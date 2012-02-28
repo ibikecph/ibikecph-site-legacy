@@ -1,0 +1,45 @@
+# This is a manifest file that'll be compiled into application.js, which will include all the files
+# listed below.
+#
+# Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+# or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+#
+# It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+# the compiled file.
+#
+# WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+# GO AFTER THE REQUIRES BELOW.
+#
+#= require jquery
+#= require jquery_ujs
+#= require leaflet-src
+#= require L.Bugfixes
+#= require L.DashedPolyline
+#= require L.MouseMarker
+#= require L.SwitchableIcon
+#= require i18n
+#= require i18n/translations
+#= require OSRM.base
+#= require OSRM.config
+#= require main
+#= require OSRM.Markers
+#= require OSRM.Route
+#= require OSRM.Map
+#= require OSRM.GUI
+#= require routing/OSRM.Routing
+#= require routing/OSRM.RoutingDescription
+#= require routing/OSRM.RoutingGeometry
+#= require routing/OSRM.RoutingGUI
+#= require routing/OSRM.RoutingNoNames
+#= require OSRM.Via
+#= require OSRM.Geocoder
+#= require OSRM.Browser
+#= require OSRM.JSONP
+#= require OSRM.Utils
+#= require_tree .
+
+I18n.defaultLocale = "<%= I18n.default_locale %>"
+I18n.locale = "<%= I18n.locale %>"
+
+jQuery ->
+	OSRM.init()

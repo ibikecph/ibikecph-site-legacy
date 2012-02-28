@@ -1,0 +1,181 @@
+# This program is free software you can redistribute it and/or modify
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation either version 3 of the License, or
+# any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU Affero General Public License
+# along with this program if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# or see http://www.gnu.org/licenses/agpl.txt.
+
+
+# OSRM initialization
+# [initialization, image prefetching]
+
+
+# onload initialization routine
+window.OSRM.init = () ->
+	window.OSRM.prefetchImages()
+	window.OSRM.prefetchIcons()
+	window.OSRM.GUI.init()
+	window.OSRM.Map.init()
+	#window.OSRM.Printing.init()
+	window.OSRM.Routing.init()
+	
+	# check if the URL contains some GET parameter, e.g. for showing a route
+	window.OSRM.parseParameters()
+
+# prefetch images
+window.OSRM.GLOBALS.images = {}
+window.OSRM.prefetchImages = () ->
+	image_list = [	{id:'marker-shadow',					url:"<%= asset_path 'marker-shadow.png' %>"},
+					{id:'marker-source',					url:"<%= asset_path 'marker-source.png' %>"},
+					{id:'marker-target',					url:"<%= asset_path 'marker-target.png' %>"},
+					{id:'marker-via',						url:"<%= asset_path 'marker-via.png' %>"},
+					{id:'marker-highlight',					url:"<%= asset_path 'marker-highlight.png' %>"},
+					{id:'marker-source-drag',				url:"<%= asset_path 'marker-source-drag.png' %>"},
+					{id:'marker-target-drag',				url:"<%= asset_path 'marker-target-drag.png' %>"},
+					{id:'marker-via-drag',					url:"<%= asset_path 'marker-via-drag.png' %>"},
+					{id:'marker-highlight-drag',			url:"<%= asset_path 'marker-highlight-drag.png' %>"},
+					{id:'marker-drag',						url:"<%= asset_path 'marker-drag.png' %>"},
+					{id:'cancel',							url:"<%= asset_path 'cancel.png' %>"},
+					{id:'cancel_active',					url:"<%= asset_path 'cancel_active.png' %>"},
+					{id:'cancel_hover',						url:"<%= asset_path 'cancel_hover.png' %>"},
+					{id:'restore',							url:"<%= asset_path 'restore.png' %>"},
+					{id:'restore_active',					url:"<%= asset_path 'restore_active.png' %>"},
+					{id:'restore_hover',					url:"<%= asset_path 'restore_hover.png' %>"},
+					{id:'printer',							url:"<%= asset_path 'printer.png' %>"},
+					{id:'printer_active',					url:"<%= asset_path 'printer_active.png' %>"},
+					{id:'printer_hover',					url:"<%= asset_path 'printer_hover.png' %>"},
+					{id:'printer_inactive',					url:"<%= asset_path 'printer_inactive.png' %>"},
+					{id:'direction_0',						url:"<%= asset_path 'default.png' %>"},		             	
+					{id:'direction_1',						url:"<%= asset_path 'continue.png' %>"},
+					{id:'direction_2',						url:"<%= asset_path 'slight-right.png' %>"},
+					{id:'direction_3',						url:"<%= asset_path 'turn-right.png' %>"},
+					{id:'direction_4',						url:"<%= asset_path 'sharp-right.png' %>"},
+					{id:'direction_5',						url:"<%= asset_path 'u-turn.png' %>"},
+					{id:'direction_6',						url:"<%= asset_path 'slight-left.png' %>"},
+					{id:'direction_7',						url:"<%= asset_path 'turn-left.png' %>"},
+					{id:'direction_8',						url:"<%= asset_path 'sharp-left.png' %>"},
+					{id:'direction_10',						url:"<%= asset_path 'continue.png' %>"},
+					{id:'direction_11',						url:"<%= asset_path 'round-about.png' %>"},
+					{id:'direction_15',						url:"<%= asset_path 'target.png' %>"},
+					{id:'favicon',							url:"<%= asset_path 'osrm-favicon.ico' %>"}
+				]
+	
+	for i in [0...image_list.length]
+		window.OSRM.G.images[image_list[i].id] = new Image()
+		window.OSRM.G.images[image_list[i].id].src = image_list[i].url
+
+
+# prefetch icons
+window.OSRM.GLOBALS.icons = {}
+window.OSRM.prefetchIcons = () ->
+	icon_list = [
+					{id:'marker-source',					image_id:"<%= asset_path 'marker-source' %>"},
+					{id:'marker-target',					image_id:"<%= asset_path 'marker-target' %>"},
+					{id:'marker-via',						image_id:"<%= asset_path 'marker-via' %>"},
+					{id:'marker-highlight',					image_id:"<%= asset_path 'marker-highlight' %>"},
+					{id:'marker-source-drag',				image_id:"<%= asset_path 'marker-source-drag' %>"},
+					{id:'marker-target-drag',				image_id:"<%= asset_path 'marker-target-drag' %>"},
+					{id:'marker-via-drag',					image_id:"<%= asset_path 'marker-via-drag' %>"},
+					{id:'marker-highlight-drag',			image_id:"<%= asset_path 'marker-highlight-drag' %>"}
+				]
+	for i in [0...icon_list.length]
+		icon = {
+				iconUrl: window.OSRM.G.images[icon_list[i].id].src, iconSize: new L.Point(25, 41), iconAnchor: new L.Point(13, 41),
+				shadowUrl: window.OSRM.G.images["marker-shadow"].src, shadowSize: new L.Point(41, 41),
+				popupAnchor: new L.Point(0, -33)
+			}
+		window.OSRM.G.icons[icon_list[i].id] = new L.SwitchableIcon(icon)
+	
+	# special values for drag marker
+	window.OSRM.G.icons['marker-drag'] = new L.SwitchableIcon( {iconUrl: window.OSRM.G.images["marker-drag"].src, iconSize: new L.Point(18, 18) } )	
+
+
+#parse URL GET parameters
+window.OSRM.parseParameters = () ->
+	called_url = document.location.search.substr(1,document.location.search.length)
+	
+	# reject messages that are clearly too long or too small 
+	if called_url.length > 1000 || called_url.length == 0
+		return
+	
+	# storage for parameter values
+	params = {}
+
+	# parse input
+	splitted_url = called_url.split('&')
+	for i in [0...splitted_url.length]
+		name_val = splitted_url[i].split('=')
+		if name_val.length != 2
+			continue
+		
+		if name_val[0] == 'hl'
+			window.OSRM.Localization.setLanguage(name_val[1])
+		else if name_val[0] == 'loc'
+			coordinates = unescape(name_val[1]).split(',')
+			if coordinates.length!=2 || !window.OSRM.Utils.isLatitude(coordinates[0]) || !window.OSRM.Utils.isLongitude(coordinates[1])
+				return
+			params.positions = params.positions || []
+			params.positions.push ( new L.LatLng( coordinates[0], coordinates[1]) )
+		else if name_val[0] == 'dest'
+			coordinates = unescape(name_val[1]).split(',')
+			if coordinates.length!=2 || !window.OSRM.Utils.isLatitude(coordinates[0]) || !window.OSRM.Utils.isLongitude(coordinates[1])
+				return				
+			params.destination = new L.LatLng( coordinates[0], coordinates[1])
+		else if name_val[0] == 'destname'
+			params.destination_name = decodeURI(name_val[1]).replace(/<\/?[^>]+(>|$)/g ,"")	# discard tags	
+		else if name_val[0] == 'z'
+			zoom_level = Number(name_val[1])
+			if zoom_level<0 || zoom_level > 18
+				return
+			params.zoom = zoom_level
+		else if name_val[0] == 'center'
+			coordinates = unescape(name_val[1]).split(',')
+			if coordinates.length!=2 || !window.OSRM.Utils.isLatitude(coordinates[0]) || !window.OSRM.Utils.isLongitude(coordinates[1])
+				return				
+			params.center = new L.LatLng( coordinates[0], coordinates[1])			
+		
+	# case 1: destination given
+	if  params.destination
+		index = window.OSRM.G.markers.setTarget( params.destination.latlng )
+		if params.destination_name
+			$('#gui-input-target').val params.destination_name
+		else 
+			window.OSRM.Geocoder.updateAddress( window.OSRM.C.TARGET_LABEL, window.OSRM.C.DO_FALLBACK_TO_LAT_LNG )
+		window.OSRM.G.markers.route[index].show()
+		window.OSRM.G.markers.route[index].centerView()
+		return
+
+	# case 2: locations given
+	if params.positions
+		# draw via points
+		if params.positions.length > 0
+			window.OSRM.G.markers.setSource( params.positions[0] )
+			window.OSRM.Geocoder.updateAddress( window.OSRM.C.SOURCE_LABEL, window.OSRM.C.DO_FALLBACK_TO_LAT_LNG )
+		if params.positions.length > 1
+			window.OSRM.G.markers.setTarget( params.positions[params.positions.length-1] )
+			window.OSRM.Geocoder.updateAddress( window.OSRM.C.TARGET_LABEL, window.OSRM.C.DO_FALLBACK_TO_LAT_LNG )
+		for i in [0...params.positions.length]
+			window.OSRM.G.markers.setVia( i-1, params.positions[i] )
+		for i in [0...window.OSRM.G.markers.route.length]
+			window.OSRM.G.markers.route[i].show()
+		
+		# center on route (support for old links) / move to given view (new behaviour)
+		if params.zoom == null || params.center == null
+			bounds = new L.LatLngBounds( params.positions )
+			window.OSRM.G.map.fitBoundsUI( bounds )
+		else
+			window.OSRM.G.map.setView(params.center, params.zoom)
+			
+		# compute route
+		window.OSRM.Routing.getRoute()
+		return
+	
+	# default case: do nothing

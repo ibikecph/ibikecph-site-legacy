@@ -1,0 +1,27 @@
+<div class="header-title">
+	<%= I18n.t("route_description") %>
+</div>
+<div class="full">
+	<div class="left">
+		<div class="header-content">
+			<%- "#{I18n.t("distance")}: #{OSRM.Utils.metersToDistance(@route_summary.total_distance)}" %>
+		</div>
+		<div class="header-content">
+			<%- "#{I18n.t("duration")}: #{OSRM.Utils.secondsToTime(@route_summary.total_time)}" %>
+		</div>
+	</div>
+	<% if @query_string: %>
+	<div class="right">
+		<div id="route-link" class="header-content">
+			<a class="result-link" onclick="OSRM.RoutingDescription.onClickCreateShortcut('<%= OSRM.DEFAULTS.WEBSITE_URL + @query_string %>')">
+				<%= I18n.t("get_link_to_route") %>
+			</a>
+		</div>
+		<div class="header-content">
+			<a class="result-link" onclick="document.location.href='<%= "#{OSRM.DEFAULTS.HOST_ROUTING_URL}#{@query_string}&output=gpx" %>'">
+				<%= I18n.t("gpx_file") %>
+			</a>
+		</div>
+	</div>
+	<% end %>
+</div>
