@@ -1,5 +1,6 @@
 RailsOSRM::Application.routes.draw do
   
+  match '/:locale' => 'pages#index'
   root :to => 'pages#index'
 
   # The priority is based upon order of creation:

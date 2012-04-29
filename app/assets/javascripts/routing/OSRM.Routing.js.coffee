@@ -76,7 +76,7 @@ showRoute: (response) ->
 	if response.status == 207
 		OSRM.RoutingGeometry.showNA()
 		OSRM.RoutingNoNames.showNA()
-		OSRM.RoutingDescription.showNA( I18n.t("NO_ROUTE_FOUND") )
+		OSRM.RoutingDescription.showNA( I18n.t("no_route") )
 		OSRM.Routing._snapRoute()		
 	else
 		OSRM.RoutingGeometry.show(response)

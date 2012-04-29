@@ -3,6 +3,7 @@
 
 en:
   #ui
+  headline:                 'OSRM-Rails Demo'
   start:                    'Start'
   end:                      'End'
   show:                     'Show'
@@ -16,14 +17,15 @@ en:
   start_tip:                'Enter start'
   end_tip:                  'Enter destination'
   legal:                    'Routing by <a href="https://github.com/DennisOSRM/Project-OSRM/wiki">OSRM</a>'
-  no_route:                 'No route found'
+  
   # geocoder
   search_results:           'Search Results'
-  found_x_results:          'found %i results'
+  found_x_results:          'found %{i} results'
   timed_out:                'Timed Out'
   no_results_found:         'No results found'
-  no_results_found_SOURCE:  'No results found for start'
-  no_results_found_TARGET:  'No results found for end'
+  no_results_found_source:  'No results found for start'
+  no_results_found_target:  'No results found for end'
+  no_route:                 'No route found'
   
   #routing
   route_description:        'Route Description'

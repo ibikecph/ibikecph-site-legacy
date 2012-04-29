@@ -104,9 +104,9 @@ _showResults_Empty: (parameters) ->
 	$('#information-box-header').html "<div class='header-title'>"+I18n.t("search_results")+"</div>" +
 		"<div class='header-content'>("+I18n.t("found_x_results").replace(/%i/,0)+")</div>"		
 	if parameters.marker_id == OSRM.C.SOURCE_LABEL
-		$('#information-box').html "<div class='no-results big-font'>"+I18n.t("no_results_found_SOURCE")+": "+parameters.query +"</div>"
+		$('#information-box').html "<div class='no-results big-font'>"+I18n.t("no_results_found_source")+": "+parameters.query +"</div>"
 	else if parameters.marker_id == OSRM.C.TARGET_LABEL
-		$('#information-box').html "<div class='no-results big-font'>"+I18n.t("no_results_found_TARGET")+": "+parameters.query +"</div>"
+		$('#information-box').html "<div class='no-results big-font'>"+I18n.t("no_results_found_target")+": "+parameters.query +"</div>"
 	else
 		$('#information-box').html "<div class='no-results big-font'>"+I18n.t("no_results_found")+": "+parameters.query +"</div>"
 ,
