@@ -3,7 +3,8 @@
 
 dk:
   #ui
-  headline:                 'OSRM-Rails Demo'
+  subtitle:                 'BEMÆRK: Dette er kun en prototype, og bør endnu ikke anvendes til at navigere efter.'
+  getting_started:          'Klik på kortet eller indtast adresser i felterne nedenfor.'
   start:                    'Fra'
   end:                      'Til'
   show:                     'Vis'
@@ -16,7 +17,7 @@ dk:
   highlight_unnamed:        'Vis veje uden navne'
   start_tip:                'Fra-adresse'
   end_tip:                  'Til-adresse'
-  legal:                    'Ruter af <a href="https://github.com/DennisOSRM/Project-OSRM/wiki">OSRM</a>'
+  legal:                    'Ruteberegning udført med <a href="https://github.com/DennisOSRM/Project-OSRM/wiki" target="_blank">OSRM</a>'
   
   # geocoder
   search_results:           'Søgeresultater'

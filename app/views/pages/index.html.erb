@@ -20,7 +20,10 @@
 		<div id="input-mask-header">
 			<div id="gui-toggle-out" class="iconic-button top-right-button"></div>
 		</div>
-		<h1><%= t :headline %></h1>
+		<%= image_tag 'ibikecph.png', :class => :logo %>
+		<p><%= APP_VERSION %></p>		
+		<p><%= t :subtitle %></p>		
+		<p class="getting_started"><%= t :getting_started %></p>		
 		<!--  header -->
 
 		<!--  input mask -->
@@ -29,63 +32,47 @@
 			<!-- source/target input -->
 			<div class="full">
 				<div id="input-source" class="input-marker">
-				<div class="left">
-					<span id="gui-search-source-label" class="input-label"><%= t :start %>:</span>
+					<div class="left">
+						<span id="gui-search-source-label" class="input-label"><%= t :start %>:</span>
+					</div>
+					<div class="center input-box">
+						<input id="gui-input-source" class="input-box" type="text" maxlength="200" value="" title="<%= t :start_tip %>" />
+					</div>
+					<div class="left">
+						<div id="gui-delete-source" class="iconic-button delete-marker input-delete"></div>
+					</div>
+					<div class="right">
+						<input type="submit" id="gui-search-source" value="<%= t :show %>"></input>
+					</div>
 				</div>
-				<div class="center input-box">
-					<input id="gui-input-source" class="input-box" type="text" maxlength="200" value="" title="<%= t :start_tip %>" />
+		
+		
+				<div id="input-target" class="input-marker">
+					<div class="left">
+						<span id="gui-search-target-label" class="input-label"><%= t :end %>:</span>
+					</div>
+					<div class="center input-box">
+						<input id="gui-input-target" class="input-box" type="text" maxlength="200" value="" title="<%= t :end_tip %>" />
+					</div>	
+					<div class="left">
+						<div id="gui-delete-target" class="iconic-button delete-marker input-delete"></div>
+					</div>
+					<div class="right">
+						<input type="submit" id="gui-search-target" value="<%= t :show %>"></input>
+					</div>	
 				</div>
-				<div class="left">
-					<div id="gui-delete-source" class="iconic-button delete-marker input-delete"></div>
+			</div>
+		
+			<!-- action buttons -->
+		    <div class="full">
+			    <div class="left">
+					<input type="submit" id="gui-reset" value="<%= t :reset %>"></input>
 				</div>
 				<div class="right">
-					<input type="submit" id="gui-search-source" value="<%= t :show %>"></input>
+					<input type="submit" id="gui-reverse" value="<%= t :reverse %>"></input>
 				</div>
-			</div>
-		
-		
-			<div id="input-target" class="input-marker">
-				<div class="left">
-					<span id="gui-search-target-label" class="input-label"><%= t :end %>:</span>
-				</div>
-				<div class="center input-box">
-					<input id="gui-input-target" class="input-box" type="text" maxlength="200" value="" title="<%= t :end_tip %>" />
-				</div>	
-				<div class="left">
-					<div id="gui-delete-target" class="iconic-button delete-marker input-delete"></div>
-				</div>
-				<div class="right">
-					<input type="submit" id="gui-search-target" value="<%= t :show %>"></input>
-				</div>	
-			</div>
-		</div>
-		
-		<!-- action buttons -->
-	    <div class="full">
-		    <div class="left">
-				<input type="submit" id="gui-reset" value="<%= t :reset %>"></input>
-			</input>
-			</div>
-			<div class="right">
-				<input type="submit" id="gui-reverse" value="<%= t :reverse %>"></input>
-			</div>
+		    </div>
 	    </div>
-	    </div>
-
-		<!-- option toggle -->
-		<span id="gui-options-toggle" class="small-font"><%= t :map_tools %></span>
-
-		<!-- actual options -->
-		<div id="options-box" class="full">
-			<div class="left">
-				<input type="checkbox" id="option-highlight-nonames" value="highlight-nonames" />
-				<span id="gui-option-highlight-nonames-label" class="checkbox-label small-font"><%= t :highlight_unnamed %></span>
-			</div>
-			<div class="right">
-				<input type="submit" id="open-josm" value="<%= t :josm %>"></input>
-				<input type="submit" id="open-osmbugs" value="<%= t :osm_bugs %>"></input>
-			</div>
-		</div>
 	</div>
 
 	<!-- output box -->

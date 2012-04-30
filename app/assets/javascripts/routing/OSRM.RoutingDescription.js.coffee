@@ -68,14 +68,12 @@ getDrivingInstructionIcon: (server_instruction_id) ->
 	if OSRM.G.images[local_icon_id]
 		return OSRM.G.images[local_icon_id].src
 	else
-		alert( "no icon for #{local_icon_id}")
 		return OSRM.G.images["direction_0"].src
 ,
 
 instruction: (response) ->
 	code = response[0]
 	name = response[1]
-	
 	if code == "10"
 		bearing = I18n.t response[6]
 		key = "head"

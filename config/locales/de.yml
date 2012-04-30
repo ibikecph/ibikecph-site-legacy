@@ -3,6 +3,9 @@
 
 de:
   #ui
+  subtitle:                 'HINWEIS: Dies ist nur ein Prototyp, und sollte nicht zur Navigation verwendet werden.'
+  getting_started:          'Klicken Sie auf die Karte oder geben Sie die Adressen in die Felder unten aus.'
+
   headline:                 'OSRM-Rails Demo'
   start:                    'Start'
   end:                      'Ziel'

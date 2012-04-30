@@ -19,16 +19,16 @@
 
 OSRM.DEFAULTS =
 
-HOST_ROUTING_URL: 'http://router.project-osrm.org/viaroute',
+HOST_ROUTING_URL: 'http://83.221.133.2/viaroute',
 HOST_SHORTENER_URL: 'http://map.project-osrm.org/shorten/',
 HOST_GEOCODER_URL: 'http://nominatim.openstreetmap.org/search',
 HOST_REVERSE_GEOCODER_URL: 'http://nominatim.openstreetmap.org/reverse',
 WEBSITE_URL: document.URL.replace(/#*(\?.*|$)/i,""),					# truncates URL before first ?, and removes tailing #
 JSONP_TIMEOUT: 5000,
 ZOOM_LEVEL: 17,
-ONLOAD_ZOOM_LEVEL: 5,
-ONLOAD_LATITUDE: 50.68,
-ONLOAD_LONGITUDE: 10.58,
+ONLOAD_ZOOM_LEVEL: 13,
+ONLOAD_LATITUDE: 55.68,
+ONLOAD_LONGITUDE: 12.58,
 ONLOAD_SOURCE: "",
 ONLOAD_TARGET: "",
 HIGHLIGHT_ZOOM_LEVEL: 16,

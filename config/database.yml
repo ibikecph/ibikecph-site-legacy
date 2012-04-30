@@ -6,7 +6,7 @@
 development:
     adapter: postgresql
     encoding: unicode
-    database: railsosrm_development
+    database: ibikecph_development
     pool: 5
     username: emil
     password:
@@ -17,7 +17,7 @@ development:
 test:
     adapter: postgresql
     encoding: unicode
-    database: railsosrm_test
+    database: ibikecph_test
     pool: 5
     username: emil
     password:

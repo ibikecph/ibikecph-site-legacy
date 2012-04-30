@@ -3,7 +3,8 @@
 
 en:
   #ui
-  headline:                 'OSRM-Rails Demo'
+  subtitle:                 'NOTE: This is just a prototype, and should not yet be used for navigation.'
+  getting_started:          'Click on the map or enter addresses in the fields below.'
   start:                    'Start'
   end:                      'End'
   show:                     'Show'
