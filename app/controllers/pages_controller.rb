@@ -7,4 +7,7 @@ class PagesController < ApplicationController
     render :text => 'pong'
   end
   
+  def blog
+  end
+  
 end

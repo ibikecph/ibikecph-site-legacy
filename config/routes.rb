@@ -1,6 +1,7 @@
 RailsOSRM::Application.routes.draw do
 
   match '/ping' => 'pages#ping'
+  match '/blog' => 'pages#blog'
   
   match '/:locale' => 'pages#index'
   root :to => 'pages#index'

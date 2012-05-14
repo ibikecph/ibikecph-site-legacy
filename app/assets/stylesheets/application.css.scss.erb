@@ -449,7 +449,7 @@ html, body {
 	width: 300px;
 }
 
-h1,h2 {
+h1,h2,h3 {
 	margin-top: 0.2em;
 	margin-bottom: 0.2em;
 }
@@ -482,6 +482,9 @@ p {
 	margin: 0;
 	margin-top: 0.8em;
 	margin-bottom: 0.8em;
+	&.note {
+		color: #888;
+	}
 }
 
 img.logo {
@@ -494,4 +497,17 @@ img.logo {
 
 p.getting_started {
 	clear: both;
+}
+
+div.blog {
+	margin: 50px;
+	max-width: 600px;
+	img {
+		float: none;
+		margin-bottom: 30px;
+	}
+}
+
+h3 {
+	margin-top: 1em;
 }
