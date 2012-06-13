@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.6'
 gem 'i18n-js'
 
 # Bundle edge Rails instead:
