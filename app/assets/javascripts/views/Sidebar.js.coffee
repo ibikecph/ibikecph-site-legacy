@@ -17,23 +17,26 @@ class ibikecph.Sidebar extends Backbone.View
 		@model.via.bind  'change:loading', @loading_changed, this
 
 	address_changed: (model, address) ->
-		@set_field model.get('field_name'), address
+		field_name = model.get 'field_name'
+		@set_field field_name, address
+
+		@app.router.navigate_field field_name, address, trigger: false
 
 	loading_changed: (model, loading) ->
 		@set_loading model.get('field_name'), loading
 
 	get_field: (field_name) ->
-		return @$('.' + field_name).val()
+		return @$(".#{field_name}").val()
 
 	set_field: (field_name, text) ->
-		@$('.' + field_name).val "#{text}"
+		@$(".#{field_name}").val "#{text}"
 
 	set_loading: (field_name, loading) ->
-		@$('.' + field_name).toggleClass 'loading', !!loading
+		@$(".#{field_name}").toggleClass 'loading', !!loading
 
 	fields_updated: ->
 		from = @get_field 'from'
 		to   = @get_field 'to'
 		via  = @get_field 'via'
 
-		@app.router.navigate_route from, via, to
+		@app.router.navigate_route from, via, to, trigger: true
