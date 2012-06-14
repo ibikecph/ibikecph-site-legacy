@@ -26,7 +26,7 @@ class ibikecph.Map extends Backbone.View
 		else
 			pin = new L.Marker location, draggable: true
 
-			pin.on 'dragend', (event) =>
+			pin.on 'drag', (event) =>
 				@model[field_name].set event.target.getLatLng()
 
 			@map.addLayer pin

@@ -12,9 +12,15 @@ class ibikecph.Geocoder
 			@load_address @model.get 'address'
 
 		@model.bind 'change:lat change:lng', =>
-			@load_location
-				lat: @model.get 'lat'
-				lng: @model.get 'lng'
+			@abort()
+			@wait_for 300, =>
+				@load_location
+					lat: @model.get 'lat'
+					lng: @model.get 'lng'
+
+	wait_for: (milliseconds, callback) ->
+		clearTimeout(@timer) if @timer
+		@timer = setTimeout callback, milliseconds
 
 	abort: ->
 		@request.abort() if @request?.abort
