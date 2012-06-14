@@ -5,9 +5,6 @@ window.ibikecph.app = app = {}
 app.start = ->
 	app.start = -> null # run only once
 
-	# TODO: Debug
-	# L.Icon.Default.imagePath = "#{window.location.protocol}//#{window.location.host}/img/leaflet"
-
 	app.info = new ibikecph.Info
 
 	app.sidebar = new ibikecph.Sidebar
