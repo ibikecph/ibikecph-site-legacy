@@ -12,9 +12,15 @@ class ibikecph.Geocoder
 			@load_address @model.get 'address'
 
 		@model.bind 'change:lat change:lng', =>
-			@load_location
-				lat: @model.get 'lat'
-				lng: @model.get 'lng'
+			@abort()
+			@wait_for 300, =>
+				@load_location
+					lat: @model.get 'lat'
+					lng: @model.get 'lng'
+
+	wait_for: (milliseconds, callback) ->
+		clearTimeout(@timer) if @timer
+		@timer = setTimeout callback, milliseconds
 
 	abort: ->
 		@request.abort() if @request?.abort
@@ -26,6 +32,13 @@ class ibikecph.Geocoder
 	request_done: ->
 		@request = null
 		@model.set 'loading', false
+
+	convert_number: (value) ->
+		value = 1 * value
+		if isNaN value
+			null
+		else
+			value
 
 	load_address: (new_address) ->
 		return if new_address == @current.address
@@ -45,8 +58,8 @@ class ibikecph.Geocoder
 		), (result) =>
 			@request_done()
 
-			@current.lat = 1 * result[0]?.lat
-			@current.lng = 1 * result[0]?.lon
+			@current.lat = @convert_number result[0]?.lat
+			@current.lng = @convert_number result[0]?.lon
 			@model.set @current
 
 	load_location: (new_location) ->
@@ -70,6 +83,6 @@ class ibikecph.Geocoder
 			if address and address.road and address.postcode and address.city
 				@current.address = "#{address.road}#{[' ' + address.house_number if address.house_number]}, #{address.postcode} #{address.city}"
 
-			@current.lat = 1 * result?.lat
-			@current.lng = 1 * result?.lon
+			@current.lat = @convert_number result?.lat
+			@current.lng = @convert_number result?.lon
 			@model.set @current

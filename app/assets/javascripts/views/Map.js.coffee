@@ -21,6 +21,8 @@ class ibikecph.Map extends Backbone.View
 		field_name = model.get 'field_name'
 		location = new L.LatLng model.get('lat'), model.get('lng')
 
+		return unless location.lat? and location.lng?
+
 		if @pin[field_name]
 			@pin[field_name].setLatLng location
 		else
