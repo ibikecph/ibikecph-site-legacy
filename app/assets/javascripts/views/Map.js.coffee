@@ -1,6 +1,4 @@
-window.ibikecph or= {}
-
-class window.ibikecph.Map extends Backbone.View
+class ibikecph.Map extends Backbone.View
 
 	initialize: ->
 		@map = new L.Map @el.id

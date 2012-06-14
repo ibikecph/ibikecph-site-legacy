@@ -1,6 +1,4 @@
-window.ibikecph or= {}
-
-window.ibikecph.app = app = {}
+ibikecph.app = app = {}
 
 app.start = ->
 	app.start = -> null # run only once

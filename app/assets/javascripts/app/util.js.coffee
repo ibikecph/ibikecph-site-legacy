@@ -1,5 +1,4 @@
-window.ibikecph or= {}
-window.ibikecph.util or= {}
+ibikecph.util or= {}
 
-window.ibikecph.util.normalize_whitespace = (text) ->
+ibikecph.util.normalize_whitespace = (text) ->
 	"#{text}".replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ')

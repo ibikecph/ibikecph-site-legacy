@@ -1,6 +1,4 @@
-window.ibikecph or= {}
-
-class window.ibikecph.Router extends Backbone.Router
+class ibikecph.Router extends Backbone.Router
 
 	routes:
 		'!/*from/*to/*via': 'show_route'

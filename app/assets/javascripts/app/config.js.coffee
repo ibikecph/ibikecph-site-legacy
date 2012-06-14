@@ -1,6 +1,6 @@
 window.ibikecph or= {}
 
-window.ibikecph.config =
+ibikecph.config =
 
 	start:
 		lat: 55.68

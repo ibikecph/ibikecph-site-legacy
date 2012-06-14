@@ -1,6 +1,4 @@
-window.ibikecph or= {}
-
-class window.ibikecph.Geocoder
+class ibikecph.Geocoder
 
 	constructor: (@model) ->
 		@current =

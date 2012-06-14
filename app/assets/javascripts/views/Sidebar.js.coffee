@@ -1,6 +1,4 @@
-window.ibikecph or= {}
-
-class window.ibikecph.Sidebar extends Backbone.View
+class ibikecph.Sidebar extends Backbone.View
 
 	events:
 		'change .from' : 'fields_updated'
