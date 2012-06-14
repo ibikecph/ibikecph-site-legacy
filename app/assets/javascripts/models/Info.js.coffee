@@ -1,6 +1,6 @@
-class ibikecph.Info extends Backbone.Model
+class ibikecph.Info
 
-	initialize: ->
+	constructor: ->
 		@from = new ibikecph.Point field_name: 'from'
 		@to   = new ibikecph.Point field_name: 'to'
 		@via  = new ibikecph.Point field_name: 'via'
