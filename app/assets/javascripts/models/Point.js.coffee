@@ -70,9 +70,31 @@ window.ibikecph.Point = Backbone.Model.extend
 			@set 'loading', false
 
 	geocode: (address, callback) ->
-		$.getJSON '/api/geocode', q: address, (data) ->
-			callback(data)
+		$.getJSON 'http://nominatim.openstreetmap.org/search?json_callback=?', (
+			format            : 'json'
+			'accept-language' : 'da'
+			q                 : "#{[address]}"
+			countrycodes      : 'DK'
+			viewbox           : '-27.0,72.0,46.0,36.0'
+			bounded           : '1'
+			email             : 'info@contingent.dk'
+			limit             : '1'
+		), (result) ->
+			callback (
+				lat: result[0]?.lat
+				lng: result[0]?.lon
+			)
 
 	reverse_geocode: (location, callback) ->
-		$.getJSON '/api/reverse-geocode', location, (data) ->
-			callback(data)
+		$.getJSON 'http://nominatim.openstreetmap.org/reverse?json_callback=?', (
+			format            : 'json'
+			'accept-language' : 'da'
+			lat               : location.lat or 0
+			lon               : location.lng or 0
+			addressdetails    : '1'
+			email             : 'info@contingent.dk'
+		), (result) ->
+			callback (
+				lat: result[0]?.lat
+				lng: result[0]?.lon
+			)
