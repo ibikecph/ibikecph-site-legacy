@@ -6,18 +6,47 @@
 html{
 	background:url('/assets/wood.jpg') center center;
 	height:100%;
+	overflow:hidden;
+}
+
+
+span.pin{
+	position: fixed;
+	width:24px;
+	height:24px;
+	z-index:100;
+	&.tl{
+		background:url('/assets/pin-tl.png');
+		top:3px;
+		left:6px;
+	}
+	&.tr{
+		background:url('/assets/pin-tr.png');
+		top:3px;
+		right:6px;
+	}
+	&.bl{
+		background:url('/assets/pin-bl.png');
+		left:6px;
+		bottom:3px;
+	}
+	&.br{
+		background:url('/assets/pin-br.png');
+		right:6px;
+		bottom:3px;
+	}
 }
 
 body{
 	background:#fff;
 	height:100%;
-	margin:15px;
+	margin:20px;
 	padding:15px;
 	box-shadow:0px 1px 1px black;
 
 
 	#sidebar{
-		width:250px;
+		width:320px;
 		label{
 			p{
 				margin-top:10px;
@@ -26,13 +55,13 @@ body{
 				margin-bottom:5px;		
 			}
 			input[type=text]{
-				margin-left:10px;
 				padding:10px;
-				width:210px;
+				width:300px;
 				font-size:20px;
 				border:1px solid #eee;
 			}
 		}
+		padding:0px 10px;
 		border:1px solid #eee;
 		border-right:none;
 
