@@ -12,33 +12,25 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require underscore_min
+#= require backbone_min
 #= require leaflet-src
-#= require L.Bugfixes
-#= require L.DashedPolyline
-#= require L.MouseMarker
-#= require L.SwitchableIcon
 #= require i18n
 #= require i18n/translations
-#= require OSRM.base
-#= require OSRM.config
-#= require main
-#= require OSRM.Markers
-#= require OSRM.Route
-#= require OSRM.Map
-#= require OSRM.GUI
-#= require routing/OSRM.Routing
-#= require routing/OSRM.RoutingDescription
-#= require routing/OSRM.RoutingGeometry
-#= require routing/OSRM.RoutingGUI
-#= require routing/OSRM.RoutingNoNames
-#= require OSRM.Via
-#= require OSRM.Geocoder
-#= require OSRM.Browser
-#= require OSRM.JSONP
-#= require OSRM.Utils
-#= require_tree .
+#= require app/config
+#= require app/util
+#= require app/Router
+#= require models/RoutePoint
+#= require collections/Route
+#= require models/Point
+#= require models/Info
+#= require views/Sidebar
+#= require views/Map
+#= require app/app
+#= require_tree
 
 I18n.defaultLocale = "<%= I18n.default_locale %>"
+I18n.locale        = "<%= I18n.locale %>"
 
 jQuery ->
-	OSRM.init()
+	ibikecph.app.start()

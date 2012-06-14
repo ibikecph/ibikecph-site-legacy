@@ -1,85 +1,18 @@
-<script>
-	I18n.locale = "<%= I18n.locale %>"
-</script>
-
-<!--map-->
-<div id="map"></div>
-
-<!-- show ui blob -->
-<div id="blob-wrapper" class="gui-wrapper">
-	<div id="blob-content" class="gui-box">
-		<div id="gui-toggle-in" class="iconic-button"></div>
-	</div>
+<div id="sidebar">
+	<label>
+		<p>From:</p>
+		<input type="text" class="from" autofocus>
+	</label>
+	<label>
+		<p>To:</p>
+		<input type="text" class="to">
+	</label>
+	<label>
+		<p>Via:</p>
+		<input type="text" class="via">
+	</label>
 </div>
 
-<!-- show main gui -->
-<div id="main-wrapper">
-
-	<!-- input box -->
-	<div id="main-input" class="gui-box">
-		<div id="input-mask-header">
-			<div id="gui-toggle-out" class="iconic-button top-right-button"></div>
-		</div>
-		<%= image_tag 'ibikecph.png', :class => :logo %>
-		<p><%= APP_VERSION %></p>		
-		<p><%= t :subtitle %></p>		
-		<p class="getting_started"><%= t :getting_started %></p>		
-		<!--  header -->
-
-		<!--  input mask -->
-		<div id="input-mask">
-	
-			<!-- source/target input -->
-			<div class="full">
-				<div id="input-source" class="input-marker">
-					<div class="left">
-						<span id="gui-search-source-label" class="input-label"><%= t :start %>:</span>
-					</div>
-					<div class="center input-box">
-						<input id="gui-input-source" class="input-box" type="text" maxlength="200" value="" title="<%= t :start_tip %>" />
-					</div>
-					<div class="left">
-						<div id="gui-delete-source" class="iconic-button delete-marker input-delete"></div>
-					</div>
-					<div class="right">
-						<input type="submit" id="gui-search-source" value="<%= t :show %>"></input>
-					</div>
-				</div>
-		
-		
-				<div id="input-target" class="input-marker">
-					<div class="left">
-						<span id="gui-search-target-label" class="input-label"><%= t :end %>:</span>
-					</div>
-					<div class="center input-box">
-						<input id="gui-input-target" class="input-box" type="text" maxlength="200" value="" title="<%= t :end_tip %>" />
-					</div>	
-					<div class="left">
-						<div id="gui-delete-target" class="iconic-button delete-marker input-delete"></div>
-					</div>
-					<div class="right">
-						<input type="submit" id="gui-search-target" value="<%= t :show %>"></input>
-					</div>	
-				</div>
-			</div>
-		
-			<!-- action buttons -->
-		    <div class="full">
-			    <div class="left">
-					<input type="submit" id="gui-reset" value="<%= t :reset %>"></input>
-				</div>
-				<div class="right">
-					<input type="submit" id="gui-reverse" value="<%= t :reverse %>"></input>
-				</div>
-		    </div>
-	    </div>
-	</div>
-
-	<!-- output box -->
-	<div id="main-output" class="gui-box">
-		<div id="information-box-header"></div>
-		<div id="information-box"></div>
-		<div id="legal-notice" class="small-font"><%= t(:legal).html_safe %></a></div>
-	</div>
-
+<div id="viewport">
+	<div id="map"></div>
 </div>
