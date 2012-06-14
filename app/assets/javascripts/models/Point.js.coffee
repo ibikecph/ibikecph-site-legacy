@@ -1,6 +1,6 @@
 window.ibikecph or= {}
 
-window.ibikecph.Point = Backbone.Model.extend
+class window.ibikecph.Point extends Backbone.Model
 
 	defaults:
 		address : ''

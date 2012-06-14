@@ -1,4 +1,4 @@
 window.ibikecph or= {}
 
-window.ibikecph.Route = Backbone.Collection.extend
+class window.ibikecph.Route extends Backbone.Collection
 	model: ibikecph.RoutePoint

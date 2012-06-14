@@ -1,3 +1,3 @@
 window.ibikecph or= {}
 
-window.ibikecph.RoutePoint = Backbone.Model.extend {}
+class window.ibikecph.RoutePoint extends Backbone.Model
