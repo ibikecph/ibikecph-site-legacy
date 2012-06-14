@@ -1,6 +1,4 @@
-window.ibikecph or= {}
-
-window.ibikecph.app = app = {}
+ibikecph.app = app = {}
 
 $(window).resize => 
 	w = $(window).width()

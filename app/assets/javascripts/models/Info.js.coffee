@@ -1,6 +1,5 @@
-window.ibikecph or= {}
+class ibikecph.Info extends Backbone.Model
 
-window.ibikecph.Info = Backbone.Model.extend
 	initialize: ->
 		@from = new ibikecph.Point field_name: 'from'
 		@to   = new ibikecph.Point field_name: 'to'
