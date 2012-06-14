@@ -2,8 +2,21 @@ window.ibikecph or= {}
 
 window.ibikecph.app = app = {}
 
+$(window).resize => 
+	w = $(window).width()
+	h = $(window).height()
+	#left and right margun
+	m = parseInt($('body').css('margin-left'), 10) * 2;
+	p = parseInt($('body').css('padding-left'), 10) * 2;
+	sb = $('#sidebar').outerWidth();
+	$('body').height(h - p - m);
+	$('#sidebar').height(h - p - m - 2);
+	$('#viewport').height(h - p - m - 2);
+	$('#viewport').width(w - sb - p - m - 2);
+
+
 app.start = ->
-	app.start = -> null # run only once
+	app.start = ->  null
 
 	app.info = new ibikecph.Info
 
@@ -20,3 +33,5 @@ app.start = ->
 	app.router = new ibikecph.Router app: app
 
 	Backbone.history.start()
+	$(window).trigger('resize')
+

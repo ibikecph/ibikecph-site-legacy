@@ -1,0 +1,64 @@
+*{
+	padding:0px;
+	margin:0px;
+	font-family:'Helvetica', 'Arial', sans-serif;
+}
+html{
+	background:url('/assets/wood.jpg') center center;
+	height:100%;
+}
+
+body{
+	background:#fff;
+	height:100%;
+	margin:15px;
+	padding:15px;
+	box-shadow:0px 1px 1px black;
+
+
+	#sidebar{
+		width:250px;
+		label{
+			p{
+				margin-top:10px;
+				margin-left:10px;
+				font-size:15px;		
+				margin-bottom:5px;		
+			}
+			input[type=text]{
+				margin-left:10px;
+				padding:10px;
+				width:210px;
+				font-size:20px;
+				border:1px solid #eee;
+			}
+		}
+		border:1px solid #eee;
+		border-right:none;
+
+
+		background:url('/assets/ibikecph.png') no-repeat center bottom white;
+
+	}
+
+	#viewport{
+		width:80%;
+		position: relative;
+		overflow:hidden;
+		border:1px solid #eee;
+
+		#map {
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100%;
+			z-index: 0;
+		}
+	}
+
+	> div{
+		height:100%;
+		float:left;
+		clear:none;
+	}
+}
