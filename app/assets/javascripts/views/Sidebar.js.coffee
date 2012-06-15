@@ -3,6 +3,30 @@ class ibikecph.Sidebar extends Backbone.View
 	events:
 		'change label input' : 'fields_updated'
 		'click .pin.reset' : 'clear'
+		'mousedown .pin.to, .pin.from'  : 'drag_pin_start'
+		'mouseup .pin.draging'	: 'drag_pin_end'
+
+	drag_pin_start: (event) ->
+		if $(event.target).hasClass 'reset'
+			return
+		@draging = $(event.target).clone();
+		$(event.target).addClass 'reset'
+		$(@el).append(@draging);
+		self = @
+		$("html").mousemove (event) ->
+			self.drag_pin_move(event)
+		@draging.css position : 'fixed', left : event.clientX - 18, top : event.clientY - 20, 'z-index' : 100
+		@draging.addClass 'draging'
+
+	drag_pin_move : (event) ->
+		if @draging
+			@draging.css position : 'fixed', left : event.clientX - 18, top : event.clientY - 20, 'z-index' : 100
+
+	drag_pin_end : (event) ->
+		if @draging
+			@draging.remove()
+			console.log('droped at pos:', event.clientX, event.clientY - 40);
+			@draging = undefined
 
 	initialize: (options) ->
 		@app = options.app
