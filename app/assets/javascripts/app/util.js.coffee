@@ -51,3 +51,22 @@ ibikecph.util.decode_path = (encoded) ->
 		)
 
 	return array
+
+ibikecph.util.translate_turn_instruction = (turn) ->
+	switch turn | 0
+		when 1 then 'continue'
+		when 2 then 'turn-slight-right'
+		when 3 then 'turn-right'
+		when 4 then 'turn-sharp-right'
+		when 5 then 'u-turn'
+		when 6 then 'turn-sharp-left'
+		when 7 then 'turn-left'
+		when 8 then 'turn-slight-left'
+		when 9 then 'reach-via-point'
+		when 10 then 'head'
+		when 11 then 'enter-roundabout'
+		when 12 then 'leave-roundabout'
+		when 13 then 'stay-on-roundabout'
+		when 14 then 'start'
+		when 15 then 'reached-destination'
+		else 'no-instruction'
