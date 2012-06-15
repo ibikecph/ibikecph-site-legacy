@@ -58,7 +58,7 @@ class ibikecph.Sidebar extends Backbone.View
 		@set_loading model.get('field_name'), loading
 
 	get_field: (field_name) ->
-		return @$("input.#{field_name}").val()
+		return @$("input.#{field_name}").val() or ''
 
 	set_field: (field_name, text) ->
 		console.log('text',text);
@@ -75,7 +75,6 @@ class ibikecph.Sidebar extends Backbone.View
 	fields_updated: ->
 		from = @get_field 'from'
 		to   = @get_field 'to'
-		via   = @get_field 'via'
+		via  = @get_field 'via'
 
-
-		@app.router.navigate_route from, via, to, trigger: true
+		@app.router.navigate_route from, via, to, trigger: false
