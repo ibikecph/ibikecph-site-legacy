@@ -11,6 +11,7 @@ html{
 
 
 span.pin{
+	display:none
 	position: fixed;
 	width:24px;
 	height:24px;
@@ -38,7 +39,7 @@ span.pin{
 }
 
 body{
-	background:#fff;
+	background:#FFFDF4;
 	height:100%;
 	margin:20px;
 	padding:15px;
@@ -58,12 +59,16 @@ body{
 				padding:10px;
 				width:300px;
 				font-size:20px;
-				border:1px solid #eee;
+				border:2px solid #eee;
+				border-radius:5px;
 			}
 		}
 		padding:0px 10px;
-		border:1px solid #eee;
+		border:1px solid #F3EEC8;
 		border-right:none;
+		height:100%;
+		float:left;
+		clear:none;
 
 
 		background:url('/assets/ibikecph.png') no-repeat center bottom white;
@@ -74,7 +79,11 @@ body{
 		width:80%;
 		position: relative;
 		overflow:hidden;
-		border:1px solid #eee;
+		border:1px solid #F3EEC8;
+		border-left-color:#ddd;
+		height:100%;
+		float:left;
+		clear:none;
 
 		#map {
 			position: fixed;
@@ -85,9 +94,4 @@ body{
 		}
 	}
 
-	> div{
-		height:100%;
-		float:left;
-		clear:none;
-	}
 }
