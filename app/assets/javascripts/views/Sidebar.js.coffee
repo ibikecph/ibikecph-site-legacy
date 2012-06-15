@@ -72,7 +72,7 @@ class ibikecph.Sidebar extends Backbone.View
 			$(".distance .count", @el).text(meters/1000 + ' km');
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' minutter');
 			d = new Date;
-			d.setTime d.getTime() + seconds * 1000;
+			d.setTime d.getTime() + seconds * 1000 + 1000 * 60 * 2;
 			m = d.getMinutes();
 			if m < 10
 				m = '0' + m
