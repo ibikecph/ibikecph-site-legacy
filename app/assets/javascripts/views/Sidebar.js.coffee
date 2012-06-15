@@ -65,12 +65,18 @@ class ibikecph.Sidebar extends Backbone.View
 	summary_changed: ->
 		console.log(@)
 		meters = @.get 'total_distance'
-		minutes  = @.get 'total_time'
+		seconds  = @.get 'total_time'
 
-		if meters and minutes
+		if meters and seconds
 			$(".time", @el).show()
 			$(".distance .count", @el).text(meters/1000 + ' km');
-			$(".duration .count", @el).text(Math.floor(minutes/60 + 2) + ' minutter');
+			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' minutter');
+			d = new Date;
+			d.setTime d.getTime() + seconds * 1000;
+			m = d.getMinutes();
+			if m < 10
+				m = '0' + m
+			$(".arrival .count").text d.getHours() + ':' + m
 		else
 			$(".time", @el).hide()
 	
