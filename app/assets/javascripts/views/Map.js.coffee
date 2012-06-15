@@ -10,10 +10,15 @@ class ibikecph.Map extends Backbone.View
 
 		@path = null
 
-		open_street_map = new L.TileLayer ibikecph.config.tiles.url, ibikecph.config.tiles.options
+		layers_control = new L.Control.Layers
+		for tileset, index in ibikecph.config.tiles
+			layer = new L.TileLayer tileset.url, tileset.options
+			layers_control.addBaseLayer layer, tileset.name
+			@map.addLayer(layer) if index == 0
+		@map.addControl layers_control
 
 		initial_location = new L.LatLng ibikecph.config.start.lat, ibikecph.config.start.lng
-		@map.setView(initial_location, ibikecph.config.start.zoom).addLayer(open_street_map)
+		@map.setView initial_location, ibikecph.config.start.zoom
 
 		@model.from.bind 'change:location', @location_changed, this
 		@model.to.bind   'change:location', @location_changed, this
