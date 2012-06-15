@@ -33,8 +33,12 @@ class ibikecph.Map extends Backbone.View
 		x -= offset.left
 		y -= offset.top
 
-		#if x < 0 or y < 0 or x >= width or y >= height
-		console.log 'Dropped pin relative to map at:', x, y
+		return if x < 0 or y < 0 or x >= width or y >= height
+
+		position = new L.Point x, y
+		location = @map.layerPointToLatLng @map.containerPointToLayerPoint position
+
+		@model[field_name].set 'location', location
 
 	location_changed: (model) ->
 		field_name = model.get 'field_name'

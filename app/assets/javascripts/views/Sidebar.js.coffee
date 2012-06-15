@@ -26,7 +26,7 @@ class ibikecph.Sidebar extends Backbone.View
 		if @draging
 			@draging.remove()
 			field_name = @draging.removeClass('draging pin').attr('class');
-			@app.map.set_pin_at 'from', event.pageX + 1, event.pageY + 24
+			@app.map.set_pin_at field_name, event.pageX + 1, event.pageY + 24
 			@draging = undefined
 
 	initialize: (options) ->
@@ -47,8 +47,7 @@ class ibikecph.Sidebar extends Backbone.View
 
 		input = $("input", label)
 		input.val ''
-		input.trigger 'change'
-
+		@fields_updated()
 
 	address_changed: (model, address) ->
 		field_name = model.get 'field_name'
@@ -59,7 +58,7 @@ class ibikecph.Sidebar extends Backbone.View
 		@set_loading model.get('field_name'), loading
 
 	get_field: (field_name) ->
-		return @$("input.#{field_name}").val()
+		return @$("input.#{field_name}").val() or ''
 
 	set_field: (field_name, text) ->
 		if text 
@@ -75,7 +74,6 @@ class ibikecph.Sidebar extends Backbone.View
 	fields_updated: ->
 		from = @get_field 'from'
 		to   = @get_field 'to'
-		via   = @get_field 'via'
-
+		via  = @get_field 'via'
 
 		@app.router.navigate_route from, via, to, trigger: true
