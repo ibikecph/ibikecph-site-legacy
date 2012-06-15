@@ -8,7 +8,7 @@ class ibikecph.Sidebar extends Backbone.View
 
 	drag_pin_start: (event) ->
 		if $(event.target).hasClass 'reset'
-			return
+			return true
 		@draging = $(event.target).clone();
 		$(event.target).addClass 'reset'
 		$(@el).append(@draging);
