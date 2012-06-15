@@ -71,7 +71,11 @@ class ibikecph.OSRM
 					path = ibikecph.util.decode_path result.route_geometry
 					@model.route.reset path
 
-					#console.log 'routing', result
+					if result.status == 0
+						@model.instructions.reset_from_osrm result.route_instructions
+						@model.summary.set result.route_summary
+
+					console.log 'routing', result
 			else
 				@model.route.reset() if @model.route.length > 0
 
@@ -94,7 +98,7 @@ class ibikecph.OSRM
 		data += via if via
 		data += to
 
-		#data += '&instructions=true'
+		data += '&instructions=true'
 
 		return data
 
