@@ -25,7 +25,7 @@ class ibikecph.Sidebar extends Backbone.View
 	drag_pin_end : (event) ->
 		if @draging
 			@draging.remove()
-			console.log('droped at pos:', event.clientX, event.clientY - 40);
+			@app.map.set_pin_at 'from', event.pageX + 1, event.pageY + 24
 			@draging = undefined
 
 	initialize: (options) ->
