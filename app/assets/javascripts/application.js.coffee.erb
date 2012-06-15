@@ -9,7 +9,7 @@
 #
 # WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 # GO AFTER THE REQUIRES BELOW.
-#
+#= require modernizr
 #= require jquery
 #= require jquery_ujs
 #= require underscore_min
@@ -37,3 +37,16 @@ I18n.locale        = "<%= I18n.locale %>"
 
 jQuery ->
 	ibikecph.app.start()
+	if !Modernizr.input.placeholder
+		$('[placeholder]')
+			.focus ->
+				input = $(this)
+				if input.val() is input.attr 'placeholder'
+					input.val '';
+					input.removeClass 'placeholder'
+			.blur ->
+				input = $(this)
+				if input.val() is input.attr 'placeholder' or ''
+					input.addClass('placeholder')
+					input.val(input.attr('placeholder'))
+			
