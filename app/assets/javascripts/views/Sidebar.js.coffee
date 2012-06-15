@@ -15,16 +15,17 @@ class ibikecph.Sidebar extends Backbone.View
 		self = @
 		$("html").mousemove (event) ->
 			self.drag_pin_move(event)
-		@draging.css position : 'fixed', left : event.clientX - 18, top : event.clientY - 20, 'z-index' : 100
+		@draging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
 		@draging.addClass 'draging'
 
 	drag_pin_move : (event) ->
 		if @draging
-			@draging.css position : 'fixed', left : event.clientX - 18, top : event.clientY - 20, 'z-index' : 100
+			@draging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
 
 	drag_pin_end : (event) ->
 		if @draging
 			@draging.remove()
+			field_name = @draging.removeClass('draging pin').attr('class');
 			@app.map.set_pin_at 'from', event.pageX + 1, event.pageY + 24
 			@draging = undefined
 
@@ -61,7 +62,6 @@ class ibikecph.Sidebar extends Backbone.View
 		return @$("input.#{field_name}").val()
 
 	set_field: (field_name, text) ->
-		console.log('text',text);
 		if text 
 			$("div.#{field_name}").addClass 'reset'
 		else
