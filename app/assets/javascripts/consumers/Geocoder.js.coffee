@@ -2,21 +2,20 @@ class ibikecph.Geocoder
 
 	constructor: (@model) ->
 		@current =
-			address : null
-			lat     : null
-			lng     : null
+			address: null
+			location:
+				lat: null
+				lng: null
 
 		@request = null
 
 		@model.bind 'change:address', (model, new_address) =>
 			@load_address @model.get 'address'
 
-		@model.bind 'change:lat change:lng', =>
+		@model.bind 'change:location', =>
 			@abort()
 			@wait_for 300, =>
-				@load_location
-					lat: @model.get 'lat'
-					lng: @model.get 'lng'
+				@load_location @model.get 'location'
 
 	wait_for: (milliseconds, callback) ->
 		clearTimeout(@timer) if @timer
@@ -44,12 +43,14 @@ class ibikecph.Geocoder
 		return if new_address == @current.address
 		@current.address = new_address
 
+		return unless @current.address
+
 		@request_init()
 
 		@request = $.getJSON 'http://nominatim.openstreetmap.org/search?json_callback=?', (
 			format            : 'json'
 			'accept-language' : 'da'
-			q                 : "#{[new_address]}"
+			q                 : "#{@current.address}"
 			countrycodes      : 'DK'
 			viewbox           : '-27.0,72.0,46.0,36.0'
 			bounded           : '1'
@@ -58,22 +59,25 @@ class ibikecph.Geocoder
 		), (result) =>
 			@request_done()
 
-			@current.lat = @convert_number result[0]?.lat
-			@current.lng = @convert_number result[0]?.lon
+			@current.location.lat = @convert_number result[0]?.lat
+			@current.location.lng = @convert_number result[0]?.lon
 			@model.set @current
 
 	load_location: (new_location) ->
-		return if new_location.lat == @current.lat and new_location.lng == @current.lng
-		@current.lat = new_location.lat
-		@current.lng = new_location.lng
+		return if new_location?.lat == @current.location.lat and new_location?.lng == @current.location.lng
+
+		@current.location.lat = new_location?.lat
+		@current.location.lng = new_location?.lng
+
+		return unless @current.location.lat and @current.location.lng
 
 		@request_init()
 
 		@request = $.getJSON 'http://nominatim.openstreetmap.org/reverse?json_callback=?', (
 			format            : 'json'
 			'accept-language' : 'da'
-			lat               : new_location.lat or 0
-			lon               : new_location.lng or 0
+			lat               : @current.location.lat or 0
+			lon               : @current.location.lng or 0
 			addressdetails    : '1'
 			email             : 'info@contingent.dk'
 		), (result) =>
@@ -83,6 +87,6 @@ class ibikecph.Geocoder
 			if address and address.road and address.postcode and address.city
 				@current.address = "#{address.road}#{[' ' + address.house_number if address.house_number]}, #{address.postcode} #{address.city}"
 
-			@current.lat = @convert_number result?.lat
-			@current.lng = @convert_number result?.lon
+			@current.location.lat = @convert_number result?.lat
+			@current.location.lng = @convert_number result?.lon
 			@model.set @current
