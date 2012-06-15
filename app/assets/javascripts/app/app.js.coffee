@@ -5,11 +5,10 @@ $(window).resize ->
 	h = $(window).height()
 	m = parseInt($('body').css('margin-left' ), 10) * 2
 	p = parseInt($('body').css('padding-left'), 10) * 2
-	sb = $('#sidebar').outerWidth()
+	tb = $('#topbar').outerHeight()
 	$('body').height(h - p - m)
-	$('#sidebar').height(h - p - m - 2)
-	$('#viewport').height(h - p - m - 2)
-	$('#viewport').width(w - sb - p - m - 2)
+	$('#viewport').height h - p - m - 2 - tb;
+	$("#topbar").width w - m - p - 2;
 
 
 app.start = ->
@@ -19,7 +18,7 @@ app.start = ->
 
 	app.sidebar = new ibikecph.Sidebar
 		model : app.info
-		el    : '#sidebar'
+		el    : '#topbar'
 		app   : app
 
 	app.map = new ibikecph.Map
