@@ -9,75 +9,53 @@ class ibikecph.OSRM
 		@checksum = null
 		@prehints = []
 		@hints    = {}
-		@request  = null
+		@request  = new ibikecph.SmartJSONP
 
 		@model.from.bind 'change:location', @load_route, this
 		@model.to.bind   'change:location', @load_route, this
 		@model.via.bind  'change:location', @load_route, this
 
-	wait_for: (milliseconds, callback) ->
-		return if @timer
-
-		old_last_wait = @last_wait
-		@last_wait    = new Date
-
-		if old_last_wait
-			waited_time    = new Date - old_last_wait
-			remaining_time = milliseconds - waited_time
-
-			if remaining_time <= 10
-				callback()
-			else
-				@timer = setTimeout =>
-					@timer     = null
-					@last_wait = new Date
-					callback()
-				, remaining_time
-		else
-			callback()
-
 	abort: ->
-		@request.abort() if @request?.abort
+		@request.abort()
 
 	load_route: (model) ->
-		@wait_for 60, =>
-			field_name   = model.get 'field_name'
-			new_location = model.get 'location'
+		field_name   = model.get 'field_name'
+		new_location = model.get 'location'
 
-			if new_location?.lat? and new_location.lng?
-				@current[field_name] = new_location
-			else
-				@current[field_name] = null
+		if new_location?.lat? and new_location.lng?
+			@current[field_name] = new_location
+		else
+			@current[field_name] = null
 
-			#@abort()
+		#@abort()
 
-			query_string = @build_query_string()
+		query_string = @build_query_string()
 
-			if query_string
-				@request = $.getJSON 'http://83.221.133.2/viaroute?jsonp=?&' + query_string, (result) =>
-					return unless result
+		if query_string
+			@request.exec 'http://83.221.133.2/viaroute?jsonp=?&' + query_string, (result) =>
+				return unless result
 
-					if result.hint_data
-						@checksum = result.hint_data.checksum
+				if result.hint_data
+					@checksum = result.hint_data.checksum
 
-						for code, index in result.hint_data.locations or []
-							hint = @prehints[index]
-							if hint
-								hint.value = code
-								@hints[hint.field_name] = hint
+					for code, index in result.hint_data.locations or []
+						hint = @prehints[index]
+						if hint
+							hint.value = code
+							@hints[hint.field_name] = hint
 
-						@prehints = []
+					@prehints = []
 
-					path = ibikecph.util.decode_path result.route_geometry
-					@model.route.reset path
+				path = ibikecph.util.decode_path result.route_geometry
+				@model.route.reset path
 
-					if result.status == 0
-						@model.instructions.reset_from_osrm result.route_instructions
-						@model.summary.set result.route_summary
+				if result.status == 0
+					@model.instructions.reset_from_osrm result.route_instructions
+					@model.summary.set result.route_summary
 
-					console.log 'routing', result
-			else
-				@model.route.reset() if @model.route.length > 0
+				#console.log 'routing', result
+		else
+			@model.route.reset() if @model.route.length > 0
 
 	build_query_string: ->
 		if @current.zoom?
