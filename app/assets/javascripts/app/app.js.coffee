@@ -8,7 +8,9 @@ $(window).resize ->
 	tb = $('#topbar').outerHeight()
 	$('body').height(h - p - m)
 	$('#viewport').height h - p - m - 2 - tb;
-	$("#topbar").width w - m - p - 2;
+	$("#topbar").width w - m - p;
+	$("label").width(Math.floor((w - m - p) / 2 - 20));
+
 
 
 app.start = ->

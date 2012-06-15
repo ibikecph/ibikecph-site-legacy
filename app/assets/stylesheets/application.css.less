@@ -12,35 +12,6 @@ html{
 
 
 
-
-span.pin{
-	display:none
-	position: fixed;
-	width:24px;
-	height:24px;
-	z-index:100;
-	&.tl{
-		background:url('/assets/pin-tl.png');
-		top:3px;
-		left:6px;
-	}
-	&.tr{
-		background:url('/assets/pin-tr.png');
-		top:3px;
-		right:6px;
-	}
-	&.bl{
-		background:url('/assets/pin-bl.png');
-		left:6px;
-		bottom:3px;
-	}
-	&.br{
-		background:url('/assets/pin-br.png');
-		right:6px;
-		bottom:3px;
-	}
-}
-
 body{
 	background:#FFFDF4;
 	height:100%;
@@ -51,6 +22,38 @@ body{
 	#topbar{
 		height:68px;
 		label{
+
+			.pin{
+				width:25px;
+				height:43px;
+				float:right;
+				margin-top:2px;
+				margin-left:5px;
+				margin-right:1px;
+				border-radius:5px;
+				cursor:move;
+
+				&.from{
+					background:url('/assets/images/marker-start.png') center center no-repeat;
+				}
+
+				&.to{
+					background:url('/assets/images/marker-end.png') center center no-repeat;
+				}
+
+				&.reset{
+					background:url('/assets/images/marker-remove.png') center center no-repeat;	
+					cursor:pointer;				
+				}
+			}
+
+
+			&.last{
+				margin-left:10px;
+			}
+
+
+
 			p{
 				display:none;
 				margin-left:10px;
@@ -60,16 +63,22 @@ body{
 			}
 			input[type=text]{
 				padding:10px;
-				width:295px;
+				width:490px;
 				font-size:20px;
 				border:2px solid #eee;
 				border-radius:5px;
-				margin-left:10px;
+				clear:none;
+				float:left;
 
 			}
-			margin-top:10px;
+			margin-top:5px;
 			float:left;
 			position: relative;
+			margin-left:5px;
+			padding:5px;
+			border-radius: 5px;
+			background:#eee;
+
 		}
 		border:1px solid #F3EEC8;
 		border-bottom:none;
@@ -77,17 +86,18 @@ body{
 		clear:none;
 
 		.delete{
-				width:32px;
-				height:32px;
-				float:right;
-				background:url('/assets/cancel.png') no-repeat right 12px;
-				cursor:pointer;
+				width:40px;
+				height:40px;
+				margin-top:2px;
 
+				float:right;
+				cursor:pointer;
+				clear:none;
+				background:url('/assets/cancel.png') no-repeat center center;
 		}
 
 
-		background:url('/assets/ibikecph.png') no-repeat right center white;
-
+		background:white;
 	}
 
 	#viewport{

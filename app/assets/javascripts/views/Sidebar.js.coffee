@@ -1,33 +1,9 @@
 class ibikecph.Sidebar extends Backbone.View
 
 	events:
-		'change .from' : 'fields_updated'
-		'change .to'   : 'fields_updated'
-		'change .via'  : 'fields_updated'
-		'mouseenter label' : 'show_delete'
-		'mouseleave label' : 'hide_delete'
-		'click .delete' : 'clear'
-
-
-	show_delete: (event) ->
-		label = $(event.target)
-
-		label = label.parent() while label[0].tagName isnt 'LABEL'
-		
-		label.prepend('<div class="delete">');
-
-
-	hide_delete: (event) ->
-		$(".delete").remove();
-
-	clear: (event) ->
-		del = $(event.target);
-
-		parent = del;
-
-		parent = parent.parent() while parent[0].tagName isnt 'LABEL'
-
-		$("input", parent).val('').trigger('change');
+		'change input.from' : 'fields_updated'
+		'change input.to'   : 'fields_updated'
+		'change input.via'  : 'fields_updated'
 
 
 	initialize: (options) ->
