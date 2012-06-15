@@ -9,7 +9,7 @@ class ibikecph.Geocoder
 
 		@request = null
 
-		@model.bind 'change:address', (model, new_address) =>
+		@model.bind 'change:address', =>
 			@load_address @model.get 'address'
 
 		@model.bind 'change:location', =>
