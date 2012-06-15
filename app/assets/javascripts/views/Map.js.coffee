@@ -20,14 +20,19 @@ class ibikecph.Map extends Backbone.View
 	location_changed: (model) ->
 		field_name = model.get 'field_name'
 		location   = model.get 'location'
+		lat        = location?.lat
+		lng        = location?.lng
+		valid      = !!(lat? and lng?)
 
-		return unless location?.lat? and location.lng?
-
-		location = new L.LatLng location.lat, location.lng
+		location = new L.LatLng lat, lng
 
 		if @pin[field_name]
-			@pin[field_name].setLatLng location
-		else
+			if valid
+				@pin[field_name].setLatLng location
+			else
+				@pin[field_name].removeLayer location
+				@pin[field_name] = null
+		else if valid
 			pin = new L.Marker location, draggable: true
 
 			pin.on 'drag', (event) =>

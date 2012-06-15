@@ -43,7 +43,11 @@ class ibikecph.Geocoder
 		return if new_address == @current.address
 		@current.address = new_address
 
-		return unless @current.address
+		unless @current.address
+			@current.location.lat = null
+			@current.location.lng = null
+			@model.set @current
+			return
 
 		@request_init()
 
