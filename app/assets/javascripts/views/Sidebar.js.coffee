@@ -45,9 +45,14 @@ class ibikecph.Sidebar extends Backbone.View
 
 		label = label.parent() while label[0].tagName isnt 'LABEL'
 
-		input = $("input", label)
+		input = $("input", label);
+
+		console.log('clear', input);
+
+		pin.removeClass 'reset'
+
 		input.val ''
-		@fields_updated()
+		@fields_updated();
 
 	address_changed: (model, address) ->
 		field_name = model.get 'field_name'
