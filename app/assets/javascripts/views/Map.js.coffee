@@ -38,15 +38,10 @@ class ibikecph.Map extends Backbone.View
 				@pin[field_name] = null
 		else if valid
 
-
-			MyIcon = L.Icon.extend({
-				iconURL : '/assets/images/marker-' + field_name + '.png',
-				shadowURL : '/assets/images/marker-shadow.png',
-			});
-
-			icon = new MyIcon
-
-			pin = new L.Marker location, draggable: true, icon : icon
+			pin = new L.Marker location, (
+				draggable : true
+				icon      : ibikecph.icons[field_name]
+			)
 
 			pin.on 'drag', (event) =>
 				location = event.target.getLatLng()
