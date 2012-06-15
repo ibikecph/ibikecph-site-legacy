@@ -9,6 +9,10 @@ class ibikecph.Map extends Backbone.View
 			via  : null
 
 		@path = null
+		@path_marker = new L.Marker null, (
+			draggable : false
+			icon      : ibikecph.icons.path_marker
+		)
 
 		layers_control = new L.Control.Layers
 		for tileset, index in ibikecph.config.tiles
@@ -20,11 +24,23 @@ class ibikecph.Map extends Backbone.View
 		initial_location = new L.LatLng ibikecph.config.start.lat, ibikecph.config.start.lng
 		@map.setView initial_location, ibikecph.config.start.zoom
 
+		@map.on 'mousemove', (event) => @mouse_moved event
+
 		@model.from.bind 'change:location', @location_changed, this
 		@model.to.bind   'change:location', @location_changed, this
 		@model.via.bind  'change:location', @location_changed, this
 
 		@model.route.bind 'reset', @geometry_changed, this
+
+	mouse_moved: (event) ->
+		return unless @path
+
+		closest = @path.closestLayerPoint event.layerPoint
+		if closest.distance < 10
+			@path_marker.setLatLng @map.layerPointToLatLng closest
+			@map.addLayer @path_marker
+		else
+			@map.removeLayer @path_marker
 
 	set_pin_at: (field_name, x, y) ->
 		offset = $(@el).offset()
