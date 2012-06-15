@@ -55,6 +55,6 @@ class ibikecph.Map extends Backbone.View
 
 		@map.removeLayer(@path) if @path
 
-		@path = new L.Polyline latlngs
-		#@map.fitBounds new L.LatLngBounds(latlngs)
+		@path = new L.Polyline latlngs, color: 'red'
+		#g@map.fitBounds new L.LatLngBounds(latlngs)
 		@map.addLayer @path
