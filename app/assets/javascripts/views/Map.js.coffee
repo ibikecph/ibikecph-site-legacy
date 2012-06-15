@@ -26,6 +26,16 @@ class ibikecph.Map extends Backbone.View
 
 		@model.route.bind 'reset', @geometry_changed, this
 
+	set_pin_at: (field_name, x, y) ->
+		offset = $(@el).offset()
+		width  = $(@el).width()
+		height = $(@el).height()
+		x -= offset.left
+		y -= offset.top
+
+		#if x < 0 or y < 0 or x >= width or y >= height
+		console.log 'Dropped pin relative to map at:', x, y
+
 	location_changed: (model) ->
 		field_name = model.get 'field_name'
 		location   = model.get 'location'
