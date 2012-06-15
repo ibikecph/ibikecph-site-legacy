@@ -1,11 +1,11 @@
 ibikecph.app = app = {}
 
-$(window).resize => 
+$(window).resize ->
 	w = $(window).width()
 	h = $(window).height()
-	m = parseInt($('body').css('margin-left'), 10) * 2;
-	p = parseInt($('body').css('padding-left'), 10) * 2;
-	sb = $('#sidebar').outerWidth();
+	m = parseInt($('body').css('margin-left' ), 10) * 2
+	p = parseInt($('body').css('padding-left'), 10) * 2
+	sb = $('#sidebar').outerWidth()
 	$('body').height(h - p - m)
 	$('#sidebar').height(h - p - m - 2)
 	$('#viewport').height(h - p - m - 2)
