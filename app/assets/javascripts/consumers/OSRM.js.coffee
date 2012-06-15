@@ -88,8 +88,8 @@ class ibikecph.OSRM
 		lng = 1 * location.lng
 		return null if isNaN(lat) or isNaN(lng)
 
-		lat = lat.toFixed(6)
-		lng = lng.toFixed(6)
+		lat = lat.toFixed(5)
+		lng = lng.toFixed(5)
 
 		data = "&loc=#{lat},#{lng}"
 
