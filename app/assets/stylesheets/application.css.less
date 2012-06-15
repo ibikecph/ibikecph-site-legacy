@@ -10,7 +10,11 @@ html{
 }
 
 
+
+
+
 span.pin{
+	display:none
 	position: fixed;
 	width:24px;
 	height:24px;
@@ -38,7 +42,7 @@ span.pin{
 }
 
 body{
-	background:#fff;
+	background:#FFFDF4;
 	height:100%;
 	margin:20px;
 	padding:15px;
@@ -52,18 +56,37 @@ body{
 				margin-top:10px;
 				margin-left:10px;
 				font-size:15px;		
-				margin-bottom:5px;		
+				margin-bottom:10px;	
 			}
 			input[type=text]{
 				padding:10px;
-				width:300px;
+				width:295px;
 				font-size:20px;
-				border:1px solid #eee;
+				border:2px solid #eee;
+				border-radius:5px;
+
 			}
+
+
+			margin-top:20px;
+			float:left;
+			position: relative;
 		}
 		padding:0px 10px;
-		border:1px solid #eee;
+		border:1px solid #F3EEC8;
 		border-right:none;
+		height:100%;
+		float:left;
+		clear:none;
+
+		.delete{
+				width:32px;
+				height:32px;
+				float:right;
+				background:url('/assets/cancel.png') no-repeat right 12px;
+				cursor:pointer;
+
+		}
 
 
 		background:url('/assets/ibikecph.png') no-repeat center bottom white;
@@ -74,7 +97,11 @@ body{
 		width:80%;
 		position: relative;
 		overflow:hidden;
-		border:1px solid #eee;
+		border:1px solid #F3EEC8;
+		border-left-color:#ddd;
+		height:100%;
+		float:left;
+		clear:none;
 
 		#map {
 			position: fixed;
@@ -85,9 +112,4 @@ body{
 		}
 	}
 
-	> div{
-		height:100%;
-		float:left;
-		clear:none;
-	}
 }

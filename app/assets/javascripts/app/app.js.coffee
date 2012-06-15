@@ -3,7 +3,6 @@ ibikecph.app = app = {}
 $(window).resize ->
 	w = $(window).width()
 	h = $(window).height()
-	# Left and right margin
 	m = parseInt($('body').css('margin-left' ), 10) * 2
 	p = parseInt($('body').css('padding-left'), 10) * 2
 	sb = $('#sidebar').outerWidth()
