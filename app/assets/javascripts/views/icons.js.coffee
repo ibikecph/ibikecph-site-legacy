@@ -6,6 +6,12 @@ class ibikecph.Icon extends L.Icon
 		shadowSize : new L.Point(41, 41)
 		iconAnchor : new L.Point(12, 41)
 
+class ibikecph.PathMarker extends L.Icon
+	options:
+		iconUrl    : '/assets/marker-drag.png'
+		iconSize   : new L.Point(18, 18)
+		iconAnchor : new L.Point( 9,  9)
+
 ibikecph.icons = {}
 
 ibikecph.icons.from = new ibikecph.Icon
@@ -16,3 +22,5 @@ ibikecph.icons.to = new ibikecph.Icon
 
 ibikecph.icons.via = new ibikecph.Icon
 	iconUrl : '/assets/images/marker-via.png'
+
+ibikecph.icons.path_marker = new ibikecph.PathMarker
