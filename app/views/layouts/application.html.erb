@@ -19,15 +19,20 @@ or see http://www.gnu.org/licenses/agpl.txt.
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>IBikeCph</title>
 	<%= stylesheet_link_tag "application", :media => "all" %>
 	<%= stylesheet_link_tag "leaflet", :media => "all" %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
+	<title>I BIKE CPH | Ruteplanlægger - alpha</title>
 </head>
 <body class="base-font not-selectable">
 <%= yield %>
+<span class="pin tl"></span>
+<span class="pin tr"></span>
+<span class="pin bl"></span>
+<span class="pin br"></span>
+
 </body>
 </html>
