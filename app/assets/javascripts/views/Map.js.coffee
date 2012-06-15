@@ -37,7 +37,16 @@ class ibikecph.Map extends Backbone.View
 				@pin[field_name].removeLayer location
 				@pin[field_name] = null
 		else if valid
-			pin = new L.Marker location, draggable: true
+
+
+			MyIcon = L.Icon.extend({
+				iconURL : '/assets/images/marker-' + field_name + '.png',
+				shadowURL : '/assets/images/marker-shadow.png',
+			});
+
+			icon = new MyIcon
+
+			pin = new L.Marker location, draggable: true, icon : icon
 
 			pin.on 'drag', (event) =>
 				location = event.target.getLatLng()
