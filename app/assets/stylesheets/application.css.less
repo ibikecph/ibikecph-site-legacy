@@ -21,6 +21,33 @@ body{
 
 	#topbar{
 
+		position: relative;
+		.time{
+			opacity: .8;
+			display:none;
+			width:184px;
+			background:black;
+			height:54px;
+			padding:10px;
+			position: absolute;
+			top:66px;
+			z-index:99;
+			left:50%;
+			margin-left:-102px;
+			background:url('/assets/clock.png');
+			p{
+				font-size:14px;
+				width:100%;
+				margin-bottom:7px;
+
+				span{
+					float:right;
+					font-weight:bold;
+
+				}
+			}
+		}
+
 		.pin{
 				width:25px;
 				height:43px;

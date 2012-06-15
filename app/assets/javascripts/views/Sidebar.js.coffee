@@ -38,6 +38,8 @@ class ibikecph.Sidebar extends Backbone.View
 		@model.from.bind 'change:loading', @loading_changed, this
 		@model.to.bind   'change:loading', @loading_changed, this
 
+		@app.info.summary.bind 'change', @summary_changed, @app.info.summary;
+
 	clear : (event) ->
 		pin = $(event.target);
 
@@ -46,8 +48,6 @@ class ibikecph.Sidebar extends Backbone.View
 		label = label.parent() while label[0].tagName isnt 'LABEL'
 
 		input = $("input", label);
-
-		console.log('clear', input);
 
 		pin.removeClass 'reset'
 
@@ -62,6 +62,18 @@ class ibikecph.Sidebar extends Backbone.View
 	loading_changed: (model, loading) ->
 		@set_loading model.get('field_name'), loading
 
+	summary_changed: ->
+		console.log(@)
+		meters = @.get 'total_distance'
+		minutes  = @.get 'total_time'
+
+		if meters and minutes
+			$(".time", @el).show()
+			$(".distance .count", @el).text(meters/1000 + ' km');
+			$(".duration .count", @el).text(Math.floor(minutes/60 + 2) + ' minutter');
+		else
+			$(".time", @el).hide()
+	
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
 
