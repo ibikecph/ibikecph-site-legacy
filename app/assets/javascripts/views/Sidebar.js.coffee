@@ -47,8 +47,7 @@ class ibikecph.Sidebar extends Backbone.View
 
 		input = $("input", label)
 		input.val ''
-		input.trigger 'change'
-
+		@fields_updated()
 
 	address_changed: (model, address) ->
 		field_name = model.get 'field_name'
@@ -77,4 +76,4 @@ class ibikecph.Sidebar extends Backbone.View
 		to   = @get_field 'to'
 		via  = @get_field 'via'
 
-		@app.router.navigate_route from, via, to, trigger: false
+		@app.router.navigate_route from, via, to, trigger: true
