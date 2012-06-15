@@ -8,6 +8,8 @@ class ibikecph.Map extends Backbone.View
 			to   : null
 			via  : null
 
+		@path = null
+
 		open_street_map = new L.TileLayer ibikecph.config.tiles.url, ibikecph.config.tiles.options
 
 		initial_location = new L.LatLng ibikecph.config.start.lat, ibikecph.config.start.lng
@@ -16,6 +18,8 @@ class ibikecph.Map extends Backbone.View
 		@model.from.bind 'change:location', @location_changed, this
 		@model.to.bind   'change:location', @location_changed, this
 		@model.via.bind  'change:location', @location_changed, this
+
+		@model.route.bind 'reset', @geometry_changed, this
 
 	location_changed: (model) ->
 		field_name = model.get 'field_name'
@@ -44,3 +48,13 @@ class ibikecph.Map extends Backbone.View
 
 			@map.addLayer pin
 			@pin[field_name] = pin
+ 
+	geometry_changed: (points) ->
+		latlngs = points.map (point) ->
+			new L.LatLng point.get('lat'), point.get('lng')
+
+		@map.removeLayer(@path) if @path
+
+		@path = new L.Polyline latlngs
+		#@map.fitBounds new L.LatLngBounds(latlngs)
+		@map.addLayer @path

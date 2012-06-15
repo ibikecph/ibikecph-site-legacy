@@ -6,3 +6,5 @@ class ibikecph.Info
 		@via  = new ibikecph.Point field_name: 'via'
 
 		@route = new ibikecph.Route
+
+		new ibikecph.OSRM this
