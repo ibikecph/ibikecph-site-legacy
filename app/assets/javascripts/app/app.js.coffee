@@ -34,4 +34,20 @@ app.start = ->
 
 	Backbone.history.start()
 	$(window).trigger('resize')
+	$('a.guide').click (event) ->
+		event.preventDefault()
+		if app.info.instructions.length
+			$('.instructions').remove()
+			el = $('<div>', class : 'instructions')
+			app.info.instructions.each (instruction) ->
+				instruction_el = $('<div>', class : 'instruction')
+				text = '';
+
+				_.each instruction.toJSON(), (v, k, a) ->
+					if(v)
+						text += v  + ':';
+				instruction_el.text(text)
+				el.append instruction_el
+				$('body').prepend(el);
+			console.log el
 
