@@ -1,13 +1,13 @@
 <div id="topbar">
-	<label>
+	<div class="label">
 		<div class="pin from"></div>
 		<input type="text" class="from"  placeholder='From'>
-	</label>
+	</div>
 	<img src="/assets/ibikecph.png" alt="I BIKE CPH">
-	<label class="last">
+	<div class="label" class="last">
 		<div class="pin to"></div>
 		<input type="text" class="to" placeholder="To">
-	</label>
+	</div>
 	<div class="time">
 		<p class='distance'>Afstand: <span class="count">23 km</span></p>
 		<p class='duration'>Tid: <span class="count">13 minutter</span></p>
@@ -17,5 +17,8 @@
 
 <div id="viewport">
 	<div id="map"></div>
-	<a class='permalink' href="#" style="display:none">Permalink for denne rute</a>
+	<div class="actions">
+			<a class='permalink' href="#" >Del Ruten</a>	
+			<a class='guide' href="#" >Rutebeskrivelse</a>	
+	</div>
 </div>

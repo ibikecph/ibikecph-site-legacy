@@ -10,8 +10,8 @@ $(window).resize ->
 	$('body').height(h - p - m)
 	$('#viewport').height h - p - m - 2 - tb;
 	$("#topbar").width w - m - p;
-	$("#topbar label").width(Math.floor((w - m - p  - logo) / 2 - 20));
-	$("#topbar input").width($("#topbar label").width() - $("#topbar .pin").width() - 30)
+	$("#topbar .label").width(Math.floor((w - m - p  - logo) / 2 - 20));
+	$("#topbar input").width($("#topbar .label").width() - $("#topbar .pin").width() - 30)
 
 
 

@@ -44,9 +44,9 @@ class ibikecph.Sidebar extends Backbone.View
 
 		label = pin;
 
-		label = label.parent() while label[0].tagName isnt 'LABEL'
+		label = label.parent() while not label.hasClass 'label'
 
-		input = $("input", label);
+		input = $ "input", label;
 
 		pin.removeClass 'reset'
 
@@ -72,7 +72,7 @@ class ibikecph.Sidebar extends Backbone.View
 		seconds  = @.get 'total_time'
 
 		if meters and seconds
-			$('.permalink').show()
+			$('.actions').show()
 			$(".time", @el).show()
 			$(".distance .count", @el).text(meters/1000 + ' km');
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' min');
@@ -83,7 +83,7 @@ class ibikecph.Sidebar extends Backbone.View
 				m = '0' + m
 			$(".arrival .count").text d.getHours() + ':' + m
 		else
-			$('.permalink').hide()
+			$('.actions').hide()
 			$(".time", @el).hide()
 
 	get_field: (field_name) ->
