@@ -41,11 +41,8 @@ app.start = ->
 			el = $('<div>', class : 'instructions')
 			app.info.instructions.each (instruction) ->
 				instruction_el = $('<div>', class : 'instruction')
-				text = '';
+				text = ibikecph.util.instruction_string instruction.toJSON();
 
-				_.each instruction.toJSON(), (v, k, a) ->
-					if(v)
-						text += v  + ':';
 				instruction_el.text(text)
 				el.append instruction_el
 				$('body').prepend(el);

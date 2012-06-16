@@ -1,7 +1,40 @@
 ibikecph.util or= {}
 
 ibikecph.util.normalize_whitespace = (text) ->
-	"#{text}".replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ')
+	"#{text}".replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
+
+
+ibikecph.util.instruction_string = (instruction) ->
+	string = ''
+
+	numbers = ['første', 'anden', 'tredje', 'fjerde', 'femte', 'sjette', 'syvende']
+
+	switch instruction.turn
+		when 'head' then string += 'Kør'
+		when 'continue' then string += 'Kør'
+		when 'turn-left' then string += 'Drej til venstre'
+		when 'turn-right' then string += 'Drej til højre'
+		when 'turn-slight-right' then string += 'Drej til let til højre'
+		when 'turn-slight-left' then string += 'Drej til let til venstre'
+		when 'turn-sharp-right' then string += 'Drej til skarpt til højre'
+		when 'turn-sharp-left' then string += 'Drej til skarpt til venstre'
+		when 'enter-roundabout' then string += 'Kør ind i rundkørsel'
+		when 'reached-destination' then return 'Du er fremme ved destinationen'
+
+		else string += instruction.turn
+
+	if instruction.street
+		switch instruction.turn
+			when 'enter-roundabout' 
+				string += ', tag ' + numbers[instruction.roundabout_exit - 1] + ' afkørsel'
+			else
+				string += ' ad '
+				string += instruction.street
+
+
+	string += ' og fortsæt ' + instruction.distance  + ' m'
+
+	string
 
 ibikecph.util.decode_path = (encoded) ->
 	len   = encoded.length
