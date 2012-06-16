@@ -10,8 +10,8 @@ ibikecph.util.instruction_string = (instruction) ->
 	numbers = ['første', 'anden', 'tredje', 'fjerde', 'femte', 'sjette', 'syvende']
 
 	switch instruction.turn
-		when 'head' then string += 'Kør'
-		when 'continue' then string += 'Kør'
+		when 'head' then string += 'Start med at køre'
+		when 'continue' then string += 'Kør frem'
 		when 'turn-left' then string += 'Drej til venstre'
 		when 'turn-right' then string += 'Drej til højre'
 		when 'turn-slight-right' then string += 'Drej til let til højre'
@@ -19,7 +19,7 @@ ibikecph.util.instruction_string = (instruction) ->
 		when 'turn-sharp-right' then string += 'Drej til skarpt til højre'
 		when 'turn-sharp-left' then string += 'Drej til skarpt til venstre'
 		when 'enter-roundabout' then string += 'Kør ind i rundkørsel'
-		when 'reached-destination' then return 'Du er fremme ved destinationen'
+		when 'reached-destination' then return '<strong>Du er fremme ved destinationen</strong>'
 
 		else string += instruction.turn
 
@@ -29,10 +29,10 @@ ibikecph.util.instruction_string = (instruction) ->
 				string += ', tag ' + numbers[instruction.roundabout_exit - 1] + ' afkørsel'
 			else
 				string += ' ad '
-				string += instruction.street
+				string += '<strong>' + instruction.street + '</strong>'
 
 
-	string += ' og fortsæt ' + instruction.distance  + ' m'
+	string += ' og fortsæt <strong>' + instruction.distance  + ' m</strong>'
 
 	string
 

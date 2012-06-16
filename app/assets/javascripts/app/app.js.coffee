@@ -34,6 +34,8 @@ app.start = ->
 
 	Backbone.history.start()
 	$(window).trigger('resize')
+	$('.instructions').live 'click', ->
+		$(this).remove()
 	$('a.guide').click (event) ->
 		event.preventDefault()
 		if app.info.instructions.length
@@ -43,8 +45,9 @@ app.start = ->
 				instruction_el = $('<div>', class : 'instruction')
 				text = ibikecph.util.instruction_string instruction.toJSON();
 
-				instruction_el.text(text)
+				instruction_el.html(text)
 				el.append instruction_el
 				$('body').prepend(el);
-			console.log el
+			app.info.instructions.bind 'reset', ->
+				el.remove()
 
