@@ -24,19 +24,17 @@ class ibikecph.Map extends Backbone.View
 		initial_location = new L.LatLng ibikecph.config.start.lat, ibikecph.config.start.lng
 		@map.setView initial_location, ibikecph.config.start.zoom
 
-		@map.on 'mousemove', (event) => @mouse_moved event
+		@map.on 'mousemove', (event) =>
+			@mouse_moved event
 
-		@model.from.bind 'change:location', @location_changed, this
-		@model.to.bind   'change:location', @location_changed, this
-		@model.via.bind  'change:location', @location_changed, this
-
+		@model.waypoints.bind 'change:location', @location_changed, this
 		@model.route.bind 'reset', @geometry_changed, this
 
 	mouse_moved: (event) ->
 		return unless @path
 
 		closest = @path.closestLayerPoint event.layerPoint
-		if closest.distance < 10
+		if closest and closest.distance < 10
 			@path_marker.setLatLng @map.layerPointToLatLng closest
 			@map.addLayer @path_marker
 		else
@@ -54,25 +52,26 @@ class ibikecph.Map extends Backbone.View
 		position = new L.Point x, y
 		location = @map.layerPointToLatLng @map.containerPointToLayerPoint position
 
-		@model[field_name].set 'location', location
+		@model.endpoint(field_name).set 'location', location
 
 	location_changed: (model) ->
-		field_name = model.get 'field_name'
+		field_name = model.get 'type'
 		location   = model.get 'location'
 		lat        = location?.lat
 		lng        = location?.lng
-		valid      = !!(lat? and lng?)
 
-		location = new L.LatLng lat, lng
+		if lat? and lng?
+			location = new L.LatLng lat, lng
+		else
+			location = null
 
 		if @pin[field_name]
-			if valid
+			if location
 				@pin[field_name].setLatLng location
 			else
-				@pin[field_name].removeLayer location
+				@map.removeLayer @pin[field_name]
 				@pin[field_name] = null
-		else if valid
-
+		else if location
 			pin = new L.Marker location, (
 				draggable : true
 				icon      : ibikecph.icons[field_name]
@@ -80,14 +79,14 @@ class ibikecph.Map extends Backbone.View
 
 			pin.on 'drag', (event) =>
 				location = event.target.getLatLng()
-				@model[field_name].set 'location', (
+				@model.endpoint(field_name).set 'location', (
 					lat: location.lat
 					lng: location.lng
 				)
 
 			@map.addLayer pin
 			@pin[field_name] = pin
- 
+
 	geometry_changed: (points) ->
 		latlngs = points.map (point) ->
 			new L.LatLng point.get('lat'), point.get('lng')

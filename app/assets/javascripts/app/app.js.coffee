@@ -7,7 +7,6 @@ $(window).resize ->
 	p = parseInt($('body').css('padding-left'), 10) * 2
 	tb = $('#topbar').outerHeight()
 	logo = $("#topbar img").outerWidth()
-	console.log logo
 	$('body').height(h - p - m)
 	$('#viewport').height h - p - m - 2 - tb;
 	$("#topbar").width w - m - p;

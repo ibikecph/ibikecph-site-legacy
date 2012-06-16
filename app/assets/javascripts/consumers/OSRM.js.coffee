@@ -1,105 +1,102 @@
 class ibikecph.OSRM
 
 	constructor: (@model) ->
-		@current =
-			from : null
-			to   : null
-			via  : null
+		@request     = new ibikecph.SmartJSONP
+		@zoom        = null
+		@checksum    = null
+		@hints       = ({} for i in [0...10])
+		@hints_index = 0
 
-		@checksum = null
-		@prehints = []
-		@hints    = {}
-		@request  = new ibikecph.SmartJSONP
-
-		@model.from.bind 'change:location', @load_route, this
-		@model.to.bind   'change:location', @load_route, this
-		@model.via.bind  'change:location', @load_route, this
+		@model.waypoints.bind 'reset change', @load_route, this
 
 	abort: ->
 		@request.abort()
 
-	load_route: (model) ->
-		field_name   = model.get 'field_name'
-		new_location = model.get 'location'
-
-		if new_location?.lat? and new_location.lng?
-			@current[field_name] = new_location
-		else
-			@current[field_name] = null
-
-		#@abort()
-
-		query_string = @build_query_string()
+	load_route: ->
+		{prehints, query_string} = @build_request()
 
 		if query_string
-			@request.exec 'http://83.221.133.2/viaroute?jsonp=?&' + query_string, (result) =>
-				return unless result
-
-				if result.hint_data
-					@checksum = result.hint_data.checksum
-
-					for code, index in result.hint_data.locations or []
-						hint = @prehints[index]
-						if hint
-							hint.value = code
-							@hints[hint.field_name] = hint
-
-					@prehints = []
-
-				path = ibikecph.util.decode_path result.route_geometry
-				@model.route.reset path
-
-				if result.status == 0
-					@model.instructions.reset_from_osrm result.route_instructions
-					@model.summary.set result.route_summary
-
-				#console.log 'routing', result
+			do (prehints) =>
+				@request.exec 'http://83.221.133.2/viaroute?jsonp=?&' + query_string, (response) =>
+					@update_model response, prehints
 		else
 			@model.route.reset() if @model.route.length > 0
+			@model.instructions.reset() if @model.instructions.length > 0
+			@model.summary.set(
+				total_distance : null
+				total_time     : null
+			)
 
-	build_query_string: ->
-		if @current.zoom?
-			data = "z=#{@current.zoom}&"
+	update_model: (response, prehints) ->
+		return unless response
+
+		if response.hint_data
+			@checksum = response.hint_data.checksum
+
+			@hints_index = (@hints_index + 1) % @hints.length
+			@hints[@hints_index] = hints = {}
+
+			for hint, index in response.hint_data.locations or []
+				location_string = prehints[index]
+				hints[location_string] = hint if location_string
+
+		if response.route_geometry
+			path = ibikecph.util.decode_path response.route_geometry
+			@model.route.reset path
+
+		if response.route_instructions
+			@model.instructions.reset_from_osrm response.route_instructions
 		else
-			data = ''
+			@model.instructions.reset()
 
-		data += 'output=json&geomformat=cmp'
-		data += "&checksum=#{@checksum}" if @checksum?
+		if response.route_summary
+			@model.summary.set response.route_summary
 
-		@prehints = []
-		from = @build_location_query_string @prehints, 'from'
-		to   = @build_location_query_string @prehints, 'to'
-		via  = @build_location_query_string @prehints, 'via'
-		return null unless from and to
+		#console.log 'routing', response
 
-		data += from
-		data += via if via
-		data += to
+	hint_for_location: (location_string) ->
+		for hints in @hints
+			hint = hints[location_string]
+			return hint if hint
+		return null
 
-		data += '&instructions=true'
+	build_request: ->
+		return {} unless @model.waypoints.has_endpoints()
 
-		return data
+		if @zoom?
+			qs = "z=#{@current.zoom}&"
+		else
+			qs = ''
 
-	build_location_query_string: (prehints, field_name) ->
-		location = @current[field_name]
-		return null unless location
+		qs += 'output=json&geomformat=cmp'
+		qs += "&checksum=#{@checksum}" if @checksum?
 
-		lat = 1 * location.lat
-		lng = 1 * location.lng
+		prehints = []
+		for waypoint in @model.waypoints.models
+			waypoint_qs = @build_location_query_string waypoint, prehints
+			qs += waypoint_qs if waypoint_qs
+
+		qs += '&instructions=true'
+
+		return (
+			prehints     : prehints
+			query_string : qs
+		)
+
+	build_location_query_string: (waypoint, prehints) ->
+		location = waypoint.get 'location'
+
+		lat = 1 * location?.lat
+		lng = 1 * location?.lng
 		return null if isNaN(lat) or isNaN(lng)
 
 		lat = lat.toFixed(5)
 		lng = lng.toFixed(5)
+		location_string = "&loc=#{lat},#{lng}"
+		hint = @hint_for_location(location_string)
 
-		data = "&loc=#{lat},#{lng}"
+		qs = location_string
+		qs += "&hint=#{hint}" if hint
 
-		hint = @hints[field_name]
-		data += "&hint=#{hint.value}" if hint?.value and lat == hint.lat and lng == hint.lng
-
-		prehints.push(
-			field_name : field_name
-			lat        : lat
-			lng        : lng
-		)
-
-		return data
+		prehints.push location_string
+		return qs
