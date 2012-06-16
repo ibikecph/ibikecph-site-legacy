@@ -67,7 +67,6 @@ class ibikecph.Sidebar extends Backbone.View
 		$('.permalink').attr 'href', url
 
 	summary_changed: ->
-		console.log(@)
 		meters = @.get 'total_distance'
 		seconds  = @.get 'total_time'
 
