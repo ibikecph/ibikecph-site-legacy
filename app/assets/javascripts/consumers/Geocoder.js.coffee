@@ -13,6 +13,11 @@ class ibikecph.Geocoder
 			@load_address @model.get 'address'
 
 		@model.bind 'change:location', =>
+			location = @model.get 'location'
+			if location and location.lat and location.lng
+				@current.address = "#{I18n.toNumber location.lat, precision:4}; #{I18n.toNumber location.lng, precision:4}"
+				@model.set 'address', @current.address
+
 			@abort()
 			@wait_for 300, =>
 				@load_location @model.get 'location'
@@ -65,7 +70,7 @@ class ibikecph.Geocoder
 
 			@current.location.lat = @convert_number result[0]?.lat
 			@current.location.lng = @convert_number result[0]?.lon
-			@model.set @current
+			@model.set 'location', @current.location
 
 	load_location: (new_location) ->
 		return if new_location?.lat == @current.location.lat and new_location?.lng == @current.location.lng
@@ -87,10 +92,8 @@ class ibikecph.Geocoder
 		), (result) =>
 			@request_done()
 
-			address = result?.address
-			if address and address.road and address.postcode and address.city
-				@current.address = "#{address.road}#{[' ' + address.house_number if address.house_number]}, #{address.postcode} #{address.city}"
+			address = ibikecph.util.displayable_address result
 
-			@current.location.lat = @convert_number result?.lat
-			@current.location.lng = @convert_number result?.lon
-			@model.set @current
+			if address
+				@current.address = address
+				@model.set 'address', @current.address

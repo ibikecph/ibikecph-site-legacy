@@ -70,3 +70,53 @@ ibikecph.util.translate_turn_instruction = (turn) ->
 		when 14 then 'start'
 		when 15 then 'reached-destination'
 		else 'no-instruction'
+
+ibikecph.util.displayable_address = (geocoding_response) ->
+	address = geocoding_response?.address
+
+	if address
+		country_code = "#{address.country_code}".toUpperCase()
+		city = address.city or address.town or address.village or address.hamlet or address.administrative
+		if address.postcode
+			postcode = "#{address.postcode} "
+		else
+			postcode = ''
+		if address.road and not /^\d+$/.test "#{address.road}"
+			road = "#{address.road}"
+		else
+			road = ''
+		house_number = address.house_number
+
+	if country_code == 'DK' or country_code == 'NO' or country_code == 'DE'
+		if road and house_number and city
+			display_address = "#{road} #{house_number}, #{postcode}#{city}"
+		else if road and city
+			display_address = "#{road}, #{postcode}#{city}"
+		else if city
+			display_address = "#{postcode}#{city}"
+
+		if country_code == 'NO'
+			display_address += ', Norge'
+		else if country_code == 'DE'
+			display_address += ', Tyskland'
+
+	else if country_code == 'SE'
+		postcode = postcode.match /^(\d{3})(\d{2}) $/
+		if postcode
+			postcode = "SE-#{postcode[1]} #{postcode[2]} "
+		else
+			postcode = ''
+
+		if road and house_number and city
+			display_address = "#{road} #{house_number}, #{postcode}#{city}"
+		else if road and city
+			display_address = "#{road}, #{postcode}#{city}"
+		else if city
+			display_address = "#{postcode}#{city}"
+
+		display_address += ', Sverige'
+
+	else
+		display_address = ibikecph.util.normalize_whitespace "#{[geocoding_response?.display_name]}"
+
+	return display_address or null

@@ -1,10 +1,10 @@
 class ibikecph.Sidebar extends Backbone.View
 
 	events:
-		'change label input' : 'fields_updated'
-		'click .pin.reset' : 'clear'
-		'mousedown .pin.to, .pin.from'  : 'drag_pin_start'
-		'mouseup .pin.draging'	: 'drag_pin_end'
+		'change label input'           : 'fields_updated'
+		'click .pin.reset'             : 'clear'
+		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
+		'mouseup .pin.draging'         : 'drag_pin_end'
 
 	drag_pin_start: (event) ->
 		if $(event.target).hasClass 'reset'
@@ -32,13 +32,12 @@ class ibikecph.Sidebar extends Backbone.View
 	initialize: (options) ->
 		@app = options.app
 
-		@model.from.bind 'change:address', @address_changed, this
-		@model.to.bind   'change:address', @address_changed, this
+		@model.waypoints.bind 'from:change:address to:change:address', @address_changed, this
+		@model.waypoints.bind 'from:change:loading to:change:loading', @loading_changed, this
 
-		@model.from.bind 'change:loading', @loading_changed, this
-		@model.to.bind   'change:loading', @loading_changed, this
+		@model.waypoints.bind 'reset change', @waypoints_changed, this
 
-		@app.info.summary.bind 'change', @summary_changed, @app.info.summary;
+		@model.summary.bind 'change', @summary_changed, @app.info.summary;
 
 	clear : (event) ->
 		pin = $(event.target);
@@ -52,15 +51,20 @@ class ibikecph.Sidebar extends Backbone.View
 		pin.removeClass 'reset'
 
 		input.val ''
-		@fields_updated();
+		@fields_updated target: input
 
 	address_changed: (model, address) ->
-		field_name = model.get 'field_name'
+		field_name = model.get 'type'
 		@set_field field_name, address
-		@app.router.navigate_field field_name, address, trigger: false
 
 	loading_changed: (model, loading) ->
-		@set_loading model.get('field_name'), loading
+		@set_loading model.get('type'), loading
+
+	waypoints_changed: ->
+		hash = '#!/' + @model.waypoints.to_code()
+		url  = "#{window.location.protocol}//#{window.location.host}#{hash}"
+
+		$('.permalink').attr 'href', url
 
 	summary_changed: ->
 		console.log(@)
@@ -68,6 +72,7 @@ class ibikecph.Sidebar extends Backbone.View
 		seconds  = @.get 'total_time'
 
 		if meters and seconds
+			$('.permalink').show()
 			$(".time", @el).show()
 			$(".distance .count", @el).text(meters/1000 + ' km');
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' minutter');
@@ -78,8 +83,9 @@ class ibikecph.Sidebar extends Backbone.View
 				m = '0' + m
 			$(".arrival .count").text d.getHours() + ':' + m
 		else
+			$('.permalink').hide()
 			$(".time", @el).hide()
-	
+
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
 
@@ -90,13 +96,25 @@ class ibikecph.Sidebar extends Backbone.View
 			$("div.#{field_name}").removeClass 'reset'			
 		@$(".#{field_name}").val "#{text}"
 
-
 	set_loading: (field_name, loading) ->
 		@$(".#{field_name}").toggleClass 'loading', !!loading
 
-	fields_updated: ->
-		from = @get_field 'from'
-		to   = @get_field 'to'
-		via  = @get_field 'via'
+	fields_updated: (event) ->
+		input = $(event.target)
 
-		@app.router.navigate_route from, via, to, trigger: true
+		if input.is '.from'
+			type = 'from'
+		else if input.is '.to'
+			type = 'to'
+		else
+			return
+
+		raw_value = input.val()
+		value = ibikecph.util.normalize_whitespace raw_value
+
+		input.val(value) if value != raw_value
+
+		if value
+			@model.endpoint(type).set 'address', value
+		else
+			@model.clear type
