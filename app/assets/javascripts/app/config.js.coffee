@@ -7,6 +7,9 @@ ibikecph.config =
 		lng: 12.50
 		zoom: 12
 
+	path:
+		color: 'blue'
+
 	tiles: [
 		name: 'Open Street Map'
 		url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
