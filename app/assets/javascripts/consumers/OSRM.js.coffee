@@ -7,7 +7,7 @@ class ibikecph.OSRM
 		@hints       = ({} for i in [0...10])
 		@hints_index = 0
 
-		@model.waypoints.bind 'reset change', @load_route, this
+		@model.waypoints.on 'reset add remove change', @load_route, this
 
 	abort: ->
 		@request.abort()

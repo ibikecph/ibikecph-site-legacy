@@ -5,12 +5,13 @@ class ibikecph.Map extends Backbone.View
 		@dragging_pin = false
 		@pins         = {}
 
+		@route_point_index = []
+
 		@current_route = new L.Polyline [], ibikecph.config.current_route.style
 		@invalid_route = new L.Polyline [], ibikecph.config.invalid_route.style
 		@old_route     = new L.Polyline [], ibikecph.config.old_route.style
 
 		@route_marker = new L.Marker null, (
-			clickable : false
 			draggable : false
 			icon      : ibikecph.icons.route_marker
 		)
@@ -25,6 +26,9 @@ class ibikecph.Map extends Backbone.View
 		initial_location = new L.LatLng ibikecph.config.start.lat, ibikecph.config.start.lng
 		@map.setView initial_location, ibikecph.config.start.zoom
 
+		@route_marker.on 'mousedown', (event) =>
+			@create_via_point event
+
 		@map.on 'mousemove', (event) =>
 			@update_route_marker event
 
@@ -33,6 +37,10 @@ class ibikecph.Map extends Backbone.View
 
 		@model.route.on 'reset', (points) =>
 			@geometry_changed points
+
+		@model.route.on 'add remove change', =>
+			# TODO: Are the events sent before or after the collection is updated?
+			@geometry_changed @model.route
 
 		@model.waypoints.on 'change:location change:type', (model) =>
 			@waypoint_added_or_updated model
@@ -101,10 +109,15 @@ class ibikecph.Map extends Backbone.View
 						lng: location.lng
 					)
 
+				pin.on 'click', (event) =>
+					@model.waypoints.remove event.target.model
+
 				@map.addLayer pin
 		else if pin
 			@map.removeLayer pin
 			delete @pins[cid]
+
+		return pin
 
 	update_route_marker: (event) ->
 		return unless @showing_route()
@@ -116,6 +129,45 @@ class ibikecph.Map extends Backbone.View
 			@map.addLayer @route_marker
 		else
 			@map.removeLayer @route_marker
+
+	create_via_point: (event) ->
+		location = event.target.getLatLng()
+
+		waypoint = new ibikecph.Waypoint
+			type     : 'via'
+			location : location
+
+		@model.waypoints.add waypoint, at: @closest_waypoint_index(location)
+
+		via_marker = @waypoint_show_hide_update waypoint, false
+
+		# Fake an initial dragstart event, so that the new via marker is actually dragged.
+		via_marker.dragging._draggable._onDown event.originalEvent
+
+		@update_route_marker layerPoint: new L.Point(-100, -100)
+
+	closest_waypoint_index: (location) ->
+		seg_index = @closest_route_point_index location
+
+		if seg_index < 1
+			seg_index = 1
+		else if seg_index > @route_point_index.length - 1
+			seg_index = @route_point_index.length - 1
+
+		return @route_point_index[seg_index] or 1
+
+	closest_route_point_index: (location) ->
+		min_distance = Infinity
+		closest      = 0
+
+		for route_point, index in @current_route.getLatLngs()
+			distance = route_point.distanceTo location
+
+			if distance < min_distance
+				min_distance = distance
+				closest      = index
+
+		return index
 
 	set_pin_by_mouse_click: (event) ->
 		unless @model.waypoints.has_from()
@@ -143,12 +195,13 @@ class ibikecph.Map extends Backbone.View
 	showing_route: ->
 		@current_route.getLatLngs().length > 0
 
-	geometry_changed: (points) ->
-		valid  = points.length >= 2
-		points = @model.waypoints.as_route_points() if not valid
+	geometry_changed: (route) ->
+		valid  = route.length >= 2
+		route = @model.waypoints.as_route_points() if not valid
 
-		latlngs = points.map (point) ->
-			new L.LatLng point.get('lat'), point.get('lng')
+		latlngs = route.map (point) -> point.to_latlng()
+
+		@update_route_point_index @model.waypoints.to_latlngs(), latlngs
 
 		if valid
 			@map.addLayer    @current_route
@@ -163,3 +216,40 @@ class ibikecph.Map extends Backbone.View
 			@map.addLayer    @invalid_route
 			@current_route.setLatLngs []
 			@invalid_route.setLatLngs latlngs
+
+	update_route_point_index: (waypoints, route) ->
+		@route_point_index = []
+
+		return unless waypoints.length >= 2 and route.length >= 2
+
+		reverse_index = []
+
+		# Map 'to' endpoint
+		reverse_index.push [waypoints.length - 1, route.length]
+
+		for i in [1...waypoints.length-1]
+			waypoint = waypoints[i]
+
+			min_distance = Infinity
+			closest      = 0
+
+			# Brute-force search for nearest via waypoint
+			for j in [1...route.length-1]
+				route_point = route[j]
+				distance    = route_point.distanceTo waypoint
+
+				if distance < min_distance
+					min_distance = distance
+					closest      = j
+
+			reverse_index.push [i, closest]
+
+		reverse_index.sort (a, b) -> a[1] - b[1]
+
+		last_waypoint    = 0
+		last_route_point = 0
+		for [waypoint, route_point] in reverse_index
+			for i in [last_route_point...route_point]
+				@route_point_index[i] = last_waypoint + 1
+			last_waypoint    = waypoint
+			last_route_point = route_point
