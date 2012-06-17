@@ -10,6 +10,7 @@ class ibikecph.Map extends Backbone.View
 		@old_route     = new L.Polyline [], ibikecph.config.old_route.style
 
 		@route_marker = new L.Marker null, (
+			clickable : false
 			draggable : false
 			icon      : ibikecph.icons.route_marker
 		)
@@ -155,9 +156,7 @@ class ibikecph.Map extends Backbone.View
 			@current_route.setLatLngs latlngs
 			@invalid_route.setLatLngs []
 
-			unless @dragging_pin
-				@map.fitBounds new L.LatLngBounds(latlngs)
-				# TODO: Can we make it zoom out just a bit?
+			@map.fitBounds new L.LatLngBounds(latlngs).pad(1) unless @dragging_pin
 
 		else
 			@map.removeLayer @current_route
