@@ -1,9 +1,9 @@
 class ibikecph.Map extends Backbone.View
 
 	initialize: ->
-		@map      = new L.Map @el.id
-		@dragging = false
-		@pins     = {}
+		@map          = new L.Map @el.id
+		@dragging_pin = false
+		@pins         = {}
 
 		@path = null
 		@path_marker = new L.Marker null, (
@@ -77,11 +77,11 @@ class ibikecph.Map extends Backbone.View
 
 				pin.on 'dragstart', (event) =>
 					event.target.dragged = true
-					@dragging = true
+					@dragging_pin = true
 
 				pin.on 'dragend', (event) =>
 					event.target.dragged = false
-					@dragging = false
+					@dragging_pin = false
 
 				pin.on 'drag', (event) =>
 					location = event.target.getLatLng()
@@ -99,7 +99,7 @@ class ibikecph.Map extends Backbone.View
 		return unless @path
 
 		closest = @path.closestLayerPoint event.layerPoint
-		if closest and closest.distance < 10 and not @dragging
+		if closest and closest.distance < 10 and not @dragging_pin
 			@path_marker.setLatLng @map.layerPointToLatLng closest
 			@map.addLayer @path_marker
 		else
@@ -120,11 +120,22 @@ class ibikecph.Map extends Backbone.View
 		@model.endpoint(field_name).set 'location', location
 
 	geometry_changed: (points) ->
+		valid  = points.length >= 2
+		points = @model.waypoints.as_route_points() if not valid
+
 		latlngs = points.map (point) ->
 			new L.LatLng point.get('lat'), point.get('lng')
 
-		@map.removeLayer(@path) if @path
+		if valid
+			style = ibikecph.config.route.style
+		else
+			style = ibikecph.config.invalid_route.style
 
-		@path = new L.Polyline latlngs, color: ibikecph.config.path.color
-		#@map.fitBounds new L.LatLngBounds(latlngs)
-		@map.addLayer @path
+		if @path
+			@path.setLatLngs latlngs
+			@path.setStyle style
+		else
+			@path = new L.Polyline latlngs, style
+			@map.addLayer @path
+
+		@map.fitBounds new L.LatLngBounds(latlngs) unless @dragging_pin

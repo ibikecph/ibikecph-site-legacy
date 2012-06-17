@@ -7,8 +7,17 @@ ibikecph.config =
 		lng: 12.50
 		zoom: 12
 
-	path:
-		color: 'blue'
+	route:
+		style:
+			color   : 'blue'
+			weight  : 5
+			opacity : 0.6
+
+	invalid_route:
+		style:
+			color   : 'black'
+			weight  : 1
+			opacity : 0.5
 
 	tiles: [
 		name: 'Open Street Map'

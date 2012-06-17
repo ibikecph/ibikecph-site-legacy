@@ -43,6 +43,8 @@ class ibikecph.OSRM
 		if response.route_geometry
 			path = ibikecph.util.decode_path response.route_geometry
 			@model.route.reset path
+		else
+			@model.route.reset()
 
 		if response.route_instructions
 			@model.instructions.reset_from_osrm response.route_instructions

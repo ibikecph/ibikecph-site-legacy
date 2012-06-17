@@ -48,6 +48,23 @@ class ibikecph.Waypoints extends Backbone.Collection
 	has_endpoints: ->
 		@has_from() and @has_to()
 
+	as_route_points: ->
+		@models.map( (model) ->
+			location = model.get 'location'
+
+			lat = 1 * location.lat
+			lng = 1 * location.lng
+
+			if isNaN(lat) or isNaN(lng)
+				null
+			else
+				new ibikecph.RoutePoint(
+					lat: lat
+					lng: lng
+				)
+
+		).filter( (model) -> model )
+
 	to_code: ->
 		codes = @map (waypoint) -> waypoint.to_code()
 
