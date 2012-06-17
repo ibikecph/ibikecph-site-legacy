@@ -110,7 +110,13 @@ class ibikecph.Map extends Backbone.View
 					)
 
 				pin.on 'click', (event) =>
-					@model.waypoints.remove event.target.model
+					model = event.target.model
+					type  = model.get 'type'
+					if type == 'from' or type == 'to'
+						@model.clear type
+					else
+						@model.waypoints.remove model
+					@map.removeLayer @route_marker
 
 				@map.addLayer pin
 		else if pin
@@ -144,7 +150,7 @@ class ibikecph.Map extends Backbone.View
 		# Fake an initial dragstart event, so that the new via marker is actually dragged.
 		via_marker.dragging._draggable._onDown event.originalEvent
 
-		@update_route_marker layerPoint: new L.Point(-100, -100)
+		@map.removeLayer @route_marker
 
 	closest_waypoint_index: (location) ->
 		seg_index = @closest_route_point_index location

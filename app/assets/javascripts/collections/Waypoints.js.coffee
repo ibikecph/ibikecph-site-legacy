@@ -5,12 +5,6 @@ class ibikecph.Waypoints extends Backbone.Collection
 		@_setup_event_proxy()
 
 	endpoint: (type) ->
-		@find_or_clear_endpoint type, false
-
-	clear: (type) ->
-		@find_or_clear_endpoint type, true
-
-	find_or_clear_endpoint: (type, clear) ->
 		last = (type == 'end' || type == 'to')
 
 		if last
@@ -23,10 +17,6 @@ class ibikecph.Waypoints extends Backbone.Collection
 		waypoint   = @at index
 		type_match = waypoint?.get and waypoint.get('type') == type
 
-		if clear
-			@remove([waypoint]) if type_match
-			return
-
 		unless type_match
 			waypoint = new ibikecph.Waypoint type: type
 
@@ -36,6 +26,21 @@ class ibikecph.Waypoints extends Backbone.Collection
 				@add [waypoint], at: 0
 
 		return waypoint
+
+	clear: (type) ->
+		last = (type == 'end' || type == 'to')
+
+		if last
+			if @has_from()
+				waypoint = @at(0)
+		else
+			if @has_to()
+				waypoint = @at(@length - 1)
+
+		if waypoint
+			@reset [waypoint]
+		else
+			@reset()
 
 	has_from: ->
 		waypoint = @at(0)
