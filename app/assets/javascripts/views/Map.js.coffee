@@ -103,6 +103,7 @@ class ibikecph.Map extends Backbone.View
 					@map.removeLayer @old_route
 
 				pin.on 'drag', (event) =>
+					window.location.hash = ''
 					location = event.target.getLatLng()
 					event.target.model.set 'location', (
 						lat: location.lat
@@ -173,7 +174,7 @@ class ibikecph.Map extends Backbone.View
 				min_distance = distance
 				closest      = index
 
-		return index
+		return closest
 
 	set_pin_by_mouse_click: (event) ->
 		unless @model.waypoints.has_from()

@@ -36,7 +36,11 @@ class ibikecph.Waypoints extends Backbone.Collection
 		else
 			if @has_to()
 				waypoint = @at(@length - 1)
-
+		
+		if type
+			@trigger 'clear:' + type
+		
+		
 		if waypoint
 			@reset [waypoint]
 		else

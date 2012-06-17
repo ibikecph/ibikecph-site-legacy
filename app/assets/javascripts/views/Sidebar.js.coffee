@@ -32,8 +32,15 @@ class ibikecph.Sidebar extends Backbone.View
 	initialize: (options) ->
 		@app = options.app
 
-		@model.waypoints.bind 'from:change:address to:change:address', @address_changed, this
-		@model.waypoints.bind 'from:change:loading to:change:loading', @loading_changed, this
+		self = @
+
+		@model.waypoints.bind 'from:change:address to:change:address', @address_changed, @
+		@model.waypoints.bind 'from:change:loading to:change:loading', @loading_changed, @
+		@model.waypoints.bind 'clear:from', ->
+			self.set_field('from', '')
+		@model.waypoints.bind 'clear:to', ->
+			self.set_field('to', '')
+
 
 		@model.waypoints.bind 'reset change', @waypoints_changed, this
 

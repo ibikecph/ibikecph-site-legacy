@@ -33,7 +33,12 @@ app.start = ->
 	app.router = new ibikecph.Router app: app
 
 	Backbone.history.start()
-	$(window).trigger('resize')
+
+
+	
+
+	$(window).trigger 'resize'
+
 	$('.instructions').live 'click', ->
 		$(this).remove()
 	$('a.guide').click (event) ->
