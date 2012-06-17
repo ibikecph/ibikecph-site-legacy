@@ -1,0 +1,14 @@
+<div id="header">
+	<div class="login">
+		<% if current_user %>
+			<%= current_user.name %>
+			<%= link_to "Logout", logout_path %>
+		<% else %>
+			<%= link_to "Sign Up", signup_path %> or
+			<%= link_to "Login", login_path %>
+		<% end %>
+	</div>
+	<div class="menu">
+		<%= render_navigation :context => :main %>
+	</div>
+</div>

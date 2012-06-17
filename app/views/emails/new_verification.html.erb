@@ -1,0 +1,14 @@
+<h6>Resend Verification Email</h6>
+<p>
+	To verify your email, please fill out the form below, and follow the instructions in the email we send you.
+</p>
+		
+<%= form_tag verify_emails_path do %>
+<p>
+	<%= label_tag :email %><br>
+	<%= text_field_tag :email, params[:email] %>
+</p>
+<p>
+	<%= submit_tag "Resend", :class => :submit %>
+</p>
+<% end %>

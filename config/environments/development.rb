@@ -1,4 +1,23 @@
 RailsOSRM::Application.configure do
+  CA_FILE_PATH = nil
+
+  #keys for development apps. production and staging is set through heroku configs
+  FACEBOOK_CLIENT_ID = '111'
+  FACEBOOK_CLIENT_SECRET = 'xxx'
+  FACEBOOK_CLIENT_OPTIONS = {}
+
+  TWITTER_CLIENT_ID = '111'
+  TWITTER_CLIENT_SECRET = 'xxx'
+
+  #we're using www.localhost because you can't save cookies with only localhost
+  #login doesn't work well unless cookies are on
+  #adjust your host file to point www.localhost to 127.0.0.1 just like the normal localhost
+  MAIN_DOMAIN = 'www.localhost'
+  FACEBOOK_DOMAIN = 'fb.localhost'
+  MAIN_PORT = '3000'
+  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
+  MAIN_DOMAIN_WITH_PORT = [MAIN_DOMAIN,MAIN_PORT].join(':')
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -13,8 +32,13 @@ RailsOSRM::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send
-  config.action_mailer.raise_delivery_errors = false
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN_WITH_PORT }
+  # A dummy setup for development - no deliveries, but logged
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default :charset => "utf-8"
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -34,4 +58,7 @@ RailsOSRM::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  Delayed::Worker.delay_jobs = false
+  
 end

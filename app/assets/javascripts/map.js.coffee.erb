@@ -36,7 +36,17 @@
 #= require views/Sidebar
 #= require views/Map
 #= require app/app
-#= require_tree
+#= require_tree ./app
+#= require_tree ./collections
+#= require_tree ./consumers
+#= require_tree ./i18n
+#= require_tree ./models
+#= require_tree ./templates
+#= require_tree ./views
+
+
+
+
 
 I18n.defaultLocale = "<%= I18n.default_locale %>"
 I18n.locale        = "<%= I18n.locale %>"

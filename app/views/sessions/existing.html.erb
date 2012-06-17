@@ -1,0 +1,25 @@
+<h6>Existing User</h6>
+<p>A user with the name <strong><%= @user.name %></strong> already exists.</p>
+<br>
+<% if @user.image.present? %>
+	<%= image_tag @user.image.g3.url, :class => 'g3 square' %>
+	<br>
+<% end %>
+<p class="note">The user joined <%= time_ago_in_words @user.created_at %> ago.</p>
+<% if @user.ideas.any? %>
+<p class="note">The latest idea by the user is <%= @user.ideas.first.headline %>.</p>
+<% else %>
+<p class="note">The user has not submitted any ideas.</p>
+<% end %>
+<br>
+
+<h4>That's me!</h4>
+<p>
+	Please <%= link_to 'login', login_path %> using one of your verified login methods.
+	If you wish to add <%= @provider %> login, you can do so after logging in by going to the Account > Login Settings page.
+</p>
+<br>
+<h4>Must be someone else...</h4>
+<p>
+	Try <%= link_to 'signing up', signup_path %> using another username, or <%= link_to 'logging in', login_path %> using one of your already verified login methods.
+</p>

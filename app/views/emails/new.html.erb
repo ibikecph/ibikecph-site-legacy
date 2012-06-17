@@ -1,0 +1,17 @@
+<h6>Change Email</h6>
+<%= form_for current_user, :url => emails_path, :method => :post do |f| %>
+<%= errors_for( current_user ).html_safe %>
+<%= fields_for @auth do |auth| %>
+	<p>
+		<%= auth.label :uid %><br>
+		<%= auth.text_field :uid %>
+	</p>
+	<p>
+		<%= auth.label :uid_confirmation %><br>
+		<%= auth.text_field :uid_confirmation %><br>
+	</p>
+<% end %>
+<p>
+	<%= submit_tag "Change Email", :class => :submit %>
+</p>
+<% end %>

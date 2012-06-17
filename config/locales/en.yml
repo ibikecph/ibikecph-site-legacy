@@ -2,8 +2,17 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      email_authentication:       #form label
+        uid: 'Email'                            
+        uid_confirmation: 'Email confirmation'
+      authentications:        #error messages
+        uid: 'Email'      
+        uid_confirmation: 'Email confirmation'
+    
   #ui
-  from : from
+  from: from
   to: to
   title: I BIKE CPH | Bike Route Planner (alpha)
   generate_link: Make a Link

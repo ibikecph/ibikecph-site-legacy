@@ -1,0 +1,8 @@
+<h5>Users</h5>
+	<%= will_paginate @users, :class => :pagination %>
+<% for user in @users %>
+	<p>
+		<%= link_to user.name, user %>
+		<span class="note"><%= time_ago_in_words user.created_at %> ago</span>
+	</p>
+<% end %>

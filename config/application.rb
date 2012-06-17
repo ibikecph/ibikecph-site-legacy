@@ -31,13 +31,13 @@ module RailsOSRM
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = :dk
+    config.i18n.default_locale = :en
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :password_confirmation]
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
@@ -62,6 +62,22 @@ module RailsOSRM
     env.append_path Modernizr.path
 
     config.assets.paths << Rails.root.join("leaflet")
+    
+    
+    #modifiy the way rails styles fields with errors in forms.
+    #by default rails wraps fields with erros in <div class="field_with_errors">.
+    #this is a problem if the <div> is inside an inline element like <p>.
+    #<label> items are wrapped by <span class="field_with_errors">
+    #other tags like input and text-areas are not wrapped, since this would interfere with the javascript that shows characters left
+    ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+      #include ActionView::Helpers::RawOutputHelper
+      if html_tag =~ /<(label)/
+        %(<span class="field_with_errors">#{html_tag}</span>).html_safe   #wrap label tags with spans
+      else
+        html_tag    #don't wrap other tags (line input or text-area)
+      end
+    end
+    
   end
 end
 
