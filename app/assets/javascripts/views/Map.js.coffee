@@ -1,12 +1,9 @@
 class ibikecph.Map extends Backbone.View
 
 	initialize: ->
-		@map = new L.Map @el.id
-
-		@pin =
-			from : null
-			to   : null
-			via  : null
+		@map      = new L.Map @el.id
+		@dragging = false
+		@pins     = {}
 
 		@path = null
 		@path_marker = new L.Marker null, (
@@ -27,14 +24,82 @@ class ibikecph.Map extends Backbone.View
 		@map.on 'mousemove', (event) =>
 			@mouse_moved event
 
-		@model.waypoints.bind 'change:location', @location_changed, this
-		@model.route.bind 'reset', @geometry_changed, this
+		@model.route.on 'reset', @geometry_changed, this
+
+		@model.waypoints.on 'change:location change:type', (model) =>
+			@waypoint_added_or_updated model
+
+		@model.waypoints.on 'add', (model) =>
+			@waypoint_added_or_updated model
+
+		@model.waypoints.on 'remove', (model) =>
+			@waypoint_removed model
+
+		@model.waypoints.on 'reset', (collection) =>
+			@waypoints_reset collection
+
+	waypoint_added_or_updated: (model) ->
+		@waypoint_show_hide_update model, false
+
+	waypoint_removed: (model) ->
+		@waypoint_show_hide_update model, true
+
+	waypoints_reset: (collection) ->
+		for cid, pin of @pins
+			@waypoint_show_hide_update pin.model, true
+
+		for model in collection.models
+			@waypoint_show_hide_update model, false
+
+	waypoint_show_hide_update: (model, remove) ->
+		field_name = model.get 'type'
+		location   = model.get 'location'
+		cid        = model.cid
+		pin        = @pins[cid]
+
+		if location.lat? and location.lng? and not remove
+			location = new L.LatLng location.lat, location.lng
+		else
+			location = null
+
+		if location
+			if pin
+				unless pin.dragging
+					pin.setLatLng location
+					pin.setIcon ibikecph.icons[field_name]
+			else
+				pin = new L.Marker location, (
+					draggable : true
+					icon      : ibikecph.icons[field_name]
+				)
+				pin.model = model
+				@pins[cid] = pin
+
+				pin.on 'dragstart', (event) =>
+					event.target.dragging = true
+					@dragging = true
+
+				pin.on 'dragend', (event) =>
+					event.target.dragging = false
+					@dragging = false
+
+				pin.on 'drag', (event) =>
+					location = event.target.getLatLng()
+					event.target.model.set 'location', (
+						lat: location.lat
+						lng: location.lng
+					)
+
+				@map.addLayer pin
+		else if pin
+			@map.removeLayer pin
+			delete @pins[cid]
 
 	mouse_moved: (event) ->
 		return unless @path
 
 		closest = @path.closestLayerPoint event.layerPoint
-		if closest and closest.distance < 10
+		if closest and closest.distance < 10 and not @dragging
 			@path_marker.setLatLng @map.layerPointToLatLng closest
 			@map.addLayer @path_marker
 		else
@@ -53,39 +118,6 @@ class ibikecph.Map extends Backbone.View
 		location = @map.layerPointToLatLng @map.containerPointToLayerPoint position
 
 		@model.endpoint(field_name).set 'location', location
-
-	location_changed: (model) ->
-		field_name = model.get 'type'
-		location   = model.get 'location'
-		lat        = location?.lat
-		lng        = location?.lng
-
-		if lat? and lng?
-			location = new L.LatLng lat, lng
-		else
-			location = null
-
-		if @pin[field_name]
-			if location
-				@pin[field_name].setLatLng location
-			else
-				@map.removeLayer @pin[field_name]
-				@pin[field_name] = null
-		else if location
-			pin = new L.Marker location, (
-				draggable : true
-				icon      : ibikecph.icons[field_name]
-			)
-
-			pin.on 'drag', (event) =>
-				location = event.target.getLatLng()
-				@model.endpoint(field_name).set 'location', (
-					lat: location.lat
-					lng: location.lng
-				)
-
-			@map.addLayer pin
-			@pin[field_name] = pin
 
 	geometry_changed: (points) ->
 		latlngs = points.map (point) ->
