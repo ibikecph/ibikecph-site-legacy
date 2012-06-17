@@ -64,7 +64,7 @@ class ibikecph.Map extends Backbone.View
 
 		if location
 			if pin
-				unless pin.dragging
+				unless pin.dragged
 					pin.setLatLng location
 					pin.setIcon ibikecph.icons[field_name]
 			else
@@ -76,11 +76,11 @@ class ibikecph.Map extends Backbone.View
 				@pins[cid] = pin
 
 				pin.on 'dragstart', (event) =>
-					event.target.dragging = true
+					event.target.dragged = true
 					@dragging = true
 
 				pin.on 'dragend', (event) =>
-					event.target.dragging = false
+					event.target.dragged = false
 					@dragging = false
 
 				pin.on 'drag', (event) =>
