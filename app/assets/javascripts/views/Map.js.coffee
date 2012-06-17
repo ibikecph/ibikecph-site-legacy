@@ -5,10 +5,13 @@ class ibikecph.Map extends Backbone.View
 		@dragging_pin = false
 		@pins         = {}
 
-		@path = null
-		@path_marker = new L.Marker null, (
+		@current_route = new L.Polyline [], ibikecph.config.current_route.style
+		@invalid_route = new L.Polyline [], ibikecph.config.invalid_route.style
+		@old_route     = new L.Polyline [], ibikecph.config.old_route.style
+
+		@route_marker = new L.Marker null, (
 			draggable : false
-			icon      : ibikecph.icons.path_marker
+			icon      : ibikecph.icons.route_marker
 		)
 
 		layers_control = new L.Control.Layers
@@ -22,9 +25,13 @@ class ibikecph.Map extends Backbone.View
 		@map.setView initial_location, ibikecph.config.start.zoom
 
 		@map.on 'mousemove', (event) =>
-			@mouse_moved event
+			@update_route_marker event
 
-		@model.route.on 'reset', @geometry_changed, this
+		@map.on 'click', (event) =>
+			@set_pin_by_mouse_click event
+
+		@model.route.on 'reset', (points) =>
+			@geometry_changed points
 
 		@model.waypoints.on 'change:location change:type', (model) =>
 			@waypoint_added_or_updated model
@@ -78,10 +85,13 @@ class ibikecph.Map extends Backbone.View
 				pin.on 'dragstart', (event) =>
 					event.target.dragged = true
 					@dragging_pin = true
+					@old_route.setLatLngs @current_route.getLatLngs()
+					@map.addLayer @old_route
 
 				pin.on 'dragend', (event) =>
 					event.target.dragged = false
 					@dragging_pin = false
+					@map.removeLayer @old_route
 
 				pin.on 'drag', (event) =>
 					location = event.target.getLatLng()
@@ -95,15 +105,25 @@ class ibikecph.Map extends Backbone.View
 			@map.removeLayer pin
 			delete @pins[cid]
 
-	mouse_moved: (event) ->
-		return unless @path
+	update_route_marker: (event) ->
+		return unless @showing_route()
 
-		closest = @path.closestLayerPoint event.layerPoint
+		closest = @current_route.closestLayerPoint event.layerPoint
+
 		if closest and closest.distance < 10 and not @dragging_pin
-			@path_marker.setLatLng @map.layerPointToLatLng closest
-			@map.addLayer @path_marker
+			@route_marker.setLatLng @map.layerPointToLatLng closest
+			@map.addLayer @route_marker
 		else
-			@map.removeLayer @path_marker
+			@map.removeLayer @route_marker
+
+	set_pin_by_mouse_click: (event) ->
+		unless @model.waypoints.has_from()
+			@model.endpoint('from').set 'location', event.latlng
+			return
+
+		unless @model.waypoints.has_to()
+			@model.endpoint('to').set 'location', event.latlng
+			return
 
 	set_pin_at: (field_name, x, y) ->
 		offset = $(@el).offset()
@@ -119,6 +139,9 @@ class ibikecph.Map extends Backbone.View
 
 		@model.endpoint(field_name).set 'location', location
 
+	showing_route: ->
+		@current_route.getLatLngs().length > 0
+
 	geometry_changed: (points) ->
 		valid  = points.length >= 2
 		points = @model.waypoints.as_route_points() if not valid
@@ -127,15 +150,17 @@ class ibikecph.Map extends Backbone.View
 			new L.LatLng point.get('lat'), point.get('lng')
 
 		if valid
-			style = ibikecph.config.route.style
-		else
-			style = ibikecph.config.invalid_route.style
+			@map.addLayer    @current_route
+			@map.removeLayer @invalid_route
+			@current_route.setLatLngs latlngs
+			@invalid_route.setLatLngs []
 
-		if @path
-			@path.setLatLngs latlngs
-			@path.setStyle style
-		else
-			@path = new L.Polyline latlngs, style
-			@map.addLayer @path
+			unless @dragging_pin
+				@map.fitBounds new L.LatLngBounds(latlngs)
+				# TODO: Can we make it zoom out just a bit?
 
-		@map.fitBounds new L.LatLngBounds(latlngs) unless @dragging_pin
+		else
+			@map.removeLayer @current_route
+			@map.addLayer    @invalid_route
+			@current_route.setLatLngs []
+			@invalid_route.setLatLngs latlngs

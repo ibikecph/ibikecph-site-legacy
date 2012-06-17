@@ -7,11 +7,17 @@ ibikecph.config =
 		lng: 12.50
 		zoom: 12
 
-	route:
+	current_route:
 		style:
 			color   : 'blue'
 			weight  : 5
 			opacity : 0.6
+
+	old_route:
+		style:
+			color   : 'black'
+			weight  : 5
+			opacity : 0.4
 
 	invalid_route:
 		style:
