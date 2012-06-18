@@ -1,3 +1,4 @@
+
 class ibikecph.Sidebar extends Backbone.View
 
 	events:
@@ -69,9 +70,8 @@ class ibikecph.Sidebar extends Backbone.View
 
 	waypoints_changed: ->
 		hash = '#!/' + @model.waypoints.to_code()
-		url  = "#{window.location.protocol}//#{window.location.host}#{hash}"
 
-		$('.permalink').attr 'href', url
+		$('.permalink').attr 'href', hash
 
 	summary_changed: ->
 		meters = @.get 'total_distance'

@@ -35,7 +35,17 @@ app.start = ->
 	Backbone.history.start()
 
 
+	if window.location.pathname.indexOf('en') isnt -1
+		$('body').append($('<a>', {'href' : '/dk/', class : 'ln' }).text('Dansk'));
+	else
+		$('body').append($('<a>', 'href' : '/en/', class : 'ln').text('English'));
 	
+
+	$(".ln").click (event) ->
+		event.preventDefault();
+		href = $(this).attr('href') + $('.permalink').attr('href');
+		window.location = href;
+
 
 	$(window).trigger 'resize'
 
