@@ -27,14 +27,14 @@ en:
 
 
   #earth corners
-  N: noth bound
-  NE: noth east bound
-  E: east bound
-  SE: south east bound
-  S: south bound
-  SW: south west bound
-  W: west bound
-  NW: north west bound
+  N: noth
+  NE: noth east
+  E: east
+  SE: south east
+  S: south
+  SW: south west
+  W: west
+  NW: north west
 
 
   #route description
