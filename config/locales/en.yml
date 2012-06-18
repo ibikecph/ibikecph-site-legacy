@@ -50,7 +50,7 @@ en:
   turn-sharp-right: Turn sharply to the right
   #other
   enter-roundabout: Enter the roundabout
-  take-the-nth-exit: Take the {%nth} exit
+  take-the-nth-exit: and take the {%nth} exit
   reached-destination: You arrived at the destination
 
   follow: following

@@ -49,7 +49,7 @@ dk:
   turn-sharp-right: Drej skarpt til højre
   #other
   enter-roundabout: Kør ind i rundkørsel
-  take-the-nth-exit: Tag {%nth} afkørsel
+  take-the-nth-exit: tag {%nth} afkørsel
   reached-destination: Du er fremme ved destinationen
 
   follow: ad
