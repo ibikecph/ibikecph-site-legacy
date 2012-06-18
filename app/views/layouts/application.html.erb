@@ -21,11 +21,14 @@ or see http://www.gnu.org/licenses/agpl.txt.
 <head>
 	<%= stylesheet_link_tag "application", :media => "all" %>
 	<%= stylesheet_link_tag "leaflet", :media => "all" %>
+	<!--[if lte IE 8]>
+	<%= stylesheet_link_tag "leaflet.ie", :media => "all" %>
+	<![endif]-->
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
-	<title>I BIKE CPH | Ruteplanlægger - alpha</title>
+	<title><%=t :title %></title>
 </head>
 <body class="base-font not-selectable">
 <%= yield %>

@@ -44,7 +44,11 @@ app.start = ->
 	$('a.guide').click (event) ->
 		event.preventDefault()
 		if app.info.instructions.length
+			end = false
+			if $('.instructions').length
+				end = true
 			$('.instructions').remove()
+			if end then return
 			el = $('<div>', class : 'instructions')
 			app.info.instructions.each (instruction) ->
 				instruction_el = $('<div>', class : 'instruction')

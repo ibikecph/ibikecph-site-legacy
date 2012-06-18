@@ -58,7 +58,7 @@ class ibikecph.Waypoints extends Backbone.Collection
 		@has_from() and @has_to()
 
 	as_route_points: ->
-		@models.map( (model) ->
+		_.filter(@.map((model) ->
 			location = model.get 'location'
 
 			lat = 1 * location.lat
@@ -72,7 +72,7 @@ class ibikecph.Waypoints extends Backbone.Collection
 					lng: lng
 				)
 
-		).filter( (model) -> model )
+		), (model) -> model)
 
 	to_latlngs: ->
 		@as_route_points().map (point) -> point.to_latlng()

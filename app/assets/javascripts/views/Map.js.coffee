@@ -206,7 +206,8 @@ class ibikecph.Map extends Backbone.View
 		valid  = route.length >= 2
 		route = @model.waypoints.as_route_points() if not valid
 
-		latlngs = route.map (point) -> point.to_latlng()
+		latlngs = route.map (point) -> 
+			point.to_latlng();
 
 		@update_route_point_index @model.waypoints.to_latlngs(), latlngs
 

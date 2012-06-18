@@ -5,34 +5,22 @@ ibikecph.util.normalize_whitespace = (text) ->
 
 
 ibikecph.util.instruction_string = (instruction) ->
-	string = ''
+	string = I18n.translate(instruction.turn);
 
-	numbers = ['første', 'anden', 'tredje', 'fjerde', 'femte', 'sjette', 'syvende']
+	if instruction.turn is 'enter-roundabout'
+		string += ' ' +  I18n.t('take-the-nth-exit').replace('{%nth}', I18n.translate(instruction.roundabout_exit + ''));
 
-	switch instruction.turn
-		when 'head' then string += 'Start med at køre'
-		when 'continue' then string += 'Kør frem'
-		when 'turn-left' then string += 'Drej til venstre'
-		when 'turn-right' then string += 'Drej til højre'
-		when 'turn-slight-right' then string += 'Drej til let til højre'
-		when 'turn-slight-left' then string += 'Drej til let til venstre'
-		when 'turn-sharp-right' then string += 'Drej til skarpt til højre'
-		when 'turn-sharp-left' then string += 'Drej til skarpt til venstre'
-		when 'enter-roundabout' then string += 'Kør ind i rundkørsel'
-		when 'reached-destination' then return '<strong>Du er fremme ved destinationen</strong>'
+	if instruction.street and instruction.turn isnt 'enter-roundabout'
+		string += ' ' + I18n.translate('follow') + ' ' + instruction.street
 
-		else string += instruction.turn
+	if instruction.turn is 'head'
+		string += ' ' + I18n.translate(instruction.direction)
 
-	if instruction.street
-		switch instruction.turn
-			when 'enter-roundabout' 
-				string += ', tag ' + numbers[instruction.roundabout_exit - 1] + ' afkørsel'
-			else
-				string += ' ad '
-				string += '<strong>' + instruction.street + '</strong>'
+	if instruction.distance and instruction.turn isnt 'continue'
+		string += ' ' + I18n.translate('and_continue') + ' ' + instruction.distance + 'm';
 
-
-	string += ' og fortsæt <strong>' + instruction.distance  + ' m</strong>'
+	if instruction.turn is 'continue'
+		string += ' ' + I18n.translate('for') + ' ' + instruction.distance + 'm'
 
 	string
 

@@ -3,85 +3,56 @@
 
 en:
   #ui
-  subtitle:                 'NOTE: This is just a prototype, and should not yet be used for navigation.'
-  getting_started:          'Click on the map or enter addresses in the fields below.'
-  start:                    'Start'
-  end:                      'End'
-  show:                     'Show'
-  reset:                    'Reset'
-  search:                   'Search'
-  reverse:                  'Reverse'
-  josm:                     'JOSM'
-  osm_bugs:                 'OSM Bugs'
-  map_tools:                'Map Tools'
-  highlight_unnamed:        'Highlight unnamed streets'
-  start_tip:                'Enter start'
-  end_tip:                  'Enter destination'
-  legal:                    'Routing by <a href="https://github.com/DennisOSRM/Project-OSRM/wiki">OSRM</a>'
-  
-  # geocoder
-  search_results:           'Search Results'
-  found_x_results:          'found %{i} results'
-  timed_out:                'Timed Out'
-  no_results_found:         'No results found'
-  no_results_found_source:  'No results found for start'
-  no_results_found_target:  'No results found for end'
-  no_route:                 'No route found'
-  
-  #routing
-  route_description:        'Route Description'
-  get_link_to_route:        'Generate Link'
-  generate_link_to_route:   'waiting for link'
-  link_to_route_timeout:    'not available'
-  gpx_file:                 'GPX File'
-  distance:                 'Distance'
-  duration:                 'Duration'
-  computing_route:          'Computing route'
-  NO_ROUTE_FOUND:           'No route possible'
-  
-  # directions
-  N:                        'north'
-  E:                        'east'
-  S:                        'south'
-  W:                        'west'
-  NE:                       'northeast'
-  SE:                       'southeast'
-  SW:                       'southwest'
-  NW:                       'northwest'
- 
-  ordinal_0:                '0th'
-  ordinal_1:                '1st'
-  ordinal_2:                '2nd'
-  ordinal_3:                '3rd'
-  ordinal_4:                '4th'
-  ordinal_5:                '5th'
-  ordinal_6:                '6th'
-  ordinal_7:                '7th'
-  ordinal_8:                '8th'
-  ordinal_9:                '9th'
-  
-  head:                     'Head %{bearing}'
-  direction_0:              'Unknown instruction'
-  direction_1:              'Continue'
-  direction_2:              'Turn slight right'
-  direction_3:              'Turn right'
-  direction_4:              'Turn sharp right'
-  direction_5:              'U-Turn'
-  direction_6:              'Turn slight left'
-  direction_7:              'Turn left'
-  direction_8:              'Turn sharp left'
-  roundabout:               'Enter roundabout and take the %{nth} exit'
-  direction_15:             'You have reached your destination'
-  
-  head_on:                  'Head %{bearing} on %{name}'
-  direction_0_on:           'Unknown instruction %{name}'
-  direction_1_on:           'Continue on %{name}'
-  direction_2_on:           'Turn slight right on %{name}'
-  direction_3_on:           'Turn right on %{name}'
-  direction_4_on:           'Turn sharp right on %{name}'
-  direction_5_on:           'U-Turn on %{name}'
-  direction_6_on:           'Turn slight left on %{name}'
-  direction_7_on:           'Turn left on %{name}'
-  direction_8_on:           'Turn sharp left on %{name}'
-  roundabout_on:            'Enter roundabout and take %{nth} exit on %{name}'
-  
+  from : from
+  to: to
+  title: I BIKE CPH | Bike Route Planner (alpha)
+  generate_link: Make a Link
+  route_description: Route Description
+  distance: distance
+  duration: time
+  arrival: arrival
+
+
+  1: first
+  2: seccond
+  3: third
+  4: fourth
+  5: fifth
+  6: sixth
+  7: seventh
+  8: eigth
+  9: ninth
+  10: tenth
+
+
+
+  #earth corners
+  N: noth bound
+  NE: noth east bound
+  E: east bound
+  SE: south east bound
+  S: south bound
+  SW: south west bound
+  W: west bound
+  NW: north west bound
+
+
+  #route description
+  head: Start
+  continue: Continue
+  #left
+  turn-left: Turn left
+  turn-slight-left: Turn slightly to the left
+  turn-sharp-left: Turn sharply to the left
+  #right
+  turn-right: Turn right
+  turn-slight-right: Turn slighty to the right
+  turn-sharp-right: Turn sharply to the right
+  #other
+  enter-roundabout: Enter the roundabout
+  take-the-nth-exit: Take the {%nth} exit
+  reached-destination: You arrived at the destination
+
+  follow: following
+  and_continue: and continue for
+  for: for

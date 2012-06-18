@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
       end
     else
-      I18n.locale = I18n.default_locale
+      I18n.locale = 'en'
+      #I18n.default_locale
     end
   end
 

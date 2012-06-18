@@ -3,83 +3,56 @@
 
 dk:
   #ui
-  subtitle:                 'BEMÆRK: Dette er kun en prototype, og bør endnu ikke anvendes til at navigere efter.'
-  getting_started:          'Klik på kortet eller indtast adresser i felterne nedenfor.'
-  start:                    'Fra'
-  end:                      'Til'
-  show:                     'Vis'
-  reset:                    'Ryd'
-  search:                   'Søg'
-  reverse:                  'Byt'
-  josm:                     'JOSM'
-  osm_bugs:                 'OSM Bugs'
-  map_tools:                'Kortværktøjer'
-  highlight_unnamed:        'Vis veje uden navne'
-  start_tip:                'Fra-adresse'
-  end_tip:                  'Til-adresse'
-  legal:                    'Ruteberegning udført med <a href="https://github.com/DennisOSRM/Project-OSRM/wiki" target="_blank">OSRM</a>'
-  
-  # geocoder
-  search_results:           'Søgeresultater'
-  found_x_results:          'fandt %{i} resultater'
-  timed_out:                'Udløb'
-  no_results_found:         'Ingen resultater fundet'
-  no_results_found_source:  'Til-adresse ikke fundet'
-  no_results_found_target:  'Fra-adresse ikke fundet'
-  
-  #routing
-  route_description:        'Rutebeskrivelse'
-  get_link_to_route:        'Generer link'
-  generate_link_to_route:   'Venter på link'
-  link_to_route_timeout:    'Ikke tilgængelig'
-  gpx_file:                 'Download GPX-fil'
-  distance:                 'Afstand'
-  duration:                 'Rejsetid'
-  computing_route:          'Beregner rute'
-  no_route:                 'Ingen rute fundet'
-  
-  # directions
-  N:                        'nord'
-  E:                        'øst'
-  S:                        'syd'
-  W:                        'vest'
-  NE:                       'nordøst'
-  SE:                       'sydøst'
-  SW:                       'sydvest'
-  NW:                       'nordvest'
- 
-  ordinal_0:                '0.'
-  ordinal_1:                '1.'
-  ordinal_2:                '2.'
-  ordinal_3:                '3.'
-  ordinal_4:                '4.'
-  ordinal_5:                '5.'
-  ordinal_6:                '6.'
-  ordinal_7:                '7.'
-  ordinal_8:                '8.'
-  ordinal_9:                '9.'
-  
-  head:                     'Kør mod %{bearing}'
-  direction_0:              'Ukendt instruktion'
-  direction_1:              'Fortsæt'
-  direction_2:              'Drej let til højre'
-  direction_3:              'Drej til højre'
-  direction_4:              'Drej skarpt til højre'
-  direction_5:              'Foretag en u-vending'
-  direction_6:              'Drej let til venstre'
-  direction_7:              'Drej til venstre'
-  direction_8:              'Drej skarpt til venstre'
-  roundabout:               'Følg rundkørslen og tag %{nth} frakørsel'
-  direction_15:             'Ankomst'
-  
-  head_on:                  'Kør mod %{bearing} ad %{name}'
-  direction_0_on:           'Ukendt instruktion ad %{name}'
-  direction_1_on:           'Fortsæt ad %{name}'
-  direction_2_on:           'Drej let til højre ad %{name}'
-  direction_3_on:           'Drej til højre ad %{name}'
-  direction_4_on:           'Drej skarpt til højre ad %{name}'
-  direction_5_on:           'Foretag en u-vending ad %{name}'
-  direction_6_on:           'Drej let til venstre ad %{name}'
-  direction_7_on:           'Drej til venstre ad %{name}'
-  direction_8_on:           'Drej skarpt til venstre ad %{name}'
-  roundabout_on:            'Følg rundkørslen og tag %{nth} frakørsel ad %{name}'
+  from : fra
+  to: til
+  title: I BIKE CPH | Cykelruteplanlægger (alpha)
+  generate_link: Lav et link
+  route_description: Rutebeskrivelse
+  distance: afstand
+  duration: tid
+  arrival: ankomst
+
+
+  1: første
+  2: anden
+  3: tredje
+  4: fjerde
+  5: femte
+  6: sjette
+  7: syvende
+  8: ottende
+  9: niende
+  10: tiende
+
+
+
+  #earth corners
+  N: mod nord
+  NE: mod nordøst
+  E: mod øst
+  SE: mod sydøst
+  S: mod syd
+  SW: mod sydvest
+  W: mod vest
+  NW: mod nordvest
+
+  #route description
+  head: Start med at køre 
+  continue: Kør frem
+  #left
+  turn-left: Drej til venstre
+  turn-slight-left: Drej let til venstre
+  turn-sharp-left: Drej skarpt til venstre
+  #right
+  turn-right: Drej til højre
+  turn-slight-right: Drej let til højre
+  turn-sharp-right: Drej skarpt til højre
+  #other
+  enter-roundabout: Kør ind i rundkørsel
+  take-the-nth-exit: Tag {%nth} afkørsel
+  reached-destination: Du er fremme ved destinationen
+
+  follow: ad
+  and_continue: og fortsæt
+  for: 
+  towards: mod 

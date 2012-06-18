@@ -1,24 +1,24 @@
 <div id="topbar">
 	<div class="label">
 		<div class="pin from"></div>
-		<input type="text" class="from"  placeholder='Fra...'>
+		<input type="text" class="from"  placeholder='<%=t :from %>...'>
 	</div>
 	<img src="/assets/ibikecph.png" alt="I BIKE CPH">
 	<div class="label" class="last">
 		<div class="pin to"></div>
-		<input type="text" class="to" placeholder="Til...">
+		<input type="text" class="to" placeholder='<%=t :to %>...'>
 	</div>
 	<div class="time">
-		<p class='distance'>Afstand: <span class="count">23 km</span></p>
-		<p class='duration'>Tid: <span class="count">13 minutter</span></p>
-		<p class='arrival'>Ankomst: <span class="count">13 minutter</span></p>
+		<p class='distance'><%=t :distance %>: <span class="count">23 km</span></p>
+		<p class='duration'><%=t :duration %>:<span class="count">13 minutter</span></p>
+		<p class='arrival'><%=t :arrival %>: <span class="count">13 minutter</span></p>
 	</div>
 </div>
 
 <div id="viewport">
 	<div id="map"></div>
 	<div class="actions">
-			<a class='permalink' href="#" >Lav et link</a>	
-			<a class='guide' href="#" >Giv mig rutebeskrivelsen</a>	
+			<a class='permalink' href="#" ><%=t :generate_link %></a>	
+			<a class='guide' href="#" ><%=t :route_description %></a>	
 	</div>
 </div>
