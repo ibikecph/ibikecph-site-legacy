@@ -55,8 +55,9 @@ module RailsOSRM
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
-    config.assets.paths << Rails.root.join("leaflet")
+    
+    #avoid loading environment during asset precompilation. required on heroku
+    config.assets.initialize_on_precompile = false
     
     
     #modifiy the way rails styles fields with errors in forms.

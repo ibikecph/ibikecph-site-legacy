@@ -32,9 +32,7 @@ RailsOSRM::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  
-  config.assets.initialize_on_precompile = false
-  
+    
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
@@ -46,7 +44,7 @@ RailsOSRM::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
