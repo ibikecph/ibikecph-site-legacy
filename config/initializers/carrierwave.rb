@@ -2,8 +2,8 @@
 CarrierWave.configure do |config|
   config.fog_credentials = {
     :provider               => 'AWS',
-    :aws_access_key_id      => 'xxx',
-    :aws_secret_access_key  => 'yyy',
+    :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
+    :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
     :region                 => 'us-east-1' #must match actual location of bucket. might want to make sure it also is the same as where servers are hosted - then transfer inbetween is free
   }
   config.fog_directory  = "ibikecph-#{Rails.env}"

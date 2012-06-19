@@ -6,11 +6,6 @@
 	<br>
 <% end %>
 <p class="note">The user joined <%= time_ago_in_words @user.created_at %> ago.</p>
-<% if @user.ideas.any? %>
-<p class="note">The latest idea by the user is <%= @user.ideas.first.headline %>.</p>
-<% else %>
-<p class="note">The user has not submitted any ideas.</p>
-<% end %>
 <br>
 
 <h4>That's me!</h4>

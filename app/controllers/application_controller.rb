@@ -14,16 +14,16 @@ class ApplicationController < ActionController::Base
   
   private 
   
-  unless Rails.application.config.consider_all_requests_local
-    rescue_from Exception, :with => :internal_error
-    rescue_from ActionController::UnknownController, :with => :route_not_found
-    rescue_from ActionController::UnknownAction, :with => :route_not_found
-    rescue_from ActionController::MethodNotAllowed, :with => :invalid_method
-    rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-    rescue_from CanCan::AccessDenied, :with => :access_denied
-    #note: can't yet catch ActionController::RoutingError in rails 3.
-    #we're using a catch-all route instead.
-  end
+  #unless Rails.application.config.consider_all_requests_local
+  #  rescue_from Exception, :with => :internal_error
+  #  rescue_from ActionController::UnknownController, :with => :route_not_found
+  #  rescue_from ActionController::UnknownAction, :with => :route_not_found
+  #  rescue_from ActionController::MethodNotAllowed, :with => :invalid_method
+  #  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  #  rescue_from CanCan::AccessDenied, :with => :access_denied
+  #  #note: can't yet catch ActionController::RoutingError in rails 3.
+  #  #we're using a catch-all route instead.
+  #end
   
   def set_locale
     if params[:locale]

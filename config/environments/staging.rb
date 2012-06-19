@@ -9,7 +9,7 @@ RailsOSRM::Application.configure do
   TWITTER_CLIENT_ID = ENV['TWITTER_CLIENT_ID']
   TWITTER_CLIENT_SECRET = ENV['TWITTER_CLIENT_SECRET']
 
-  MAIN_DOMAIN = 'http://stormy-flower-5599.herokuapp.com/'
+  MAIN_DOMAIN = 'http://ibikecph-staging.herokuapp.com/'
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
 
@@ -32,9 +32,8 @@ RailsOSRM::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-
-  config.assets.initialize_on_precompile = false
   
+  config.assets.initialize_on_precompile = false
   
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

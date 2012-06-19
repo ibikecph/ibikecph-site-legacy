@@ -16,12 +16,12 @@ gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'simple-navigation'
 
+gem 'thin'        #use thin instead of webrick in development
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'therubyracer'
-  gem 'modernizr'
-  gem 'less-rails'
+  gem 'sass'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'eco'
@@ -29,4 +29,7 @@ end
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'sass'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
 end

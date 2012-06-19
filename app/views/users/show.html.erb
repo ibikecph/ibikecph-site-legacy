@@ -1,43 +1,13 @@
-<div class="buttons righty">
-	<% if can? :manage, User %>
-		<%= link_to "Edit",  [:edit,@user] %>
-		<%= link_to "Delete",  @user, :method => :delete, :confirm => "Are you sure?" %>
-	<% end %>
-	<% if current_user == @user %>
-		<%= link_to "Edit Profile", [:edit,:account] %>
-	<% end %>
-</div>
-<h5><%= @user.name %><%= ' (you)' if current_user == @user %></h5>
-<div class="gr">
-	<div class="g4">
-		<h4>Profile</h4>
-		<% if @user.image.present? %>
-		<%= image_tag @user.image.g4.url, :class => 'g4 square', :title => @user.name, :alt => @user.name %>
-		<br>
-		<% elsif facebook_auth = @user.facebook_auth %>
-	       <%= image_tag "http://graph.facebook.com/#{facebook_auth.uid}/picture?type=square", :class => :avatar, :title => @user.name, :alt => @user.name %>
-	   	<% end %>
-		<p class="note">Joined <%= time_ago_in_words @user.created_at %> ago.</p>
-		<%= simple_format(@user.about) %>
-	</div>
-	<div class="g8 ge">
-		<% if @user.ideas.any? %>
-		<h4>Ideas</h4>
-	  	<%= will_paginate @ideas, :class => :pagination %>
-		<ul class="ideas">
-		<% for idea in @ideas %>
-			<li>
-				<% if idea.challenge %>
-					<%= link_to idea.headline, [idea.challenge,idea] %>
-				<% else %>
-					<%= idea.headline %>
-				<% end %>
-				<span class="note"><%= time_ago_in_words idea.created_at %> ago</span>
-				<br>
-				<%= truncate(idea.body, :length => 80, :separator => ' ' ) %>
-			</li>
-		<% end %>
-		</ul>
-		<% end %>
-	</div>
-</div>
+<%= link_to "Edit", [:edit,:account], :class => "button righty" if current_user == @user %>
+<h6><%= @user.name %><%= ' (you)' if current_user == @user %></h6>
+
+<label>Name</label>
+<p><%= @user.name %></p>
+
+<label>Image</label>
+<p><%= image_tag @user.image.g3.url, :class => 'g3 square' %></p>
+
+<% if @user.about %>
+<label>About</label>
+	<%= simple_format(@user.about) %>
+<% end %>

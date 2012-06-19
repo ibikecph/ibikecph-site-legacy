@@ -9,9 +9,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @ideas = @user.ideas.
-        includes(:user,:visualizations,:challenge).
-        paginate :page => params[:page], :per_page => 20
   end
   
   def new

@@ -22,3 +22,6 @@ test:
 
 #production will be set by heroku
 production:
+
+#production will be set by heroku
+staging:

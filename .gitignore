@@ -19,3 +19,4 @@
 /public/uploads/*
 
 .DS_Store
+logfile

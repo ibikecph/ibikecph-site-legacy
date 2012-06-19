@@ -1,99 +1,99 @@
-@import "base.css.less";
+@import "base.css.scss";
 
-@columns: 12;
-@column: 50px;
-@gutter: 30px;
-@half_gutter: 0.5*@gutter;
-@image_ratio: 2.0/3.0;
-@width: @columns*@column+(@columns - 1)*@gutter;
-@columns_12: 12*@column+11*@gutter;
-@columns_8: 8*@column+7*@gutter;
-@columns_6: 6*@column+5*@gutter;
-@columns_4: 4*@column+3*@gutter;
-@columns_3: 3*@column+2*@gutter;
-@columns_2: 2*@column+1*@gutter;
-@sidebar_padding: 20px;
-@avatar: @column;
+$columns: 12;
+$column: 50px;
+$gutter: 30px;
+$half_gutter: 0.5*$gutter;
+$image_ratio: 2.0/3.0;
+$width: $columns*$column+($columns - 1)*$gutter;
+$columns_12: 12*$column+11*$gutter;
+$columns_8: 8*$column+7*$gutter;
+$columns_6: 6*$column+5*$gutter;
+$columns_4: 4*$column+3*$gutter;
+$columns_3: 3*$column+2*$gutter;
+$columns_2: 2*$column+1*$gutter;
+$sidebar_padding: 20px;
+$avatar: $column;
 
 body {
-    padding: @half_gutter;
+    padding: $half_gutter;
     text-align: center;
 }
 
 a {
-    color: @link;
+    color: $link;
 }
 
 img {
     &.g12 {
-        width: @columns_12;
-        height: @columns_12 * @image_ratio;
+        width: $columns_12;
+        height: $columns_12 * $image_ratio;
         &.square {
-            height: @columns_12
+            height: $columns_12
         }
     }
     &.g8 {
-        width: @columns_8;
-        height: @columns_8 * @image_ratio;
+        width: $columns_8;
+        height: $columns_8 * $image_ratio;
         &.inside {
-            width: @columns_8 - 2*@sidebar_padding;
+            width: $columns_8 - 2*$sidebar_padding;
             height: auto;
         }
         &.square {
-            height: @columns_8
+            height: $columns_8
         }
     }
     &.g6 {
-        width: @columns_6;
-        height: @columns_6 * @image_ratio;
+        width: $columns_6;
+        height: $columns_6 * $image_ratio;
         &.inside {
-            width: @columns_6 - 2*@sidebar_padding;
+            width: $columns_6 - 2*$sidebar_padding;
             height: auto;
         }
         &.square {
-            height: @columns_6
+            height: $columns_6
         }
     }
     &.g4 {
-        width: @columns_4;
-        height: @columns_4 * @image_ratio;
+        width: $columns_4;
+        height: $columns_4 * $image_ratio;
         &.inside {
-            width: @columns_4 - 2*@sidebar_padding;
+            width: $columns_4 - 2*$sidebar_padding;
             height: auto;
         }
         &.square {
-            height: @columns_4
+            height: $columns_4
         }
     }
     &.g3 {
-        width: @columns_3;
-        height: @columns_3 * @image_ratio;
+        width: $columns_3;
+        height: $columns_3 * $image_ratio;
         &.square {
-            height: @columns_3
+            height: $columns_3
         }
     }
     &.g2 {
-        width: @columns_2;
-        height: @columns_2 * @image_ratio;
+        width: $columns_2;
+        height: $columns_2 * $image_ratio;
         &.square {
-            height: @columns_2
+            height: $columns_2
         }
     }
     &.g1 {
-        width: @column;
-        height: @column * @image_ratio;
+        width: $column;
+        height: $column * $image_ratio;
         &.square {
-            height: @column
+            height: $column
         }
     }
     &.avatar {
-        height: @avatar;
-        width: @avatar;
+        height: $avatar;
+        width: $avatar;
     }
 }
 
 .note {
-    color: @note_color;
+    color: $note_color;
     font-size: 0.8em;
 }
 
@@ -118,7 +118,7 @@ img {
 div.gr {
     div {
         &.g12, &.g8, &.g6, &.g4, &.g3, &.g2, &.g1  {
-            margin-right: @gutter;
+            margin-right: $gutter;
             float: left;
             &.center {
                 margin: auto;
@@ -126,52 +126,52 @@ div.gr {
             }
         }
         &.g12 {
-            width: @columns_12;
+            width: $columns_12;
         }
         &.g8 {
-            width: @columns_8;
+            width: $columns_8;
         }
         &.g6 {
-            width: @columns_6;
+            width: $columns_6;
         }
         &.g4 {
-            width: @columns_4;
+            width: $columns_4;
         }
         &.g3 {
-            width: @columns_3;
+            width: $columns_3;
         }
         &.g2 {
-            width: @columns_2;
+            width: $columns_2;
         }
         &.g1 {
-            width: @column;
+            width: $column;
         }
         &.ge {
             margin-right: 0;
         }
         &.g4.sidebar {
-            width: (4*@column+3*@gutter) - 2*@sidebar_padding;
+            width: (4*$column+3*$gutter) - 2*$sidebar_padding;
         }
         &.g6.sidebar {
-            width: (6*@column+5*@gutter) - 2*@sidebar_padding;
+            width: (6*$column+5*$gutter) - 2*$sidebar_padding;
         }
         &.g8.sidebar {
-            width: (8*@column+7*@gutter) - 2*@sidebar_padding;
+            width: (8*$column+7*$gutter) - 2*$sidebar_padding;
         }
         &.g12.sidebar {
-            width: (12*@column+11*@gutter) - 2*@sidebar_padding;
+            width: (12*$column+11*$gutter) - 2*$sidebar_padding;
         }
     }
 } 
 label {
     font-size: 0.8em;
     font-weight: bold;
-    color: @text_color;
+    color: $text_color;
     margin-top: 20px;
 }
 textarea {
     width: 100%;
-    border: 1px solid @lightish;
+    border: 1px solid $lightish;
     padding: 2px;
 }
 
@@ -191,16 +191,16 @@ div#form_errors, div#form_notice {
 }
 
 div#form_notice {
-    background-color: @highlight;
+    background-color: $highlight;
 }
 div#form_errors {
-    background-color: @error;
+    background-color: $error;
 }
 div#form_errors, div#form_notice {
     display: none;
 }
 .submit, a.submit {
-    background-color: @color;
+    background-color: $color;
     border: 0;
     border-radius: 4px;
     color: white;
@@ -215,12 +215,12 @@ div#form_errors, div#form_notice {
 }
 a.submit {
     &.toggle {
-        background-color: @medium;	
+        background-color: $medium;	
         &.on {
-            background-color: @highlight;	
+            background-color: $highlight;	
         }
         &:hover {
-            background-color: @hover;	
+            background-color: $hover;	
         }
     }
 }
@@ -229,7 +229,7 @@ input.submit {
     margin-right: 10px;
 }
 .submit:hover, a.submit:hover a.on.submit:hover {
-    background-color: @hover;
+    background-color: $hover;
 }
 
 p {
@@ -237,20 +237,20 @@ p {
 }
 
 .field_with_errors {
-    color: @error;
+    color: $error;
     display: inline;
 }
 span.chars_remaining {
     font-size: 1em;
-    color: @note_color;
+    color: $note_color;
     display: inline;
 }
 span.too_long {
-    color: @error;
+    color: $error;
 }
 #error_explanation {
     padding: 20px;
-    background-color: @error;
+    background-color: $error;
     font-size: 1em;
     margin-bottom: 10px;
 }
@@ -268,23 +268,23 @@ input {
 }
 
 h6 {
-    color: @color;
+    color: $color;
     font-size: 1em;
     margin-bottom: 0.3em;
 }
 
 #flash {
     color: white;
-    padding: @sidebar_padding;
-    margin-bottom: @half_gutter;
+    padding: $sidebar_padding;
+    margin-bottom: $half_gutter;
     font-weight: bold;
     border: 0;
     border-radius: 4px;
     &.notice {
-        background-color: @highlight;
+        background-color: $highlight;
     }
     &.alert {
-        background-color: @error;
+        background-color: $error;
     }
     &.empty {
         background-color: transparent;
@@ -295,51 +295,51 @@ h6 {
 }
 .lefty {
     float: left;
-    margin-right: @gutter;
+    margin-right: $gutter;
     margin-bottom: 10px;
 }
 .righty {
     float: right;
-    margin-left: @gutter;
+    margin-left: $gutter;
     margin-bottom: 10px;
 }
 .left {
     float: left;
-    margin-right: @half_gutter;
+    margin-right: $half_gutter;
 }
 .right {
     float: right;
-    margin-left: @half_gutter;
+    margin-left: $half_gutter;
 }
 
 div.dialog {
     text-align: left;
     display: inline-block;
-    width: @columns_8;
+    width: $columns_8;
     margin: auto;
-    background-color: @light;
-    padding: @sidebar_padding - 2*@border_width;
+    background-color: $light;
+    padding: $sidebar_padding - 2*$border_width;
     border-radius: 4px;
-    margin-bottom: @half_gutter;
-    border: @border_width solid @lightish;
+    margin-bottom: $half_gutter;
+    border: $border_width solid $lightish;
 }
 div.oauth_providers {
-    margin-top: 2*@gutter;
+    margin-top: 2*$gutter;
 }
 hr {
-    border-color: @light;
-    margin-bottom: @half_gutter;
+    border-color: $light;
+    margin-bottom: $half_gutter;
 }
 
 
 #header {
     text-align: left;
-    width: @columns_8;
+    width: $columns_8;
     margin: auto;
     font-size: 0.9em;
     overflow:hidden;
     .menu {
-        margin-bottom: @gutter;
+        margin-bottom: $gutter;
         ul {
             margin: 0;
             list-style-type: none;
@@ -366,13 +366,13 @@ hr {
     .login {
         float: right;
         &.note {
-            color: @medium;
+            color: $medium;
         }
         &.a {
-            color: @color;
+            color: $color;
         }
         &.a:hover {
-            color: @hover;
+            color: $hover;
         }
     }
 }
