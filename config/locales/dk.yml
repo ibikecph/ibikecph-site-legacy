@@ -3,8 +3,8 @@
 
 dk:
   #ui
-  from : fra
-  to: til
+  from : Indtast start adressen
+  to: Indtast destinationen
   title: I BIKE CPH | Cykelruteplanlægger (alpha)
   generate_link: Lav et link
   route_description: Rutebeskrivelse

@@ -1,0 +1,238 @@
+*{
+	padding:0px;
+	margin:0px;
+	font-family:'Helvetica', 'Arial', sans-serif;
+}
+html{
+	background:#222;
+	height:100%;
+	overflow:hidden;
+}
+
+#uvTab{
+	right:20px !important;
+}
+
+
+.instructions{
+	position: fixed;
+	bottom:100px;
+	left:46px;
+	border-radius:5px;
+	z-index:101;
+	background:white;
+	padding:10px;
+	border:2px solid #888;
+	cursor:pointer;
+	height:400px;
+	overflow-y:scroll;
+
+	.instruction{
+		background:#fff;
+		padding:5px;
+		font-size:12px;
+
+		&:nth-child(odd){
+			background:#eee
+		}
+	}
+}
+
+
+
+body{
+	background:#FFFDF4;
+	height:100%;
+
+
+	#topbar{
+
+		position: relative;
+		.time{
+			opacity: .8;
+			display:none;
+			width:184px;
+			background:black;
+			height:54px;
+			padding:10px;
+			position: absolute;
+			top:66px;
+			z-index:99;
+			left:50%;
+			margin-left:-102px;
+			background:url('/assets/clock.png');
+			p{
+				text-transform:capitalize;
+				font-size:12px;
+				width:100%;
+				margin-bottom:6px;
+
+				span{
+					float:right;
+					font-weight:bold;
+
+				}
+			}
+		}
+
+		.pin{
+				width:25px;
+				height:43px;
+				float:right;
+				margin-top:2px;
+				margin-left:5px;
+				margin-right:1px;
+				border-radius:5px;
+				cursor:move;
+
+				&.from{
+					background:url('/assets/images/marker-start.png') center center no-repeat;
+				}
+
+				&.to{
+					background:url('/assets/images/marker-end.png') center center no-repeat;
+				}
+
+				&.reset{
+					background:url('/assets/images/marker-remove.png') center center no-repeat;	
+					cursor:pointer;				
+				}
+		}
+
+		height:68px;
+
+		img{
+			float: left;
+			padding-top:18px;
+			padding-left:20px;
+			padding-right:10px;
+			margin-right:5px;
+			padding-bottom:16px;
+			width:37px;
+			cursor:pointer;
+			height:30px;
+		}
+
+		.label{
+
+			
+
+
+			&.last{
+			}
+
+			p{
+				display:none;
+				margin-left:10px;
+				font-size:15px;		
+				margin-bottom:10px;	
+				float:left;
+			}
+			input[type=text]{
+				padding:10px;
+				width:490px;
+				font-size:18px;
+				line-height:20px;
+				border:2px solid #eee;
+				border-radius:5px;
+				clear:none;
+				float:left;
+			}
+
+
+
+			margin-top:5px;
+			float:left;
+			position: relative;
+			margin-left:5px;
+			padding:5px;
+			border-radius: 5px;
+			background:#eee;
+
+		}
+		border-bottom:none;
+		float:left;
+		clear:none;
+
+		.delete{
+				width:40px;
+				height:40px;
+				margin-top:2px;
+
+				float:right;
+				cursor:pointer;
+				clear:none;
+				background:url('/assets/cancel.png') no-repeat center center;
+		}
+
+
+		background:white;
+	}
+
+	#viewport{
+		width:100%;
+		position: relative;
+		overflow:hidden;
+		border-left-color:#ddd;
+		height:100%;
+		float:left;
+		clear:none;
+
+		.actions{
+			display:none;
+			position: absolute;
+			bottom:10px;
+			left:10px;
+			a{
+				float:left;
+				display: inline-block;
+				background-color: #fff;
+				color: #c00;
+				font-size:12px;
+				color:#c00;
+				margin-right:10px;
+				padding:10px;
+				border-radius:5px;
+				text-decoration:none;
+				font-weight:bold;
+				border:2px solid #888;
+
+				&:hover{
+					color:#000;
+				}
+			}			
+		}
+
+
+
+		#map {
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100%;
+			z-index: 0;
+		}
+	}
+
+}
+
+.ln{
+			display:none;
+			position: absolute;
+			bottom:60px;
+			right:35px;
+				float:left;
+				display: inline-block;
+				background-color: #fff;
+				color: #c00;
+				font-size:12px;
+				color:#c00;
+				margin-right:10px;
+				padding:10px;
+				border-radius:5px;
+				text-decoration:none;
+				font-weight:bold;
+				border:2px solid #888;
+
+	
+		}
