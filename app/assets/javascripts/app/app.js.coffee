@@ -33,12 +33,6 @@ app.start = ->
 	app.router = new ibikecph.Router app: app
 
 	Backbone.history.start()
-
-
-	if window.location.pathname.indexOf('en') isnt -1
-		$('body').append($('<a>', {'href' : '/dk/', class : 'ln' }).text('Dansk'));
-	else
-		$('body').append($('<a>', 'href' : '/en/', class : 'ln').text('English'));
 	
 
 	$(".ln").click (event) ->
