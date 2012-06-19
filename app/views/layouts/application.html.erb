@@ -20,27 +20,17 @@ or see http://www.gnu.org/licenses/agpl.txt.
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<%= stylesheet_link_tag "application", :media => "all" %>
-	<%= stylesheet_link_tag "leaflet", :media => "all" %>
-	<!--[if lte IE 8]>
-	<%= stylesheet_link_tag "leaflet.ie", :media => "all" %>
-	<![endif]-->
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
 	<title><%=t :title %></title>
 </head>
-<body class="base-font not-selectable">
-<%= yield %>
-
-<script type="text/javascript">
-  I18n.locale = '<%=locale %>';
-  var uvOptions = {};
-  (function() {
-    var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-    uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/7qr1eAW85pRpkeZd212ZVw.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-  })();
-</script>
+<body>
+	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
+	<div class="dialog">
+		<%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
+		<%= yield %>
+	</div>
 </body>
 </html>

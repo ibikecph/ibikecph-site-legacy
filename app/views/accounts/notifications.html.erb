@@ -1,0 +1,17 @@
+<% unless @has_email %>
+<p>To enable email notifications, please <%= link_to 'setup a verified email', account_path %>.</p>
+<% else %>
+<h4>Send me an email when</h4>
+<%= errors_for( current_user ).html_safe %>
+<%= form_for current_user, :url => notifications_account_path, :html => {:method => :post, :multipart => true} do |f| %>
+	<p>
+		<%= f.check_box :notify_comments_for_me %>
+		People comment on my ideas
+	</p>
+	<p>
+		<%= f.check_box :notify_new_ideas %>
+		People add ideas to challenges I'm following
+	</p>
+	<p><%= f.submit 'Save', :class => :submit %></p>
+<% end %>
+<% end %>

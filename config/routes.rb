@@ -1,65 +1,60 @@
 RailsOSRM::Application.routes.draw do
 
+  #signup, login, logout
+  get "signup" => "users#new", :as => :signup
+  get "login" => "sessions#new", :as => :login
+  get "login/return" => "sessions#new_and_return", :as => :login_and_return
+  get "logout" => "sessions#destroy", :as => :logout
+  resources :sessions, :path => :login, :except => :index do
+    collection do
+      get 'unverified'
+      get 'existing'
+    end
+  end
+  match "/auth/:provider/callback" => "sessions#oath_create"
+  match "/auth/failure" => "sessions#failure"
+  
+  resource :account do
+    get 'activating'
+    get 'notifications'
+    post 'notifications' => :update_notifications
+  end
+  get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
+  put 'account/password' => 'accounts#update_password', :as => :update_password  
+  delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
+  get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
+  post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
+
+  resources :users
+
+  resources :emails, :path => 'account/emails' do
+    collection do
+      match ':token/verify' => :verify, :as => :verify_by_token
+      get 'verify' => :new_verification
+      post 'verify' => :create_verification
+      get 'unverified'
+    end
+    member do
+      get 'verify/resend' => :resend_verification, :as => :resend_verification
+    end
+  end
+
+  resources :password_resets, :except => [:index,:edit], :path => 'account/password/reset' do
+    collection do
+      match ':token/edit' => :edit, :as => :reset_by_token
+    end
+    get 'unverified', :on => :collection
+  end
+  
+  
   match '/ping' => 'pages#ping'
   match '/blog' => 'pages#blog'
+  match '/feedback' => 'pages#feedback'
   
   match '/:locale' => 'pages#index'
-  root :to => 'pages#index'
+  root :to => 'map#index'
 
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
-
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
-
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
-
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-
-  # See how all your routes lay out with "rake routes"
-
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  #404 catch all. https://github.com/rails/rails/issues/671
+  match '*path' => 'application#route_not_found'  
 end

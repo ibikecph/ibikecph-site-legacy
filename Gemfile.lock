@@ -1,3 +1,19 @@
+GIT
+  remote: git://github.com/emiltin/cancan.git
+  revision: b51e63a4ce2dfaf36caa8ac1dc31ed806dea9b0d
+  branch: master
+  specs:
+    cancan (1.6.7)
+
+GIT
+  remote: git://github.com/emiltin/omniauth.git
+  revision: c53ad626cae66ee385ba8e75ccee47fe8d2693d4
+  branch: master
+  specs:
+    omniauth (1.0.2)
+      hashie (~> 1.2)
+      rack
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -29,7 +45,11 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    carrierwave (0.6.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -37,15 +57,38 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    daemons (1.1.8)
+    delayed_job (3.0.1)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.2)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     eco (1.0.0)
       coffee-script
       eco-source
       execjs
     eco-source (1.1.0.rc.1)
     erubis (2.7.0)
+    eventmachine (0.12.10)
+    excon (0.6.6)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.1)
+      multipart-post (~> 1.1)
+    fog (0.9.0)
+      builder
+      excon (~> 0.6.1)
+      formatador (>= 0.1.3)
+      json
+      mime-types
+      net-scp (>= 1.0.4)
+      net-ssh (>= 2.1.4)
+      nokogiri (>= 1.4.4)
+      ruby-hmac
+    formatador (0.2.1)
+    hashie (1.2.0)
     hike (1.2.1)
+    httpauth (0.1)
     i18n (0.6.0)
     i18n-js (2.1.2)
       i18n
@@ -54,14 +97,34 @@ GEM
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.7.3)
-    libv8 (3.3.10.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.18)
     multi_json (1.3.6)
-    newrelic_rpm (3.4.0)
+    multipart-post (1.1.5)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.3.0)
+    newrelic_rpm (3.3.5)
+    nokogiri (1.5.0)
+    oauth (0.4.6)
+    oauth2 (0.6.1)
+      faraday (~> 0.7)
+      httpauth (~> 0.1)
+      multi_json (~> 1.3)
+    omniauth-facebook (1.3.0)
+      omniauth-oauth2 (~> 1.0.2)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.0.2)
+      oauth2 (~> 0.6.0)
+      omniauth (~> 1.0)
+    omniauth-twitter (0.0.11)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
     pg (0.13.2)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -89,14 +152,20 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    rmagick (2.13.1)
+    ruby-hmac (0.4.0)
     sass (3.1.19)
+    simple-navigation (3.7.0)
+      activesupport (>= 2.3.2)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    therubyracer (0.10.1)
-      libv8 (~> 3.3.10)
-    thor (0.15.3)
+    thin (1.3.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    thor (0.15.2)
     tilt (1.3.3)
     treetop (1.4.10)
       polyglot
@@ -110,13 +179,24 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby
+  cancan!
+  carrierwave
   coffee-rails (~> 3.2.1)
+  delayed_job
+  delayed_job_active_record
   eco
+  fog
   i18n-js
   jquery-rails
   newrelic_rpm
+  omniauth!
+  omniauth-facebook
+  omniauth-twitter
   pg
   rails (= 3.2.6)
+  rmagick
   sass
-  therubyracer
+  simple-navigation
+  thin
   uglifier (>= 1.0.3)

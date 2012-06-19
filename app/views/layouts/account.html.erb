@@ -1,0 +1,9 @@
+<% #sub-layout. http://guides.rubyonrails.org/layouts_and_rendering.html#using-nested-layouts %>
+<% content_for :content do %>
+<h2><%= current_user.name %> (you)</h2>
+<%= render_navigation :context => :account %>
+<div class="clear"></div><br>
+
+<%= yield %>
+<% end %>
+<%= render :template => 'layouts/application' %>

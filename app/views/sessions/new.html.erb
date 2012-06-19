@@ -1,0 +1,23 @@
+<h6>Login</h6>
+
+<%= form_tag sessions_path do %>
+<p>
+	<%= label_tag :email %><br>
+	<%= text_field_tag :email, params[:email] %>
+</p>
+<p>
+	<%= label_tag :password %><br>
+	<%= password_field_tag :password %> <span class="note"><%= link_to 'Forgot it?', new_password_reset_path %></span>
+</p>
+<p>
+	<%= check_box_tag :remember_me, 1, params[:remember_me] %>
+	<%= label_tag :remember_me %>
+</p>
+<p>
+	<%= submit_tag "Login", :class => :submit %>
+	<span class="note">No account? <%= link_to "Sign Up", new_user_path %></span>
+</p>
+<% end %>
+<div class="oauth_providers">
+	<%= render :partial => 'sessions/login_providers', :locals => { :title => '..or log in with:' } %>
+</div>
