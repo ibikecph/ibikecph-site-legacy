@@ -15,6 +15,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'simple-navigation'
+gem 'will_paginate'
 
 gem 'thin'        #use thin instead of webrick in development
 
