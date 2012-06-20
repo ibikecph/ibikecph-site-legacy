@@ -9,7 +9,7 @@ RailsOSRM::Application.configure do
   TWITTER_CLIENT_ID = ENV['TWITTER_CLIENT_ID']
   TWITTER_CLIENT_SECRET = ENV['TWITTER_CLIENT_SECRET']
 
-  MAIN_DOMAIN = 'http://stormy-flower-5599.herokuapp.com'
+  MAIN_DOMAIN = 'stormy-flower-5599.herokuapp.com'
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
 
@@ -79,11 +79,5 @@ RailsOSRM::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # ActionMailer Config
-  # Setup for production - deliveries, no errors raised
   config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
-  
 end

@@ -78,7 +78,7 @@ class EmailsController < ApplicationController
       activate_email
       if welcome
         copy_return_to
-        logged_in welcome_account_path, :notice => "Email #{@auth.uid} verified."
+        logged_in account_path, :notice => "Email #{@auth.uid} verified."
       else
         redirect_to account_path, :notice => "Email #{@auth.uid} verified."
       end

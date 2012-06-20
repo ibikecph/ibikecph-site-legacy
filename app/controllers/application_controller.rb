@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_user, :logged_in?, :auth_link, :facebook_logout
   
-  
   def route_not_found
     respond_to do |format|
       format.html { render 'errors/route_not_found', :status => :not_found }

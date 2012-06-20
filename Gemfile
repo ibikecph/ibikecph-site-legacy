@@ -26,7 +26,7 @@ group :assets do
   gem 'eco'
 end
 
-group :production, do
+group :production do
   gem 'newrelic_rpm'
 end
 

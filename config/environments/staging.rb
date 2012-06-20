@@ -9,7 +9,7 @@ RailsOSRM::Application.configure do
   TWITTER_CLIENT_ID = ENV['TWITTER_CLIENT_ID']
   TWITTER_CLIENT_SECRET = ENV['TWITTER_CLIENT_SECRET']
 
-  MAIN_DOMAIN = 'http://ibikecph-staging.herokuapp.com'
+  MAIN_DOMAIN = ENV['DOMAIN']
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
 
@@ -32,7 +32,9 @@ RailsOSRM::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-    
+  
+  config.assets.initialize_on_precompile = false
+  
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
@@ -44,7 +46,7 @@ RailsOSRM::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  config.log_level = :debug
+  # config.log_level = :debug
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
@@ -79,11 +81,5 @@ RailsOSRM::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # ActionMailer Config
-  # Setup for production - deliveries, no errors raised
-  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
-  
+  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }  
 end
