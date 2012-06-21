@@ -8,7 +8,18 @@ class ibikecph.Sidebar extends Backbone.View
 		'mouseup .pin.draging'         : 'drag_pin_end'
 		'click input.link'			   : 'select_all'
 		'change input.link'			   : 'waypoints_changed'
+		'click .close'				   : 'colapse'
+		'click .expand'				   : 'expand'
 
+
+	colapse : (event) ->
+		$(@el).width 16
+		$(@el).height 16
+		$(event.target).removeClass('close').addClass 'expand'
+
+	expand : (event) ->
+		$(@el).attr 'style', ''
+		$(event.target).removeClass('expand').addClass 'close'
 
 	select_all: (event) ->
 		$(event.target).select()

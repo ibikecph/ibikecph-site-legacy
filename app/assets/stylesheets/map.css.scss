@@ -47,6 +47,8 @@ body{
 
 	#topbar{
 
+
+		overflow:hidden;
 		position: absolute;
 		z-index:10;
 		width:350px;
@@ -95,7 +97,24 @@ body{
 		}
 
 
-		img{
+		.control{
+			cursor:pointer;
+			width:16px;
+			height:16px;
+			background:red;
+			float:left;
+			clear:both;
+
+			&.close{
+				background:url('/assets/close.png');
+			}
+
+			&.expand{
+				background:url('/assets/expand.png');				
+			}
+		}
+
+		img.logo{
 			float: right;
 			cursor:pointer;
 			margin-right:-1px;
@@ -130,6 +149,7 @@ body{
 					text-decoration:underline;
 					cursor:pointer;
 					display:none;
+					margin-right:2px;
 				}
 
 			}
@@ -152,7 +172,7 @@ body{
 			}
 
 
-			margin-top:20px;
+			margin-top:10px;
 			float:left;
 			clear:left;
 
