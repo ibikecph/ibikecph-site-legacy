@@ -1,3 +1,4 @@
+<div class="dialog">
 <h6>Login</h6>
 
 <%= form_tag sessions_path do %>
@@ -20,4 +21,5 @@
 <% end %>
 <div class="oauth_providers">
 	<%= render :partial => 'sessions/login_providers', :locals => { :title => '..or log in with:' } %>
+</div>
 </div>

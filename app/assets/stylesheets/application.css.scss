@@ -5,21 +5,36 @@ $column: 50px;
 $gutter: 30px;
 $half_gutter: 0.5*$gutter;
 $image_ratio: 2.0/3.0;
-$width: $columns*$column+($columns - 1)*$gutter;
-$columns_12: 12*$column+11*$gutter;
-$columns_8: 8*$column+7*$gutter;
-$columns_6: 6*$column+5*$gutter;
-$columns_4: 4*$column+3*$gutter;
-$columns_3: 3*$column+2*$gutter;
-$columns_2: 2*$column+1*$gutter;
 $sidebar_padding: 20px;
 $avatar: $column;
+$width: $columns*$column+($columns - 1)*$gutter;
+$columns_12: 12*$column+11*$gutter;
+$columns_10: 10*$column+9*$gutter;
+$columns_8: 8*$column+7*$gutter;
+$columns_6: 6*$column+5*$gutter;
+$columns_5: 5*$column+4*$gutter;
+$columns_4: 4*$column+3*$gutter;
+$columns_3: 3*$column+2*$gutter;
+$columns_3: 3*$column+2*$gutter;
+$columns_2: 2*$column+1*$gutter;
+$columns_12_pad: 12*$column+11*$gutter - 2*$sidebar_padding;
+$columns_10_pad: 10*$column+9*$gutter - 2*$sidebar_padding;
+$columns_8_pad: 8*$column+7*$gutter - 2*$sidebar_padding;
+$columns_6_pad: 6*$column+5*$gutter - 2*$sidebar_padding;
+$columns_5_pad: 5*$column+4*$gutter - 2*$sidebar_padding;
+$columns_4_pad: 4*$column+3*$gutter - 2*$sidebar_padding;
+$columns_3_pad: 3*$column+2*$gutter - 2*$sidebar_padding;
+$columns_3_pad: 3*$column+2*$gutter - 2*$sidebar_padding;
+$columns_2_pad: 2*$column+1*$gutter - 2*$sidebar_padding;
 
 body {
     padding: $half_gutter;
-    text-align: center;
 }
 
+div.content {
+	width: $columns_10;
+    margin: auto;
+}
 a {
     color: $link;
 }
@@ -52,6 +67,17 @@ img {
         }
         &.square {
             height: $columns_6
+        }
+    }
+    &.g5 {
+        width: $columns_5;
+        height: $columns_5 * $image_ratio;
+        &.inside {
+            width: $columns_5 - 2*$sidebar_padding;
+            height: auto;
+        }
+        &.square {
+            height: $columns_5
         }
     }
     &.g4 {
@@ -313,9 +339,7 @@ h6 {
 }
 
 div.dialog {
-    text-align: left;
     display: inline-block;
-    width: $columns_8;
     margin: auto;
     background-color: $light;
     padding: $sidebar_padding - 2*$border_width;
@@ -333,9 +357,8 @@ hr {
 
 
 #header {
-    text-align: left;
-    width: $columns_8;
-    margin: auto;
+    width: $columns_10;
+	text-align: left;
     font-size: 0.9em;
     overflow:hidden;
     .menu {
