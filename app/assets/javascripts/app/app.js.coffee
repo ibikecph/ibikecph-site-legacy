@@ -32,24 +32,3 @@ app.start = ->
 
 	$(window).trigger 'resize'
 
-	$('.instructions').live 'click', ->
-		$(this).remove()
-	$('a.guide').click (event) ->
-		event.preventDefault()
-		if app.info.instructions.length
-			end = false
-			if $('.instructions').length
-				end = true
-			$('.instructions').remove()
-			if end then return
-			el = $('<div>', class : 'instructions')
-			app.info.instructions.each (instruction) ->
-				instruction_el = $('<div>', class : 'instruction')
-				text = ibikecph.util.instruction_string instruction.toJSON();
-
-				instruction_el.html(text)
-				el.append instruction_el
-				$('body').prepend(el);
-			app.info.instructions.bind 'reset', ->
-				el.remove()
-

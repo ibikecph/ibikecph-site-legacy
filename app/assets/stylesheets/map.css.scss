@@ -14,36 +14,26 @@ html {
 }
 
 
-.instructions{
-	position: fixed;
-	bottom:100px;
-	left:46px;
-	border-radius:5px;
-	z-index:101;
-	background:white;
-	padding:10px;
-	border:2px solid #888;
-	cursor:pointer;
-	height:400px;
-	overflow-y:scroll;
-
-	.instruction{
-		background:#fff;
-		padding:5px;
-		font-size:12px;
-
-		&:nth-child(odd){
-			background:#eee
-		}
-	}
-}
-
 
 
 body{
 	background:#FFFDF4;
 	height:100%;
 
+
+	div.instructions{
+		width:350px;
+		padding:10px;
+		margin:10px;
+		border:2px solid #EEEEEE;
+		border-radius:5px;
+		box-shadow:0px 1px 1px rgba(0,0,0,.5);
+		overflow:scroll;
+		position:absolute;
+		bottom:10px;
+		background:white;
+
+	}
 
 	#topbar{
 
@@ -144,14 +134,28 @@ body{
 				&.clear{
 					float:right;
 					text-transform:uppercase;
-					color:#F72C34;
-					font-weight:normal;
-					text-decoration:underline;
 					cursor:pointer;
 					display:none;
 					margin-right:2px;
 					font-size:10px;
-					margin-top:4px;
+					color:#aaa;
+					margin-top:6px;
+					margin-bottom:-10px;
+					&:hover{
+						color:#F72C34;
+						text-decoration:underline;
+					}
+				}
+
+				&.instructions{
+					float:right;
+					margin-right:1px;
+					color:#F62830;
+					cursor:pointer;
+					&:hover{
+						color:#F72C34;
+						text-decoration:underline;						
+					}
 				}
 
 			}

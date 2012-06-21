@@ -10,6 +10,17 @@ class ibikecph.Sidebar extends Backbone.View
 		'change input.link'			   : 'waypoints_changed'
 		'click .close'				   : 'colapse'
 		'click .expand'				   : 'expand'
+		'click .instructions'		   : 'instructions'
+
+	instructions : (event) ->
+		event.preventDefault()
+
+		if @app.info.instructions.length
+			instructions = $("<div>", class : 'instructions')
+			@app.info.instructions.each (model)->
+				instructions.append $("<div>", class : 'instruction').text(ibikecph.util.instruction_string(model.toJSON()))
+			$("div.instructions").remove();
+			$("body").append(instructions);
 
 
 	colapse : (event) ->
