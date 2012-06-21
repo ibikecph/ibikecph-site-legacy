@@ -12,14 +12,15 @@ en:
         uid_confirmation: 'Email confirmation'
     
   #ui
-  from: from
-  to: to
+  from: From
+  to: To
   title: I BIKE CPH | Bike Route Planner (alpha)
   generate_link: Make a Link
   route_description: Route Description
   distance: distance
   duration: time
   arrival: arrival
+  link_for_route: Link to Route
 
 
   1: first

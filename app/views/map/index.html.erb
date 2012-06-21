@@ -8,15 +8,18 @@
 			<input type="text" class="from"  placeholder='<%=t :from %>' title='<%=t :from %>'>
 		</label>
 	</div>
-	<div class="label" class="last">
+	<div class="label">
 		<label>
 			<p><%=t :to %></p>
 			<input type="text" class="to" placeholder='<%=t :to %>' title='<%=t :to %>'>
 		</label>
 	</div>
-	<div class="actions">
-		<a class='permalink' href="#" ><%=t :generate_link %></a>	
-		<a class='guide' href="#" ><%=t :route_description %></a>	
+
+	<div class="label text">
+		<label>
+			<p><%=t :link_for_route %></p>
+			<input type="text" class="link">
+		</label>
 	</div>
 	<div class="time">
 		<p class='distance'><%=t :distance %>: <span class="count">23 km</span></p>

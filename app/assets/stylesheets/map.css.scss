@@ -89,20 +89,33 @@ body{
 		img{
 			float: right;
 			cursor:pointer;
+			margin-bottom:-36px;
+			margin-right:-1px;
 		}
 
 		.label{
 
-			&.last{
+			&.text{
+				background:#eee;
+				padding:10px;
+				width:330px;
+				display:none;
+				input{
+					width:309px !important;
+					border:none !important;
+				}
 			}
 
 			p{
-				font-size:16px;		
+				font-size:14px;		
 				margin-bottom:10px;	
 				float:left;
 				clear:both;
+				font-weight:bold;
 
 			}
+
+
 
 			p:after{
 				content: ':';
@@ -113,16 +126,18 @@ body{
 				font-size:16px;
 				line-height:20px;
 				border:2px solid #eee;
-				border-radius:5px;
 				clear:both;
 				float:left;
 				width:326px;
+
+				&.link{
+					color:#888;
+				}
 			}
 
 
-			margin-bottom:20px;
+			margin-top:20px;
 			float:left;
-			border-radius: 5px;
 			clear:left;
 
 		}

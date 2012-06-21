@@ -6,6 +6,12 @@ class ibikecph.Sidebar extends Backbone.View
 		'click .pin.reset'             : 'clear'
 		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
 		'mouseup .pin.draging'         : 'drag_pin_end'
+		'click input.link'			   : 'select_url'
+		'change input.link'			   : 'waypoints_changed'
+
+
+	select_url: (event) ->
+		$(event.target).select()
 
 	drag_pin_start: (event) ->
 		if $(event.target).hasClass 'reset'
@@ -71,9 +77,14 @@ class ibikecph.Sidebar extends Backbone.View
 		@set_loading model.get('type'), loading
 
 	waypoints_changed: ->
-		hash = '#!/' + @model.waypoints.to_code()
+		url = window.location.protocol + '//' + window.location.host + '#!/' + @model.waypoints.to_code()
 
-		$('.permalink').attr 'href', hash
+		if @model.waypoints.length > 1
+			$('input.link').val url
+			$('.label.text').show()
+		else
+			$('input.link').val ''
+			$('.label.text').hide()
 
 	summary_changed: ->
 		meters = @.get 'total_distance'
