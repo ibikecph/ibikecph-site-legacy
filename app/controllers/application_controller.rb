@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
-  helper_method :current_user, :logged_in?, :auth_link, :facebook_logout
+  helper_method :current_user, :auth_link
   
   def route_not_found
     respond_to do |format|

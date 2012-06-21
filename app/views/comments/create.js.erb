@@ -1,0 +1,12 @@
+//add comment
+var comment = $("<%= escape_javascript(render(@comment)) %>");	//render
+comment.find("span.timeago").timeago();	//start timeago updates
+
+//insert
+$(".comments table").append(comment).show(); 
+
+//reset comment form
+$("#new_comment_form")[0].reset();
+
+//hide errors
+$("#form_errors").hide();

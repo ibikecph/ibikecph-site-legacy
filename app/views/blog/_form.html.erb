@@ -1,0 +1,23 @@
+<%= form_for @blog_entry, :url => url, :html => {:multipart => true} do |f| %>
+<%= errors_for( @blog_entry ).html_safe %>
+
+	<p>
+		<%= f.label :title %>
+		<%= chars_remaining %><br>
+		<%= f.text_field :title, { "data-maxlength" => @blog_entry.class::MAXLENGTH[:title] } %>
+	</p>
+	<p>
+		<%= f.label :body %>
+		<%= chars_remaining %><br>
+		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @blog_entry.class::MAXLENGTH[:body] } %>
+	</p>
+	<p>
+		<%= image_fields f, @blog_entry %>
+	</p>
+	<p>
+		<%= f.label :sticky %><br>
+		<%= f.check_box :sticky %> Keep this entry at top (can be changed latter).
+	</p>
+	<p><%= f.submit :class => :submit %></p>
+
+<% end %>

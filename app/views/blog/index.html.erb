@@ -1,0 +1,14 @@
+<div class="gr">
+	<div class="g4">
+		<% if can? :manage, BlogEntry %>
+			<div class="righty buttons">
+				<%= link_to "New Entry",  new_blog_entry_path %>
+			</div>
+		<% end %>
+		<%= render :partial => 'blog_entry', :collection => @blog_entries %>
+	</div>
+	<div class="g4 ge">
+		<%= render 'sidebar' %>
+	</div>
+</div>
+

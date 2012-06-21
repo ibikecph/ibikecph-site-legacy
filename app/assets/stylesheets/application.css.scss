@@ -379,3 +379,33 @@ hr {
 h3 {
     margin-top: 1em;
 }
+
+div.sidebar {
+    float: right;
+    width: $columns_3;
+    padding-left: $gutter;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin-bottom: 0.5em;
+	width: 100%;
+	td.avatar {
+		width: $avatar;
+	}
+	p {
+		margin: 0;
+	}
+	tr+tr {
+		border-top: 1px solid $light;
+	}
+}
+*+.comments {
+	margin-top: $gutter;
+}
+.comments {
+	table {
+		float: left;
+		width: 100%;
+	}
+}

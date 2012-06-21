@@ -12,6 +12,10 @@ module ApplicationHelper
     '<span class="chars_remaining"></span>'.html_safe
   end
 
+  def comments target
+    render :partial => '/comments/comments', :locals => { :target => target }
+  end
+
   def attribute_required? object, attribute
     #inspect a model to see if the attribute is required (validates :presence => true)
     target = (object.class == Class) ? object : object.class
@@ -38,6 +42,21 @@ module ApplicationHelper
   	end
 		out << form.hidden_field(:image_cache)
 		out.html_safe
+	end
+	
+	def profile_image user
+	  h  = { :class => :avatar, :title => user.name, :alt => user.name }
+	  if user.image.present?
+	    return image_tag user.image.g1.url, { :class => 'g1 square', :title => user.name, :alt => user.name }
+	  end
+    
+    facebook_auth = user.facebook_auth
+    if facebook_auth
+      return image_tag "http://graph.facebook.com/#{facebook_auth.uid}/picture?type=square", h
+    end
+    
+    #fallback to default image
+    image_tag user.image.g1.default_url, { :class => 'g1 square', :title => user.name, :alt => user.name }
 	end
 	
 

@@ -1,0 +1,10 @@
+<div class="sidebar">
+	<ul>
+		<% for blog_entry in @blog_entries %>
+			<li>
+				<%= link_to blog_entry.title, blog_entry %><br>
+				<span class="note"><%= time_ago_in_words blog_entry.created_at %> ago</span>
+			</li>
+		<% end %>
+	</ul>
+</div>

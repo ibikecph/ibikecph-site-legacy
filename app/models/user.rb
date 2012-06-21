@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   
   has_many :authentications, :dependent => :destroy
   
-  attr_accessible :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache
+  attr_accessible :role, :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache
   
   attr_accessor :password, :created_from_oath
   
