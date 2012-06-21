@@ -27,7 +27,9 @@ class ibikecph.Sidebar extends Backbone.View
 		if @draging
 			@draging.remove()
 			field_name = @draging.removeClass('draging pin').attr('class');
-			@app.map.set_pin_at field_name, event.pageX + 1, event.pageY + 24
+			
+			if not @app.map.set_pin_at field_name, event.pageX + 1, event.pageY + 24
+				$('.pin.' + field_name).removeClass 'reset' 
 			@draging = undefined
 
 	initialize: (options) ->

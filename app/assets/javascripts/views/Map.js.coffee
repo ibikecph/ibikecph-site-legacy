@@ -192,7 +192,7 @@ class ibikecph.Map extends Backbone.View
 		x -= offset.left
 		y -= offset.top
 
-		return if x < 0 or y < 0 or x >= width or y >= height
+		return false if x < 0 or y < 0 or x >= width or y >= height
 
 		position = new L.Point x, y
 		location = @map.layerPointToLatLng @map.containerPointToLayerPoint position
