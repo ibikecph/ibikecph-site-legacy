@@ -1,40 +1,35 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
+gem 'jquery-rails'
 gem 'i18n-js'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'cancan', :git => 'git://github.com/emiltin/cancan.git', :branch => 'master'
 gem 'pg'
-
+gem 'carrierwave'
+gem 'rmagick'
+gem 'omniauth', :git => 'git://github.com/emiltin/omniauth.git', :branch => 'master'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'fog'
+gem 'bcrypt-ruby', :require => 'bcrypt'
+gem 'delayed_job_active_record'
+gem 'simple-navigation'
+gem 'will_paginate'
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  gem 'sass-rails'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'sass'
   gem 'uglifier', '>= 1.0.3'
   gem 'eco'
 end
-
-gem 'jquery-rails'
 
 group :production do
   gem 'newrelic_rpm'
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :production, :staging do
+  gem 'workless', '~> 1.0.1'
+end

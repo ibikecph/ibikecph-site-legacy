@@ -1,0 +1,30 @@
+<%= link_to "Edit", [:edit,:account], :class => "button righty" %>
+<h6>Profile</h6>
+
+<label>Name</label>
+<p><%= current_user.name %></p>
+
+<label>Image</label>
+<p><%= image_tag current_user.image.g2.url, :class => 'g2 square' %></p>
+
+<label>About</label>
+<% if current_user.about %>
+	<%= simple_format(current_user.about) %>
+<% else %>
+	<p>(Empty)</p>
+<% end %>
+
+<% if @has_email %>
+<%= link_to 'Change Email',new_email_path, :class => "note button righty" %>
+<label>Email</label>
+<p><%= current_user.email %></p>
+<% end %>
+
+
+<% if @has_password %>
+<%= link_to 'Change Password', edit_password_path, :class => "note button righty" %>
+<label>Password</label>
+<p>&bull;&bull;&bull;&bull;&bull;</p>
+<% end %>
+
+

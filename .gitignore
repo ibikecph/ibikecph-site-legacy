@@ -15,4 +15,8 @@
 /tmp
 
 
+#ignore local uploads
+/public/uploads/*
+
 .DS_Store
+logfile

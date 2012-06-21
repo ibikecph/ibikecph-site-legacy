@@ -11,6 +11,50 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define() do
+ActiveRecord::Schema.define(:version => 20120617175940) do
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider",         :null => false
+    t.string   "uid",              :null => false
+    t.string   "type"
+    t.string   "state"
+    t.string   "token"
+    t.datetime "token_created_at"
+    t.datetime "activated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.string   "queue"
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.text     "about"
+    t.string   "image"
+    t.string   "auth_token"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
+    t.datetime "remember_me_token_saved_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
 
 end

@@ -1,5 +1,18 @@
 RailsOSRM::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+  CA_FILE_PATH = "/etc/ssl/certs" 
+  
+  FACEBOOK_CLIENT_ID = ENV['FACEBOOK_CLIENT_ID']
+  FACEBOOK_CLIENT_SECRET = ENV['FACEBOOK_CLIENT_SECRET']
+  FACEBOOK_CLIENT_OPTIONS = {:ssl => {:ca_path => CA_FILE_PATH} }
+  
+  TWITTER_CLIENT_ID = ENV['TWITTER_CLIENT_ID']
+  TWITTER_CLIENT_SECRET = ENV['TWITTER_CLIENT_SECRET']
+
+  MAIN_DOMAIN = 'stormy-flower-5599.herokuapp.com'
+  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
+  MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
+
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -15,11 +28,11 @@ RailsOSRM::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Generate digests for assets URLs
-  config.assets.digest = true
-
+  config.assets.digest = true  
+  
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
@@ -64,4 +77,7 @@ RailsOSRM::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
 end

@@ -1,0 +1,6 @@
+<h6>Reset Password</h6>
+<p>Instructions for resetting your password will be send to <strong><%= current_user.email %></strong>.</p>
+<p>
+	<%= link_to "Send Instructions", password_resets_path, :method => :post, :class => :submit %>
+</p>
+

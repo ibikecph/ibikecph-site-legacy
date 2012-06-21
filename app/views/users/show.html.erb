@@ -1,0 +1,13 @@
+<%= link_to "Edit", [:edit,:account], :class => "button righty" if current_user == @user %>
+<h6><%= @user.name %><%= ' (you)' if current_user == @user %></h6>
+
+<label>Name</label>
+<p><%= @user.name %></p>
+
+<label>Image</label>
+<p><%= image_tag @user.image.g3.url, :class => 'g3 square' %></p>
+
+<% if @user.about %>
+<label>About</label>
+	<%= simple_format(@user.about) %>
+<% end %>
