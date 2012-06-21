@@ -21,6 +21,7 @@ en:
   duration: time
   arrival: arrival
   link_for_route: Link to Route
+  clear: clear
 
 
   1: first

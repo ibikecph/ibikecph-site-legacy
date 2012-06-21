@@ -3,7 +3,7 @@ class ibikecph.Sidebar extends Backbone.View
 
 	events:
 		'change label input'           : 'fields_updated'
-		'click .pin.reset'             : 'clear'
+		'click .clear'             	   : 'clear'
 		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
 		'mouseup .pin.draging'         : 'drag_pin_end'
 		'click input.link'			   : 'select_all'
@@ -109,10 +109,13 @@ class ibikecph.Sidebar extends Backbone.View
 		return @$("input.#{field_name}").val() or ''
 
 	set_field: (field_name, text) ->
-		if text 
-			$("div.#{field_name}").addClass 'reset'
+
+		#hide/show clear buttons
+		if(text)
+			@$("p.#{field_name}").show()
 		else
-			$("div.#{field_name}").removeClass 'reset'			
+			@$("p.#{field_name}").hide()
+
 		@$(".#{field_name}").val "#{text}"
 
 	set_loading: (field_name, loading) ->

@@ -91,7 +91,6 @@ body{
 		img{
 			float: right;
 			cursor:pointer;
-			margin-bottom:-36px;
 			margin-right:-1px;
 		}
 
@@ -113,16 +112,22 @@ body{
 				font-size:14px;		
 				margin-bottom:10px;	
 				float:left;
-				clear:both;
 				font-weight:bold;
 
+				&.clear{
+					float:right;
+					text-transform:lowercase;
+					color:#F72C34;
+					font-weight:normal;
+					text-decoration:underline;
+					cursor:pointer;
+					display:none;
+				}
+
 			}
 
 
 
-			p:after{
-				content: ':';
-			}
 
 			input[type=text]{
 				padding:10px;
