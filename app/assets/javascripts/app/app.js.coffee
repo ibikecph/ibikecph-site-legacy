@@ -1,17 +1,6 @@
 ibikecph.app = app = {}
 
-$(window).resize ->
-	w = $(window).width()
-	h = $(window).height()
-	m = parseInt($('body').css('margin-left' ), 10) * 2
-	p = parseInt($('body').css('padding-left'), 10) * 2
-	tb = $('#topbar').outerHeight()
-	logo = $("#topbar img").outerWidth()
-	$('body').height(h - p - m)
-	$('#viewport').height h - p - m - tb;
-	$("#topbar").width w - m - p;
-	$("#topbar .label").width(Math.floor((w - m - p  - logo) / 2 - 20));
-	$("#topbar input").width($("#topbar .label").width() - $("#topbar .pin").width() - 30)
+
 
 
 

@@ -221,7 +221,6 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rails (= 3.2.6)
-  sass
   rmagick
   sass-rails
   simple-navigation

@@ -47,20 +47,23 @@ body{
 
 	#topbar{
 
-		position: relative;
+		position: absolute;
+		z-index:10;
+		width:350px;
+		padding:10px;
+		margin:10px;
+
+		.actions{
+			float:left;
+		}
+
 		.time{
 			opacity: .8;
-			display:none;
 			width:184px;
-			background:black;
 			height:54px;
 			padding:10px;
-			position: absolute;
-			top:66px;
 			z-index:99;
-			left:50%;
-			margin-left:-102px;
-			background:url('/assets/clock.png');
+			float:left;
 			p{
 				text-transform:capitalize;
 				font-size:12px;
@@ -99,7 +102,6 @@ body{
 			}
 		}
 
-		height:68px;
 
 		img{
 			float: left;
@@ -174,31 +176,6 @@ body{
 		height:100%;
 		float:left;
 		clear:none;
-
-		.actions{
-			display:none;
-			position: absolute;
-			bottom:10px;
-			left:10px;
-			a{
-				float:left;
-				display: inline-block;
-				background-color: #fff;
-				color: #c00;
-				font-size:12px;
-				color:#c00;
-				margin-right:10px;
-				padding:10px;
-				border-radius:5px;
-				text-decoration:none;
-				font-weight:bold;
-				border:2px solid #888;
-
-				&:hover{
-					color:#000;
-				}
-			}			
-		}
 
 
 

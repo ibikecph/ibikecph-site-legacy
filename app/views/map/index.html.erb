@@ -1,12 +1,18 @@
 <div id="topbar">
+
+
+	<img src="/assets/ibikecph.png" alt="I BIKE CPH">
 	<div class="label">
-		<div class="pin from"></div>
+		<label><%=t :from %></label>
 		<input type="text" class="from"  placeholder='<%=t :from %>' title='<%=t :from %>'>
 	</div>
-	<img src="/assets/ibikecph.png" alt="I BIKE CPH">
 	<div class="label" class="last">
-		<div class="pin to"></div>
+		<label><%=t :to %></label>
 		<input type="text" class="to" placeholder='<%=t :to %>' title='<%=t :to %>'>
+	</div>
+	<div class="actions">
+		<a class='permalink' href="#" ><%=t :generate_link %></a>	
+		<a class='guide' href="#" ><%=t :route_description %></a>	
 	</div>
 	<div class="time">
 		<p class='distance'><%=t :distance %>: <span class="count">23 km</span></p>
@@ -17,8 +23,4 @@
 
 <div id="viewport">
 	<div id="map"></div>
-	<div class="actions">
-			<a class='permalink' href="#" ><%=t :generate_link %></a>	
-			<a class='guide' href="#" ><%=t :route_description %></a>	
-	</div>
 </div>
