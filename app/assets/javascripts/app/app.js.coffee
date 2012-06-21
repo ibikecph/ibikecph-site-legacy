@@ -1,6 +1,7 @@
 ibikecph.app = app = {}
 
-
+$(window).bind 'resize', ->
+	$("div.instructions").height $(window).height() - $('#topbar').outerHeight(true) - 35
 
 
 

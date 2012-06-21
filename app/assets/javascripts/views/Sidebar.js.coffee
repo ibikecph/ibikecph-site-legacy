@@ -15,21 +15,30 @@ class ibikecph.Sidebar extends Backbone.View
 	instructions : (event) ->
 		event.preventDefault()
 
+		if $('div.instructions').length
+			$('div.instructions').remove();
+			return
+
 		if @app.info.instructions.length
 			instructions = $("<div>", class : 'instructions')
-			@app.info.instructions.each (model)->
-				instructions.append $("<div>", class : 'instruction').text(ibikecph.util.instruction_string(model.toJSON()))
+			@app.info.instructions.each (model, index)->
+				if index % 2 is 0 then odd = 'even' else odd = 'odd'
+
+				instructions.append $("<div>", class : 'instruction ' + odd).text(ibikecph.util.instruction_string(model.toJSON()))
 			$("div.instructions").remove();
 			$("body").append(instructions);
+			$(window).trigger 'resize';
 
 
 	colapse : (event) ->
 		$(@el).width 16
 		$(@el).height 16
+		$("div.instructions").hide()
 		$(event.target).removeClass('close').addClass 'expand'
 
 	expand : (event) ->
 		$(@el).attr 'style', ''
+		$("div.instructions").show()
 		$(event.target).removeClass('expand').addClass 'close'
 
 	select_all: (event) ->
@@ -100,6 +109,8 @@ class ibikecph.Sidebar extends Backbone.View
 
 	waypoints_changed: ->
 		url = window.location.protocol + '//' + window.location.host + '#!/' + @model.waypoints.to_code()
+
+		$('div.instructions').remove()
 
 		if @model.instructions.length
 			$('input.link').val url

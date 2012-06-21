@@ -30,8 +30,19 @@ body{
 		box-shadow:0px 1px 1px rgba(0,0,0,.5);
 		overflow:scroll;
 		position:absolute;
-		bottom:10px;
+		bottom:0px;
 		background:white;
+
+		.instruction{
+			background: #eee;
+			padding: 6px;
+			font-size:15px;
+			line-height:18px;
+			&.even{
+				background: white;
+			}
+		}
+
 
 	}
 
