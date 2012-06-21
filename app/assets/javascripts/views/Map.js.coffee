@@ -1,5 +1,7 @@
 class ibikecph.Map extends Backbone.View
 
+
+	bounds: true
 	initialize: ->
 		@map          = new L.Map @el.id, zoomControl : false
 		@dragging_pin = false
@@ -218,7 +220,9 @@ class ibikecph.Map extends Backbone.View
 			@invalid_route.setLatLngs []
 
 			#autozoom
-			#@map.fitBounds new L.LatLngBounds(latlngs).pad(1) unless @dragging_pin
+			if @bounds && window.location.hash
+				@map.fitBounds new L.LatLngBounds(latlngs).pad(.05) unless @dragging_pin
+			@bounds = false
 
 		else
 			@map.removeLayer @current_route

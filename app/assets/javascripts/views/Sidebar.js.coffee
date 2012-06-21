@@ -6,11 +6,11 @@ class ibikecph.Sidebar extends Backbone.View
 		'click .pin.reset'             : 'clear'
 		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
 		'mouseup .pin.draging'         : 'drag_pin_end'
-		'click input.link'			   : 'select_url'
+		'click input.link'			   : 'select_all'
 		'change input.link'			   : 'waypoints_changed'
 
 
-	select_url: (event) ->
+	select_all: (event) ->
 		$(event.target).select()
 
 	drag_pin_start: (event) ->
@@ -79,7 +79,7 @@ class ibikecph.Sidebar extends Backbone.View
 	waypoints_changed: ->
 		url = window.location.protocol + '//' + window.location.host + '#!/' + @model.waypoints.to_code()
 
-		if @model.waypoints.length > 1
+		if @model.instructions.length
 			$('input.link').val url
 			$('.label.text').show()
 		else

@@ -64,9 +64,11 @@ body{
 
 		.time{
 			opacity: .8;
-			width:184px;
+			width:346px;
 			height:54px;
-			padding:10px;
+			margin-top:10px;
+			display:none;
+			padding:2px;
 			z-index:99;
 			float:left;
 			p{
@@ -99,6 +101,7 @@ body{
 				background:#eee;
 				padding:10px;
 				width:330px;
+				margin-top:10px;
 				display:none;
 				input{
 					width:309px !important;
