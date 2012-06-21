@@ -85,13 +85,21 @@ body{
 			}
 		}
 
-		
+		.disclaimer{
+			color:#aaa;
+			float:left;
+			width:286px;
+			font-size:12px;
+			margin-top:18px;
+			margin-left:2px;
+		}
 
 
 		img{
 			float: right;
 			cursor:pointer;
 			margin-right:-1px;
+			margin-top:12px;
 		}
 
 		.label{
