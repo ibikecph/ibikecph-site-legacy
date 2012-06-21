@@ -52,6 +52,11 @@ body{
 		width:350px;
 		padding:10px;
 		margin:10px;
+		border:2px solid #EEEEEE;
+		border-radius:5px;
+		box-shadow:0px 1px 1px rgba(0,0,0,.5);
+		opacity:.95;
+		top:0px;
 
 		.actions{
 			float:left;
@@ -78,78 +83,49 @@ body{
 			}
 		}
 
-		.pin{
-			width:25px;
-			height:43px;
-			float:right;
-			margin-top:2px;
-			margin-left:5px;
-			margin-right:1px;
-			border-radius:5px;
-			cursor:move;
-
-			&.from{
-				background:url('/assets/images/marker-start.png') center center no-repeat;
-			}
-
-			&.to{
-				background:url('/assets/images/marker-end.png') center center no-repeat;
-			}
-
-			&.reset{
-				background:url('/assets/images/marker-remove.png') center center no-repeat;	
-				cursor:pointer;				
-			}
-		}
+		
 
 
 		img{
-			float: left;
-
-			padding-top:4px;
-			padding-left:6px;
-			width:77px;
+			float: right;
 			cursor:pointer;
 		}
 
 		.label{
 
-
-
-
 			&.last{
 			}
 
 			p{
-				display:none;
-				margin-left:10px;
-				font-size:15px;		
+				font-size:16px;		
 				margin-bottom:10px;	
 				float:left;
+				clear:both;
+
 			}
+
+			p:after{
+				content: ':';
+			}
+
 			input[type=text]{
 				padding:10px;
-				width:490px;
-				font-size:18px;
+				font-size:16px;
 				line-height:20px;
 				border:2px solid #eee;
 				border-radius:5px;
-				clear:none;
+				clear:both;
 				float:left;
+				width:326px;
 			}
 
 
-
-			margin-top:5px;
+			margin-bottom:20px;
 			float:left;
-			position: relative;
-			margin-left:5px;
-			padding:5px;
 			border-radius: 5px;
-			background:#eee;
+			clear:left;
 
 		}
-		border-bottom:none;
 		float:left;
 		clear:none;
 
