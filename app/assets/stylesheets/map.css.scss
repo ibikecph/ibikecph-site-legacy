@@ -143,13 +143,15 @@ body{
 
 				&.clear{
 					float:right;
-					text-transform:lowercase;
+					text-transform:uppercase;
 					color:#F72C34;
 					font-weight:normal;
 					text-decoration:underline;
 					cursor:pointer;
 					display:none;
 					margin-right:2px;
+					font-size:10px;
+					margin-top:4px;
 				}
 
 			}
