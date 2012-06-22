@@ -1,8 +1,4 @@
-<div class="menu">
-	<%= render_navigation :context => :blog %>
+<div class="dialog g8">
+	<h1>New Blog Entry</h1>
+	<%= render :partial => 'form', :locals => { :url => blog_entry_index_path } %>
 </div>
-<br class="clear">
-<br>
-
-<h1>New Blog Entry</h1>
-<%= render :partial => 'form', :locals => { :url => blog_entry_index_path } %>

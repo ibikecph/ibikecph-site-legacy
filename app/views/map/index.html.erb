@@ -1,36 +1,35 @@
-<div id="topbar">
-
-	<div class="close control"></div>
-
-	<div class="label">
-		<label>
-			<p><%=t :from %></p><p class="clear from"><%=t :clear%></p>
-			<input type="text" class="from"  title='<%=t :from %>'>
-		</label>
-	</div>
-	<div class="label">
-		<label>
-			<p><%=t :to %></p><p class="clear to"><%=t :clear%></p>
-			<input type="text" class="to"  title='<%=t :to %>'>
-		</label>
-	</div>
-
-
-	<div class="time">
-		<p class='distance'><%=t :distance %>: <span class="count">23 km</span></p>
-		<p class='duration'><%=t :duration %>:<span class="count">13 minutter</span></p>
-		<p class='arrival'><%=t :arrival %>: <span class="count">13 minutter</span></p>
-	</div>
-	<div class="label text">
-		<label>
-			<p><%=t :link_for_route %></p> <p class="instructions"><%=t :route_instructions %></p>
-			<input type="text" class="link">
-		</label>
-	</div>
-		<p class="disclaimer">Dette er en alpha version, leveret af Københavns Kommune, projektet er open-source og kan hentes på Github.</p>
-		<img src="/assets/ibikecph.png" alt="I BIKE CPH" class="logo">
-</div>
-
 <div id="viewport">
+	<div id="topbar">
+		<div class="close control"></div>
+		
+		<div class="label">
+			<label>
+				<p><%=t :from %></p><p class="clear from"><%=t :clear%></p>
+				<input type="text" class="from"  title='<%=t :from %>'>
+			</label>
+		</div>
+		<div class="label">
+			<label>
+				<p><%=t :to %></p><p class="clear to"><%=t :clear%></p>
+				<input type="text" class="to"  title='<%=t :to %>'>
+			</label>
+		</div>
+
+
+		<div class="time">
+			<p class='distance'><%=t :distance %>: <span class="count">23 km</span></p>
+			<p class='duration'><%=t :duration %>:<span class="count">13 minutter</span></p>
+			<p class='arrival'><%=t :arrival %>: <span class="count">13 minutter</span></p>
+		</div>
+		<div class="label text">
+			<label>
+				<p><%=t :link_for_route %></p> <p class="instructions"><%=t :route_instructions %></p>
+				<input type="text" class="link">
+			</label>
+		</div>
+			<p class="disclaimer">Dette er en alpha version, leveret af Københavns Kommune, projektet er open-source og kan hentes på Github.</p>
+			<img src="/assets/ibikecph.png" alt="I BIKE CPH" class="logo">
+	</div>
 	<div id="map"></div>
 </div>
+

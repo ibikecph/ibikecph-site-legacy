@@ -1,9 +1,9 @@
 $sat: 0;
 $hue: 25;
-$color: hsl( 0, 60%, 50% );
+$color: hsl( 0, 70%, 50% );
 $hover: hsl( 10, 50%, 40% );
 $error: hsl( 0, 70%, 50% );
-$highlight: hsl( 77, 60%, 50% );
+$highlight: hsl( 80, 60%, 60% );
 $text_color: hsl( $hue, 10%, 10% );
 $note_color: hsl( $hue, 10%, 60% );
 $black: hsl( $hue, $sat, 10% );
@@ -15,11 +15,92 @@ $light: hsl( $hue, $sat, 97% );
 $back: hsl( $hue, $sat, 100% );
 $link: hsl( 230, 30%, 50% );
 
+$columns: 12;
+$column: 50px;
+$gutter: 30px;
+$half_gutter: 0.5*$gutter;
+$image_ratio: 2.0/3.0;
+$avatar: $column;
+$width: $columns*$column+($columns - 1)*$gutter;
 $border_width: 1px;
-
+$columns_12: 12*$column+11*$gutter;
+$columns_10: 10*$column+9*$gutter;
+$columns_8: 8*$column+7*$gutter;
+$columns_6: 6*$column+5*$gutter;
+$columns_5: 5*$column+4*$gutter;
+$columns_4: 4*$column+3*$gutter;
+$columns_3: 3*$column+2*$gutter;
+$columns_3: 3*$column+2*$gutter;
+$columns_2: 2*$column+1*$gutter;
+$columns_12_pad: 12*$column+11*$gutter - 2*$gutter;
+$columns_10_pad: 10*$column+9*$gutter - 2*$gutter;
+$columns_8_pad: 8*$column+7*$gutter - 2*$gutter;
+$columns_6_pad: 6*$column+5*$gutter - 2*$gutter;
+$columns_5_pad: 5*$column+4*$gutter - 2*$gutter;
+$columns_4_pad: 4*$column+3*$gutter - 2*$gutter;
+$columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
+$columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
+$columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 
 * {
 	padding: 0px;
 	margin: 0px;
 	font-family: 'Helvetica', 'Arial', sans-serif;
+}
+a {
+    color: $color;
+    &:hover {
+        color: $hover;
+    }
+}
+#header {
+    line-height: 1.2em;
+    padding: 0px $gutter 0px $gutter;
+    background-color: $dark;
+    color: white;
+    font-size: 0.9em;
+    overflow:hidden;
+    position: relative;
+    a {
+        color: white;
+        &:hover {
+            color: white;
+        }
+    }
+}
+.menu {
+    margin-left: -$half-gutter;
+    ul {
+        list-style-type: circle;
+        li {
+            float: left;
+            display: inline-block;
+            margin-right: 5px;
+            &.selected, &.selected:hover {
+                background-color: $color;
+            }
+            &:hover {
+                background-color: $darkish;
+            }
+            a {
+                line-height: 1.5em;
+                text-decoration: none;
+                padding: $half-gutter;
+            }
+        }
+    }
+    &.login {
+        float: right;
+    }
+}
+.note {
+    color: $note_color;
+    font-size: 0.8em;
+}
+hr {
+    border-color: $light;
+    margin-bottom: $half_gutter;
+}
+.clear {
+    clear: both;
 }

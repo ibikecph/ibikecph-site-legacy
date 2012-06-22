@@ -2,7 +2,7 @@ class BlogController < ApplicationController
   
   before_filter :find_blog_entry, :except => [:index,:archive,:new,:create]
   before_filter :authorize, :except => [:index,:show]
-  before_filter :find_blog_entries, :only => [:index,:archive]
+  before_filter :find_blog_entries, :only => [:index,:show,:archive]
   
   def index
   end
@@ -60,7 +60,7 @@ class BlogController < ApplicationController
   end
   
   def find_blog_entries
-    @blog_entries = BlogEntry.all
+    @blog_entries = BlogEntry.order('created_at desc')
   end
   
 end

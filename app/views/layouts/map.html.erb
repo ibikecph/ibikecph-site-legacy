@@ -27,7 +27,7 @@ or see http://www.gnu.org/licenses/agpl.txt.
 	<title>I Bike Cph</title>
 </head>
 <body class="base-font not-selectable">
+	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
 	<%= yield %>
-	<%= render :partial => 'layouts/user_voice' %>
 </body>
 </html>

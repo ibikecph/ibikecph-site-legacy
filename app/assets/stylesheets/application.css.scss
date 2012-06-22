@@ -1,54 +1,60 @@
 @import "base.css.scss";
 
-$columns: 12;
-$column: 50px;
-$gutter: 30px;
-$half_gutter: 0.5*$gutter;
-$image_ratio: 2.0/3.0;
-$avatar: $column;
-$width: $columns*$column+($columns - 1)*$gutter;
-$columns_12: 12*$column+11*$gutter;
-$columns_10: 10*$column+9*$gutter;
-$columns_8: 8*$column+7*$gutter;
-$columns_6: 6*$column+5*$gutter;
-$columns_5: 5*$column+4*$gutter;
-$columns_4: 4*$column+3*$gutter;
-$columns_3: 3*$column+2*$gutter;
-$columns_3: 3*$column+2*$gutter;
-$columns_2: 2*$column+1*$gutter;
-$columns_12_pad: 12*$column+11*$gutter - 2*$gutter;
-$columns_10_pad: 10*$column+9*$gutter - 2*$gutter;
-$columns_8_pad: 8*$column+7*$gutter - 2*$gutter;
-$columns_6_pad: 6*$column+5*$gutter - 2*$gutter;
-$columns_5_pad: 5*$column+4*$gutter - 2*$gutter;
-$columns_4_pad: 4*$column+3*$gutter - 2*$gutter;
-$columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
-$columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
-$columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
-
 body {
     line-height: 1.3em;
 }
-
-div.content {
+div#content {
+    width: $columns_12;
     padding: $gutter;
-    text-align: center;
 }
-a {
-    color: $link;
+div#footer {
+    clear: both;
+    height: $gutter;
 }
-
-img {
+div.gr {
+    float: left;
+}
+div {
+    &.g12, &.g8, &.g6, &.g4, &.g3, &.g2, &.g1  {
+        margin-right: $gutter;
+        float: left;
+    }
     &.g12 {
         width: $columns_12;
-        height: $columns_12 * $image_ratio;
+    }
+    &.g8 {
+        width: $columns_8;
+    }
+    &.g6 {
+        width: $columns_6;
+    }
+    &.g4 {
+        width: $columns_4;
+    }
+    &.g3 {
+        width: $columns_3;
+    }
+    &.g2 {
+        width: $columns_2;
+    }
+    &.g1 {
+        width: $column;
+    }
+    &.ge {
+        margin-right: 0;
+    }
+}
+img {
+    &.g12 {
+        max-width: $columns_12;
+        max-height: $columns_12;
         &.square {
             height: $columns_12
         }
     }
     &.g8 {
-        width: $columns_8;
-        height: $columns_8 * $image_ratio;
+        max-width: $columns_8;
+        max-height: $columns_8;
         &.inside {
             width: $columns_8 - 2*$gutter;
             height: auto;
@@ -58,8 +64,8 @@ img {
         }
     }
     &.g6 {
-        width: $columns_6;
-        height: $columns_6 * $image_ratio;
+        max-width: $columns_6;
+        max-height: $columns_6;
         &.inside {
             width: $columns_6 - 2*$gutter;
             height: auto;
@@ -69,8 +75,8 @@ img {
         }
     }
     &.g5 {
-        width: $columns_5;
-        height: $columns_5 * $image_ratio;
+        max-width: $columns_5;
+        max-height: $columns_5;
         &.inside {
             width: $columns_5 - 2*$gutter;
             height: auto;
@@ -80,8 +86,8 @@ img {
         }
     }
     &.g4 {
-        width: $columns_4;
-        height: $columns_4 * $image_ratio;
+        max-width: $columns_4;
+        max-height: $columns_4;
         &.inside {
             width: $columns_4 - 2*$gutter;
             height: auto;
@@ -91,22 +97,22 @@ img {
         }
     }
     &.g3 {
-        width: $columns_3;
-        height: $columns_3 * $image_ratio;
+        max-width: $columns_3;
+        max-height: $columns_3;
         &.square {
             height: $columns_3
         }
     }
     &.g2 {
-        width: $columns_2;
-        height: $columns_2 * $image_ratio;
+        max-width: $columns_2;
+        max-height: $columns_2;
         &.square {
             height: $columns_2
         }
     }
     &.g1 {
-        width: $column;
-        height: $column * $image_ratio;
+        max-width: $column;
+        max-height: $column;
         &.square {
             height: $column
         }
@@ -116,78 +122,6 @@ img {
         width: $avatar;
     }
 }
-
-.note {
-    color: $note_color;
-    font-size: 0.8em;
-}
-
-.ln {
-    display:none;
-    position: absolute;
-    bottom:60px;
-    right:35px;
-    float:left;
-    display: inline-block;
-    background-color: #fff;
-    color: #c00;
-    font-size:12px;
-    color:#c00;
-    margin-right:10px;
-    padding:10px;
-    border-radius:5px;
-    text-decoration:none;
-    font-weight:bold;
-    border:2px solid #888;
-}
-div.gr {
-    div {
-        &.g12, &.g8, &.g6, &.g4, &.g3, &.g2, &.g1  {
-            margin-right: $gutter;
-            float: left;
-            &.center {
-                margin: auto;
-                float: none;
-            }
-        }
-        &.g12 {
-            width: $columns_12;
-        }
-        &.g8 {
-            width: $columns_8;
-        }
-        &.g6 {
-            width: $columns_6;
-        }
-        &.g4 {
-            width: $columns_4;
-        }
-        &.g3 {
-            width: $columns_3;
-        }
-        &.g2 {
-            width: $columns_2;
-        }
-        &.g1 {
-            width: $column;
-        }
-        &.ge {
-            margin-right: 0;
-        }
-        &.g4.sidebar {
-            width: (4*$column+3*$gutter) - 2*$gutter;
-        }
-        &.g6.sidebar {
-            width: (6*$column+5*$gutter) - 2*$gutter;
-        }
-        &.g8.sidebar {
-            width: (8*$column+7*$gutter) - 2*$gutter;
-        }
-        &.g12.sidebar {
-            width: (12*$column+11*$gutter) - 2*$gutter;
-        }
-    }
-} 
 label, .chars_remaining {
     font-size: 0.8em;
     font-weight: bold;
@@ -199,22 +133,18 @@ textarea {
     border: 1px solid $lightish;
     padding: 2px;
 }
-
 .form_fields {
     margin-left: 20px;
     margin-bottom: 20px;
 }
-
 div#form_errors, div#form_notice {
     color: white;
     padding: 10px;
     font-size: 1.2em;
 }
-
 div#form_errors, div#form_notice {
     margin-bottom: 1em;
 }
-
 div#form_notice {
     background-color: $highlight;
 }
@@ -256,11 +186,9 @@ input.submit {
 .submit:hover, a.submit:hover a.on.submit:hover {
     background-color: $hover;
 }
-
 p {
     margin-bottom: 0.5em;
 }
-
 .field_with_errors {
     color: $error;
     display: inline;
@@ -290,10 +218,12 @@ span.too_long {
 input {
     font-size: 1em;
 }
-
 h1, h2 {
     color: $color;
     margin-bottom: 0.3em;
+    a {
+        text-decoration: none;
+    }
 }
 h1 {
     font-size: 1.3em;
@@ -302,14 +232,11 @@ h1 {
 h2 {
     font-size: 1.1em;
 }
-
 #flash {
     color: white;
-    padding: $half_gutter;
-    margin-bottom: $half_gutter;
+    padding: $half_gutter $gutter;
     font-weight: bold;
     border: 0;
-    border-radius: 4px;
     &.notice {
         background-color: $highlight;
     }
@@ -319,9 +246,6 @@ h2 {
     &.empty {
         background-color: transparent;
     }   
-}
-.clear {
-    clear: both;
 }
 .lefty {
     float: left;
@@ -341,63 +265,17 @@ h2 {
     float: right;
     margin-left: $half_gutter;
 }
-
 div.dialog {
-    text-align: left;
-    width: $columns_8;
-    display: inline-block;
+    float: none;
     margin: auto;
     background-color: $light;
-    padding: $gutter - 2*$border_width;
+    padding: $half_gutter - 2*$border_width;
     border-radius: 4px;
     margin-bottom: $half_gutter;
     border: $border_width solid $lightish;
 }
 div.oauth_providers {
     margin-top: $gutter;
-}
-hr {
-    border-color: $light;
-    margin-bottom: $half_gutter;
-}
-
-
-#header {
-    padding: 2px $gutter 0px $gutter;
-    background-color: $light;
-    font-size: 0.9em;
-    overflow:hidden;
-    border-bottom: $border_width solid $lightish;
-    position: relative;
-}
-.menu {
-    ul {
-        margin: 0;
-        list-style-type: circle;
-        li {
-            float: left;
-            margin: 0;
-            margin-right: 0px;
-            border-radius: 0 0 4px 4px;
-            display: inline-block;
-            padding-top: 2px;
-            padding-bottom: 3px;
-            padding-left: 0px;
-            padding-right: 15px;
-            margin-right: 5px;
-            &:hover {
-            }
-            &.selected {
-                font-weight: bold;
-            }
-        }
-    }
-    &.login {
-        float: right;
-    }
-}
-h3 {
-    margin-top: 1em;
 }
 div.sidebar {
     float: right;
@@ -420,38 +298,75 @@ table {
     }
 }
 td, th {
-	text-align: left;
-	vertical-align: top;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	&+td,&+th {
-		padding-left: 0.5*$gutter;
-	}
+    text-align: left;
+    vertical-align: top;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    &+td,&+th {
+        padding-left: 0.5*$gutter;
+    }
 }
 th {
-	font-weight: bold;
+    font-weight: bold;
 }
 td.buttons, th.buttons {
-	white-space: nowrap;
-	&.last {
-		text-align: right;
-	}
+    white-space: nowrap;
+    &.last {
+        text-align: right;
+    }
+}
+.button, .buttons a {
+    display: inline-block;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-decoration: none;
+    padding: 2px 4px 2px 4px;
+    line-height: 1.2em;
+    border-radius: 2px;
+    background-color: $color;
+    color: white;
+    &.add_idea {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: 4px 8px;
+        font-size: 1.8em;
+        border-radius: 4px;
+        color: white;
+    }
+}
+.button:hover, td.buttons a:hover, div.buttons a:hover, p.buttons a:hover {
+    background-color: $hover;
+}
+div.buttons, p.buttons {
+    font-size: 1.1em;
+    margin-bottom: 0.5em;
+}
+a.button:hover {
+    background-color: $hover;
 }
 td.note {
-	padding-top:0.4em;
+    padding-top:0.4em;
 }
 *+.comments {
     margin-top: $gutter;
 }
 .comments {
     table {
+        font-size: 0.9em;
         float: left;
         width: 100%;
     }
 }
 .new_comment {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 div.blog {
     margin-bottom: $gutter;
+}
+ul.blog_entries {
+    li + li {
+        margin-top: 0.5em;
+    }
 }

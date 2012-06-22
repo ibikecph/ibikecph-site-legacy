@@ -1,8 +1,13 @@
-<div class="menu">
-	<%= render_navigation :context => :blog %>
+<div class="gr">
+	<div class="g8">
+		<%= render :partial => 'blog_entry', :collection => @blog_entries %>
+	</div>
+	<div class="g1">&nbsp;</div>
+	<div class="g3 ge">
+		<div class="buttons righty">
+			<%= link_to "New Entry",  new_blog_entry_path %>
+		</div>
+		<br class="clear"></br>
+		<%= render 'sidebar' %>
+	</div>
 </div>
-<br class="clear">
-<br>
-
-<%= render :partial => 'blog_entry', :collection => @blog_entries %>
-

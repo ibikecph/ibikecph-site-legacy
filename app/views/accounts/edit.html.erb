@@ -1,3 +1,4 @@
+<div class="dialog g6">
 <h1>Edit Profile</h1>
 <%= errors_for( current_user ).html_safe %>
 <%= form_for current_user, :url => account_path, :html => {:multipart => true} do |f| %>
@@ -18,3 +19,4 @@
 	</p>
 	<p><%= f.submit 'Save Profile', :class => :submit %></p>
 <% end %>
+</div>
