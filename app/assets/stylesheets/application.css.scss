@@ -5,7 +5,6 @@ $column: 50px;
 $gutter: 30px;
 $half_gutter: 0.5*$gutter;
 $image_ratio: 2.0/3.0;
-$sidebar_padding: 20px;
 $avatar: $column;
 $width: $columns*$column+($columns - 1)*$gutter;
 $columns_12: 12*$column+11*$gutter;
@@ -17,23 +16,23 @@ $columns_4: 4*$column+3*$gutter;
 $columns_3: 3*$column+2*$gutter;
 $columns_3: 3*$column+2*$gutter;
 $columns_2: 2*$column+1*$gutter;
-$columns_12_pad: 12*$column+11*$gutter - 2*$sidebar_padding;
-$columns_10_pad: 10*$column+9*$gutter - 2*$sidebar_padding;
-$columns_8_pad: 8*$column+7*$gutter - 2*$sidebar_padding;
-$columns_6_pad: 6*$column+5*$gutter - 2*$sidebar_padding;
-$columns_5_pad: 5*$column+4*$gutter - 2*$sidebar_padding;
-$columns_4_pad: 4*$column+3*$gutter - 2*$sidebar_padding;
-$columns_3_pad: 3*$column+2*$gutter - 2*$sidebar_padding;
-$columns_3_pad: 3*$column+2*$gutter - 2*$sidebar_padding;
-$columns_2_pad: 2*$column+1*$gutter - 2*$sidebar_padding;
+$columns_12_pad: 12*$column+11*$gutter - 2*$gutter;
+$columns_10_pad: 10*$column+9*$gutter - 2*$gutter;
+$columns_8_pad: 8*$column+7*$gutter - 2*$gutter;
+$columns_6_pad: 6*$column+5*$gutter - 2*$gutter;
+$columns_5_pad: 5*$column+4*$gutter - 2*$gutter;
+$columns_4_pad: 4*$column+3*$gutter - 2*$gutter;
+$columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
+$columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
+$columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 
 body {
-    padding: $half_gutter;
+    line-height: 1.3em;
 }
 
 div.content {
-	width: $columns_10;
-    margin: auto;
+    padding: $gutter;
+    text-align: center;
 }
 a {
     color: $link;
@@ -51,7 +50,7 @@ img {
         width: $columns_8;
         height: $columns_8 * $image_ratio;
         &.inside {
-            width: $columns_8 - 2*$sidebar_padding;
+            width: $columns_8 - 2*$gutter;
             height: auto;
         }
         &.square {
@@ -62,7 +61,7 @@ img {
         width: $columns_6;
         height: $columns_6 * $image_ratio;
         &.inside {
-            width: $columns_6 - 2*$sidebar_padding;
+            width: $columns_6 - 2*$gutter;
             height: auto;
         }
         &.square {
@@ -73,7 +72,7 @@ img {
         width: $columns_5;
         height: $columns_5 * $image_ratio;
         &.inside {
-            width: $columns_5 - 2*$sidebar_padding;
+            width: $columns_5 - 2*$gutter;
             height: auto;
         }
         &.square {
@@ -84,7 +83,7 @@ img {
         width: $columns_4;
         height: $columns_4 * $image_ratio;
         &.inside {
-            width: $columns_4 - 2*$sidebar_padding;
+            width: $columns_4 - 2*$gutter;
             height: auto;
         }
         &.square {
@@ -176,20 +175,20 @@ div.gr {
             margin-right: 0;
         }
         &.g4.sidebar {
-            width: (4*$column+3*$gutter) - 2*$sidebar_padding;
+            width: (4*$column+3*$gutter) - 2*$gutter;
         }
         &.g6.sidebar {
-            width: (6*$column+5*$gutter) - 2*$sidebar_padding;
+            width: (6*$column+5*$gutter) - 2*$gutter;
         }
         &.g8.sidebar {
-            width: (8*$column+7*$gutter) - 2*$sidebar_padding;
+            width: (8*$column+7*$gutter) - 2*$gutter;
         }
         &.g12.sidebar {
-            width: (12*$column+11*$gutter) - 2*$sidebar_padding;
+            width: (12*$column+11*$gutter) - 2*$gutter;
         }
     }
 } 
-label {
+label, .chars_remaining {
     font-size: 0.8em;
     font-weight: bold;
     color: $text_color;
@@ -267,9 +266,8 @@ p {
     display: inline;
 }
 span.chars_remaining {
-    font-size: 1em;
     color: $note_color;
-    display: inline;
+    font-weight: normal;
 }
 span.too_long {
     color: $error;
@@ -283,7 +281,7 @@ span.too_long {
 #error_explanation ul {
     padding: 0;
     margin: 0;
-    list-style-type: inside;
+    list-style-position: inside;
 }
 #error_explanation ul li {
     color: white;
@@ -293,15 +291,21 @@ input {
     font-size: 1em;
 }
 
-h6 {
+h1, h2 {
     color: $color;
-    font-size: 1em;
     margin-bottom: 0.3em;
+}
+h1 {
+    font-size: 1.3em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.1em;
 }
 
 #flash {
     color: white;
-    padding: $sidebar_padding;
+    padding: $half_gutter;
     margin-bottom: $half_gutter;
     font-weight: bold;
     border: 0;
@@ -339,16 +343,18 @@ h6 {
 }
 
 div.dialog {
+    text-align: left;
+    width: $columns_8;
     display: inline-block;
     margin: auto;
     background-color: $light;
-    padding: $sidebar_padding - 2*$border_width;
+    padding: $gutter - 2*$border_width;
     border-radius: 4px;
     margin-bottom: $half_gutter;
     border: $border_width solid $lightish;
 }
 div.oauth_providers {
-    margin-top: 2*$gutter;
+    margin-top: $gutter;
 }
 hr {
     border-color: $light;
@@ -357,78 +363,95 @@ hr {
 
 
 #header {
-    width: $columns_10;
-	text-align: left;
+    padding: 2px $gutter 0px $gutter;
+    background-color: $light;
     font-size: 0.9em;
     overflow:hidden;
-    .menu {
-        margin-bottom: $gutter;
-        ul {
+    border-bottom: $border_width solid $lightish;
+    position: relative;
+}
+.menu {
+    ul {
+        margin: 0;
+        list-style-type: circle;
+        li {
+            float: left;
             margin: 0;
-            list-style-type: none;
-            li {
-                float: left;
-                margin: 0;
-                margin-right: 0px;
-                border-radius: 0 0 4px 4px;
-                display: inline-block;
-                padding-top: 2px;
-                padding-bottom: 3px;
-                padding-left: 0px;
-                padding-right: 15px;
-                margin-right: 5px;
-                &:hover {
-                }
-                &.selected {
-                    font-weight: bold;
-                }
+            margin-right: 0px;
+            border-radius: 0 0 4px 4px;
+            display: inline-block;
+            padding-top: 2px;
+            padding-bottom: 3px;
+            padding-left: 0px;
+            padding-right: 15px;
+            margin-right: 5px;
+            &:hover {
+            }
+            &.selected {
+                font-weight: bold;
             }
         }
     }
-
-    .login {
+    &.login {
         float: right;
-        &.note {
-            color: $medium;
-        }
-        &.a {
-            color: $color;
-        }
-        &.a:hover {
-            color: $hover;
-        }
     }
 }
 h3 {
     margin-top: 1em;
 }
-
 div.sidebar {
     float: right;
     width: $columns_3;
     padding-left: $gutter;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	margin-bottom: 0.5em;
-	width: 100%;
-	td.avatar {
-		width: $avatar;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 0.5em;
+    width: 100%;
+    td.avatar {
+        width: $avatar;
+    }
+    p {
+        margin: 0;
+    }
+    tr+tr {
+        border-top: 1px solid $light;
+    }
+}
+td, th {
+	text-align: left;
+	vertical-align: top;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	&+td,&+th {
+		padding-left: 0.5*$gutter;
 	}
-	p {
-		margin: 0;
+}
+th {
+	font-weight: bold;
+}
+td.buttons, th.buttons {
+	white-space: nowrap;
+	&.last {
+		text-align: right;
 	}
-	tr+tr {
-		border-top: 1px solid $light;
-	}
+}
+td.note {
+	padding-top:0.4em;
 }
 *+.comments {
-	margin-top: $gutter;
+    margin-top: $gutter;
 }
 .comments {
-	table {
-		float: left;
-		width: 100%;
-	}
+    table {
+        float: left;
+        width: 100%;
+    }
+}
+.new_comment {
+	margin-top: 10px;
+}
+div.blog {
+    margin-bottom: $gutter;
 }

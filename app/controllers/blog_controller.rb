@@ -1,22 +1,22 @@
 class BlogController < ApplicationController
   
-  before_filter :find_blog_entry, :except => [:index,:new,:create]
+  before_filter :find_blog_entry, :except => [:index,:archive,:new,:create]
   before_filter :authorize, :except => [:index,:show]
-  before_filter :find_blog_entries, :only => [:index,:show]
+  before_filter :find_blog_entries, :only => [:index,:archive]
   
   def index
-    render :index
+  end
+  
+  def archive
   end
   
   def show
     @blog_entry = BlogEntry.find params[:id]
     @comments = @blog_entry.comments
-    render :show
   end
 
   def new
     @blog_entry = BlogEntry.new
-    render :new
   end
   
   def create
@@ -32,7 +32,6 @@ class BlogController < ApplicationController
   end
 
   def edit
-    render :edit
   end
 
   def update

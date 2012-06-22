@@ -1,14 +1,8 @@
-<div class="gr">
-	<div class="g6">
-		<% if can? :manage, BlogEntry %>
-			<div class="righty buttons">
-				<%= link_to "New Entry",  new_blog_entry_path %>
-			</div>
-		<% end %>
-		<%= render :partial => 'blog_entry', :collection => @blog_entries %>
-	</div>
-	<div class="g4 ge">
-		<%= render 'sidebar' %>
-	</div>
+<div class="menu">
+	<%= render_navigation :context => :blog %>
 </div>
+<br class="clear">
+<br>
+
+<%= render :partial => 'blog_entry', :collection => @blog_entries %>
 

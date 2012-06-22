@@ -27,9 +27,9 @@ or see http://www.gnu.org/licenses/agpl.txt.
 	<title><%=t :title %></title>
 </head>
 <body>
+	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
 	<div class="content">
-		<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
-		<div class="">
+		<div class="dialog">
 			<%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
 			<%= yield %>
 		</div>

@@ -9,7 +9,7 @@
 			</p>
 		<% end %>
 		<p class="note">
-			<%= link_to comment.user.name, comment.user %>, 
+			<%= link_to comment.user.name, comment.user %> 
 			<span class="timeago" title="<%= comment.created_at.getutc.iso8601 %>"><%= time_ago_in_words comment.created_at %> ago</span>
 		</p>
 		<%= sanitize(simple_format(auto_link(comment.body)),:tags => %w(a br p)) %>

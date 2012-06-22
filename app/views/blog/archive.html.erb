@@ -1,0 +1,19 @@
+<% if can? :manage, BlogEntry %>
+	<div class="righty buttons">
+		<%= link_to "New Entry",  new_blog_entry_path %>
+	</div>
+<% end %>
+<div class="menu">
+	<%= render_navigation :context => :blog %>
+</div>
+<br class="clear">
+<br>
+
+<ul>
+	<% for blog_entry in @blog_entries %>
+		<li>
+			<%= link_to blog_entry.title, blog_entry %><br>
+			<span class="note"><%= time_ago_in_words blog_entry.created_at %> ago</span>
+		</li>
+	<% end %>
+</ul>
