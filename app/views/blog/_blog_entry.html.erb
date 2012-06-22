@@ -1,0 +1,20 @@
+<div class="blog">
+	<% if can? :manage, @blog_entry %>
+		<div class="buttons righty">
+			<%= link_to "Edit",  [:edit, blog_entry] %>
+			<%= link_to "Delete", blog_entry, :method => :delete, :confirm => "Are you sure?" %>
+		</div>
+	<% end %>
+	<h1><%= blog_entry.title %></h1>
+	<p class="note timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> ago</p>
+	<% if blog_entry.image? %>
+		<%= link_to blog_entry do %>
+			<%= image_tag blog_entry.image.g3.url, :class => :g3 %><br><br>
+		<% end %>
+	<% end %>
+	<%= auto_html_blog blog_entry.body, :width => 225, :height => 150 %>
+	<%= link_to "#{blog_entry.comments_count.to_i > 0 ?
+		pluralize( blog_entry.comments_count, 'comment') :
+		'Be the first to add a comment'} &rarr;".html_safe,
+		 	blog_entry, :class => :note %>
+</div>

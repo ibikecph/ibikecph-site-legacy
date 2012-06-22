@@ -1,0 +1,8 @@
+<div class="menu">
+	<%= render_navigation :context => :blog %>
+</div>
+<br class="clear">
+<br>
+
+<%= render :partial => 'blog_entry', :collection => @blog_entries %>
+

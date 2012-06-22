@@ -28,9 +28,11 @@ or see http://www.gnu.org/licenses/agpl.txt.
 </head>
 <body>
 	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
-	<div class="dialog">
-		<%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
-		<%= yield %>
+	<div class="content">
+		<div class="dialog">
+			<%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
+			<%= yield %>
+		</div>
 	</div>
 </body>
 </html>

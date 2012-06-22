@@ -1,5 +1,5 @@
 <div class="g6">
-	<h6>Change Password</h6>
+	<h1>Change Password</h1>
 	<p>For user <strong><%= @user.name %></strong>.</p>
 	<%= form_for @user, :url => password_reset_path(params[:token]), :html => {:method => :put} do |f| %>
 	<%= errors_for( @user ).html_safe %>

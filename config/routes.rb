@@ -46,9 +46,15 @@ RailsOSRM::Application.routes.draw do
     get 'unverified', :on => :collection
   end
   
+  resources :blogs, :controller => :blog, :as => :blog_entry, :path => :blog do
+    collection do
+      get 'archive' => :archive
+    end
+  end
+  resources :comments, :only => [:destroy]
+  match 'comments/:commentable_type/:commentable_id' => 'comments#create', :via => :post
   
   match '/ping' => 'pages#ping'
-  match '/blog' => 'pages#blog'
   match '/feedback' => 'pages#feedback'
   
   match '/:locale' => 'pages#index'

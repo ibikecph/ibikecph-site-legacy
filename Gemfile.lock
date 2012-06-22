@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/emiltin/auto_html.git
+  revision: 0ac8f1a33bbbbc55429c9816e9b66933d025064f
+  branch: master
+  specs:
+    auto_html (1.5.3)
+      redcarpet (~> 2.0.0)
+      rinku (~> 1.5.0)
+
+GIT
   remote: git://github.com/emiltin/cancan.git
   revision: b51e63a4ce2dfaf36caa8ac1dc31ed806dea9b0d
   branch: master
@@ -151,6 +160,8 @@ GEM
       activesupport (= 3.2.6)
       bundler (~> 1.0)
       railties (= 3.2.6)
+    rails_autolink (1.0.5)
+      rails (~> 3.1)
     railties (3.2.6)
       actionpack (= 3.2.6)
       activesupport (= 3.2.6)
@@ -161,8 +172,10 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    redcarpet (2.0.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rinku (1.5.1)
     rmagick (2.13.1)
     ruby-hmac (0.4.0)
     rubyzip (0.9.6.1)
@@ -206,6 +219,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  auto_html!
   bcrypt-ruby
   cancan!
   carrierwave
@@ -221,6 +235,7 @@ DEPENDENCIES
   omniauth-twitter
   pg
   rails (= 3.2.6)
+  rails_autolink
   rmagick
   sass-rails
   simple-navigation

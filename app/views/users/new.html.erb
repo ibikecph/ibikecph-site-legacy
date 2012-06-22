@@ -1,4 +1,4 @@
-<h6>Sign Up</h6>
+<h1>Sign Up</h1>
 <p>Create your free I Bike Cph account.</p>
 <br>
 <%= form_for @user do |f| %>
@@ -8,25 +8,25 @@
 	<%= f.text_field :name, :tabindex => 1 %>
 </p>
 <%= fields_for @email do |email| %>
-	<div class="lefty">
+	<div class="g4">
 		<p>
 			<%= email.label :uid %><br>
 			<%= email.text_field :uid, :tabindex => 2 %><br>
 		</p>
 	</div>
-	<div class="lefty">
+	<div class="g4 ge">
 		<p>
 			<%= f.label :password %><br>
 			<%= f.password_field :password, :tabindex => 4 %>
 		</p>
 	</div>
-	<div class="lefty">
+	<div class="g4">
 		<p>
 			<%= email.label :uid_confirmation %><br>
 			<%= email.text_field :uid_confirmation, :tabindex => 3 %><br>
 		</p>
 	</div>
-	<div class="lefty">
+	<div class="g4 ge">
 		<p>
 			<%= f.label :password_confirmation %><br>
 			<%= f.password_field :password_confirmation, :tabindex => 5 %><br>
