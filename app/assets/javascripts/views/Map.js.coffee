@@ -105,7 +105,6 @@ class ibikecph.Map extends Backbone.View
 					@map.removeLayer @old_route
 
 				pin.on 'drag', (event) =>
-					window.location.hash = ''
 					location = event.target.getLatLng()
 					event.target.model.set 'location', (
 						lat: location.lat

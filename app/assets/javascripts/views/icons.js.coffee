@@ -1,10 +1,8 @@
 class ibikecph.Icon extends L.Icon
 	options:
 		iconUrl    : '/assets/images/marker-icon.png'
-		shadowUrl  : '/assets/images/marker-shadow.png'
-		iconSize   : new L.Point(25, 41)
-		shadowSize : new L.Point(41, 41)
-		iconAnchor : new L.Point(12, 41)
+		iconSize   : new L.Point(48, 48)
+		iconAnchor : new L.Point(42, 42)
 
 class ibikecph.RouteMarker extends L.Icon
 	options:
