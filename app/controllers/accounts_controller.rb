@@ -6,8 +6,6 @@ class AccountsController < ApplicationController
   before_filter :check_can_set_password, :only => [:new_password, :create_password]
   before_filter :find_email_authentication_by_token, :only => [:verify_email]
     
-  layout :choose_layout
-  
   def show
     @has_password = current_user.has_password?
     @has_email = current_user.authentications.emails.active.any?
@@ -16,7 +14,6 @@ class AccountsController < ApplicationController
   def logins
     @email_auths = current_user.authentications.emails
     @oauth_auths = current_user.authentications.oauths
-    @can_add_email = current_user.authentications.emails.count < MAX_EMAILS
     @can_remove_email = current_user.authentications.emails.active.count > 1
     @can_remove_oauth = current_user.authentications.emails.active.count >= 1 || current_user.authentications.oauths.active.count > 1
     @has_password = current_user.has_password?
@@ -37,9 +34,9 @@ class AccountsController < ApplicationController
     authentication = Authentication.find_by_provider_and_uid 'email', params[:email]
     if authentication
       authentication.send_activation
-      redirect_to activating_account_path, :notice => "Activation email sent to #{authentication.uid}."
+      redirect_to activating_account_path, :notice => t('accounts.flash.activation_sent', :email => authentication.uid)#"Activation email sent to #{authentication.uid}."
     else
-      flash.now.alert = "Email not found."
+      flash.now.alert = t('accounts.flash.email_not_found')
       render :new_activation
     end
   end
@@ -52,12 +49,12 @@ class AccountsController < ApplicationController
       if current_user.update_attributes params[:user]
         current_user.password_reset_token = nil
         current_user.save!
-        redirect_to account_path, :notice => "Password changed."
+        redirect_to account_path, :notice => t('accounts.flash.password_changed')
       else
         render :edit_password
       end
     else
-      flash.now.alert = "Current password was incorrect."
+      flash.now.alert = t('accounts.flash.invalid_password')
       render :edit_password
     end
   end
@@ -67,7 +64,7 @@ class AccountsController < ApplicationController
   
   def update
     if current_user.update_attributes(params[:user])
-      flash[:notice] = "Successfully updated profile."
+      flash[:notice] = t('accounts.flash.updated')
       redirect_to account_path
     else
       render :action => :edit
@@ -93,12 +90,6 @@ class AccountsController < ApplicationController
       flash[:notice] = "Notification settings updated."
     end
     redirect_to notifications_account_path
-  end
-  
-  private
-  
-  def choose_layout
-    current_user.present? ? "account" : "application"
   end
 
 end

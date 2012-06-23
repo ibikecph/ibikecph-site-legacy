@@ -1,5 +1,5 @@
-<h6>Users</h6>
-	<%= will_paginate @users, :class => :pagination %>
+<h1><%=t '.title' %></h1>
+<%= will_paginate @users, :class => :pagination %>
 <% for user in @users %>
 	<p>
 		<%= link_to user.name, user %>

@@ -4,17 +4,179 @@
 en:
   activerecord:
     attributes:
-      email_authentication:       #form label
+      #form labels
+      email_authentication:
         uid: 'Email'                            
         uid_confirmation: 'Email confirmation'
-      authentications:        #error messages
+      #error messages
+      authentications:
         uid: 'Email'      
         uid_confirmation: 'Email confirmation'
+    
+  
+  edit: Edit
+  new: New
+  delete: Delete
+  submit: Submit
+  login: Login
+  hi: "Hi %{user}"
+  
+  you: You
+  or_login_with: or login with
+  sure_q: Are you sure?
+  be_the_first_to_comment: Be the first to comment
+  comment: comment
+  
+  users:
+    index:
+      title: Users
+    new:
+      title: Sign Up
+      body: Create your free I Bike Cph account
+      submit: Create Account
+      already_have_account_q: Already have an account?
+    show:
+      joined_at_html: "Joined %{ago}"
+  
+  sessions:
+    new:
+      title: Login
+      submit: Login
+      forgot_it_q: Forgot it?
+      no_account_q: No account?
+    flash:
+      logged_in: "Logged in as %{user}."
+      logged_in_oath: "Logged in as %{name} using %{provider}."
+      invalid_login: Email or password was invalid.
+      oath_cancel: Login cancelled.
+      oath_error: "Could not log in: %{error}."
+      email_not_verified: "Email %{email} not verified."
+      logged_out: Logged out.
+      
+  accounts:
+    show:
+      title: Your Profile
+      title_login: Your Login
+      name: Name
+      image: Image
+      about: About
+      email: Email
+      change_email: Change Email
+      change_password: Change Password
+    edit:
+      title: Edit Profile
+      submit: Save
+    activating:
+      title: Activating your Account
+      body: "To activate your account, please follow the instructions in the email we sent you."
+      link: Resend Activation Email
+    welcome:
+      title: Welcome!
+      body: Thank you for signing up. We hope you'll enjoy your stay at I Bike Cph.
+    new_activation:
+      title: Resend Activation Email
+      body: You can have your account activation email resent by filling out the form below.
+      submit: Resend
+    edit_password:
+      title: Change Password
+      forgotten_q: Forgotten?
+      new_password: New Password
+      submit: Change
+    welcome:
+      title: Welcome
+      body: Thank you for signing up. We hope you'll enjoy your stay at I Bike Cph!
+    flash:
+      email_not_found: Email not found.
+      password_changed: Password changed.
+      invalid_password: Current password didn't match.
+      updated: Account updated.
+        
+  blog:
+    index:
+      new: New Blog Entry
+    show:
+      other_entries: Other Entries
+      blog_archive: Blog Archive
+    new:
+      title: New Blog Entry
+    edit:
+      title: Edit Blog Entry
+    form:
+      make_sticky: Keep this entry at top (can be changed latter).
+      submit: Save
+    archive:
+      title: Blog Archive
+    flash:
+      created: Blog entry created.
+      updated: Blog entry updated.
+      deleted: Blog entry deleted.
+      
+  comments:
+    new:
+      add_comment: Add comment
+      login_to_comment_html: "To comment, please %{link}."
+      login: login
+      submit: Submit
+    comments:
+      title: Comments
+  
+  emails:
+    new:
+      title: Change Email
+      new_email: New Email
+      new_email_confirmation: New Email Confirmation
+      submit: Change
+    unverified:
+      title: Email not Verified
+      body: "To continue using your account, please verify your email."
+      submit: Send Verification Email
+    new_verification:
+      title: Verify Email
+      body: "Please enter your email below, and follow the instructions in the email we send to you."
+      submit: Submit
+    flash:
+      verification_sent: "Verification instructions sent to %{email}."
+      already_verified: "Email %{email} already verified."
+      verified: "Email %{email} verified."
+      not_found: "Email %{email} not found."
+      verification_expired: Verification has expired.
+      verified_with_password: "Email #{@email} verified and password set."
+    
+  password_resets:
+    new:
+      title: Reset Password
+      body: "Please enter your email, and we'll send you instructions for resetting your password."
+      submit: Send Instructions
+    edit:
+      title: Change Password
+      for_user: "Change password for user %{user}."
+      submit: Change Password
+    new_logged_in:
+      title: Reset Password
+      body: "Instructions for resetting your password will be send to %{user}."
+      submit: Send Instructions
+    flash:
+      instructions_sent: "Instructions for resetting your password has been emailed to %{email}."
+      email_not_found: "Email %{email} not found."
+      password_changed: Password changed
+      invalid_link: Invalid password reset link.
+      expired_link: Password reset link has expired.
+      
+  user_mailer:
+    activation:
+      subject: Activating your I Bike Cph account
+      body: "Thank you for signing up at I Bike Cph! To verify your email, please visit:"
+    verify_email:
+      subject: Verifying your I Bike Cph account
+      body: "To verify your email for use with I Bike Cph, please visit"
+    password_reset:
+      subject: Resetting your I Bike Cph password
+      body: "To reset your I Bike Cph password, please visit"
     
   #ui
   from: From
   to: To
-  title: I BIKE CPH | Bike Route Planner (alpha)
+  page_title: I Bike Cph
   generate_link: Make a Link
   route_description: Route Description
   distance: distance
@@ -52,17 +214,17 @@ en:
   head: Start
   continue: Continue
   #left
-  turn-left: Turn left
-  turn-slight-left: Turn slightly to the left
-  turn-sharp-left: Turn sharply to the left
+  turn_left: Turn left
+  turn_slight_left: Turn slightly to the left
+  turn_sharp_left: Turn sharply to the left
   #right
-  turn-right: Turn right
-  turn-slight-right: Turn slighty to the right
-  turn-sharp-right: Turn sharply to the right
+  turn_right: Turn right
+  turn_slight_right: Turn slighty to the right
+  turn_sharp_right: Turn sharply to the right
   #other
-  enter-roundabout: Enter the roundabout
-  take-the-nth-exit: and take the {%nth} exit
-  reached-destination: You arrived at the destination
+  enter_roundabout: Enter the roundabout
+  take_the_nth_exit: "and take the {%nth} exit"
+  reached_destination: You arrived at the destination
 
   follow: following
   and_continue: and continue for

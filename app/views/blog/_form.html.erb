@@ -16,8 +16,8 @@
 	</p>
 	<p>
 		<%= f.label :sticky %><br>
-		<%= f.check_box :sticky %> Keep this entry at top (can be changed latter).
+		<%= f.check_box :sticky %> <%=t '.make_sticky'%>
 	</p>
-	<p><%= f.submit :class => :submit %></p>
+	<p><%= f.submit t('.submit'), :class => :submit %></p>
 
 <% end %>

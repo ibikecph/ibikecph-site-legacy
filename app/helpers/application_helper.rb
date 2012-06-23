@@ -58,7 +58,5 @@ module ApplicationHelper
     #fallback to default image
     image_tag user.image.g1.default_url, { :class => 'g1 square', :title => user.name, :alt => user.name }
 	end
-	
-
 
 end

@@ -1,8 +1,3 @@
-<h1>Email not Verified</h1>
-<p>		
-	To continue using your account, you need to verify your email.
-</p>
-<p>
-	Please follow the instructions in the email we sent you when you signed up, or click below to have the  instructions resend to your email.
-</p>
-<p><%= link_to 'Resend Verification Email', verify_emails_path %></p>
+<h1><%=t '.title' %></h1>
+<p><%=t '.body' %></p>
+<p><%= link_to t('.submit'), verify_emails_path %></p>

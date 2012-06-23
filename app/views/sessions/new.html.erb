@@ -1,5 +1,5 @@
 <div class="dialog g4">
-<h1>Login</h1>
+<h1><%=t '.title' %></h1>
 
 <%= form_tag sessions_path do %>
 <p>
@@ -8,18 +8,18 @@
 </p>
 <p>
 	<%= label_tag :password %><br>
-	<%= password_field_tag :password %> <span class="note"><%= link_to 'Forgot it?', new_password_reset_path %></span>
+	<%= password_field_tag :password %> <span class="note"><%= link_to t('.forgot_it_q'), new_password_reset_path %></span>
 </p>
 <p>
 	<%= check_box_tag :remember_me, 1, params[:remember_me] %>
 	<%= label_tag :remember_me %>
 </p>
 <p>
-	<%= submit_tag "Login", :class => :submit %>
-	<span class="note">No account? <%= link_to "Sign Up", new_user_path %></span>
+	<%= submit_tag t('.submit'), :class => :submit %>
+	<span class="note"><%=t '.no_account_q' %> <%= link_to t('signup'), new_user_path %></span>
 </p>
 <% end %>
 <div class="oauth_providers">
-	<%= render :partial => 'sessions/login_providers', :locals => { :title => '..or log in with:' } %>
+	<%= render :partial => 'sessions/login_providers', :locals => { :title => "...#{t('or_login_with')}:" } %>
 </div>
 </div>

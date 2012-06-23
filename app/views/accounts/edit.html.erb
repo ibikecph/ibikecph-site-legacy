@@ -1,5 +1,5 @@
 <div class="dialog g6">
-<h1>Edit Profile</h1>
+<h1><%=t '.title' %></h1>
 <%= errors_for( current_user ).html_safe %>
 <%= form_for current_user, :url => account_path, :html => {:multipart => true} do |f| %>
 	<p>
@@ -17,6 +17,6 @@
 		<%= chars_remaining %>
 		<%= f.text_area :about, { :rows => 6, "data-maxlength" => User::MAXLENGTH[:about] } %>
 	</p>
-	<p><%= f.submit 'Save Profile', :class => :submit %></p>
+	<p><%= f.submit t('.submit'), :class => :submit %></p>
 <% end %>
 </div>

@@ -1,5 +1,5 @@
-Hi <%= @user.name %>,
+<%=t 'hi', :user => @user.name %>,
 
-Thank you for signing up at I Bike Cph! To verify your email, please visit:
+<%=t '.body' %>
 
 <%= @url %>

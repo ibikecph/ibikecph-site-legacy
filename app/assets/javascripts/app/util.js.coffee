@@ -7,10 +7,10 @@ ibikecph.util.normalize_whitespace = (text) ->
 ibikecph.util.instruction_string = (instruction) ->
 	string = I18n.translate(instruction.turn);
 
-	if instruction.turn is 'enter-roundabout'
-		string += ' ' +  I18n.t('take-the-nth-exit').replace('{%nth}', I18n.translate(instruction.roundabout_exit + ''));
+	if instruction.turn is 'enter_roundabout'
+		string += ' ' +  I18n.t('take_the_nth_exit').replace('{%nth}', I18n.translate(instruction.roundabout_exit + ''));
 
-	if instruction.street and instruction.turn isnt 'enter-roundabout'
+	if instruction.street and instruction.turn isnt 'enter_roundabout'
 		string += ' ' + I18n.translate('follow') + ' ' + instruction.street
 
 	if instruction.turn is 'head'
@@ -76,20 +76,20 @@ ibikecph.util.decode_path = (encoded) ->
 ibikecph.util.translate_turn_instruction = (turn) ->
 	switch turn | 0
 		when 1 then 'continue'
-		when 2 then 'turn-slight-right'
-		when 3 then 'turn-right'
-		when 4 then 'turn-sharp-right'
+		when 2 then 'turn_slight_right'
+		when 3 then 'turn_right'
+		when 4 then 'turn_sharp_right'
 		when 5 then 'u-turn'
-		when 6 then 'turn-sharp-left'
-		when 7 then 'turn-left'
-		when 8 then 'turn-slight-left'
+		when 6 then 'turn_sharp_left'
+		when 7 then 'turn_left'
+		when 8 then 'turn_slight_left'
 		when 9 then 'reach-via-point'
 		when 10 then 'head'
-		when 11 then 'enter-roundabout'
+		when 11 then 'enter_roundabout'
 		when 12 then 'leave-roundabout'
 		when 13 then 'stay-on-roundabout'
 		when 14 then 'start'
-		when 15 then 'reached-destination'
+		when 15 then 'reached_destination'
 		else 'no-instruction'
 
 ibikecph.util.displayable_address = (geocoding_response) ->

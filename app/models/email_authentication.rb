@@ -11,6 +11,10 @@ class EmailAuthentication < Authentication
     self.state = 'unverified'
   end
   
+  def address
+    uid
+  end
+  
   def send_activation
     generate_token
     save!

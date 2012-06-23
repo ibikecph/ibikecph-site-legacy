@@ -6,12 +6,12 @@ class PasswordResetsController < ApplicationController
     
   def new
     if current_user
-      if current_user.has_active_email?
-        @emails = current_user.authentications.emails.active.map { |e| e.uid }
+      #if current_user.has_active_email?
+        @emails = current_user.authentications.emails.map { |e| e.uid }
         render :new_logged_in
-      else
-        redirect_to account_path, :alert => "Cannot reset password without a verified email."
-      end
+      #else
+      #  redirect_to account_path, :alert => "Cannot reset password without a verified email." #TODO
+      #end
     end
   end
   
@@ -22,17 +22,17 @@ class PasswordResetsController < ApplicationController
       email = EmailAuthentication.find_by_uid params[:email]
     end
     if email
-      path = current_user ? account_path : login_path
       if email.active?
         user = email.user
         user.send_password_reset
-        redirect_to path, :notice => "Instructions for resetting your password has been emailed to #{email.uid}."
+        path = current_user ? account_path : login_path
+        redirect_to path, :notice => t('password_resets.flash.instructions_sent', :email => email.uid)
       else
         flash[:email] = email.uid
         redirect_to :action => :unverified
       end
     else
-      flash.now.alert = "Email not found."
+      flash.now.alert = t('password_resets.flash.email_not_found', :email => params[:email])
       render :new
     end
   end
@@ -46,7 +46,7 @@ class PasswordResetsController < ApplicationController
       @user.save!
       auto_login @user
       copy_return_to
-      logged_in account_path, :notice => "Password has been changed."
+      logged_in account_path, :notice =>  t('password_resets.flash.password_changed')
     else
       render :edit
     end
@@ -56,12 +56,12 @@ class PasswordResetsController < ApplicationController
   
   def find_user_by_token
     @user = User.find_by_password_reset_token params[:token] if params[:token]
-    redirect_to new_password_reset_path, :alert => "Password reset invalid." unless @user
+    redirect_to new_password_reset_path, :alert => t('password_resets.flash.invalid_link') unless @user
   end
   
   def check_expired
     if @user.password_reset_sent_at.blank? || @user.password_reset_sent_at < RESET_PASSWORD_PERIOD.ago
-      redirect_to new_password_reset_path, :alert => "Password reset has expired."
+      redirect_to new_password_reset_path, :alert => t('password_resets.flash.expired_link')
     end
   end
   

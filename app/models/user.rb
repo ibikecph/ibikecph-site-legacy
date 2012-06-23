@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   
   has_many :authentications, :dependent => :destroy
-  
+  has_many :blog_entries, :dependent => :nullify
+  has_many :comments, :dependent => :destroy
   attr_accessible :role, :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache
   
   attr_accessor :password, :created_from_oath
@@ -89,8 +90,15 @@ class User < ActiveRecord::Base
     authentications.emails.each { |e| puts e; e.destroy unless e==auth }
   end
     
+  def emails
+    authentications.emails
+  end
+  
   def email
-    #TODO how to select an email? would be easier if users only ever had one email
+    authentications.emails.active.first
+  end
+  
+  def email_address
     authentications.emails.active.first.uid rescue nil
   end
 

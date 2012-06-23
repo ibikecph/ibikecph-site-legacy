@@ -4,10 +4,10 @@
 	</div>
 	<div class="g1">&nbsp;</div>
 	<div class="g3 ge">
-		<div class="buttons righty">
-			<%= link_to "New Entry",  new_blog_entry_path %>
-		</div>
-		<br class="clear"></br>
-		<%= render 'sidebar' %>
+		<% if can? :manage, BlogEntry %>
+			<div class="buttons righty">
+				<%= link_to t('.new'), new_blog_entry_path %>
+			</div>
+		<% end %>
 	</div>
 </div>

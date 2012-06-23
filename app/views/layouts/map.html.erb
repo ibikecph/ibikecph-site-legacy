@@ -24,7 +24,7 @@ or see http://www.gnu.org/licenses/agpl.txt.
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
-	<title>I Bike Cph</title>
+	<title><%=t :page_title %></title>
 </head>
 <body class="base-font not-selectable">
 	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>

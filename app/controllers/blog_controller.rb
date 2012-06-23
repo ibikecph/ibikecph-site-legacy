@@ -2,12 +2,13 @@ class BlogController < ApplicationController
   
   before_filter :find_blog_entry, :except => [:index,:archive,:new,:create]
   before_filter :authorize, :except => [:index,:show]
-  before_filter :find_blog_entries, :only => [:index,:show,:archive]
+  before_filter :find_blog_entries, :only => [:index,:show]
   
   def index
   end
   
   def archive
+    @blog_entries = BlogEntry.latest
   end
   
   def show
@@ -20,11 +21,10 @@ class BlogController < ApplicationController
   end
   
   def create
-    @blog_entry = BlogEntry.new params[:blog_entry]
-    @blog_entry.user = current_user
+    @blog_entry = current_user.blog_entries.build params[:blog_entry]
     if @blog_entry.save
 #      Publisher.publish_blog_entry @blog_entry
-      flash[:notice] = "Successfully created blog entry."
+      flash[:notice] = t('blog.flash.created')
       redirect_to @blog_entry
     else
       render :new
@@ -36,7 +36,7 @@ class BlogController < ApplicationController
 
   def update
     if @blog_entry.update_attributes(params[:blog_entry])
-      flash[:notice] = "Successfully updated blog entry."
+      flash[:notice] = t('blog.flash.updated')
       redirect_to @blog_entry
     else
       render :edit
@@ -45,7 +45,7 @@ class BlogController < ApplicationController
   
   def destroy
     @blog_entry.destroy
-    flash[:notice] = "Successfully destroyed blog entry."
+    flash[:notice] = t('blog.flash.deleted')
     redirect_to blog_entry_index_path
   end
   
@@ -60,7 +60,7 @@ class BlogController < ApplicationController
   end
   
   def find_blog_entries
-    @blog_entries = BlogEntry.order('created_at desc')
+    @blog_entries = BlogEntry.latest.limit(20)
   end
   
 end

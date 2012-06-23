@@ -4,7 +4,8 @@ class Ability < ActiveRecord::Base
   def initialize(user)
     disable_risky_blocks
 
-    can [:index,:show], [BlogEntry,Comment,User]
+    can [:index,:show], [Comment,User]
+    can [:index,:archive,:show], [BlogEntry]
     if user
       if user.role == "super"
         can :manage, :all 

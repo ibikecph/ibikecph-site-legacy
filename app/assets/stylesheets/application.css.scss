@@ -125,7 +125,7 @@ img {
 label, .chars_remaining {
     font-size: 0.8em;
     font-weight: bold;
-    color: $text_color;
+    color: $dark;
     margin-top: 20px;
 }
 textarea {
@@ -336,15 +336,13 @@ td.buttons, th.buttons {
         color: white;
     }
 }
-.button:hover, td.buttons a:hover, div.buttons a:hover, p.buttons a:hover {
-    background-color: $hover;
+.button:hover, td.buttons a:hover, div.buttons a:hover, p.buttons a:hover, a.button:hover {
+    background-color: $dark;
+    color: white;
 }
 div.buttons, p.buttons {
     font-size: 1.1em;
     margin-bottom: 0.5em;
-}
-a.button:hover {
-    background-color: $hover;
 }
 td.note {
     padding-top:0.4em;

@@ -16,6 +16,7 @@ RailsOSRM::Application.routes.draw do
   
   resource :account do
     get 'activating'
+    get 'welcome'
     get 'notifications'
     post 'notifications' => :update_notifications
   end

@@ -4,15 +4,13 @@
 		<div id="form_notice"></div>
 		<%= form_for( :comment, :remote => true, :html => {:id => 'new_comment_form'}, :url => { :controller => '/comments', :action => :create, :commentable_type => target.class.name, :commentable_id => target.id } ) do |f| -%>
 			<p>
-				<%= f.label 'Add Comment' %>
+				<%= f.label t('.add_comment') %>
 				<%= chars_remaining %>
 				<%= f.text_area :body, :rows => 5, "data-maxlength" => Comment::MAXLENGTH[:body] %>
 			</p>
-			<%= submit_tag 'Submit', :class => :submit %>
+			<%= submit_tag t('.submit'), :class => :submit %>
 		<% end -%>
 	<% else %>
-		<p>
-			To comment, please <%= link_to 'Login', login_and_return_path %>.
-		</p>
+		<p><%=t '.login_to_comment_html', :link => link_to(t('.login'),login_and_return_path) %></p>
 	<% end %>
 </div>

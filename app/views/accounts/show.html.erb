@@ -1,30 +1,48 @@
 <div class="g6">
-<%= link_to "Edit", [:edit,:account], :class => "button righty" %>
-<h1>Profile</h1>
 
-<label>Name</label>
+
+<%= link_to t('edit'), [:edit,:account], :class => "button righty" %>
+<h1><%=t '.title' %></h1>
+
+<label><%=t '.name' %></label>
 <p><%= current_user.name %></p>
 
-<label>Image</label>
+<label><%=t '.image' %></label>
 <p><%= image_tag current_user.image.g2.url, :class => 'g2 square' %></p>
 
-<label>About</label>
+<label><%=t '.about' %></label>
 <% if current_user.about %>
 	<%= simple_format(current_user.about) %>
 <% else %>
-	<p>(Empty)</p>
+	<p>(<%=t 'empty' %>)</p>
 <% end %>
 
-<% if @has_email %>
+
+<br>
+
+
+<h1><%=t '.title_login' %></h1>
+
+<% if current_user.authentications.emails.any? %>
 <%= link_to 'Change Email',new_email_path, :class => "note button righty" %>
-<label>Email</label>
-<p><%= current_user.email %></p>
+<label><%=t '.email' %></label>
+<p>
+	<% for email in current_user.emails %>
+		<%= email.address %>
+		<% unless email.active? %>
+			<span class="note">(<%= t('.unverified') %>)</span>
+		<% end %>
+		<br>
+	<% end %>
+</p>
 <% end %>
 
 
 <% if @has_password %>
-<%= link_to 'Change Password', edit_password_path, :class => "note button righty" %>
-<label>Password</label>
+<%= link_to t('.change_password'), edit_password_path, :class => "note button righty" %>
+<label><%=t '.password' %></label>
 <p>&bull;&bull;&bull;&bull;&bull;</p>
 <% end %>
+
 </div>
+

@@ -27,7 +27,7 @@ class SessionsController < ApplicationController
     copy_return_to
     reset_session    
     auto_login user
-    logged_in welcome_account_path, :notice => "Logged in as #{user.name} using #{@auth["provider"].titleize}."  
+    logged_in welcome_account_path, :notice => t('sessions.flash.logged_in', :name => user.name, :provider => @auth["provider"].titleize)  
   end
 
   def new
@@ -38,75 +38,38 @@ class SessionsController < ApplicationController
     session[:return_to_saved_at] = Time.zone.now
     render :new
   end
-
+    
   def create
     auth = Authentication.find_by_provider_and_uid 'email', params[:email]
     if auth && (params[:password].blank? == false) && auth.user.authenticate(params[:password])
       if auth.state == 'active' || auth.token_created_at > VERIFICATION_RESPITE.ago
         auto_login auth.user, :remember_me => params[:remember_me]
         copy_return_to
-        logged_in account_path, :notice => "Logged in as #{auth.user.name}"
+        logged_in account_path, :notice => t('sessions.flash.logged_in', :user => auth.user.name)
       else
         @email = auth.uid
-        redirect_to unverified_emails_path, :alert => "Email #{auth.uid} not verified."
+        redirect_to unverified_emails_path, :alert => t('sessions.flash.email_not_verified', :email => auth.uid)
       end
     else
-      flash.now.alert = "Email or password was invalid"
+      flash.now.alert = t('sessions.flash.invalid_login')
       render :new
     end
   end
 
   def destroy
     logout
-    redirect_to root_url, :notice => "Logged out."
+    redirect_to root_url, :notice => t('sessions.flash.logged_out')
   end
 
   def setup
     render :nothing => true
   end
 
-  #when running in dev mode, allow login without calling out to facebook
-  def dev_login role=''
-    if Rails.env.development? || Rails.env.staging?
-      user = User.find_by_role!(role.to_s)
-
-      session.clear
-      session[:user_id] = user.id
-      redirect_to root_path, :notice => "Developer mode log in as #{user.name} with role #{role}"
-    else
-      redirect_to root_path
-    end
-  end
-
-  def user
-    dev_login
-  end
-
-  def alt
-    dev_login :alt
-  end
-
-  def staff
-    dev_login :staff
-  end
-
-  def admin
-    dev_login :admin
-  end
-
-  def super
-    dev_login :super
-  end
-
-  def redirect_facebook
-    redirect_to "http://facebook.com"
-  end
-
   def failure
     if params[:message]= 'invalid_credentials'
-      redirect_to (current_user ? account_path : root_path), :alert => "Login cancelled."
+      redirect_to (current_user ? account_path : root_path), :alert => t('sessions.flash.oath__cancel')
     else
-      redirect_to (current_user ? account_path : root_path), :alert => "Could not log in: #{params[:message]}"
+      redirect_to (current_user ? account_path : root_path), :alert => t('sessions.flash.oath_error', :error => params[:message])
     end
   end
   
@@ -179,7 +142,6 @@ class SessionsController < ApplicationController
     a = OAuthAuthentication.new :provider => @auth["provider"], :uid => @auth["uid"]
     a.user = user
     a.save!
-    #user.add_email(@auth['info']['email'], :active) if @auth['info']['email'].present?
     a
   end
   
