@@ -26,13 +26,13 @@ ibikecph.config =
 			opacity : 0.5
 
 	tiles: [
-		name: 'Open Street Map'
-		url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		name: 'Solar'
+		url: 'http://83.221.133.5/tiles/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2011 OpenStreetMap contributors, Imagery &copy 2011 Mapnik'
 	,
-		name: 'Solar'
-		url: 'http://83.221.133.5/tiles/{z}/{x}/{y}.png'
+		name: 'Open Street Map'
+		url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2011 OpenStreetMap contributors, Imagery &copy 2011 Mapnik'
 	]
