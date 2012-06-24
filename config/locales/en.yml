@@ -20,6 +20,8 @@ en:
   submit: Submit
   login: Login
   hi: "Hi %{user}"
+  on: On
+  off: Off
   
   you: You
   or_login_with: or login with
@@ -57,12 +59,14 @@ en:
     show:
       title: Your Profile
       title_login: Your Login
+      title_settings: Your Settings
       name: Name
       image: Image
       about: About
       email: Email
       change_email: Change Email
       change_password: Change Password
+      notify_by_email: Email Notifications
     edit:
       title: Edit Profile
       submit: Save
@@ -85,17 +89,23 @@ en:
     welcome:
       title: Welcome
       body: Thank you for signing up. We hope you'll enjoy your stay at I Bike Cph!
+    settings:
+      title: Edit Settings
+      unverified: "Note: You will not receive email notifications until you verify your email address."
+      email_notifications: Send me email notifications
+      submit: Save
     flash:
       email_not_found: Email not found.
       password_changed: Password changed.
       invalid_password: Current password didn't match.
       updated: Account updated.
+      settings_updated: Settings updated.
         
   blog:
     index:
       new: New Blog Entry
     show:
-      other_entries: Other Entries
+      latest_entries: Latest Entries
       blog_archive: Blog Archive
     new:
       title: New Blog Entry
@@ -168,10 +178,16 @@ en:
       body: "Thank you for signing up at I Bike Cph! To verify your email, please visit:"
     verify_email:
       subject: Verifying your I Bike Cph account
-      body: "To verify your email for use with I Bike Cph, please visit"
+      body: "To verify your email for use with I Bike Cph, please visit:"
     password_reset:
       subject: Resetting your I Bike Cph password
-      body: "To reset your I Bike Cph password, please visit"
+      body: "To reset your I Bike Cph password, please visit:"
+    blog_entry:
+      subject: "Blog: %{title}"
+      body: "A new blog entry titled '%{title}' was posted on I Bike Cph. To read it, please visit:"
+    comment:
+      subject: "Comment: %{title}"
+      body: "%{user} added a comment '%{title}' on I Bike Cph. To read it, please visit:"
     
   #ui
   from: From

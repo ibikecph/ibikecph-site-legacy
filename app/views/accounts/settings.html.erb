@@ -1,0 +1,15 @@
+<div class="dialog g4">
+	<% unless @has_email %>
+	<p><%=t '.unverified' %></p>
+	<% else %>
+	<h1><%=t '.title' %></h1>
+	<%= errors_for( current_user ).html_safe %>
+	<%= form_for current_user, :url => settings_account_path, :html => {:method => :post} do |f| %>
+		<p>
+			<%= f.check_box :notify_by_email %>
+			<%=t '.email_notifications' %>
+		</p>
+		<p><%= f.submit t('.submit'), :class => :submit %></p>
+	<% end %>
+	<% end %>
+</div>

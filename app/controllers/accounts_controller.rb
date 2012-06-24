@@ -81,15 +81,17 @@ class AccountsController < ApplicationController
     end
   end
   
-  def notifications
+  def settings
     @has_email = current_user.authentications.emails.active.any?
   end
   
-  def update_notifications
+  def update_settings
     if current_user.update_attributes(params[:user])
-      flash[:notice] = "Notification settings updated."
+      flash[:notice] = t('accounts.flash.settings_updated')
+      redirect_to account_path
+    else
+      render :settings
     end
-    redirect_to notifications_account_path
   end
 
 end

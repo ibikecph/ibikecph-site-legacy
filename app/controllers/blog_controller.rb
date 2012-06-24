@@ -1,7 +1,7 @@
 class BlogController < ApplicationController
   
   before_filter :find_blog_entry, :except => [:index,:archive,:new,:create]
-  before_filter :authorize, :except => [:index,:show]
+  before_filter :authorize, :except => [:index,:show,:archive]
   before_filter :find_blog_entries, :only => [:index,:show]
   
   def index
@@ -23,7 +23,7 @@ class BlogController < ApplicationController
   def create
     @blog_entry = current_user.blog_entries.build params[:blog_entry]
     if @blog_entry.save
-#      Publisher.publish_blog_entry @blog_entry
+      Publisher.publish @blog_entry
       flash[:notice] = t('blog.flash.created')
       redirect_to @blog_entry
     else
@@ -56,7 +56,7 @@ class BlogController < ApplicationController
   end
   
   def authorize
-    #authorize! :manage, @blog_entry || BlogEntry
+    authorize! :manage, @blog_entry || BlogEntry
   end
   
   def find_blog_entries

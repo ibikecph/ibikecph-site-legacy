@@ -17,8 +17,8 @@ RailsOSRM::Application.routes.draw do
   resource :account do
     get 'activating'
     get 'welcome'
-    get 'notifications'
-    post 'notifications' => :update_notifications
+    get 'settings'
+    post 'settings' => :update_settings
   end
   get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
   put 'account/password' => 'accounts#update_password', :as => :update_password  
@@ -54,6 +54,9 @@ RailsOSRM::Application.routes.draw do
   end
   resources :comments, :only => [:destroy]
   match 'comments/:commentable_type/:commentable_id' => 'comments#create', :via => :post
+
+  match 'follows/:followable_type/:followable_id' => 'follows#follow', :via => :post
+  match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
   match '/ping' => 'pages#ping'
   match '/feedback' => 'pages#feedback'

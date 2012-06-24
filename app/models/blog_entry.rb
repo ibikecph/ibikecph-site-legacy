@@ -2,6 +2,9 @@ class BlogEntry < ActiveRecord::Base
   
   belongs_to :user
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at ASC'
+  has_many :follows, :as => :followable, :dependent => :destroy
+  has_many :followers, :through => :follows, :source => :user
+
   scope :latest, order('sticky desc, created_at desc')
   mount_uploader :image, ResizedImageUploader
   attr_accessible :title, :body, :image, :remove_image, :image_cache, :sticky

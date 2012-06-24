@@ -44,5 +44,18 @@
 <p>&bull;&bull;&bull;&bull;&bull;</p>
 <% end %>
 
+
+<br>
+
+
+<h1><%=t '.title_settings' %></h1>
+
+<%= link_to 'Change Settings',settings_account_path, :class => "note button righty" %>
+<label><%=t '.notify_by_email' %></label>
+<p>
+	<%= current_user.notify_by_email ? t('on') : t('off') %>
+</p>
+
+
 </div>
 

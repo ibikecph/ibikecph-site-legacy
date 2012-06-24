@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
       @comment.commentable_id = params[:commentable_id]
       @comment.user_id = current_user.id
       if @comment.save
+        Publisher.publish @comment
       else
         render :error
       end
@@ -35,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def authorize_manage
-    authorize! :create, @comment
+    authorize! :manage, @comment
   end
   
 end
