@@ -19,7 +19,4 @@
 	<span class="note"><%=t '.no_account_q' %> <%= link_to t('signup'), new_user_path %></span>
 </p>
 <% end %>
-<div class="oauth_providers">
-	<%= render :partial => 'sessions/login_providers', :locals => { :title => "...#{t('or_login_with')}:" } %>
-</div>
 </div>

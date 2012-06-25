@@ -11,8 +11,6 @@ RailsOSRM::Application.routes.draw do
       get 'existing'
     end
   end
-  match "/auth/:provider/callback" => "sessions#oath_create"
-  match "/auth/failure" => "sessions#failure"
   
   resource :account do
     get 'activating'
@@ -23,8 +21,8 @@ RailsOSRM::Application.routes.draw do
   get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
   put 'account/password' => 'accounts#update_password', :as => :update_password  
   delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
-  get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
-  post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
+  #get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
+  #post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
 
   resources :users
 
@@ -34,6 +32,7 @@ RailsOSRM::Application.routes.draw do
       get 'verify' => :new_verification
       post 'verify' => :create_verification
       get 'unverified'
+      get 'verification_sent'
     end
     member do
       get 'verify/resend' => :resend_verification, :as => :resend_verification
