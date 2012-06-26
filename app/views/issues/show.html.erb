@@ -1,0 +1,28 @@
+<div class="g6">
+	<p>
+		<%= link_to "&larr; Back to List".html_safe, issues_path %>
+	</p>
+	<%= render 'issues/editing' %>
+	<h2><%= @issue.title %></h2>
+	<% if current_user %>
+		<div class="righty"><p><%= render 'issues/votes' %></p></div>
+	<% end %>
+	<%= simple_format @issue.body %>
+	<br class="clear">
+
+	<% if @issue.user %>
+		<%= link_to profile_image(@issue.user), @issue.user, :class => "avatar lefty" %>
+	<% end %>
+
+	<div class="note noprint">
+		<% if @issue.user %>
+			<%= link_to truncate(@issue.user.name, :length => 80), @issue.user %>,
+		<% end %>
+		<span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
+			<%= time_ago_in_words @issue.created_at %> ago
+		</span>
+	</div>
+	<br class="clear">
+
+	<%= comments @issue %>
+</div>

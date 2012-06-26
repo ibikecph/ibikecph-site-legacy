@@ -57,8 +57,19 @@ RailsOSRM::Application.routes.draw do
   match 'follows/:followable_type/:followable_id' => 'follows#follow', :via => :post
   match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
+  
+  resources :issues do
+    member do
+      post 'vote'
+      post 'unvote'
+    end
+    collection do
+      get 'list'
+      get 'cards'
+    end
+  end
+  
   match '/ping' => 'pages#ping'
-  match '/feedback' => 'pages#feedback'
   
   match '/:locale' => 'pages#index'
   root :to => 'map#index'

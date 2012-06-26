@@ -1,0 +1,47 @@
+<div class="gr">
+	<div class="g8">
+		<% if can? :create, Issue %>
+			<div class="righty buttons">
+				<%= link_to "New Issue", new_issue_path %>
+			</div>
+		<% end %>
+		<h1>Issues</h1>
+		<p>Bug reports and ideas for improvement.</p>
+		<br>
+		
+		<%= will_paginate @issues, :class => :pagination %>
+		<table class="issues">
+			<% for issue in @issues %>
+			<tr class="<%= cycle 'even', 'odd' %>">
+				<td class="note">
+					#<%= issue.id %>
+				</td>
+				<td>
+					<% if can? :manage, issue %>
+						<div class="righty buttons">
+							<%= link_to "Edit", [:edit,issue] %>
+							<%= link_to "Delete", issue, :method => :delete, :confirm => 'Are you sure?' %>
+						</div>
+					<% end %>
+					<h4>
+						<%= link_to issue.title, issue %>
+					</h4>
+					<p class="note">
+						<%= link_to issue.user.name, issue.user, :class => :user %>,
+						<span class="timeago" title="<%= issue.created_at.getutc.iso8601 %>"><%= time_ago_in_words(issue.created_at) %></span>
+					</p>
+				</td>
+				<td class="comments note">
+					<%= link_to pluralize(issue.comments_count, 'comment'), issue %>
+				</td>
+			</tr>
+			<% end %>
+		</table>
+		<%= will_paginate @issues, :class => :pagination %>
+		
+	</div>
+	<div class="g1">&nbsp;</div>
+	<div class="g3 ge">
+		<%= render 'sidebar' %>
+	</div>
+</div>

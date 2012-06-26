@@ -299,8 +299,8 @@ table {
 td, th {
     text-align: left;
     vertical-align: top;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     &+td,&+th {
         padding-left: 0.5*$gutter;
     }
@@ -366,4 +366,68 @@ ul.blog_entries {
     li + li {
         margin-top: 0.5em;
     }
+}
+.pagination {
+  font-size: 0.8em;
+	margin: 0;
+	text-align: left;
+	font-weight: bold;
+	margin-bottom: 10px;
+  a, span, em {
+  	padding: .2em .5em; 
+  	color: white;
+  	text-decoration: none;
+  }
+  span.disabled {
+  	color: #aaa;
+  }
+  span.current {
+  	font-weight: bold;
+  	color: $dark;
+  }
+  a {
+  	color: $color;
+    &:hover, &:focus {
+    	text-decoration: underline;
+    }
+  }
+  em {
+  	color: $dark;
+  }
+  .page_info {
+  	color: $medium;
+  	padding-top: .8em;
+  }
+  .previous_page, .next_page {
+  	border-width: 2px;
+  	color: $color;
+  	&.disabled {
+  	  color: $medium;
+	  }
+  }
+  .previous_page {
+  	margin-right: 1em;
+  }
+  .next_page {
+  	margin-left: 1em;
+  }
+}
+table.issues {
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  td {
+    a.user {
+      color: $darkish;
+    }  
+    &.comments {
+      a {
+        color: $darkish;
+      }
+      white-space: nowrap; 
+    }
+  }
 }
