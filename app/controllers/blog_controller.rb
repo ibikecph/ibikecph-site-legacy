@@ -1,7 +1,7 @@
 class BlogController < ApplicationController
   
   before_filter :find_blog_entry, :only => [:show,:edit,:update,:destroy]
-  before_filter :authorize, :except => [:index,:show,:archive]
+  before_filter :authorize, :except => [:index,:show,:archive,:ideas]
   before_filter :latest, :only => [:index,:archive,:show,:tag]
   before_filter :tag_cloud, :only => [:index,:archive,:show,:tag]
   

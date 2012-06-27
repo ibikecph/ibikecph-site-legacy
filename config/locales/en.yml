@@ -199,6 +199,12 @@ en:
     comment:
       subject: "Comment: %{title}"
       body: "%{user} added a comment '%{title}' on I Bike Cph. To read it, please visit:"
+  
+  issues:
+    index:
+      title: "Lab"
+      body: "Ideas and bug reports."
+      no_items: No items.
     
   #ui
   from: From

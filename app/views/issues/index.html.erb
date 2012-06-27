@@ -5,8 +5,11 @@
 				<%= link_to "New Issue", new_issue_path %>
 			</div>
 		<% end %>
-		<h1>Issues</h1>
-		<p>Bug reports and ideas for improvement.</p>
+		<h1><%=t '.title' %></h1>
+		<p><%=t '.body' %></p>
+		<%= link_to "All", issues_path %>
+		<%= link_to "Ideas", :tag => 'idea' %>
+		<%= link_to "Bugs", :tag => 'bug' %>
 		<br>
 		
 		<%= will_paginate @issues, :class => :pagination %>
@@ -17,12 +20,6 @@
 					#<%= issue.id %>
 				</td>
 				<td>
-					<% if can? :manage, issue %>
-						<div class="righty buttons">
-							<%= link_to "Edit", [:edit,issue] %>
-							<%= link_to "Delete", issue, :method => :delete, :confirm => 'Are you sure?' %>
-						</div>
-					<% end %>
 					<h4>
 						<%= link_to issue.title, issue %>
 					</h4>
@@ -34,11 +31,20 @@
 				<td class="comments note">
 					<%= link_to pluralize(issue.comments_count, 'comment'), issue %>
 				</td>
+				<% if can? :manage, issue %>
+				<td class="editing buttons">
+					<%= link_to "Edit", [:edit,issue] %>
+					<%= link_to "Delete", issue, :method => :delete, :confirm => 'Are you sure?' %>
+				</td>
+				<% end %>
 			</tr>
 			<% end %>
 		</table>
 		<%= will_paginate @issues, :class => :pagination %>
 		
+		<% if @issues.empty? %>
+			<p><%= t '.no_items' %></p>
+		<% end %>
 	</div>
 	<div class="g1">&nbsp;</div>
 	<div class="g3 ge">

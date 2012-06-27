@@ -318,7 +318,7 @@ td.buttons, th.buttons {
     display: inline-block;
     white-space: nowrap;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-decoration: none;
     padding: 2px 4px 2px 4px;
     line-height: 1.2em;
@@ -335,13 +335,12 @@ td.buttons, th.buttons {
         color: white;
     }
 }
-.button:hover, td.buttons a:hover, div.buttons a:hover, p.buttons a:hover, a.button:hover {
+.button:hover, .buttons a:hover {
     background-color: $dark;
     color: white;
+    text-decoration: none;
 }
-div.buttons, p.buttons {
-    font-size: 1.1em;
-    margin-bottom: 0.5em;
+.buttons {
 }
 td.note {
     padding-top:0.4em;
@@ -428,6 +427,8 @@ table.issues {
       a {
         color: $darkish;
       }
+    }
+    &.comments, &.editing {
       white-space: nowrap; 
     }
   }

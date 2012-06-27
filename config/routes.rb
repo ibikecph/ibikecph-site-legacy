@@ -59,7 +59,7 @@ RailsOSRM::Application.routes.draw do
   match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
   
-  resources :issues do
+  resources :issues, :path => 'lab' do
     member do
       post 'vote'
       post 'unvote'
@@ -69,6 +69,7 @@ RailsOSRM::Application.routes.draw do
       get 'cards'
     end
   end
+  
   
   match '/ping' => 'pages#ping'
   

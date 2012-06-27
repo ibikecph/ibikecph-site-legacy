@@ -1,20 +1,26 @@
-<div class="g6">
+<div class="g8">
 	<p>
 		<%= link_to "&larr; Back to List".html_safe, issues_path %>
 	</p>
 	<%= render 'issues/editing' %>
 	<h2><%= @issue.title %></h2>
-	<% if current_user %>
-		<div class="righty"><p><%= render 'issues/votes' %></p></div>
-	<% end %>
 	<%= simple_format @issue.body %>
+	<% if @issue.tags.any? %>
+		<p class="tags">
+			Tags: <%= @issue.tag_list %>
+		</p>
+	<% end %>
 	<br class="clear">
+
+	<% if current_user %>
+		<div class="righty"><%= render 'issues/votes' %></div>
+	<% end %>
 
 	<% if @issue.user %>
 		<%= link_to profile_image(@issue.user), @issue.user, :class => "avatar lefty" %>
 	<% end %>
 
-	<div class="note noprint">
+	<div class="note">
 		<% if @issue.user %>
 			<%= link_to truncate(@issue.user.name, :length => 80), @issue.user %>,
 		<% end %>

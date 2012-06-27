@@ -1,15 +1,21 @@
 class IssuesController < ApplicationController
        
   before_filter :require_login, :only => [:new,:create]
-  before_filter :find_issue, :except => [:old_show,:list,:index,:new,:create]
+  before_filter :find_issue, :only => [:show,:edit,:update,:destroy,:vote,:unvote]
   #authorize_resource :except => [:list,:new,:create]
   before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :prep, :only => [:index,:list,:create]
+  before_filter :prep, :only => [:index,:list,:create,:ideas]
 
   def index
-    @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 10
+    p 'xxxx'
+    p params[:tag]
+    if params[:tag]
+      @issues = Issue.tagged_with(params[:tag].to_s).lastest.includes(:user).paginate :page => params[:page], :per_page => 10
+    else
+      @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 10
+    end
   end
-
+  
   def show
     count_votes
     @comments = @issue.comments

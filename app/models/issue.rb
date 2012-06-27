@@ -6,11 +6,13 @@ class Issue < ActiveRecord::Base
   has_many :follows, :as => :followable, :dependent => :destroy
   has_many :followers, :through => :follows, :source => :user
   
+  acts_as_taggable
+  
   scope :lastest, order('created_at desc')
   scope :most_commented, where('comments_count > 0').order('comments_count desc')
   scope :most_voted, where('votes_count > 0').order('votes_count desc')
   
-  attr_accessible :title, :body, :rating
+  attr_accessible :title, :body, :tag_list
   
   MAXLENGTH = { :title => 100, :body => 10000 }
   
