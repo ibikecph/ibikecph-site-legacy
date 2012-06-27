@@ -6,7 +6,7 @@
 <h2><%=t '.latest_entries' %></h2>
 <br>
 <ul class="blog_entries">
-	<% for blog_entry in @blog_entries %>
+	<% for blog_entry in @latest %>
 		<li>
 			<%= link_to blog_entry.title, blog_entry %><br>
 			<span class="note"><%= time_ago_in_words blog_entry.created_at %> ago</span>
@@ -15,3 +15,4 @@
 </ul>
 <br>
 <p><%= link_to t('.blog_archive'), archive_blog_entry_index_path %></p>
+<br>

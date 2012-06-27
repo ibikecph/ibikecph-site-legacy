@@ -363,6 +363,7 @@ div.blog {
     margin-bottom: $gutter;
 }
 ul.blog_entries {
+  list-style: none;
     li + li {
         margin-top: 0.5em;
     }
@@ -430,4 +431,22 @@ table.issues {
       white-space: nowrap; 
     }
   }
+}
+.tags {
+    color: $note_color;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+div.tag_cloud {
+  a {
+    color: $dark;
+    &:hover {
+      color: $color;
+      text-decoration: underline;
+    }
+  }
+  .tag1 { font-size: 0.8em; }
+  .tag2 { font-size: 1.0em; }
+  .tag3 { font-size: 1.2em; }
+  .tag4 { font-size: 1.4em; }
 }

@@ -5,11 +5,10 @@
 				<%= link_to "New Entry",  new_blog_entry_path %>
 			</div>
 		<% end %>
-		<h1><%=t '.title' %></h1>
+		<h1><%=t '.title', :tag => params[:tag] %></h1>
 		<br>
-		<%= will_paginate @blog_entries, :class => :pagination %>
 		<ul class="blog_entries">
-			<%= render :partial => 'list', :collection => @blog_entries, :as => :blog_entry %>
+			<%= render :partial => "list", :collection => @blog_entries, :as => :blog_entry%>
 		</ul>
 	</div>
 	<div class="g1">&nbsp;</div>
@@ -18,5 +17,4 @@
 		<%= render 'tag_cloud' %>
 	</div>
 </div>
-
 

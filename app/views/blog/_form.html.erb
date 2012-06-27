@@ -12,6 +12,10 @@
 		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @blog_entry.class::MAXLENGTH[:body] } %>
 	</p>
 	<p>
+		<%= f.label :tags %>
+		<%= f.text_area :tag_list, { :rows => 1 } %>
+	</p>
+	<p>
 		<%= image_fields f, @blog_entry %>
 	</p>
 	<p>

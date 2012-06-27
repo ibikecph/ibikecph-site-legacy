@@ -49,6 +49,7 @@ RailsOSRM::Application.routes.draw do
   resources :blogs, :controller => :blog, :as => :blog_entry, :path => :blog do
     collection do
       get 'archive' => :archive
+      get 'tag/:tag' => :tag
     end
   end
   resources :comments, :only => [:destroy]

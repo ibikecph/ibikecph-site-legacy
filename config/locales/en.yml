@@ -22,6 +22,7 @@ en:
   hi: "Hi %{user}"
   on: On
   off: Off
+  tags: Tags
   
   you: You
   or_login_with: or login with
@@ -114,6 +115,8 @@ en:
       submit: Save
     archive:
       title: Blog Archive
+    tag:
+      title: "Entries tagged with: %{tag}"
     flash:
       created: Blog entry created.
       updated: Blog entry updated.
