@@ -77,8 +77,15 @@ body{
 				clear:both;
 				cursor:pointer;
 				font-weight:bold;
+				width:100%;
 				&:hover{
 					text-decoration:underline;
+				}
+
+				background:url(/assets/colapse-expand.png) right top no-repeat;
+
+				&.colapse{
+					background:url(/assets/colapse-expand.png) right bottom no-repeat;					
 				}
 			}
 
