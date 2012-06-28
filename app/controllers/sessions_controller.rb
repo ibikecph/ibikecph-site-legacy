@@ -17,18 +17,18 @@ class SessionsController < ApplicationController
     end
   end
   
-  def oath_setup
-    render :nothing => true
-  end
-
-  def oath_create
-    #raise auth.to_yaml
-    user = User.create_with_omniauth! @auth
-    copy_return_to
-    reset_session    
-    auto_login user
-    logged_in welcome_account_path, :notice => t('sessions.flash.logged_in', :name => user.name, :provider => @auth["provider"].titleize)  
-  end
+  #def oath_setup
+  #  render :nothing => true
+  #end
+  #
+  #def oath_create
+  #  #raise auth.to_yaml
+  #  user = User.create_with_omniauth! @auth
+  #  copy_return_to
+  #  reset_session    
+  #  auto_login user
+  #  logged_in welcome_account_path, :notice => t('sessions.flash.logged_in_oath', :user => user.name, :provider => @auth["provider"].titleize)  
+  #end
 
   def new
   end
@@ -42,13 +42,17 @@ class SessionsController < ApplicationController
   def create
     auth = Authentication.find_by_provider_and_uid 'email', params[:email]
     if auth && (params[:password].blank? == false) && auth.user.authenticate(params[:password])
-      if auth.state == 'active' || auth.token_created_at > VERIFICATION_RESPITE.ago
+      if auth.state == 'active' # || auth.token_created_at > VERIFICATION_RESPITE.ago
         auto_login auth.user, :remember_me => params[:remember_me]
         copy_return_to
         logged_in account_path, :notice => t('sessions.flash.logged_in', :user => auth.user.name)
       else
         @email = auth.uid
-        redirect_to unverified_emails_path, :alert => t('sessions.flash.email_not_verified', :email => auth.uid)
+        if auth.user.authentications.emails.active.any?
+          redirect_to unverified_emails_path, :alert => t('sessions.flash.email_not_verified', :email => auth.uid)
+        else
+          redirect_to activating_account_path, :alert => t('sessions.flash.email_not_verified', :email => auth.uid)
+        end
       end
     else
       flash.now.alert = t('sessions.flash.invalid_login')
@@ -67,7 +71,7 @@ class SessionsController < ApplicationController
 
   def failure
     if params[:message]= 'invalid_credentials'
-      redirect_to (current_user ? account_path : root_path), :alert => t('sessions.flash.oath__cancel')
+      redirect_to (current_user ? account_path : root_path), :alert => t('sessions.flash.oath_cancel')
     else
       redirect_to (current_user ? account_path : root_path), :alert => t('sessions.flash.oath_error', :error => params[:message])
     end

@@ -14,9 +14,6 @@ class ibikecph.Geocoder
 
 		@model.bind 'change:location', =>
 			location = @model.get 'location'
-			if location and location.lat and location.lng
-				@current.address = "#{I18n.toNumber location.lat, precision:4}; #{I18n.toNumber location.lng, precision:4}"
-				@model.set 'address', @current.address
 
 			@abort()
 			@wait_for 300, =>

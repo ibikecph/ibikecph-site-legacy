@@ -1,21 +1,26 @@
 class BlogController < ApplicationController
   
-  before_filter :find_blog_entry, :except => [:index,:archive,:new,:create]
-  before_filter :authorize, :except => [:index,:show,:archive]
-  before_filter :find_blog_entries, :only => [:index,:show]
+  before_filter :find_blog_entry, :only => [:show,:edit,:update,:destroy]
+  before_filter :authorize, :except => [:index,:show,:archive,:ideas]
+  before_filter :latest, :only => [:index,:archive,:show,:tag]
+  before_filter :tag_cloud, :only => [:index,:archive,:show,:tag]
   
   def index
   end
   
   def archive
-    @blog_entries = BlogEntry.latest
+    @blog_entries = BlogEntry.latest.paginate :page => params[:page], :per_page => 10
   end
   
   def show
     @blog_entry = BlogEntry.find params[:id]
     @comments = @blog_entry.comments
   end
-
+  
+  def tag
+    @blog_entries = BlogEntry.tagged_with(params[:tag]).latest
+  end
+  
   def new
     @blog_entry = BlogEntry.new
   end
@@ -59,9 +64,12 @@ class BlogController < ApplicationController
     authorize! :manage, @blog_entry || BlogEntry
   end
   
-  def find_blog_entries
-    @blog_entries = BlogEntry.latest.limit(20)
+  def latest
+    @latest = BlogEntry.latest.limit(10)
   end
   
+  def tag_cloud
+    @tags = BlogEntry.tag_counts_on(:tags)
+  end
 end
 

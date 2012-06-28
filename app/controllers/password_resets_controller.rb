@@ -6,18 +6,25 @@ class PasswordResetsController < ApplicationController
     
   def new
     if current_user
-      #if current_user.has_active_email?
+      @email = current_user.email
+      if @email==nil && current_user.authentications.emails.count==1
+        @email = current_user.authentications.emails.first
+      end
+      if @email
+        render :new_fixed
+      else
         @emails = current_user.authentications.emails.map { |e| e.uid }
-        render :new_logged_in
-      #else
-      #  redirect_to account_path, :alert => "Cannot reset password without a verified email." #TODO
-      #end
+        render :new_select
+      end
+    else
+      render :new_ask
     end
   end
   
   def create
     if current_user
-      email = current_user.authentications.emails.active.first
+      email = current_user.authentications.emails.active.first ||
+        current_user.authentications.emails.find_by_uid(params[:email])
     else
       email = EmailAuthentication.find_by_uid params[:email]
     end
@@ -33,7 +40,7 @@ class PasswordResetsController < ApplicationController
       end
     else
       flash.now.alert = t('password_resets.flash.email_not_found', :email => params[:email])
-      render :new
+      render :new_ask
     end
   end
   

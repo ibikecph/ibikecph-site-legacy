@@ -22,6 +22,7 @@ en:
   hi: "Hi %{user}"
   on: On
   off: Off
+  tags: Tags
   
   you: You
   or_login_with: or login with
@@ -48,7 +49,7 @@ en:
       no_account_q: No account?
     flash:
       logged_in: "Logged in as %{user}."
-      logged_in_oath: "Logged in as %{name} using %{provider}."
+      logged_in_oath: "Logged in as %{user} using %{provider}."
       invalid_login: Email or password was invalid.
       oath_cancel: Login cancelled.
       oath_error: "Could not log in: %{error}."
@@ -57,9 +58,9 @@ en:
       
   accounts:
     show:
-      title: Your Profile
-      title_login: Your Login
-      title_settings: Your Settings
+      title: Profile
+      title_login: Login
+      title_settings: Settings
       name: Name
       image: Image
       about: About
@@ -67,31 +68,28 @@ en:
       change_email: Change Email
       change_password: Change Password
       notify_by_email: Email Notifications
+      unverified: Unverified
+      password_hidden: Hidden
+      no_image: None
     edit:
       title: Edit Profile
       submit: Save
     activating:
-      title: Activating your Account
+      title: Almost there...
       body: "To activate your account, please follow the instructions in the email we sent you."
       link: Resend Activation Email
-    welcome:
-      title: Welcome!
-      body: Thank you for signing up. We hope you'll enjoy your stay at I Bike Cph.
-    new_activation:
-      title: Resend Activation Email
-      body: You can have your account activation email resent by filling out the form below.
-      submit: Resend
     edit_password:
       title: Change Password
       forgotten_q: Forgotten?
       new_password: New Password
       submit: Change
     welcome:
-      title: Welcome
-      body: Thank you for signing up. We hope you'll enjoy your stay at I Bike Cph!
+      title: Welcome!
+      body: Thank you for signing up. We hope you'll enjoy your stay at I Bike Cph.
+      view_account: View your Account
     settings:
       title: Edit Settings
-      unverified: "Note: You will not receive email notifications until you verify your email address."
+      unverified: "To receive email notifications, you need to verify your email address."
       email_notifications: Send me email notifications
       submit: Save
     flash:
@@ -100,7 +98,8 @@ en:
       invalid_password: Current password didn't match.
       updated: Account updated.
       settings_updated: Settings updated.
-        
+      activation_sent: "Activation email resent to %{email}."
+      
   blog:
     index:
       new: New Blog Entry
@@ -116,6 +115,8 @@ en:
       submit: Save
     archive:
       title: Blog Archive
+    tag:
+      title: "Entries tagged with: %{tag}"
     flash:
       created: Blog entry created.
       updated: Blog entry updated.
@@ -137,9 +138,13 @@ en:
       new_email_confirmation: New Email Confirmation
       submit: Change
     unverified:
-      title: Email not Verified
-      body: "To continue using your account, please verify your email."
-      submit: Send Verification Email
+      title: Unverified Email
+      body: "You should have received en email with instructions on how to verify your email. Otherwise, you can resent it be clicking below."
+      submit: Resend Verification Email
+    verification_sent:
+      title: Verification Email Sent
+      body: "To use your email, please follow the instructions in the verification email we sent you"
+      link: Resend Verification Email
     new_verification:
       title: Verify Email
       body: "Please enter your email below, and follow the instructions in the email we send to you."
@@ -149,22 +154,28 @@ en:
       already_verified: "Email %{email} already verified."
       verified: "Email %{email} verified."
       not_found: "Email %{email} not found."
-      verification_expired: Verification has expired.
+      verification_expired: Verification link has expired.
       verified_with_password: "Email #{@email} verified and password set."
-    
+      verification_wait: "Verification email can only be sent once each %{time}. Please wait a while and try again."
+      verification_not_found: Invalid verification link.
+      
   password_resets:
-    new:
+    new_ask:
       title: Reset Password
       body: "Please enter your email, and we'll send you instructions for resetting your password."
+      submit: Send Instructions
+    new_select:
+      title: Reset Password
+      body: "Instructions for resetting your password will be send to %{user}."
+      submit: Send Instructions
+    new_fixed:
+      title: Reset Password
+      body: "Instructions for resetting your password will be send to %{user}."
       submit: Send Instructions
     edit:
       title: Change Password
       for_user: "Change password for user %{user}."
       submit: Change Password
-    new_logged_in:
-      title: Reset Password
-      body: "Instructions for resetting your password will be send to %{user}."
-      submit: Send Instructions
     flash:
       instructions_sent: "Instructions for resetting your password has been emailed to %{email}."
       email_not_found: "Email %{email} not found."
@@ -188,7 +199,31 @@ en:
     comment:
       subject: "Comment: %{title}"
       body: "%{user} added a comment '%{title}' on I Bike Cph. To read it, please visit:"
-    
+  
+  issues:
+    index:
+      title: "Lab"
+      body: "Ideas and bug reports."
+      no_items: No items.
+    show:
+      back_to_list: Back to list
+      labels: Labels
+      Tags: Tags
+  
+  errors:
+    access_denied:
+      title: Hang On
+      body: You don't have access to this page.
+    record_not_found:
+      title: Item not found
+      body: You may have mistyped the address or the item might have been deleted.
+    route_not_found:
+      title: Page not found
+      body: You may have mistyped the address or the page might have moved.
+    internal_error:
+      title: Ups...!
+      body: Something went wrong. We'll fix it as soon as possible.
+      
   #ui
   from: From
   to: To

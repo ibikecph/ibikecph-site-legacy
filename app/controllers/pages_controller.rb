@@ -4,7 +4,9 @@ class PagesController < ApplicationController
     render :text => 'pong'
   end
   
-  def feedback
+  def fail
+    raise "Raising an error for testing!" if current_user && current_user.role == 'super'
+    render :nothing => true
   end
   
 end

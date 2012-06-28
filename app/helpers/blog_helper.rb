@@ -1,5 +1,6 @@
 module BlogHelper
   include AutoHtml
+  include ActsAsTaggableOn::TagsHelper
   
   def auto_html_blog html, options
     #gsub doesn't work on SafeStrings. to avoid this, use to_str to convert to normal stri

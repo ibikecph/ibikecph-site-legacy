@@ -1,4 +1,6 @@
 RailsOSRM::Application.routes.draw do
+  
+  root :to => 'map#index'
 
   #signup, login, logout
   get "signup" => "users#new", :as => :signup
@@ -11,8 +13,6 @@ RailsOSRM::Application.routes.draw do
       get 'existing'
     end
   end
-  match "/auth/:provider/callback" => "sessions#oath_create"
-  match "/auth/failure" => "sessions#failure"
   
   resource :account do
     get 'activating'
@@ -23,8 +23,8 @@ RailsOSRM::Application.routes.draw do
   get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
   put 'account/password' => 'accounts#update_password', :as => :update_password  
   delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
-  get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
-  post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
+  #get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
+  #post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
 
   resources :users
 
@@ -34,6 +34,7 @@ RailsOSRM::Application.routes.draw do
       get 'verify' => :new_verification
       post 'verify' => :create_verification
       get 'unverified'
+      get 'verification_sent'
     end
     member do
       get 'verify/resend' => :resend_verification, :as => :resend_verification
@@ -50,6 +51,7 @@ RailsOSRM::Application.routes.draw do
   resources :blogs, :controller => :blog, :as => :blog_entry, :path => :blog do
     collection do
       get 'archive' => :archive
+      get 'tag/:tag' => :tag
     end
   end
   resources :comments, :only => [:destroy]
@@ -58,13 +60,24 @@ RailsOSRM::Application.routes.draw do
   match 'follows/:followable_type/:followable_id' => 'follows#follow', :via => :post
   match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
-  match '/ping' => 'pages#ping'
-  match '/feedback' => 'pages#feedback'
   
-  match '/:locale' => 'pages#index'
-  root :to => 'map#index'
-
-
-  #404 catch all. https://github.com/rails/rails/issues/671
-  match '*path' => 'application#route_not_found'  
+  resources :issues, :path => 'lab' do
+    member do
+      post 'vote'
+      post 'unvote'
+    end
+    collection do
+      get 'list'
+      get 'cards'
+    end
+  end
+  
+  
+  match '/ping' => 'pages#ping'
+  match '/fail' => 'pages#fail'
+#  match '/:locale' => 'pages#index'
+  
+  #rail 3.2 exception handling
+  match "/404", :to => "application#error_route_not_found"
+  match "/500", :to => "application#error_internal_error"
 end

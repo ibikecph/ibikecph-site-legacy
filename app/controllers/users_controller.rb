@@ -25,8 +25,9 @@ class UsersController < ApplicationController
     if @user.save
       copy_return_to
       @email.send_activation
-      auto_login @user
-      logged_in account_path, :notice => "Account created. Welcome!"
+      redirect_to activating_account_path
+      #auto_login @user
+      #logged_in account_path, :notice => "Account created. Welcome!"
     else
       @existing_user = User.find_by_name params[:user][:name]
       render :action => 'new'

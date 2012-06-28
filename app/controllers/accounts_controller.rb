@@ -11,34 +11,10 @@ class AccountsController < ApplicationController
     @has_email = current_user.authentications.emails.active.any?
   end
   
-  def logins
-    @email_auths = current_user.authentications.emails
-    @oauth_auths = current_user.authentications.oauths
-    @can_remove_email = current_user.authentications.emails.active.count > 1
-    @can_remove_oauth = current_user.authentications.emails.active.count >= 1 || current_user.authentications.oauths.active.count > 1
-    @has_password = current_user.has_password?
-    @has_email = current_user.authentications.emails.active.any?
-    @has_unverified_email = current_user.authentications.emails.unverified.any?
-  end
-  
   def activating
   end
   
   def welcome
-  end
-  
-  def new_activation
-  end
-  
-  def create_activation
-    authentication = Authentication.find_by_provider_and_uid 'email', params[:email]
-    if authentication
-      authentication.send_activation
-      redirect_to activating_account_path, :notice => t('accounts.flash.activation_sent', :email => authentication.uid)#"Activation email sent to #{authentication.uid}."
-    else
-      flash.now.alert = t('accounts.flash.email_not_found')
-      render :new_activation
-    end
   end
   
   def edit_password

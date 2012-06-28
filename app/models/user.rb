@@ -84,11 +84,6 @@ class User < ActiveRecord::Base
     end
     false
   end
-  
-  def cleanup_emails auth
-    return unless auth.active?
-    authentications.emails.each { |e| puts e; e.destroy unless e==auth }
-  end
     
   def emails
     authentications.emails
@@ -102,14 +97,14 @@ class User < ActiveRecord::Base
     authentications.emails.active.first.uid rescue nil
   end
 
-  def self.create_with_omniauth! auth
-    user = self.new
-    user.name = auth['info']['name']  
-    user.authentications << OAuthAuthentication.new(:provider => auth['provider'], :uid => auth['uid'])
-    user.created_from_oath = true
-    user.save!
-    user    
-  end
+  #def self.create_with_omniauth! auth
+  #  user = self.new
+  #  user.name = auth['info']['name']  
+  #  user.authentications << OAuthAuthentication.new(:provider => auth['provider'], :uid => auth['uid'])
+  #  user.created_from_oath = true
+  #  user.save!
+  #  user    
+  #end
   
   def find_follow target
     if target

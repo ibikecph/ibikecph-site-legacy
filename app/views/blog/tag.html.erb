@@ -1,0 +1,20 @@
+<div class="gr">
+	<div class="g8">
+		<% if can? :manage, BlogEntry %>
+			<div class="righty buttons">
+				<%= link_to "New Entry",  new_blog_entry_path %>
+			</div>
+		<% end %>
+		<h1><%=t '.title', :tag => params[:tag] %></h1>
+		<br>
+		<ul class="blog_entries">
+			<%= render :partial => "list", :collection => @blog_entries, :as => :blog_entry%>
+		</ul>
+	</div>
+	<div class="g1">&nbsp;</div>
+	<div class="g3 ge">
+		<%= render 'latest' %>
+		<%= render 'tag_cloud' %>
+	</div>
+</div>
+

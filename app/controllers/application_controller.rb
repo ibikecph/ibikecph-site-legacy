@@ -4,25 +4,34 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_user, :auth_link
   
-  def route_not_found
-    respond_to do |format|
-      format.html { render 'errors/route_not_found', :status => :not_found }
-      format.any { render :nothing => true, :status => :not_found }
+  def error_route_not_found
+    render 'errors/route_not_found', :status => :not_found
+  end
+   
+  def error_access_denied
+    render 'errors/access_denied'
+  end
+  
+  def error_internal_error
+    begin
+      render 'errors/internal_error'
+    rescue
+      #absolutely last chance. render something without any risk of throwing an exception
+      render :file => 'public/500.html', :layout => false
     end
   end
   
+  
   private 
   
-  #unless Rails.application.config.consider_all_requests_local
+  unless Rails.application.config.consider_all_requests_local
   #  rescue_from Exception, :with => :internal_error
   #  rescue_from ActionController::UnknownController, :with => :route_not_found
   #  rescue_from ActionController::UnknownAction, :with => :route_not_found
   #  rescue_from ActionController::MethodNotAllowed, :with => :invalid_method
   #  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-  #  rescue_from CanCan::AccessDenied, :with => :access_denied
-  #  #note: can't yet catch ActionController::RoutingError in rails 3.
-  #  #we're using a catch-all route instead.
-  #end
+    rescue_from CanCan::AccessDenied, :with => :error_access_denied
+  end
   
   def set_locale
     if params[:locale]

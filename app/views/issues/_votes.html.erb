@@ -1,0 +1,9 @@
+<% if current_user %>
+	<% path = @vote ? [:unvote,@issue] : [:vote,@issue] %>
+	<% text = "#{@vote ? '&#10003; ':''}#{pluralize( @issue.votes.count, 'vote')}".html_safe %>
+	<% title = @vote ?  'Click to stop liking this issue' : 'Click to vote this issue' %>
+	<% klass = @vote ? 'on submit toggle' : 'submit toggle' %>
+	<%= link_to text, path, :remote => true, :id => :votes, :method => :post, :class => klass, :title => title %>
+<% end %>
+
+

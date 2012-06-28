@@ -1,6 +1,7 @@
 <div class="dialog g4">
 	<% unless @has_email %>
 	<p><%=t '.unverified' %></p>
+	<p><%= link_to t('.verify_email'), verify_emails_path %></p>
 	<% else %>
 	<h1><%=t '.title' %></h1>
 	<%= errors_for( current_user ).html_safe %>

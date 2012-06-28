@@ -5,8 +5,8 @@ class EmailsController < ApplicationController
    
   include ActionView::Helpers::DateHelper
 
-  before_filter :require_login, :except => [:unverified,:verify,:new_verification,:create_verification] 
-  before_filter :find_authentication, :except => [:new,:create,:unverified,:verify,:new_verification,:create_verification]
+  before_filter :require_login, :except => [:unverified,:verify,:new_verification,:create_verification,:verification_sent] 
+  before_filter :find_authentication, :except => [:new,:create,:unverified,:verify,:new_verification,:create_verification,:verification_sent]
   before_filter :find_authentication_by_token, :only => [:verify]
   
   def unverified
@@ -22,9 +22,7 @@ class EmailsController < ApplicationController
   
   def create
     has_password = current_user.has_password?
-
     @auth = current_user.authentications.build params[:email_authentication].merge(:type => 'EmailAuthentication')
-
     unless has_password
       current_user.password = params[:user][:password]
       current_user.password_confirmation = params[:user][:password_confirmation]
@@ -33,7 +31,10 @@ class EmailsController < ApplicationController
 
     if current_user.save
       @auth.send_verify
-      redirect_to account_path, :notice => "Verification instructions sent to #{@auth.uid}."
+      current_user.authentications.emails.each do |e|
+        e.destroy unless e.active? || e==@auth
+      end
+      redirect_to verification_sent_emails_path, :notice => t('emails.flash.verification_sent', :email => @auth.uid)
     else
       if has_password
         render :new
@@ -54,10 +55,12 @@ class EmailsController < ApplicationController
         redirect_to login_path, :alert => t('emails.flash.already_verified', :email => @auth.uid)
       else
         if @auth.token_created_at > RESEND_WAIT.ago
-          redirect_to verify_emails_path(:email => @auth.uid), :alert => "Verification email can only be sent once each #{distance_of_time_in_words RESEND_WAIT}. Please wait a while and try again."
+          @email = @auth.uid
+          flash.now.alert = t('.emails.flash.verification_wait', :time => distance_of_time_in_words(RESEND_WAIT))
+          render :new_verification
         else
           @auth.send_verify
-          redirect_to login_path, :notice => t('emails.flash.verification_sent', :email => @auth.uid)
+          redirect_to verification_sent_emails_path, :notice => t('emails.flash.verification_sent', :email => @auth.uid)
         end
       end
     else
@@ -99,13 +102,16 @@ class EmailsController < ApplicationController
         return
       end
     end
-    redirect_to current_user ? account_path : root_path
+    flash[:alert] = t('emails.flash.verification_not_found')
+    redirect_to current_user ? account_path : login_path
   end
   
   def activate_email
     @auth.activate
     @auth.save!
-    @user.cleanup_emails @auth
+    @auth.user.authentications.emails.each do |e|
+      e.destroy unless e==@auth
+    end    
     auto_login @user
   end
   

@@ -8,7 +8,13 @@
 <p><%= current_user.name %></p>
 
 <label><%=t '.image' %></label>
-<p><%= image_tag current_user.image.g2.url, :class => 'g2 square' %></p>
+<p>
+	<% if current_user.image? %>
+		<%= image_tag current_user.image.g2.url, :class => 'g2 square' %>
+	<% else %>
+		(<%=t '.no_image' %>)
+	<% end %>
+</p>
 
 <label><%=t '.about' %></label>
 <% if current_user.about %>
@@ -18,8 +24,7 @@
 <% end %>
 
 
-<br>
-
+<hr>
 
 <h1><%=t '.title_login' %></h1>
 
@@ -41,11 +46,11 @@
 <% if @has_password %>
 <%= link_to t('.change_password'), edit_password_path, :class => "note button righty" %>
 <label><%=t '.password' %></label>
-<p>&bull;&bull;&bull;&bull;&bull;</p>
+<p>(<%=t '.password_hidden' %>)</p>
 <% end %>
 
 
-<br>
+<hr>
 
 
 <h1><%=t '.title_settings' %></h1>
