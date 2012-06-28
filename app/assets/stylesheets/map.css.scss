@@ -16,17 +16,12 @@ html {
 body{
 	height:100%;
 
-	div.instructions{
-		width:350px;
-		padding:10px;
-		margin:10px;
-		border:2px solid #EEEEEE;
-		border-radius:5px;
-		box-shadow:0px 1px 1px rgba(0,0,0,.5);
-		overflow:scroll;
-		position:absolute;
-		bottom:0px;
-		background:white;
+	div.route{
+		height:200px;
+		clear:both;
+		float:left;
+		overflow-y:scroll;
+		display:none;
 
 		.instruction{
 			background: #eee;
@@ -70,6 +65,8 @@ body{
 				margin-top:10px;
 				float:left;
 				clear:both;
+				font-weight:bold;
+				margin-bottom:10px;
 				&:hover{
 					color:black !important;
 				}
@@ -79,6 +76,10 @@ body{
 				float:left;
 				clear:both;
 				cursor:pointer;
+				font-weight:bold;
+				&:hover{
+					text-decoration:underline;
+				}
 			}
 
 		}

@@ -15,9 +15,13 @@ class ibikecph.Sidebar extends Backbone.View
 	instructions : (event) ->
 		event.preventDefault()
 
+		if $("div.route:visible").length
+			$("div.route").hide()
+			return
 
 		if @app.info.instructions.length
-			instructions = $("div.route");
+			instructions = $("div.route").empty();
+			$("div.route").show();
 			@app.info.instructions.each (model, index)->
 				if index % 2 is 0 then odd = 'even' else odd = 'odd'
 
@@ -112,6 +116,7 @@ class ibikecph.Sidebar extends Backbone.View
 			$('.actions').show()
 			$(".time", @el).show()
 			$(".meta", @el).show()
+			$(".route").hide()
 			$(".distance .count", @el).text(meters/1000 + ' km');
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' min');
 			d = new Date;
