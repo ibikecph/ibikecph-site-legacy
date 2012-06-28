@@ -4,33 +4,28 @@ class ApplicationController < ActionController::Base
   before_filter :set_locale
   helper_method :current_user, :auth_link
   
-  def error_route_not_found
-    render 'errors/route_not_found', :status => :not_found
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from CanCan::AccessDenied, :with => :error_forbidden
   end
    
-  def error_access_denied
-    render 'errors/access_denied'
+  def error_forbidden
+    render 'errors/forbidden', :status => :forbidden rescue last_chance
   end
   
-  def error_internal_error
-    begin
-      render 'errors/internal_error'
-    rescue
-      #absolutely last chance. render something without any risk of throwing an exception
-      render :file => 'public/500.html', :layout => false
-    end
+  #these error handlers are called from rack middleware, see routes.rb
+  def error_route_not_found
+    render 'errors/route_not_found', :status => :not_found rescue last_chance
   end
   
-  
+  def error_internal_error    
+    render 'errors/internal_error' rescue last_chance
+  end
+    
   private 
   
-  unless Rails.application.config.consider_all_requests_local
-  #  rescue_from Exception, :with => :internal_error
-  #  rescue_from ActionController::UnknownController, :with => :route_not_found
-  #  rescue_from ActionController::UnknownAction, :with => :route_not_found
-  #  rescue_from ActionController::MethodNotAllowed, :with => :invalid_method
-  #  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-    rescue_from CanCan::AccessDenied, :with => :error_access_denied
+  def last_chance
+    #we're at the end of the line. render something with mimimal risk of throwing another exception
+    render :file => 'public/500.html', :layout => false
   end
   
   def set_locale

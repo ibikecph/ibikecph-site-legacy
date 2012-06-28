@@ -82,6 +82,8 @@ GEM
     eco-source (1.1.0.rc.1)
     erubis (2.7.0)
     eventmachine (0.12.10)
+    exception_notification (2.5.2)
+      actionmailer (>= 3.0.4)
     excon (0.6.6)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -229,6 +231,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job_active_record
   eco
+  exception_notification
   fog
   i18n-js
   jquery-rails

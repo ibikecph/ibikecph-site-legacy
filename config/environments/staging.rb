@@ -81,5 +81,10 @@ RailsOSRM::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }  
+  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
+  
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Exception] ",
+    :sender_address => %{"notifier" <auto@#{MAIN_DOMAIN}>},
+    :exception_recipients => ENV['EXCEPTION_RECIPIENTS']
 end

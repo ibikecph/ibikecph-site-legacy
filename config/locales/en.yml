@@ -211,9 +211,9 @@ en:
       Tags: Tags
   
   errors:
-    access_denied:
-      title: Hang On
-      body: You don't have access to this page.
+    forbidden:
+      title: Sorry
+      body: It seems you don't have access to the item.
     record_not_found:
       title: Item not found
       body: You may have mistyped the address or the item might have been deleted.

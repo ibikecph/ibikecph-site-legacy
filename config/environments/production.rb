@@ -80,4 +80,10 @@ RailsOSRM::Application.configure do
   
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
+
+  
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Exception] ",
+    :sender_address => %{"notifier" <auto@#{MAIN_DOMAIN}>},
+    :exception_recipients => ENV['EXCEPTION_RECIPIENTS']
 end
