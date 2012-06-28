@@ -1,9 +1,9 @@
 <div id="header">
-	<img src="/assets/ibikecph.png" alt="">
+	<%= link_to image_tag("/assets/ibikecph_white.png"), root_path %>
 	<div class="menu">
 		<%= render_navigation :context => :main %>
 	</div>
-		<div class="menu login">
+	<div class="menu login">
 		<%= render_navigation :context => :login %>
 	</div>
 </div>

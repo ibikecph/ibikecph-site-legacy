@@ -50,49 +50,49 @@ $columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 a {
     color: $color;
     &:hover {
-        color: white;
+        color: $hover;
     }
 }
 #header {
-    background-color: white;
+    background-color: $dark;
     color: white;
     font-size: 0.9em;
-    overflow:hidden;
-    height:50px;
+    overflow: hidden;
     position: relative;
-    img{
-        float:left;
-    }
-    a {
-        color: black;
-        &:hover {
-            color: white;
-        }
+    padding: 0;
+    margin: 0;
+    height: 42px;
+    img {
+        float: left;
+        margin: 5px $half_gutter;
     }
 }
 .menu {
-    margin-left: -$half-gutter;
     ul {
         list-style-type: circle;
         li {
             float: left;
             display: inline-block;
-            padding:10px;
-            height:30px;
+            padding: 14px;
             &.selected, &.selected:hover {
-                background-color: #D84742;
+                background-color: $color;
             }
             &:hover {
                 background-color: $darkish;
             }
             a {
-                line-height: 1.5em;
+                font-weight: bold;
+                color: white;
                 text-decoration: none;
 
             }
         }
     }
 
+}
+.menu.login {
+    float: right;
+    margin-right: $half_gutter;
 }
 .note {
     color: $note_color;

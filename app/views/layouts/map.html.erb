@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
 	<title><%=t :page_title %></title>
 </head>
-<body class="base-font not-selectable">
+<body>
 	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
 	<%= yield %>
 </body>
