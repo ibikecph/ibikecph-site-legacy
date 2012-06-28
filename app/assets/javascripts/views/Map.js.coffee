@@ -1,7 +1,7 @@
 class ibikecph.Map extends Backbone.View
 
-
 	bounds: true
+
 	initialize: ->
 		@map          = new L.Map @el.id, zoomControl: false
 		@dragging_pin = false
@@ -39,6 +39,11 @@ class ibikecph.Map extends Backbone.View
 		initial_location = new L.LatLng ibikecph.config.initial_location.lat, ibikecph.config.initial_location.lng
 		@map.setView initial_location, ibikecph.config.initial_location.zoom
 
+		setTimeout =>
+			@trigger 'zoom', zoom: @map.getZoom()
+			@trigger 'dragging_pin', dragging_pin: @dragging_pin
+		, 1
+
 		@route_marker.on 'mousedown', (event) =>
 			@create_via_point event
 
@@ -47,6 +52,9 @@ class ibikecph.Map extends Backbone.View
 
 		@map.on 'click', (event) =>
 			@set_pin_by_mouse_click event
+
+		@map.on 'zoomend', (event) =>
+			@trigger 'zoom', zoom: @map.getZoom()
 
 		@model.route.on 'reset', (points) =>
 			@geometry_changed points
@@ -109,11 +117,13 @@ class ibikecph.Map extends Backbone.View
 					@dragging_pin = true
 					@old_route.setLatLngs @current_route.getLatLngs()
 					@map.addLayer @old_route
+					@trigger 'dragging_pin', dragging_pin: @dragging_pin
 
 				pin.on 'dragend', (event) =>
 					event.target.dragged = false
 					@dragging_pin = false
 					@map.removeLayer @old_route
+					@trigger 'dragging_pin', dragging_pin: @dragging_pin
 
 				pin.on 'drag', (event) =>
 					location = event.target.getLatLng()

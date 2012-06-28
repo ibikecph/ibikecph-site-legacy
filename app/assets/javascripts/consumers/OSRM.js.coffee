@@ -18,6 +18,20 @@ class ibikecph.OSRM
 	abort: ->
 		@request.abort()
 
+	set_zoom: (zoom) ->
+		@zoom = zoom
+		@load_route()
+
+	get_zoom: ->
+		@zoom
+
+	set_instructions: (instructions) ->
+		@instructions = instructions
+		@load_route()
+
+	get_instructions: ->
+		@instructions
+
 	load_route: ->
 		locations = @get_location_codes()
 
@@ -31,7 +45,8 @@ class ibikecph.OSRM
 			return
 
 		current_query = "#{@zoom}/#{!!@instructions}/#{locations.join ';'}"
-		return if current_query == @last_query
+		current_query_with_instructions = "#{@zoom}/true/#{locations.join ';'}"
+		return if current_query == @last_query or current_query_with_instructions == @last_query
 		@last_query = current_query
 
 		{prehints, query_string} = @build_request locations
