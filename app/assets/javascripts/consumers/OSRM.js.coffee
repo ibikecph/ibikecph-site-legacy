@@ -26,8 +26,10 @@ class ibikecph.OSRM
 		@zoom
 
 	set_instructions: (instructions) ->
-		@instructions = instructions
-		@load_route()
+		had_instructions = @instructions
+		@instructions    = instructions
+
+		@load_route() if instructions and not had_instructions
 
 	get_instructions: ->
 		@instructions
@@ -82,8 +84,6 @@ class ibikecph.OSRM
 		if response.route_summary
 			@model.summary.set response.route_summary
 
-		#console.log 'routing', response
-
 	hint_for_location: (location_code) ->
 		for hints in @hints
 			hint = hints[location_code]
@@ -107,8 +107,7 @@ class ibikecph.OSRM
 			query_string += "&loc=#{location_code}"
 			query_string += "&hint=#{hint}" if hint
 
-		if @instructions?
-			query_string += '&instructions=true'
+		query_string += "&instructions=#{!!@instructions}"
 
 		return (
 			prehints     : prehints
