@@ -1,31 +1,44 @@
 class ibikecph.OSRM
 
-	constructor: (@model) ->
-		@request     = new ibikecph.SmartJSONP
-		@zoom        = null
-		@checksum    = null
-		@hints       = ({} for i in [0...10])
-		@hints_index = 0
+	constructor: (@model, @url) ->
+		@request      = new ibikecph.SmartJSONP
+		@zoom         = null
+		@instructions = null
+		@checksum     = null
+		@hints        = ({} for i in [0...10])
+		@hints_index  = 0
+		@last_query   = ''
 
-		@model.waypoints.on 'reset add remove change', @load_route, this
+		@url += if /\?/.test @url then '&' else '?'
+		@url += 'jsonp=?&'
+
+		@model.waypoints.on 'reset add remove change', =>
+			@load_route()
 
 	abort: ->
 		@request.abort()
 
 	load_route: ->
-		{prehints, query_string} = @build_request()
+		locations = @get_location_codes()
 
-		if query_string
-			do (prehints) =>
-				@request.exec 'http://83.221.133.2/viaroute?jsonp=?&' + query_string, (response) =>
-					@update_model response, prehints
-		else
+		if locations.length < 2
 			@model.route.reset() if @model.route.length > 0
 			@model.instructions.reset() if @model.instructions.length > 0
 			@model.summary.set(
 				total_distance : null
 				total_time     : null
 			)
+			return
+
+		current_query = "#{@zoom}/#{!!@instructions}/#{locations.join ';'}"
+		return if current_query == @last_query
+		@last_query = current_query
+
+		{prehints, query_string} = @build_request locations
+
+		do (prehints) =>
+			@request.exec @url + query_string, (response) =>
+				@update_model response, prehints
 
 	update_model: (response, prehints) ->
 		return unless response
@@ -37,8 +50,8 @@ class ibikecph.OSRM
 			@hints[@hints_index] = hints = {}
 
 			for hint, index in response.hint_data.locations or []
-				location_string = prehints[index]
-				hints[location_string] = hint if location_string
+				location_code = prehints[index]
+				hints[location_code] = hint if location_code
 
 		if response.route_geometry
 			path = ibikecph.util.decode_path response.route_geometry
@@ -56,49 +69,50 @@ class ibikecph.OSRM
 
 		#console.log 'routing', response
 
-	hint_for_location: (location_string) ->
+	hint_for_location: (location_code) ->
 		for hints in @hints
-			hint = hints[location_string]
+			hint = hints[location_code]
 			return hint if hint
 		return null
 
-	build_request: ->
-		return {} unless @model.waypoints.has_endpoints()
+	build_request: (location_codes) ->
+		return {} unless location_codes and location_codes.length >= 2
 
 		if @zoom?
-			qs = "z=#{@current.zoom}&"
+			query_string = "z=#{@zoom}&"
 		else
-			qs = ''
+			query_string = ''
 
-		qs += 'output=json&geomformat=cmp'
-		qs += "&checksum=#{@checksum}" if @checksum?
+		query_string += 'output=json&geomformat=cmp'
+		query_string += "&checksum=#{@checksum}" if @checksum?
 
 		prehints = []
-		for waypoint in @model.waypoints.models
-			waypoint_qs = @build_location_query_string waypoint, prehints
-			qs += waypoint_qs if waypoint_qs
+		for location_code in location_codes
+			hint = @hint_for_location location_code
+			query_string += "&loc=#{location_code}"
+			query_string += "&hint=#{hint}" if hint
 
-		qs += '&instructions=true'
+		if @instructions?
+			query_string += '&instructions=true'
 
 		return (
 			prehints     : prehints
-			query_string : qs
+			query_string : query_string
 		)
 
-	build_location_query_string: (waypoint, prehints) ->
-		location = waypoint.get 'location'
+	get_location_codes: ->
+		return [] unless @model.waypoints.has_endpoints()
 
-		lat = 1 * location?.lat
-		lng = 1 * location?.lng
-		return null if isNaN(lat) or isNaN(lng)
+		locations = []
 
-		lat = lat.toFixed(5)
-		lng = lng.toFixed(5)
-		location_string = "&loc=#{lat},#{lng}"
-		hint = @hint_for_location(location_string)
+		for waypoint in @model.waypoints.models
+			location = waypoint.get 'location'
+			if location?.lat? and location.lng?
+				lat = 1 * location.lat
+				lng = 1 * location.lng
+				locations.push "#{lat.toFixed 6},#{lng.toFixed 6}" unless isNaN(lat) or isNaN(lng)
 
-		qs = location_string
-		qs += "&hint=#{hint}" if hint
-
-		prehints.push location_string
-		return qs
+		if locations.length < 2
+			[]
+		else
+			locations

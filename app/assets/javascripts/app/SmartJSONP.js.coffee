@@ -29,6 +29,7 @@ class ibikecph.SmartJSONP
 
 		@current_request = $.ajax
 			url      : url
+			cache    : true # to prevent sending _=[timestamp] query string parameter
 			dataType : 'jsonp'
 			timeout  : 5000
 			success  : (data, status, xhr) =>

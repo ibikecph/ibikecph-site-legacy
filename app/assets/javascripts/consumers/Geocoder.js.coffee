@@ -56,16 +56,13 @@ class ibikecph.Geocoder
 
 		@request_init()
 
-		@request = $.getJSON 'http://nominatim.openstreetmap.org/search?json_callback=?', (
-			format            : 'json'
-			'accept-language' : 'da'
-			q                 : "#{@current.address}"
-			countrycodes      : 'DK'
-			viewbox           : '-27.0,72.0,46.0,36.0'
-			bounded           : '1'
-			email             : 'info@contingent.dk'
-			limit             : '1'
-		), (result) =>
+		options = _.extend
+			format : 'json'
+			q      : "#{@current.address}"
+			limit  : '1'
+		, ibikecph.config.geocoding_service.options
+
+		@request = $.getJSON ibikecph.config.geocoding_service.url + '?json_callback=?', options, (result) =>
 			@request_done()
 
 			@current.location.lat = @convert_number result[0]?.lat
@@ -82,14 +79,13 @@ class ibikecph.Geocoder
 
 		@request_init()
 
-		@request = $.getJSON 'http://nominatim.openstreetmap.org/reverse?json_callback=?', (
-			format            : 'json'
-			'accept-language' : 'da'
-			lat               : @current.location.lat or 0
-			lon               : @current.location.lng or 0
-			addressdetails    : '1'
-			email             : 'info@contingent.dk'
-		), (result) =>
+		options = _.extend
+			format : 'json'
+			lat    : @current.location.lat or 0
+			lon    : @current.location.lng or 0
+		, ibikecph.config.geocoding_service.options
+
+		@request = $.getJSON ibikecph.config.reverse_geocoding_service.url + '?json_callback=?', options, (result) =>
 			@request_done()
 
 			address = ibikecph.util.displayable_address result

@@ -10,6 +10,8 @@ app.start = ->
 
 	app.info = new ibikecph.Info
 
+	new ibikecph.OSRM app.info, ibikecph.config.routing_service.url
+
 	app.sidebar = new ibikecph.Sidebar
 		model : app.info
 		el    : '#topbar'

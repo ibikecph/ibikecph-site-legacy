@@ -3,30 +3,41 @@ class ibikecph.Map extends Backbone.View
 
 	bounds: true
 	initialize: ->
-		@map          = new L.Map @el.id, zoomControl : false
+		@map          = new L.Map @el.id, zoomControl: false
 		@dragging_pin = false
 		@pins         = {}
 
 		@route_point_index = []
 
-		@current_route = new L.Polyline [], ibikecph.config.current_route.style
-		@invalid_route = new L.Polyline [], ibikecph.config.invalid_route.style
-		@old_route     = new L.Polyline [], ibikecph.config.old_route.style
+		@current_route = new L.Polyline [], ibikecph.config.route_styles.current
+		@invalid_route = new L.Polyline [], ibikecph.config.route_styles.invalid
+		@old_route     = new L.Polyline [], ibikecph.config.route_styles.old
 
 		@route_marker = new L.Marker null, (
 			draggable : false
 			icon      : ibikecph.icons.route_marker
 		)
 
-		layers_control = new L.Control.Layers
-		for tileset, index in ibikecph.config.tiles
-			layer = new L.TileLayer tileset.url, tileset.options
-			layers_control.addBaseLayer layer, tileset.name
-			@map.addLayer(layer) if index == 0
-		@map.addControl layers_control
+		for control in ibikecph.config.map_controls
+			switch control.type
 
-		initial_location = new L.LatLng ibikecph.config.start.lat, ibikecph.config.start.lng
-		@map.setView initial_location, ibikecph.config.start.zoom
+				when 'layers'
+					@layers_control = new L.Control.Layers
+					@layers_control.setPosition control.position if control.position
+
+					for tileset, index in ibikecph.config.map_tiles
+						layer = new L.TileLayer tileset.url, tileset.options
+						@layers_control.addBaseLayer layer, tileset.name
+						@map.addLayer layer if index == 0
+					@map.addControl @layers_control
+
+				when 'zoom'
+					@zoom_control = new L.Control.Zoom
+					@zoom_control.setPosition control.position if control.position
+					@map.addControl @zoom_control
+
+		initial_location = new L.LatLng ibikecph.config.initial_location.lat, ibikecph.config.initial_location.lng
+		@map.setView initial_location, ibikecph.config.initial_location.zoom
 
 		@route_marker.on 'mousedown', (event) =>
 			@create_via_point event
