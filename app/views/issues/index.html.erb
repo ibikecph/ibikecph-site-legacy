@@ -1,10 +1,8 @@
 <div class="gr">
 	<div class="g8">
-		<% if can? :create, Issue %>
-			<div class="righty buttons">
-				<%= link_to "New Issue", new_issue_path %>
-			</div>
-		<% end %>
+		<div class="righty buttons">
+			<%= link_to "New Issue", new_issue_path %>
+		</div>
 		<h1><%=t '.title' %></h1>
 		<p><%=t '.body' %></p>
 		<%= link_to "All", issues_path %>

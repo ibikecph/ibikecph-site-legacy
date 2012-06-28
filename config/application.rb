@@ -60,6 +60,10 @@ module RailsOSRM
     config.assets.initialize_on_precompile = false
     
     
+    #3.2 wayy of catching exceptions
+    config.exceptions_app = self.routes
+    
+    
     #modifiy the way rails styles fields with errors in forms.
     #by default rails wraps fields with erros in <div class="field_with_errors">.
     #this is a problem if the <div> is inside an inline element like <p>.

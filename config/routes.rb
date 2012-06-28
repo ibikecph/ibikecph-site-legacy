@@ -1,4 +1,6 @@
 RailsOSRM::Application.routes.draw do
+  
+  root :to => 'map#index'
 
   #signup, login, logout
   get "signup" => "users#new", :as => :signup
@@ -72,11 +74,10 @@ RailsOSRM::Application.routes.draw do
   
   
   match '/ping' => 'pages#ping'
+  match '/fail' => 'pages#fail'
+#  match '/:locale' => 'pages#index'
   
-  match '/:locale' => 'pages#index'
-  root :to => 'map#index'
-
-
-  #404 catch all. https://github.com/rails/rails/issues/671
-  match '*path' => 'application#route_not_found'  
+  #rail 3.2 exception handling
+  match "/404", :to => "application#error_route_not_found"
+  match "/500", :to => "application#error_internal_error"
 end
