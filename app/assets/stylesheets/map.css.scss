@@ -44,6 +44,8 @@ body{
 	#topbar{
 
 
+
+
 		overflow:hidden;
 		position: absolute;
 		z-index:10;
@@ -60,20 +62,48 @@ body{
 			float:left;
 		}
 
+		.meta{
+
+			display:none;
+
+			.link{
+				margin-top:10px;
+				float:left;
+				clear:both;
+				&:hover{
+					color:black !important;
+				}
+			}
+
+			.instructions{
+				float:left;
+				clear:both;
+				cursor:pointer;
+			}
+
+		}
+
+		.reset{
+			float:right;
+			color:#DB483B;
+			cursor:pointer;
+		}
+
 		.time{
+			border-top:1px dashed #EFEEED;
 			opacity: .8;
 			width:346px;
 			height:54px;
-			margin-top:10px;
+			margin-top:20px;
 			display:none;
-			padding:2px;
+			padding:20px 2px 20px;
 			z-index:99;
 			float:left;
 			p{
 				text-transform:capitalize;
-				font-size:12px;
+				font-size:16px;
 				width:100%;
-				margin-bottom:6px;
+				margin-bottom:8px;
 
 				span{
 					float:right;
@@ -117,6 +147,8 @@ body{
 			margin-top:12px;
 		}
 
+
+
 		.label{
 
 			&.text{
@@ -153,18 +185,12 @@ body{
 					}
 				}
 
-				&.instructions{
-					float:right;
-					margin-right:1px;
-					color:#F62830;
-					cursor:pointer;
-					&:hover{
-						color:#F72C34;
-						text-decoration:underline;						
-					}
-				}
+				
 
 			}
+
+
+
 
 
 

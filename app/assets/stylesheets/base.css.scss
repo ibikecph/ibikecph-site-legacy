@@ -50,19 +50,21 @@ $columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 a {
     color: $color;
     &:hover {
-        color: $hover;
+        color: white;
     }
 }
 #header {
-    padding: 0px $gutter 0px $gutter;
-    background-color: $dark;
+    background-color: white;
     color: white;
     font-size: 0.9em;
     overflow:hidden;
     height:50px;
     position: relative;
+    img{
+        float:left;
+    }
     a {
-        color: white;
+        color: black;
         &:hover {
             color: white;
         }
@@ -75,9 +77,10 @@ a {
         li {
             float: left;
             display: inline-block;
-            margin-right: 5px;
+            padding:10px;
+            height:30px;
             &.selected, &.selected:hover {
-                background-color: $color;
+                background-color: #D84742;
             }
             &:hover {
                 background-color: $darkish;
@@ -85,13 +88,11 @@ a {
             a {
                 line-height: 1.5em;
                 text-decoration: none;
-                padding: $half-gutter;
+
             }
         }
     }
-    &.login {
-        float: right;
-    }
+
 }
 .note {
     color: $note_color;

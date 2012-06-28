@@ -3,7 +3,7 @@ class ibikecph.Sidebar extends Backbone.View
 
 	events:
 		'change label input'           : 'fields_updated'
-		'click .clear'             	   : 'clear'
+		'click .reset'             	   : 'reset'
 		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
 		'mouseup .pin.draging'         : 'drag_pin_end'
 		'click input.link'			   : 'select_all'
@@ -15,18 +15,13 @@ class ibikecph.Sidebar extends Backbone.View
 	instructions : (event) ->
 		event.preventDefault()
 
-		if $('div.instructions').length
-			$('div.instructions').remove();
-			return
 
 		if @app.info.instructions.length
-			instructions = $("<div>", class : 'instructions')
+			instructions = $("div.route");
 			@app.info.instructions.each (model, index)->
 				if index % 2 is 0 then odd = 'even' else odd = 'odd'
 
 				instructions.append $("<div>", class : 'instruction ' + odd).text(ibikecph.util.instruction_string(model.toJSON()))
-			$("div.instructions").remove();
-			$("body").append(instructions);
 			$(window).trigger 'resize';
 
 
@@ -74,11 +69,11 @@ class ibikecph.Sidebar extends Backbone.View
 
 		self = @
 
-		@model.waypoints.bind 'from:change:address to:change:address', @address_changed, @
-		@model.waypoints.bind 'from:change:loading to:change:loading', @loading_changed, @
-		@model.waypoints.bind 'clear:from', ->
+		@model.waypoints.bind 'from:change:address to:change:address reset', @address_changed, @
+		@model.waypoints.bind 'from:change:loading to:change:loading reset', @loading_changed, @
+		@model.waypoints.bind 'clear:from reset', ->
 			self.set_field('from', '')
-		@model.waypoints.bind 'clear:to', ->
+		@model.waypoints.bind 'clear:to reset', ->
 			self.set_field('to', '')
 
 
@@ -86,19 +81,9 @@ class ibikecph.Sidebar extends Backbone.View
 
 		@model.summary.bind 'change', @summary_changed, @app.info.summary;
 
-	clear : (event) ->
-		pin = $(event.target);
+	reset :  ->
+		@app.info.waypoints.reset();
 
-		label = pin;
-
-		label = label.parent() while not label.hasClass 'label'
-
-		input = $ "input", label;
-
-		pin.removeClass 'reset'
-
-		input.val ''
-		@fields_updated target: input
 
 	address_changed: (model, address) ->
 		field_name = model.get 'type'
@@ -113,10 +98,10 @@ class ibikecph.Sidebar extends Backbone.View
 		$('div.instructions').remove()
 
 		if @model.instructions.length
-			$('input.link').val url
+			$('a.link').attr href : url
 			$('.label.text').show()
 		else
-			$('input.link').val ''
+			$('a.link').attr herf : '#'
 			$('.label.text').hide()
 
 	summary_changed: ->
@@ -126,6 +111,7 @@ class ibikecph.Sidebar extends Backbone.View
 		if meters and seconds
 			$('.actions').show()
 			$(".time", @el).show()
+			$(".meta", @el).show()
 			$(".distance .count", @el).text(meters/1000 + ' km');
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' min');
 			d = new Date;
@@ -137,6 +123,7 @@ class ibikecph.Sidebar extends Backbone.View
 		else
 			$('.actions').hide()
 			$(".time", @el).hide()
+			$(".meta", @el).hide()
 
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
