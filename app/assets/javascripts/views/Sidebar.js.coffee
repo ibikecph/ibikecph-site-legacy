@@ -89,11 +89,10 @@ class ibikecph.Sidebar extends Backbone.View
 		@model.waypoints.reset()
 
 	waypoints_changed: ->
-		url = window.location.protocol + '//' + window.location.host + '#!/' + @model.waypoints.to_code()
-
 		$('div.instructions').remove()
 
 		if @model.instructions.length
+			url = window.location.protocol + '//' + window.location.host + '#!/' + @model.waypoints.to_code()
 			$('a.link').attr href : url
 			$('.label.text').show()
 		else
