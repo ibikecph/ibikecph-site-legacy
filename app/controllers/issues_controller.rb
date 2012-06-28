@@ -7,10 +7,8 @@ class IssuesController < ApplicationController
   before_filter :prep, :only => [:index,:list,:create,:ideas]
 
   def index
-    p 'xxxx'
-    p params[:tag]
-    if params[:tag]
-      @issues = Issue.tagged_with(params[:tag].to_s).lastest.includes(:user).paginate :page => params[:page], :per_page => 10
+    if params[:label]
+      @issues = Issue.tagged_with(params[:label].to_s, :on => :labels).lastest.includes(:user).paginate :page => params[:page], :per_page => 10
     else
       @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 10
     end

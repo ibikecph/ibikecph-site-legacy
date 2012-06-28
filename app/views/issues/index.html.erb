@@ -8,8 +8,8 @@
 		<h1><%=t '.title' %></h1>
 		<p><%=t '.body' %></p>
 		<%= link_to "All", issues_path %>
-		<%= link_to "Ideas", :tag => 'idea' %>
-		<%= link_to "Bugs", :tag => 'bug' %>
+		<%= link_to "Ideas", :label => 'idea' %>
+		<%= link_to "Bugs", :label => 'bug' %>
 		<br>
 		
 		<%= will_paginate @issues, :class => :pagination %>

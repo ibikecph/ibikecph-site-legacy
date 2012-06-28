@@ -205,6 +205,10 @@ en:
       title: "Lab"
       body: "Ideas and bug reports."
       no_items: No items.
+    show:
+      back_to_list: Back to list
+      labels: Labels
+      Tags: Tags
     
   #ui
   from: From
