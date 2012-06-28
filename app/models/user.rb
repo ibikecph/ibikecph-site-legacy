@@ -97,15 +97,6 @@ class User < ActiveRecord::Base
     authentications.emails.active.first.uid rescue nil
   end
 
-  #def self.create_with_omniauth! auth
-  #  user = self.new
-  #  user.name = auth['info']['name']  
-  #  user.authentications << OAuthAuthentication.new(:provider => auth['provider'], :uid => auth['uid'])
-  #  user.created_from_oath = true
-  #  user.save!
-  #  user    
-  #end
-  
   def find_follow target
     if target
       Follow.first :conditions => { 
@@ -114,7 +105,6 @@ class User < ActiveRecord::Base
           :followable_id => target.id
         }
     end
-  end
-  
+  end 
   
 end

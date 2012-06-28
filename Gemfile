@@ -7,9 +7,6 @@ gem 'cancan', :git => 'git://github.com/emiltin/cancan.git', :branch => 'master'
 gem 'pg'
 gem 'carrierwave'
 gem 'rmagick'
-gem 'omniauth', :git => 'git://github.com/emiltin/omniauth.git', :branch => 'master'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
 gem 'fog'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 gem 'delayed_job_active_record'
@@ -30,10 +27,7 @@ group :assets do
   gem 'eco'
 end
 
-group :production do
-  gem 'newrelic_rpm'
-end
-
 group :production, :staging do
   gem 'workless', '~> 1.0.1'
+  gem 'newrelic_rpm'    #place low in list to allow other stuff to be instrumented
 end
