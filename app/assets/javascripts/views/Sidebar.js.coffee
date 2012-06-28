@@ -17,9 +17,12 @@ class ibikecph.Sidebar extends Backbone.View
 
 		if $("div.route:visible").length
 			$("div.route").hide()
+			$(".instructions").removeClass('colapse')
 			return
 
 		if @app.info.instructions.length
+			$(".instructions").addClass('colapse')
+
 			instructions = $("div.route").empty()
 			$("div.route").show()
 			@app.info.instructions.each (model, index)->
@@ -103,10 +106,14 @@ class ibikecph.Sidebar extends Backbone.View
 		meters = @.get 'total_distance'
 		seconds  = @.get 'total_time'
 
+
 		if meters and seconds
 			$('.actions').show()
 			$(".time", @el).show()
 			$(".meta", @el).show()
+			$(".instructions").removeClass('colapse')
+
+
 			$(".route").hide()
 			$(".distance .count", @el).text(meters/1000 + ' km')
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' min')
