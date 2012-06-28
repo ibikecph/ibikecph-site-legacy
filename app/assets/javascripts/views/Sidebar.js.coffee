@@ -83,8 +83,8 @@ class ibikecph.Sidebar extends Backbone.View
 		@model.waypoints.bind 'clear:to reset', =>
 			@set_field 'to', ''
 
-
-		@model.waypoints.bind 'reset change', @waypoints_changed, this
+		@model.waypoints.bind 'reset change', =>
+			@waypoints_changed()
 
 		@model.summary.bind 'change', @summary_changed, @app.info.summary
 
@@ -95,11 +95,11 @@ class ibikecph.Sidebar extends Backbone.View
 		$('div.instructions').remove()
 
 		if @model.instructions.length
-			url = window.location.protocol + '//' + window.location.host + '#!/' + @model.waypoints.to_code()
+			url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
 			$('a.link').attr href : url
 			$('.label.text').show()
 		else
-			$('a.link').attr herf : '#'
+			$('a.link').attr href : '#'
 			$('.label.text').hide()
 
 	summary_changed: ->
