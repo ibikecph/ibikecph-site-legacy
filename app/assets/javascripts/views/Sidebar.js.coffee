@@ -95,6 +95,9 @@ class ibikecph.Sidebar extends Backbone.View
 		@model.waypoints.reset()
 
 	waypoints_changed: ->
+
+		return if @app.map.dragging_pin
+
 		$('div.instructions').remove()
 
 		if @model.instructions.length
