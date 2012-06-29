@@ -266,7 +266,7 @@ class ibikecph.Map extends Backbone.View
 
 			#autozoom
 			if @bounds && window.location.hash
-				@map.fitBounds new L.LatLngBounds(latlngs).pad(.05) unless @dragging_pin
+				@go_to_route() unless @dragging_pin
 			@bounds = false
 
 		else
