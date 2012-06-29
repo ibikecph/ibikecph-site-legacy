@@ -108,13 +108,17 @@ body{
 			border-top:1px dashed #444;
 			opacity: .8;
 			width:346px;
-			height:54px;
 			margin-top:20px;
 			display:none;
 			padding:20px 0px;
 			z-index:99;
 			float:left;
 			p{
+				input{
+					float:right;
+					width:40px;
+				}
+				font-weight:normal !important;
 				text-transform:capitalize;
 				font-size:16px;
 				width:100%;
