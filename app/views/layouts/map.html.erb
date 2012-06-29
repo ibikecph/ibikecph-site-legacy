@@ -2,6 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<%= stylesheet_link_tag "map", :media => "all" %>
+
+	<!--[if lte IE 8]>
+		<%= stylesheet_link_tag "leaflet.ie.css", :media => "all" %>
+	<![endif]-->
+
 	<%= javascript_include_tag "map" %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
