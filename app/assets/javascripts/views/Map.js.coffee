@@ -256,24 +256,24 @@ class ibikecph.Map extends Backbone.View
 
 		latlngs = route.map (point) -> point.to_latlng()
 
-		@update_route_point_index @model.waypoints.to_latlngs(), latlngs
+		@update_route_point_index @model.waypoints.to_latlngs(), latlngs unless @dragging_pin
 
 		if valid
-			@map.addLayer    @current_route
-			@map.removeLayer @invalid_route
 			@current_route.setLatLngs latlngs
 			@invalid_route.setLatLngs []
+			@map.addLayer    @current_route
+			@map.removeLayer @invalid_route
 
-			#autozoom
-			if @bounds && window.location.hash
-				@go_to_route() unless @dragging_pin
-			@bounds = false
+			# Autozoom on load
+			@go_to_route() if @bounds and window.location.hash
 
 		else
-			@map.removeLayer @current_route
-			@map.addLayer    @invalid_route
 			@current_route.setLatLngs []
 			@invalid_route.setLatLngs latlngs
+			@map.removeLayer @current_route
+			@map.addLayer    @invalid_route
+
+		@bounds = false
 
 	update_route_point_index: (waypoints, route) ->
 		@route_point_index = []
