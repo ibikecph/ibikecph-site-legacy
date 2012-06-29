@@ -2,9 +2,6 @@ RailsOSRM::Application.routes.draw do
   
   root :to => 'map#index'
 
-  # set locale
-  get ":locale" => 'map#index'
-
   #signup, login, logout
   get "signup" => "users#new", :as => :signup
   get "login" => "sessions#new", :as => :login
@@ -78,8 +75,8 @@ RailsOSRM::Application.routes.draw do
   
   match '/ping' => 'pages#ping'
   match '/fail' => 'pages#fail'
-#  match '/:locale' => 'pages#index'
-  
+  match '/:locale' => 'pages#index'
+
   #rail 3.2 exception handling
   match "/404", :to => "application#error_route_not_found"
   match "/500", :to => "application#error_internal_error"
