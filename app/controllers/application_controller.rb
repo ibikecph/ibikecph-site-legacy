@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
       end
     else
-      I18n.locale = 'dk'
+      I18n.locale = 'en'
     end
   end
 
