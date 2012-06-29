@@ -75,6 +75,9 @@ class ibikecph.Sidebar extends Backbone.View
 
 		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
 			@set_field model.get('type'), address
+			if _gaq? and address
+				_gaq.push ['_trackEvent', 'location', model.get 'type', address]
+
 		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
 			@set_loading model.get('type'), loading
 

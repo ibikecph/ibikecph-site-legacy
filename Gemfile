@@ -20,6 +20,7 @@ gem 'auto_html', :require => 'auto_html', :git => 'git://github.com/emiltin/auto
 gem 'rails_autolink'
 gem 'acts-as-taggable-on'
 gem 'exception_notification'
+gem 'google-analytics-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
