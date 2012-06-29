@@ -31,8 +31,8 @@ class ibikecph.Waypoint extends Backbone.Model
 	to_code: ->
 		location = @get 'location'
 
-		lat = 100000 * location.lat
-		lng = 100000 * location.lng
+		lat = 1000000 * location.lat
+		lng = 1000000 * location.lng
 		return '' if isNaN(lat) and isNaN(lng)
 
 		# String representation of this waypoint.
@@ -40,15 +40,15 @@ class ibikecph.Waypoint extends Backbone.Model
 
 ibikecph.Waypoint.from_code = (code) ->
 	# Parse string representation to the location of a waypoint.
-	location = "#{code}".match /^(-?[a-z0-9]{1,5})\.(-?[a-z0-9]{1,5})$/i
+	location = "#{code}".match /^(-?[a-z0-9]{1,6})\.(-?[a-z0-9]{1,6})$/i
 
 	waypoint = new ibikecph.Waypoint
 
 	if location
 		setTimeout ->
 			waypoint.set 'location', (
-				lat: parseInt(location[1], 36) * 1e-5
-				lng: parseInt(location[2], 36) * 1e-5
+				lat: parseInt(location[1], 36) * 1e-6
+				lng: parseInt(location[2], 36) * 1e-6
 			)
 		, 1
 
