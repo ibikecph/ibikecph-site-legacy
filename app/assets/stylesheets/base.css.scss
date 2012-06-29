@@ -54,6 +54,8 @@ a {
     }
 }
 #header {
+
+
     background-color: white;
     color: white;
     font-size: 0.9em;
@@ -62,6 +64,9 @@ a {
     position: relative;
     img{
         float:left;
+    }
+    .alpha{
+        float:right;
     }
     a {
         color: black;
