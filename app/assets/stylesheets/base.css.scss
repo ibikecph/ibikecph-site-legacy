@@ -74,6 +74,22 @@ a {
             color: white;
         }
     }
+
+    .locales {
+        li {
+            background-color: #fff;
+            padding-right: 0;
+
+            a {
+                color: #ccc;
+                text-decoration: none;
+
+                &.selected, &:hover {
+                    color: #777;
+                }
+            }
+        }
+    }
 }
 .menu {
     margin-left: -$half-gutter;

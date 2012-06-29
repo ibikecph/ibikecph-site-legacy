@@ -2,6 +2,9 @@ RailsOSRM::Application.routes.draw do
   
   root :to => 'map#index'
 
+  # set locale
+  get ":locale" => 'map#index'
+
   #signup, login, logout
   get "signup" => "users#new", :as => :signup
   get "login" => "sessions#new", :as => :login
