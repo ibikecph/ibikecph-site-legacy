@@ -2,12 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<%= stylesheet_link_tag "map", :media => "all" %>
+	<%= analytics_init %>
 
 	<!--[if lte IE 8]>
 		<%= stylesheet_link_tag "leaflet.ie.css", :media => "all" %>
 	<![endif]-->
 
 	<%= javascript_include_tag "map" %>
+	<script type="text/javascript">
+	I18n.locale        = "<%= I18n.locale %>"
+	</script>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
