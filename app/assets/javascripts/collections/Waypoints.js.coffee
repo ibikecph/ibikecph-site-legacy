@@ -1,9 +1,12 @@
+# Represents the waypoints (ie. from/to/via) entered by the user.
+
 class ibikecph.Waypoints extends Backbone.Collection
 	model: ibikecph.Waypoint
 
 	initialize: ->
 		@_setup_event_proxy()
 
+	# Returns the model for the from/to endpoint.
 	endpoint: (type) ->
 		last = (type == 'end' || type == 'to')
 
@@ -27,6 +30,8 @@ class ibikecph.Waypoints extends Backbone.Collection
 
 		return waypoint
 
+	# Clears the from/to endpoint. If there are via points, then the next via
+	# point will become an endpoint and the proper events are triggered.
 	clear: (type) ->
 		last = (type == 'end' || type == 'to')
 
@@ -66,6 +71,7 @@ class ibikecph.Waypoints extends Backbone.Collection
 	has_endpoints: ->
 		@has_from() and @has_to()
 
+	# Converts the waypoints into route points, used to display invalid/unknown routes.
 	as_route_points: ->
 		_.filter(@map((model) ->
 			location = model.get 'location'
@@ -94,6 +100,8 @@ class ibikecph.Waypoints extends Backbone.Collection
 
 		return codes.join '/'
 
+	# Initialize collection with a string representation, fx. when the user is
+	# linking to a specific route.
 	reset_from_code: (code) ->
 		waypoints = []
 
@@ -109,6 +117,10 @@ class ibikecph.Waypoints extends Backbone.Collection
 
 		@reset waypoints
 
+	# Event magic to forward events fromt the models of the from/to endpoints to
+	# observers of this collection. This is a bit difficult, since the events
+	# must be unregistered from the models that are removed or when resetting the
+	# whole collection.
 	_setup_event_proxy: ->
 		@_proxy_event_from = (event_name, a, b, c) =>
 			@trigger 'from:' + event_name, a, b, c

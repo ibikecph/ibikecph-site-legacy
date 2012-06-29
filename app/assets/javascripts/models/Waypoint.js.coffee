@@ -1,3 +1,5 @@
+# A waypoint (ie. from/to/via) that the user entered.
+
 class ibikecph.Waypoint extends Backbone.Model
 
 	defaults:
@@ -26,9 +28,11 @@ class ibikecph.Waypoint extends Backbone.Model
 		lng = 100000 * location.lng
 		return '' if isNaN(lat) and isNaN(lng)
 
+		# String representation of this waypoint.
 		return Math.floor(lat).toString(36) + '.' + Math.floor(lng).toString(36)
 
 ibikecph.Waypoint.from_code = (code) ->
+	# Parse string representation to the location of a waypoint.
 	location = "#{code}".match /^(-?[a-z0-9]{1,5})\.(-?[a-z0-9]{1,5})$/i
 
 	waypoint = new ibikecph.Waypoint
