@@ -13,6 +13,13 @@ class ibikecph.Waypoint extends Backbone.Model
 	initialize: ->
 		new ibikecph.Geocoder this
 
+	valid_location: ->
+		location = @get 'location'
+		return false unless location and location?.lat? and location?.lng?
+
+		invalid = isNaN(1 * location.lat) or isNaN(1 * location.lng)
+		not invalid
+
 	clear: ->
 		@set
 			address: ''

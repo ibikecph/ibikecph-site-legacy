@@ -68,6 +68,12 @@ class ibikecph.Waypoints extends Backbone.Collection
 		waypoint = @at(@length - 1)
 		waypoint?.get and waypoint.get('type') == 'to'
 
+	has_valid_from: ->
+		@has_from() and @at(0).valid_location()
+
+	has_valid_to: ->
+		@has_to() and @at(@length - 1).valid_location()
+
 	has_endpoints: ->
 		@has_from() and @has_to()
 

@@ -64,7 +64,7 @@ class ibikecph.Map extends Backbone.View
 			@trigger 'zoom', zoom: @map.getZoom()
 
 		@map.on 'locationfound', (event) =>
-			@model.endpoint('from').set 'location', event.latlng unless @model.waypoints.has_from()
+			@model.endpoint('from').set 'location', event.latlng unless @model.waypoints.has_valid_from()
 
 		@model.route.on 'reset', (points) =>
 			@geometry_changed points
@@ -225,11 +225,11 @@ class ibikecph.Map extends Backbone.View
 		return closest
 
 	set_pin_by_mouse_click: (event) ->
-		unless @model.waypoints.has_from()
+		unless @model.waypoints.has_valid_from()
 			@model.endpoint('from').set 'location', event.latlng
 			return
 
-		unless @model.waypoints.has_to()
+		unless @model.waypoints.has_valid_to()
 			@model.endpoint('to').set 'location', event.latlng
 			return
 
