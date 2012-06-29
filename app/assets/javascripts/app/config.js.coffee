@@ -40,6 +40,9 @@ ibikecph.config =
 		type     : 'layers'
 		position : 'topright'
 	,
+		type     : 'goto'
+		position : 'topright'
+	,
 		type     : 'zoom'
 		position : 'topright'
 	]
