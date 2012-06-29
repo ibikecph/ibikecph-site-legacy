@@ -31,20 +31,29 @@ class ibikecph.Waypoints extends Backbone.Collection
 		last = (type == 'end' || type == 'to')
 
 		if last
-			if @has_from()
-				waypoint = @at(0)
-		else
 			if @has_to()
-				waypoint = @at(@length - 1)
-		
-		if type
-			@trigger 'clear:' + type
-		
-		
-		if waypoint
-			@reset [waypoint]
+				@remove [@at @length - 1]
+				next = @length - 1
+				if next > 0
+					model = @at(next)
+					model.set 'type', 'to'
+					@trigger 'to:change:location', model, model.get('location')
+					@trigger 'to:change:address' , model, model.get('address')
+					@trigger 'to:change', model
+				else
+					@trigger 'clear:to'
 		else
-			@reset()
+			if @has_from()
+				@remove [@at 0]
+				next = 0
+				if next < @length - 1
+					model = @at(next)
+					model.set 'type', 'from'
+					@trigger 'from:change:location', model, model.get('location')
+					@trigger 'from:change:address' , model, model.get('address')
+					@trigger 'from:change', model
+				else
+					@trigger 'clear:from'
 
 	has_from: ->
 		waypoint = @at(0)
@@ -107,13 +116,15 @@ class ibikecph.Waypoints extends Backbone.Collection
 		@_proxy_event_to = (event_name, a, b, c) =>
 			@trigger 'to:' + event_name, a, b, c
 
-		@on 'add', (waypoint) =>
+		@on 'change:type add', (waypoint) =>
 			type = waypoint.get('type')
 
 			if type == 'from'
-				waypoint.on 'all', @_proxy_event_from
+				waypoint.unbind 'all', @_proxy_event_from
+				waypoint.on     'all', @_proxy_event_from
 			else if type == 'to'
-				waypoint.on 'all', @_proxy_event_to
+				waypoint.unbind 'all', @_proxy_event_to
+				waypoint.on     'all', @_proxy_event_to
 
 		@on 'remove', (waypoint) =>
 			type = waypoint.get('type')
@@ -135,7 +146,9 @@ class ibikecph.Waypoints extends Backbone.Collection
 			last  = new_waypoints.at(new_waypoints.length - 1)
 
 			if first and first.get('type') == 'from'
-				first.on 'all', @_proxy_event_from
+				first.unbind 'all', @_proxy_event_from
+				first.on     'all', @_proxy_event_from
 
 			if last and last.get('type') == 'to'
-				last.on 'all', @_proxy_event_to
+				last.unbind 'all', @_proxy_event_to
+				last.on     'all', @_proxy_event_to
