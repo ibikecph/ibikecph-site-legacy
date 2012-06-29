@@ -2,7 +2,7 @@ class ibikecph.Instructions extends Backbone.Collection
 	model: ibikecph.Instruction
 
 	reset_from_osrm: (instructions) ->
-		@reset instructions.map (instruction) ->
+		@reset _.map instructions, (instruction) ->
 			[turn, street, distance, _, _, _, direction] = instruction
 
 			roundabout_exit = "#{turn}".match /^1[123]-(\d+)$/
