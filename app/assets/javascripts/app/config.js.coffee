@@ -40,6 +40,9 @@ ibikecph.config =
 		type     : 'layers'
 		position : 'topright'
 	,
+		type     : 'goto'
+		position : 'topright'
+	,
 		type     : 'zoom'
 		position : 'topright'
 	]
@@ -52,7 +55,8 @@ ibikecph.config =
 		options:
 			'accept-language' : 'da'
 			countrycodes      : 'DK'
-			viewbox           : '-27.0,72.0,46.0,36.0'
+#			viewbox           : '-27.0,72.0,46.0,36.0' # Europe
+			viewbox           : '7.6,54.4,15.7,58' # DK, Bornholm and Skåne
 			bounded           : '1'
 			email             : 'info@contingent.dk'
 

@@ -23,6 +23,7 @@ en:
   on: On
   off: Off
   tags: Tags
+  departure: Departure
   
   you: You
   or_login_with: or login with
@@ -262,7 +263,7 @@ en:
 
 
   #route description
-  head: Start
+  head: Head
   continue: Continue
   #left
   turn_left: Turn left

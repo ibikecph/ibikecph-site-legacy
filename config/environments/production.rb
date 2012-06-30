@@ -3,6 +3,7 @@ RailsOSRM::Application.configure do
   MAIN_DOMAIN = 'stormy-flower-5599.herokuapp.com'
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
+  GA.tracker = "UA-32719126-1"
 
   # Code is not reloaded between requests
   config.cache_classes = true

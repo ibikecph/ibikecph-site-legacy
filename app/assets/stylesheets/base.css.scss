@@ -54,6 +54,8 @@ a {
     }
 }
 #header {
+
+
     background-color: white;
     color: white;
     font-size: 0.9em;
@@ -63,10 +65,29 @@ a {
     img{
         float:left;
     }
+    .alpha{
+        float:right;
+    }
     a {
         color: black;
         &:hover {
             color: white;
+        }
+    }
+
+    .locales {
+        li {
+            background-color: #fff;
+            padding-right: 0;
+
+            a {
+                color: #ccc;
+                text-decoration: none;
+
+                &.selected, &:hover {
+                    color: #777;
+                }
+            }
         }
     }
 }

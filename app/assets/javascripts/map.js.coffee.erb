@@ -9,12 +9,12 @@
 #
 # WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 # GO AFTER THE REQUIRES BELOW.
-#= require mdn
 #= require jquery
 #= require jquery_ujs
 #= require underscore_min
 #= require backbone_min
 #= require leaflet-src
+#= require leaflet/L.Control.Goto
 #= require i18n
 #= require i18n/translations
 #= require app/config
@@ -29,7 +29,6 @@
 #= require models/Waypoint
 #= require collections/Waypoints
 #= require models/InstructionsSummary
-#= require models/Point
 #= require models/Info
 #= require views/icons
 #= require views/Sidebar
@@ -48,7 +47,6 @@
 
 
 I18n.defaultLocale = "<%= I18n.default_locale %>"
-I18n.locale        = "<%= I18n.locale %>"
 
 jQuery ->
 	ibikecph.app.start()

@@ -105,16 +105,20 @@ body{
 		}
 
 		.time{
-			border-top:1px dashed #EFEEED;
+			border-top:1px dashed #444;
 			opacity: .8;
 			width:346px;
-			height:54px;
 			margin-top:20px;
 			display:none;
-			padding:20px 2px 20px;
+			padding:20px 0px;
 			z-index:99;
 			float:left;
 			p{
+				input{
+					float:right;
+					width:40px;
+				}
+				font-weight:normal !important;
 				text-transform:capitalize;
 				font-size:16px;
 				width:100%;
@@ -294,4 +298,27 @@ body{
 		border:2px solid #EEEEEE;
 	box-shadow:0px 1px 1px rgba(0,0,0,.5);
 
+}
+
+.leaflet-control-goto {
+	padding:5px;
+	border-radius:5px;
+
+	a {
+		border-radius:4px;
+		width:26px;
+		height:26px;
+		background-position:50% 50%;
+		background-repeat:no-repeat;
+		display:block;
+	}
+}
+
+.leaflet-control-goto-my-location {
+	background-image:url(location.png);
+	margin-bottom:5px;
+}
+
+.leaflet-control-goto-route {
+	background-image:url(route.png);
 }

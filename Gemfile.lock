@@ -90,6 +90,7 @@ GEM
       nokogiri (>= 1.4.4)
       ruby-hmac
     formatador (0.2.1)
+    google-analytics-rails (0.0.3)
     heroku (2.21.2)
       launchy (>= 0.3.2)
       rest-client (~> 1.6.1)
@@ -203,6 +204,7 @@ DEPENDENCIES
   eco
   exception_notification
   fog
+  google-analytics-rails
   i18n-js
   jquery-rails
   newrelic_rpm

@@ -31,7 +31,7 @@ class ibikecph.SmartJSONP
 			url      : url
 			cache    : true # to prevent sending _=[timestamp] query string parameter
 			dataType : 'jsonp'
-			timeout  : 5000
+			timeout  : 1000
 			success  : (data, status, xhr) =>
 				callback data
 			error    : (xhr, status, error) =>

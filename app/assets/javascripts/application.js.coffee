@@ -15,4 +15,3 @@
 #= require i18n/translations
 #= require jquery.timeago
 #= require utils
-	

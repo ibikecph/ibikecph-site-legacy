@@ -32,11 +32,20 @@ class ApplicationController < ActionController::Base
     if params[:locale]
       if I18n.available_locales.include?(params[:locale].to_sym)
         I18n.locale = params[:locale]
-      else
-        redirect_to root_path
+        cookies[:locale] = {
+          :value => params[:locale],
+          :expires => Time.now + 365*24*60*60
+        }
       end
+      redirect_to root_path
     else
-      I18n.locale = I18n.default_locale
+      locale = cookies[:locale]
+
+      if locale and locale.size < 10 and I18n.available_locales.include? locale.to_sym
+        I18n.locale = locale
+      else
+        I18n.locale = 'en'
+      end
     end
   end
 

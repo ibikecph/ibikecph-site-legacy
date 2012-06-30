@@ -36,6 +36,13 @@ class ibikecph.Map extends Backbone.View
 					@zoom_control.setPosition control.position if control.position
 					@map.addControl @zoom_control
 
+				when 'goto'
+					@goto_control = new L.Control.Goto
+					@goto_control.setPosition control.position if control.position
+					@goto_control.go_to_my_location = => @go_to_my_location()
+					@goto_control.go_to_route       = => @go_to_route()
+					@map.addControl @goto_control
+
 		initial_location = new L.LatLng ibikecph.config.initial_location.lat, ibikecph.config.initial_location.lng
 		@map.setView initial_location, ibikecph.config.initial_location.zoom
 
@@ -56,6 +63,9 @@ class ibikecph.Map extends Backbone.View
 		@map.on 'zoomend', (event) =>
 			@trigger 'zoom', zoom: @map.getZoom()
 
+		@map.on 'locationfound', (event) =>
+			@model.endpoint('from').set 'location', event.latlng unless @model.waypoints.has_valid_from()
+
 		@model.route.on 'reset', (points) =>
 			@geometry_changed points
 
@@ -74,6 +84,22 @@ class ibikecph.Map extends Backbone.View
 
 		@model.waypoints.on 'reset', (collection) =>
 			@waypoints_reset collection
+
+	go_to_my_location: ->
+		@map.locate
+			setView: true
+			enableHighAccuracy: true
+
+	go_to_route: ->
+		latlngs = @model.waypoints.to_latlngs()
+
+		# In order to not display route behind sidebar.
+		translate = new L.Point -374, 0
+
+		for latlng in latlngs[..]
+			latlngs.push @map.layerPointToLatLng @map.latLngToLayerPoint(latlng).add(translate)
+
+		@map.fitBounds new L.LatLngBounds(latlngs).pad(.03) if latlngs.length > 0
 
 	waypoint_added_or_updated: (model) ->
 		@waypoint_show_hide_update model, false
@@ -199,11 +225,11 @@ class ibikecph.Map extends Backbone.View
 		return closest
 
 	set_pin_by_mouse_click: (event) ->
-		unless @model.waypoints.has_from()
+		unless @model.waypoints.has_valid_from()
 			@model.endpoint('from').set 'location', event.latlng
 			return
 
-		unless @model.waypoints.has_to()
+		unless @model.waypoints.has_valid_to()
 			@model.endpoint('to').set 'location', event.latlng
 			return
 
@@ -228,27 +254,26 @@ class ibikecph.Map extends Backbone.View
 		valid  = route.length >= 2
 		route = @model.waypoints.as_route_points() if not valid
 
-		latlngs = route.map (point) -> 
-			point.to_latlng();
+		latlngs = route.map (point) -> point.to_latlng()
 
-		@update_route_point_index @model.waypoints.to_latlngs(), latlngs
+		@update_route_point_index @model.waypoints.to_latlngs(), latlngs unless @dragging_pin
 
 		if valid
-			@map.addLayer    @current_route
-			@map.removeLayer @invalid_route
 			@current_route.setLatLngs latlngs
 			@invalid_route.setLatLngs []
+			@map.addLayer    @current_route
+			@map.removeLayer @invalid_route
 
-			#autozoom
-			if @bounds && window.location.hash
-				@map.fitBounds new L.LatLngBounds(latlngs).pad(.05) unless @dragging_pin
-			@bounds = false
+			# Autozoom on load
+			@go_to_route() if @bounds and window.location.hash
 
 		else
-			@map.removeLayer @current_route
-			@map.addLayer    @invalid_route
 			@current_route.setLatLngs []
 			@invalid_route.setLatLngs latlngs
+			@map.removeLayer @current_route
+			@map.addLayer    @invalid_route
+
+		@bounds = false
 
 	update_route_point_index: (waypoints, route) ->
 		@route_point_index = []

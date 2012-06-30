@@ -11,6 +11,7 @@ class ibikecph.Sidebar extends Backbone.View
 		'click .close'                 : 'colapse'
 		'click .expand'                : 'expand'
 		'click .instructions'          : 'instructions'
+		'change .departure input'	   : 'summary_changed'
 
 	instructions : (event) ->
 		event.preventDefault()
@@ -75,6 +76,9 @@ class ibikecph.Sidebar extends Backbone.View
 
 		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
 			@set_field model.get('type'), address
+			if _gaq? and address
+				_gaq.push ['_trackEvent', 'location', model.get 'type', address]
+
 		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
 			@set_loading model.get('type'), loading
 
@@ -86,12 +90,15 @@ class ibikecph.Sidebar extends Backbone.View
 		@model.waypoints.bind 'reset change', =>
 			@waypoints_changed()
 
-		@model.summary.bind 'change', @summary_changed, @app.info.summary
+		@model.summary.bind 'change', @summary_changed, @
 
 	reset: ->
 		@model.waypoints.reset()
 
 	waypoints_changed: ->
+
+		return if @app.map.dragging_pin
+
 		$('div.instructions').remove()
 
 		if @model.instructions.length
@@ -103,8 +110,11 @@ class ibikecph.Sidebar extends Backbone.View
 			$('.label.text').hide()
 
 	summary_changed: ->
-		meters = @.get 'total_distance'
-		seconds  = @.get 'total_time'
+
+
+
+		meters = @app.info.summary.get 'total_distance'
+		seconds  = @app.info.summary.get 'total_time'
 
 
 		if meters and seconds
@@ -118,6 +128,15 @@ class ibikecph.Sidebar extends Backbone.View
 			$(".distance .count", @el).text(meters/1000 + ' km')
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' min')
 			d = new Date
+
+
+
+			if $(".departure input").val()
+				t = $(".departure input").val().split(':')
+				if t.length = 2
+					d.setHours(t[0])
+					d.setMinutes(t[0])
+
 			d.setTime d.getTime() + seconds * 1000 + 1000 * 60 * 2
 			m = d.getMinutes()
 			if m < 10
