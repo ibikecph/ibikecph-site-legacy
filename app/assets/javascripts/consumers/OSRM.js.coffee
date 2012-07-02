@@ -103,6 +103,7 @@ class ibikecph.OSRM
 
 		prehints = []
 		for location_code in location_codes
+			prehints.push location_code
 			hint = @hint_for_location location_code
 			query_string += "&loc=#{location_code}"
 			query_string += "&hint=#{hint}" if hint

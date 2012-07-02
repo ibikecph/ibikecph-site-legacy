@@ -1,3 +1,6 @@
+# Holds references to all the important models and collections for a given
+# instance of the app.
+
 class ibikecph.Info
 
 	constructor: ->

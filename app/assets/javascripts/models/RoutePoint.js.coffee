@@ -1,3 +1,5 @@
+# A point on the route.
+
 class ibikecph.RoutePoint extends Backbone.Model
 
 	to_latlng: ->

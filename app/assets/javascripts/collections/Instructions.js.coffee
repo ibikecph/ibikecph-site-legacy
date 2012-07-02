@@ -1,3 +1,5 @@
+# Represent the instructions for the user to follow a given route.
+
 class ibikecph.Instructions extends Backbone.Collection
 	model: ibikecph.Instruction
 
