@@ -8,9 +8,9 @@ class ibikecph.Waypoints extends Backbone.Collection
 	reset: (models, options) ->
 		models || (models = []);
 		options || (options = {});
-
+		this._reset();
 		@.models = models;
-		this.trigger 'reset', this, options  if not options.silent
+		this.trigger 'reset', @, options  if options.silent isnt false
 		return this 
 
 	endpoint: (type) ->
