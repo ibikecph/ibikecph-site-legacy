@@ -122,7 +122,7 @@ img {
         width: $avatar;
     }
 }
-label, .chars_remaining {
+label, .chars_remaining, p#terms a {
     font-size: 0.8em;
     font-weight: bold;
     color: $dark;
@@ -450,4 +450,11 @@ div.tag_cloud {
   .tag2 { font-size: 1.0em; }
   .tag3 { font-size: 1.2em; }
   .tag4 { font-size: 1.4em; }
+}
+p#terms {
+    textarea {
+        display: none;
+        font-size: 0.8em;
+        user-select: none;
+    }
 }

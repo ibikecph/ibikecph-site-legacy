@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   before_filter :require_login, :only => [:edit,:update,:destroy]
-  before_filter :find_user, :except => [:index,:new,:create]
+  before_filter :find_user, :except => [:index,:new,:create,:terms]
   authorize_resource :only => [:show,:edit,:update,:destroy]
   
   def index
@@ -33,7 +33,10 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
-
+  
+  def terms
+  end
+  
   private
     
   def warn_about_existing_name

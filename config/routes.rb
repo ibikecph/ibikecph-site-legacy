@@ -4,6 +4,7 @@ RailsOSRM::Application.routes.draw do
 
   #signup, login, logout
   get "signup" => "users#new", :as => :signup
+  get "signup/terms" => "users#terms", :as => :terms
   get "login" => "sessions#new", :as => :login
   get "login/return" => "sessions#new_and_return", :as => :login_and_return
   get "logout" => "sessions#destroy", :as => :logout

@@ -38,6 +38,11 @@
 		</div>
 	</div>
 <% end %>
+<p id="terms">
+	<%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), :terms, :target => '_blank' %>
+	<%= text_area_tag :terms_text, t('terms'), :rows => 10, :disabled => 'disabled' %>
+</p>
+
 <p>
 	<%= submit_tag t('.submit'), :class => :submit %>
 	<span class="note"><%=t '.already_have_account_q' %> <%= link_to t('Login'), login_path %></span>

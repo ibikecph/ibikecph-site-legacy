@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :authentications, :dependent => :destroy
   has_many :blog_entries, :dependent => :nullify
   has_many :comments, :dependent => :destroy
-  attr_accessible :role, :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache, :notify_by_email
+  attr_accessible :role, :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache, :notify_by_email, :terms
   
   attr_accessor :password, :created_from_oath
   
@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :on => :create, :unless => :has_oath_authentications
   validates_length_of :password, :minimum => 3, :message => "must be at least 3 characters long", :if => :password
   validates_confirmation_of :password, :message => "should match confirmation", :if => :password
+  validates_acceptance_of :terms
   
   accepts_nested_attributes_for :authentications
   

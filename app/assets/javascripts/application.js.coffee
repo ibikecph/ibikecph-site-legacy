@@ -15,3 +15,8 @@
 #= require i18n/translations
 #= require jquery.timeago
 #= require utils
+
+jQuery ->
+	$('p#terms a').click (event) ->
+        event.preventDefault()
+        $('p#terms textarea').toggle()

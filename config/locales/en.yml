@@ -37,6 +37,8 @@ en:
     new:
       title: Sign Up
       body: Create your free I Bike Cph account
+      i_accept: I accept the
+      terms: Terms of Service
       submit: Create Account
       already_have_account_q: Already have an account?
     show:
