@@ -4,6 +4,15 @@ class ibikecph.Waypoints extends Backbone.Collection
 	initialize: ->
 		@_setup_event_proxy()
 
+
+	reset: (models, options) ->
+		models || (models = []);
+		options || (options = {});
+
+		@.models = models;
+		this.trigger 'reset', this, options  if not options.silent
+		return this 
+
 	endpoint: (type) ->
 		last = (type == 'end' || type == 'to')
 
