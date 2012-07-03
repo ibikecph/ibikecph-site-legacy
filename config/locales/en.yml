@@ -11,8 +11,7 @@ en:
       #error messages
       authentications:
         uid: 'Email'      
-        uid_confirmation: 'Email confirmation'
-    
+        uid_confirmation: 'Email confirmation'    
   
   edit: Edit
   new: New
@@ -116,6 +115,10 @@ en:
       submit: Save
     archive:
       title: Blog Archive
+    latest:
+      title: Latest Entries
+      archive: Blog Archives
+      new: New Entry
     tag:
       title: "Entries tagged with: %{tag}"
     flash:
@@ -224,7 +227,10 @@ en:
     internal_error:
       title: Ups...!
       body: Something went wrong. We'll fix it as soon as possible.
-      
+  
+  character:
+    remaining: "%{n} characters remaining"
+    
   #ui
   from: From
   to: To

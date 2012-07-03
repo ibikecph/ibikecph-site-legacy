@@ -1,7 +1,7 @@
-<h2>Top Issues</h2>
+<h2><%=t '.title' %></h2>
 <table class="fullwidth">
 	<% if @most_voted.any? %>
-	<tr><th colspan=2><br>Most Votes</th>
+	<tr><th colspan=2><br><%=t '.most_votes' %></th>
 	<% for issue in @most_voted %>
 	<tr class="oneline">
 		<td><%= link_to issue.title, issue %></td>
@@ -11,7 +11,7 @@
 	<% end %>
 
 	<% if @most_commented.any? %>
-	<tr><th colspan=2><br>Most Comments</th>
+	<tr><th colspan=2><br><%=t '.most_comments' %></th>
 	<% for issue in @most_commented %>
 	<tr class="oneline">
 		<td><%= link_to issue.title, issue %></td>
