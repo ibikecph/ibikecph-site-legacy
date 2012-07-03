@@ -1,13 +1,13 @@
 <div class="gr">
 	<div class="g8">
 		<div class="righty buttons">
-			<%= link_to "New Issue", new_issue_path %>
+			<%= link_to t('.new'), new_issue_path %>
 		</div>
 		<h1><%=t '.title' %></h1>
 		<p><%=t '.body' %></p>
-		<%= link_to "All", issues_path %>
-		<%= link_to "Ideas", :label => 'idea' %>
-		<%= link_to "Bugs", :label => 'bug' %>
+		<%= link_to t('issues.labels.all'), issues_path %>
+		<%= link_to t('issues.labels.ideas'), :label => 'idea' %>
+		<%= link_to t('issues.labels.bugs'), :label => 'bug' %>
 		<br>
 		
 		<%= will_paginate @issues, :class => :pagination %>
@@ -27,12 +27,12 @@
 					</p>
 				</td>
 				<td class="comments note">
-					<%= link_to pluralize(issue.comments_count, 'comment'), issue %>
+					<%= link_to t( 'comment', :count => issue.comments_count ), issue %>
 				</td>
 				<% if can? :manage, issue %>
-				<td class="editing buttons">
-					<%= link_to "Edit", [:edit,issue] %>
-					<%= link_to "Delete", issue, :method => :delete, :confirm => 'Are you sure?' %>
+				<td class="editing buttons last">
+					<%= link_to t('edit'), [:edit,issue] %>
+					<%= link_to t('delete'), issue, :method => :delete, :confirm => t('are_you_sure_q') %>
 				</td>
 				<% end %>
 			</tr>

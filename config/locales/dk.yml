@@ -2,15 +2,323 @@
 # See https://github.com/svenfuchs/rails_i18n/tree/master/rails%2Flocale for starting points.
 
 dk:
+  activerecord:
+    models:
+      issue: Emne
+      user: Bruger
+      blog_entry: Blogindlæg
+      comment: Kommentar
+      vote: Stemme
+    attributes:
+      email_authentication:
+        uid: 'Email'                            
+        uid_confirmation: 'Email konfirmering'
+      authentications:
+        uid: 'Email'      
+        uid_confirmation: 'Email konfirmering'
+      blog_entry:
+        title: Titel
+        body: Indhold
+        tags: Tags
+        image: Billede
+        sticky: Fasthold
+      issue:
+        title: Titel
+        body: Beskrivelse
+        labels: Mærkater
+        tags: Tags
+      user:
+        name: Navn
+        about: Om
+        image: Billede
+        tags: Tags
+        current_password: Nuværende kodeord
+        new_password_confirmation: Konfirmér nyt kodeord
+    errors:
+      messages:
+        blank: kan ikke være tom
+
+  helpers:
+    submit:
+      create: "Opret %{model}"
+      update: "Gem %{model}"
+  
+  menu:
+    routes: Ruter
+    blog: Blog
+    lab: Lab
+    signup: Indmeld
+    login: Log Ind
+    logout: Log ud
+  
+  edit: Rediger
+  new: Ny
+  delete: Slet
+  submit: Gem
+  login: Log ind
+  hi: "Hej %{user}"
+  on: Til
+  off: Fra
+  tags: Tags
+  departure: Afgang
+  ago: siden
+  you: Dig
+  or_login_with: eller log ind med
+  sure_q: Er du sikker?
+  be_the_first_to_comment: Vær den første til at kommentere
+  are_you_sure_q: Er du sikker?
+  comment: kommentar
+  
+  vote:
+    one: 1 stemme
+    other: "%{count} stemmer"
+  
+  comment:
+    one: 1 kommentar
+    other: "%{count} kommentarer"
+  
+  character:
+    one: 1 karakter
+    other: "%{count} karakterer"
+    remaining: "%{n} %{pluralized} tilbage"
+    too_long: "%{n} %{pluralized} for lang"
+  
+  follows:
+    follow:
+        follow: Følg
+        start: Klik for a følge
+        stop: Klik for at stoppe med at følge
+
+  users:
+    index:
+      title: Brugere
+    new:
+      title: Opret Konto
+      body: Opret en gratis I Bike Cph konto
+      submit: Gem
+      already_have_account_q: Har du allerede en konto?
+    show:
+      joined_at_html: "Oprettet %{ago}"
+  
+  sessions:
+    new:
+      title: Log ind
+      submit: Log ind
+      forgot_it_q: Glemt det?
+      no_account_q: Ingen konto?
+      remember_me: Husk mig
+    flash:
+      logged_in: "Logget ind som %{user}."
+      logged_in_oath: "Logget ind som %{user} med %{provider}."
+      invalid_login: Email eller kodeord var forkert.
+      oath_cancel: Login afbrudt.
+      oath_error: "Kunne ikke logge ind: %{error}."
+      email_not_verified: "Email %{email} ikke verificeret."
+      logged_out: Logget ud.
+      
+  accounts:
+    show:
+      title: Profil
+      title_login: Log ind
+      title_settings: Indstillinger
+      name: Navn
+      image: Billede
+      about: Om
+      email: Email
+      password: Kodeord
+      change_email: Ændr Email
+      change_password: Ændr kodeord
+      change_settings: Rediger indstillinger
+      notify_by_email: Email Beskeder
+      unverified: Uverficiret
+      password_hidden: Skjult
+      no_image: Intet
+    edit:
+      title: Rediger Profil
+      submit: Gem
+    activating:
+      title: Næsten i mål...
+      body: "For at aktivere din konto, bedes du venligts følge instruktionerne i den email vi har sendt til dig."
+      link: Gensend aktiveringsemail
+    edit_password:
+      title: Ændr Kodeord
+      forgotten_q: Glemt det?
+      new_password: Nyt Kodeord
+      submit: Gem
+    welcome:
+      title: Velkommen!
+      body: Tak for din indmeldelse. Vi håber du før fornøjelse af dit ophold på I Bike Cph.
+      view_account: Se din konto
+    settings:
+      title: Rediger Indstillinger
+      unverified: "For at modtage emailbeskeder, er det nødvendig at du verificerer din emailadresse."
+      email_notifications: Send mig emailbeskeder
+      submit: Gem
+    flash:
+      email_not_found: Email ikke fundet.
+      password_changed: Kodeord ændret.
+      invalid_password: Nuværende kodeord ikke korrekt.
+      updated: Konto opdateret.
+      settings_updated: Indstillinger opdateret.
+      activation_sent: "Aktiveringsemail gensendt til %{email}."
+      
+  blog:
+    index:
+      new: Nyt Blogindlæg
+    show:
+      blog_archive: Blogarkiv
+    new:
+      title: Nyt Blogindlæg
+    edit:
+      title: Rediger Blogindlæg
+    form:
+      make_sticky: Hold dette indlæg øverst (kan ændres senere).
+      submit: Gem
+    archive:
+      title: Blogarkiv
+    latest:
+      title: Seneste Indlæg
+      archive: Blogarkiv
+      new: Nyt Indlæg
+    tag:
+      title: "Indlæg tagget med: %{tag}"
+    flash:
+      created: Blogindlæg oprettet.
+      updated: Blogindlæg opdateret.
+      deleted: Blogindlæg slettet.
+      
+  comments:
+    new:
+      add_comment: Tilføj kommentar
+      login_to_comment_html: "For at kommentere bedes du %{link}."
+      login: logge ind
+      submit: Send
+    comments:
+      title: Kommentarer
+  
+  emails:
+    new:
+      title: Ændr Email
+      new_email: Ny Email
+      new_email_confirmation: Ny Email Konfirmering
+      submit: Gem
+    unverified:
+      title: Uverificeret Email
+      body: "Du skulle gerne have modtaget en email med instruktioner om hvordan du verificerer din email. Eller kan de få den gensendt ved at klikke nedenfor."
+      submit: Gensend Verificeringsemail
+    verification_sent:
+      title: Verificeringsemail Sendt
+      body: "For benytte din email, bedes du følge instruktioner i den verificeringsemail vi har sendt til dig."
+      link: Gensend Verificeringsemail
+    new_verification:
+      title: Verificer Email
+      body: "Indtast din email nedenfor, og følg instrutioner i den email vi sender til dig."
+      submit: Send
+    flash:
+      verification_sent: "Verificeringinstruktioner sendt til %{email}."
+      already_verified: "Emailen %{email} er allerede verificeret."
+      verified: "Emailen %{email} verificeret."
+      not_found: "Emailen %{email} ikke fundet."
+      verification_expired: Verifikationlinket er udløbet.
+      verified_with_password: "Emailen #{@email} verificeret, og kodeord gemt."
+      verification_wait: "Verifikationsemail kan kun sendes hver %{time}. Vent venligts lidt, og prøv så igen."
+      verification_not_found: Ugyldigt verifikationslink.
+      
+  password_resets:
+    new_ask:
+      title: Nulstil Kodeord
+      body: "Indtast din email nedenfor, så sender vi instrutioner om hvordan du nulstiller dit kodeord."
+      submit: Send Instruktioner
+    new_select:
+      title: Nulstil Kodeord
+      body: "Instrutioner om hvordan du nulstiller dit kodeord vil blive sendt til %{user}."
+      submit: Send Instruktioner
+    new_fixed:
+      title: Nulstil kodeord
+      body: "Instruktioner om hvordan du nulstiller dit kodeord vil blive sendt til %{user}."
+      submit: Send Instruktioner
+    edit:
+      title: Ændr Kodeord
+      for_user: "Ændr kodeord for brugeren %{user}."
+      submit: Ændr Kodeord
+    flash:
+      instructions_sent: "Instruktioner om hvordan du nulstiller dit kodeord er sendt til %{email}."
+      email_not_found: "Emailen %{email} ikke fundet."
+      password_changed: Kodeord Ændret
+      invalid_link: Ugyldigt link til nulstilling af kodeord.
+      expired_link: Link til nulstilling af kodeord er udløbet.
+      
+  user_mailer:
+    activation:
+      subject: Aktiver din I Bike Cph konto
+      body: "Tak for indmeldingen på I Bike Cph! For at verificere din  email, bedes du gå til:"
+    verify_email:
+      subject: Verificering af din I Bike Cph konto
+      body: "For at verificere din email til brug på I Bike Cph, bedes du gå til:"
+    password_reset:
+      subject: Nulstilling af dit I Bike Cph kodeord
+      body: "For at nulstille dig I Bike Cph kodeord, bedes du gå til:"
+    blog_entry:
+      subject: "Blogindlæg: %{title}"
+      body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph. Læs det på:"
+    comment:
+      subject: "Kommentar: %{title}"
+      body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph. Læs den på:"
+  
+  issues:
+    index:
+      title: "Lab"
+      body: "Idéer og fejlmeldinger."
+      no_items: Ingen indlæg.
+      new: Nyt Emne
+    new:
+      title: Nyt Emne
+    edit:
+      title: Redigere Emne
+    show:
+      back_to_list: Tilbage til listen
+      labels: Mærkater
+      tags: Tags
+    sidebar:
+      title: Populære emner
+      most_votes: Flest stemmer
+      most_comments: Flest kommentarer
+    votes:
+      vote: Klik for at stemme
+      unvote: Klik for at fjerne stemme
+    labels:
+      all: Alle
+      ideas: Idéer
+      bugs: Fejl
+    
+  errors:
+    forbidden:
+      title: Desværre
+      body: Det lader til at du ikke har adgang til siden.
+    record_not_found:
+      title: Emne ikke fundet
+      body: "Måske har du indtastet en forkert adresse, eller siden er flyttet."
+    route_not_found:
+      title: Side ikke fundet
+      body: "Måske har du indtastet en forkert adresse, eller siden er flyttet."
+    internal_error:
+      title: Ups...!
+      body: Noget gik galt. Vi retter det hurtigst muligt.
+
+  character:
+    remaining: "%{n} karakterer tilbage"
+  
   #ui
-  from : Indtast start adressen
-  to: Indtast destinationen
+  from: Fra
+  to: Til
   page_title: I Bike Cph
   generate_link: Lav et link
   route_description: Rutebeskrivelse
   distance: afstand
   duration: tid
   arrival: ankomst
+  link_for_route: Link til Route
+  clear: ryd
 
 
   1: første
@@ -28,7 +336,7 @@ dk:
   normal_bike: Almindelig cykel
   frieght_bike: Ladcykel
   electrical_bike: Elcykel
-  reset: Nulstil addresser
+  reset: Nulstil
   link_for_route: Link til rute
   route_instructions: Rutebeskrivelse
 
@@ -62,4 +370,4 @@ dk:
   follow: ad
   and_continue: og fortsæt
   for: og fortsæt
-  towards: mod 
+  towards: mod  

@@ -11,7 +11,7 @@
 			<% if @blog_entry.user %>
 				<%= @blog_entry.user.name %>,
 			<% end %>
-			<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@blog_entry.created_at).capitalize %> ago</span>
+			<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
 		</p>
 		<%= image_tag @blog_entry.image.url if @blog_entry.image? %>
 		<%= auto_html_blog @blog_entry.body, :width => 610, :height => 406 %>

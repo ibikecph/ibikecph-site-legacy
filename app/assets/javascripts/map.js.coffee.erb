@@ -17,6 +17,7 @@
 #= require leaflet/L.Control.Goto
 #= require i18n
 #= require i18n/translations
+#= require locale
 #= require app/config
 #= require app/util
 #= require app/Router
@@ -34,6 +35,7 @@
 #= require views/Sidebar
 #= require views/Map
 #= require app/app
+#= require ie.map
 #= require_tree ./app
 #= require_tree ./collections
 #= require_tree ./consumers
@@ -42,12 +44,5 @@
 #= require_tree ./templates
 #= require_tree ./views
 
-
-
-
-
-I18n.defaultLocale = "<%= I18n.default_locale %>"
-
 jQuery ->
 	ibikecph.app.start()
-	

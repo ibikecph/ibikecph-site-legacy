@@ -3,17 +3,54 @@
 
 en:
   activerecord:
+    models:
+      issue: Issue
+      user: User
+      blog_entry: Blog Entry
+      comment: Comment
+      vote: Vote
     attributes:
-      #form labels
       email_authentication:
         uid: 'Email'                            
         uid_confirmation: 'Email confirmation'
-      #error messages
       authentications:
         uid: 'Email'      
-        uid_confirmation: 'Email confirmation'
-    
+        uid_confirmation: 'Email confirmation'    
+      blog_entry:
+        title: Title
+        body: Body
+        tags: Tags
+        image: Image
+        sticky: Sticky
+      issue:
+        title: Title
+        body: Body
+        labels: Labels
+        tags: Tags
+      user:
+        name: Name
+        about: About
+        image: Image
+        tags: Tags
+        current_password: Current Password
+        new_password_confirmation: Confirm New Password
   
+  
+  
+  
+  
+  
+  
+  
+  
+  menu:
+    routes: Routes
+    blog: Blog
+    lab: Lab
+    signup: Sign Up
+    login: Login
+    logout: Logout
+
   edit: Edit
   new: New
   delete: Delete
@@ -30,6 +67,26 @@ en:
   sure_q: Are you sure?
   be_the_first_to_comment: Be the first to comment
   comment: comment
+ 
+  vote:
+    one: 1 vote
+    other: "%{count} votes"
+  
+  comment:
+    one: 1 comment
+    other: "%{count} comments"
+  
+  character:
+    one: 1 character
+    other: "%{count} characters"
+    remaining: "%{n} %{pluralized} remaining"
+    too_long: "%{n} %{pluralized} too long"
+  
+  follows:
+    follow:
+        follow: Follow
+        start: Click to Follow
+        stop: Click to Stop Following
   
   users:
     index:
@@ -50,6 +107,7 @@ en:
       submit: Login
       forgot_it_q: Forgot it?
       no_account_q: No account?
+      remember_me: Remember Me
     flash:
       logged_in: "Logged in as %{user}."
       logged_in_oath: "Logged in as %{user} using %{provider}."
@@ -68,8 +126,10 @@ en:
       image: Image
       about: About
       email: Email
+      password: Password
       change_email: Change Email
       change_password: Change Password
+      change_settings: Edit Setting
       notify_by_email: Email Notifications
       unverified: Unverified
       password_hidden: Hidden
@@ -107,7 +167,6 @@ en:
     index:
       new: New Blog Entry
     show:
-      latest_entries: Latest Entries
       blog_archive: Blog Archive
     new:
       title: New Blog Entry
@@ -118,6 +177,10 @@ en:
       submit: Save
     archive:
       title: Blog Archive
+    latest:
+      title: Latest Entries
+      archive: Blog Archives
+      new: New Entry
     tag:
       title: "Entries tagged with: %{tag}"
     flash:
@@ -208,11 +271,27 @@ en:
       title: "Lab"
       body: "Ideas and bug reports."
       no_items: No items.
+      new: New Issue
+    new:
+      title: New Issue
+    edit:
+      title: Edit Issue
     show:
       back_to_list: Back to list
       labels: Labels
-      Tags: Tags
-  
+      tags: Tags
+    sidebar:
+      title: Popular Issues
+      most_votes: Most Votes
+      most_comments: Most Comments
+    votes:
+      vote: Click to Vote
+      unvote: Click to Remove Vote
+    labels:
+      all: All
+      ideas: Ideas
+      bugs: Bugs
+
   errors:
     forbidden:
       title: Sorry
@@ -226,7 +305,10 @@ en:
     internal_error:
       title: Ups...!
       body: Something went wrong. We'll fix it as soon as possible.
-      
+  
+  character:
+    remaining: "%{n} characters remaining"
+    
   #ui
   from: From
   to: To
