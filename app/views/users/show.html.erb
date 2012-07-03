@@ -3,7 +3,7 @@
 <h1><%= @user.name %><%= " (#{t('you')})" if current_user == @user %></h1>
 
 <p class="note">
-	<%=t '.joined_at_html', :ago => %Q{<span class="timeago" title="blog_entry.created_at.getutc.iso8601">#{ time_ago_in_words(@user.created_at).capitalize } _password</span>}.html_safe %>
+	<%=t '.joined_at_html', :ago => %Q{<span class="timeago" title="blog_entry.created_at.getutc.iso8601">#{ time_ago_in_words(@user.created_at).capitalize } #{t('ago')}</span>}.html_safe %>
 </p>
 
 <p><%= image_tag @user.image.g4.url, :class => 'g4 square' %></p>

@@ -108,6 +108,7 @@ en:
       submit: Login
       forgot_it_q: Forgot it?
       no_account_q: No account?
+      signup: Sign Up
       remember_me: Remember Me
     flash:
       logged_in: "Logged in as %{user}."

@@ -50,6 +50,15 @@ $columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 html {
 	min-width: 445px;
 }
+body {
+    position: relative;
+    #alpha {
+        position: absolute;
+        right: 0;
+        top: -3px;
+        z-index: 10;
+    }
+}
 a {
     color: $color;
     &:hover {
@@ -63,12 +72,6 @@ a {
     overflow: hidden;
     position: relative;
     white-space: nowrap;
-    img.alpha {
-        position: absolute;
-        right: 0;
-        top: -3px;
-        z-index: 10;
-    }
     height: 35px;
     img.logo {
         width: 120px;

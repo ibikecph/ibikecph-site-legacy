@@ -3,6 +3,6 @@
 <% for user in @users %>
 	<p>
 		<%= link_to user.name, user %>
-		<span class="note"><%= time_ago_in_words user.created_at %> _password</span>
+		<span class="note"><%= time_ago_in_words user.created_at %> <%=t 'ago' %></span>
 	</p>
 <% end %>
