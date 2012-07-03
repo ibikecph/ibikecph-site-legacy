@@ -42,7 +42,15 @@ dk:
     submit:
       create: "Opret %{model}"
       update: "Gem %{model}"
-
+  
+  menu:
+    routes: Ruter
+    blog: Blog
+    lab: Lab
+    signup: Indmeld
+    login: Log Ind
+    logout: Log ud
+  
   edit: Rediger
   new: Ny
   delete: Slet

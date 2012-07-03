@@ -3,10 +3,10 @@ SimpleNavigation::Configuration.run do |navigation|
   navigation.items do |primary|
     if current_user
       primary.item :account, current_user.name, account_path, :highlights_on => /^\/account/
-      primary.item :logout, "Logout", logout_path
+      primary.item :logout, t('menu.logout'), logout_path
     else
-      primary.item :signup, "Sign Up", signup_path
-      primary.item :login, "Login", login_path
+      primary.item :signup, t('menu.signup'), signup_path
+      primary.item :login, t('menu.login'), login_path
     end
   end
 end
