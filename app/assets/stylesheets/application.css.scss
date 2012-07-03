@@ -232,21 +232,6 @@ h1 {
 h2 {
     font-size: 1.1em;
 }
-#flash {
-    color: white;
-    padding: $half_gutter $gutter;
-    font-weight: bold;
-    border: 0;
-    &.notice {
-        background-color: $highlight;
-    }
-    &.alert {
-        background-color: $error;
-    }
-    &.empty {
-        background-color: transparent;
-    }   
-}
 .lefty {
     float: left;
     margin-right: $gutter;

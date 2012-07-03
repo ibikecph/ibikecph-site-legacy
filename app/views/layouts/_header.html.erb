@@ -1,13 +1,13 @@
 <div id="header">
-	<img src="/assets/ibikecph.png" alt="">
+	<%= image_tag 'alpha.png', :class => :alpha %>
+	<%= link_to image_tag('ibikecph_small.png', :class => :logo), root_path %>
 	<div class="menu">
 		<%= render_navigation :context => :main %>
-	</div>
-	<div class="menu login">
-		<%= render_navigation :context => :login %>
 	</div>
 	<div class="menu locales">
 		<%= render_navigation :context => :locale %>
 	</div>
-	<img src="/assets/alpha.png" alt="" class="alpha">
+	<div class="menu login">
+		<%= render_navigation :context => :login %>
+	</div>
 </div>
