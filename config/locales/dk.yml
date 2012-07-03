@@ -95,6 +95,8 @@ dk:
     new:
       title: Opret Konto
       body: Opret en gratis I Bike Cph konto
+      i_accept: Jeg accepterer
+      terms: Brugerbetingelserne
       submit: Gem
       already_have_account_q: Har du allerede en konto?
     show:
