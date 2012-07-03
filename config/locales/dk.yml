@@ -67,6 +67,7 @@ dk:
   sure_q: Er du sikker?
   be_the_first_to_comment: Vær den første til at kommentere
   are_you_sure_q: Er du sikker?
+  comment: kommentar
   
   vote:
     one: 1 stemme
@@ -79,8 +80,8 @@ dk:
   character:
     one: 1 karakter
     other: "%{count} karakterer"
-    remaining: "%{n} %{pluralized} remaining"
-    too_long: "%{n} %{pluralized} too_long"
+    remaining: "%{n} %{pluralized} tilbage"
+    too_long: "%{n} %{pluralized} for lang"
   
   follows:
     follow:
@@ -277,7 +278,7 @@ dk:
     show:
       back_to_list: Tilbage til listen
       labels: Mærkater
-      Tags: Tags
+      tags: Tags
     sidebar:
       title: Populære emner
       most_votes: Flest stemmer
@@ -304,12 +305,11 @@ dk:
       title: Ups...!
       body: Noget gik galt. Vi retter det hurtigst muligt.
 
-    character:
-      remaining: "%{n} karakterer tilbage"
-
+  character:
+    remaining: "%{n} karakterer tilbage"
   
   #ui
-  from : Fra
+  from: Fra
   to: Til
   page_title: I Bike Cph
   generate_link: Lav et link
@@ -317,6 +317,8 @@ dk:
   distance: afstand
   duration: tid
   arrival: ankomst
+  link_for_route: Link til Route
+  clear: ryd
 
 
   1: første
