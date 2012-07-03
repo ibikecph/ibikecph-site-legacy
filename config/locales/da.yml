@@ -1,7 +1,7 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails_i18n/tree/master/rails%2Flocale for starting points.
 
-dk:
+da:
   activerecord:
     models:
       issue: Emne
@@ -12,10 +12,10 @@ dk:
     attributes:
       email_authentication:
         uid: 'Email'                            
-        uid_confirmation: 'Email konfirmering'
+        uid_confirmation: 'Bekræft email'
       authentications:
         uid: 'Email'      
-        uid_confirmation: 'Email konfirmering'
+        uid_confirmation: 'Bekræft email'
       blog_entry:
         title: Titel
         body: Indhold
@@ -32,22 +32,17 @@ dk:
         about: Om
         image: Billede
         tags: Tags
+        terms: Brugebetingelserne
+        password: Kodeord
+        password_confirmation: Bekræft kodeord
         current_password: Nuværende kodeord
-        new_password_confirmation: Konfirmér nyt kodeord
-    errors:
-      messages:
-        blank: kan ikke være tom
-
-  helpers:
-    submit:
-      create: "Opret %{model}"
-      update: "Gem %{model}"
+        new_password_confirmation: Bekræft nyt kodeord
   
   menu:
     routes: Ruter
     blog: Blog
     lab: Lab
-    signup: Indmeld
+    signup: Opret
     login: Log Ind
     logout: Log ud
   
@@ -68,6 +63,7 @@ dk:
   be_the_first_to_comment: Vær den første til at kommentere
   are_you_sure_q: Er du sikker?
   comment: kommentar
+  not_a_valid_email: er ikke en gyldig email adresse 
   
   vote:
     one: 1 stemme
@@ -145,7 +141,7 @@ dk:
     edit_password:
       title: Ændr Kodeord
       forgotten_q: Glemt det?
-      new_password: Nyt Kodeord
+      new_password: Nyt kodeord
       submit: Gem
     welcome:
       title: Velkommen!

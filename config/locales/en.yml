@@ -67,6 +67,7 @@ en:
   sure_q: Are you sure?
   be_the_first_to_comment: Be the first to comment
   comment: comment
+  not_a_valid_email: is not a valid email address 
  
   vote:
     one: 1 vote

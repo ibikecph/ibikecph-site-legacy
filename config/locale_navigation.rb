@@ -1,6 +1,6 @@
 SimpleNavigation::Configuration.run do |navigation|
 	supported_locales = [
-		{ :locale => :dk, :name => 'Dansk'   },
+		{ :locale => :da, :name => 'Dansk'   },
 		{ :locale => :en, :name => 'English' }
 	]
 

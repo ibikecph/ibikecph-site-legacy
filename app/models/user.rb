@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
   validates_presence_of :password, :on => :create, :unless => :has_oath_authentications
-  validates_length_of :password, :minimum => 3, :message => "must be at least 3 characters long", :if => :password
-  validates_confirmation_of :password, :message => "should match confirmation", :if => :password
+  validates_length_of :password, :minimum => 3, :if => :password
+  validates_confirmation_of :password, :if => :password
   validates_acceptance_of :terms
   
   accepts_nested_attributes_for :authentications
