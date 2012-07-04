@@ -2,8 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
-  before_filter :require_login    #require login everywhere by default
-  
+  before_filter :require_login, :except => [:error_forbidden,:error_route_not_found,:error_internal_error]    #require login everywhere by default
   helper_method :current_user, :auth_link
   
   unless Rails.application.config.consider_all_requests_local
@@ -26,13 +25,15 @@ class ApplicationController < ActionController::Base
   private 
   
   def set_locale
+    p params
+    p I18n.default_locale
     #if I18n.available_locales.include?(params[:locale].to_sym)
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
   def default_url_options options={}
     if I18n.locale.to_s == I18n.default_locale.to_s
-      {}
+      { :locale => nil }    #leave out locale part from generated urls
     else
       { :locale => I18n.locale } 
     end
