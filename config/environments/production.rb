@@ -1,6 +1,6 @@
 RailsOSRM::Application.configure do
   
-  MAIN_DOMAIN = 'stormy-flower-5599.herokuapp.com'
+  MAIN_DOMAIN = ENV['DOMAIN']
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
   GA.tracker = "UA-32719126-1"
@@ -23,6 +23,8 @@ RailsOSRM::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true  
+  
+  config.assets.initialize_on_precompile = false
   
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
@@ -71,7 +73,6 @@ RailsOSRM::Application.configure do
   
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
-
   
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[Exception] ",

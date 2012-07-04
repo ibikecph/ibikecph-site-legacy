@@ -32,7 +32,7 @@ da:
         about: Om
         image: Billede
         tags: Tags
-        terms: Brugebetingelserne
+        terms: Brugerbetingelserne
         password: Kodeord
         password_confirmation: Bekræft kodeord
         current_password: Nuværende kodeord
@@ -253,7 +253,7 @@ da:
   user_mailer:
     activation:
       subject: Aktiver din I Bike Cph konto
-      body: "Tak for indmeldingen på I Bike Cph! For at verificere din  email, bedes du gå til:"
+      body: "Tak for indmeldingen på I Bike Cph! For at verificere din email, bedes du gå til:"
     verify_email:
       subject: Verificering af din I Bike Cph konto
       body: "For at verificere din email til brug på I Bike Cph, bedes du gå til:"
