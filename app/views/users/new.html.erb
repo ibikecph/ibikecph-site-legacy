@@ -39,7 +39,7 @@
 	</div>
 <% end %>
 <p id="terms">
-	<%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), :terms, :target => '_blank' %>
+	<%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
 	<%= text_area_tag :terms_text, t('terms'), :rows => 10, :disabled => 'disabled' %>
 </p>
 
