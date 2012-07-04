@@ -46,6 +46,9 @@ da:
     login: Log Ind
     logout: Log ud
   
+  da: Dansk
+  en: Engelsk
+  
   edit: Rediger
   new: Ny
   delete: Slet
@@ -269,9 +272,9 @@ da:
       title: "Lab"
       body: "Idéer og fejlmeldinger."
       no_items: Ingen indlæg.
-      new: Nyt Emne
+      new: Opret Nyt Emne
     new:
-      title: Nyt Emne
+      title: Opret Nyt Emne
     edit:
       title: Redigere Emne
     show:

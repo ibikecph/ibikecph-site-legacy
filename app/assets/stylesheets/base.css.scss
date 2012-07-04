@@ -112,8 +112,15 @@ a {
     }
     &.locales {
         li {
+			a {
+				font-weight: normal;
+                padding: 0px 7px;
+			}
+            &:hover {
+                background-color: $darkish*0.8;
+            }
             &.selected, &.selected:hover {
-                background-color: $medium;
+                background-color: $darkish;
             }
         }
     }
