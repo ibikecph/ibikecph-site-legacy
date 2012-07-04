@@ -40,9 +40,8 @@
 <% end %>
 <p id="terms">
 	<%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
-	<%= text_area_tag :terms_text, t('terms'), :rows => 10, :disabled => 'disabled' %>
+	<%= text_area_tag :terms_text, t('terms', :locale => :da), :rows => 10, :disabled => 'disabled' %>
 </p>
-
 <p>
 	<%= submit_tag t('.submit'), :class => :submit %>
 	<span class="note"><%=t '.already_have_account_q' %> <%= link_to t('login'), login_path %></span>
