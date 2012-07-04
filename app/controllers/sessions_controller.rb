@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController  
-
+  
+  skip_before_filter :require_login
   before_filter :find_auth_info, :only => :oath_create
   before_filter :oauth_login_existing_user, :only => :oath_create
   before_filter :oauth_link_to_current_user, :only => :oath_create
@@ -16,20 +17,7 @@ class SessionsController < ApplicationController
       redirect_to login_path
     end
   end
-  
-  #def oath_setup
-  #  render :nothing => true
-  #end
-  #
-  #def oath_create
-  #  #raise auth.to_yaml
-  #  user = User.create_with_omniauth! @auth
-  #  copy_return_to
-  #  reset_session    
-  #  auto_login user
-  #  logged_in welcome_account_path, :notice => t('sessions.flash.logged_in_oath', :user => user.name, :provider => @auth["provider"].titleize)  
-  #end
-
+ 
   def new
   end
 

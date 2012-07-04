@@ -1,10 +1,9 @@
 class IssuesController < ApplicationController
        
-  before_filter :require_login, :only => [:new,:create]
-  before_filter :find_issue, :only => [:show,:edit,:update,:destroy,:vote,:unvote]
-  #authorize_resource :except => [:list,:new,:create]
+  skip_before_filter :require_login, :only => [:index,:show]
+  load_and_authorize_resource
   before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :prep, :only => [:index,:list,:create,:ideas]
+  before_filter :load_sidebar, :only => [:index,:list,:create,:ideas]
 
   def index
     if params[:label]
@@ -110,7 +109,7 @@ class IssuesController < ApplicationController
     @votes = @issue.votes.count
   end
   
-  def prep
+  def load_sidebar
     @most_commented = Issue.most_commented.includes(:user).limit(7)
     @most_voted = Issue.most_voted.includes(:user).limit(7)
     @issue = Issue.new

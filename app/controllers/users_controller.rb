@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :require_login, :only => [:edit,:update,:destroy]
-  before_filter :find_user, :except => [:index,:new,:create,:terms]
-  authorize_resource :only => [:show,:edit,:update,:destroy]
+  skip_before_filter :require_login, :only => [:new,:create,:show]
+  load_and_authorize_resource
   
   def index
     @users = User.order('created_at desc').paginate :page => params[:page], :per_page => 100
@@ -32,9 +31,6 @@ class UsersController < ApplicationController
       @existing_user = User.find_by_name params[:user][:name]
       render :action => 'new'
     end
-  end
-  
-  def terms
   end
   
   private

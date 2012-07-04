@@ -137,7 +137,7 @@ da:
       submit: Gem
     activating:
       title: Næsten i mål...
-      body: "For at aktivere din konto, bedes du venligts følge instruktionerne i den email vi har sendt til dig."
+      body: "For at aktivere din konto, bedes du venligst følge instruktionerne i den email vi har sendt til dig."
       link: Gensend aktiveringsemail
     edit_password:
       title: Ændr Kodeord
@@ -220,7 +220,7 @@ da:
       not_found: "Emailen %{email} ikke fundet."
       verification_expired: Verifikationlinket er udløbet.
       verified_with_password: "Emailen #{@email} verificeret, og kodeord gemt."
-      verification_wait: "Verifikationsemail kan kun sendes hver %{time}. Vent venligts lidt, og prøv så igen."
+      verification_wait: "Verifikationsemail kan kun sendes hver %{time}. Vent venligst lidt, og prøv så igen."
       verification_not_found: Ugyldigt verifikationslink.
       
   password_resets:

@@ -5,13 +5,14 @@ class Ability < ActiveRecord::Base
     disable_risky_blocks
 
     can [:index,:show], [Comment,User,Issue]
-    can [:index,:archive,:show], [BlogEntry]
+    can [:index,:archive,:show,:tag], [BlogEntry]
     if user
       if user.role == "super"
-        can :manage, :all 
+        can :all, :all 
       else
         can :create, [Comment,Issue,Vote]
-        can :manage, [Follow,Vote] do |t|
+        can [:vote,:unvote], Issue
+        can :destroy, [Follow] do |t|
           t.user.id == user.id
         end
     

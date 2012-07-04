@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
+  before_filter :require_login    #require login everywhere by default
+  
   helper_method :current_user, :auth_link
   
   unless Rails.application.config.consider_all_requests_local
