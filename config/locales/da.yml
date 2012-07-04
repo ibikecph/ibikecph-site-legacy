@@ -39,9 +39,9 @@ da:
         new_password_confirmation: Bekræft nyt kodeord
   
   menu:
-    routes: Ruter
+    routes: Rute
     blog: Blog
-    lab: Lab
+    feedbac: Feedback
     signup: Opret
     login: Log Ind
     logout: Log ud

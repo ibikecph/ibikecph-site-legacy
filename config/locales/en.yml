@@ -44,9 +44,9 @@ en:
   
   
   menu:
-    routes: Routes
+    routes: Route
     blog: Blog
-    lab: Lab
+    feedback: Feedback
     signup: Sign Up
     login: Login
     logout: Logout
