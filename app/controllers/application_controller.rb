@@ -25,32 +25,24 @@ class ApplicationController < ActionController::Base
     
   private 
   
+  def set_locale
+    #if I18n.available_locales.include?(params[:locale].to_sym)
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def default_url_options options={}
+    if I18n.locale.to_s == I18n.default_locale.to_s
+      {}
+    else
+      { :locale => I18n.locale } 
+    end
+  end
+  
   def last_chance
     #we're at the end of the line. render something with mimimal risk of throwing another exception
     render :file => 'public/500.html', :layout => false
   end
   
-  def set_locale
-    if params[:locale]
-      if I18n.available_locales.include?(params[:locale].to_sym)
-        I18n.locale = params[:locale]
-        cookies[:locale] = {
-          :value => params[:locale],
-          :expires => Time.now + 365*24*60*60
-        }
-      end
-      redirect_to root_path
-    else
-      locale = cookies[:locale]
-
-      if locale and locale.size < 10 and I18n.available_locales.include? locale.to_sym
-        I18n.locale = locale
-      else
-        I18n.locale = 'en'
-      end
-    end
-  end
-
   def current_user
     @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
     #FIXME should check user.remember_me_token_saved_at to see if the token has expired
