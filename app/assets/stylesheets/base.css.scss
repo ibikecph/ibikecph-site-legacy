@@ -59,6 +59,9 @@ body {
         z-index: 10;
     }
 }
+img {
+	border: none;	//avoid stupid borders arond logo and alpha flag in IE
+}
 a {
     color: $color;
     &:hover {
