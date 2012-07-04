@@ -1,19 +1,9 @@
 RailsOSRM::Application.configure do
-  CA_FILE_PATH = nil
-
-  #keys for development apps. production and staging is set through heroku configs
-  FACEBOOK_CLIENT_ID = '111'
-  FACEBOOK_CLIENT_SECRET = 'xxx'
-  FACEBOOK_CLIENT_OPTIONS = {}
-
-  TWITTER_CLIENT_ID = '111'
-  TWITTER_CLIENT_SECRET = 'xxx'
 
   #we're using www.localhost because you can't save cookies with only localhost
   #login doesn't work well unless cookies are on
   #adjust your host file to point www.localhost to 127.0.0.1 just like the normal localhost
   MAIN_DOMAIN = 'www.localhost'
-  FACEBOOK_DOMAIN = 'fb.localhost'
   MAIN_PORT = '3000'
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = [MAIN_DOMAIN,MAIN_PORT].join(':')

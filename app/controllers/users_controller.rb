@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   
-  before_filter :require_login, :only => [:edit,:update,:destroy]
-  before_filter :find_user, :except => [:index,:new,:create]
-  authorize_resource :only => [:show,:edit,:update,:destroy]
+  skip_before_filter :require_login, :only => [:new,:create,:show]
+  load_and_authorize_resource
   
   def index
     @users = User.order('created_at desc').paginate :page => params[:page], :per_page => 100
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
       render :action => 'new'
     end
   end
-
+  
   private
     
   def warn_about_existing_name

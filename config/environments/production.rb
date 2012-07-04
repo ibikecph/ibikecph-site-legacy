@@ -1,19 +1,9 @@
 RailsOSRM::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
-  CA_FILE_PATH = "/etc/ssl/certs" 
   
-  FACEBOOK_CLIENT_ID = ENV['FACEBOOK_CLIENT_ID']
-  FACEBOOK_CLIENT_SECRET = ENV['FACEBOOK_CLIENT_SECRET']
-  FACEBOOK_CLIENT_OPTIONS = {:ssl => {:ca_path => CA_FILE_PATH} }
-  
-  TWITTER_CLIENT_ID = ENV['TWITTER_CLIENT_ID']
-  TWITTER_CLIENT_SECRET = ENV['TWITTER_CLIENT_SECRET']
-
   MAIN_DOMAIN = 'stormy-flower-5599.herokuapp.com'
   MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
   GA.tracker = "UA-32719126-1"
-
 
   # Code is not reloaded between requests
   config.cache_classes = true

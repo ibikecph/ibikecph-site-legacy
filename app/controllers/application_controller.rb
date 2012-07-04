@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
+  before_filter :require_login    #require login everywhere by default
+  
   helper_method :current_user, :auth_link
   
   unless Rails.application.config.consider_all_requests_local
@@ -99,21 +101,6 @@ class ApplicationController < ActionController::Base
     @return_to = session[:return_to] = nil
     @return_to_saved_at = session[:return_to_saved_at] = nil
     redirect_to path, :notice => options[:notice] || "Logged in."
-  #rescue nil
-  #  redirect_to root_path, :notice => "Logged in."    
-  end
-  
-  def ta key, *args
-    if key[0]=='.'
-      self.class.to_s =~ /(.*)Controller/
-      base = [$1,self.action_name].join('.').downcase
-  	  t [base,key].join('.'), *args
-  	else
-  	  t key, *args
-  	end
-	end
-
-  def i18n_action
   end
 
 end

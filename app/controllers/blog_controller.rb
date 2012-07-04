@@ -1,7 +1,7 @@
 class BlogController < ApplicationController
   
-  before_filter :find_blog_entry, :only => [:show,:edit,:update,:destroy]
-  before_filter :authorize, :except => [:index,:show,:archive,:ideas]
+  skip_before_filter :require_login, :only => [:index,:archive,:show,:tag]
+  load_and_authorize_resource :class => "BlogEntry"
   before_filter :latest, :only => [:index,:archive,:show,:tag]
   before_filter :tag_cloud, :only => [:index,:archive,:show,:tag]
   
@@ -55,14 +55,6 @@ class BlogController < ApplicationController
   end
   
   private
-  
-  def find_blog_entry
-    @blog_entry = BlogEntry.find params[:id]
-  end
-  
-  def authorize
-    authorize! :manage, @blog_entry || BlogEntry
-  end
   
   def latest
     @latest = BlogEntry.latest.limit(10)

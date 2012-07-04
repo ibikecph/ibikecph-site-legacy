@@ -1,9 +1,6 @@
 class CommentsController < ApplicationController
   
-  before_filter :require_login
-  before_filter :find_comment, :except => [:create]
-  before_filter :authorize_create, :only => [:create]
-  before_filter :authorize_manage, :except => [:create]
+  load_and_authorize_resource
 
   def create
     if current_user

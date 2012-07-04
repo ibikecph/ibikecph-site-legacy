@@ -61,7 +61,7 @@ RailsOSRM::Application.routes.draw do
   match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
   
-  resources :issues, :path => 'lab' do
+  resources :issues, :path => 'feedback' do
     member do
       post 'vote'
       post 'unvote'

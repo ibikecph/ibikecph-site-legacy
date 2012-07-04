@@ -10,7 +10,7 @@
 		<% if blog_entry.user %>
 			<%= blog_entry.user.name %>,
 		<% end %>
-		<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> ago</span>
+		<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
 	</p>
 	<% if blog_entry.image? %>
 		<%= link_to blog_entry do %>
@@ -19,7 +19,7 @@
 	<% end %>
 	<%= auto_html_blog blog_entry.body, :width => 225, :height => 150 %>
 	<%= link_to "#{blog_entry.comments_count.to_i > 0 ?
-		pluralize( blog_entry.comments_count, t('comment')) :
+		t( 'comment', :count => blog_entry.comments_count ) :
 		t('be_the_first_to_comment')} &rarr;".html_safe,
 		 	{ :controller => :blog, :action => :show, :id => blog_entry.id, :anchor => :comments }, :class => :note %>
 </div>

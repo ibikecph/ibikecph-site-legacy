@@ -1,4 +1,4 @@
 <li>
 	<%= link_to blog_entry.title, blog_entry %><br>
-	<span class="note"><%= time_ago_in_words blog_entry.created_at %> ago</span>
+	<span class="note"><%= time_ago_in_words blog_entry.created_at %> <%=t 'ago' %></span>
 </li>

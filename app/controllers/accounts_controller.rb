@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   
-  before_filter :require_login, :except => [:activating,:unverified_email,:new_activation,
+  skip_before_filter :require_login, :only => [:activating,:unverified_email,:new_activation,
       :create_activation,:activate,:resend_activation,:verify_email,:existing]
   
   before_filter :check_can_set_password, :only => [:new_password, :create_password]

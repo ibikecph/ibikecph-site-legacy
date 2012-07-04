@@ -1,6 +1,5 @@
 class FollowsController < ApplicationController
 
-  before_filter :require_login
   before_filter :find_followable
   before_filter :find_follow
   

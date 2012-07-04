@@ -72,13 +72,13 @@ jQuery.fn.showMaxlength = function(options){
 $(document).ready(function(){
 	var onEditCallback = function(remaining){
 		if(remaining >= 0){
-			$(this).siblings('.chars_remaining').text(remaining+' characters remaining');
+			$(this).siblings('.chars_remaining').text(' '+I18n.t('character.remaining', {n: remaining} ));
 			$(this).siblings('.chars_remaining').removeClass('too_long');
 		}
 	}
 
 	var onLimitCallback = function(excess){
-		$(this).siblings('.chars_remaining').text(excess+' characteres too long');
+		$(this).siblings('.chars_remaining').text(' '+I18n.t('character.too_long', {n: excess} ));
 		$(this).siblings('.chars_remaining').addClass('too_long');
 	}
 

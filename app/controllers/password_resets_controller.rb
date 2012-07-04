@@ -53,7 +53,7 @@ class PasswordResetsController < ApplicationController
       @user.save!
       auto_login @user
       copy_return_to
-      logged_in account_path, :notice =>  t('password_resets.flash.password_changed')
+      logged_in account_path, :notice => t('password_resets.flash.password_changed')
     else
       render :edit
     end

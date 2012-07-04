@@ -12,11 +12,11 @@
 </p>
 <p>
 	<%= check_box_tag :remember_me, 1, params[:remember_me] %>
-	<%= label_tag :remember_me %>
+	<%= label_tag t('.remember_me') %>
 </p>
 <p>
 	<%= submit_tag t('.submit'), :class => :submit %>
-	<span class="note"><%=t '.no_account_q' %> <%= link_to t('signup'), new_user_path %></span>
+	<span class="note"><%=t '.no_account_q' %> <%= link_to t('.signup'), new_user_path %></span>
 </p>
 <% end %>
 </div>

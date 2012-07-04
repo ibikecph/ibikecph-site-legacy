@@ -2,12 +2,12 @@
 <html>
 <head>
 	<%= stylesheet_link_tag "application", :media => "all" %>
-	<%= analytics_init %>
 	<%= javascript_include_tag "application" %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="" type="image/x-icon" id="favicon"/>
 	<title><%=t :page_title %></title>
+	<%= analytics_init %>
 </head>
 <body>
 	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
