@@ -41,7 +41,7 @@ da:
   menu:
     routes: Rute
     blog: Blog
-    feedbac: Feedback
+    feedback: Feedback
     signup: Opret
     login: Log Ind
     logout: Log ud
