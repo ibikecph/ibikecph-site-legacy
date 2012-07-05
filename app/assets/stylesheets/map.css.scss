@@ -117,6 +117,13 @@ body{
 				input{
 					float:right;
 					width:40px;
+					border:1px solid #444;
+					font-size:12px;
+					padding:2px;
+					text-align:center;
+					&.user{
+						font-weight:bold;
+					}
 				}
 				font-weight:normal !important;
 				text-transform:capitalize;

@@ -11,7 +11,59 @@ class ibikecph.Sidebar extends Backbone.View
 		'click .close'                 : 'colapse'
 		'click .expand'                : 'expand'
 		'click .instructions'          : 'instructions'
-		'change .departure input'	   : 'summary_changed'
+		'change .departure input'	   : 'change_departure'
+		'change .arrival   input'	   : 'change_arrival'
+
+
+
+
+
+	change_arrival : (event) ->
+
+		arr = new Date();
+		arrival_time = $(event.target).val()
+		if arrival_time.split(':').length is 2
+			arr.setHours(arrival_time.split(':')[0]);
+			arr.setMinutes(arrival_time.split(':')[1]);
+			if isNaN(arr.getTime())
+				@arrival = null
+				arr = new Date()
+				arrival_time = ('0' + arr.getHours()).substr(-2) + ':' + ('0' + arr.getMinutes()).substr(-2)
+			else
+				@arrival = arrival_time;
+				$(".user", @.el).removeClass('user');
+				$(event.target).addClass('user');
+				@departure = null
+		else
+			@arrival = null;
+
+		$(event.target).val(arrival_time);
+
+		@summary_changed();
+
+
+	change_departure : (event) ->
+
+		dep = new Date();
+		departure_time = $(event.target).val()
+		if departure_time.split(':').length is 2
+			dep.setHours(departure_time.split(':')[0]);
+			dep.setMinutes(departure_time.split(':')[1]);
+			console.log(dep)
+			if isNaN(dep.getTime())
+				@departure = null
+				dep = new Date()
+				departure_time = ('0' + dep.getHours()).substr(-2) + ':' + ('0' + dep.getMinutes()).substr(-2)
+			else	
+				@departure = departure_time;
+				$(".user", @.el).removeClass('user');
+				$(event.target).addClass('user');
+				@arrival = null
+		else
+			@departure = null;
+		$(event.target).val(departure_time);
+		@summary_changed();
+
 
 	instructions : (event) ->
 		event.preventDefault()
@@ -111,11 +163,8 @@ class ibikecph.Sidebar extends Backbone.View
 
 	summary_changed: ->
 
-
-
 		meters = @app.info.summary.get 'total_distance'
 		seconds  = @app.info.summary.get 'total_time'
-
 
 		if meters and seconds
 			$('.actions').show()
@@ -123,29 +172,39 @@ class ibikecph.Sidebar extends Backbone.View
 			$(".meta", @el).show()
 			$(".instructions").removeClass('colapse')
 
-
-			$(".route").hide()
 			$(".distance .count", @el).text(meters/1000 + ' km')
 			$(".duration .count", @el).text(Math.floor(seconds/60 + 2) + ' min')
 			d = new Date
 
+			departure = $(".departure input").val()
+			arrival   = $(".arrival input").val()
 
+			if not @departure and not @arrival
+				now = new Date();
+				departure = ('0' + now.getHours()).substr(-2) + ':' + ('0' + now.getMinutes()).substr(-2)
+				future = new Date()
+				future.setTime now.getTime() + seconds * 1000
+				arrival = ('0' + future.getHours()).substr(-2) + ':' + ('0' + future.getMinutes()).substr(-2)
+			if @departure and not @arrival
+				departure = @departure;
+				future = new Date()
+				future.setHours departure.split(":")[0]
+				future.setMinutes departure.split(":")[1]
+				future.setTime future.getTime() + seconds * 1000
+				arrival = ('0' + future.getHours()).substr(-2) + ':' + ('0' + future.getMinutes()).substr(-2)
 
-			if $(".departure input").val()
-				t = $(".departure input").val().split(':')
-				if t.length = 2
-					d.setHours(t[0])
-					d.setMinutes(t[0])
+			if @arrival and not @departure
+				arrival = @arrival;
+				past = new Date()
+				past.setHours arrival.split(":")[0]
+				past.setMinutes arrival.split(":")[1]
+				past.setTime past.getTime() - seconds * 1000
+				departure = ('0' + past.getHours()).substr(-2) + ':' + ('0' + past.getMinutes()).substr(-2)
 
-			d.setTime d.getTime() + seconds * 1000 + 1000 * 60 * 2
-			m = d.getMinutes()
-			if m < 10
-				m = '0' + m
-			$(".arrival .count").text d.getHours() + ':' + m
-		else
-			$('.actions').hide()
-			$(".time", @el).hide()
-			$(".meta", @el).hide()
+			$(".departure input").val(departure);
+			$(".arrival   input").val(arrival);
+
+			
 
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
