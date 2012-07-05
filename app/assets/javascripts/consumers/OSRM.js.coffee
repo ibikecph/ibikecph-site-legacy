@@ -70,7 +70,11 @@ class ibikecph.OSRM
 				location_code = prehints[index]
 				hints[location_code] = hint if location_code
 
-		@model.set 'route', response.route_geometry or ''
+		if response.route_geometry
+			@model.set 'route', response.route_geometry
+		else
+			@model.set 'route', ''
+			@model.trigger 'change:route', @model, '', {}
 
 		if response.route_instructions
 			@model.instructions.reset_from_osrm response.route_instructions
