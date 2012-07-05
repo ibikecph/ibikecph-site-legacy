@@ -173,6 +173,7 @@ class ibikecph.Sidebar extends Backbone.View
 			$('.actions').show()
 			$(".time", @el).show()
 			$(".meta", @el).show()
+			$(".route", @el).hide()
 			$(".instructions").removeClass('colapse')
 
 			$(".distance .count", @el).text(meters/1000 + ' km')
