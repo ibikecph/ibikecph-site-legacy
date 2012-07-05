@@ -25,20 +25,18 @@ class ApplicationController < ActionController::Base
   private 
   
   def set_locale
-    p params
-    p I18n.default_locale
     #if I18n.available_locales.include?(params[:locale].to_sym)
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
   def default_url_options options={}
-    if I18n.locale.to_s == I18n.default_locale.to_s
-      { :locale => nil }    #leave out locale part from generated urls
-    else
-      { :locale => I18n.locale } 
-    end
+    { :locale => locale_for_url }
   end
   
+	def locale_for_url
+	  I18n.locale == I18n.default_locale ? nil : I18n.locale
+	end
+	
   def last_chance
     #we're at the end of the line. render something with mimimal risk of throwing another exception
     render :file => 'public/500.html', :layout => false

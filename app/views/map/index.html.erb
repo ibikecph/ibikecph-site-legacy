@@ -1,21 +1,21 @@
 <div id="viewport">
 	<div id="topbar">
 		<div class="close control"></div>
-		<select name="bike" id="">
+		<select name="biketype" id="biketype">
 			<option><%=t :normal_bike %></option>
-			<option disabled="true"><%=t :frieght_bike %></option>
-			<option disabled="true"><%=t :electrical_bike %></option>
+			<option disabled><%=t :frieght_bike %></option>
+			<option disabled><%=t :electrical_bike %></option>
 		</select>
 		<div class="reset"><%=t :reset %></div>
 		<div class="label">
 			<label>
-				<p><%=t :from %></p>
+				<span><%=t :from %></span>
 				<input type="text" class="from"  title='<%=t :from %>'>
 			</label>
 		</div>
 		<div class="label">
 			<label>
-				<p><%=t :to %></p>
+				<span><%=t :to %></span>
 				<input type="text" class="to"  title='<%=t :to %>'>
 			</label>
 		</div>
@@ -25,9 +25,9 @@
 
 		<div class="time">
 			<p class='departure'><%=t :departure %> <input type="text" /></p>
+			<p class='arrival'><%=t :arrival %>  <input type="text" /></p>
 			<p class='distance'><%=t :distance %> <span class="count">23 km</span></p>
 			<p class='duration'><%=t :duration %> <span class="count">13 minutter</span></p>
-			<p class='arrival'><%=t :arrival %>  <span class="count">13 minutter</span></p>
 		</div>
 
 		<div class="meta">
