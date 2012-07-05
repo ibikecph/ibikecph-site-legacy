@@ -18,13 +18,13 @@ class EmailAuthentication < Authentication
   def send_activation
     generate_token
     save!
-    UserMailer.delay.activation(id)
+    UserMailer.delay.activation(id, (I18n.locale == I18n.default_locale ? nil : I18n.locale) )
   end
 
   def send_verify
     generate_token
     save!
-    UserMailer.delay.verify_email(id)
+    UserMailer.delay.verify_email(id, (I18n.locale == I18n.default_locale ? nil : I18n.locale) )
   end
   
 end
