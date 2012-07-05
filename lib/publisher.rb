@@ -3,7 +3,7 @@ class Publisher
   include Rails.application.routes.url_helpers
   
   def self.publish object
-    self.new.delay.publish object.class.name, object.id, I18n.locale if object
+    self.new.delay.publish object.class.name, object.id, (I18n.default_locale ? nil : I18n.locale) if object
   end
     
   def publish klass, id, locale
