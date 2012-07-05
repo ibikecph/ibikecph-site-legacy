@@ -13,9 +13,18 @@ class ibikecph.Sidebar extends Backbone.View
 		'click .instructions'          : 'instructions'
 		'change .departure input'	   : 'change_departure'
 		'change .arrival   input'	   : 'change_arrival'
+		'click .instruction'		   : 'zoom_to_instruction'
 
 
+	zoom_to_instruction : (event) ->
 
+		path = _.find @app.map.map._layers, (layer) ->
+			if layer._latlngs?
+				return true
+
+		point = path._latlngs[$(event.target).attr('data-index')];
+
+		@app.map.map.panTo(point)
 
 
 	change_arrival : (event) ->
@@ -84,7 +93,7 @@ class ibikecph.Sidebar extends Backbone.View
 			@app.info.instructions.each (model, index)->
 				if index % 2 is 0 then odd = 'even' else odd = 'odd'
 
-				instructions.append $("<div>", class : 'instruction ' + odd).text(ibikecph.util.instruction_string(model.toJSON()))
+				instructions.append $("<div>", class : 'instruction ' + odd, 'data-index' : model.get('index')).text(ibikecph.util.instruction_string(model.toJSON()))
 			$(window).trigger 'resize'
 
 
