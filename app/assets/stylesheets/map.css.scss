@@ -89,10 +89,10 @@ body{
 					text-decoration:underline;
 				}
 
-				background:url(/assets/colapse-expand.png) right top no-repeat;
+				background:url(asset_path('colapse-expand.png', 'image')) right top no-repeat;
 
 				&.colapse{
-					background:url(/assets/colapse-expand.png) right bottom no-repeat;					
+					background-position: right bottom;					
 				}
 			}
 
@@ -158,11 +158,11 @@ body{
 			clear:both;
 
 			&.close{
-				background:url('/assets/close.png');
+				background:url(asset_path('close.png', 'image'));
 			}
 
 			&.expand{
-				background:url('/assets/expand.png');				
+				background:url(asset_path('expand.png', 'image'));				
 			}
 		}
 
@@ -233,7 +233,7 @@ body{
 			float:right;
 			cursor:pointer;
 			clear:none;
-			background:url('/assets/cancel.png') no-repeat center center;
+			background:url(asset_path('cancel.png', 'image')) no-repeat center center;
 		}
 
 
