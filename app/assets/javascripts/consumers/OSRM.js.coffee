@@ -38,7 +38,7 @@ class ibikecph.OSRM
 		locations = @get_location_codes()
 
 		if locations.length < 2
-			@model.route.reset() if @model.route.length > 0
+			@model.set 'route', ''
 			@model.instructions.reset() if @model.instructions.length > 0
 			@model.summary.set(
 				total_distance : null
@@ -70,11 +70,7 @@ class ibikecph.OSRM
 				location_code = prehints[index]
 				hints[location_code] = hint if location_code
 
-		if response.route_geometry
-			path = ibikecph.util.decode_path response.route_geometry
-			@model.route.reset path
-		else
-			@model.route.reset()
+		@model.set 'route', response.route_geometry or ''
 
 		if response.route_instructions
 			@model.instructions.reset_from_osrm response.route_instructions

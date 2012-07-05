@@ -1,11 +1,11 @@
 # Holds references to all the important models and collections for a given
-# instance of the app.
+# instance of the app. Also contains the route (model attribute `route`) as a
+# compressed string, see OSRM API documentation.
 
-class ibikecph.Info
+class ibikecph.Info extends Backbone.Model
 
-	constructor: ->
+	initialize: ->
 		@waypoints    = new ibikecph.Waypoints
-		@route        = new ibikecph.Route
 		@instructions = new ibikecph.Instructions
 		@summary      = new ibikecph.InstructionsSummary
 

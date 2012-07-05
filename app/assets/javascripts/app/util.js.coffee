@@ -25,13 +25,13 @@ ibikecph.util.instruction_string = (instruction) ->
 	string
 
 ibikecph.util.decode_path = (encoded) ->
-	len   = encoded.length
-	index = 0
-	array = []
-	lat   = 0
-	lng   = 0
+	len    = encoded.length
+	index  = 0
+	points = []
+	lat    = 0
+	lng    = 0
 
-	while (index < len)
+	while index < len
 
 		b      = null
 		shift  = 0
@@ -66,12 +66,9 @@ ibikecph.util.decode_path = (encoded) ->
 
 		lng += dlng
 
-		array.push(
-			lat: lat * 1e-5
-			lng: lng * 1e-5
-		)
+		points.push new L.LatLng(lat * 1e-5, lng * 1e-5)
 
-	return array
+	return points
 
 ibikecph.util.translate_turn_instruction = (turn) ->
 	switch turn | 0

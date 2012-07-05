@@ -87,25 +87,8 @@ class ibikecph.Waypoints extends Backbone.Collection
 		@has_from() and @has_to()
 
 	# Converts the waypoints into route points, used to display invalid/unknown routes.
-	as_route_points: ->
-		_.filter(@map((model) ->
-			location = model.get 'location'
-
-			lat = 1 * location.lat
-			lng = 1 * location.lng
-
-			if isNaN(lat) or isNaN(lng)
-				null
-			else
-				new ibikecph.RoutePoint(
-					lat: lat
-					lng: lng
-				)
-
-		), (model) -> model)
-
 	to_latlngs: ->
-		_.map @as_route_points(), (point) -> point.to_latlng()
+		_.filter @map((model) -> model.to_latlng()), (location) -> location
 
 	to_code: ->
 		codes = @map (waypoint) -> waypoint.to_code()

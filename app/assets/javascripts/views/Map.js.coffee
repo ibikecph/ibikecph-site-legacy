@@ -66,12 +66,8 @@ class ibikecph.Map extends Backbone.View
 		@map.on 'locationfound', (event) =>
 			@model.endpoint('from').set 'location', event.latlng unless @model.waypoints.has_valid_from()
 
-		@model.route.on 'reset', (points) =>
-			@geometry_changed points
-
-		@model.route.on 'add remove change', =>
-			# TODO: Are the events sent before or after the collection is updated?
-			@geometry_changed @model.route
+		@model.on 'change:route', (model, compressed_route) =>
+			@geometry_changed compressed_route
 
 		@model.waypoints.on 'change:location change:type', (model) =>
 			@waypoint_added_or_updated model
@@ -250,11 +246,11 @@ class ibikecph.Map extends Backbone.View
 	showing_route: ->
 		@current_route.getLatLngs().length > 0
 
-	geometry_changed: (route) ->
-		valid  = route.length >= 2
-		route = @model.waypoints.as_route_points() if not valid
+	geometry_changed: (compressed_route) ->
+		latlngs = ibikecph.util.decode_path compressed_route
 
-		latlngs = route.map (point) -> point.to_latlng()
+		valid   = latlngs.length >= 2
+		latlngs = @model.waypoints.to_latlngs() if not valid
 
 		@update_route_point_index @model.waypoints.to_latlngs(), latlngs unless @dragging_pin
 

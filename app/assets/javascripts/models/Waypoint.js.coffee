@@ -20,6 +20,18 @@ class ibikecph.Waypoint extends Backbone.Model
 		invalid = isNaN(1 * location.lat) or isNaN(1 * location.lng)
 		not invalid
 
+	to_latlng: ->
+		location = @get 'location'
+		return null unless location and location?.lat? and location?.lng?
+
+		lat = 1 * location.lat
+		lng = 1 * location.lng
+
+		if isNaN(lat) or isNaN(lng)
+			null
+		else
+			new L.LatLng lat, lng
+
 	clear: ->
 		@set
 			address: ''
