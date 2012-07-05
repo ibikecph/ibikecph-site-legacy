@@ -48,7 +48,9 @@ class ibikecph.Geocoder
 		unless @current.address
 			@current.location.lat = null
 			@current.location.lng = null
-			@model.set @current
+			@model.set 'location', @current.location
+			@model.trigger 'change:location', @model, @current.location, {}
+			@model.trigger 'change', @model
 			return
 
 		@request_init()
@@ -65,6 +67,8 @@ class ibikecph.Geocoder
 			@current.location.lat = @convert_number result[0]?.lat
 			@current.location.lng = @convert_number result[0]?.lon
 			@model.set 'location', @current.location
+			@model.trigger 'change:location', @model, @current.location, {}
+			@model.trigger 'change', @model
 
 	load_location: (new_location) ->
 		return if new_location?.lat == @current.location.lat and new_location?.lng == @current.location.lng
