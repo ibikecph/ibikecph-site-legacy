@@ -7,6 +7,7 @@ class ibikecph.Instructions extends Backbone.Collection
 		@reset _.map instructions, (instruction) ->
 			[turn, street, distance, _, _, _, direction] = instruction
 
+
 			roundabout_exit = "#{turn}".match /^1[123]-(\d+)$/
 			if roundabout_exit
 				turn = 11
