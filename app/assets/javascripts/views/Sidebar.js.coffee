@@ -28,8 +28,10 @@ class ibikecph.Sidebar extends Backbone.View
 			if isNaN(arr.getTime())
 				@arrival = null
 				arr = new Date()
+				arr.setTime arr.getTime() + 1000 * 60 * 60
 				arrival_time = ('0' + arr.getHours()).substr(-2) + ':' + ('0' + arr.getMinutes()).substr(-2)
 			else
+				arrival_time = ('0' + arr.getHours()).substr(-2) + ':' + ('0' + arr.getMinutes()).substr(-2)
 				@arrival = arrival_time;
 				$(".user", @.el).removeClass('user');
 				$(event.target).addClass('user');
@@ -55,6 +57,7 @@ class ibikecph.Sidebar extends Backbone.View
 				dep = new Date()
 				departure_time = ('0' + dep.getHours()).substr(-2) + ':' + ('0' + dep.getMinutes()).substr(-2)
 			else	
+				departure_time = ('0' + dep.getHours()).substr(-2) + ':' + ('0' + dep.getMinutes()).substr(-2)
 				@departure = departure_time;
 				$(".user", @.el).removeClass('user');
 				$(event.target).addClass('user');
