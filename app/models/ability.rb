@@ -8,18 +8,17 @@ class Ability < ActiveRecord::Base
     can [:index,:archive,:show,:tag], [BlogEntry]
     can :create, User
     if user
-      if user.role == "super"
-        can :all, :all 
+      if user.role == 'super'
+        can :manage, :all
       else
         can :create, [Comment,Issue,Vote]
         can [:vote,:unvote], Issue
-        can :destroy, [Follow] do |t|
+        can :destroy, Follow do |t|
           t.user.id == user.id
-        end
-    
+        end 
       end
     end
+    cannot :delete, User 
   end
-  
   
 end

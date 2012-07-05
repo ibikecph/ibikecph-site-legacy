@@ -51,6 +51,9 @@ en:
     login: Login
     logout: Logout
 
+  da: Danish
+  en: English
+
   edit: Edit
   new: New
   delete: Delete

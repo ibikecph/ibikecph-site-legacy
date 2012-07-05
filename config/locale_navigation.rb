@@ -1,12 +1,10 @@
 SimpleNavigation::Configuration.run do |navigation|
-	supported_locales = [
-		{ :locale => :da, :name => 'Dansk'   },
-		{ :locale => :en, :name => 'English' }
-	]
-
   navigation.items do |primary|
-  	supported_locales.each do |l|
-	    primary.item l[:locale], l[:locale].to_s, "/#{l[:locale]}", :link => { :title => l[:name] }, :highlights_on => lambda{ I18n.locale == l[:locale] }
+  	[:da,:en].each do |l|
+	    primary.item l, 
+	      t( l, :locale=>l ),
+	      url_for(:locale => (l == I18n.default_locale ? nil : l)), 
+        :highlights_on => lambda{ I18n.locale == l }
   	end
   end
 end
