@@ -347,6 +347,10 @@ en:
   W: west
   NW: north west
 
+  normal_bike: Normal Bike
+  frieght_bike: Freight Bike
+  electrical_bike: Electrical Bike
+
 
   #route description
   head: Head

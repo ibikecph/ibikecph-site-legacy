@@ -182,30 +182,11 @@ body{
 				}
 			}
 
-			p{
+			span{
 				font-size:14px;		
 				margin-bottom:4px;	
 				float:left;
 				font-weight:bold;
-
-				&.clear{
-					float:right;
-					text-transform:uppercase;
-					cursor:pointer;
-					display:none;
-					margin-right:2px;
-					font-size:10px;
-					color:#aaa;
-					margin-top:6px;
-					margin-bottom:-10px;
-					&:hover{
-						color:#F72C34;
-						text-decoration:underline;
-					}
-				}
-
-				
-
 			}
 
 
@@ -312,6 +293,10 @@ body{
 		background-repeat:no-repeat;
 		display:block;
 	}
+}
+
+.leaflet-control-zoom{
+	padding:9px;
 }
 
 .leaflet-control-goto-my-location {
