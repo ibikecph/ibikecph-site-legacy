@@ -32,7 +32,7 @@
 				<% if can? :manage, issue %>
 				<td class="editing buttons last">
 					<%= link_to t('edit'), [:edit,issue] %>
-					<%= link_to t('delete'), issue, :method => :delete, :confirm => t('are_you_sure_q') %>
+					<%= link_to t('delete'), issue, :method => :delete, :confirm => t('sure_q') %>
 				</td>
 				<% end %>
 			</tr>

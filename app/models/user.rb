@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.delay.password_reset(id)
+    UserMailer.delay.password_reset(id, (I18n.locale == I18n.default_locale ? nil : I18n.locale) )
   end
 
   def generate_token column

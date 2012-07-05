@@ -81,4 +81,4 @@ module RailsOSRM
   end
 end
 
-APP_VERSION = 'Preview 1'
+APP_VERSION = 'Alpha'

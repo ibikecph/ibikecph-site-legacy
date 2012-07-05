@@ -209,7 +209,7 @@ da:
       submit: Gensend Verificeringsemail
     verification_sent:
       title: Verificeringsemail Sendt
-      body: "For benytte din email, bedes du følge instruktioner i den verificeringsemail vi har sendt til dig."
+      body: "For benytte din email, bedes du følge instruktionerne i den verificeringsemail vi har sendt til dig."
       link: Gensend Verificeringsemail
     new_verification:
       title: Verificer Email
@@ -258,7 +258,7 @@ da:
       body: "For at verificere din email til brug på I Bike Cph, bedes du gå til:"
     password_reset:
       subject: Nulstilling af dit I Bike Cph kodeord
-      body: "For at nulstille dig I Bike Cph kodeord, bedes du gå til:"
+      body: "For at nulstille dit I Bike Cph kodeord, bedes du gå til:"
     blog_entry:
       subject: "Blogindlæg: %{title}"
       body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph. Læs det på:"
