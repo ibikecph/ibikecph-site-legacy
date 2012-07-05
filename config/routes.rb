@@ -54,6 +54,7 @@ RailsOSRM::Application.routes.draw do
       collection do
         get 'archive' => :archive
         get 'tag/:tag' => :tag
+        get 'transition' => :transition
       end
     end
     resources :comments, :only => [:destroy]
@@ -83,5 +84,10 @@ RailsOSRM::Application.routes.draw do
   match "/404", :to => "application#error_route_not_found"
   match "/500", :to => "application#error_internal_error"
   
-  
+  match "medlemmer/*path" => "blog#transition"
+  match "groupper/*path" => "blog#transition"
+  match "cykler/*path" => "blog#transition"
+  match "steder/*path" => "blog#transition"
+  match "tips/*path" => "blog#transition"
+  match "indlaeg/*path" => "blog#transition"
 end

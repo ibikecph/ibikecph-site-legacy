@@ -1,11 +1,12 @@
 class BlogController < ApplicationController
   
-  skip_before_filter :require_login, :only => [:index,:archive,:show,:tag]
+  skip_before_filter :require_login, :only => [:index,:archive,:show,:tag,:transition]
   load_and_authorize_resource :class => "BlogEntry"
-  before_filter :latest, :only => [:index,:archive,:show,:tag]
-  before_filter :tag_cloud, :only => [:index,:archive,:show,:tag]
+  before_filter :latest, :only => [:index,:archive,:show,:tag,:transition]
+  before_filter :tag_cloud, :only => [:index,:archive,:show,:tag,:transition]
   
   def index
+    @blog_entries = BlogEntry.latest.paginate :page => params[:page], :per_page => 10
   end
   
   def archive
@@ -17,8 +18,12 @@ class BlogController < ApplicationController
     @comments = @blog_entry.comments
   end
   
+  def transition
+    redirect_to :action => :tag, :tag => 'nyside'
+  end
+  
   def tag
-    @blog_entries = BlogEntry.tagged_with(params[:tag]).latest
+    @blog_entries = BlogEntry.tagged_with(params[:tag]).latest.paginate :page => params[:page], :per_page => 10
   end
   
   def new
