@@ -38,9 +38,9 @@ class ibikecph.Sidebar extends Backbone.View
 				@arrival = null
 				arr = new Date()
 				arr.setTime arr.getTime() + 1000 * 60 * 60
-				arrival_time = ('0' + arr.getHours()).substr(-2) + ':' + ('0' + arr.getMinutes()).substr(-2)
+				arrival_time = ('0' + arr.getHours()).slice(-2) + ':' + ('0' + arr.getMinutes()).slice(-2)
 			else
-				arrival_time = ('0' + arr.getHours()).substr(-2) + ':' + ('0' + arr.getMinutes()).substr(-2)
+				arrival_time = ('0' + arr.getHours()).slice(-2) + ':' + ('0' + arr.getMinutes()).slice(-2)
 				@arrival = arrival_time;
 				$(".user", @.el).removeClass('user');
 				$(event.target).addClass('user');
@@ -60,13 +60,12 @@ class ibikecph.Sidebar extends Backbone.View
 		if departure_time.split(':').length is 2
 			dep.setHours(departure_time.split(':')[0]);
 			dep.setMinutes(departure_time.split(':')[1]);
-			console.log(dep)
 			if isNaN(dep.getTime())
 				@departure = null
 				dep = new Date()
-				departure_time = ('0' + dep.getHours()).substr(-2) + ':' + ('0' + dep.getMinutes()).substr(-2)
+				departure_time = ('0' + dep.getHours()).slice(-2) + ':' + ('0' + dep.getMinutes()).slice(-2)
 			else	
-				departure_time = ('0' + dep.getHours()).substr(-2) + ':' + ('0' + dep.getMinutes()).substr(-2)
+				departure_time = ('0' + dep.getHours()).slice(-2) + ':' + ('0' + dep.getMinutes()).slice(-2)
 				@departure = departure_time;
 				$(".user", @.el).removeClass('user');
 				$(event.target).addClass('user');
@@ -194,17 +193,17 @@ class ibikecph.Sidebar extends Backbone.View
 
 			if not @departure and not @arrival
 				now = new Date();
-				departure = ('0' + now.getHours()).substr(-2) + ':' + ('0' + now.getMinutes()).substr(-2)
+				departure = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2)
 				future = new Date()
 				future.setTime now.getTime() + seconds * 1000
-				arrival = ('0' + future.getHours()).substr(-2) + ':' + ('0' + future.getMinutes()).substr(-2)
+				arrival = ('0' + future.getHours()).slice(-2) + ':' + ('0' + future.getMinutes()).slice(-2)
 			if @departure and not @arrival
 				departure = @departure;
 				future = new Date()
 				future.setHours departure.split(":")[0]
 				future.setMinutes departure.split(":")[1]
 				future.setTime future.getTime() + seconds * 1000
-				arrival = ('0' + future.getHours()).substr(-2) + ':' + ('0' + future.getMinutes()).substr(-2)
+				arrival = ('0' + future.getHours()).slice(-2) + ':' + ('0' + future.getMinutes()).slice(-2)
 
 			if @arrival and not @departure
 				arrival = @arrival;
@@ -212,7 +211,7 @@ class ibikecph.Sidebar extends Backbone.View
 				past.setHours arrival.split(":")[0]
 				past.setMinutes arrival.split(":")[1]
 				past.setTime past.getTime() - seconds * 1000
-				departure = ('0' + past.getHours()).substr(-2) + ':' + ('0' + past.getMinutes()).substr(-2)
+				departure = ('0' + past.getHours()).slice(-2) + ':' + ('0' + past.getMinutes()).slice(-2)
 
 			$(".departure input").val(departure);
 			$(".arrival   input").val(arrival);
