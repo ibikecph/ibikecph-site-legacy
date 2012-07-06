@@ -90,12 +90,12 @@ class ibikecph.Map extends Backbone.View
 		latlngs = @model.waypoints.to_latlngs()
 
 		# In order to not display route behind sidebar.
-		translate = new L.Point -374, 0
+		translate = new L.Point -374, -50
 
 		for latlng in latlngs[..]
 			latlngs.push @map.layerPointToLatLng @map.latLngToLayerPoint(latlng).add(translate)
 
-		@map.fitBounds new L.LatLngBounds(latlngs).pad(.03) if latlngs.length > 0
+		@map.fitBounds new L.LatLngBounds(latlngs).pad(.05) if latlngs.length > 0
 
 	waypoint_added_or_updated: (model) ->
 		@waypoint_show_hide_update model, false
