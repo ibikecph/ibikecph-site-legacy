@@ -1,7 +1,11 @@
 RailsOSRM::Application.configure do
   
+  #note:
+  #heroku config vars normally stored in ENV is not available during asset precompiling
+  #see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
+   
   MAIN_DOMAIN = ENV['DOMAIN']
-  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
+  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN ? (MAIN_DOMAIN.split('.').size - 1) : 0
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
   GA.tracker = "UA-32719126-1"
 
@@ -52,7 +56,7 @@ RailsOSRM::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( map.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

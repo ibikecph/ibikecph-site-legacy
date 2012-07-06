@@ -1,7 +1,11 @@
 RailsOSRM::Application.configure do
 
+  #note:
+  #heroku config vars normally stored in ENV is not available during asset precompiling
+  #see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
+   
   MAIN_DOMAIN = ENV['DOMAIN']
-  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
+  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN ? (MAIN_DOMAIN.split('.').size - 1) : 0
   MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
 
   # Code is not reloaded between requests
