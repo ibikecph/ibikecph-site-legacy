@@ -93,10 +93,10 @@ body{
 					text-decoration:underline;
 				}
 
-				background:url(asset_path('colapse-expand.png', 'image')) right top no-repeat;
+				background:url(asset_path('arrow-down.png', 'image')) right top no-repeat;
 
 				&.colapse{
-					background-position: right bottom;					
+				background:url(asset_path('arrow-up.png', 'image')) right top no-repeat;
 				}
 			}
 
@@ -311,10 +311,10 @@ body{
 }
 
 .leaflet-control-goto-my-location {
-	background-image:url(location.png);
+	background-image:url(asset_path('location.png', 'image'));
 	margin-bottom:5px;
 }
 
 .leaflet-control-goto-route {
-	background-image:url(route.png);
+	background-image:url(asset_path('route.png', 'image'));
 }
