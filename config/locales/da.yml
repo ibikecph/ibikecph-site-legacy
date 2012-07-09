@@ -265,7 +265,8 @@ da:
     comment:
       subject: "Kommentar: %{title}"
       body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph. Læs den på:"
-  
+    unsubscribing: "Hvis du ikke ønsker at modtage email beskeder fra ibikecph, kan du ændre dine instilling ved at gå til %{link}."
+    
   issues:
     index:
       title: "Lab"

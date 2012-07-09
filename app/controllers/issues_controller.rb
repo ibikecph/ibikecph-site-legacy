@@ -29,6 +29,7 @@ class IssuesController < ApplicationController
     @issues = Issue.lastest.includes(:user,:visualizations).paginate :page => params[:page], :per_page => 20
     
     if @issue.save
+      current_user.follow @issue
       
       begin
         Publisher.publish_issue @issue

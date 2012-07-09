@@ -33,6 +33,7 @@ class BlogController < ApplicationController
   def create
     @blog_entry = current_user.blog_entries.build params[:blog_entry]
     if @blog_entry.save
+      current_user.follow @blog_entry
       Publisher.publish @blog_entry
       flash[:notice] = t('blog.flash.created')
       redirect_to @blog_entry

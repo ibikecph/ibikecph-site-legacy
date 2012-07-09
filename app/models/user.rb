@@ -106,6 +106,31 @@ class User < ActiveRecord::Base
           :followable_id => target.id
         }
     end
-  end 
+  end
+
+  def following? target
+    target && Follow.exists?( :user_id => self.id, :followable_type => target.class.name,:followable_id => target.id, :active => true )
+  end
+  
+  def follow target
+    follow = find_follow target
+    if follow
+      follow.update_attribute :active, true
+    else
+      follow = Follow.new
+      follow.followable = target
+      follow.user = self
+      follow.save
+    end
+  end
+
+  def unfollow target
+    follow = find_follow target
+    if follow
+      follow.update_attribute :active, false
+    else
+      false
+    end
+  end
   
 end

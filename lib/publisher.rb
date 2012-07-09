@@ -19,7 +19,7 @@ class Publisher
   
   def blog blog_entry, locale
     User.all.each do |user|
-      if user.notify_by_email
+      if user.notify_by_email && user != blog_entry.user
         UserMailer.blog_entry(user,blog_entry,locale).deliver
       end
     end
@@ -27,7 +27,7 @@ class Publisher
 
   def comment comment, locale
     comment.commentable.followers.each do |user|
-      if user.notify_by_email
+      if user.notify_by_email && user != comment.user
         UserMailer.comment(user,comment,locale).deliver
       end
     end

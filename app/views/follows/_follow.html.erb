@@ -1,6 +1,5 @@
 <% if current_user %>
-	<% follow = current_user.find_follow target %>
-	<% following = follow && follow.active %>
+	<% following = current_user.following? target %>
 	<% text = following ? "&#10003; #{t('.follow')}".html_safe : t('.follow') %>
 	<% path = following ? [:unfollow,target] : [:follow,target] %>
 	<% url = { :controller => '/follows', :action => :follow, :followable_type => target.class.name, :followable_id => target.id } %>

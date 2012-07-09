@@ -25,6 +25,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @blog_entry = blog_entry
     @url = url_for :controller => :blog, :action => :show, :id => blog_entry.id,  :locale => locale
+    @settings_url = settings_url locale
     mail :to => @user.email_address, :subject => t('user_mailer.blog_entry.subject', :title => blog_entry.title)
   end
 
@@ -41,6 +42,7 @@ class UserMailer < ActionMailer::Base
     else
       return
     end
+    @settings_url = settings_url locale
     mail :to => @user.email_address, :subject => t('user_mailer.comment.subject', :title => @title)
   end
   
@@ -51,6 +53,11 @@ class UserMailer < ActionMailer::Base
     @user = auth.user
     @url = url_for :controller => :emails, :action => :verify, :token => auth.token, :locale => locale
     mail :to => auth.uid, :subject => subject
+  end
+  
+  
+  def settings_url locale
+    url_for :controller => :accounts, :action => :settings, :locale => locale
   end
   
 end
