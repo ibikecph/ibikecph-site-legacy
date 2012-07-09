@@ -9,6 +9,7 @@ class CommentsController < ApplicationController
       @comment.commentable_id = params[:commentable_id]
       @comment.user_id = current_user.id
       if @comment.save
+        current_user.follow @comment.commentable, :unless_set => true
         Publisher.publish @comment
       else
         render :error

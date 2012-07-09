@@ -9,3 +9,6 @@ $("#new_comment_form")[0].reset();
 
 //hide errors
 $("#form_errors").hide();
+
+//update follow button, in case we auto-followed
+$("#follow").replaceWith("<%= escape_javascript(render(:partial => '/follows/follow', :locals => {:target => @comment.commentable})) %>");
