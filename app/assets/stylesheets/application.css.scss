@@ -168,15 +168,13 @@ div#form_errors, div#form_notice {
     text-decoration: none;
     text-align: center;
 }
-a.submit {
-    &.toggle {
-        background-color: $medium;	
-        &.on {
-            background-color: $highlight;	
-        }
-        &:hover {
-            background-color: $hover;	
-        }
+.toggle {
+    background-color: $medium;	
+    &.on {
+        background-color: $highlight;	
+    }
+    &:hover {
+        background-color: $hover;	
     }
 }
 input.submit {
