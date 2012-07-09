@@ -266,10 +266,10 @@ en:
       body: "To reset your I Bike Cph password, please visit:"
     blog_entry:
       subject: "Blog: %{title}"
-      body: "A new blog entry titled '%{title}' was posted on I Bike Cph. To read it, please visit:"
+      body: "A new blog entry titled '%{title}' was posted on I Bike Cph:"
     comment:
       subject: "Comment: %{title}"
-      body: "%{user} added a comment '%{title}' on I Bike Cph. To read it, please visit:"
+      body: "%{user} added a comment '%{title}' on I Bike Cph:"
   
   issues:
     index:

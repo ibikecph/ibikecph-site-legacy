@@ -261,10 +261,10 @@ da:
       body: "For at nulstille dit I Bike Cph kodeord, bedes du gå til:"
     blog_entry:
       subject: "Blogindlæg: %{title}"
-      body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph. Læs det på:"
+      body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph:"
     comment:
       subject: "Kommentar: %{title}"
-      body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph. Læs den på:"
+      body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph:"
     unsubscribing: "Hvis du ikke ønsker at modtage email beskeder fra ibikecph, kan du ændre dine instilling ved at gå til %{link}."
     
   issues:

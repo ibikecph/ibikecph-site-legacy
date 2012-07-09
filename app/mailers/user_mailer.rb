@@ -32,6 +32,7 @@ class UserMailer < ActionMailer::Base
   def comment user, comment, locale
     @user = user
     @comment = comment
+    @author = comment.user
     @target = comment.commentable
     @title = truncate(@comment.body, :length => 40, :separator => ' ', :omission => '...')
     case @target
