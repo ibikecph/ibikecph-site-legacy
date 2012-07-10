@@ -23,15 +23,20 @@ ibikecph.config =
 
 	# The first tile set is used by default.
 	map_tiles: [
-		name: 'Solar'
-		url: 'http://83.221.133.5/tiles/{z}/{x}/{y}.png'
-		options:
-			attribution: 'Map data &copy 2011 OpenStreetMap contributors, Imagery &copy 2011 Mapnik'
-	,
-		name: 'Open Street Map'
+		name: 'OpenStreetMap'
 		url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 		options:
-			attribution: 'Map data &copy 2011 OpenStreetMap contributors, Imagery &copy 2011 Mapnik'
+			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
+	,
+		name: 'ibikecph'
+		url: 'http://83.221.133.3/tiles/{z}/{x}/{y}.png'
+		options:
+			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 ibikecph'
+	,
+	name: 'OpenCycleMap'
+	url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
+	options:
+		attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery by Andy Allan and Dave Stubbs'
 	]
 
 	# The map controls are inserted in the specified order. Supported types:
