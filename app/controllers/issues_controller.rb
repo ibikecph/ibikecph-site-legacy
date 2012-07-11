@@ -30,19 +30,7 @@ class IssuesController < ApplicationController
     
     if @issue.save
       current_user.follow @issue
-      
-      begin
-        Publisher.publish_issue @issue
-      rescue Exception => e
-        logger.error "*** Error: Could not publish issue #{@issue.title}: #{e}"
-      end
-      
-      begin
-        Notifier.issue @issue
-      rescue Exception => e
-        logger.error "*** Error: Could not send notificatons for issue #{@issue.title}: #{e}"
-      end
-      
+      Publisher.publish_issue @issue
       flash[:notice] = 'Issue submitted.'
       redirect_to @issue
     else
