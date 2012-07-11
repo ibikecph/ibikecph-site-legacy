@@ -23,14 +23,12 @@ class IssuesController < ApplicationController
   end
  
   def create
+    collect_labels
     @issue = Issue.new(params[:issue])
     @issue.user = current_user
- 
-    @issues = Issue.lastest.includes(:user,:visualizations).paginate :page => params[:page], :per_page => 20
-    
     if @issue.save
       current_user.follow @issue
-      Publisher.publish_issue @issue
+      Publisher.publish @issue
       flash[:notice] = 'Issue submitted.'
       redirect_to @issue
     else
@@ -43,6 +41,7 @@ class IssuesController < ApplicationController
   end
 
   def update
+    collect_labels
     if @issue.update_attributes(params[:issue])
       flash[:notice] = "Successfully updated issue."
       redirect_to @issue
@@ -103,5 +102,9 @@ class IssuesController < ApplicationController
     @most_voted = Issue.most_voted.includes(:user).limit(7)
     @issue = Issue.new
   end
-
+  
+  def collect_labels
+    params[:issue][:label_list] = params[:labels].keys.join(' ')
+  end
+  
 end

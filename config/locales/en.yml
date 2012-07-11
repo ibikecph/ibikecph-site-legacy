@@ -43,6 +43,11 @@ en:
   
   
   
+  labels:
+    idea: Idea
+    bug: Bug
+    map: Map
+    
   menu:
     routes: Route
     blog: Blog

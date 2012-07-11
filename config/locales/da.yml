@@ -25,7 +25,7 @@ da:
       issue:
         title: Titel
         body: Beskrivelse
-        labels: Mærkater
+        labels: Type
         tags: Tags
       user:
         name: Navn
@@ -37,6 +37,11 @@ da:
         password_confirmation: Bekræft kodeord
         current_password: Nuværende kodeord
         new_password_confirmation: Bekræft nyt kodeord
+  
+  labels:
+    idea: Idé
+    bug: Fejl 
+    map: Kort
   
   menu:
     routes: Rute
@@ -276,10 +281,10 @@ da:
     new:
       title: Opret Nyt Emne
     edit:
-      title: Redigere Emne
+      title: Rediger Emne
     show:
       back_to_list: Tilbage til listen
-      labels: Mærkater
+      labels: Type
       tags: Tags
     sidebar:
       title: Populære emner

@@ -1,5 +1,6 @@
 class Issue < ActiveRecord::Base
   
+  
   belongs_to :user
   has_many :votes, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy, :order => 'created_at asc'
@@ -13,9 +14,10 @@ class Issue < ActiveRecord::Base
   scope :most_commented, where('comments_count > 0').order('comments_count desc')
   scope :most_voted, where('votes_count > 0').order('votes_count desc')
   
-  attr_accessible :title, :body, :tag_list, :label_list
+  attr_accessible :title, :body, :tag_list, :label_list, :labels
   
   MAXLENGTH = { :title => 100, :body => 10000 }
+  LABELS = [:idea,:bug,:map]
   
   validates :title, :presence => true, :uniqueness => true, :length => { :maximum => MAXLENGTH[:title] }
   validates :body, :presence => true, :length => { :maximum => MAXLENGTH[:body] }

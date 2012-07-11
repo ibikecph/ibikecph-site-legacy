@@ -297,7 +297,14 @@ td.buttons, th.buttons {
         text-align: right;
     }
 }
-.button, .buttons a {
+.button, .buttons a, .label_list li {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
     display: inline-block;
     white-space: nowrap;
     font-weight: bold;
@@ -324,6 +331,12 @@ td.buttons, th.buttons {
     text-decoration: none;
 }
 .buttons {
+}
+.label_picker {
+    margin-bottom: $half_gutter;      
+}
+.label_list li {
+    background-color: $medium;
 }
 td.note {
     padding-top:0.4em;
