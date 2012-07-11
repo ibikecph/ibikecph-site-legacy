@@ -22,9 +22,9 @@ class ibikecph.Sidebar extends Backbone.View
 			if layer._latlngs?
 				return true
 
-		point = path._latlngs[$(event.target).attr('data-index')];
+		point = path._latlngs[ $(event.target).attr('data-index') ]
 
-		@app.map.map.panTo(point)
+		@app.map.go_to_point point
 
 
 	change_arrival : (event) ->
