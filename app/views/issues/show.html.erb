@@ -4,14 +4,19 @@
 			<%= link_to "&larr; #{t '.back_to_list'}".html_safe, issues_path %>
 		</p>
 		<%= render 'issues/editing' %>
+		
 		<h2><%= @issue.title %></h2>
-		<%= simple_format @issue.body %>
 
-		<% if @issue.labels.any? %>
- 			<span class="tags">
-				<%=t '.labels' %>: <%= @issue.label_list %>
-			</span><br>
-		<% end %>
+		<div class="label_list">
+			<ul>
+			<% for label in @issue.label_list.to_s.split %>
+				<%= content_tag :li, t("labels.#{label}"), :class => :on %>
+			<% end %>
+			</ul>
+		</div>
+		<br>
+		
+		<%= simple_format @issue.body %>
 
 		<% if @issue.tags.any? %>
 			<span class="tags">

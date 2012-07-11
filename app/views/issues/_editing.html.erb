@@ -1,6 +1,6 @@
 <% if can? :manage, @issue %>
 	<div class="buttons righty">
-		<%= link_to "Edit", [:edit,@issue] %>
-		<%= link_to "Delete", @issue, :method => :delete, :confirm => t('sure_q') %>
+		<%= link_to t('edit'), [:edit,@issue] %>
+		<%= link_to t('delete'), @issue, :method => :delete, :confirm => t('sure_q') %>
 	</div>
 <% end %>
