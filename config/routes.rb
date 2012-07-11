@@ -90,4 +90,5 @@ RailsOSRM::Application.routes.draw do
   match "steder/*path" => "blog#transition"
   match "tips/*path" => "blog#transition"
   match "indlaeg/*path" => "blog#transition"
+  match "cykelguide" => "blog#transition"
 end

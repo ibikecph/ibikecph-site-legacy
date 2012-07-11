@@ -2,7 +2,7 @@ class BlogController < ApplicationController
   
   skip_before_filter :require_login, :only => [:index,:archive,:show,:tag,:transition]
   before_filter :find_entry, :only => [:show,:edit,:update,:destroy]
-  authorize_resource :class => "BlogEntry"
+  authorize_resource :class => "BlogEntry", :except => [:transition]
   before_filter :latest, :only => [:index,:archive,:show,:tag,:transition]
   before_filter :tag_cloud, :only => [:index,:archive,:show,:tag,:transition]
   
@@ -19,7 +19,7 @@ class BlogController < ApplicationController
   end
   
   def transition
-    redirect_to :action => :tag, :tag => 'nyside'
+    redirect_to :action => :index
   end
   
   def tag
