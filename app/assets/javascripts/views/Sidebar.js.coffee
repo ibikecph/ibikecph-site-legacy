@@ -215,8 +215,11 @@ class ibikecph.Sidebar extends Backbone.View
 
 			$(".departure input").val(departure);
 			$(".arrival   input").val(arrival);
-
-			
+		else
+			$(".distance .count", @el).text('-')
+			$(".duration .count", @el).text('-')
+			$(".departure input").val('-');
+			$(".arrival   input").val('-');
 
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
