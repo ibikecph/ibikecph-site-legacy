@@ -7,7 +7,6 @@ class ibikecph.Waypoints extends Backbone.Collection
 		@_setup_event_proxy()
 
 	# Returns the model for the from/to endpoint.
-
 	endpoint: (type) ->
 		last = (type == 'end' || type == 'to')
 
@@ -60,6 +59,18 @@ class ibikecph.Waypoints extends Backbone.Collection
 					@trigger 'from:change', model
 				else
 					@trigger 'clear:from'
+
+	get_from_and_to: ->
+		from = @at(0)
+		to   = @at(@length - 1)
+
+		from = null unless from?.get and from.get('type') == 'from'
+		to   = null unless to?.get   and to.get('type')   == 'to'
+
+		return (
+			from : from
+			to   : to
+		)
 
 	has_from: ->
 		waypoint = @at(0)

@@ -97,6 +97,16 @@ class ibikecph.Map extends Backbone.View
 
 		@map.fitBounds new L.LatLngBounds(latlngs).pad(.05) if latlngs.length > 0
 
+	go_to_point: (location) ->
+		if @map.getZoom() < 16
+			@map.setZoom 16
+			do (location) =>
+				setTimeout =>
+					@map.panTo location
+				, 500
+		else
+			@map.panTo location
+
 	waypoint_added_or_updated: (model) ->
 		@waypoint_show_hide_update model, false
 

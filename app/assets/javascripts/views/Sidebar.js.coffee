@@ -22,9 +22,9 @@ class ibikecph.Sidebar extends Backbone.View
 			if layer._latlngs?
 				return true
 
-		point = path._latlngs[$(event.target).attr('data-index')];
+		point = path._latlngs[ $(event.target).attr('data-index') ]
 
-		@app.map.map.panTo(point)
+		@app.map.go_to_point point
 
 
 	change_arrival : (event) ->
@@ -139,9 +139,6 @@ class ibikecph.Sidebar extends Backbone.View
 
 		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
 			@set_field model.get('type'), address
-			if _gaq? and address
-				_gaq.push ['_trackEvent', 'location', model.get 'type', address]
-
 		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
 			@set_loading model.get('type'), loading
 
@@ -215,8 +212,11 @@ class ibikecph.Sidebar extends Backbone.View
 
 			$(".departure input").val(departure);
 			$(".arrival   input").val(arrival);
-
-			
+		else
+			$(".distance .count", @el).text('-')
+			$(".duration .count", @el).text('-')
+			$(".departure input").val('-');
+			$(".arrival   input").val('-');
 
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
