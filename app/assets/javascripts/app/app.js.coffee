@@ -9,6 +9,17 @@ app.start = ->
 
 	app.info = new ibikecph.Info
 
+	app.info.waypoints.on 'from:change:address to:change:address reset', ->
+		if _gaq? and not app.map.dragging_pin
+			{from, to} = app.info.waypoints.get_from_and_to()
+
+			from = from.get 'address' if from
+			to   = to.get   'address' if to
+
+			_gaq.push ['_trackEvent', 'location', 'from', from] if from
+			_gaq.push ['_trackEvent', 'location', 'to'  , to  ] if to
+			_gaq.push ['_trackEvent', 'location', 'route', "#{from} -- #{to}"] if from and to
+
 	app.osrm = new ibikecph.OSRM app.info, ibikecph.config.routing_service.url
 
 	app.sidebar = new ibikecph.Sidebar
