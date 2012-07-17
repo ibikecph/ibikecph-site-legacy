@@ -24,7 +24,7 @@ app.start = ->
 
 	app.sidebar = new ibikecph.Sidebar
 		model : app.info
-		el    : '#topbar'
+		el    : '#ui'
 		app   : app
 
 	app.map = new ibikecph.Map
