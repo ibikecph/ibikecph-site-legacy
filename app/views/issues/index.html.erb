@@ -5,12 +5,17 @@
 		</div>
 		<h1><%=t '.title' %></h1>
 		<p><%=t '.body' %></p>
-		<%= link_to t('issues.labels.all'), issues_path %>
-		<%= link_to t('issues.labels.ideas'), :label => 'idea' %>
-		<%= link_to t('issues.labels.bugs'), :label => 'bug' %>
+		<div class="note">
+			<%=simple_auto_html t('.note') %>
+		</div>
 		<br>
-		
+		<ul class="sort">
+			<li><%= link_to t('issues.labels.all'), issues_path %></li>
+			<li><%= link_to t('issues.labels.ideas'), :label => 'idea' %></li>
+			<li><%= link_to t('issues.labels.bugs'), :label => 'bug' %></li>
+		</ul>
 		<%= will_paginate @issues, :class => :pagination %>
+		
 		<table class="issues">
 			<% for issue in @issues %>
 			<tr class="<%= cycle 'even', 'odd' %>">

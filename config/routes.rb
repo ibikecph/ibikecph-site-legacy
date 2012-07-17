@@ -77,6 +77,8 @@ RailsOSRM::Application.routes.draw do
   end
   
   
+  match '/terms' => 'pages#terms'
+  
   match '/ping' => 'pages#ping'
   match '/fail' => 'pages#fail'
 

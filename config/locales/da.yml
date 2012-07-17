@@ -274,8 +274,16 @@ da:
     
   issues:
     index:
-      title: "Lab"
-      body: "Idéer og fejlmeldinger."
+      title: "Feedback"
+      body: "Har du idéer til forbedringer af cykelruteplanlæggeren? Har du fundet noget der ikke virker, eller mangler der en sti på kortet? Så kan du fortælle det her!"
+      note: |
+        Denne webside er kun til diskussion af den digitale cykelruteplanlægger. Andre idéer til forbedring af cykling i København bedes sendes til Cykelsekretariatet, Københavns Kommune: http://kk.dk/cyklernesby
+        
+        Du kan rapportere 'analoge' problemer, som fx huller i cykelstierne, på Giv et Praj: http://givetpraj.kk.dk.
+        
+        Ibikecph's sociale forum ligger nu på Facebook: https://www.facebook.com/IbikeCPH
+        
+        Det er ikke tilladt at reklame her på siden.
       no_items: Ingen indlæg.
       new: Opret Nyt Emne
     new:
@@ -297,7 +305,11 @@ da:
       all: Alle
       ideas: Idéer
       bugs: Fejl
-    
+  
+  pages:
+    terms:
+      title: Brugerbetingelser for ibikecph.dk
+     
   errors:
     forbidden:
       title: Desværre

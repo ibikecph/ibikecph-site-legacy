@@ -59,4 +59,12 @@ module ApplicationHelper
     image_tag user.image.g1.default_url, { :class => 'g1 square', :title => user.name, :alt => user.name }
 	end
 
+  def simple_auto_html str
+    #gsub doesn't work on SafeStrings. to avoid this, use to_str to convert to normal stri
+    auto_html str.to_str do
+      simple_format
+      link :target => 'blank'
+    end
+  end
+
 end

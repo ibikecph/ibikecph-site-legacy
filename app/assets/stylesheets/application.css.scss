@@ -454,3 +454,16 @@ p#terms {
         user-select: none;
     }
 }
+div.note {
+    font-size: 0.9;
+    color: $darkish;
+}
+ul.sort {
+    list-style: none;
+    li {
+        float: left;
+    }
+    li + li {
+        margin-left: 1.5em;
+    }
+}

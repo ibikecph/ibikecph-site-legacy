@@ -279,7 +279,17 @@ en:
   issues:
     index:
       title: "Lab"
-      body: "Ideas and bug reports."
+      body: "Du you have ideas for improvements of the bike route planner? Did you encounter an error, or a path missing on the map? Then you can let os know!"
+      note: |
+        This site is only for discussing the digital bicycle route planner.
+        
+        Other ideas for improving biking in Copenhagen should be send to the Bicycle Programme, Copenhagen Municipality: http://kk.dk/cyklernesby
+        
+        You can report 'analog' problems, like holes in the road, at: http://givetpraj.kk.dk.
+        
+        Ibikecph's social forum is now located on Facebook: https://www.facebook.com/IbikeCPH
+        
+        Advertising is not allowed at this site.
       no_items: No items.
       new: New Issue
     new:
@@ -302,6 +312,10 @@ en:
       ideas: Ideas
       bugs: Bugs
 
+  pages:
+    terms:
+      title: Terms of use for ibikecph.dk
+      
   errors:
     forbidden:
       title: Sorry
