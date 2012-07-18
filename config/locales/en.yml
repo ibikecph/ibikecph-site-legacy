@@ -311,6 +311,8 @@ en:
       all: All
       ideas: Ideas
       bugs: Bugs
+    tag:
+      title: "Issues tagged with: %{tag}"
 
   pages:
     terms:

@@ -17,13 +17,13 @@ da:
         uid: 'Email'      
         uid_confirmation: 'Bekræft email'
       blog_entry:
-        title: Titel
+        title: Overskrift
         body: Indhold
         tags: Tags
         image: Billede
         sticky: Fasthold
       issue:
-        title: Titel
+        title: Overskrift
         body: Beskrivelse
         labels: Type
         tags: Tags
@@ -277,7 +277,7 @@ da:
       title: "Feedback"
       body: "Har du idéer til forbedringer af cykelruteplanlæggeren? Har du fundet noget der ikke virker, eller mangler der en sti på kortet? Så kan du fortælle det her!"
       note: |
-        Denne webside er kun til diskussion af den digitale cykelruteplanlægger. Andre idéer til forbedring af cykling i København bedes sendes til Cykelsekretariatet, Københavns Kommune: http://kk.dk/cyklernesby.
+        Denne webside er kun til diskussion af den digitale cykelruteplanlægger. Andre idéer til forbedring af cykling i København bedes sendt til Cykelsekretariatet, Københavns Kommune: http://kk.dk/cyklernesby.
         
         Du kan rapportere 'analoge' problemer, som fx huller i cykelstierne, på Giv et Praj: http://givetpraj.kk.dk.
         
@@ -305,7 +305,9 @@ da:
       all: Alle
       ideas: Idéer
       bugs: Fejl
-  
+    tag:
+      title: "Emner markeret med: %{tag}"
+      
   pages:
     terms:
       title: Brugerbetingelser for ibikecph.dk

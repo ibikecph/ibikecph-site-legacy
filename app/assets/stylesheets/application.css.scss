@@ -437,8 +437,9 @@ table.issues {
 div.tag_cloud {
   a {
     color: $dark;
+    margin-right: 5px;
+    text-decoration: none;
     &:hover {
-      color: $color;
       text-decoration: underline;
     }
   }

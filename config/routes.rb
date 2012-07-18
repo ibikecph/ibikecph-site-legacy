@@ -72,6 +72,7 @@ RailsOSRM::Application.routes.draw do
       collection do
         get 'list'
         get 'cards'
+        get 'tag/:tag' => :tag
       end
     end
   end

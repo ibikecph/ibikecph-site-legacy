@@ -3,7 +3,7 @@ class IssuesController < ApplicationController
   skip_before_filter :require_login, :only => [:index,:show]
   load_and_authorize_resource
   before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :load_sidebar, :only => [:index,:list,:create,:ideas]
+  before_filter :load_sidebar, :only => [:index,:list,:create,:ideas,:tag]
 
   def index
     if params[:label]
@@ -16,6 +16,10 @@ class IssuesController < ApplicationController
   def show
     count_votes
     @comments = @issue.comments
+  end
+  
+  def tag
+    @issues = Issue.tagged_with(params[:tag].to_s).paginate :page => params[:page], :per_page => 10
   end
   
   def new
@@ -101,6 +105,7 @@ class IssuesController < ApplicationController
     @most_commented = Issue.most_commented.includes(:user).limit(7)
     @most_voted = Issue.most_voted.includes(:user).limit(7)
     @issue = Issue.new
+    @tags = Issue.tag_counts_on(:tags)
   end
   
   def collect_labels

@@ -1,5 +1,6 @@
 <%= form_for @issue, :url => url do |f| %>
 <%= errors_for( @issue ).html_safe %>
+	<% if can? :manage, @issue %>
 	<p>
 		<%= f.label :labels %><br>
 		<% for label in Issue::LABELS %>
@@ -7,6 +8,7 @@
 			<%=t "labels.#{label}", %><br>
 		<% end %>
 	</p>
+	<% end %>
 	<p>
 		<%= f.label :title %>
 		<%= chars_remaining %>
