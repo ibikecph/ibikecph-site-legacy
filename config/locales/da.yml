@@ -60,8 +60,6 @@ da:
   submit: Gem
   login: Log ind
   hi: "Hej %{user}"
-  on: Til
-  off: Fra
   tags: Tags
   departure: Afgang
   ago: siden
@@ -71,6 +69,11 @@ da:
   be_the_first_to_comment: Vær den første til at kommentere
   comment: kommentar
   not_a_valid_email: er ikke en gyldig email adresse 
+  empty: Tom
+ 
+  #yes and no are reserved words in yaml, so need to quote
+  'yes': 'Ja'
+  'no': 'Nej'
   
   vote:
     one: 1 stemme
@@ -129,13 +132,13 @@ da:
       title_settings: Indstillinger
       name: Navn
       image: Billede
-      about: Om
+      about: Om mig
       email: Email
       password: Kodeord
       change_email: Ændr Email
       change_password: Ændr kodeord
       change_settings: Rediger indstillinger
-      notify_by_email: Email Beskeder
+      notify_by_email: Beskeder via email
       unverified: Uverficiret
       password_hidden: Skjult
       no_image: Intet
@@ -158,7 +161,7 @@ da:
     settings:
       title: Rediger Indstillinger
       unverified: "For at modtage emailbeskeder, er det nødvendig at du verificerer din emailadresse."
-      email_notifications: Send mig emailbeskeder
+      email_notifications: "Send mig email når der er nye blog indlæg, folk kommenterer på mine indlæg, etc."
       submit: Gem
     flash:
       email_not_found: Email ikke fundet.
@@ -284,12 +287,12 @@ da:
         Ibikecph's sociale forum ligger nu på Facebook: https://www.facebook.com/IbikeCPH.
         
         Det er ikke tilladt at reklame her på siden. Se iøvrigt brugerbetingelserne: http://ibikecph.dk/terms.
-      no_items: Ingen indlæg.
-      new: Opret Nyt Emne
+      no_items: Ingen emner.
+      new: Opret nyt emne
     new:
-      title: Opret Nyt Emne
+      title: Opret nyt emne
     edit:
-      title: Rediger Emne
+      title: Rediger emne
     show:
       back_to_list: Tilbage til listen
       labels: Type

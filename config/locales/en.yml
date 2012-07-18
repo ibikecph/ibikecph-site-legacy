@@ -65,10 +65,12 @@ en:
   submit: Submit
   login: Login
   hi: "Hi %{user}"
-  on: On
-  off: Off
   tags: Tags
   departure: Departure
+  
+  #yes and no are reserved words in yaml, so need to quote
+  'yes': 'Yes'
+  'no': 'No'
   
   you: You
   or_login_with: or login with
@@ -76,7 +78,8 @@ en:
   be_the_first_to_comment: Be the first to comment
   comment: comment
   not_a_valid_email: is not a valid email address 
- 
+  empty: Empty
+  
   vote:
     one: 1 vote
     other: "%{count} votes"
@@ -134,7 +137,7 @@ en:
       title_settings: Settings
       name: Name
       image: Image
-      about: About
+      about: About me
       email: Email
       password: Password
       change_email: Change Email
@@ -163,7 +166,7 @@ en:
     settings:
       title: Edit Settings
       unverified: "To receive email notifications, you need to verify your email address."
-      email_notifications: Send me email notifications
+      email_notifications: "Send me email notifications about new blog entries, when people comment on my posts, etc."
       submit: Save
     flash:
       email_not_found: Email not found.

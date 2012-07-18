@@ -9,15 +9,11 @@
 
 <label><%=t '.image' %></label>
 <p>
-	<% if current_user.image? %>
-		<%= image_tag current_user.image.g2.url, :class => 'g2 square' %>
-	<% else %>
-		(<%=t '.no_image' %>)
-	<% end %>
+	<%= image_tag current_user.image.g2.url, :class => 'g2 square' %>
 </p>
 
 <label><%=t '.about' %></label>
-<% if current_user.about %>
+<% if current_user.about.present? %>
 	<%= simple_format(current_user.about) %>
 <% else %>
 	<p>(<%=t 'empty' %>)</p>
@@ -58,7 +54,7 @@
 <%= link_to t('.change_settings'),settings_account_path, :class => "note button righty" %>
 <label><%=t '.notify_by_email' %></label>
 <p>
-	<%= current_user.notify_by_email ? t('on') : t('off') %>
+	<%= current_user.notify_by_email ? t('yes') : t('no') %>
 </p>
 
 
