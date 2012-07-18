@@ -1,9 +1,9 @@
 RailsOSRM::Application.routes.draw do
   
-  match '/:locale' => 'map#index', :locale => /en/   #root path with locale
-  root :to => 'map#index'
-  
   scope "(:locale)", :locale => /en/ do
+    #root
+    root :to => 'map#index'
+    
     #signup, login, logout
     get "signup" => "users#new", :as => :signup
     get "login" => "sessions#new", :as => :login
