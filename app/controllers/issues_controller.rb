@@ -109,7 +109,7 @@ class IssuesController < ApplicationController
   end
   
   def collect_labels
-    params[:issue][:label_list] = params[:labels].keys.join(' ')
+    params[:issue][:label_list] = params[:labels].keys.join(' ') if params[:labels].is_a? Hash
   end
   
 end
