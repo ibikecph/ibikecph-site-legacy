@@ -62,6 +62,9 @@ da:
   hi: "Hej %{user}"
   tags: Tags
   departure: Afgang
+  arrival: Ankomst
+  departure_placeholder: kl.
+  arrival_placeholder: kl.
   ago: siden
   you: Dig
   or_login_with: eller log ind med
@@ -332,17 +335,24 @@ da:
   character:
     remaining: "%{n} karakterer tilbage"
   
+  map:
+    index:
+      payoff: Hurtigere på cykel
+    
   #ui
-  from: Fra
-  to: Til
+  from: A
+  to: B
+  from_placeholder: Fra adresse
+  to_placeholder: Til adresse
   page_title: I Bike Cph
   generate_link: Lav et link
-  route_description: Rutebeskrivelse
+  route_instructions: Rutebeskrivelse
   distance: afstand
   duration: tid
-  arrival: ankomst
   link_for_route: Link til Route
   clear: ryd
+  zoom_to_route: Zoom til Rute
+  use_my_location: Brug min position
 
 
   1: første
@@ -357,13 +367,11 @@ da:
   10: tiende
 
 
-  normal_bike: Almindelig cykel
-  frieght_bike: Ladcykel
-  electrical_bike: Elcykel
+  normal_bike: Cykel
+  cargo_bike: Ladcykel
+  electric_bike: Elcykel
   reset: Nulstil
-  link_for_route: Link til rute
-  route_instructions: Rutebeskrivelse
-
+  link_for_route: Link
 
   #earth corners
   N: mod nord

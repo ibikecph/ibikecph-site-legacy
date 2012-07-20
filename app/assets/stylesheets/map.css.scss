@@ -1,320 +1,167 @@
 /*
 *= require leaflet
 */
-
 @import "base.css.scss";
-
 html {
-	height:100%;
-	overflow:hidden;
+	height: 100%;
+	overflow: hidden;
 }
-
-#uvTab{
-	right:20px !important;
+body {
+	height: 100%;
 }
-
-body{
-	height:100%;
-
-	div.route{
-		height:200px;
-		clear:both;
-		float:left;
-		overflow-y:scroll;
-		display:none;
-
-		.instruction{
-			background: #eee;
-			padding: 6px;
-			font-size:15px;
-			line-height:18px;
-			&.even{
-				background: white;
+#viewport {
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+#map {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	z-index: 0;
+}
+#ui {
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	width: 350px;
+	box-shadow: 0px 5px 5px rgba(0,0,0,.5);
+	top: 10px;
+	left: 10px;
+    padding: $half_gutter - 2*$border_width;
+    border-radius: 4px;
+    border: $border_width solid $lightish;
+	background: $light;
+	&.hidden {
+		width: 16px;
+		height: 16px;
+		#ui_content {
+			display: none
+		}
+		.fold {
+			display: block;
+			background: image-url('expand.png');
+		}
+	}
+	.fold {
+		cursor: pointer;
+		width: 16px;
+		height: 16px;
+		float: left;
+		background: image-url('close.png');
+	}
+	.reset, .permalink, .details {
+		font-size: 0.8em;
+		float: right;
+		color: $color;
+		cursor: pointer;
+		margin-left: 10px;
+		text-decoration: none;
+		&:hover {
+			color: black;
+		}
+	}
+	h1 {
+		color: $highlight;
+		font-size: 1em;
+		margin-bottom: 0.5em;
+		font-style: italic;
+	}
+	.mode {
+		margin: 10px 0;
+		span {
+			margin-right: 10px;
+			&.proposed {
+				color: $medium;
 			}
-			&:hover{
-				text-decoration:underline;
-				cursor:pointer;
+		}
+	}
+	#addresses {
+		.address {
+			label {
+				display: inline-block;
+				width: 17px;
+				font-size: 1em;		
+				font-weight: bold;
+			}
+			input {
+				width: 320px;
+				padding: 3px 1px;
+				font-size: 1em;
+			}
+			margin-bottom: 3px;	
+		}
+		margin-bottom: 10px;	
+	}
+	#time {
+		font-size: 0.9em;
+		input {
+			font-size: 0.9em;
+			width: 50px;
+		}
+	}
+	#summary {
+		display: none;
+		margin-top: 10px;
+		border-top: 1px solid $medium;
+		padding-top: 10px;
+		.duration, .distance {
+			font-size: 1.3em;
+			font-weight: bold;
+		}
+	}
+	#route {
+		display: none;
+		margin-top: 10px;
+		height: 300px;
+		overflow-y: scroll;
+		.step {
+			padding: 6px;
+			font-size: 15px;
+			line-height: 18px;
+			cursor: pointer;
+			&.even {
+				background-color: white;
+			}
+			&:hover {
+				text-decoration: underline;
 			};
 		}
-
-
 	}
-
-	#ui{
-
-
-		select{
-			float:left;
-			clear:both;
-			margin-top:10px;
-		}
-
-
-
-
-		overflow:hidden;
-		position: absolute;
-		z-index:10;
-		width:350px;
-		padding:10px;
-		margin:10px;
-		border:2px solid #EEEEEE;
-		border-radius:5px;
-		box-shadow:0px 1px 1px rgba(0,0,0,.5);
-		opacity:.95;
-		top:0px;
-
-		.actions{
-			float:left;
-		}
-
-		.meta{
-
-			display:none;
-
-			.link{
-				margin-top:10px;
-				float:left;
-				clear:both;
-				font-weight:bold;
-				margin-bottom:10px;
-				&:hover{
-					color:black !important;
-				}
-			}
-
-			.instructions{
-				float:left;
-				clear:both;
-				cursor:pointer;
-				font-weight:bold;
-				width:100%;
-				&:hover{
-					text-decoration:underline;
-				}
-
-				background:image-url('arrow-down.png') right top no-repeat;
-
-				&.colapse{
-				background:image-url('arrow-up.png') right top no-repeat;
-				}
-			}
-
-		}
-
-		.reset{
-			float:right;
-			color:#DB483B;
-			cursor:pointer;
-		}
-
-		.time{
-			border-top:1px dashed #444;
-			opacity: .8;
-			width:346px;
-			margin-top:20px;
-			display:none;
-			padding:20px 0px 0px;
-			z-index:99;
-			float:left;
-			p{
-				input{
-					float:right;
-					width:40px;
-					border:1px solid #444;
-					font-size:12px;
-					padding:2px;
-					text-align:center;
-					&.user{
-						font-weight:bold;
-					}
-				}
-				font-weight:normal !important;
-				text-transform:capitalize;
-				font-size:16px;
-				width:100%;
-				margin-bottom:8px;
-
-				span{
-					float:right;
-					font-weight:bold;
-
-				}
-			}
-		}
-
-		.disclaimer{
-			color:#aaa;
-			float:left;
-			width:286px;
-			font-size:12px;
-			margin-top:18px;
-			margin-left:2px;
-		}
-
-
-		.control{
-			cursor:pointer;
-			width:16px;
-			height:16px;
-			background:red;
-			float:left;
-			clear:both;
-
-			&.close{
-				background:image-url('close.png');
-			}
-
-			&.expand{
-				background:image-url('expand.png');				
-			}
-		}
-
-		img.logo{
-			float: right;
-			cursor:pointer;
-			margin-right:-1px;
-			margin-top:12px;
-		}
-
-
-
-		.label{
-
-			&.text{
-				background:#eee;
-				padding:10px;
-				width:330px;
-				margin-top:10px;
-				display:none;
-				input{
-					width:309px !important;
-					border:none !important;
-				}
-			}
-
-			span{
-				font-size:14px;		
-				margin-bottom:4px;	
-				float:left;
-				font-weight:bold;
-			}
-
-
-
-
-
-
-
-			input[type=text]{
-				padding:10px;
-				font-size:16px;
-				line-height:20px;
-				border:2px solid #eee;
-				clear:both;
-				float:left;
-				width:326px;
-
-				&.link{
-					color:#888;
-				}
-			}
-
-
-			margin-top:10px;
-			float:left;
-			clear:left;
-
-		}
-		float:left;
-		clear:none;
-
-		.delete{
-			width:40px;
-			height:40px;
-			margin-top:2px;
-
-			float:right;
-			cursor:pointer;
-			clear:none;
-			background:image-url('cancel.png') no-repeat center center;
-		}
-
-
-		background:white;
-	}
-
-	#viewport{
-		width:100%;
-		position: relative;
-		overflow:hidden;
-		border-left-color:#ddd;
-		height:100%;
-		float:left;
-		clear:none;
-
-
-
-		#map {
-			position: fixed;
-			left: 0;
-			height: 100%;
-			z-index: 0;
-		}
-	}
-
 }
-
-.ln{
-	display:none;
-	position: absolute;
-	bottom:60px;
-	right:35px;
-	float:left;
-	display: inline-block;
-	background-color: #fff;
-	color: #c00;
-	font-size:12px;
-	color:#c00;
-	margin-right:10px;
-	padding:10px;
-	border-radius:5px;
-	text-decoration:none;
-	font-weight:bold;
-	border:2px solid #888;
-
+.leaflet-control {
+	background-color: white;
+    border: $border_width solid $lightish;
+	border-radius: 4px;
+	box-shadow: 0px 5px 5px rgba(0,0,0,.5);
 }
-
-.leaflet-control{
-	background:white;
-		border:2px solid #EEEEEE;
-	box-shadow:0px 1px 1px rgba(0,0,0,.5);
-
-}
-
 .leaflet-control-goto {
-	padding:5px;
-	border-radius:5px;
-
+	padding: 5px;
 	a {
-		border-radius:4px;
-		width:26px;
-		height:26px;
-		background-position:50% 50%;
-		background-repeat:no-repeat;
-		display:block;
+		width: 26px;
+		height: 26px;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		display: block;
 	}
 }
-
-.leaflet-control-zoom{
-	padding:9px;
+.leaflet-control-zoom {
+	padding: 9px;
 }
-
 .leaflet-control-goto-my-location {
-	background-image:image-url('location.png');
-	margin-bottom:5px;
+	background-image: image-url('location.png');
+	margin-bottom: 5px;
 }
-
 .leaflet-control-goto-route {
-	background-image:image-url('route.png');
+	background-image: image-url('route.png');
+}
+::-webkit-input-placeholder {
+	color: #ddd;
+}
+:-moz-placeholder {
+	color: #ddd;
+}
+:-ms-input-placeholder {
+	color: #ddd;
 }

@@ -17,9 +17,9 @@ ibikecph.config =
 			weight  : 5
 			opacity : 0.4
 		invalid:
-			color   : 'black'
-			weight  : 1
-			opacity : 0.5
+			color   : 'grey'
+			weight  : 5
+			opacity : 0.3
 
 	# The first tile set is used by default.
 	map_tiles: [

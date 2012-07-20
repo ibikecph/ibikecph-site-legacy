@@ -118,7 +118,7 @@ GEM
     net-ssh (2.3.0)
     newrelic_rpm (3.3.5)
     nokogiri (1.5.0)
-    pg (0.13.2)
+    pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)

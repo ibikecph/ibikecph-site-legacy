@@ -67,6 +67,9 @@ en:
   hi: "Hi %{user}"
   tags: Tags
   departure: Departure
+  arrival: Arrival
+  departure_placeholder: at
+  arrival_placeholder: at
   
   #yes and no are reserved words in yaml, so need to quote
   'yes': 'Yes'
@@ -338,18 +341,24 @@ en:
   character:
     remaining: "%{n} characters remaining"
     
+  map:
+    index:
+      payoff: Faster on Bike
+
   #ui
-  from: From
-  to: To
+  from: A
+  to: B
+  from_placeholder: From addresse
+  to_placeholder: To address
   page_title: I Bike Cph
   generate_link: Make a Link
-  route_description: Route Description
+  route_instructions: Driving Instructions
   distance: distance
   duration: time
-  arrival: arrival
-  link_for_route: Link to Route
+  link_for_route: Link
   clear: clear
-
+  zoom_to_route: Zoom to Route
+  use_my_location: Use my Location
 
   1: first
   2: seccond
@@ -374,9 +383,9 @@ en:
   W: west
   NW: north west
 
-  normal_bike: Normal Bike
-  frieght_bike: Freight Bike
-  electrical_bike: Electrical Bike
+  normal_bike: Bike
+  cargo_bike: Cargo Bike
+  electric_bike: Electric Bike
 
 
   #route description

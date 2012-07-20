@@ -3,23 +3,23 @@ class ibikecph.Icon extends L.Icon
 	options:
 		iconUrl    : "<%= image_path('marker-icon.png') %>"
 		iconSize   : new L.Point(48, 48)
-		iconAnchor : new L.Point(42, 42)
+		iconAnchor : new L.Point(13, 46)
 
 class ibikecph.RouteMarker extends L.Icon
 	options:
-		iconUrl    : "<%= image_path('marker-drag.png') %>"
+		iconUrl    : "<%= image_path('marker_drag.png') %>"
 		iconSize   : new L.Point(48, 48)
-		iconAnchor : new L.Point(42, 42)
+		iconAnchor : new L.Point(13, 46)
 
 ibikecph.icons = {}
 
 ibikecph.icons.from = new ibikecph.Icon
-	iconUrl : "<%= image_path('marker-start.png') %>"
+	iconUrl : "<%= image_path('marker_a.png') %>"
 
 ibikecph.icons.to = new ibikecph.Icon
-	iconUrl : "<%= image_path('marker-end.png') %>"
+	iconUrl : "<%= image_path('marker_b.png') %>"
 
 ibikecph.icons.via = new ibikecph.Icon
-	iconUrl : "<%= image_path('marker-via.png') %>"
+	iconUrl : "<%= image_path('marker_via.png') %>"
 
 ibikecph.icons.route_marker = new ibikecph.RouteMarker

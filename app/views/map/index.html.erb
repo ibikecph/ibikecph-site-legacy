@@ -1,44 +1,43 @@
 <div id="viewport">
 	<div id="ui">
-		<div class="close control"></div>
-		<select name="biketype" id="biketype">
-			<option><%=t :normal_bike %></option>
-			<option disabled><%=t :frieght_bike %></option>
-			<option disabled><%=t :electrical_bike %></option>
-		</select>
-		<div class="reset"><%=t :reset %></div>
-		<div class="label">
-			<label>
-				<span><%=t :from %></span>
-				<input type="text" class="from"  title='<%=t :from %>'>
-			</label>
-		</div>
-		<div class="label">
-			<label>
-				<span><%=t :to %></span>
-				<input type="text" class="to"  title='<%=t :to %>'>
-			</label>
-		</div>
+		<div class="fold"></div>
+		<div id="ui_content">
+			<a class="reset"><%=t :reset %></a>
+			<a class="permalink"><%=t :link_for_route %></a> 
+			<br>
+			<div class="mode">
+				<%= radio_button_tag 'mode', :normal, true %> <span><%=t :normal_bike %></span>
+				<%= radio_button_tag 'mode', :cargo, false, :disabled => true %> <span class="proposed"><%=t :cargo_bike %></span>
+				<%= radio_button_tag 'mode', :electric, false, :disabled => true %> <span class="proposed"><%=t :electric_bike %></span>
+			</div>
+		
+			<div id="addresses">
+				<div class="address">
+					<label><%=t :from %></label>
+					<input type="text" class="from" title="<%=t :from %>" placeholder="<%=t :from_placeholder %>" tabindex=1 >
+				</div>
+				<div class="address">
+					<label><%=t :to %></label>
+					<input type="text" class="to" title="<%=t :to %>" placeholder="<%=t :to_placeholder %>" tabindex=2>
+				</div>
+			</div>
 
-
-
-
-		<div class="time">
-			<p class='departure'><%=t :departure %> <input type="text" /></p>
-			<p class='arrival'><%=t :arrival %>  <input type="text" /></p>
-			<p class='distance'><%=t :distance %> <span class="count">23 km</span></p>
-			<p class='duration'><%=t :duration %> <span class="count">13 minutter</span></p>
-		</div>
-
-		<div class="meta">
-			<a class="link" href="#"><%=t :link_for_route %></a> 
-			<p class="instructions"><%=t :route_instructions %></p>
-			<div class="route">
-				
+			<div id="time">
+				<%=t :departure %> <input class="at departure" type="text" placeholder="<%=t :departure_placeholder %>" tabindex=3>
+				&rarr;
+				<%=t :arrival %> <input class="at arrival" type="text" placeholder="<%=t :arrival_placeholder %>" tabindex=4>
+			</div>
+		
+			<div id="summary">
+				<a class="details"><%=t :route_instructions %></a>
+				<span class='distance'></span> / <span class='duration'></span>
+			</div>
+			<div id="route">
+				route...
 			</div>
 		</div>
-
 	</div>
+	
 	<div id="map"></div>
 </div>
 
