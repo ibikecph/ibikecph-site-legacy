@@ -5,7 +5,7 @@
 		<%= f.label :labels %><br>
 		<% for label in Issue::LABELS %>
 			<%= check_box_tag "labels[#{label}]", label, @issue.label_list.to_s.split.include?(label.to_s) %>
-			<%=t "labels.#{label}", %><br>
+			<%=t "labels.#{label}" %><br>
 		<% end %>
 	</p>
 	<% end %>

@@ -110,6 +110,13 @@ body {
 			font-size: 1.3em;
 			font-weight: bold;
 		}
+		.notice {
+			border: 1px solid #cc8;
+			background-color: #fec;
+			color: black;
+			padding: 10px;
+			margin-bottom: 10px;
+		}
 	}
 	#route {
 		display: none;

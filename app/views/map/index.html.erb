@@ -29,6 +29,10 @@
 			</div>
 		
 			<div id="summary">
+				<div class="notice">
+					<%=t '.work_in_progress' %><br>
+					<%= link_to( t('.bugs_and_suggestions'),issues_path) %>
+				</div>
 				<a class="details"><%=t :route_instructions %></a>
 				<span class='distance'></span> / <span class='duration'></span>
 			</div>

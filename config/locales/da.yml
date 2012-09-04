@@ -338,6 +338,8 @@ da:
   map:
     index:
       payoff: Hurtigere på cykel
+      work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtive."
+      bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
     
   #ui
   from: A
@@ -353,7 +355,6 @@ da:
   clear: ryd
   zoom_to_route: Zoom til Rute
   use_my_location: Brug min position
-
 
   1: første
   2: anden

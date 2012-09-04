@@ -344,6 +344,8 @@ en:
   map:
     index:
       payoff: Faster on Bike
+      work_in_progress: "The site is under development, and route suggestion can be inaccurate."
+      bugs_and_suggestions: "Report bugs, or suggest improvements."
 
   #ui
   from: A
