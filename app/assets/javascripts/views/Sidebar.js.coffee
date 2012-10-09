@@ -2,7 +2,7 @@
 class ibikecph.Sidebar extends Backbone.View
 
 	events:
-		'change input.address'         : 'fields_updated'
+		'change .address input'        : 'fields_updated'
 		'click .reset'                 : 'reset'
 		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
 		'mouseup .pin.draging'         : 'drag_pin_end'
