@@ -188,10 +188,15 @@ class ibikecph.Sidebar extends Backbone.View
 			type = 'to'
 		else
 			return
-
+		
 		raw_value = input.val()
 		value = ibikecph.util.normalize_whitespace raw_value
-
+		
+		#be a little smarter when parsing adresses, to make nominatim happier
+		value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København
+		value = value.replace /\b[nNøØsSvV]$/, ""					# remove north/south/east/west postfix
+		value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
+		
 		input.val(value) if value != raw_value
 
 		if value
