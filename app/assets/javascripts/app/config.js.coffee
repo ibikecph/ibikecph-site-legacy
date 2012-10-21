@@ -53,7 +53,7 @@ ibikecph.config =
 	]
 
 	routing_service:
-		url: 'http://83.221.133.2/viaroute'
+		url: 'http://localhost:5000/viaroute'
 
 	geocoding_service:
 		url: 'http://nominatim.openstreetmap.org/search'
