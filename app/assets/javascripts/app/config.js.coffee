@@ -70,4 +70,4 @@ ibikecph.config =
 		options:
 			'accept-language' : 'da'
 			addressdetails    : '1'
-			email             : 'info@contingent.dk'
+			email             : 'emil.tin@tmf.kk.dk'
