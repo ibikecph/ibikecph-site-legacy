@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8'
 gem 'jquery-rails'
 gem 'i18n-js'
 gem 'cancan', :git => 'git://github.com/emiltin/cancan.git', :branch => 'master'
@@ -23,12 +23,12 @@ gem 'google-analytics-rails'
 # in production environments by default.
 group :assets do
   gem 'sass-rails'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'coffee-rails'
+  gem 'uglifier'
   gem 'eco'
 end
 
 group :production, :staging do
-  gem 'workless', '~> 1.0.1'
+  gem 'workless', '~> 1.1.1'
   gem 'newrelic_rpm'    #place low in list to allow other stuff to be instrumented
 end
