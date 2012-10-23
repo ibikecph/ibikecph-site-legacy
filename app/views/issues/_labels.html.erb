@@ -1,0 +1,8 @@
+<% if @labels.any? %>
+<div class="label_list">
+	<% for label in @labels %>
+	<% css_class = params[:label]==label.name ? :on : nil %>
+	<%= link_to label.name.capitalize, { :controller => :issues, :action => :labels, :label => label.name }, :class => css_class %>
+	<% end %>
+</div>
+<% end %>

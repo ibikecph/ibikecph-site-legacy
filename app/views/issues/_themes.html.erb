@@ -1,0 +1,10 @@
+<% if @themes.any? %>
+<h2><%=t '.themes' %></h2>
+<ul class="themes">
+	<% for theme in @themes %>
+	<li>
+		<%= link_to theme.title, theme %><br>
+	</li>
+	<% end %>
+</ul>
+<% end %>

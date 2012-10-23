@@ -78,6 +78,9 @@ module RailsOSRM
       end
     end
     
+    #configure acts_as_taggable
+    ActsAsTaggableOn.remove_unused_tags = true  #remove unused tag objects after removing taggings
+    ActsAsTaggableOn.force_lowercase = true     #save all tags as lowercase
   end
 end
 

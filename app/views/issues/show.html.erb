@@ -1,39 +1,15 @@
 <div class="gr">
 	<div class="g8">
-		<p>
-			<%= link_to "&larr; #{t '.back_to_list'}".html_safe, issues_path %>
-		</p>
 		<%= render 'issues/editing' %>
-		
-		<h2><%= @issue.title %></h2>
-
-		<div class="label_list">
-			<ul>
-			<% for label in @issue.label_list.to_s.split %>
-				<%= content_tag :li, t("labels.#{label}"), :class => :on %>
-			<% end %>
-			</ul>
-		</div>
+		<h1><%= @issue.title %></h1>
+		<%= auto_html_blog @issue.body, {} %>
+		<%= render 'tag_cloud' %>
+		<%= render 'labels' %>
 		<br>
 		
-		<%= simple_format @issue.body %>
-
-		<% if @issue.tags.any? %>
-			<span class="tags">
-				<%=t '.tags' %>: <%= @issue.tag_list %>
-			</span><br>
-		<% end %>
-
-		<br class="clear">
-
-		<% if current_user %>
-			<div class="righty"><%= render 'issues/votes' %></div>
-		<% end %>
-
 		<% if @issue.user %>
 			<%= link_to profile_image(@issue.user), @issue.user, :class => "avatar lefty" %>
 		<% end %>
-
 		<div class="note">
 			<% if @issue.user %>
 				<%= link_to truncate(@issue.user.name, :length => 80), @issue.user %>,
@@ -48,6 +24,27 @@
 	</div>
 	<div class="g1">&nbsp;</div>
 	<div class="g3 ge">
+		<h2><%=t '.themes' %></h2>
+		<ul class="themes">
+			<% for theme in @themes %>
+			<li>
+				<%= link_to theme.title, theme %><br>
+			</li>
+			<% end %>
+		</ul>
+		<br>
+		<br>
+
+		<% if @related.any? %>
+		<h2><%=t '.related' %></h2>
+		<ul>
+			<% for issue in @related %>
+			<li><%= link_to issue.title, issue %></li>
+			<% end %>
+		</ul>
+		<br>
+		<% end %>
+
 	</div>
 </div>
 

@@ -56,7 +56,7 @@ class BlogController < ApplicationController
   
   def destroy
     @blog_entry.destroy
-    flash[:notice] = t('blog.flash.deleted')
+    flash[:notice] = t('blog.flash.destroyed')
     redirect_to blog_entry_index_path
   end
   

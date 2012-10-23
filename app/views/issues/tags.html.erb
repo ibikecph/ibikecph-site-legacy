@@ -1,15 +1,8 @@
 <div class="gr">
 	<div class="g8">
-		<p><%= link_to t('.back_to_list'), issues_path %></p>
-		<h1><%=t '.title', :tag => params[:tag] %></h1>
-		<label><%=t '.other_tags' %></label>
+		<h1><%=t '.title' %></h1>
 		<%= render 'tag_cloud' %>
 		<br>
-		<ul class="sort">
-			<li><%= link_to t('issues.labels.all'), issues_path %></li>
-			<li><%= link_to t('issues.labels.ideas'), :label => 'idea' %></li>
-			<li><%= link_to t('issues.labels.bugs'), :label => 'bug' %></li>
-		</ul>
 		<%= will_paginate @issues, :class => :pagination %>
 		
 		<table class="issues">
@@ -47,6 +40,7 @@
 	</div>
 	<div class="g1">&nbsp;</div>
 	<div class="g3 ge">
-		<%= render 'sidebar' %>
+		<%= render 'current_theme' %>
+		<%= render 'other_themes' %>
 	</div>
 </div>

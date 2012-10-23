@@ -1,0 +1,31 @@
+<div class="gr">
+	<div class="g8">
+		<% if can? :manage, @theme %>
+		<div class="buttons righty">
+			<%= link_to t('edit'),  [:edit,@theme] %>
+			<%= link_to t('delete'),  @theme, :method => :delete, :confirm => t('sure_q') %>
+		</div>
+		<% end %>
+		
+		<h1><%= @theme.title %></h1>
+		<p class="note">
+			<% if @theme.user %>
+				<%= @theme.user.name %>,
+			<% end %>
+			<span class="timeago" title="theme.created_at.getutc.iso8601"><%= time_ago_in_words(@theme.created_at).capitalize %> <%=t 'ago' %></span>
+		</p>
+		
+		<%= image_tag @theme.image.url  %>
+		<br><br>
+		<%= auto_html_blog @theme.body, :width => 610, :height => 406 %>
+
+		<br>
+		<%= render :partial => 'issues/issues', :locals => { :new_url => new_issue_for_theme_path } %>
+	</div>
+	
+	<div class="g1">&nbsp;</div>
+	<div class="g3 ge">
+		<%= render 'issues/other_themes' %>
+		<%= render 'issues/most_commented' %>
+	</div>
+</div>

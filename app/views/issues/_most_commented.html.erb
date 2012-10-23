@@ -1,0 +1,12 @@
+<% if @most_commented.any? %>
+<h2><%=t '.title' %></h2>
+<table class="fullwidth">
+	<% for issue in @most_commented %>
+	<tr class="oneline">
+		<td><%= link_to issue.title, issue %></td>
+		<td><%= issue.comments_count %></td>
+	</tr>
+	<% end %>
+</table>
+<br>
+<% end %>

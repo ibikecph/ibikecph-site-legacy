@@ -1,64 +1,74 @@
 class IssuesController < ApplicationController
        
-  skip_before_filter :require_login, :only => [:index,:show,:tag]
+  skip_before_filter :require_login, :only => [:index,:show,:tags,:labels]
   load_and_authorize_resource
-  skip_authorize_resource :only => :tag
-  before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :load_sidebar, :only => [:index,:list,:create,:ideas,:tag]
+  skip_authorize_resource :only => [:tags,:labels]
+  #before_filter :find_vote, :only => [:show,:vote,:unvote]
+  before_filter :load_sidebar, :only => [:index,:tags,:labels]
+  before_filter :find_popular_tags, :only => [:index]
 
   def index
-    if params[:label]
-      @issues = Issue.tagged_with(params[:label].to_s, :on => :labels).lastest.includes(:user).paginate :page => params[:page], :per_page => 10
-    else
-      @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 10
-    end
+    @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 30
   end
   
   def show
     count_votes
     @comments = @issue.comments
+    @themes = @issue.themes
+    @related = @issue.find_related_tags.limit(20)
+    @tags = @issue.tags
+    @labels = @issue.labels
   end
   
-  def tag
-    @issues = Issue.tagged_with(params[:tag].to_s).paginate :page => params[:page], :per_page => 10
+  def tags
+    @issues = Issue.tagged_with(params[:tag].to_s).paginate :page => params[:page], :per_page => 50
+    @tags = Issue.tag_counts_on(:tags).order('name')
+  end
+
+  def labels
+    @issues = Issue.tagged_with(params[:label].to_s, :on => :labels).paginate :page => params[:page], :per_page => 50
+    @labels = Issue.tag_counts_on(:labels)
   end
   
   def new
     @issue = Issue.new
+    @themes = Theme.all
   end
  
+  def new_for_theme
+    @theme = Theme.find params[:id]
+    @issue = Issue.new
+    @issue.themes << @theme
+    @themes = Theme.all  end
+ 
   def create
-    collect_labels
-    @issue = Issue.new(params[:issue])
-    @issue.user = current_user
-    if @issue.save
-      current_user.follow @issue
-      Publisher.publish @issue
-      flash[:notice] = 'Issue submitted.'
-      redirect_to @issue
-    else
-      render :new
-    end
+    do_create @issue, :new
   end
-
+  
+  def create_for_theme
+    @theme = Theme.find params[:id]
+    do_create @theme, :new_for_theme
+  end
+  
   def edit
     @users = User.all
+    @themes = Theme.all
   end
 
   def update
-    collect_labels
     if @issue.update_attributes(params[:issue])
-      flash[:notice] = "Successfully updated issue."
+      flash[:notice] = t('issues.flash.updated')
       redirect_to @issue
     else
       @users = User.all
+      @themes = Theme.all
       render :action => :edit
     end
   end
   
   def destroy
     @issue.destroy
-    flash[:notice] = "Successfully destroyed issue."
+    flash[:notice] = t('issues.flash.destroyed')
     redirect_to :action => :index
   end
   
@@ -90,6 +100,21 @@ class IssuesController < ApplicationController
   
   private
   
+  def do_create redirect_to, rerender_to
+    params[:issue].delete(:label_list) unless can? :manage, Issue
+    @issue = Issue.new(params[:issue])
+    @issue.user = current_user
+    if @issue.save
+      current_user.follow @issue
+      Publisher.publish @issue
+      flash[:notice] = t('issues.flash.created')
+      redirect_to redirect_to
+    else
+      @themes = Theme.all
+      render rerender_to
+    end
+  end
+  
   def find_issue
     @issue = Issue.find params[:id]
   end
@@ -103,14 +128,16 @@ class IssuesController < ApplicationController
   end
   
   def load_sidebar
+    @theme = Theme.latest.first
+    @themes = Theme.where("id<>?",@theme.id) if @theme
     @most_commented = Issue.most_commented.includes(:user).limit(7)
-    @most_voted = Issue.most_voted.includes(:user).limit(7)
-    @issue = Issue.new
-    @tags = Issue.tag_counts_on(:tags)
+    #@most_voted = Issue.most_voted.includes(:user).limit(7)
   end
   
-  def collect_labels
-    params[:issue][:label_list] = params[:labels].keys.join(' ') if params[:labels].is_a? Hash
+  def find_popular_tags
+    @tags = Issue.tag_counts_on(:tags).order('count desc').limit(20)
   end
+  
+    
   
 end

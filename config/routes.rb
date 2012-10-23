@@ -72,11 +72,15 @@ RailsOSRM::Application.routes.draw do
       collection do
         get 'list'
         get 'cards'
-        get 'tag/:tag' => :tag
+        get 'tags(/:tag)' => :tags
+        get 'labels(/:label)' => :labels
       end
     end
   end
   
+  resources :themes
+  get 'themes/:id/new' => 'issues#new_for_theme', :as => :new_issue_for_theme
+  post 'themes/:id/create' => 'issues#create_for_theme', :as => :create_issue_for_theme
   
   match '/terms' => 'pages#terms'
   

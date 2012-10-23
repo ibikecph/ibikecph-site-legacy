@@ -12,6 +12,8 @@ class Publisher
     case object
     when BlogEntry
       blog object, locale
+    when Theme
+      theme object, locale
     when Comment
       comment object, locale
     end
@@ -21,6 +23,14 @@ class Publisher
     User.all.each do |user|
       if user.notify_by_email && user != blog_entry.user
         UserMailer.blog_entry(user,blog_entry,locale).deliver
+      end
+    end
+  end
+
+  def theme theme, locale
+    User.all.each do |user|
+      if user.notify_by_email && user != theme.user
+        UserMailer.theme(user,theme,locale).deliver
       end
     end
   end

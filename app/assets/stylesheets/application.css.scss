@@ -297,7 +297,7 @@ td.buttons, th.buttons {
         text-align: right;
     }
 }
-.button, .buttons a, .label_list li {
+.button, .buttons a, .label_list a, .tag_cloud a {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -307,36 +307,71 @@ td.buttons, th.buttons {
     
     display: inline-block;
     white-space: nowrap;
-    font-weight: bold;
-    font-size: 0.9em;
     text-decoration: none;
     padding: 2px 4px 2px 4px;
     line-height: 1.2em;
+	font-size: 0.9em;
     border-radius: 2px;
-    background-color: $color;
+    background-color: $medium;
+    font-weight: bold;
+	margin-bottom: 0.2em;
     color: white;
-    &.add_idea {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        padding: 4px 8px;
-        font-size: 1.8em;
-        border-radius: 4px;
-        color: white;
-    }
+	&:hover {
+		text-decoration: none;
+	}
+}
+.button, .buttons a {
+    background-color: $color;
+}
+.tag_cloud a {
+	background-color: $medium;
+	color: white;
+	&:hover {
+		background-color: $darkish;
+		color: white
+	}
+	&.on:hover {
+		background-color: $dark;
+	}
+	&.tag1 { font-size: 0.9em; }
+	&.tag2 { font-size: 1.1em; }
+	&.tag3 { font-size: 1.3em; }
+	&.tag4 { font-size: 1.5em; }
+	&.on {
+		background-color: $dark;
+		color: white;
+	}
+}
+.label_list a {
+	background-color: #4af;
+	color: white;
+	&:hover {
+		background-color: #4af*0.7;
+		color: white
+	}
+	&.on:hover {
+		background-color: $dark;
+	}
+	&.on {
+		background-color: #4af*0.7;
+		color: white;
+	}
+}
+.label_list {
+    margin-bottom: 0.5em;
 }
 .button:hover, .buttons a:hover {
     background-color: $dark;
     color: white;
     text-decoration: none;
 }
-.buttons {
+.buttons.big a {
+	font-size: 1.3em;
+    border-radius: 4px;
+    padding: 4px 8px 4px 8px;
 }
 .label_picker {
     margin-bottom: $half_gutter;      
-}
-.label_list li {
-    background-color: $medium;
 }
 td.note {
     padding-top:0.4em;
@@ -411,9 +446,6 @@ ul.blog_entries {
 table.issues {
   a {
     text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
   }
   td {
     a.user {
@@ -434,20 +466,7 @@ table.issues {
     font-size: 0.8em;
     font-weight: bold;
 }
-div.tag_cloud {
-  a {
-    color: $dark;
-    margin-right: 5px;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  .tag1 { font-size: 0.8em; }
-  .tag2 { font-size: 1.0em; }
-  .tag3 { font-size: 1.2em; }
-  .tag4 { font-size: 1.4em; }
-}
+
 p#terms {
     textarea {
         display: none;
@@ -467,4 +486,9 @@ ul.sort {
     li + li {
         margin-left: 1.5em;
     }
+}
+img.dialog {
+	width: 400px;
+	height: 144px;
+	margin-bottom: 1em;
 }

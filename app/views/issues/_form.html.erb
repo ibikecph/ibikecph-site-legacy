@@ -1,14 +1,5 @@
 <%= form_for @issue, :url => url do |f| %>
 <%= errors_for( @issue ).html_safe %>
-	<% if can? :manage, @issue %>
-	<p>
-		<%= f.label :labels %><br>
-		<% for label in Issue::LABELS %>
-			<%= check_box_tag "labels[#{label}]", label, @issue.label_list.to_s.split.include?(label.to_s) %>
-			<%=t "labels.#{label}" %><br>
-		<% end %>
-	</p>
-	<% end %>
 	<p>
 		<%= f.label :title %>
 		<%= chars_remaining %>
@@ -20,8 +11,21 @@
 		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @issue.class::MAXLENGTH[:body] } %>
 	</p>
 	<p>
+		<%= f.label :themes %><br>
+		<% for theme in @themes %>
+			<%= check_box_tag "issue[theme_ids][]", theme.id, @issue.themes.include?(theme) %>
+			<%= theme.title %><br>
+		<% end %>
+	</p>
+	<p>
 		<%= f.label :tags %>
 		<%= f.text_area :tag_list, { :rows => 1 } %>
 	</p>
+	<% if can? :manage, @issue %>
+	<p>
+		<%= f.label :labels %><br>
+		<%= f.text_area :label_list, { :rows => 1 } %>
+	</p>
+	<% end %>
 	<p><%= f.submit :class => :submit %></p>
 <% end %>

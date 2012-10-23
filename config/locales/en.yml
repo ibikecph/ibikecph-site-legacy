@@ -22,6 +22,12 @@ en:
         tags: Tags
         image: Image
         sticky: Sticky
+      theme:
+        title: Title
+        body: Description
+        label: Label
+        image: Image
+        sticky: Keep at top
       issue:
         title: Title
         body: Body
@@ -34,6 +40,12 @@ en:
         tags: Tags
         current_password: Current Password
         new_password_confirmation: Confirm New Password
+    errors:
+      models:
+        issue:
+          attributes:
+            themes:
+              blank: cannot all be deselected
   
   
   
@@ -42,7 +54,10 @@ en:
   
   
   
-  
+  will_paginate:
+    previous_label: Previous
+    next_label: Next
+
   labels:
     idea: Idea
     bug: Bug
@@ -203,6 +218,29 @@ en:
       created: Blog entry created.
       updated: Blog entry updated.
       deleted: Blog entry deleted.
+
+  themes:
+    index:
+      new: New Theme
+    show:
+      new_issue: Add New Issue
+      issues: Issue
+    new:
+      title: New Theme
+    edit:
+      title: Edit Theme
+    form:
+      make_sticky: Keep this theme at the top
+      submit: Save
+    latest:
+      title: Themes
+      new: New Theme
+    theme:
+      num_issues: "%{count} issues"
+    flash:
+      created: Theme added.
+      updated: Theme updated.
+      destroyed: Theme deleted.
       
   comments:
     new:
@@ -284,41 +322,48 @@ en:
   
   issues:
     index:
-      title: "Lab"
-      body: "Du you have ideas for improvements of the bike route planner? Did you encounter an error, or a path missing on the map? Then you can let os know!"
+      title: Get Involved!
+      body: "Du you have ideas for improving the bike route planner or website? Did you encounter bugs, or a path missing on the map? Then  let us know!"
       note: |
-        This site is only for discussing the digital bicycle route planner.
-        
-        Other ideas for improving biking in Copenhagen should be send to the Bicycle Programme, Copenhagen Municipality: http://kk.dk/cyklernesby
-        
-        You can report 'analog' problems, like holes in the road, at: http://givetpraj.kk.dk.
-        
-        Ibikecph's social forum is now located on Facebook: https://www.facebook.com/IbikeCPH
-        
-        Advertising is not allowed at this site.
-      no_items: No items.
-      new: New Issue
+        This site is only for discussing the digital bicycle route planner. Please send other ideas for improving biking in Copenhagen to <a href="http://kk.dk/cyklernesby" target="_blank">Copenhagen Municipality</a>. You can report 'analog' problems, like holes in the road, at <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's social forum is located on <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Advertising is not allowed at this site. See the <a href="http://ibikecph.dk/terms" target="_blank">user terms</a> for more info.
+      num_issues: "%{count} issues"
+    issues:
+      title: Issues
+      no_items: No issues.
+      new: Add New Issue
     new:
-      title: New Issue
+      title: Add New Issue
+    new_for_theme:
+      title: Add New Issue
     edit:
       title: Edit Issue
     show:
       back_to_list: Back to list
       labels: Labels
       tags: Tags
-    sidebar:
-      title: Popular Issues
-      most_votes: Most Votes
-      most_comments: Most Comments
+      related: Related issues
+      themes: Related themes
+    current_theme:
+      current_theme: Current theme
+    other_themes:
+      title: Other themes
+      new_theme: New theme
+    most_commented:
+      title: Commented issues
     votes:
       vote: Click to Vote
       unvote: Click to Remove Vote
+    tags:
+      title: "Issues tagged with..."
+      popular_tags: Popular tags
+      all_tags: View all tags
     labels:
-      all: All
-      ideas: Ideas
-      bugs: Bugs
-    tag:
-      title: "Issues tagged with: %{tag}"
+      title: "Issues labelled as.."
+      no_items: No issues found
+    flash:
+      created: Issue added.
+      updated: Issue updated.
+      destroyed: Issue deleted.
 
   pages:
     terms:
