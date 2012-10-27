@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
   def require_login
     unless current_user
       save_return_to
-      redirect_to login_path, :notice => 'Please login first.' 
+      redirect_to login_path, :notice => t('application.please_login_first')
     end
   end
   

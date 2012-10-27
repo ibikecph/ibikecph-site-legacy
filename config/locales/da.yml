@@ -340,7 +340,10 @@ da:
       payoff: Hurtigere på cykel
       work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtive."
       bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
-    
+  
+  application:
+    please_login_first: Log venligst ind først
+  
   #ui
   from: A
   to: B
