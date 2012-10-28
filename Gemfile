@@ -16,7 +16,7 @@ gem 'thin'
 gem 'auto_html', :require => 'auto_html', :git => 'git://github.com/emiltin/auto_html.git', :branch => 'master'   #:path => '~/code/auto_html'
 gem 'rails_autolink'
 gem 'acts-as-taggable-on'
-gem 'exception_notification'
+gem 'exception_notification', '2.6.1'   #there's UTF bug with 3.0.0
 gem 'google-analytics-rails'
 
 # Gems used only for assets and not required
