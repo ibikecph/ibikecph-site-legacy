@@ -40,13 +40,7 @@
 	</div>
 	<div class="g1">&nbsp;</div>
 	<div class="g3 ge">
-		<h2><%=t '.themes' %></h2>
-		<ul class="themes">
-			<% for theme in @themes %>
-			<li>
-				<%= link_to theme.title, theme %><br>
-			</li>
-			<% end %>
-		</ul>
+		<%= render 'current_theme' %>
+		<%= render 'other_themes' %>
 	</div>
 </div>
