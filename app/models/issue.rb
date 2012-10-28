@@ -18,14 +18,7 @@ class Issue < ActiveRecord::Base
   attr_accessible :title, :body, :tag_list, :label_list, :labels, :theme_ids
   
   MAXLENGTH = { :title => 100, :body => 10000 }
-  BASIC_LABELS = ['ide','kort','fejl']
   
   validates :title, :presence => true, :uniqueness => true, :length => { :maximum => MAXLENGTH[:title] }
   validates :body, :presence => true, :length => { :maximum => MAXLENGTH[:body] }
-  validates :themes, :presence => true
-  
-  def self.available_labels
-    labels = BASIC_LABELS + Theme.tag_counts_on(:labels).map { |label| label.name }
-    labels.uniq
-  end
 end

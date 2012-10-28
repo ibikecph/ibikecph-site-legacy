@@ -24,6 +24,7 @@
 	</div>
 	<div class="g1">&nbsp;</div>
 	<div class="g3 ge">
+		<% if @themes.any? %>
 		<h2><%=t '.themes' %></h2>
 		<ul class="themes">
 			<% for theme in @themes %>
@@ -34,6 +35,7 @@
 		</ul>
 		<br>
 		<br>
+		<% end %>
 
 		<% if @related.any? %>
 		<h2><%=t '.related' %></h2>
