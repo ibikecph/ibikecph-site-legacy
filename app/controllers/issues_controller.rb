@@ -2,19 +2,22 @@ class IssuesController < ApplicationController
        
   skip_before_filter :require_login, :only => [:index,:show,:tags,:labels]
   load_and_authorize_resource
-  skip_authorize_resource :only => [:tags,:labels]
+  skip_authorize_resource :only => [:all,:new_for_theme,:create_for_theme,:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :load_sidebar, :only => [:index,:tags,:labels]
+  before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show]
   before_filter :find_popular_tags, :only => [:index]
 
   def index
+    @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
+  end
+  
+  def all
     @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 30
   end
   
   def show
-    count_votes
+    #count_votes
     @comments = @issue.comments
-    @themes = @issue.themes
     @related = @issue.find_related_tags.limit(20)
     @tags = @issue.tags
     @labels = @issue.labels
@@ -78,7 +81,7 @@ class IssuesController < ApplicationController
       @vote.user = current_user
       @vote.issue = @issue
       if @vote.save
-        count_votes
+        #count_votes
         render 'votes'
         return
       end
@@ -90,7 +93,7 @@ class IssuesController < ApplicationController
     if @vote
       @vote.destroy
       @vote = nil
-      count_votes
+      #count_votes
       render 'votes'
       return
     end
@@ -129,7 +132,7 @@ class IssuesController < ApplicationController
   
   def load_sidebar
     @theme = Theme.latest.first
-    @themes = Theme.where("id<>?",@theme.id) if @theme
+    @themes = Theme.all
     @most_commented = Issue.most_commented.includes(:user).limit(7)
     #@most_voted = Issue.most_voted.includes(:user).limit(7)
   end

@@ -1,18 +1,13 @@
-<% if can? :manage, BlogEntry %>
-	<div class="buttons righty">
-		<%= link_to t('.new'), new_blog_entry_path %>
-	</div>
-<% end %>
-<h2><%=t '.title' %></h2>
-<br>
-<ul class="blog_entries">
-	<% for blog_entry in @latest %>
-		<li>
-			<%= link_to blog_entry.title, blog_entry %><br>
-			<span class="note"><%= time_ago_in_words blog_entry.created_at %> <%=t 'ago' %></span>
-		</li>
+<div class="sidebar">
+	<% if can? :manage, BlogEntry %>
+		<div class="buttons righty">
+			<%= link_to t('.new'), new_blog_entry_path %>
+		</div>
 	<% end %>
-</ul>
-<br>
-<p><%= link_to t('.archive'), archive_blog_entry_index_path %></p>
-<br>
+	<h2><%=t '.title' %></h2>
+	<ul>
+		<%= render :partial => 'list', :collection => @latest, :as => :blog_entry %>
+	</ul>
+	<br>
+	<p><%= link_to "#{t('.archive')} &rarr;".html_safe, archive_blog_entry_index_path %></p>
+</div>

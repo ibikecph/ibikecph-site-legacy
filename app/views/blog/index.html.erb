@@ -1,10 +1,8 @@
 <div class="gr">
-	<div class="g8">
-		<%= render :partial => 'blog_entry', :collection => @blog_entries %>
-	</div>
-	<div class="g1">&nbsp;</div>
-	<div class="g3 ge">
-		<%= render 'latest' %>
+	<div class="g4">
 		<%= render 'tag_cloud' %>
+	</div>
+	<div class="g8 ge">
+		<%= render :partial => 'blog_entry', :collection => @blog_entries %>
 	</div>
 </div>

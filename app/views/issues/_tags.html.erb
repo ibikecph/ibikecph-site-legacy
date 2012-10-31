@@ -1,4 +1,8 @@
+<% if @tags && @tags.any? %>
+<div class="sidebar">
 <h2><%=t '.popular_tags' %></h2>
 <%= render 'tag_cloud' %>
 <br>
 <%= link_to t('.all_tags'), :action => :tags %>
+</div>
+<% end %>

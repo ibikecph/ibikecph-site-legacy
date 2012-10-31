@@ -5,8 +5,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   include Sprockets::Helpers::RailsHelper
   include Sprockets::Helpers::IsolatedHelper
   
-  COLUMN_WIDTH = 50
-  GUTTER_WIDTH = 30
+  COLUMN_WIDTH = 60
+  GUTTER_WIDTH = 40
   ASPECT_RATIO = 2.0/3.0
   
   def self.grid_width columms

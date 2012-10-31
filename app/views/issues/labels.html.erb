@@ -1,5 +1,8 @@
 <div class="gr">
-	<div class="g8">
+	<div class="g4 ">
+		<%= render 'sidebar' %>
+	</div>
+	<div class="g8 ge">
 		<h1><%=t '.title', :label => params[:label] %></h1>
 		<%= render 'labels' %>
 		
@@ -37,10 +40,5 @@
 		<% if @issues.empty? %>
 			<p><%= t '.no_items' %></p>
 		<% end %>
-	</div>
-	<div class="g1">&nbsp;</div>
-	<div class="g3 ge">
-		<%= render 'current_theme' %>
-		<%= render 'other_themes' %>
 	</div>
 </div>

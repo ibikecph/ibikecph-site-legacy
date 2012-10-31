@@ -1,11 +1,15 @@
 <div class="gr">
-	<div class="g8">
+	<div class="g4">
+		<%= render 'themes/themes' %>
+		<%= render 'issues/related' %>
+	</div>
+	<div class="g8 ge">
 		<%= render 'issues/editing' %>
 		<h1><%= @issue.title %></h1>
 		<%= auto_html_blog @issue.body, {} %>
+		<br>
 		<%= render 'tag_cloud' %>
 		<%= render 'labels' %>
-		<br>
 		
 		<% if @issue.user %>
 			<%= link_to profile_image(@issue.user), @issue.user, :class => "avatar lefty" %>
@@ -22,31 +26,4 @@
 
 		<%= comments @issue %>
 	</div>
-	<div class="g1">&nbsp;</div>
-	<div class="g3 ge">
-		<% if @themes.any? %>
-		<h2><%=t '.themes' %></h2>
-		<ul class="themes">
-			<% for theme in @themes %>
-			<li>
-				<%= link_to theme.title, theme %><br>
-			</li>
-			<% end %>
-		</ul>
-		<br>
-		<br>
-		<% end %>
-
-		<% if @related.any? %>
-		<h2><%=t '.related' %></h2>
-		<ul>
-			<% for issue in @related %>
-			<li><%= link_to issue.title, issue %></li>
-			<% end %>
-		</ul>
-		<br>
-		<% end %>
-
-	</div>
 </div>
-

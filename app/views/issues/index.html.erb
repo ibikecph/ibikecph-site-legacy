@@ -1,20 +1,9 @@
 <div class="gr">
-	<div class="g8">
-		<h1><%=t '.title' %></h1>
-		<%= image_tag 'dialog.png', :class => :dialog %>
-		<p><%=t '.body' %></p>
-		<br>
-		<div class="note">
-			<%=simple_auto_html t('.note') %>
-		</div>
-		<br>
-		<%= render :partial => 'issues/issues', :locals => { :new_url => new_issue_path } %>
+	<div class="g4">
+		<%= render 'sidebar' %>
 	</div>
-	<div class="g1">&nbsp;</div>
-	<div class="g3 ge">
-		<%= render 'current_theme' %>
-		<%= render 'other_themes' %>
-		<%= render 'most_commented' %>
-		<%= render 'tags' %>
+	<div class="g8 ge">
+		<%= render @theme %>
+		<%= render :partial => 'issues/issues', :locals => { :title => t('.issues_title'), :new_url => new_issue_path } %>
 	</div>
 </div>

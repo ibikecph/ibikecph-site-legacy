@@ -70,7 +70,7 @@ RailsOSRM::Application.routes.draw do
         post 'unvote'
       end
       collection do
-        get 'list'
+        get 'all'
         get 'cards'
         get 'tags(/:tag)' => :tags
         get 'labels(/:label)' => :labels

@@ -6,6 +6,7 @@ body {
 div#content {
     width: $columns_12;
     padding: $gutter;
+    padding-top: 0.5*$gutter;
 }
 div#footer {
     clear: both;
@@ -217,18 +218,18 @@ input {
     font-size: 1em;
 }
 h1, h2 {
-    color: $color;
+    color: $dark;
     margin-bottom: 0.3em;
     a {
         text-decoration: none;
     }
 }
 h1 {
-    font-size: 1.3em;
+    font-size: 1.6em;
     margin-bottom: 0.3em;
 }
 h2 {
-    font-size: 1.1em;
+    font-size: 1.3em;
 }
 .lefty {
     float: left;
@@ -259,10 +260,22 @@ div.dialog {
 div.oauth_providers {
     margin-top: $gutter;
 }
-div.sidebar {
-    float: right;
-    width: $columns_3;
-    padding-left: $gutter;
+.gr .sidebar {
+  clear: both;
+  background-color: yellow;
+  border-left: 0.5*$gutter solid yellow;
+  margin-left: -0.5*$gutter;
+  border-right: 0.5*$gutter solid yellow;
+  margin-right: -0.5*$gutter;
+  border-radius: 4px;
+  padding-top: 0.5*$gutter;
+  padding-bottom: 0.5*$gutter;
+  color: black;
+}
+.gr {
+  .sidebar + .sidebar {
+    margin-top: 0.5*$gutter;
+  }
 }
 table {
     border-collapse: collapse;
@@ -488,7 +501,13 @@ ul.sort {
     }
 }
 img.dialog {
-	width: 400px;
-	height: 144px;
+	width: 340px;
+	height: 109px;
 	margin-bottom: 1em;
+}
+.theme {
+  margin-bottom: 0.5*$gutter;
+}
+li a {
+  text-decoration: none;
 }

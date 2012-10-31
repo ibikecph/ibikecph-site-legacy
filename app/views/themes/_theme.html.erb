@@ -1,18 +1,20 @@
 <div class="theme">
-	<% if can? :manage, @theme %>
+	<p class="note">
+	<% if theme == Theme.order('created_at desc').first %>
+		<%=t '.title_current' %>
+	<% else %>
+		<%=t '.title' %>
+	<% end %>
+	</p>
+	<% if can? :manage, theme %>
 		<div class="buttons righty">
 			<%= link_to t('edit'),  [:edit, theme] %>
 			<%= link_to t('delete'), theme, :method => :delete, :confirm => t('sure_q') %>
 		</div>
 	<% end %>
-	<h1><%= link_to theme.title, theme %></h1>
-	<p class="note">
-		<% if theme.user %>
-			<%= theme.user.name %>,
-		<% end %>
-		<span class="timeago" title="theme.created_at.getutc.iso8601"><%= time_ago_in_words(theme.created_at).capitalize %> <%=t 'ago' %></span>
+	<h1><%= theme.title %></h1>
+	<%= image_tag(theme.image.url)  %>
+	<br><br>
+	<%= auto_html_blog theme.body, :width => 760, :height => 506 %>
 	</p>
-	<%= auto_html_blog theme.body, :width => 225, :height => 150 %>
-	<%= link_to "#{t( '.num_issues', :count => theme.issues.count )} &rarr;".html_safe, theme, :class => :note %>
 </div>
-<br>

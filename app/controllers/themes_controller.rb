@@ -10,7 +10,7 @@ class ThemesController < ApplicationController
   
   def show
     @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
-    @themes = Theme.where("id<>?",@theme.id) if @theme
+    @themes = Theme.all
     @most_commented = @theme.issues.most_commented.includes(:user).limit(7)
   end
   

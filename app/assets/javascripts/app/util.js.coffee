@@ -5,22 +5,22 @@ ibikecph.util.normalize_whitespace = (text) ->
 
 
 ibikecph.util.instruction_string = (instruction) ->
-	string = I18n.translate(instruction.turn);
+	string = I18n.translate('instructions.'+instruction.turn);
 
 	if instruction.turn is 'enter_roundabout'
-		string += ' ' +  I18n.t('take_the_nth_exit').replace('{%nth}', I18n.translate(instruction.roundabout_exit + ''));
+		string += ' ' +  I18n.t('instructions.take_the_nth_exit').replace('{%nth}', I18n.translate('instructions.'+instruction.roundabout_exit + ''));
 
 	if instruction.street and instruction.turn isnt 'enter_roundabout'
-		string += ' ' + I18n.translate('follow') + ' ' + instruction.street
+		string += ' ' + I18n.translate('instructions.follow') + ' ' + instruction.street
 
 	if instruction.turn is 'head'
-		string += ' ' + I18n.translate(instruction.direction)
+		string += ' ' + I18n.translate('instructions.'+instruction.direction)
 
 	if instruction.distance and instruction.turn isnt 'continue'
-		string += ' ' + I18n.translate('and_continue') + ' ' + instruction.distance + 'm';
+		string += ' ' + I18n.translate('instructions.and_continue') + ' ' + instruction.distance + 'm';
 
 	if instruction.turn is 'continue'
-		string += ' ' + I18n.translate('for') + ' ' + instruction.distance + 'm'
+		string += ' ' + I18n.translate('instructions.for') + ' ' + instruction.distance + 'm'
 
 	string
 

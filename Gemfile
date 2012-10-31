@@ -18,6 +18,11 @@ gem 'rails_autolink'
 gem 'acts-as-taggable-on'
 gem 'exception_notification', '2.6.1'   #there's UTF bug with 3.0.0
 gem 'google-analytics-rails'
+gem 'rails-timeago'
+
+group :development do
+  gem 'quiet_assets'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

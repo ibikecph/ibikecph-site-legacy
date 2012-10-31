@@ -56,15 +56,10 @@ da:
     previous_label: Forrige
     next_label: Næste
         
-  labels:
-    idea: Idé
-    bug: Fejl 
-    map: Kort
-  
   menu:
     routes: Rute
     blog: Blog
-    feedback: Feedback
+    feedback: Testpiloter
     signup: Opret
     login: Log Ind
     logout: Log ud
@@ -111,9 +106,11 @@ da:
   character:
     one: 1 karakter
     other: "%{count} karakterer"
-    remaining: "%{n} %{pluralized} tilbage"
-    too_long: "%{n} %{pluralized} for lang"
-  
+    remaining: "%{count} karakterer tilbage"
+    too_long: "%{count} karakterer for lang"
+ 
+    character:
+ 
   follows:
     follow:
         follow: Følg
@@ -199,8 +196,6 @@ da:
   blog:
     index:
       new: Nyt Blogindlæg
-    show:
-      blog_archive: Blogarkiv
     new:
       title: Nyt Blogindlæg
     edit:
@@ -209,10 +204,10 @@ da:
       make_sticky: Hold dette indlæg øverst (kan ændres senere).
       submit: Gem
     archive:
-      title: Blogarkiv
+      title: Alle blogindlæg
     latest:
-      title: Seneste Indlæg
-      archive: Blogarkiv
+      title: Seneste blogindlæg
+      archive: Se alle blogindlæg
       new: Nyt Indlæg
     tag:
       title: "Indlæg tagget med: %{tag}"
@@ -226,7 +221,7 @@ da:
       new: Nyt Tema
     show:
       new_issue: Opret nyt indlæg
-      issues: Indlæg
+      issues: Indlæg for dette tema
     new:
       title: Nyt Tema
     edit:
@@ -238,18 +233,23 @@ da:
       title: Temaer
       new: Nyt Tema
     theme:
+      title: Tema
+      title_current: Aktuelt tema
       num_issues: "%{count} indlæg"
     flash:
       created: Tema oprettet.
       updated: Tema opdateret.
       destroyed: Tema slettet.
+    themes:
+      title: Temaer
+      new_theme: Nyt Tema
 
   comments:
     new:
-      add_comment: Tilføj kommentar
+      add_comment: Kommentar
       login_to_comment_html: "For at kommentere bedes du %{link}."
       login: logge ind
-      submit: Tilføj
+      submit: Tilføj kommentar
     comments:
       title: Kommentarer
   
@@ -328,15 +328,19 @@ da:
     
   issues:
     index:
+      num_issues: "%{count} indlæg"
+      issues_title: Indlæg til dette tema
+    welcome:
       title: Bland dig!
       body: "Har du idéer til forbedringer af cykelruteplanlæggeren og websiden? Er der noget der ikke virker, eller mangler der en sti på kortet? Så fortæl det her!"
       note: |
         Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklame her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
-      num_issues: "%{count} indlæg"
     issues:
-      title: Indlæg
       no_items: Ingen indlæg.
-      new: Opret nyt indlæg      
+      new: Opret nyt indlæg
+      all_issues: Se indlæg til alle temaer
+    all:
+      title: Alle indlæg
     new:
       title: Opret nyt indlæg
     new_for_theme:
@@ -347,15 +351,10 @@ da:
       back_to_list: Tilbage til listen
       labels: Mærkater
       tags: Tags
-      related: Relaterede indlæg
-      themes: Relaterede temaer
-    current_theme:
-      current_theme: Aktuelt tema
-    other_themes:
-      title: Andre temaer
-      new_theme: Nyt Tema
+    related:
+      title: Relaterede indlæg
     most_commented:
-      title: Kommenterede indlæg
+      title: Mest kommenterede
     votes:
       vote: Klik for at stemme
       unvote: Klik for at fjerne stemme
@@ -364,7 +363,7 @@ da:
       popular_tags: Populære tags
       all_tags: Se alle tags
     labels:
-      title: "Indlæg markeret med..."
+      title: "Indlæg markeret som..."
       no_items: No issues found
     flash:
       created: Indlæg oprettet.
@@ -389,9 +388,6 @@ da:
       title: Ups...!
       body: Noget gik galt. Vi retter det hurtigst muligt.
 
-  character:
-    remaining: "%{n} karakterer tilbage"
-  
   map:
     index:
       payoff: Hurtigere på cykel
@@ -416,51 +412,51 @@ da:
   zoom_to_route: Zoom til Rute
   use_my_location: Brug min position
 
-  1: første
-  2: anden
-  3: tredje
-  4: fjerde
-  5: femte
-  6: sjette
-  7: syvende
-  8: ottende
-  9: niende
-  10: tiende
-
-
   normal_bike: Cykel
   cargo_bike: Ladcykel
   electric_bike: Elcykel
   reset: Nulstil
   link_for_route: Link
+  
+  instructions:
+    1: første
+    2: anden
+    3: tredje
+    4: fjerde
+    5: femte
+    6: sjette
+    7: syvende
+    8: ottende
+    9: niende
+    10: tiende
 
-  #earth corners
-  N: mod nord
-  NE: mod nordøst
-  E: mod øst
-  SE: mod sydøst
-  S: mod syd
-  SW: mod sydvest
-  W: mod vest
-  NW: mod nordvest
+    #earth corners
+    N: mod nord
+    NE: mod nordøst
+    E: mod øst
+    SE: mod sydøst
+    S: mod syd
+    SW: mod sydvest
+    W: mod vest
+    NW: mod nordvest
 
-  #route description
-  head: Start med at køre 
-  continue: Kør frem
-  #left
-  turn_left: Drej til venstre
-  turn_slight_left: Drej let til venstre
-  turn_sharp_left: Drej skarpt til venstre
-  #right
-  turn_right: Drej til højre
-  turn_slight_right: Drej let til højre
-  turn_sharp_right: Drej skarpt til højre
-  #other
-  enter_roundabout: Kør ind i rundkørsel
-  take_the_nth_exit: tag {%nth} afkørsel
-  reached_destination: Du er fremme ved destinationen
+    #route description
+    head: Start ad 
+    continue: Fortsæt
+    #left
+    turn_left: Drej til venstre
+    turn_slight_left: Drej let til venstre
+    turn_sharp_left: Drej skarpt til venstre
+    #right
+    turn_right: Drej til højre
+    turn_slight_right: Drej let til højre
+    turn_sharp_right: Drej skarpt til højre
+    #other
+    enter_roundabout: Følg rundkørslen
+    take_the_nth_exit: "og tag {%nth} afkørsel"
+    reached_destination: Ankomst til destinationen
 
-  follow: ad
-  and_continue: og fortsæt
-  for: og fortsæt
-  towards: mod  
+    follow: ad
+    and_continue: og fortsæt
+    for: og kør
+    towards: mod  

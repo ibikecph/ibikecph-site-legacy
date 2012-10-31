@@ -1,4 +1,7 @@
 module ApplicationHelper
+  include AutoHtml
+  include ActsAsTaggableOn::TagsHelper
+
 
   def errors_for(object)
     if object.errors.any?
@@ -50,18 +53,25 @@ module ApplicationHelper
 	    return image_tag user.image.g1.url, { :class => 'g1 square', :title => user.name, :alt => user.name }
 	  end
     
-    facebook_auth = user.facebook_auth
-    if facebook_auth
-      return image_tag "http://graph.facebook.com/#{facebook_auth.uid}/picture?type=square", h
-    end
-    
     #fallback to default image
     image_tag user.image.g1.default_url, { :class => 'g1 square', :title => user.name, :alt => user.name }
 	end
 
-  def simple_auto_html str
-    #gsub doesn't work on SafeStrings. to avoid this, use to_str to convert to normal stri
-    auto_html str.to_str do
+  
+  #gsub doesn't work on SafeStrings. to avoid this, use to_str to convert to normal string
+  
+  
+  def auto_html_blog html, options
+    auto_html html.to_str do
+      simple_format
+      vimeo options
+      youtube options
+      link :target => 'blank'
+    end
+  end
+  
+  def auto_html_basic html
+    auto_html html.to_str do
       simple_format
       link :target => 'blank'
     end

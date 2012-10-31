@@ -1,6 +1,6 @@
 $sat: 0;
 $hue: 25;
-$color: hsl( 0, 70%, 50% );
+$color: hsl( 0, 90%, 50% );
 $hover: hsl( 10, 50%, 40% );
 $error: hsl( 0, 70%, 50% );
 $highlight: hsl( 80, 60%, 60% );
@@ -16,8 +16,8 @@ $back: hsl( $hue, $sat, 100% );
 $link: hsl( 230, 30%, 50% );
 
 $columns: 12;
-$column: 50px;
-$gutter: 30px;
+$column: 60px;
+$gutter: 40px;
 $half_gutter: 0.5*$gutter;
 $image_ratio: 2.0/3.0;
 $avatar: $column;

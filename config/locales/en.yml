@@ -30,7 +30,7 @@ en:
         sticky: Keep at top
       issue:
         title: Title
-        body: Body
+        body: Description
         labels: Labels
         tags: Tags
       user:
@@ -66,7 +66,7 @@ en:
   menu:
     routes: Route
     blog: Blog
-    feedback: Feedback
+    feedback: Test Pilots
     signup: Sign Up
     login: Login
     logout: Logout
@@ -85,11 +85,7 @@ en:
   arrival: Arrival
   departure_placeholder: at
   arrival_placeholder: at
-  
-  #yes and no are reserved words in yaml, so need to quote
-  'yes': 'Yes'
-  'no': 'No'
-  
+  ago: ago
   you: You
   or_login_with: or login with
   sure_q: Are you sure?
@@ -97,6 +93,10 @@ en:
   comment: comment
   not_a_valid_email: is not a valid email address 
   empty: Empty
+
+  #yes and no are reserved words in yaml, so need to quote
+  'yes': 'Yes'
+  'no': 'No'
   
   vote:
     one: 1 vote
@@ -106,12 +106,16 @@ en:
     one: 1 comment
     other: "%{count} comments"
   
+  issue:
+    one: 1 issue
+    other: "%{count} issues"
+  
   character:
     one: 1 character
     other: "%{count} characters"
-    remaining: "%{n} %{pluralized} remaining"
-    too_long: "%{n} %{pluralized} too long"
-  
+    remaining: "%{count} characters remaining"
+    too_long: "%{count} characters too long"
+
   follows:
     follow:
         follow: Follow
@@ -236,11 +240,16 @@ en:
       title: Themes
       new: New Theme
     theme:
+      title: Theme
+      title_current: Current theme
       num_issues: "%{count} issues"
     flash:
       created: Theme added.
       updated: Theme updated.
       destroyed: Theme deleted.
+    themes:
+      title: Themes
+      new_theme: New Theme
       
   comments:
     new:
@@ -322,15 +331,19 @@ en:
   
   issues:
     index:
+      num_issues: "%{count} issues"
+      issues_title: Issues for this theme
+    welcome:
       title: Get Involved!
       body: "Du you have ideas for improving the bike route planner or website? Did you encounter bugs, or a path missing on the map? Then  let us know!"
       note: |
         This site is only for discussing the digital bicycle route planner. Please send other ideas for improving biking in Copenhagen to <a href="http://kk.dk/cyklernesby" target="_blank">Copenhagen Municipality</a>. You can report 'analog' problems, like holes in the road, at <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's social forum is located on <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Advertising is not allowed at this site. See the <a href="http://ibikecph.dk/terms" target="_blank">user terms</a> for more info.
-      num_issues: "%{count} issues"
     issues:
-      title: Issues
       no_items: No issues.
       new: Add New Issue
+      all_issues: View issues for all themes
+    all:
+      title: All Issues
     new:
       title: Add New Issue
     new_for_theme:
@@ -341,15 +354,10 @@ en:
       back_to_list: Back to list
       labels: Labels
       tags: Tags
-      related: Related issues
-      themes: Related themes
-    current_theme:
-      current_theme: Current theme
-    other_themes:
-      title: Other themes
-      new_theme: New theme
+    related:
+      title: Related issues
     most_commented:
-      title: Commented issues
+      title: Most Commented
     votes:
       vote: Click to Vote
       unvote: Click to Remove Vote
@@ -383,9 +391,6 @@ en:
       title: Ups...!
       body: Something went wrong. We'll fix it as soon as possible.
   
-  character:
-    remaining: "%{n} characters remaining"
-    
   map:
     index:
       payoff: Faster on Bike
@@ -399,7 +404,7 @@ en:
   to_placeholder: To address
   page_title: I Bike Cph
   generate_link: Make a Link
-  route_instructions: Driving Instructions
+  route_instructions: Route Description
   distance: distance
   duration: time
   link_for_route: Link
@@ -407,50 +412,51 @@ en:
   zoom_to_route: Zoom to Route
   use_my_location: Use my Location
 
-  1: first
-  2: seccond
-  3: third
-  4: fourth
-  5: fifth
-  6: sixth
-  7: seventh
-  8: eigth
-  9: ninth
-  10: tenth
-
-
-
-  #earth corners
-  N: noth
-  NE: noth east
-  E: east
-  SE: south east
-  S: south
-  SW: south west
-  W: west
-  NW: north west
-
   normal_bike: Bike
   cargo_bike: Cargo Bike
   electric_bike: Electric Bike
+  reset: Reset
+  link_for_route: Link
 
+  instructions:
+    1: first
+    2: seccond
+    3: third
+    4: fourth
+    5: fifth
+    6: sixth
+    7: seventh
+    8: eigth
+    9: ninth
+    10: tenth
 
-  #route description
-  head: Head
-  continue: Continue
-  #left
-  turn_left: Turn left
-  turn_slight_left: Turn slightly to the left
-  turn_sharp_left: Turn sharply to the left
-  #right
-  turn_right: Turn right
-  turn_slight_right: Turn slighty to the right
-  turn_sharp_right: Turn sharply to the right
-  #other
-  enter_roundabout: Enter the roundabout
-  take_the_nth_exit: "and take the {%nth} exit"
-  reached_destination: You arrived at the destination
+    #earth corners
+    N: north
+    NE: north east
+    E: east
+    SE: south east
+    S: south
+    SW: south west
+    W: west
+    NW: north west
 
-  follow: following
-  and_continue: and continue for
-  for: for
+    #route description
+    head: Head
+    continue: Continue
+    #left
+    turn_left: Turn left
+    turn_slight_left: Turn slightly left
+    turn_sharp_left: Turn sharply left
+    #right
+    turn_right: Turn right
+    turn_slight_right: Turn slighty right
+    turn_sharp_right: Turn sharply right
+    #other
+    enter_roundabout: Enter the roundabout
+    take_the_nth_exit: "and take the {%nth} exit"
+    reached_destination: Arrival at destination
+
+    follow: "on"
+    and_continue: and continue for
+    for: for
+    towards: towards

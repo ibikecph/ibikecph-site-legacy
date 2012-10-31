@@ -1,0 +1,23 @@
+<div class="sidebar">
+	<% if can? :manage, Theme %>
+		<div class="buttons righty">
+			<%= link_to t('.new_theme'), new_theme_path %>
+		</div>
+	<% end %>
+	<% if @themes && @themes.any? %>
+	<h2><%=t '.title' %></h2>
+	<ul class="themes">
+		<% for theme in @themes %>
+			<li>
+				<%= link_to theme.title, theme %>
+				<% if @issue && @issue.themes.exists?(theme) %>
+					&#10003;
+				<% end %>
+				<br>
+			</li>
+		<% end %>
+	</ul>
+	<% else %>
+		<%=t '.no_themes' %>
+	<% end %>
+</div>

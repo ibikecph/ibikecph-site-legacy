@@ -4,8 +4,8 @@ ibikecph.config =
 
 	initial_location:
 		lat: 55.68
-		lng: 12.50
-		zoom: 12
+		lng: 12.55
+		zoom: 13
 
 	route_styles:
 		current:

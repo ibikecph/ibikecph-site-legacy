@@ -1,8 +1,0 @@
-<% if @theme %>
-<p class="note"><%=t '.current_theme' %></p>
-<h2><%= link_to @theme.title, @theme %></h2>
-<%= link_to image_tag(@theme.image.g3.url), @theme  %>
-<br>
-<%= simple_format truncate(@theme.body, :length=>100) %>
-<br>
-<% end %>

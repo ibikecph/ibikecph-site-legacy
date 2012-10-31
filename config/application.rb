@@ -59,12 +59,11 @@ module RailsOSRM
     #avoid loading environment during asset precompilation. required on heroku
     config.assets.initialize_on_precompile = false
     
-    
-    #3.2 wayy of catching exceptions
+    #3.2 way of catching exceptions
     config.exceptions_app = self.routes
     
     
-    #modifiy the way rails styles fields with errors in forms.
+    #modify the way rails styles fields with errors in forms.
     #by default rails wraps fields with erros in <div class="field_with_errors">.
     #this is a problem if the <div> is inside an inline element like <p>.
     #<label> items are wrapped by <span class="field_with_errors">
@@ -81,6 +80,10 @@ module RailsOSRM
     #configure acts_as_taggable
     ActsAsTaggableOn.remove_unused_tags = true  #remove unused tag objects after removing taggings
     ActsAsTaggableOn.force_lowercase = true     #save all tags as lowercase
+    
+    #rails-timeago gem settings
+    Rails::Timeago.default_options :limit => proc { 1.month.ago }
+    Rails::Timeago.locales = [:en, :da]
   end
 end
 

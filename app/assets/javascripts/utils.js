@@ -71,14 +71,16 @@ jQuery.fn.showMaxlength = function(options){
 
 $(document).ready(function(){
 	var onEditCallback = function(remaining){
+		console.log(I18n.currentLocale());
+  	
 		if(remaining >= 0){
-			$(this).siblings('.chars_remaining').text(' '+I18n.t('character.remaining', {n: remaining} ));
+			$(this).siblings('.chars_remaining').text(' '+I18n.t('character.remaining', {count: remaining} ));
 			$(this).siblings('.chars_remaining').removeClass('too_long');
 		}
 	}
 
 	var onLimitCallback = function(excess){
-		$(this).siblings('.chars_remaining').text(' '+I18n.t('character.too_long', {n: excess} ));
+		$(this).siblings('.chars_remaining').text(' '+I18n.t('character.too_long', {count: excess} ));
 		$(this).siblings('.chars_remaining').addClass('too_long');
 	}
 
@@ -88,6 +90,16 @@ $(document).ready(function(){
 	});
 
 	$('textarea[data-maxlength]').showMaxlength({
+		onEdit: onEditCallback,
+		onLimit: onLimitCallback,
+	});
+
+	$('input:text[maxlength]').limitMaxlength({
+		onEdit: onEditCallback,
+		onLimit: onLimitCallback,
+	});
+
+	$('input:text[data-maxlength]').showMaxlength({
 		onEdit: onEditCallback,
 		onLimit: onLimitCallback,
 	});

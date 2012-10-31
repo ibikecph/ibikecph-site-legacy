@@ -3,6 +3,8 @@
 <head>
 	<%= stylesheet_link_tag "application", :media => "all" %>
 	<%= javascript_include_tag "application" %>
+	<%= render 'layouts/locale' %>
+	<%= timeago_script_tag %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" id="favicon"/>
