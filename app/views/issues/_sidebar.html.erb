@@ -1,4 +1,4 @@
 <%= render 'issues/welcome' %>
 <%= render 'themes/themes' %>
 <%= render 'issues/most_commented' %>
-<%= render 'issues/tags' %>
+<%= render 'issues/tags', :locals => { :tags => @popular_tags } %>

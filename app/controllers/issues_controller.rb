@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
   skip_authorize_resource :only => [:all,:new_for_theme,:create_for_theme,:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
   before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show]
-  before_filter :find_popular_tags, :only => [:index]
+  before_filter :find_popular_tags, :only => [:index,:show,:tags,:labels]
 
   def index
     if @theme
@@ -142,7 +142,7 @@ class IssuesController < ApplicationController
   end
   
   def find_popular_tags
-    @tags = Issue.tag_counts_on(:tags).order('count desc').limit(20)
+    @popular_tags = Issue.tag_counts_on(:tags).order('count desc').limit(20)
   end
   
     
