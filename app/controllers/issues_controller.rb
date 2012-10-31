@@ -8,7 +8,9 @@ class IssuesController < ApplicationController
   before_filter :find_popular_tags, :only => [:index]
 
   def index
-    @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
+    if @theme
+      @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
+    end
   end
   
   def all

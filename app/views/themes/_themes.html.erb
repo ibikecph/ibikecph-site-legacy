@@ -1,3 +1,4 @@
+<% if @themes && @themes.any? %>
 <div class="sidebar">
 	<% if can? :manage, Theme %>
 		<div class="buttons righty">
@@ -21,3 +22,4 @@
 		<%=t '.no_themes' %>
 	<% end %>
 </div>
+<% end %>
