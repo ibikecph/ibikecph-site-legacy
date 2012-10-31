@@ -59,22 +59,22 @@ module ApplicationHelper
 
   
   #gsub doesn't work on SafeStrings. to avoid this, use to_str to convert to normal string
-  
+  def auto_html_basic html
+    auto_html html.to_str do
+      simple_format
+      issue_link
+      link :target => 'blank'
+    end
+  end
   
   def auto_html_blog html, options
     auto_html html.to_str do
       simple_format
       vimeo options
       youtube options
+      issue_link
       link :target => 'blank'
     end
   end
   
-  def auto_html_basic html
-    auto_html html.to_str do
-      simple_format
-      link :target => 'blank'
-    end
-  end
-
 end
