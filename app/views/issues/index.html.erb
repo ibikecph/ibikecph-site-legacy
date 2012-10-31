@@ -3,7 +3,7 @@
 		<%= render 'sidebar' %>
 	</div>
 	<div class="g8 ge">
-		<%= render @theme %>
+		<%= render @theme if @theme %>
 		<%= render :partial => 'issues/issues', :locals => { :title => t('.issues_title'), :new_url => new_issue_path } %>
 	</div>
 </div>

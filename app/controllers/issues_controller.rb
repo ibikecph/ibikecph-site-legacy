@@ -10,6 +10,8 @@ class IssuesController < ApplicationController
   def index
     if @theme
       @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
+    else
+      all
     end
   end
   
