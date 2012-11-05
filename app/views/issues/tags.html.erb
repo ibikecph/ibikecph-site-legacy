@@ -4,14 +4,7 @@
 	</div>
 	<div class="g8 ge">
 		<h1><%=t '.title' %></h1>
-
-		<div class="tag_cloud">
-			<% tag_cloud(@tags, [:tag1,:tag2,:tag3,:tag4]) do |tag, css_class| %>
-				<% css_class = "#{css_class} on" if params[:tag]==tag.name %>
-				<%= link_to tag.name, { :controller => :issues, :action => :tags, :tag => tag.name }, :class => css_class %>
-			<% end %>
-		</div>
-
+		<%= render :partial => 'tag_cloud', :locals => { :tags => @tags } %>
 		<br>
 		<%= will_paginate @issues, :class => :pagination %>
 		

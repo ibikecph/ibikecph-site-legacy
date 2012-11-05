@@ -1,12 +1,7 @@
 <% if @popular_tags and @popular_tags.any? %>
 <div class="sidebar">
 	<h2><%=t '.popular_tags' %></h2>
-	<div class="tag_cloud">
-		<% tag_cloud(@popular_tags, [:tag1,:tag2,:tag3,:tag4]) do |tag, css_class| %>
-			<% css_class = "#{css_class} on" if params[:tag]==tag.name %>
-			<%= link_to tag.name, { :controller => :issues, :action => :tags, :tag => tag.name }, :class => css_class %>
-		<% end %>
-	</div><br>
+	<%= render :partial => 'tag_cloud', :locals => { :tags => @popular_tags } %>
 	<%= link_to t('.all_tags'), :action => :tags %>
 </div>
 <% end %>

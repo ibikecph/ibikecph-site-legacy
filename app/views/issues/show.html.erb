@@ -9,7 +9,7 @@
 		<h1><%= @issue.title %></h1>
 		<%= auto_html_blog @issue.body, {} %>
 		<br>
-		<%= render 'tag_cloud' %>
+		<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
 		<%= render 'labels' %>
 		
 		<% if @issue.user %>
