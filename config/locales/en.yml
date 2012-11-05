@@ -328,7 +328,7 @@ en:
     comment:
       subject: "Comment: %{title}"
       body: "%{user} added a comment '%{title}' on I Bike Cph:"
-    unsubscribing: "If you don't want to receive emails from I Bike CPH, you can change your settings at %{link}."
+    unsubscribing: "You cannot reply to this email. If you don't want to receive emails from I Bike CPH, you can change your settings at %{link}."
   
   issues:
     index:
