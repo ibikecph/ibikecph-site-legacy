@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   
   include ActionView::Helpers::TextHelper
 
-  default from: "auto@#{MAIN_DOMAIN}"
+  default from: "I Bike CPH <auto@#{MAIN_DOMAIN}>"
 
   #we pass objects ids instead of objecst because we're using delayed_job to send email
   #that way only the id will be stored in the database, instead of the entire object (which could also be stale)
