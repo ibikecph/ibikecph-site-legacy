@@ -1,6 +1,6 @@
 <%=t 'hi', :user => @user.name %>,
 
-<%=t '.body', :title => @theme.title %>
+<%=t('.body', :title => @theme.title).html_safe %>
 
 <%= @url %>
 
