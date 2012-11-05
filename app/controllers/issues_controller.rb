@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
        
-  skip_before_filter :require_login, :only => [:index,:show,:tags,:labels]
+  skip_before_filter :require_login, :only => [:index,:all,:show,:tags,:labels]
   load_and_authorize_resource
   skip_authorize_resource :only => [:all,:new_for_theme,:create_for_theme,:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
