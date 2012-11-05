@@ -511,3 +511,9 @@ img.dialog {
 li a {
   text-decoration: none;
 }
+.field_with_errors label {
+  color: $color;
+  &:after {
+    content: " *";
+  }
+}
