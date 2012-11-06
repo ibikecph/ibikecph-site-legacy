@@ -85,7 +85,7 @@ da:
   be_the_first_to_comment: Vær den første til at kommentere
   comment: kommentar
   not_a_valid_email: er ikke en gyldig email adresse 
-  empty: Tom
+  empty: Ikke udfyldt
  
   #yes and no are reserved words in yaml, so need to quote
   'yes': 'Ja'
@@ -337,7 +337,7 @@ da:
       note: |
         Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklame her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
     issues:
-      no_items: Ingen indlæg.
+      no_items: Ingen indlæg
       new: Opret nyt indlæg
       all_issues: Se indlæg til alle temaer
     all:

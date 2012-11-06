@@ -4,6 +4,7 @@
 	</div>
 	<div class="g8 ge">
 		<%= render @theme if @theme %>
-		<%= render :partial => 'issues/issues', :locals => { :title => t('.issues_title'), :new_url => new_issue_path } %>
+		<% title = @theme ? t('.issues_title') : t('issues.all.title') %>
+		<%= render :partial => 'issues/issues', :locals => { :title => title, :new_url => new_issue_path } %>
 	</div>
 </div>

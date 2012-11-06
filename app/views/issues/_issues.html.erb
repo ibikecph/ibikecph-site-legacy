@@ -3,7 +3,7 @@
 </div>
 <h2><%= title %></h2>
 
-<% unless params[:action] == 'all' %>
+<% unless params[:action] == 'all' || !@theme %>
 	<p><%= link_to "#{t('.all_issues')} &rarr;".html_safe, all_issues_path %></p>
 <% end %>
 
