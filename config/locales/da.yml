@@ -327,6 +327,7 @@ da:
     unsubscribing: "Denne email kan ikke besvares. Hvis du ikke ønsker at modtage email fra I Bike CPH, kan du ændre dine instillinger på %{link}."
     
   issues:
+    view_all_issues: Se alle indlæg
     index:
       num_issues: "%{count} indlæg"
       issues_title: Indlæg til dette tema

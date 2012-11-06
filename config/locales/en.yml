@@ -331,6 +331,7 @@ en:
     unsubscribing: "You cannot reply to this email. If you don't want to receive emails from I Bike CPH, you can change your settings at %{link}."
   
   issues:
+    view_all_issues: View all Issues
     index:
       num_issues: "%{count} issues"
       issues_title: Issues for this theme
