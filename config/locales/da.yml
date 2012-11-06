@@ -324,7 +324,7 @@ da:
     comment:
       subject: "Kommentar: %{title}"
       body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph:"
-    unsubscribing: "Denne email kan ikke besvares. Hvis du ikke ønsker at modtage email beskeder fra I Bike CPH, kan du ændre dine instillinger på %{link}."
+    unsubscribing: "Denne email kan ikke besvares. Hvis du ikke ønsker at modtage email fra I Bike CPH, kan du ændre dine instillinger på %{link}."
     
   issues:
     index:

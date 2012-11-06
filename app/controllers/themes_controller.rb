@@ -43,8 +43,8 @@ class ThemesController < ApplicationController
   
   def destroy
     @theme.destroy
-    flash[:notice] = t('theme.flash.deleted')
-    redirect_to theme_index_path
+    flash[:notice] = t('themes.flash.destroyed')
+    redirect_to themes_path
   end
   
   private
