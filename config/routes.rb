@@ -63,21 +63,26 @@ RailsOSRM::Application.routes.draw do
     match 'follows/:followable_type/:followable_id' => 'follows#follow', :via => :post
     match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
-  
+    resource :corps, :only => [:show] do
+      get 'join' => :join
+      get 'leave' => :leave
+    end  
+
     resources :issues, :path => 'feedback' do
-      member do
-        post 'vote'
-        post 'unvote'
-      end
       collection do
         get 'all'
         get 'cards'
         get 'tags(/:tag)' => :tags
         get 'labels(/:label)' => :labels
       end
+      member do
+        post 'vote'
+        post 'unvote'
+      end
     end
+
   end
-  
+
   resources :themes
   get 'themes/:id/new' => 'issues#new_for_theme', :as => :new_issue_for_theme
   post 'themes/:id/create' => 'issues#create_for_theme', :as => :create_issue_for_theme

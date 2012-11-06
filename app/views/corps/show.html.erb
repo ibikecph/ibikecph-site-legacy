@@ -1,0 +1,18 @@
+<div class="gr">
+	<div class="g4">
+		<%= render 'membership' %>
+	</div>
+	<div class="g8 ge">
+		<h1><%=t '.title' %></h1>
+		<%= will_paginate @users, :class => :pagination %>
+		<% for user in @users %>
+			<p class="user_list">
+				<span class="avatar">
+					<%= link_to profile_image(user), user %>
+				</span>
+				<%= user.name %>
+			</p>
+		<% end %>
+		<%= will_paginate @users, :class => :pagination %>
+	</div>
+</div>

@@ -373,7 +373,26 @@ da:
       created: Indlæg oprettet.
       updated: Indlæg opdateret.
       destroyed: Indlæg slettet.
-      
+  
+  corps:
+    show:
+      title: Medlemmer
+    membership:
+      title: Testerkorps
+      about_testcorps: |
+        Du kan altid komme med feedback og ideer, også uden at være med i testerkorpset.
+        Når du er med i testerkorpset får du besked om aktuelle temaer og arrangementer relateret til forbedring af ruteplanlæggeren.
+        Der er ingen forpligtelser eller omkostninger ved at være med i testerkorpset, og du kan til enhver til melde dig ud.
+      join: Meld dig ind
+      leave: Meld dig ud
+      is_tester:  Du er med i testerkorpset
+      is_not_tester: Du er ikke med i testerkorpset
+    flash:
+      joined: Du er nu med i testerkorpset
+      already_joined: Du er allerede med i testerkorpset
+      left: Du har forladt testerkorpset
+      already_left: Du er ikke med i testerkorpset
+  
   pages:
     terms:
       title: Brugerbetingelser for ibikecph.dk

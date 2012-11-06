@@ -4,7 +4,7 @@ class IssuesController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => [:all,:new_for_theme,:create_for_theme,:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show]
+  before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show,:corps]
   before_filter :find_popular_tags, :only => [:index,:show,:tags,:labels]
 
   def index
@@ -104,6 +104,15 @@ class IssuesController < ApplicationController
     render :nothing => true
   end
 
+  def join
+  end
+  
+  def leave
+  end
+  
+  def corps
+  end
+  
   
   private
   
