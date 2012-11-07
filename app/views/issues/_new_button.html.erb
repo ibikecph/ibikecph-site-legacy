@@ -1,0 +1,7 @@
+<div class="righty big buttons">
+	<% if @theme %>
+		<%= link_to t('issues.issues.new'), { :controller => :issues, :action => :new_for_theme, :id => @theme.id } %>
+	<% else %>
+		<%= link_to t('issues.issues.new'), new_issue_path %>
+	<% end %>
+</div>

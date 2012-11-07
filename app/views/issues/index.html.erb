@@ -6,13 +6,11 @@
 		<%= render @theme if @theme %>
 		<% title = @theme ? t('.issues_title') : t('issues.all.title') %>
 		
-		
-		<div class="righty big buttons">
-			<%= link_to t('.new'), new_issue_path %>
-		</div>
+		<%= render 'new_button' %>
 		<h2><%= title %></h2>
-		<p><%= link_to "#{t('.all_issues')} &rarr;".html_safe, all_issues_path %></p>
-
 		<%= render :partial => 'issues/issues' %>
+		<% if @theme %>
+			<p><%= link_to "#{t('issues.issues.all_issues')} &rarr;".html_safe, all_issues_path %></p>
+		<% end %>
 	</div>
 </div>

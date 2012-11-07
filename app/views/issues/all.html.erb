@@ -3,9 +3,7 @@
 		<%= render 'sidebar' %>
 	</div>
 	<div class="g8 ge">
-		<div class="righty big buttons">
-			<%= link_to t('.new'), new_issue_path %>
-		</div>
+		<%= render 'issues/new_button' %>
 		<h2><%=t '.title' %></h2>
 		<%= render :partial => 'issues/issues' %>
 	</div>

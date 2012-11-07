@@ -10,12 +10,10 @@
 		<%= render @theme %>
 		<br>
 		
-		<div class="righty big buttons">
-			<%= link_to t('.new'), new_issue_for_theme_path %>
-		</div>
+		<%= render 'issues/new_button' %>
 		<h2><%=t '.issues' %></h2>
-		<p><%= link_to "#{t('.all_issues')} &rarr;".html_safe, all_issues_path %></p>
 		<%= render :partial => 'issues/issues' %>
+		<p><%= link_to "#{t('issues.issues.all_issues')} &rarr;".html_safe, all_issues_path %></p>
 	</div>
 	
 </div>

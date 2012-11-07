@@ -8,6 +8,7 @@ class IssuesController < ApplicationController
   before_filter :find_popular_tags, :only => [:index,:show,:tags,:labels]
 
   def index
+    @theme = Theme.latest.first
     if @theme
       @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
     else
@@ -143,7 +144,6 @@ class IssuesController < ApplicationController
   end
   
   def load_sidebar
-    @theme = Theme.latest.first
     @themes = Theme.all
     @most_commented = Issue.most_commented.includes(:user).limit(7)
     #@most_voted = Issue.most_voted.includes(:user).limit(7)

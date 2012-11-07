@@ -228,7 +228,7 @@ en:
       new: New Theme
     show:
       new_issue: Add New Issue
-      issues: Issue
+      issues: Issues for this Theme
     new:
       title: New Theme
     edit:
@@ -343,7 +343,7 @@ en:
     issues:
       no_items: No issues.
       new: Add New Issue
-      all_issues: View issues for all themes
+      all_issues: View all issues
     all:
       title: All Issues
     new:
@@ -374,6 +374,11 @@ en:
       title: Test Corps
       body: "Become a tester, og help discuss and test new features!"
       test_corps: Read more
+    search_form:
+      submit: Search
+    search:
+      title: Search for Issue
+      num_found: "Issues found: %{count}"
     flash:
       created: Issue added.
       updated: Issue updated.
