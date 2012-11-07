@@ -1,9 +1,10 @@
 $sat: 0;
 $hue: 25;
-$color: hsl( 0, 90%, 50% );
+$color: #ef4123;
+$yellow: #fff200;
 $hover: hsl( 10, 50%, 40% );
 $error: hsl( 0, 70%, 50% );
-$highlight: hsl( 80, 80%, 60% );
+$highlight: hsl( 90, 100%, 45% );
 $text_color: hsl( $hue, 10%, 10% );
 $note_color: hsl( $hue, 10%, 60% );
 $black: hsl( $hue, $sat, 10% );
