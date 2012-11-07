@@ -20,26 +20,20 @@ class Publisher
   end
   
   def blog blog_entry, locale
-    User.all.each do |user|
-      if user.notify_by_email && user != blog_entry.user
-        UserMailer.blog_entry(user,blog_entry,locale).deliver
-      end
+    User.where(:notify_by_email => true).each do |user|
+      UserMailer.blog_entry(user,blog_entry,locale).deliver if user != blog_entry.user
     end
   end
 
   def theme theme, locale
-    User.all.each do |user|
-      if user.notify_by_email && user != theme.user
-        UserMailer.theme(user,theme,locale).deliver
-      end
+    User.where(:notify_by_email => true, :tester=>true).each do |user|
+      UserMailer.theme(user,theme,locale).deliver if user != theme.user
     end
   end
 
   def comment comment, locale
-    comment.commentable.followers.each do |user|
-      if user.notify_by_email && user != comment.user
-        UserMailer.comment(user,comment,locale).deliver
-      end
+    comment.commentable.followers.where(:notify_by_email => true).each do |user|
+      UserMailer.comment(user,comment,locale).deliver if user != comment.user
     end
   end
   
