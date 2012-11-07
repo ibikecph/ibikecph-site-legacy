@@ -1,0 +1,19 @@
+en:
+  help:
+    title: Help
+    body: |
+      The site (as it is now) calculates fastest bicycle route. The service covers all of Denmark.
+      
+      Drag the map to pan. Double click to zoom in, or use the + and - buttons. The button with the dashed rectangle centers the map around the current route. The button with the arrow centers the map around your current physical location.
+      
+      Click on the map to set from and to points, or fill our the address fields (ex: Krystalgade 15, 1172 København). As soon as the adresss is found, the corresponding marker is placed/moved on the map. Note that addresses in all of Denmark are searched. You might want to add a city or zip code to make sure the correct street is found.
+      
+      As soon as both from and to addresses are found, the route is calculated automatically. Estimated distance and time is shown below the address fields. Click 'Route Description' to view a step-by-step riding instruction.
+      
+      Drag the route to set via points (points that the route must pass through). Via points can be removed by clicking on them.
+      
+      When a route has been found, you can specify departure or arrival time, and the opposite time will be calculated, based on the time or travel.
+      
+      When you drag markers around, the route will be update live - try it :-)
+      
+      You can generate a link to the current route by clicking 'Link'. The adress bar of your browser will be updated, and from there the link can be copied, and can (for example) be pasted into comment fields or emails.

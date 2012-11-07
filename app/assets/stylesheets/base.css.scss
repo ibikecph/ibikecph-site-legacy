@@ -157,3 +157,20 @@ hr {
         background-color: transparent;
     }   
 }
+h1, h2 {
+    color: $dark;
+    margin-bottom: 0.3em;
+    a {
+        text-decoration: none;
+    }
+}
+h1 {
+    font-size: 1.6em;
+    margin-bottom: 0.3em;
+}
+h2 {
+    font-size: 1.3em;
+}
+p {
+    margin-bottom: 0.5em;
+}

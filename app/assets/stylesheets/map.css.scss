@@ -51,7 +51,7 @@ body {
 		float: left;
 		background: image-url('close.png');
 	}
-	.reset, .permalink, .details {
+	.reset, .permalink, .details, .help {
 		font-size: 0.8em;
 		float: right;
 		color: $color;
@@ -134,6 +134,38 @@ body {
 			&:hover {
 				text-decoration: underline;
 			};
+		}
+	}
+}
+#help {
+	display: none;
+  opacity:0.9;
+	overflow: hidden;
+	position: absolute;
+	z-index: 1;
+	width: auto;
+	box-shadow: 0px 5px 5px rgba(0,0,0,.5);
+	margin-left: 10px;
+	margin-right: 10px;
+	bottom: 45px;
+  padding: $half_gutter - 2*$border_width;
+  border-radius: 4px;
+	background: $dark;
+	color:white;
+	line-height: 1.3em;
+	h2 {
+		color: white;
+	}
+	font-size: 0.9em;
+	a.help {
+		font-size: 0.8em;
+		float: right;
+		color: $color;
+		cursor: pointer;
+		margin-left: 10px;
+		text-decoration: none;
+		&:hover {
+			color: black;
 		}
 	}
 }

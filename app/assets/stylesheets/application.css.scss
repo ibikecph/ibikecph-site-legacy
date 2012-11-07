@@ -185,9 +185,6 @@ input.submit {
 .submit:hover, a.submit:hover a.on.submit:hover {
     background-color: $hover;
 }
-p {
-    margin-bottom: 0.5em;
-}
 .field_with_errors {
     color: $error;
     display: inline;
@@ -216,20 +213,6 @@ span.too_long {
 }
 input {
     font-size: 1em;
-}
-h1, h2 {
-    color: $dark;
-    margin-bottom: 0.3em;
-    a {
-        text-decoration: none;
-    }
-}
-h1 {
-    font-size: 1.6em;
-    margin-bottom: 0.3em;
-}
-h2 {
-    font-size: 1.3em;
 }
 .lefty {
     float: left;

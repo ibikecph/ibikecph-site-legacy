@@ -1,0 +1,20 @@
+da:
+  help:
+    title: Hjælp
+    body: |
+      Siden beregner (som den er lige nu) hurtigste cykelrute. Servicen fungere for hele Danmark.
+      
+      Træk i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og - knapperne. Knappen med den stiplede firkant centerer kortet omkring den aktuelle rute. Knappen med pilen centerer kortet omkring din fysiske position.
+      
+      Klik på på kortet for at sætte fra og til punkter, eller udfyld adressefelterne (ex: Krystalgade 15, 1172 København). Så snart en adresse er fundet, placeres den tilsvarende markør på kortet. Vær opmærksom på at der søges på adresser i hele Danmark. Tilføj evt. bynavn eller postnummer for at sikre at det er den rigtige vej du finder. 
+      
+      Så snart både fra og til markørerne er sat, beregenes ruten autoamtisk. Estimeret længde og tid vises under adressefelterne. Klik evt. på 'Rutebeskrivelse' for at se en trin-for-trin beskrivelse af ruten.
+      
+      Du kan trække et sted på ruten for at sætte via-punkter, dvs. punkter som ruten skal følge. Via-punkter kan fjernes igen ved at klikke på dem.
+      
+      Når en rute er funde, kan du angive tidspunktet for enten afgangs eller ankomst, og det modsatte tidspunkt vil blive beregnet for dig på baggrund af rejsetiden.
+      
+      Når du trækker i markørne, bliver ruten opdateret løbende - prøv selv :-)
+      
+      Du kan genere et link til den aktuelle rute ved at klikke på 'Link'. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx indsættes i kommentarer eller emails.
+      

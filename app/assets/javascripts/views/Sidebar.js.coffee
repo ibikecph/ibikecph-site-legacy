@@ -10,6 +10,7 @@ class ibikecph.Sidebar extends Backbone.View
 		'change input.link'            : 'waypoints_changed'
 		'click .fold'                  : 'fold'
 		'click .details'	           : 'details'
+		'click .help'	                 : 'help'
 		'change .departure'	  		   : 'change_departure'
 		'change .arrival'	   		   : 'change_arrival'
 		'click #instructons .step'	   : 'zoom_to_instruction'
@@ -56,6 +57,9 @@ class ibikecph.Sidebar extends Backbone.View
 					if index % 2 is 0 then odd = 'even' else odd = 'odd'
 					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(ibikecph.util.instruction_string(model.toJSON()))
 			$(window).trigger 'resize'
+
+	help: (event) ->
+		$('#help').toggle()
 
 	fold: (event) ->
 		$(@el).toggleClass('hidden')

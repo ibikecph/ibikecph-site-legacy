@@ -90,6 +90,7 @@ RailsOSRM::Application.routes.draw do
   post 'themes/:id/create' => 'issues#create_for_theme', :as => :create_issue_for_theme
   
   match '/terms' => 'pages#terms'
+  match '/help' => 'pages#help'
   
   match '/ping' => 'pages#ping'
   match '/fail' => 'pages#fail'

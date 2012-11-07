@@ -3,6 +3,10 @@ ibikecph.app = app = {}
 $(window).bind 'resize', ->
 	$('#map').height $(window).height() - $('#header').height()
 
+jQuery ->
+	$('#help .help').click (event) ->
+		event.preventDefault()
+		$('#help').toggle()
 
 app.start = ->
 	app.start = -> null

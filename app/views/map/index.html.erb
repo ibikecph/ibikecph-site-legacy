@@ -2,6 +2,7 @@
 	<div id="ui">
 		<div class="fold"></div>
 		<div id="ui_content">
+			<a class="help"><%=t '.help' %></a>
 			<a class="reset"><%=t :reset %></a>
 			<a class="permalink"><%=t :link_for_route %></a> 
 			<br>
@@ -40,6 +41,12 @@
 				route...
 			</div>
 		</div>
+	</div>
+	
+	<div id="help">
+		<a class="help"><%=t '.hide_help' %></a>
+		<h2><%=t 'help.title' %></h2>
+		<%= simple_format t('help.body') %>
 	</div>
 	
 	<div id="map"></div>

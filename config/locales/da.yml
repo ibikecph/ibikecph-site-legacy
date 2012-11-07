@@ -335,8 +335,11 @@ da:
       num_issues: "%{count} indlæg"
       issues_title: Indlæg til dette tema
     welcome:
-      title: Bland dig!
-      body: "Har du idéer til forbedringer af cykelruteplanlæggeren og websiden? Er der noget der ikke virker, eller mangler der en sti på kortet? Så fortæl det her!"
+      title: Vær med!
+      body: |
+        Har du idéer til forbedringer af cykelruteplanlæggeren og websiden? Er der noget der ikke virker, eller mangler der en sti på kortet?
+        
+        Så fortæl det her!
       note: |
         Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklame her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
     issues:
@@ -426,6 +429,8 @@ da:
       payoff: Hurtigere på cykel
       work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtive."
       bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
+      help: Hjælp
+      hide_help: Skjul
   
   application:
     please_login_first: Log venligst ind først
@@ -440,7 +445,6 @@ da:
   route_instructions: Rutebeskrivelse
   distance: afstand
   duration: tid
-  link_for_route: Link til Route
   clear: ryd
   zoom_to_route: Zoom til Rute
   use_my_location: Brug min position
