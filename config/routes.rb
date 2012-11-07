@@ -63,9 +63,11 @@ RailsOSRM::Application.routes.draw do
     match 'follows/:followable_type/:followable_id' => 'follows#follow', :via => :post
     match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
   
-    resource :corps, :only => [:show] do
-      get 'join' => :join
-      get 'leave' => :leave
+    resources :corps, :only => [:index,:show] do
+      collection do
+        get 'join' => :join
+        get 'leave' => :leave
+      end
     end  
 
     resources :issues, :path => 'feedback' do

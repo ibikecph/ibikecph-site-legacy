@@ -3,16 +3,20 @@
 		<%= render 'membership' %>
 	</div>
 	<div class="g8 ge">
-		<h1><%=t '.title' %></h1>
-		<%= will_paginate @users, :class => :pagination %>
-		<% for user in @users %>
-			<p class="user_list">
-				<span class="avatar">
-					<%= link_to profile_image(user), user %>
-				</span>
-				<%= user.name %>
-			</p>
+		<%= link_to t('edit'), [:edit,:account], :class => "button righty" if current_user == @user %>
+
+		<h1><%= @user.name %><%= " (#{t('you')})" if current_user == @user %></h1>
+
+		<div>
+			<%= image_tag @user.image.g3.url, :class => 'g3 square lefty' %>
+			<% if @user.about %>
+				<%= simple_format(@user.about) %>
+			<% end %>
+		</div>
+		<div class="clear"></div>
+		<% if @issues.any? %>
+			<br>
+			<%= render :partial => 'issues/issues', :locals => { :title => t('.issues') } %>
 		<% end %>
-		<%= will_paginate @users, :class => :pagination %>
 	</div>
 </div>

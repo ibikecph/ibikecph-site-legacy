@@ -370,11 +370,40 @@ en:
     labels:
       title: "Issues labelled as.."
       no_items: No issues found
+    corps:
+      title: Test Corps
+      body: "Become a tester, og help discuss and test new features!"
+      test_corps: Read more
     flash:
       created: Issue added.
       updated: Issue updated.
       destroyed: Issue deleted.
 
+  corps:
+    index:
+      title: Testers
+    show:
+      issues: Issues by the User
+    membership:
+      title: Hi Tester!
+      about_testcorps: |
+        Join the test corps and get closer to the development process!
+        
+        You can always add ideas or comments related to the route planner, even without joining the test corps.
+        
+        But as a member of the test corps, you will be notified about current themes, and can discuss and test new functionality.
+        
+        Vi love constructive input, but there's no obligations or costs related to joining, and you can leave at any time.
+      join: Join
+      leave: Leave
+      is_tester:  You're member of the test corps.
+      is_not_tester: You're not a member of the test corps
+    flash:
+      joined: You joined the test corps
+      already_joined: You're already a member of the test corps
+      left: You left the test corps
+      already_left: You're not a member of the test corps
+      
   pages:
     terms:
       title: Terms of use for ibikecph.dk

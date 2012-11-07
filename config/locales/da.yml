@@ -369,22 +369,32 @@ da:
     labels:
       title: "Indlæg markeret som..."
       no_items: No issues found
+    corps:
+      title: Testerkorps
+      body: "Meld dig som tester, og vær med til at diskutere og afprøve nye funktioner!"
+      test_corps: Læs mere
     flash:
       created: Indlæg oprettet.
       updated: Indlæg opdateret.
       destroyed: Indlæg slettet.
   
   corps:
+    index:
+      title: Testere
     show:
-      title: Medlemmer
+      issues: Indlæg af denne bruger
     membership:
-      title: Testerkorps
+      title: Hej tester!
       about_testcorps: |
-        Du kan altid komme med feedback og ideer, også uden at være med i testerkorpset.
-        Når du er med i testerkorpset får du besked om aktuelle temaer og arrangementer relateret til forbedring af ruteplanlæggeren.
-        Der er ingen forpligtelser eller omkostninger ved at være med i testerkorpset, og du kan til enhver til melde dig ud.
-      join: Meld dig ind
-      leave: Meld dig ud
+        Vær med i testerkorpset og kom tættere på udviklingsprocessen!
+        
+        Du kan altid komme med feedback og ideer til ruteplanlæggeren, også uden at være med i testerkorpset.
+        
+        Men som tester får besked om aktuelle teamer, og kan være med til at diskutere og afprøve nye funktioner.
+        
+        Vi håber på konstruktivt input, men der er ingen forpligtelser eller omkostninger ved at deltage, og du kan til enhver til melde dig ud her på siden.
+      join: Tilmeld
+      leave: Frameld
       is_tester:  Du er med i testerkorpset
       is_not_tester: Du er ikke med i testerkorpset
     flash:

@@ -1,7 +1,13 @@
 class CorpsController < ApplicationController
   
-  def show
+  def index
     @users = User.where(:tester => true).order('name asc').paginate :page => params[:page], :per_page => 20
+  end
+  
+  def show
+    @user = User.find params[:id]
+    @issues = @user.issues.lastest.paginate :page => params[:page], :per_page => 50
+    
   end
   
   def join
