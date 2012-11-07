@@ -58,10 +58,10 @@ da:
         
   menu:
     routes: Rute
-    blog: Blog
-    feedback: Testerkorps
-    signup: Opret
-    login: Log Ind
+    blog: Nyheder
+    feedback: Vær med
+    signup: Opret konto
+    login: Log ind
     logout: Log ud
   
   da: Dansk
@@ -121,8 +121,11 @@ da:
     index:
       title: Brugere
     new:
-      title: Opret Konto
-      body: Opret en gratis I Bike Cph konto
+      title: Opret I Bike CPH konto
+      body: |
+        Vær med!
+        En I Bike CPH konto er helt gratis og uden forpligtelser, og giver mulighed for at komme med input og komentarer.
+        Du vælger selv om du vil have tilsendt email med nyheder etc.
       i_accept: Jeg accepterer
       terms: Brugerbetingelserne
       submit: Gem

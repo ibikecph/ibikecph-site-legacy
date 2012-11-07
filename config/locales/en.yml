@@ -65,8 +65,8 @@ en:
     
   menu:
     routes: Route
-    blog: Blog
-    feedback: Test Corps
+    blog: News
+    feedback: Feedback
     signup: Sign Up
     login: Login
     logout: Logout
