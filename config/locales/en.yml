@@ -126,8 +126,11 @@ en:
     index:
       title: Users
     new:
-      title: Sign Up
-      body: Create your free I Bike Cph account
+      title: Create I Bike CPH account
+      body: | 
+        Join!
+        An I Bike CPH account is free and without obligations, og enables you to uplaod ideas and comments.
+        You choose wether you want emails with news, etc.
       i_accept: I accept the
       terms: Terms of Service
       submit: Create Account
