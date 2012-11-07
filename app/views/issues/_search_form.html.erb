@@ -1,0 +1,8 @@
+<%= form_tag :post_search_issues do %>
+<p>
+	<%= text_field_tag :search, params[:search] %>
+</p>
+<p>
+	<%= submit_tag t('.submit'), :class => :submit %>
+</p>
+<% end %>

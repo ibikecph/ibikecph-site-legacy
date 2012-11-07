@@ -1,10 +1,10 @@
 class IssuesController < ApplicationController
        
   skip_before_filter :require_login, :only => [:index,:all,:show,:tags,:labels]
-  load_and_authorize_resource :except => [:new_for_theme,:create_for_theme,:tags,:labels,:all]
+  load_and_authorize_resource :except => [:new_for_theme,:create_for_theme,:tags,:labels,:all,:search,:searched]
   skip_authorize_resource :only => [:all,:new_for_theme,:create_for_theme,:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show,:corps]
+  before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show,:corps,:search,:searched]
   before_filter :find_popular_tags, :only => [:index,:show,:tags,:labels]
 
   def index
@@ -104,15 +104,14 @@ class IssuesController < ApplicationController
     render :nothing => true
   end
 
-  def join
+  def search
   end
   
-  def leave
+  def searched
+    query = "%#{params[:search]}%".downcase
+    @issues = Issue.where("LOWER(title) LIKE ? OR LOWER(body) LIKE ?", query,query).lastest.includes(:user).paginate :page => params[:page], :per_page => 30
+    render :search
   end
-  
-  def corps
-  end
-  
   
   private
   

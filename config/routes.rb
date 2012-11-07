@@ -72,6 +72,8 @@ RailsOSRM::Application.routes.draw do
 
     resources :issues, :path => 'feedback' do
       collection do
+        get 'search'
+        post 'search' => :searched, :as => :post_search
         get 'all'
         get 'cards'
         get 'tags(/:tag)' => :tags

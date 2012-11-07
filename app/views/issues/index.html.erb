@@ -5,6 +5,14 @@
 	<div class="g8 ge">
 		<%= render @theme if @theme %>
 		<% title = @theme ? t('.issues_title') : t('issues.all.title') %>
-		<%= render :partial => 'issues/issues', :locals => { :title => title, :new_url => new_issue_path } %>
+		
+		
+		<div class="righty big buttons">
+			<%= link_to t('.new'), new_issue_path %>
+		</div>
+		<h2><%= title %></h2>
+		<p><%= link_to "#{t('.all_issues')} &rarr;".html_safe, all_issues_path %></p>
+
+		<%= render :partial => 'issues/issues' %>
 	</div>
 </div>

@@ -1,0 +1,15 @@
+<div class="gr">
+	<div class="g4">
+		<%= render 'sidebar' %>
+	</div>
+	<div class="g8 ge">
+		<h1><%=t '.title' %></h1>
+		<%= render 'search_form' %>
+		<br>
+		<hr>
+		<% if @issues %>
+			<%=t '.num_found', :count => @issues.size %>
+			<%= render :partial => 'issues/issues' if @issues.any? %>
+		<% end %>
+	</div>
+</div>

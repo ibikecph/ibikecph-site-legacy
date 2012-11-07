@@ -3,6 +3,10 @@
 		<%= render 'sidebar' %>
 	</div>
 	<div class="g8 ge">
-		<%= render :partial => 'issues/issues', :locals => { :title => t('.title'), :new_url => new_issue_path } %>
+		<div class="righty big buttons">
+			<%= link_to t('.new'), new_issue_path %>
+		</div>
+		<h2><%=t '.title' %></h2>
+		<%= render :partial => 'issues/issues' %>
 	</div>
 </div>

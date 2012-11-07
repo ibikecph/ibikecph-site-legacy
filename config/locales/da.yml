@@ -376,6 +376,11 @@ da:
       title: Testerkorps
       body: "Meld dig som tester, og vær med til at diskutere og afprøve nye funktioner!"
       test_corps: Læs mere
+    search_form:
+      submit: Søg
+    search:
+      title: Søg efter indlæg
+      num_found: "Indlæg fundet: %{count}"
     flash:
       created: Indlæg oprettet.
       updated: Indlæg opdateret.

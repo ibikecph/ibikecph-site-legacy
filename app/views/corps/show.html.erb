@@ -16,6 +16,7 @@
 		<div class="clear"></div>
 		<% if @issues.any? %>
 			<br>
+			<h2><%=t '.issues' %></h2>
 			<%= render :partial => 'issues/issues', :locals => { :title => t('.issues') } %>
 		<% end %>
 	</div>
