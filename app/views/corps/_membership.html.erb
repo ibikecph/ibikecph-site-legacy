@@ -1,12 +1,16 @@
 <div class="sidebar">
 	<h1><%=t '.title' %></h1>
 	<%= simple_format t('.about_testcorps') %>
-
-	<% if @current_user.tester? %>
-		<p class="note"><%=t '.is_tester' %></p>
-		<%= link_to t('.leave'), leave_corps_path, :class => :submit %>
+	
+	<% if current_user %>
+		<% if current_user.tester? %>
+			<p class="note"><%=t '.is_tester' %></p>
+			<%= link_to t('.leave'), leave_corps_path, :class => :submit %>
+		<% else %>
+			<p class="note"><%=t '.is_not_tester' %></p>
+			<%= link_to t('.join'), join_corps_path, :class => :submit %>
+		<% end %>
 	<% else %>
-		<p class="note"><%=t '.is_not_tester' %></p>
 		<%= link_to t('.join'), join_corps_path, :class => :submit %>
 	<% end %>
 </div>
