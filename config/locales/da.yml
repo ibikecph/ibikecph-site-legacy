@@ -272,7 +272,7 @@ da:
       link: Gensend Verificeringsemail
     new_verification:
       title: Verificer Email
-      body: "Indtast din email nedenfor, og følg instrutioner i den email vi sender til dig."
+      body: "Indtast din email nedenfor, og følg instruktionerne i den email vi sender til dig."
       submit: Send
     flash:
       verification_sent: "Verificeringinstruktioner sendt til %{email}."
@@ -287,11 +287,11 @@ da:
   password_resets:
     new_ask:
       title: Nulstil Kodeord
-      body: "Indtast din email nedenfor, så sender vi instrutioner om hvordan du nulstiller dit kodeord."
+      body: "Indtast din email nedenfor, så sender vi instruktioner om hvordan du nulstiller dit kodeord."
       submit: Send Instruktioner
     new_select:
       title: Nulstil Kodeord
-      body: "Instrutioner om hvordan du nulstiller dit kodeord vil blive sendt til %{user}."
+      body: "Instruktioner om hvordan du nulstiller dit kodeord vil blive sendt til %{user}."
       submit: Send Instruktioner
     new_fixed:
       title: Nulstil kodeord
@@ -327,7 +327,7 @@ da:
     comment:
       subject: "Kommentar: %{title}"
       body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph:"
-    unsubscribing: "Denne email kan ikke besvares. Hvis du ikke ønsker at modtage email fra I Bike CPH, kan du ændre dine instillinger på %{link}."
+    unsubscribing: "Denne email kan ikke besvares. Hvis du ikke ønsker at modtage email fra I Bike CPH, kan du ændre dine indstillinger på %{link}."
     
   issues:
     view_all_issues: Se alle indlæg
@@ -388,23 +388,27 @@ da:
   
   corps:
     index:
+      title: Hej testpilot!
+      body: |
+        Tilmeld dig Testerkorpset og vær med til at diskutere og afprøve nye funktioner! Som tester får du besked om aktuelle teamer og aktiviterer relateret til forbedring af cykelruteplanlæggeren.
+        
+        Der er ingen forpligelser eller omkostninger, og du kan til enhver tid framelde dig.
+      is_tester:  Du er med i Testerkorpset
+      is_not_tester: Du er ikke med i Testerkorpset
+    testers:
       title: Testere
+    membership:
+      join: Meld dig ind
+      leave: Meld dig ud
     show:
       issues: Indlæg af denne bruger
-    membership:
-      title: Hej tester!
-      about_testcorps: |
-        Vær med i testerkorpset og kom tættere på udviklingsprocessen!
-        
-        Du kan altid komme med feedback og ideer til ruteplanlæggeren, også uden at være med i testerkorpset.
-        
-        Men som tester får besked om aktuelle teamer, og kan være med til at diskutere og afprøve nye funktioner.
-        
-        Vi håber på konstruktivt input, men der er ingen forpligtelser eller omkostninger ved at deltage, og du kan til enhver til melde dig ud her på siden.
-      join: Tilmeld
-      leave: Frameld
-      is_tester:  Du er med i testerkorpset
-      is_not_tester: Du er ikke med i testerkorpset
+    joined:
+      title: Velkommen til Testerkorpset!
+      body: "Du er nu med i Testerkorpset, og vil få besked om aktuelle temaer og aktiviteter relateret til forbedring af cykelruteplanlæggeren. Du kan til enhver tid framelde dig her på siden."
+    left:
+      title: Du er frameld Testerkorpset
+      body: |
+        Du er stadig meget velkommen til at tilføje feedback og kommentare, men vil ikke længere modtage besked om teamer og aktiviterer relateret til forbedring af cykelruteplanlæggeren.
     flash:
       joined: Du er nu med i testerkorpset
       already_joined: Du er allerede med i testerkorpset
@@ -432,7 +436,7 @@ da:
   map:
     index:
       payoff: Hurtigere på cykel
-      work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtive."
+      work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtige."
       bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
       help: Hjælp
       hide_help: Skjul

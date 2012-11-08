@@ -1,9 +1,10 @@
 class CorpsController < ApplicationController
 
   skip_before_filter :require_login, :only => [:index, :show]
+  before_filter :load_sidebar
+  before_filter :find_users, :except => [:show]
   
   def index
-    @users = User.where(:tester => true).order('name asc').paginate :page => params[:page], :per_page => 20
   end
   
   def show
@@ -19,7 +20,7 @@ class CorpsController < ApplicationController
       current_user.update_attributes :tester => true
       flash[:notice] = t('corps.flash.joined')
     end
-    redirect_to corps_path
+    render :joined
   end
   
   def leave
@@ -29,7 +30,19 @@ class CorpsController < ApplicationController
       current_user.update_attributes :tester => false
       flash[:notice] = t('corps.flash.left')
     end
-    redirect_to corps_path
+    render :left
+  end
+  
+  private
+
+  def load_sidebar
+    @themes = Theme.all
+    @most_commented = Issue.most_commented.includes(:user).limit(7)
+    @popular_tags = Issue.tag_counts_on(:tags).order('count desc').limit(20)
+  end  
+  
+  def find_users
+    @users = User.where(:tester => true).order('name asc').paginate :page => params[:page], :per_page => 20
   end
   
 end

@@ -375,7 +375,7 @@ en:
       no_items: No issues found
     corps:
       title: Test Corps
-      body: "Become a tester, og help discuss and test new features!"
+      body: "Become a tester, and help discuss and test new features!"
       test_corps: Read more
     search_form:
       submit: Search
@@ -389,29 +389,33 @@ en:
 
   corps:
     index:
+      title: Hi Testpilot!
+      body: |
+        Join the Test Corps and help discuss and test new features! As a tester, you will be notified about current themes and activities related to improving the bike route planner.
+        
+        There's no obligations or costs related to joining, and you can leave at any time.
+        is_tester:  You're member of the Test Corps.
+        is_not_tester: You're not a member of the Test Corps
+    testers:
       title: Testers
-    show:
-      issues: Issues by the User
     membership:
-      title: Hi Tester!
-      about_testcorps: |
-        Join the test corps and get closer to the development process!
-        
-        You can always add ideas or comments related to the route planner, even without joining the test corps.
-        
-        But as a member of the test corps, you will be notified about current themes, and can discuss and test new functionality.
-        
-        Vi love constructive input, but there's no obligations or costs related to joining, and you can leave at any time.
       join: Join
       leave: Leave
-      is_tester:  You're member of the test corps.
-      is_not_tester: You're not a member of the test corps
+    show:
+      issues: Indlæg af denne bruger
+    joined:
+      title: Welcome to the Test Corps!
+      body: "You're now part of the Test Corps, and will be notified about current themes and activities related to improving the bike route planner. You can leave at any time if you wish."
+    left:
+      title: You left the Test Corps
+      body: |
+        You're still very welcome to add feedback and comments, but will no longer be notified about current themes and activities related to improving the bike route planner.
     flash:
       joined: You joined the test corps
       already_joined: You're already a member of the test corps
       left: You left the test corps
       already_left: You're not a member of the test corps
-      
+
   pages:
     terms:
       title: Terms of use for ibikecph.dk
