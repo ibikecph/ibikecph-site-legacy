@@ -1,31 +1,36 @@
-class ibikecph.Map extends Backbone.View
+class IBikeCPH.Map extends Backbone.View
 
 	bounds: true
 
 	initialize: ->
-		@map          = new L.Map @el.id, zoomControl: false
+		@map = new L.Map @el.id, zoomControl: false		#leaflet map
+		@map.on 'zoom', (event) =>
+			@osrm.set_zoom event.zoom
+		@map.on 'dragging_pin', (event) =>
+			@osrm.set_instructions not event.dragging_pin
+
 		@dragging_pin = false
 		@pins         = {}
 
 		@route_point_index = []
 
-		@current_route = new L.Polyline [], ibikecph.config.route_styles.current
-		@invalid_route = new L.Polyline [], ibikecph.config.route_styles.invalid
-		@old_route     = new L.Polyline [], ibikecph.config.route_styles.old
+		@current_route = new L.Polyline [], IBikeCPH.config.route_styles.current
+		@invalid_route = new L.Polyline [], IBikeCPH.config.route_styles.invalid
+		@old_route     = new L.Polyline [], IBikeCPH.config.route_styles.old
 
 		@route_marker = new L.Marker null, (
 			draggable : false
-			icon      : ibikecph.icons.route_marker
+			icon      : IBikeCPH.icons.route_marker
 		)
 
-		for control in ibikecph.config.map_controls
+		for control in IBikeCPH.config.map_controls
 			switch control.type
 
 				when 'layers'
 					@layers_control = new L.Control.Layers
 					@layers_control.setPosition control.position if control.position
 
-					for tileset, index in ibikecph.config.map_tiles
+					for tileset, index in IBikeCPH.config.map_tiles
 						layer = new L.TileLayer tileset.url, tileset.options
 						@layers_control.addBaseLayer layer, tileset.name
 						@map.addLayer layer if index == 0
@@ -43,8 +48,8 @@ class ibikecph.Map extends Backbone.View
 					@goto_control.go_to_route       = => @go_to_route()
 					@map.addControl @goto_control
 
-		initial_location = new L.LatLng ibikecph.config.initial_location.lat, ibikecph.config.initial_location.lng
-		@map.setView initial_location, ibikecph.config.initial_location.zoom
+		initial_location = new L.LatLng IBikeCPH.config.initial_location.lat, IBikeCPH.config.initial_location.lng
+		@map.setView initial_location, IBikeCPH.config.initial_location.zoom
 
 		setTimeout =>
 			@trigger 'zoom', zoom: @map.getZoom()
@@ -135,11 +140,11 @@ class ibikecph.Map extends Backbone.View
 			if pin
 				unless pin.dragged
 					pin.setLatLng location
-					pin.setIcon ibikecph.icons[field_name]
+					pin.setIcon IBikeCPH.icons[field_name]
 			else
 				pin = new L.Marker location, (
 					draggable : true
-					icon      : ibikecph.icons[field_name]
+					icon      : IBikeCPH.icons[field_name]
 				)
 				pin.model = model
 				@pins[cid] = pin
@@ -194,7 +199,7 @@ class ibikecph.Map extends Backbone.View
 	create_via_point: (event) ->
 		location = event.target.getLatLng()
 
-		waypoint = new ibikecph.Waypoint
+		waypoint = new IBikeCPH.Waypoint
 			type     : 'via'
 			location : location
 
@@ -257,7 +262,7 @@ class ibikecph.Map extends Backbone.View
 		@current_route.getLatLngs().length > 0
 
 	geometry_changed: (compressed_route) ->
-		latlngs = ibikecph.util.decode_path compressed_route
+		latlngs = IBikeCPH.util.decode_path compressed_route
 
 		valid   = latlngs.length >= 2
 		latlngs = @model.waypoints.to_latlngs() if not valid

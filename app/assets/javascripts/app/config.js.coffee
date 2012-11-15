@@ -1,6 +1,6 @@
-window.ibikecph or= {}
+window.IBikeCPH or= {}
 
-ibikecph.config =
+IBikeCPH.config =
 
 	initial_location:
 		lat: 55.68
@@ -28,10 +28,15 @@ ibikecph.config =
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,
+<<<<<<< HEAD
 		name: 'ibikecph'
 		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
+=======
+		name: 'IBikeCPH'
+		url: 'http://83.221.133.3/tiles/{z}/{x}/{y}.png'
+>>>>>>> start refactoring of backbone
 		options:
-			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 ibikecph'
+			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 IBikeCPH'
 	,
 	name: 'OpenCycleMap'
 	url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'

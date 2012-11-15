@@ -1,7 +1,7 @@
-class ibikecph.OSRM
+class IBikeCPH.OSRM
 
 	constructor: (@model, @url) ->
-		@request      = new ibikecph.SmartJSONP
+		@request      = new IBikeCPH.SmartJSONP
 		@zoom         = null
 		@instructions = null
 		@checksum     = null

@@ -2,12 +2,12 @@
 # instance of the app. Also contains the route (model attribute `route`) as a
 # compressed string, see OSRM API documentation.
 
-class ibikecph.Info extends Backbone.Model
+class IBikeCPH.Models.Search extends Backbone.Model
 
 	initialize: ->
-		@waypoints    = new ibikecph.Waypoints
-		@instructions = new ibikecph.Instructions
-		@summary      = new ibikecph.InstructionsSummary
+		@waypoints    = new IBikeCPH.Models.Waypoints
+		@instructions = new IBikeCPH.Models.Instructions
+		@summary      = new IBikeCPH.Models.Summary
 
 	endpoint: (type) ->
 		@waypoints.endpoint type

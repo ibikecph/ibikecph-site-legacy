@@ -1,4 +1,4 @@
-class ibikecph.Geocoder
+class IBikeCPH.Geocoder
 
 	constructor: (@model) ->
 		@current =
@@ -59,9 +59,9 @@ class ibikecph.Geocoder
 			format : 'json'
 			q      : "#{@current.address}"
 			limit  : '1'
-		, ibikecph.config.geocoding_service.options
+		, IBikeCPH.config.geocoding_service.options
 
-		@request = $.getJSON ibikecph.config.geocoding_service.url + '?json_callback=?', options, (result) =>
+		@request = $.getJSON IBikeCPH.config.geocoding_service.url + '?json_callback=?', options, (result) =>
 			@request_done()
 
 			@current.location.lat = @convert_number result[0]?.lat
@@ -84,12 +84,12 @@ class ibikecph.Geocoder
 			format : 'json'
 			lat    : @current.location.lat or 0
 			lon    : @current.location.lng or 0
-		, ibikecph.config.geocoding_service.options
+		, IBikeCPH.config.geocoding_service.options
 
-		@request = $.getJSON ibikecph.config.reverse_geocoding_service.url + '?json_callback=?', options, (result) =>
+		@request = $.getJSON IBikeCPH.config.reverse_geocoding_service.url + '?json_callback=?', options, (result) =>
 			@request_done()
 
-			address = ibikecph.util.displayable_address result
+			address = IBikeCPH.util.displayable_address result
 
 			if address
 				@current.address = address

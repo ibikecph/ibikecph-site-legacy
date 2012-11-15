@@ -1,7 +1,7 @@
 # Represents the waypoints (ie. from/to/via) entered by the user.
 
-class ibikecph.Waypoints extends Backbone.Collection
-	model: ibikecph.Waypoint
+class IBikeCPH.Models.Waypoints extends Backbone.Collection
+	model: IBikeCPH.Waypoint
 
 	initialize: ->
 		@_setup_event_proxy()
@@ -21,7 +21,7 @@ class ibikecph.Waypoints extends Backbone.Collection
 		type_match = waypoint?.get and waypoint.get('type') == type
 
 		unless type_match
-			waypoint = new ibikecph.Waypoint type: type
+			waypoint = new IBikeCPH.Waypoint type: type
 
 			if last
 				@add [waypoint]
@@ -107,7 +107,7 @@ class ibikecph.Waypoints extends Backbone.Collection
 		waypoints = []
 
 		for location_code in code.split '/'
-			waypoint = ibikecph.Waypoint.from_code location_code
+			waypoint = IBikeCPH.Waypoint.from_code location_code
 			waypoints.push(waypoint) if waypoint
 
 		if waypoints.length > 0

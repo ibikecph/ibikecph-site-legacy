@@ -1,7 +1,7 @@
 # Represent the instructions for the user to follow a given route.
 
-class ibikecph.Instructions extends Backbone.Collection
-	model: ibikecph.Instruction
+class IBikeCPH.Models.Instructions extends Backbone.Collection
+	model: IBikeCPH.Instruction
 
 	reset_from_osrm: (instructions) ->
 		@reset _.map instructions, (instruction) ->
@@ -16,7 +16,7 @@ class ibikecph.Instructions extends Backbone.Collection
 				roundabout_exit = null
 
 			(
-				turn            : ibikecph.util.translate_turn_instruction turn
+				turn            : IBikeCPH.util.translate_turn_instruction turn
 				street          : street
 				roundabout_exit : roundabout_exit
 				distance        : distance

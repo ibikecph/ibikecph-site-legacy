@@ -1,5 +1,4 @@
-
-class ibikecph.Sidebar extends Backbone.View
+class IBikeCPH.Sidebar extends Backbone.View
 
 	events:
 		'change .address input'        : 'fields_updated'
@@ -9,19 +8,36 @@ class ibikecph.Sidebar extends Backbone.View
 		'click input.link'             : 'select_all'
 		'change input.link'            : 'waypoints_changed'
 		'click .fold'                  : 'fold'
-		'click .details'	           : 'details'
-		'click .help'	                 : 'help'
-		'change .departure'	  		   : 'change_departure'
-		'change .arrival'	   		   : 'change_arrival'
+		'click .details'	             : 'details'
+		'change .departure'	  		     : 'change_departure'
+		'change .arrival'	   		       : 'change_arrival'
 		'click #instructons .step'	   : 'zoom_to_instruction'
 
+	initialize: (options) ->
+		@router = options.router
+		Backbone.View.prototype.initialize.apply this, options
+		
+		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
+			@set_field @model.get('type'), address
+		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
+			@set_loading @model.get('type'), loading
+
+		@model.waypoints.bind 'clear:from reset', =>
+			@set_field 'from', ''
+		@model.waypoints.bind 'clear:to reset', =>
+			@set_field 'to', ''
+
+		@model.waypoints.bind 'reset change', =>
+			@waypoints_changed()
+
+		@model.summary.bind 'change', @summary_changed, this
 
 	zoom_to_instruction: (event) ->
-		path = _.find @app.map.map._layers, (layer) ->
+		path = _.find @router.map.map._layers, (layer) ->
 			if layer._latlngs?
 				return true
 		point = path._latlngs[ $(event.target).attr('data-index') ]
-		@app.map.go_to_point point
+		@router.map.go_to_point point
 	
 	parse_time: (str) ->
 		hours_mins = str.split /[:\.]/
@@ -51,11 +67,11 @@ class ibikecph.Sidebar extends Backbone.View
 	details: (event) ->
 		$('#route').toggle()
 		if $('#route').length <= 1
-			if @app.info.instructions.length
+			if @router.search.instructions.length
 				instructions = $('#route').empty()
-				@app.info.instructions.each (model, index)->
+				@router.search.instructions.each (model, index)->
 					if index % 2 is 0 then odd = 'even' else odd = 'odd'
-					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(ibikecph.util.instruction_string(model.toJSON()))
+					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(IBikeCPH.util.instruction_string(model.toJSON()))
 			$(window).trigger 'resize'
 
 	help: (event) ->
@@ -70,43 +86,25 @@ class ibikecph.Sidebar extends Backbone.View
 	drag_pin_start: (event) ->
 		if $(event.target).hasClass 'reset'
 			return true
-		@draging = $(event.target).clone()
+		@dragging = $(event.target).clone()
 		$(event.target).addClass 'reset'
-		$(@el).append @draging
+		$(@el).append @dragging
 		$('html').mousemove (event) =>
 			@drag_pin_move event
-		@draging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
-		@draging.addClass 'draging'
+		@dragging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
+		@dragging.addClass 'draging'
 
 	drag_pin_move: (event) ->
-		if @draging
-			@draging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
+		if @dragging
+			@dragging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
 
 	drag_pin_end: (event) ->
-		if @draging
-			@draging.remove()
-			field_name = @draging.removeClass('draging pin').attr('class')
-			if not @app.map.set_pin_at field_name, event.pageX + 1, event.pageY + 24
+		if @dragging
+			@dragging.remove()
+			field_name = @dragging.removeClass('draging pin').attr('class')
+			if not @router.map.set_pin_at field_name, event.pageX + 1, event.pageY + 24
 				$('.pin.' + field_name).removeClass 'reset' 
-			@draging = undefined
-
-	initialize: (options) ->
-		@app = options.app
-
-		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
-			@set_field model.get('type'), address
-		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
-			@set_loading model.get('type'), loading
-
-		@model.waypoints.bind 'clear:from reset', =>
-			@set_field 'from', ''
-		@model.waypoints.bind 'clear:to reset', =>
-			@set_field 'to', ''
-
-		@model.waypoints.bind 'reset change', =>
-			@waypoints_changed()
-
-		@model.summary.bind 'change', @summary_changed, @
+			@dragging = undefined
 
 	reset: ->
 		@model.waypoints.reset()
@@ -115,7 +113,7 @@ class ibikecph.Sidebar extends Backbone.View
 		
 	waypoints_changed: ->
 		$('#route').hide()
-		return if @app.map.dragging_pin
+		return if @router.map.dragging_pin
 		#$('#route').remove()
 		if @model.instructions.length
 			url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
@@ -126,8 +124,8 @@ class ibikecph.Sidebar extends Backbone.View
 			$('#route').hide()
 
 	summary_changed: ->
-		meters = @app.info.summary.get 'total_distance'
-		seconds  = @app.info.summary.get 'total_time'
+		meters = @router.search.summary.get 'total_distance'
+		seconds  = @router.search.summary.get 'total_time'
 
 		if meters and seconds
 			$(".distance", @el).text(meters/1000 + ' km')
@@ -194,7 +192,7 @@ class ibikecph.Sidebar extends Backbone.View
 			return
 		
 		raw_value = input.val()
-		value = ibikecph.util.normalize_whitespace raw_value
+		value = IBikeCPH.util.normalize_whitespace raw_value
 		
 		#be a little smarter when parsing adresses, to make nominatim happier
 		value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København

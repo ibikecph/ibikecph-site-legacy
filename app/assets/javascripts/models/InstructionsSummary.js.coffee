@@ -1,3 +1,3 @@
 # The time, distance and arrival time for a given route.
 
-class ibikecph.InstructionsSummary extends Backbone.Model
+class IBikeCPH.Models.Summary extends Backbone.Model

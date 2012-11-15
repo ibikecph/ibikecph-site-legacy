@@ -1,10 +1,10 @@
-ibikecph.util or= {}
+IBikeCPH.util or= {}
 
-ibikecph.util.normalize_whitespace = (text) ->
+IBikeCPH.util.normalize_whitespace = (text) ->
 	"#{text}".replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
 
 
-ibikecph.util.instruction_string = (instruction) ->
+IBikeCPH.util.instruction_string = (instruction) ->
 	string = I18n.translate('instructions.'+instruction.turn);
 
 	if instruction.turn is 'enter_roundabout'
@@ -24,7 +24,7 @@ ibikecph.util.instruction_string = (instruction) ->
 
 	string
 
-ibikecph.util.decode_path = (encoded) ->
+IBikeCPH.util.decode_path = (encoded) ->
 	len    = encoded.length
 	index  = 0
 	points = []
@@ -70,7 +70,7 @@ ibikecph.util.decode_path = (encoded) ->
 
 	return points
 
-ibikecph.util.translate_turn_instruction = (turn) ->
+IBikeCPH.util.translate_turn_instruction = (turn) ->
 	switch turn | 0
 		when 1 then 'continue'
 		when 2 then 'turn_slight_right'
@@ -89,7 +89,7 @@ ibikecph.util.translate_turn_instruction = (turn) ->
 		when 15 then 'reached_destination'
 		else 'no-instruction'
 
-ibikecph.util.displayable_address = (geocoding_response) ->
+IBikeCPH.util.displayable_address = (geocoding_response) ->
 	address = geocoding_response?.address
 
 	if address
@@ -135,6 +135,6 @@ ibikecph.util.displayable_address = (geocoding_response) ->
 		display_address += ', Sverige'
 
 	else
-		display_address = ibikecph.util.normalize_whitespace "#{[geocoding_response?.display_name]}"
+		display_address = IBikeCPH.util.normalize_whitespace "#{[geocoding_response?.display_name]}"
 
 	return display_address or null

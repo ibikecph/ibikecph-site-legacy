@@ -1,7 +1,7 @@
 noop = -> null # no operation
 
 
-class ibikecph.SmartJSONP
+class IBikeCPH.SmartJSONP
 
 	constructor: ->
 		@current_request = null
