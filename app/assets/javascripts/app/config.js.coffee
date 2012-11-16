@@ -29,7 +29,7 @@ ibikecph.config =
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,
 		name: 'ibikecph'
-		url: 'http://83.221.133.3/tiles/{z}/{x}/{y}.png'
+		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 ibikecph'
 	,
@@ -53,7 +53,7 @@ ibikecph.config =
 	]
 
 	routing_service:
-		url: 'http://83.221.133.2/viaroute'
+		url: 'http://routes.ibikecph.dk/viaroute'
 
 	geocoding_service:
 		url: 'http://nominatim.openstreetmap.org/search'
