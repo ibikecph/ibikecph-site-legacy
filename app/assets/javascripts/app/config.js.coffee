@@ -28,20 +28,15 @@ IBikeCPH.config =
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,
-<<<<<<< HEAD
-		name: 'ibikecph'
-		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
-=======
 		name: 'IBikeCPH'
-		url: 'http://83.221.133.3/tiles/{z}/{x}/{y}.png'
->>>>>>> start refactoring of backbone
+		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 IBikeCPH'
 	,
-	name: 'OpenCycleMap'
-	url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
-	options:
-		attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery by Andy Allan and Dave Stubbs'
+		name: 'OpenCycleMap'
+		url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
+		options:
+			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery by Andy Allan and Dave Stubbs'
 	]
 
 	# The map controls are inserted in the specified order. Supported types:
