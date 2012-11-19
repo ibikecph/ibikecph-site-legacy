@@ -14,13 +14,13 @@ class IBikeCPH.Sidebar extends Backbone.View
 		'click #instructons .step'	   : 'zoom_to_instruction'
 
 	initialize: (options) ->
-		@router = options.router
 		Backbone.View.prototype.initialize.apply this, options
+		@router = options.router
 		
 		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
-			@set_field @model.get('type'), address
+			@set_field model.get('type'), address
 		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
-			@set_loading @model.get('type'), loading
+			@set_loading model.get('type'), loading
 
 		@model.waypoints.bind 'clear:from reset', =>
 			@set_field 'from', ''

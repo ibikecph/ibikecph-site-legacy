@@ -20,7 +20,6 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		
 		@osrm = new IBikeCPH.OSRM @search, IBikeCPH.config.routing_service.url
 		
-	index: ->
 		@map = new IBikeCPH.Map model: @search, el: '#map'
 		@sidebar = new IBikeCPH.Sidebar model: @search, el: '#ui', router: this
 
@@ -33,6 +32,8 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 			window.location = href
 
 		$(window).trigger 'resize'
+
+	index: ->
 
 	show_route: (code) ->
 		@app.info.waypoints.reset_from_code code
