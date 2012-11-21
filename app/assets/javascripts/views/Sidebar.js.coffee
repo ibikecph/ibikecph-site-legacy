@@ -1,4 +1,4 @@
-class IBikeCPH.Sidebar extends Backbone.View
+class IBikeCPH.Views.Sidebar extends Backbone.View
 
 	events:
 		'change .address input'        : 'fields_updated'
@@ -202,6 +202,6 @@ class IBikeCPH.Sidebar extends Backbone.View
 		input.val(value) if value != raw_value
 
 		if value
-			@model.endpoint(type).set 'address', value
+			#TODO @model.endpoint(type).set 'address', value
 		else
 			@model.clear type

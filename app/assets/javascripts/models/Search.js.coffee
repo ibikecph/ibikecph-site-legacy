@@ -8,9 +8,3 @@ class IBikeCPH.Models.Search extends Backbone.Model
 		@waypoints    = new IBikeCPH.Models.Waypoints
 		@instructions = new IBikeCPH.Models.Instructions
 		@summary      = new IBikeCPH.Models.Summary
-
-	endpoint: (type) ->
-		@waypoints.endpoint type
-
-	clear: (type) ->
-		@waypoints.clear type

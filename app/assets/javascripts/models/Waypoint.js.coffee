@@ -1,6 +1,6 @@
 # A waypoint (ie. from/to/via) that the user entered.
 
-class IBikeCPH.Waypoint extends Backbone.Model
+class IBikeCPH.Models.Waypoint extends Backbone.Model
 
 	defaults:
 		type: 'via'
@@ -50,11 +50,11 @@ class IBikeCPH.Waypoint extends Backbone.Model
 		# String representation of this waypoint.
 		return Math.floor(lat).toString(36) + '.' + Math.floor(lng).toString(36)
 
-IBikeCPH.Waypoint.from_code = (code) ->
+IBikeCPH.Models.Waypoint.from_code = (code) ->
 	# Parse string representation to the location of a waypoint.
 	location = "#{code}".match /^(-?[a-z0-9]{1,6})\.(-?[a-z0-9]{1,6})$/i
 
-	waypoint = new IBikeCPH.Waypoint
+	waypoint = new IBikeCPH.Models.Waypoint
 
 	if location
 		setTimeout ->

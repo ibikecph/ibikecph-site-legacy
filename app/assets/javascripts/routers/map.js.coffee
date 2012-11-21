@@ -20,8 +20,8 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		
 		@osrm = new IBikeCPH.OSRM @search, IBikeCPH.config.routing_service.url
 		
-		@map = new IBikeCPH.Map model: @search, el: '#map'
-		@sidebar = new IBikeCPH.Sidebar model: @search, el: '#ui', router: this
+		@map = new IBikeCPH.Views.Map model: @search, el: '#map'
+		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#ui', router: this
 
 		$(window).bind 'resize', ->
 			$('#map').height $(window).height() - $('#header').height()

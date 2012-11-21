@@ -1,4 +1,4 @@
-class IBikeCPH.Map extends Backbone.View
+class IBikeCPH.Views.Map extends Backbone.View
 
 	bounds: true
 
@@ -63,13 +63,13 @@ class IBikeCPH.Map extends Backbone.View
 			@update_route_marker event
 
 		@map.on 'click', (event) =>
-			@set_pin_by_mouse_click event
+			@click event
 
 		@map.on 'zoomend', (event) =>
 			@trigger 'zoom', zoom: @map.getZoom()
 
 		@map.on 'locationfound', (event) =>
-			@model.endpoint('from').set 'location', event.latlng unless @model.waypoints.has_valid_from()
+			@model.waypoints.a.set 'location', event.latlng unless @model.waypoints.has_valid_from()
 
 		@model.on 'change:route', (model, compressed_route) =>
 			@geometry_changed compressed_route
@@ -78,10 +78,10 @@ class IBikeCPH.Map extends Backbone.View
 			@waypoint_added_or_updated model
 
 		@model.waypoints.on 'add', (model) =>
-			@waypoint_added_or_updated model
+			@waypoint_added model
 
-		@model.waypoints.on 'remove', (model) =>
-			@waypoint_removed model
+		#@model.waypoints.on 'remove', (model) =>
+		#	@waypoint_removed model
 
 		@model.waypoints.on 'reset', (collection) =>
 			@waypoints_reset collection
@@ -114,9 +114,6 @@ class IBikeCPH.Map extends Backbone.View
 
 	waypoint_added_or_updated: (model) ->
 		@waypoint_show_hide_update model, false
-
-	waypoint_removed: (model) ->
-		@waypoint_show_hide_update model, true
 
 	waypoints_reset: (collection) ->
 		for cid, pin of @pins
@@ -199,7 +196,7 @@ class IBikeCPH.Map extends Backbone.View
 	create_via_point: (event) ->
 		location = event.target.getLatLng()
 
-		waypoint = new IBikeCPH.Waypoint
+		waypoint = new IBikeCPH.Models.Waypoint
 			type     : 'via'
 			location : location
 
@@ -235,28 +232,19 @@ class IBikeCPH.Map extends Backbone.View
 
 		return closest
 
-	set_pin_by_mouse_click: (event) ->
-		unless @model.waypoints.has_valid_from()
-			@model.endpoint('from').set 'location', event.latlng
-			return
-
-		unless @model.waypoints.has_valid_to()
-			@model.endpoint('to').set 'location', event.latlng
-			return
-
-	set_pin_at: (field_name, x, y) ->
-		offset = $(@el).offset()
-		width  = $(@el).width()
-		height = $(@el).height()
-		x -= offset.left
-		y -= offset.top
-
-		return false if x < 0 or y < 0 or x >= width or y >= height
-
-		position = new L.Point x, y
-		location = @map.layerPointToLatLng @map.containerPointToLayerPoint position
-
-		@model.endpoint(field_name).set 'location', location
+#	set_pin_at: (field_name, x, y) ->
+#		offset = $(@el).offset()
+#		width  = $(@el).width()
+#		height = $(@el).height()
+#		x -= offset.left
+#		y -= offset.top
+#
+#		return false if x < 0 or y < 0 or x >= width or y >= height
+#
+#		position = new L.Point x, y
+#		location = @map.layerPointToLatLng @map.containerPointToLayerPoint position
+#
+#		@model.endpoint(field_name).set 'location', location
 
 	showing_route: ->
 		@current_route.getLatLngs().length > 0
@@ -322,3 +310,13 @@ class IBikeCPH.Map extends Backbone.View
 				@route_point_index[i] = last_waypoint + 1
 			last_waypoint    = waypoint
 			last_route_point = route_point
+			
+	waypoint_added: (model) ->
+		new IBikeCPH.Views.Pin map: this, model: model
+			
+	click: (event) ->
+		if !@model.waypoints.get_end 'from'
+			@model.waypoints.set_end 'from', event.latlng
+		else if !@model.waypoints.get_end 'to'
+			@model.waypoints.set_end 'to', event.latlng
+	

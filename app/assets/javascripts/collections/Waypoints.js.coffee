@@ -1,35 +1,27 @@
 # Represents the waypoints (ie. from/to/via) entered by the user.
 
 class IBikeCPH.Models.Waypoints extends Backbone.Collection
-	model: IBikeCPH.Waypoint
-
+	model: IBikeCPH.Models.Waypoint
+	
 	initialize: ->
 		@_setup_event_proxy()
-
-	# Returns the model for the from/to endpoint.
-	endpoint: (type) ->
-		last = (type == 'end' || type == 'to')
-
-		if last
-			index = @length - 1
-			type  = 'to'
-		else
-			index = 0
-			type  = 'from'
-
-		waypoint   = @at index
-		type_match = waypoint?.get and waypoint.get('type') == type
-
-		unless type_match
-			waypoint = new IBikeCPH.Waypoint type: type
-
-			if last
-				@add [waypoint]
-			else
-				@add [waypoint], at: 0
-
-		return waypoint
-
+		@ends = {}
+		
+		@on 'remove', (model) ->
+			@waypoint_removed model
+	
+	waypoint_removed: (model) ->
+		@ends['from'] = null if @ends['from'] and @ends['from'].cid == model.cid
+		@ends['to'] = null if @ends['to'] and @ends['to'].cid == model.cid
+		
+	get_end: (type) ->
+		@ends[type]
+	
+	set_end: (type, latlon) ->
+		unless @ends[type]
+			@ends[type] = new IBikeCPH.Models.Waypoint location: latlon, type: type
+			@add @ends[type], at: (type=='from' ? 0 : 1)
+			
 	# Clears the from/to endpoint. If there are via points, then the next via
 	# point will become an endpoint and the proper events are triggered.
 	clear: (type) ->
@@ -107,7 +99,7 @@ class IBikeCPH.Models.Waypoints extends Backbone.Collection
 		waypoints = []
 
 		for location_code in code.split '/'
-			waypoint = IBikeCPH.Waypoint.from_code location_code
+			waypoint = IBikeCPH.Models.Waypoint.from_code location_code
 			waypoints.push(waypoint) if waypoint
 
 		if waypoints.length > 0
