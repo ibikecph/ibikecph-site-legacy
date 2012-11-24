@@ -15,28 +15,9 @@ class IBikeCPH.Views.Pin extends Backbone.View
 			@map.map.removeLayer @marker
 			this.remove()
 		
-		@marker.on 'dragstart', (event) =>
-			console.log 'dragstart'
-			#event.target.dragged = true
-			#@dragging_pin = true
-			#@old_route.setLatLngs @current_route.getLatLngs()
-			#@map.addLayer @old_route
-			#@trigger 'dragging_pin', dragging_pin: @dragging_pin
-
-		@marker.on 'dragend', (event) =>
-			console.log 'dragend'
-			#event.target.dragged = false
-			#@dragging_pin = false
-			#@map.removeLayer @old_route
-			#@trigger 'dragging_pin', dragging_pin: @dragging_pin
-
 		@marker.on 'drag', (event) =>
-			console.log 'drag'
-			#location = event.target.getLatLng()
-			#event.target.model.set 'location', (
-			#	lat: location.lat
-			#	lng: location.lng
-			#)
+			location = @marker.getLatLng()
+			@model.set 'location', lat: location.lat, lng: location.lng
 
 		@marker.on 'click', (event) =>
 			@model.destroy()

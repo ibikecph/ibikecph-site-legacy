@@ -146,34 +146,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 				pin.model = model
 				@pins[cid] = pin
 
-				pin.on 'dragstart', (event) =>
-					event.target.dragged = true
-					@dragging_pin = true
-					@old_route.setLatLngs @current_route.getLatLngs()
-					@map.addLayer @old_route
-					@trigger 'dragging_pin', dragging_pin: @dragging_pin
-
-				pin.on 'dragend', (event) =>
-					event.target.dragged = false
-					@dragging_pin = false
-					@map.removeLayer @old_route
-					@trigger 'dragging_pin', dragging_pin: @dragging_pin
-
-				pin.on 'drag', (event) =>
-					location = event.target.getLatLng()
-					event.target.model.set 'location', (
-						lat: location.lat
-						lng: location.lng
-					)
-
-				pin.on 'click', (event) =>
-					model = event.target.model
-					type  = model.get 'type'
-					if type == 'from' or type == 'to'
-						@model.clear type
-					else
-						@model.waypoints.remove model
-					@map.removeLayer @route_marker
 
 				@map.addLayer pin
 		else if pin
@@ -312,8 +284,21 @@ class IBikeCPH.Views.Map extends Backbone.View
 			last_route_point = route_point
 			
 	waypoint_added: (model) ->
-		new IBikeCPH.Views.Pin map: this, model: model
-			
+		view = new IBikeCPH.Views.Pin map: this, model: model
+		
+		view.on 'dragstart', (event) =>
+			event.target.marker.dragged = true
+			event.target.dragging_pin = true
+			@old_route.setLatLngs @current_route.getLatLngs()
+			@map.addLayer @old_route
+			#@trigger 'dragging_pin', dragging_pin: true
+
+		view.on 'dragend', (event) =>
+			event.target.marker.dragged = false
+			event.target.dragging_pin = false
+			@map.removeLayer @old_route
+			#@trigger 'dragging_pin', dragging_pin: false
+		
 	click: (event) ->
 		@model.waypoints.add_endpoint event.latlng
 	

@@ -3,8 +3,6 @@
 class IBikeCPH.Models.Waypoint extends Backbone.Model
 
 	defaults:
-		type: 'via'
-		address: ''
 		location:
 			lat: null
 			lng: null
