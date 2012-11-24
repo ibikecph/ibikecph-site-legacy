@@ -27,5 +27,5 @@ class IBikeCPH.Views.Pin extends Backbone.View
 			#	@model.clear type
 			#else
 			#	@model.waypoints.remove model
-			#@map.removeLayer @route_marker
+			#@map.removeLayer @via_marker
 		
