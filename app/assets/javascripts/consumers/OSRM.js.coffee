@@ -3,7 +3,7 @@ class IBikeCPH.OSRM
 	constructor: (@model, @url) ->
 		@request      = new IBikeCPH.SmartJSONP
 		@zoom         = null
-		@instructions = false
+		@instructions = true
 		@checksum     = null
 		@hints        = ({} for i in [0...10])
 		@hints_index  = 0
@@ -74,7 +74,8 @@ class IBikeCPH.OSRM
 		else
 			@model.set 'route', ''
 			@model.trigger 'change:route', @model, '', {}
-
+		
+		
 		if response.route_instructions
 			@model.instructions.reset_from_osrm response.route_instructions
 		else

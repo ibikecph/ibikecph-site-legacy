@@ -3,8 +3,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	events:
 		'change .address input'        : 'fields_updated'
 		'click .reset'                 : 'reset'
-		'mousedown .pin.to, .pin.from' : 'drag_pin_start'
-		'mouseup .pin.draging'         : 'drag_pin_end'
 		'click input.link'             : 'select_all'
 		'change input.link'            : 'waypoints_changed'
 		'click .fold'                  : 'fold'
@@ -65,6 +63,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@summary_changed()
 
 	details: (event) ->
+		console.log "load instructions, len: #{@router.search.instructions.length}"
 		$('#route').toggle()
 		if $('#route').length <= 1
 			if @router.search.instructions.length
@@ -82,29 +81,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	
 	select_all: (event) ->
 		$(event.target).select()
-
-	drag_pin_start: (event) ->
-		if $(event.target).hasClass 'reset'
-			return true
-		@dragging = $(event.target).clone()
-		$(event.target).addClass 'reset'
-		$(@el).append @dragging
-		$('html').mousemove (event) =>
-			@drag_pin_move event
-		@dragging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
-		@dragging.addClass 'draging'
-
-	drag_pin_move: (event) ->
-		if @dragging
-			@dragging.css position : 'fixed', left : event.pageX - 18, top : event.pageY - 20, 'z-index' : 100
-
-	drag_pin_end: (event) ->
-		if @dragging
-			@dragging.remove()
-			field_name = @dragging.removeClass('draging pin').attr('class')
-			if not @router.map.set_pin_at field_name, event.pageX + 1, event.pageY + 24
-				$('.pin.' + field_name).removeClass 'reset' 
-			@dragging = undefined
 
 	reset: ->
 		@model.waypoints.reset()
