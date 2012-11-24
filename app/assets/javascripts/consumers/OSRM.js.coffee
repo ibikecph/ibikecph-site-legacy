@@ -3,7 +3,7 @@ class IBikeCPH.OSRM
 	constructor: (@model, @url) ->
 		@request      = new IBikeCPH.SmartJSONP
 		@zoom         = null
-		@instructions = null
+		@instructions = false
 		@checksum     = null
 		@hints        = ({} for i in [0...10])
 		@hints_index  = 0
@@ -11,7 +11,7 @@ class IBikeCPH.OSRM
 
 		@url += if /\?/.test @url then '&' else '?'
 		@url += 'jsonp=?&'
-
+		
 		@model.waypoints.on 'reset add remove change', =>
 			@load_route()
 
@@ -25,11 +25,10 @@ class IBikeCPH.OSRM
 	get_zoom: ->
 		@zoom
 
-	set_instructions: (instructions) ->
-		had_instructions = @instructions
-		@instructions    = instructions
-
-		@load_route() if instructions and not had_instructions
+	set_instructions: (instructions) =>
+		#had_instructions = @instructions
+		#@instructions = instructions
+		#@load_route() if instructions and not had_instructions
 
 	get_instructions: ->
 		@instructions

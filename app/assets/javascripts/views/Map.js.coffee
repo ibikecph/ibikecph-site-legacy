@@ -3,11 +3,11 @@ class IBikeCPH.Views.Map extends Backbone.View
 	bounds: true
 
 	initialize: ->
+		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
+		
 		@map = new L.Map @el.id, zoomControl: false		#leaflet map
 		@map.on 'zoom', (event) =>
 			@osrm.set_zoom event.zoom
-		@map.on 'dragging_pin', (event) =>
-			@osrm.set_instructions not event.dragging_pin
 
 		@dragging_pin = false
 		@pin_views = {}		#used to map from waypoint models to views
@@ -257,17 +257,15 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@pin_views[model.cid] = view
 		
 		view.marker.on 'dragstart', (event) =>
-			#event.target.marker.dragged = true
+			@osrm.set_instructions false
 			@dragging_pin = true
 			@old_route.setLatLngs @current_route.getLatLngs()
 			@map.addLayer @old_route
-			#@trigger 'dragging_pin', dragging_pin: true
 
 		view.marker.on 'dragend', (event) =>
-			#event.target.marker.dragged = false
+			@osrm.set_instructions true
 			@dragging_pin = false
 			@map.removeLayer @old_route
-			#@trigger 'dragging_pin', dragging_pin: false
 
 	waypoint_removed: (model) ->
 		@pin_views[model.cid] = undefined
@@ -290,6 +288,5 @@ class IBikeCPH.Views.Map extends Backbone.View
 		waypoint = new IBikeCPH.Models.Waypoint type: 'via', location: location
 		@model.waypoints.add waypoint, at: @closest_waypoint_index(location)
 		@map.removeLayer @via_marker
-		@dragging_pin = true
 		# Fake an initial dragstart event, so that the new via marker is actually dragged.
 		@pin_views[waypoint.cid].marker.dragging._draggable._onDown event.originalEvent

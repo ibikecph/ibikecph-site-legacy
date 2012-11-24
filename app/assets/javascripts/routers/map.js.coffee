@@ -17,9 +17,7 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 				_gaq.push ['_trackEvent', 'location', 'from', from] if from
 				_gaq.push ['_trackEvent', 'location', 'to'  , to  ] if to
 				_gaq.push ['_trackEvent', 'location', 'route', "#{from} -- #{to}"] if from and to
-		
-		@osrm = new IBikeCPH.OSRM @search, IBikeCPH.config.routing_service.url
-		
+				
 		@map = new IBikeCPH.Views.Map model: @search, el: '#map'
 		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#ui', router: this
 
