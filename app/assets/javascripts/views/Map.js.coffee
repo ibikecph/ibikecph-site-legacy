@@ -12,8 +12,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@dragging_pin = false
 		@pin_views = {}		#used to map from waypoint models to views
 
-		@route_point_index = []
-
 		@current_route = new L.Polyline [], IBikeCPH.config.route_styles.current
 		@invalid_route = new L.Polyline [], IBikeCPH.config.route_styles.invalid
 		@old_route     = new L.Polyline [], IBikeCPH.config.route_styles.old
@@ -150,28 +148,6 @@ class IBikeCPH.Views.Map extends Backbone.View
     #
 		#return pin
 
-	closest_waypoint_index: (location) ->
-		seg_index = @closest_route_point_index location
-
-		if seg_index < 1
-			seg_index = 1
-		else if seg_index > @route_point_index.length - 1
-			seg_index = @route_point_index.length - 1
-
-		return @route_point_index[seg_index] or 1
-
-	closest_route_point_index: (location) ->
-		min_distance = Infinity
-		closest      = 0
-
-		for route_point, index in @current_route.getLatLngs()
-			distance = route_point.distanceTo location
-
-			if distance < min_distance
-				min_distance = distance
-				closest      = index
-
-		return closest
 
 #	set_pin_at: (field_name, x, y) ->
 #		offset = $(@el).offset()
@@ -196,8 +172,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		valid   = latlngs.length >= 2
 		latlngs = @model.waypoints.to_latlngs() if not valid
 
-		@update_route_point_index @model.waypoints.to_latlngs(), latlngs unless @dragging_pin
-
 		if valid
 			@current_route.setLatLngs latlngs
 			@invalid_route.setLatLngs []
@@ -214,44 +188,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@map.addLayer    @invalid_route
 
 		@bounds = false
-
-	update_route_point_index: (waypoints, route) ->
-		@route_point_index = []
-
-		return unless waypoints.length >= 2 and route.length >= 2
-
-		reverse_index = []
-
-		# Map 'to' endpoint
-		reverse_index.push [waypoints.length - 1, route.length]
-
-		for i in [1...waypoints.length-1]
-			waypoint = waypoints[i]
-
-			min_distance = Infinity
-			closest      = 0
-
-			# Brute-force search for nearest via waypoint
-			for j in [1...route.length-1]
-				route_point = route[j]
-				distance    = route_point.distanceTo waypoint
-
-				if distance < min_distance
-					min_distance = distance
-					closest      = j
-
-			reverse_index.push [i, closest]
-
-		reverse_index.sort (a, b) -> a[1] - b[1]
-
-		last_waypoint    = 0
-		last_route_point = 0
-		for [waypoint, route_point] in reverse_index
-			for i in [last_route_point...route_point]
-				@route_point_index[i] = last_waypoint + 1
-			last_waypoint    = waypoint
-			last_route_point = route_point
-			
+	
 	waypoint_added: (model) =>
 		view = new IBikeCPH.Views.Pin map: this, model: model
 		@pin_views[model.cid] = view
@@ -284,7 +221,30 @@ class IBikeCPH.Views.Map extends Backbone.View
 				@map.addLayer @via_marker
 			else
 				@map.removeLayer @via_marker
-			
+
+	closest_waypoint_index: (location) ->
+		return 1 if @model.waypoints.length == 2
+		clicked_segment = @closest_route_point_index location
+		waypoint_index = 0
+		bump_at = 0
+		for route_point, i in @current_route.getLatLngs()
+			if i == bump_at
+				waypoint_index = waypoint_index + 1
+				location = @model.waypoints.at(waypoint_index).get('location')
+				bump_at =  @closest_route_point_index location
+			if i == clicked_segment
+				return waypoint_index
+
+	closest_route_point_index: (location) ->
+		min_distance = Infinity
+		closest      = undefined
+		for route_point, index in @current_route.getLatLngs()
+			distance = route_point.distanceTo location
+			if distance < min_distance
+				min_distance = distance
+				closest      = index
+		return closest
+
 	start_via_drag: (event) ->
 		location = event.target.getLatLng()
 		waypoint = new IBikeCPH.Models.Waypoint type: 'via', location: location
