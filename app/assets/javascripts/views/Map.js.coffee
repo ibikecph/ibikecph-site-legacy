@@ -315,8 +315,5 @@ class IBikeCPH.Views.Map extends Backbone.View
 		new IBikeCPH.Views.Pin map: this, model: model
 			
 	click: (event) ->
-		if !@model.waypoints.get_end 'from'
-			@model.waypoints.set_end 'from', event.latlng
-		else if !@model.waypoints.get_end 'to'
-			@model.waypoints.set_end 'to', event.latlng
+		@model.waypoints.add_endpoint event.latlng
 	

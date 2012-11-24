@@ -5,23 +5,38 @@ class IBikeCPH.Models.Waypoints extends Backbone.Collection
 	
 	initialize: ->
 		@_setup_event_proxy()
-		@ends = {}
+		@on 'remove', (model) -> @waypoint_removed model
 		
-		@on 'remove', (model) ->
-			@waypoint_removed model
-	
 	waypoint_removed: (model) ->
-		@ends['from'] = null if @ends['from'] and @ends['from'].cid == model.cid
-		@ends['to'] = null if @ends['to'] and @ends['to'].cid == model.cid
-		
-	get_end: (type) ->
-		@ends[type]
+		#@ends['from'] = null if @ends['from'] and @ends['from'].cid == model.cid
+		#@ends['to'] = null if @ends['to'] and @ends['to'].cid == model.cid
 	
-	set_end: (type, latlon) ->
-		unless @ends[type]
-			@ends[type] = new IBikeCPH.Models.Waypoint location: latlon, type: type
-			@add @ends[type], at: (type=='from' ? 0 : 1)
-			
+	add_endpoint: (latlon) ->
+		if @length < 2
+			if @from()?
+				@add new IBikeCPH.Models.Waypoint(location: latlon, type: 'to'), at: 1
+			else
+				@add new IBikeCPH.Models.Waypoint(location: latlon, type: 'from'), at: 0
+		
+	from: ->
+		waypoint = @first()
+		if waypoint and waypoint.get('type')=='from'
+			waypoint
+
+	to: ->
+		waypoint = @last()
+		if waypoint and waypoint.get('type')=='to'
+			waypoint
+
+	has_valid_from: ->
+		@from()?
+
+	has_valid_to: ->
+		@to()?
+
+	has_endpoints: ->
+		@from()? and @to()?
+
 	# Clears the from/to endpoint. If there are via points, then the next via
 	# point will become an endpoint and the proper events are triggered.
 	clear: (type) ->
@@ -40,7 +55,7 @@ class IBikeCPH.Models.Waypoints extends Backbone.Collection
 				else
 					@trigger 'clear:to'
 		else
-			if @has_from()
+			if @from()?
 				@remove [@at 0]
 				next = 0
 				if next < @length - 1
@@ -64,23 +79,6 @@ class IBikeCPH.Models.Waypoints extends Backbone.Collection
 			to   : to
 		)
 
-	has_from: ->
-		waypoint = @at(0)
-		waypoint?.get and waypoint.get('type') == 'from'
-
-	has_to: ->
-		waypoint = @at(@length - 1)
-		waypoint?.get and waypoint.get('type') == 'to'
-
-	has_valid_from: ->
-		@has_from() and @at(0).valid_location()
-
-	has_valid_to: ->
-		@has_to() and @at(@length - 1).valid_location()
-
-	has_endpoints: ->
-		@has_from() and @has_to()
-
 	# Converts the waypoints into route points, used to display invalid/unknown routes.
 	to_latlngs: ->
 		_.filter @map((model) -> model.to_latlng()), (location) -> location
@@ -88,8 +86,8 @@ class IBikeCPH.Models.Waypoints extends Backbone.Collection
 	to_code: ->
 		codes = @map (waypoint) -> waypoint.to_code()
 
-		codes.unshift '' unless @has_from()
-		codes.push    '' unless @has_to()
+		codes.unshift '' unless @from()?
+		codes.push    '' unless @to()?
 
 		return codes.join '/'
 
