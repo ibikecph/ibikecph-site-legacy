@@ -5,6 +5,6 @@
 class IBikeCPH.Models.Search extends Backbone.Model
 
 	initialize: ->
-		@waypoints    = new IBikeCPH.Models.Waypoints
-		@instructions = new IBikeCPH.Models.Instructions
+		@waypoints    = new IBikeCPH.Collections.Waypoints
+		@instructions = new IBikeCPH.Collections.Instructions
 		@summary      = new IBikeCPH.Models.Summary

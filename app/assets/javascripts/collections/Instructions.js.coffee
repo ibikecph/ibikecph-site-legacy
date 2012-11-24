@@ -1,9 +1,11 @@
 # Represent the instructions for the user to follow a given route.
 
-class IBikeCPH.Models.Instructions extends Backbone.Collection
-	model: IBikeCPH.Instruction
+class IBikeCPH.Collections.Instructions extends Backbone.Collection
+	model: IBikeCPH.Models.Instruction
 
 	reset_from_osrm: (instructions) ->
+		return
+		#TODO for some reason, this is causing "this.model is not a constructor" errors..
 		@reset _.map instructions, (instruction) ->
 			[turn, street, distance, index, _, _, direction] = instruction
 

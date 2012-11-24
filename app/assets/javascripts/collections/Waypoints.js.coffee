@@ -1,6 +1,6 @@
 # Represents the waypoints (ie. from/to/via) entered by the user.
 
-class IBikeCPH.Models.Waypoints extends Backbone.Collection
+class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 	model: IBikeCPH.Models.Waypoint
 	
 	initialize: ->

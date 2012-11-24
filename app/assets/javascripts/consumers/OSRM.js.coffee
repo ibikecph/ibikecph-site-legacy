@@ -26,15 +26,15 @@ class IBikeCPH.OSRM
 		@zoom
 
 	set_instructions: (instructions) =>
-		#had_instructions = @instructions
-		#@instructions = instructions
-		#@load_route() if instructions and not had_instructions
+		had_instructions = @instructions
+		@instructions = instructions
+		@load_route() if instructions and not had_instructions
 
 	get_instructions: ->
 		@instructions
 
 	load_route: ->
-		locations = @get_location_codes()
+		locations = @build_location_params()
 
 		if locations.length < 2
 			@model.set 'route', ''
@@ -97,7 +97,7 @@ class IBikeCPH.OSRM
 		else
 			query_string = ''
 
-		query_string += 'output=json&geomformat=cmp'
+		query_string += 'output=json'
 		query_string += "&checksum=#{@checksum}" if @checksum?
 
 		prehints = []
@@ -114,7 +114,7 @@ class IBikeCPH.OSRM
 			query_string : query_string
 		)
 
-	get_location_codes: ->
+	build_location_params: ->
 		return [] unless @model.waypoints.has_endpoints()
 
 		locations = []
