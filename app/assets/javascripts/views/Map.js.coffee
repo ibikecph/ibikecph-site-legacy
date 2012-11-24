@@ -54,8 +54,8 @@ class IBikeCPH.Views.Map extends Backbone.View
 		#, 1
 
 		@via_marker.on 'mousedown', (event) =>
-			@add_and_drag_via_point event
-
+			@start_via_drag event
+		
 		@map.on 'mousemove', (event) =>
 			@move_via_marker event
 
@@ -267,6 +267,9 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@dragging_pin = false
 			@map.removeLayer @old_route
 
+		view.marker.on 'drag', (event) =>
+			@map.removeLayer @via_marker
+
 	waypoint_removed: (model) ->
 		@pin_views[model.cid] = undefined
 		
@@ -274,16 +277,15 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@model.waypoints.add_endpoint event.latlng
 		
 	move_via_marker: (event) ->
-		if @showing_route()
-			unless @dragging_pin
-				closest = @current_route.closestLayerPoint event.layerPoint
-				if closest and closest.distance < 10
-					@via_marker.setLatLng @map.layerPointToLatLng closest
-					@map.addLayer @via_marker
-				else
-					@map.removeLayer @via_marker
-
-	add_and_drag_via_point: (event) ->
+		if @showing_route() and not @dragging_pin
+			closest = @current_route.closestLayerPoint event.layerPoint
+			if closest and closest.distance < 10
+				@via_marker.setLatLng @map.layerPointToLatLng closest
+				@map.addLayer @via_marker
+			else
+				@map.removeLayer @via_marker
+			
+	start_via_drag: (event) ->
 		location = event.target.getLatLng()
 		waypoint = new IBikeCPH.Models.Waypoint type: 'via', location: location
 		@model.waypoints.add waypoint, at: @closest_waypoint_index(location)
