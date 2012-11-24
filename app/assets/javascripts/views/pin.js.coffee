@@ -8,6 +8,9 @@ class IBikeCPH.Views.Pin extends Backbone.View
 		@marker = new L.Marker latlon, draggable: true, icon: IBikeCPH.icons[@model.get 'type']
 		@map.map.addLayer @marker
 		
+		@model.on 'change:type', (model) =>
+			@marker.setIcon IBikeCPH.icons[model.get 'type']
+		
 		@model.on 'change', (event) =>
 			#console.log 'model change'
 
@@ -21,11 +24,3 @@ class IBikeCPH.Views.Pin extends Backbone.View
 
 		@marker.on 'click', (event) =>
 			@model.destroy()
-			#model = event.target.model
-			#type  = model.get 'type'
-			#if type == 'from' or type == 'to'
-			#	@model.clear type
-			#else
-			#	@model.waypoints.remove model
-			#@map.removeLayer @via_marker
-		

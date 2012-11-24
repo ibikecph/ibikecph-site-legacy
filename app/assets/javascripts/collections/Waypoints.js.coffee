@@ -5,11 +5,13 @@ class IBikeCPH.Models.Waypoints extends Backbone.Collection
 	
 	initialize: ->
 		@_setup_event_proxy()
-		@on 'remove', (model) -> @waypoint_removed model
+		@on 'remove', (model) -> 
+			@waypoint_removed model
 		
 	waypoint_removed: (model) ->
-		#@ends['from'] = null if @ends['from'] and @ends['from'].cid == model.cid
-		#@ends['to'] = null if @ends['to'] and @ends['to'].cid == model.cid
+		if @length > 1
+			@first().set 'type', 'from'
+			@last().set 'type', 'to'
 	
 	add_endpoint: (latlon) ->
 		if @length < 2

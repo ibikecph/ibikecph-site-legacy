@@ -69,9 +69,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@model.on 'change:route', (model, compressed_route) =>
 			@geometry_changed compressed_route
 
-		@model.waypoints.on 'change:location change:type', (model) =>
-			@waypoint_added_or_updated model
-
 		@model.waypoints.on 'add', (model) =>
 			@waypoint_added model
 
