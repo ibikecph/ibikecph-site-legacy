@@ -63,7 +63,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@summary_changed()
 
 	details: (event) ->
-		console.log "load instructions, len: #{@router.search.instructions.length}"
 		$('#route').toggle()
 		if $('#route').length <= 1
 			if @router.search.instructions.length
@@ -83,9 +82,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		$(event.target).select()
 
 	reset: ->
-		@model.waypoints.reset()
-		$('#summary').hide()
-		$('#route').hide()
+		@model.reset()
 		
 	waypoints_changed: ->
 		$('#route').hide()

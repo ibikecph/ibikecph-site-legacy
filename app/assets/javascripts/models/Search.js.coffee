@@ -8,3 +8,9 @@ class IBikeCPH.Models.Search extends Backbone.Model
 		@waypoints    = new IBikeCPH.Collections.Waypoints
 		@instructions = new IBikeCPH.Collections.Instructions
 		@summary      = new IBikeCPH.Models.Summary
+	
+	
+	reset: ->
+		@waypoints.each (wp) ->
+			wp.trigger 'remove'
+		@waypoints.reset()

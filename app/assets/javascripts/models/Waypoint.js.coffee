@@ -10,7 +10,7 @@ class IBikeCPH.Models.Waypoint extends Backbone.Model
 
 	initialize: ->
 		new IBikeCPH.Geocoder this
-
+	
 	valid_location: ->
 		location = @get 'location'
 		return false unless location and location?.lat? and location?.lng?

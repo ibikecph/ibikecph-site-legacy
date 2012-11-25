@@ -10,14 +10,12 @@ class IBikeCPH.Views.Pin extends Backbone.View
 		
 		@model.on 'change:type', (model) =>
 			@marker.setIcon IBikeCPH.icons[model.get 'type']
-		
-		@model.on 'change', (event) =>
-			#console.log 'model change'
 
-		@model.on 'destroy', (event) =>
+		@model.on 'remove', (event) =>
 			@map.map.removeLayer @marker
-			this.remove()
-		
+			@off()
+			@remove()
+
 		@marker.on 'drag', (event) =>
 			location = @marker.getLatLng()
 			@model.set 'location', lat: location.lat, lng: location.lng
