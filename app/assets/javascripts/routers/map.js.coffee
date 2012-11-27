@@ -22,7 +22,7 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#ui', router: this
 		@summary = new IBikeCPH.Views.Summary model: @search.summary, el: '#ui #summary', router: this
 
-		$(window).bind 'resize', ->
+		$(window).on 'resize', ->
 			$('#map').height $(window).height() - $('#header').height()
 
 		$('.ln').click (event) ->

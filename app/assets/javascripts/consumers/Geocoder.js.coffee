@@ -9,10 +9,10 @@ class IBikeCPH.Geocoder
 
 		@request = null
 
-		@model.bind 'change:address', =>
+		@model.on 'change:address', =>
 			@load_address @model.get 'address'
 
-		@model.bind 'change:location', =>
+		@model.on 'change:location', =>
 			location = @model.get 'location'
 
 			@abort()

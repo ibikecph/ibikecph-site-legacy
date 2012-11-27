@@ -1,8 +1,5 @@
 class IBikeCPH.Views.Summary extends Backbone.View
 	
-	events:
-		'click .details': 'details'
-
 	initialize: (options) ->
 		Backbone.View.prototype.initialize.apply this, options
 		@router = options.router
@@ -13,17 +10,6 @@ class IBikeCPH.Views.Summary extends Backbone.View
 
 	hide: ->
 		@$el.hide()
-
-	details: (event) =>
-		console.log 'datail'
-		$('#route').toggle()
-		if $('#route').length <= 1
-			if @router.search.instructions.length
-				instructions = $('#route').empty()
-				@router.search.instructions.each (model, index)->
-					if index % 2 is 0 then odd = 'even' else odd = 'odd'
-					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(IBikeCPH.util.instruction_string(model.toJSON()))
-			$(window).trigger 'resize'
 
 	render: =>
 		meters = @model.get 'total_distance'

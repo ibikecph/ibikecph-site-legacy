@@ -2,6 +2,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 	bounds: true
 
+
 	initialize: ->
 		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
 		

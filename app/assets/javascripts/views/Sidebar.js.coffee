@@ -11,24 +11,34 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'change .arrival'	   		       : 'change_arrival'
 		'click #instructons .step'	   : 'zoom_to_instruction'
 
+
 	initialize: (options) ->
 		Backbone.View.prototype.initialize.apply this, options
 		@router = options.router
 		
-		@model.waypoints.bind 'from:change:address to:change:address reset', (model, address) =>
+		@model.waypoints.on 'from:change:address to:change:address reset', (model, address) =>
 			@set_field model.get('type'), address
-		@model.waypoints.bind 'from:change:loading to:change:loading reset', (model, loading) =>
+		@model.waypoints.on 'from:change:loading to:change:loading reset', (model, loading) =>
 			@set_loading model.get('type'), loading
 
-		@model.waypoints.bind 'clear:from reset', =>
+		@model.waypoints.on 'clear:from reset', =>
 			@set_field 'from', ''
-		@model.waypoints.bind 'clear:to reset', =>
+		@model.waypoints.on 'clear:to reset', =>
 			@set_field 'to', ''
 
-		@model.waypoints.bind 'reset change', =>
+		@model.waypoints.on 'reset change', =>
 			@waypoints_changed()
 
-		@model.summary.on 'change', @summary_changed, this
+		@model.summary.on 'change', @update_departur_arrival, this
+
+	details: (event) =>
+		$('#instructions').toggle()
+		if $('#instructions').length <= 1
+			if @router.search.instructions.length
+				instructions = $('#instructions').empty()
+				@router.search.instructions.each (model, index)->
+					if index % 2 is 0 then odd = 'even' else odd = 'odd'
+					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(IBikeCPH.util.instruction_string(model.toJSON()))
 
 	zoom_to_instruction: (event) ->
 		path = _.find @router.map.map._layers, (layer) ->
@@ -53,24 +63,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@arrival = @format_time time
 		@departure = null if time
 		$(event.target).val(@arrival)
-		#@summary_changed()
 
 	change_departure: (event) ->
 		time = @parse_time $(event.target).val()
 		@departure = @format_time time
 		@arrival = null if time
 		$(event.target).val(@departure)
-		#@summary_changed()
-
-	details: (event) ->
-		$('#route').toggle()
-		if $('#route').length <= 1
-			if @router.search.instructions.length
-				instructions = $('#route').empty()
-				@router.search.instructions.each (model, index)->
-					if index % 2 is 0 then odd = 'even' else odd = 'odd'
-					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(IBikeCPH.util.instruction_string(model.toJSON()))
-			$(window).trigger 'resize'
 
 	help: (event) ->
 		$('#help').toggle()
@@ -85,18 +83,18 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@model.reset()
 		
 	waypoints_changed: ->
-		$('#route').hide()
+		$('IBikeCPH.Collections.Waypoints').hide()
 		return if @router.map.dragging_pin
-		#$('#route').remove()
+		#$('IBikeCPH.Collections.Waypoints').remove()
 		if @model.instructions.length
 			url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
 			$('a.permalink').attr href : url
 		else
 			$('a.permalink').attr href : '#'
 			#$('#summary').hide()
-			#$('#route').hide()
+			#$('IBikeCPH.Collections.Waypoints').hide()
 
-	summary_changed: ->
+	update_departur_arrival: ->
 		meters = @router.search.summary.get 'total_distance'
 		seconds  = @router.search.summary.get 'total_time'
 
