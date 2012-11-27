@@ -28,7 +28,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@model.waypoints.bind 'reset change', =>
 			@waypoints_changed()
 
-		@model.summary.bind 'change', @summary_changed, this
+		@model.summary.on 'change', @summary_changed, this
 
 	zoom_to_instruction: (event) ->
 		path = _.find @router.map.map._layers, (layer) ->
@@ -53,14 +53,14 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@arrival = @format_time time
 		@departure = null if time
 		$(event.target).val(@arrival)
-		@summary_changed()
+		#@summary_changed()
 
 	change_departure: (event) ->
 		time = @parse_time $(event.target).val()
 		@departure = @format_time time
 		@arrival = null if time
 		$(event.target).val(@departure)
-		@summary_changed()
+		#@summary_changed()
 
 	details: (event) ->
 		$('#route').toggle()
@@ -93,27 +93,28 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			$('a.permalink').attr href : url
 		else
 			$('a.permalink').attr href : '#'
-			$('#summary').hide()
-			$('#route').hide()
+			#$('#summary').hide()
+			#$('#route').hide()
 
 	summary_changed: ->
 		meters = @router.search.summary.get 'total_distance'
 		seconds  = @router.search.summary.get 'total_time'
 
 		if meters and seconds
-			$(".distance", @el).text(meters/1000 + ' km')
-			$(".duration", @el).text(Math.floor(seconds/60 + 2) + ' min')
 			d = new Date
+			d.setSeconds 0	#avoid times that are off by one, due to seconds
 
 			departure = $(".departure input").val()
 			arrival   = $(".arrival input").val()
 
 			if not @departure and not @arrival
 				now = new Date()
+				now.setSeconds 0
 				departure = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2)
 				future = new Date()
 				future.setTime now.getTime() + seconds * 1000
 				arrival = ('0' + future.getHours()).slice(-2) + ':' + ('0' + future.getMinutes()).slice(-2)
+		
 			if @departure and not @arrival
 				departure = @departure
 				future = new Date()
@@ -132,10 +133,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 			$(".departure").val(departure)
 			$(".arrival").val(arrival)
-			$('#summary', @el).show()
 		else
-			$(".distance", @el).text('')
-			$(".duration", @el).text('')
 			$(".departure").val('')
 			$(".arrival").val('')
 

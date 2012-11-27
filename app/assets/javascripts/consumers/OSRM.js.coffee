@@ -74,15 +74,16 @@ class IBikeCPH.OSRM
 		else
 			@model.set 'route', ''
 			@model.trigger 'change:route', @model, '', {}
-		
+				
+		if response.route_summary
+			@model.summary.set response.route_summary
+		else
+			@model.summary.reset()
 		
 		if response.route_instructions
 			@model.instructions.reset_from_osrm response.route_instructions
 		else
 			@model.instructions.reset()
-
-		if response.route_summary
-			@model.summary.set response.route_summary
 
 	hint_for_location: (location_code) ->
 		for hints in @hints

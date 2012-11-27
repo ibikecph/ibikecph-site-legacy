@@ -20,6 +20,7 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 				
 		@map = new IBikeCPH.Views.Map model: @search, el: '#map'
 		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#ui', router: this
+		@summary = new IBikeCPH.Views.Summary model: @search.summary, el: '#ui #summary', router: this
 
 		$(window).bind 'resize', ->
 			$('#map').height $(window).height() - $('#header').height()
@@ -30,8 +31,6 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 			window.location = href
 
 		$(window).trigger 'resize'
-
-	index: ->
 
 	show_route: (code) ->
 		@app.info.waypoints.reset_from_code code

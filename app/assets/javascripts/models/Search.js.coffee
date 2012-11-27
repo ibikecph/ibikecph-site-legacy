@@ -11,6 +11,5 @@ class IBikeCPH.Models.Search extends Backbone.Model
 	
 	
 	reset: ->
-		@waypoints.each (wp) ->
-			wp.trigger 'remove'
+		@waypoints.each (wp) -> wp.trigger 'remove'
 		@waypoints.reset()

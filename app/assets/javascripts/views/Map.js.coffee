@@ -75,9 +75,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@model.waypoints.on 'remove', (model) =>
 			@waypoint_removed model
 
-		@model.waypoints.on 'reset', (collection) =>
-			@waypoints_reset collection
-
 	go_to_my_location: ->
 		@map.locate
 			setView: true
@@ -103,48 +100,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 				, 500
 		else
 			@map.panTo location
-
-	waypoint_added_or_updated: (model) ->
-		#@waypoint_show_hide_update model, false
-
-	waypoints_reset: (collection) ->
-		#for cid, pin of @pin_views
-		#	@waypoint_show_hide_update pin.model, true
-		#for model in collection.models
-		#	@waypoint_show_hide_update model, false
-
-	waypoint_show_hide_update: (model, remove) ->
-		#field_name = model.get 'type'
-		#location   = model.get 'location'
-		#cid        = model.cid
-		#pin        = @pin_views[cid]
-    #
-		#if location.lat? and location.lng? and not remove
-		#	location = new L.LatLng location.lat, location.lng
-		#else
-		#	location = null
-    #
-		#if location
-		#	if pin
-		#		unless pin.dragged
-		#			pin.setLatLng location
-		#			pin.setIcon IBikeCPH.icons[field_name]
-		#	else
-		#		pin = new L.Marker location, (
-		#			draggable : true
-		#			icon      : IBikeCPH.icons[field_name]
-		#		)
-		#		pin.model = model
-		#		@pin_views[cid] = pin
-    #
-    #
-		#		@map.addLayer pin
-		#else if pin
-		#	@map.removeLayer pin
-		#	delete @pin_views[cid]
-    #
-		#return pin
-
 
 #	set_pin_at: (field_name, x, y) ->
 #		offset = $(@el).offset()
@@ -247,5 +202,5 @@ class IBikeCPH.Views.Map extends Backbone.View
 		waypoint = new IBikeCPH.Models.Waypoint type: 'via', location: location
 		@model.waypoints.add waypoint, at: @closest_waypoint_index(location)
 		@map.removeLayer @via_marker
-		# Fake an initial dragstart event, so that the new via marker is actually dragged.
+		#trigger synthetic event, so that new via marker is actually dragged
 		@pin_views[waypoint.cid].marker.dragging._draggable._onDown event.originalEvent
