@@ -3,7 +3,9 @@ class IBikeCPH.Views.Map extends Backbone.View
 	bounds: true
 
 
-	initialize: ->
+	initialize: (options) ->
+		@router = options.router
+		
 		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
 		
 		@map = new L.Map @el.id, zoomControl: false		#leaflet map
@@ -154,12 +156,18 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@dragging_pin = true
 			@old_route.setLatLngs @current_route.getLatLngs()
 			@map.addLayer @old_route
+			
+			#TODO probably better to trigger a signal, and let the sidebar handle hiding/showing of instructions..
+			@instructions_were_shown = $('#instructions').is(':visible')
+			@router.sidebar.hide_instructions()
 
 		view.marker.on 'dragend', (event) =>
 			@osrm.set_instructions true
 			@dragging_pin = false
 			@map.removeLayer @old_route
-
+			if @instructions_were_shown
+				@router.sidebar.show_instructions() 
+				
 		view.marker.on 'drag', (event) =>
 			@map.removeLayer @via_marker
 

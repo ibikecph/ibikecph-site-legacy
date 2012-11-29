@@ -119,21 +119,23 @@ body {
 		}
 	}
 	#instructions {
-		display: none;
+	    display: none;
 		margin-top: 10px;
-		height: 300px;
+		max-height: 300px;
 		overflow-y: scroll;
-		.step {
-			padding: 6px;
-			font-size: 15px;
-			line-height: 18px;
-			cursor: pointer;
+		li {
+			//cursor: pointer;
 			&.even {
 				background-color: white;
 			}
 			&:hover {
-				text-decoration: underline;
+				color: $dark;
 			};
+		}
+		li + li {
+			padding-top: 6px;
+			border-top: 1px solid $lightish;
+			margin-top: 6px;
 		}
 	}
 }

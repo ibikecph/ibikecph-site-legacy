@@ -29,17 +29,21 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@model.waypoints.on 'reset change', =>
 			@waypoints_changed()
 
-		@model.summary.on 'change', @update_departur_arrival, this
+		@model.summary.on 'change', @update_departure_arrival, this
 
 	details: (event) =>
-		$('#instructions').toggle()
-		if $('#instructions').length <= 1
-			if @router.search.instructions.length
-				instructions = $('#instructions').empty()
-				@router.search.instructions.each (model, index)->
-					if index % 2 is 0 then odd = 'even' else odd = 'odd'
-					instructions.append $("<div>", class : 'step ' + odd, 'data-index' : model.get('index')).text(IBikeCPH.util.instruction_string(model.toJSON()))
+		if $('#instructions').is(':visible')
+			@hide_instructions()
+		else
+			@show_instructions()
 
+	show_instructions: ->
+		@router.instructions.render()
+		$('#instructions').show()
+	
+	hide_instructions: ->
+		$('#instructions').hide()
+			
 	zoom_to_instruction: (event) ->
 		path = _.find @router.map.map._layers, (layer) ->
 			if layer._latlngs?
@@ -94,7 +98,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			#$('#summary').hide()
 			#$('IBikeCPH.Collections.Waypoints').hide()
 
-	update_departur_arrival: ->
+	update_departure_arrival: ->
 		meters = @router.search.summary.get 'total_distance'
 		seconds  = @router.search.summary.get 'total_time'
 

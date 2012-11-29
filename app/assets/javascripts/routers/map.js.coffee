@@ -18,9 +18,10 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 				_gaq.push ['_trackEvent', 'location', 'to'  , to  ] if to
 				_gaq.push ['_trackEvent', 'location', 'route', "#{from} -- #{to}"] if from and to
 				
-		@map = new IBikeCPH.Views.Map model: @search, el: '#map'
+		@map = new IBikeCPH.Views.Map model: @search, el: '#map', router: this
 		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#ui', router: this
 		@summary = new IBikeCPH.Views.Summary model: @search.summary, el: '#ui #summary', router: this
+		@instructions = new IBikeCPH.Views.Instructions collection: @search.instructions, el: '#ui #instructions_div'
 
 		$(window).on 'resize', ->
 			$('#map').height $(window).height() - $('#header').height()

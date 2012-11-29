@@ -20,4 +20,5 @@ class IBikeCPH.Collections.Instructions extends Backbone.Collection
 				distance        : distance
 				direction       : direction
 				index			: index
-			)
+			),
+			silence: true
