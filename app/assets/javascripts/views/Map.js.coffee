@@ -76,6 +76,9 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@model.waypoints.on 'remove', (model) =>
 			@waypoint_removed model
 
+		@model.waypoints.on 'reset', (model) =>
+			@map.removeLayer @invalid_route
+
 	go_to_my_location: ->
 		@map.locate
 			setView: true
