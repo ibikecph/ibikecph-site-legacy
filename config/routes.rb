@@ -3,6 +3,7 @@ RailsOSRM::Application.routes.draw do
   scope "(:locale)", :locale => /en/ do
     #root
     root :to => 'map#index'
+    get 'embed/cykelsupersti' => 'embed#cykelsupersti'
     
     #signup, login, logout
     get "signup" => "users#new", :as => :signup
