@@ -166,6 +166,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@dragging_pin = true
 		@old_route.setLatLngs @current_route.getLatLngs()
 		@map.addLayer @old_route
+		@map.removeLayer @via_marker
 	
 	drag_pin_end: ->
 		@osrm.set_instructions true
@@ -173,7 +174,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@map.removeLayer @old_route
 	
 	drag_pin: ->
-		@map.removeLayer @via_marker
 		
 	move_via_marker: (event) ->
 		if @showing_route() and not @dragging_pin

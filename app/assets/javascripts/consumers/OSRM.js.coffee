@@ -37,11 +37,12 @@ class IBikeCPH.OSRM
 			@clear()
 	
 	clear: ->
-			@model.set 'route', ''
-			@model.instructions.reset()
-			@model.summary.reset()
+		@model.set 'route', ''
+		@model.instructions.reset()
+		@model.summary.reset()
 		
 	request_route: ->
+		console.log 'request'
 		locations = @locations_array()
 		#current_query = "#{@zoom}/#{!!@instructions}/#{locations.join ';'}"
 		#current_query_with_instructions = "#{@zoom}/true/#{locations.join ';'}"
@@ -85,7 +86,7 @@ class IBikeCPH.OSRM
 		for location, index in locations
 			params.push "loc=#{location}"
 			hint = @hints[location]
-			params.push "hint=#{hint}" if hint
+			params.push "hint=#{hint}" if hint and @checksum?
 		params.join('&')
 
 	locations_array: ->
