@@ -22,3 +22,5 @@ class IBikeCPH.Collections.Instructions extends Backbone.Collection
 				index			: index
 			),
 			silence: true
+		@trigger 'change' if instructions.length>0
+		

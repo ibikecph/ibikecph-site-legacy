@@ -1,11 +1,15 @@
 class IBikeCPH.Views.Instructions extends Backbone.View
 	template: JST['instructions/index']
 		
-	#initialize: ->
-	#	@collection.on 'reload', @render
-
+	initialize: ->
+		@collection.on 'reset', @clear
+		@collection.on 'change', @render
+	
+	clear: =>
+		@$el.empty()
+		
 	render: =>
-		$(@el).html @template()
+		@$el.html @template()
 		@collection.each @appendInstruction
 		this
 

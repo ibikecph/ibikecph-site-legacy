@@ -32,18 +32,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@model.summary.on 'change', @update_departure_arrival, this
 
 	details: (event) =>
-		if $('#instructions').is(':visible')
-			@hide_instructions()
-		else
-			@show_instructions()
-
-	show_instructions: ->
-		@router.instructions.render()
-		$('#instructions').show()
-	
-	hide_instructions: ->
-		$('#instructions').hide()
-			
+		$('#instructions_div').toggle()
+		
 	zoom_to_instruction: (event) ->
 		path = _.find @router.map.map._layers, (layer) ->
 			if layer._latlngs?

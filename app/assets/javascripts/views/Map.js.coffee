@@ -146,36 +146,34 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@map.addLayer    @invalid_route
 
 		@bounds = false
-	
+
 	waypoint_added: (model) =>
 		view = new IBikeCPH.Views.Pin map: this, model: model
 		@pin_views[model.cid] = view
-		
-		view.marker.on 'dragstart', (event) =>
-			@osrm.set_instructions false
-			@dragging_pin = true
-			@old_route.setLatLngs @current_route.getLatLngs()
-			@map.addLayer @old_route
-			
-			#TODO probably better to trigger a signal, and let the sidebar handle hiding/showing of instructions..
-			@instructions_were_shown = $('#instructions').is(':visible')
-			@router.sidebar.hide_instructions()
-
-		view.marker.on 'dragend', (event) =>
-			@osrm.set_instructions true
-			@dragging_pin = false
-			@map.removeLayer @old_route
-			if @instructions_were_shown
-				@router.sidebar.show_instructions() 
-				
-		view.marker.on 'drag', (event) =>
-			@map.removeLayer @via_marker
+		view.marker.on 'dragstart', (event) => @drag_pin_start()
+		view.marker.on 'dragend', (event) => @drag_pin_end()
+		view.marker.on 'drag', (event) => @drag_pin()
 
 	waypoint_removed: (model) ->
+		@pin_views[model.cid].off() 
 		@pin_views[model.cid] = undefined
 		
 	click: (event) ->
 		@model.waypoints.add_endpoint event.latlng
+	
+	drag_pin_start: ->
+		@osrm.set_instructions false
+		@dragging_pin = true
+		@old_route.setLatLngs @current_route.getLatLngs()
+		@map.addLayer @old_route
+	
+	drag_pin_end: ->
+		@osrm.set_instructions true
+		@dragging_pin = false
+		@map.removeLayer @old_route
+	
+	drag_pin: ->
+		@map.removeLayer @via_marker
 		
 	move_via_marker: (event) ->
 		if @showing_route() and not @dragging_pin

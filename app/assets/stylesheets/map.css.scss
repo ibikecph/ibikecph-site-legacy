@@ -118,8 +118,11 @@ body {
 			margin-bottom: 10px;
 		}
 	}
-	#instructions {
+	#instructions_div {
 	    display: none;
+	}
+	#instructions {
+	    display: block;
 		margin-top: 10px;
 		max-height: 300px;
 		overflow-y: scroll;
