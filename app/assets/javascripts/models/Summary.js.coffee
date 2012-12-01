@@ -5,4 +5,6 @@ class IBikeCPH.Models.Summary extends Backbone.Model
 	defaults:
 		total_distance: undefined
 		total_time: undefined
-		
+	
+	reset: ->
+		@trigger 'reset'

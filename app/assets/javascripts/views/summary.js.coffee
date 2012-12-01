@@ -4,13 +4,16 @@ class IBikeCPH.Views.Summary extends Backbone.View
 		Backbone.View.prototype.initialize.apply this, options
 		@router = options.router
 		@model.on 'change', @render
+		@model.on 'reset', @hide
 		
 	show: ->
 		@$el.show()
 
-	hide: ->
-		@$el.hide()
-
+	hide: =>
+		@$el.hide() if @$el
+		$(".distance", @el).empty()
+		$(".duration", @el).empty()
+	
 	render: =>
 		meters = @model.get 'total_distance'
 		seconds  = @model.get 'total_time'
@@ -33,7 +36,7 @@ class IBikeCPH.Views.Summary extends Backbone.View
 	hide_in: (milliseconds) ->
 		unless @timer
 			@wait_for milliseconds, =>
-				@$el.hide()
+				@hide()
 				@timer = undefined
 			
 	abort_hide: ->

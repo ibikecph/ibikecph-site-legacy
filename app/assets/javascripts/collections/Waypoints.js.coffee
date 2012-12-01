@@ -4,14 +4,14 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 	model: IBikeCPH.Models.Waypoint
 	
 	initialize: ->
-		@_setup_event_proxy()
 		@on 'remove', (model) -> 
 			@waypoint_removed model
 		
 	waypoint_removed: (model) ->
 		if @length > 1
-			@first().set 'type', 'from'
-			@last().set 'type', 'to'
+			@first().set 'type', 'from', silence: true
+			@last().set 'type', 'to', silence: true
+			@trigger 'change'
 	
 	add_endpoint: (latlon) ->
 		if @length < 2
@@ -109,51 +109,3 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 			waypoints[waypoints.length - 1].set 'type', 'to'
 
 		@reset waypoints
-
-	# Event magic to forward events fromt the models of the from/to endpoints to
-	# observers of this collection. This is a bit difficult, since the events
-	# must be unregistered from the models that are removed or when resetting the
-	# whole collection.
-	_setup_event_proxy: ->
-		@_proxy_event_from = (event_name, a, b, c) =>
-			@trigger 'from:' + event_name, a, b, c
-
-		@_proxy_event_to = (event_name, a, b, c) =>
-			@trigger 'to:' + event_name, a, b, c
-
-		@on 'change:type add', (waypoint) =>
-			type = waypoint.get('type')
-
-			if type == 'from'
-				waypoint.unbind 'all', @_proxy_event_from
-				waypoint.on     'all', @_proxy_event_from
-			else if type == 'to'
-				waypoint.unbind 'all', @_proxy_event_to
-				waypoint.on     'all', @_proxy_event_to
-
-		@on 'remove', (waypoint) =>
-			type = waypoint.get('type')
-			waypoint.clear() unless type == 'via'
-
-			if type == 'from'
-				waypoint.unbind 'all', @_proxy_event_from
-			else if type == 'to'
-				waypoint.unbind 'all', @_proxy_event_to
-
-		@on 'reset', (new_waypoints) =>
-			first = @at(0)
-			first.unbind 'all', @_proxy_event_from if first
-
-			last = @at(@length - 1)
-			last.unbind 'all', @_proxy_event_to if last
-
-			first = new_waypoints.at(0)
-			last  = new_waypoints.at(new_waypoints.length - 1)
-
-			if first and first.get('type') == 'from'
-				first.unbind 'all', @_proxy_event_from
-				first.on     'all', @_proxy_event_from
-
-			if last and last.get('type') == 'to'
-				last.unbind 'all', @_proxy_event_to
-				last.on     'all', @_proxy_event_to

@@ -12,15 +12,14 @@ class IBikeCPH.OSRM
 		@url += if /\?/.test @url then '&' else '?'
 		@url += 'jsonp=?&'
 		
-		@model.waypoints.on 'reset add remove change', =>
-			@load_route()
+		@model.waypoints.on 'add remove change', => @waypoints_changed()
 
 	abort: ->
 		@request.abort()
 
 	set_zoom: (zoom) ->
 		@zoom = zoom
-		@load_route()
+		@request_route()
 
 	get_zoom: ->
 		@zoom
@@ -28,43 +27,38 @@ class IBikeCPH.OSRM
 	set_instructions: (instructions) =>
 		had_instructions = @instructions
 		@instructions = instructions
-		@load_route() if instructions and not had_instructions
+		@request_route() if instructions and not had_instructions
 
 	get_instructions: ->
 		@instructions
-
-	load_route: ->
-		locations = @build_location_params()
-
-		if locations.length < 2
+	
+	waypoints_changed: ->
+		if @model.waypoints.has_endpoints()
+			@request_route()
+		else
+			@clear()
+	
+	clear: ->
 			@model.set 'route', ''
-			@model.instructions.reset() if @model.instructions.length > 0
-			@model.summary.set(
-				total_distance : null
-				total_time     : null
-			)
-			return
-
+			@model.instructions.reset()
+			@model.summary.reset()
+		
+	request_route: ->
+		locations = @build_location_params()
 		current_query = "#{@zoom}/#{!!@instructions}/#{locations.join ';'}"
 		current_query_with_instructions = "#{@zoom}/true/#{locations.join ';'}"
 		return if current_query == @last_query or current_query_with_instructions == @last_query
 		@last_query = current_query
-
-		{prehints, query_string} = @build_request locations
-
+		{ prehints, query_string } = @build_request locations
 		do (prehints) =>
 			@request.exec @url + query_string, (response) =>
-				@update_model response, prehints
+				@update_model response, prehints if response
 
 	update_model: (response, prehints) ->
-		return unless response
-
 		if response.hint_data
 			@checksum = response.hint_data.checksum
-
 			@hints_index = (@hints_index + 1) % @hints.length
 			@hints[@hints_index] = hints = {}
-
 			for hint, index in response.hint_data.locations or []
 				location_code = prehints[index]
 				hints[location_code] = hint if location_code
@@ -92,43 +86,30 @@ class IBikeCPH.OSRM
 		return null
 
 	build_request: (location_codes) ->
-		return {} unless location_codes and location_codes.length >= 2
-
-		if @zoom?
-			query_string = "z=#{@zoom}&"
-		else
-			query_string = ''
-
-		query_string += 'output=json'
-		query_string += "&checksum=#{@checksum}" if @checksum?
+		params = []
+		params.push "z=#{@zoom}" if @zoom?
+		params.push 'output=json'
+		params.push "checksum=#{@checksum}" if @checksum?
+		params.push "instructions=#{!!@instructions}"
 
 		prehints = []
 		for location_code in location_codes
 			prehints.push location_code
 			hint = @hint_for_location location_code
-			query_string += "&loc=#{location_code}"
-			query_string += "&hint=#{hint}" if hint
-
-		query_string += "&instructions=#{!!@instructions}"
+			params.push "loc=#{location_code}"
+			params.push "hint=#{hint}" if hint
 
 		return (
 			prehints     : prehints
-			query_string : query_string
+			query_string : params.join('&')
 		)
 
 	build_location_params: ->
-		return [] unless @model.waypoints.has_endpoints()
-
 		locations = []
-
 		for waypoint in @model.waypoints.models
 			location = waypoint.get 'location'
 			if location?.lat? and location.lng?
 				lat = 1 * location.lat
 				lng = 1 * location.lng
-				locations.push "#{lat.toFixed 6},#{lng.toFixed 6}" unless isNaN(lat) or isNaN(lng)
-
-		if locations.length < 2
-			[]
-		else
-			locations
+				locations.push "#{lat.toFixed 5},#{lng.toFixed 5}" unless isNaN(lat) or isNaN(lng)
+		locations
