@@ -10,23 +10,24 @@ class IBikeCPH.OSRM
 
 		@url += if /\?/.test @url then '&' else '?'
 
-		@model.waypoints.on 'add remove change', => @waypoints_changed()
+		@model.waypoints.on 'add remove change:location', => @waypoints_changed()
 
 	abort: ->
 		@request.abort()
 
 	set_zoom: (zoom) ->
-		@zoom = zoom
-		@request_route()
-
+		if @zoom != zoom
+			@zoom != zoom
+			@request_route()
+		
 	get_zoom: ->
 		@zoom
 
 	set_instructions: (instructions) =>
-		had_instructions = @instructions
-		@instructions = instructions
-		@request_route() if instructions and not had_instructions
-
+		if @instructions != instructions
+			@instructions = instructions
+			@request_route()
+			
 	get_instructions: ->
 		@instructions
 	
