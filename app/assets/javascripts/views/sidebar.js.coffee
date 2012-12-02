@@ -1,15 +1,15 @@
 class IBikeCPH.Views.Sidebar extends Backbone.View
-
+	template: JST['sidebar']
+	
 	events:
 		'change .address input'        : 'fields_updated'
 		'click .reset'                 : 'reset'
 		'click input.link'             : 'select_all'
 		'change input.link'            : 'waypoints_changed'
 		'click .fold'                  : 'fold'
-		'click .details'	             : 'details'
 		'change .departure'	  		     : 'change_departure'
 		'change .arrival'	   		       : 'change_arrival'
-		'click #instructons .step'	   : 'zoom_to_instruction'
+		'click #instructions .step'	   : 'zoom_to_instruction'
 
 
 	initialize: (options) ->
@@ -33,13 +33,14 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@departure = @getNow()
 		@model.summary.on 'change', @update_departure_arrival, this
 	
+	render: ->
+		@$el.html @template()
+		this
+
 	getNow: ->
 		now = new Date()
 		now.setSeconds 0		#avoid minutes that are off by one
 		now
-		
-	details: (event) =>
-		$('#instructions_div').toggle()
 		
 	zoom_to_instruction: (event) ->
 		path = _.find @router.map.map._layers, (layer) ->

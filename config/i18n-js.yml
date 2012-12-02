@@ -13,7 +13,7 @@
 
 translations:
   - file: "app/assets/javascripts/i18n/translations.js"
-    only: ['*.date.formats', '*.instructions', '*.character']
+    only: ['*.date.formats', '*.instructions', '*.character','*.map']
 #
 # If you're running an old version, you can use something
 # like this:
