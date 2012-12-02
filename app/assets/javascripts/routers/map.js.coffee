@@ -34,7 +34,7 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		$(window).trigger 'resize'
 
 	show_route: (code) ->
-		@app.info.waypoints.reset_from_code code
+		#TODO @app.info.waypoints.reset_from_code code
 
 	update: ->
 		@navigate '!/' + @app.info.waypoints.to_code(), trigger: false

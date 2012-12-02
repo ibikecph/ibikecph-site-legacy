@@ -28,9 +28,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 		@model.waypoints.on 'reset change', =>
 			@waypoints_changed()
-
+		
+		
+		@departure = @getNow()
 		@model.summary.on 'change', @update_departure_arrival, this
-
+	
+	getNow: ->
+		now = new Date()
+		now.setSeconds 0		#avoid minutes that are off by one
+		now
+		
 	details: (event) =>
 		$('#instructions_div').toggle()
 		
@@ -41,29 +48,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		point = path._latlngs[ $(event.target).attr('data-index') ]
 		@router.map.go_to_point point
 	
-	parse_time: (str) ->
-		hours_mins = str.split /[:\.]/
-		if hours_mins.length is 2
-			time = new Date()
-			time.setHours hours_mins[0]
-			time.setMinutes hours_mins[1]
-			time
-	
-	format_time: (time) ->
-		('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2) if time
-		
-	change_arrival: (event) ->
-		time = @parse_time $(event.target).val()
-		@arrival = @format_time time
-		@departure = null if time
-		$(event.target).val(@arrival)
-
-	change_departure: (event) ->
-		time = @parse_time $(event.target).val()
-		@departure = @format_time time
-		@arrival = null if time
-		$(event.target).val(@departure)
-
 	help: (event) ->
 		$('#help').toggle()
 
@@ -75,9 +59,14 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 	reset: ->
 		@model.reset()
+		@departure = undefined
+		@arrival = undefined
+		@update_departure_arrival()
+		@departure = @getNow()
+		
 		
 	waypoints_changed: ->
-		$('IBikeCPH.Collections.Waypoints').hide()
+		#$('IBikeCPH.Collections.Waypoints').hide()
 		return if @router.map.dragging_pin
 		#$('IBikeCPH.Collections.Waypoints').remove()
 		if @model.instructions.length
@@ -87,48 +76,54 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			$('a.permalink').attr href : '#'
 			#$('#summary').hide()
 			#$('IBikeCPH.Collections.Waypoints').hide()
-
+	
+	pad_time: (min_or_hour) ->
+		("00"+min_or_hour).slice -2
+	
+	format_time: (time, delta_seconds=0) ->
+		if time
+			adjusted = new Date()
+			adjusted.setTime( time.getTime() + delta_seconds*1000 )
+			@pad_time(adjusted.getHours()) + ':' + @pad_time(adjusted.getMinutes())
+	
+	parse_time: (str) ->
+		time = new Date()
+		time.setSeconds 0
+		if /\d{1,2}[:\.]\d{1,2}/.test str  #looks like valid time? hh:mm and variations
+			hours_mins = str.split /[:\.]/
+			time.setHours hours_mins[0]
+			time.setMinutes hours_mins[1]
+		time
+			
 	update_departure_arrival: ->
-		meters = @router.search.summary.get 'total_distance'
+		meters  = @router.search.summary.get 'total_distance'
 		seconds  = @router.search.summary.get 'total_time'
-
-		if meters and seconds
-			d = new Date
-			d.setSeconds 0	#avoid times that are off by one, due to seconds
-
-			departure = $(".departure input").val()
-			arrival   = $(".arrival input").val()
-
-			if not @departure and not @arrival
-				now = new Date()
-				now.setSeconds 0
-				departure = ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2)
-				future = new Date()
-				future.setTime now.getTime() + seconds * 1000
-				arrival = ('0' + future.getHours()).slice(-2) + ':' + ('0' + future.getMinutes()).slice(-2)
-		
-			if @departure and not @arrival
-				departure = @departure
-				future = new Date()
-				future.setHours departure.split(":")[0]
-				future.setMinutes departure.split(":")[1]
-				future.setTime future.getTime() + seconds * 1000
-				arrival = ('0' + future.getHours()).slice(-2) + ':' + ('0' + future.getMinutes()).slice(-2)
-
-			if @arrival and not @departure
-				arrival = @arrival
-				past = new Date()
-				past.setHours arrival.split(":")[0]
-				past.setMinutes arrival.split(":")[1]
-				past.setTime past.getTime() - seconds * 1000
-				departure = ('0' + past.getHours()).slice(-2) + ':' + ('0' + past.getMinutes()).slice(-2)
-
-			$(".departure").val(departure)
-			$(".arrival").val(arrival)
+		now = @getNow()
+		valid = meters and seconds
+		departure = arrival = ''
+		if @departure
+			departure = @format_time @departure
+			arrival = @format_time @departure, seconds if valid
 		else
-			$(".departure").val('')
-			$(".arrival").val('')
+			arrival = @format_time @arrival
+			departure = @format_time @arrival, 59-seconds if valid
+		$(".departure").val departure
+		$(".arrival").val arrival
 
+	change_departure: (event) ->
+		time = @parse_time $(event.target).val()
+		if time
+			@departure = time
+			@arrival = undefined
+			@update_departure_arrival()
+		
+	change_arrival: (event) ->
+		time = @parse_time $(event.target).val()
+		if time
+			@arrival = time
+			@departure = undefined
+			@update_departure_arrival()
+		
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
 

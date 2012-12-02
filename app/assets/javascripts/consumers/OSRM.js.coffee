@@ -43,7 +43,6 @@ class IBikeCPH.OSRM
 		@model.summary.reset()
 		
 	request_route: ->
-		console.log 'request'
 		locations = @locations_array()
 		#current_query = "#{@zoom}/#{!!@instructions}/#{locations.join ';'}"
 		#current_query_with_instructions = "#{@zoom}/true/#{locations.join ';'}"
