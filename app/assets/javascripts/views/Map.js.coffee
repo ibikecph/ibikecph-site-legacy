@@ -55,29 +55,26 @@ class IBikeCPH.Views.Map extends Backbone.View
 		#, 1
 
 		@via_marker.on 'mousedown', (event) =>
-			@start_via_drag event
+			@initiate_via_drag event
 		
 		@map.on 'mousemove', (event) =>
 			@move_via_marker event
 
 		@map.on 'click', (event) =>
-			@click event
+			@click_map event
 
 		@map.on 'zoomend', (event) =>
 			@trigger 'zoom', zoom: @map.getZoom()
 
-		@map.on 'locationfound', (event) =>
-			@model.waypoints.a.set 'location', event.latlng unless @model.waypoints.has_valid_from()
-
 		@model.on 'change:route', (model, compressed_route) =>
 			@geometry_changed compressed_route
 
-		@model.waypoints.on 'add', (model) =>
-			@waypoint_added model
-
-		@model.waypoints.on 'remove', (model) =>
-			@waypoint_removed model
-
+		@model.waypoints.on 'change:located', (model) =>
+			if model.located()
+				@show_waypoint model
+			else
+				@hide_waypoint model
+		
 		@model.waypoints.on 'reset', (model) =>
 			@map.removeLayer @invalid_route
 
@@ -147,20 +144,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 		@bounds = false
 
-	waypoint_added: (model) =>
-		view = new IBikeCPH.Views.Pin map: this, model: model
-		@pin_views[model.cid] = view
-		view.marker.on 'dragstart', (event) => @drag_pin_start()
-		view.marker.on 'dragend', (event) => @drag_pin_end()
-		view.marker.on 'drag', (event) => @drag_pin()
-
-	waypoint_removed: (model) ->
-		@pin_views[model.cid].off() 
-		@pin_views[model.cid] = undefined
-		
-	click: (event) ->
-		@model.waypoints.add_endpoint event.latlng
-	
 	drag_pin_start: ->
 		@osrm.set_instructions false
 		@dragging_pin = true
@@ -172,8 +155,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@osrm.set_instructions true
 		@dragging_pin = false
 		@map.removeLayer @old_route
-	
-	drag_pin: ->
 		
 	move_via_marker: (event) ->
 		if @showing_route() and not @dragging_pin
@@ -204,13 +185,47 @@ class IBikeCPH.Views.Map extends Backbone.View
 			distance = route_point.distanceTo location
 			if distance < min_distance
 				min_distance = distance
-				closest      = index
+				closest = index
 		return closest
-
-	start_via_drag: (event) ->
+	
+	initiate_via_drag: (event) ->
 		location = event.target.getLatLng()
 		waypoint = new IBikeCPH.Models.Waypoint type: 'via', location: location
 		@model.waypoints.add waypoint, at: @closest_waypoint_index(location)
 		@map.removeLayer @via_marker
-		#trigger synthetic event, so that new via marker is actually dragged
+		@show_waypoint waypoint
+		#trigger synthetic event, so that new via marker is actually dragged:
 		@pin_views[waypoint.cid].marker.dragging._draggable._onDown event.originalEvent
+
+	show_waypoint: (model) =>
+		unless @pin_views[model.cid]
+			view = new IBikeCPH.Views.Pin model: model
+			@map.addLayer view.marker
+			@pin_views[model.cid] = view
+			view.marker.on 'dragstart', (event) => @drag_pin_start()
+			view.marker.on 'dragend', (event) => @drag_pin_end()
+			view.on 'click', (event) => @click_marker event
+
+	hide_waypoint: (model) ->
+		if @pin_views[model.cid]
+			@pin_views[model.cid].remove()
+			@map.removeLayer @pin_views[model.cid].marker
+			@pin_views[model.cid] = undefined
+
+	click_map: (event) ->
+		if not @model.waypoints.first().located()
+			@model.waypoints.first().set 'location', event.latlng
+			@model.waypoints.first().trigger 'input:location'
+		else if not @model.waypoints.last().located()
+			@model.waypoints.last().set 'location', event.latlng
+			@model.waypoints.last().trigger 'input:location'
+
+	click_marker: (view) ->
+		model = view.model
+		if model.get('type') == 'via' or @model.waypoints.length > 2
+			model.set 'location', null
+			model.set 'address', null
+			@model.waypoints.remove model
+		else
+			model.set 'location', null
+			model.set 'address', null

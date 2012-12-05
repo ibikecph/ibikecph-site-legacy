@@ -3,20 +3,23 @@
 class IBikeCPH.Models.Waypoint extends Backbone.Model
 
 	defaults:
-		location:
-			lat: null
-			lng: null
-		loading: false
-
+		location: null
+		located: false
+		
 	initialize: ->
+		@set 'located', @get('location')?, silent: true
 		new IBikeCPH.Geocoder this
-	
-	valid_location: ->
-		location = @get 'location'
-		return false unless location and location?.lat? and location?.lng?
+		
+		@on 'change:location', =>
+			@set 'located', @get('location')?
 
-		invalid = isNaN(1 * location.lat) or isNaN(1 * location.lng)
-		not invalid
+		@on 'change:type', =>
+			type = @get 'type'
+			unless type == 'via'
+				@trigger 'input:location' if @get 'location'
+			
+	located: ->
+		@get('located' ) == true
 
 	to_latlng: ->
 		location = @get 'location'

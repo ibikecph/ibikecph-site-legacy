@@ -4,77 +4,33 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 	model: IBikeCPH.Models.Waypoint
 	
 	initialize: ->
-		@on 'remove', (model) -> 
+		waypoint = new IBikeCPH.Models.Waypoint type: 'from'
+		@add waypoint, at: 0
+		waypoint = new IBikeCPH.Models.Waypoint type: 'to'
+		@add waypoint, at: 1
+		
+		@on 'remove', (model) ->
 			@waypoint_removed model
-		
+			
 	waypoint_removed: (model) ->
-		if @length > 1
-			@first().set 'type', 'from', silence: true
-			@last().set 'type', 'to', silence: true
-			@trigger 'change'
-	
-	add_endpoint: (latlon) ->
-		if @length < 2
-			if @from()?
-				@add new IBikeCPH.Models.Waypoint(location: latlon, type: 'to'), at: 1
-			else
-				@add new IBikeCPH.Models.Waypoint(location: latlon, type: 'from'), at: 0
-		
+		@to().set 'type', 'to'
+		@from().set 'type', 'from'
+
 	from: ->
-		waypoint = @first()
-		if waypoint and waypoint.get('type')=='from'
-			waypoint
+		@first()
 
 	to: ->
-		waypoint = @last()
-		if waypoint and waypoint.get('type')=='to'
-			waypoint
-
-	has_valid_from: ->
-		@from()?
-
-	has_valid_to: ->
-		@to()?
-
-	has_endpoints: ->
-		@from()? and @to()?
-
-	# Clears the from/to endpoint. If there are via points, then the next via
-	# point will become an endpoint and the proper events are triggered.
-	clear: (type) ->
-		last = (type == 'end' || type == 'to')
-
-		if last
-			if @has_to()
-				@remove [@at @length - 1]
-				next = @length - 1
-				if next > 0
-					model = @at(next)
-					model.set 'type', 'to'
-					@trigger 'to:change:location', model, model.get('location')
-					@trigger 'to:change:address' , model, model.get('address')
-					@trigger 'to:change', model
-				else
-					@trigger 'clear:to'
-		else
-			if @from()?
-				@remove [@at 0]
-				next = 0
-				if next < @length - 1
-					model = @at(next)
-					model.set 'type', 'from'
-					@trigger 'from:change:location', model, model.get('location')
-					@trigger 'from:change:address' , model, model.get('address')
-					@trigger 'from:change', model
-				else
-					@trigger 'clear:from'
-
+		@last()
+	
+	all_located: ->
+		@all (waypoint) -> waypoint.located()
+		
 	get_from_and_to: ->
 		from = @at(0)
-		to   = @at(@length - 1)
+		to = @at(@length - 1)
 
 		from = null unless from?.get and from.get('type') == 'from'
-		to   = null unless to?.get   and to.get('type')   == 'to'
+		to = null unless to?.get and to.get('type') == 'to'
 
 		return (
 			from : from

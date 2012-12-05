@@ -9,12 +9,11 @@ class IBikeCPH.Models.Search extends Backbone.Model
 		@instructions = new IBikeCPH.Collections.Instructions
 		@summary      = new IBikeCPH.Models.Summary
 	
-	
 	reset: ->
 		@set 'route', ''
-		@waypoints.each (t) -> t.trigger 'remove', silence: true
+		@waypoints.each (t) -> t.trigger 'remove', silent: true
 		@waypoints.reset()
-		@instructions.each (t) -> t.trigger 'remove', silence: true
+		@instructions.each (t) -> t.trigger 'remove', silent: true
 		@instructions.reset()
 		@summary.reset()
 		

@@ -7,16 +7,17 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 	initialize: ->
 		@search = new IBikeCPH.Models.Search
 
-		@search.waypoints.on 'from:change:address to:change:address reset', ->
-			if _gaq? and not app.map.dragging_pin
-				{from, to} = app.info.waypoints.get_from_and_to()
-
-				from = from.get 'address' if from
-				to   = to.get   'address' if to
-
-				_gaq.push ['_trackEvent', 'location', 'from', from] if from
-				_gaq.push ['_trackEvent', 'location', 'to'  , to  ] if to
-				_gaq.push ['_trackEvent', 'location', 'route', "#{from} -- #{to}"] if from and to
+		#TODO
+		#@search.waypoints.on 'from:change:address to:change:address reset', ->
+		#	if _gaq? and not app.map.dragging_pin
+		#		{from, to} = app.info.waypoints.get_from_and_to()
+    #
+		#		from = from.get 'address' if from
+		#		to   = to.get   'address' if to
+    #
+		#		_gaq.push ['_trackEvent', 'location', 'from', from] if from
+		#		_gaq.push ['_trackEvent', 'location', 'to'  , to  ] if to
+		#		_gaq.push ['_trackEvent', 'location', 'route', "#{from} -- #{to}"] if from and to
 				
 		@map = new IBikeCPH.Views.Map model: @search, el: '#map', router: this
 		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#search', router: this

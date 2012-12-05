@@ -11,28 +11,24 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'change .arrival'	   		       : 'change_arrival'
 		'click #instructions .step'	   : 'zoom_to_instruction'
 
-
 	initialize: (options) ->
 		Backbone.View.prototype.initialize.apply this, options
 		@router = options.router
+				
+		@model.waypoints.on 'change:address', (model) =>
+			#TODO should refactor address fields into backbone views, one for each endpoint (and perhaps for via points too)
+			type = model.get 'type'
+			value = model.get 'address'
+			@$(".from").val(value) if type=='from'
+			@$(".to").val(value) if type=='to'
 		
-		@model.waypoints.on 'from:change:address to:change:address reset', (model, address) =>
-			@set_field model.get('type'), address
-		@model.waypoints.on 'from:change:loading to:change:loading reset', (model, loading) =>
-			@set_loading model.get('type'), loading
+		@model.waypoints.on 'reset', =>
+			@set_field 'from', null
+			@set_field 'to', null
 
-		@model.waypoints.on 'clear:from reset', =>
-			@set_field 'from', ''
-		@model.waypoints.on 'clear:to reset', =>
-			@set_field 'to', ''
-
-		@model.waypoints.on 'reset change', =>
-			@waypoints_changed()
-		
-		
 		@departure = @getNow()
 		@model.summary.on 'change', @update_departure_arrival, this
-	
+		
 	render: ->
 		@$el.html @template()
 		this
@@ -65,7 +61,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@update_departure_arrival()
 		@departure = @getNow()
 		
-		
 	waypoints_changed: ->
 		#$('IBikeCPH.Collections.Waypoints').hide()
 		return if @router.map.dragging_pin
@@ -75,8 +70,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			$('a.permalink').attr href : url
 		else
 			$('a.permalink').attr href : '#'
-			#$('#summary').hide()
-			#$('IBikeCPH.Collections.Waypoints').hide()
 	
 	pad_time: (min_or_hour) ->
 		("00"+min_or_hour).slice -2
@@ -128,13 +121,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	get_field: (field_name) ->
 		return @$("input.#{field_name}").val() or ''
 
-	set_field: (field_name, text) ->
-		#hide/show clear buttons
-		if(text)
-			@$("p.#{field_name}").show()
-		else
-			@$("p.#{field_name}").hide()
-
+	set_field: (field_name, text) ->		
+		text = '' unless text
 		@$(".#{field_name}").val "#{text}"
 
 	set_loading: (field_name, loading) ->
@@ -142,14 +130,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 	fields_updated: (event) ->
 		input = $(event.target)
-
 		if input.is '.from'
-			type = 'from'
+			waypoint = @model.waypoints.from()
 		else if input.is '.to'
-			type = 'to'
+			waypoint = @model.waypoints.to()
 		else
 			return
-		
 		raw_value = input.val()
 		value = IBikeCPH.util.normalize_whitespace raw_value
 		
@@ -159,8 +145,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
 		
 		input.val(value) if value != raw_value
-
 		if value
-			#TODO @model.endpoint(type).set 'address', value
-		else
-			@model.clear type
+			waypoint.set 'address', value
+			waypoint.trigger 'input:address'
+		#else
+		#	@model.clear type

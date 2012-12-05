@@ -26,13 +26,13 @@ class IBikeCPH.OSRM
 	set_instructions: (instructions) =>
 		if @instructions != instructions
 			@instructions = instructions
-			@request_route()
+			@request_route() if @model.waypoints.all_located()
 			
 	get_instructions: ->
 		@instructions
 	
 	waypoints_changed: ->
-		if @model.waypoints.has_endpoints()
+		if @model.waypoints.all_located()
 			@request_route()
 		else
 			@clear()
