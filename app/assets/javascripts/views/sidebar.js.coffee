@@ -63,14 +63,9 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@departure = @getNow()
 		
 	permalink: ->
-		if @model.instructions.length
-			#url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
-			url = "#!/#{@model.waypoints.to_url()}"
-			console.log url
-			@router.navigate url, trigger: false
-			#$('a.permalink').attr href : url
-		else
-			#$('a.permalink').attr href : '#'
+		#url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
+		url = "#!/#{@model.waypoints.to_url()}"
+		@router.navigate url, trigger: false
 	
 	pad_time: (min_or_hour) ->
 		("00"+min_or_hour).slice -2

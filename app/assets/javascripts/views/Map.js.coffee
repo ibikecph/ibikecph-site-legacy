@@ -225,12 +225,19 @@ class IBikeCPH.Views.Map extends Backbone.View
 		else if not @model.waypoints.last().located()
 			@model.waypoints.last().set 'location', event.latlng
 			@model.waypoints.last().trigger 'input:location'
-#		else
-#			location = event.latlng
-#			waypoint = new IBikeCPH.Models.Waypoint location: location
-#			@model.waypoints.add waypoint, at: 0
-#			@map.removeLayer @via_marker
-#			@show_waypoint waypoint
+		else if event.originalEvent.altKey
+			location = event.latlng
+			waypoint = new IBikeCPH.Models.Waypoint location: location
+			l = @model.waypoints.first().get 'location'
+			fromDist = new L.LatLng(l.lat, l.lng).distanceTo location
+			l = @model.waypoints.last().get 'location'
+			toDist = new L.LatLng(l.lat, l.lng).distanceTo location
+			if fromDist < toDist
+				@model.waypoints.unshift waypoint
+			else
+				@model.waypoints.push waypoint
+			@map.removeLayer @via_marker
+			@show_waypoint waypoint
 		
 	click_marker: (view) ->
 		model = view.model
