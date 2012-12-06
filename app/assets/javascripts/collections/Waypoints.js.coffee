@@ -15,7 +15,7 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 	waypoint_removed: (model) ->
 		@to().set 'type', 'to'
 		@from().set 'type', 'from'
-	
+
 	reset: ->
 		remove = []
 		@each (t) -> 

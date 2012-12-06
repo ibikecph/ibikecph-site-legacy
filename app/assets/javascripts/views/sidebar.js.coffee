@@ -62,7 +62,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@update_departure_arrival()
 		@departure = @getNow()
 		
-		
 	waypoints_changed: ->
 		#$('IBikeCPH.Collections.Waypoints').hide()
 		return if @router.map.dragging_pin
@@ -150,5 +149,9 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		if value
 			waypoint.set 'address', value
 			waypoint.trigger 'input:address'
-		#else
-		#	@model.clear type
+		else
+			waypoint.reset()
+			if @model.waypoints.length > 2
+				@model.waypoints.remove waypoint
+			else
+				waypoint.trigger 'input:address'
