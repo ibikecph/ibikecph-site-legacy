@@ -6,12 +6,17 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 	initialize: ->
 		@reset()
 		@on 'remove add reset', (model) ->
-			@set_endpoints @model
+			@adjust_types()
 			
-	set_endpoints: (model) ->
-		@first().set 'type', 'from'
-		@last().set 'type', 'to'
-	
+	adjust_types: ->
+		@each (t,i) =>
+			if i==0
+				t.set 'type', 'from'
+			else if i==@length-1
+				t.set 'type', 'to'
+			else
+				t.set 'type', 'via'
+			
 	reset: (models) ->
 		@each (t) ->
 			t.set 'location', null

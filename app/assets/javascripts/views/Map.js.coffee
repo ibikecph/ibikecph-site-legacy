@@ -225,7 +225,13 @@ class IBikeCPH.Views.Map extends Backbone.View
 		else if not @model.waypoints.last().located()
 			@model.waypoints.last().set 'location', event.latlng
 			@model.waypoints.last().trigger 'input:location'
-
+#		else
+#			location = event.latlng
+#			waypoint = new IBikeCPH.Models.Waypoint location: location
+#			@model.waypoints.add waypoint, at: 0
+#			@map.removeLayer @via_marker
+#			@show_waypoint waypoint
+		
 	click_marker: (view) ->
 		model = view.model
 		model.set 'location', null
