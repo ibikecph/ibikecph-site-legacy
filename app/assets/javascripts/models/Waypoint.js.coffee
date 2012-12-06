@@ -33,13 +33,8 @@ class IBikeCPH.Models.Waypoint extends Backbone.Model
 		else
 			new L.LatLng lat, lng
 
-	clear: ->
-		@set
-			address: ''
-			location:
-				lat: null
-				lng: null
-			loading: false
+	reset: ->
+		@set address: null, location: null
 
 	to_code: ->
 		location = @get 'location'

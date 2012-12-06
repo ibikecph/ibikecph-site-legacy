@@ -56,10 +56,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 	reset: ->
 		@model.reset()
+		@router.map.reset()
 		@departure = undefined
 		@arrival = undefined
 		@update_departure_arrival()
 		@departure = @getNow()
+		
 		
 	waypoints_changed: ->
 		#$('IBikeCPH.Collections.Waypoints').hide()

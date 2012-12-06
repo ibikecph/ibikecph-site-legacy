@@ -35,9 +35,9 @@ class IBikeCPH.OSRM
 		if @model.waypoints.all_located()
 			@request_route()
 		else
-			@clear()
+			@reset()
 	
-	clear: ->
+	reset: ->
 		@model.set 'route', ''
 		@model.instructions.reset()
 		@model.summary.reset()
