@@ -53,14 +53,13 @@ IBikeCPH.config =
 	]
 
 	routing_service:
-		url: 'http://localhost:5000/viaroute'
+		url: 'http://routes.ibikecph.dk/viaroute'
 
 	geocoding_service:
 		url: 'http://nominatim.openstreetmap.org/search'
 		options:
 			'accept-language' : 'da'
 			countrycodes      : 'DK'
-#			viewbox           : '-27.0,72.0,46.0,36.0' # Europe
 			viewbox           : '7.6,54.4,15.7,58' # DK, Bornholm and Skåne
 			bounded           : '1'
 			email             : 'emil.tin@tmf.kk.dk'

@@ -4,9 +4,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	events:
 		'change .address input'        : 'fields_updated'
 		'click .reset'                 : 'reset'
-		'click input.link'             : 'select_all'
-		'change input.link'            : 'waypoints_changed'
-		'click .fold'                  : 'fold'
+		'click .permalink'             : 'permalink'
 		'change .departure'	  		     : 'change_departure'
 		'change .arrival'	   		       : 'change_arrival'
 		'click #instructions .step'	   : 'zoom_to_instruction'
@@ -29,6 +27,11 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@departure = @getNow()
 		@model.summary.on 'change', @update_departure_arrival, this
 		
+		#the fold button needs to be outside the foldable area
+		#since normal events only work for html items inside @$el, use plain jquery 
+		$('.fold').on 'click', ->
+			$('#ui').toggleClass('folded')
+
 	render: ->
 		@$el.html @template()
 		this
@@ -48,9 +51,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	help: (event) ->
 		$('#help').toggle()
 
-	fold: (event) ->
-		$(@el).toggleClass('hidden')
-	
 	select_all: (event) ->
 		$(event.target).select()
 
@@ -62,15 +62,15 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@update_departure_arrival()
 		@departure = @getNow()
 		
-	waypoints_changed: ->
-		#$('IBikeCPH.Collections.Waypoints').hide()
-		return if @router.map.dragging_pin
-		#$('IBikeCPH.Collections.Waypoints').remove()
+	permalink: ->
 		if @model.instructions.length
-			url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
-			$('a.permalink').attr href : url
+			#url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
+			url = "#!/#{@model.waypoints.to_url()}"
+			console.log url
+			@router.navigate url, trigger: false
+			#$('a.permalink').attr href : url
 		else
-			$('a.permalink').attr href : '#'
+			#$('a.permalink').attr href : '#'
 	
 	pad_time: (min_or_hour) ->
 		("00"+min_or_hour).slice -2
@@ -132,9 +132,9 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	fields_updated: (event) ->
 		input = $(event.target)
 		if input.is '.from'
-			waypoint = @model.waypoints.from()
+			waypoint = @model.waypoints.first()
 		else if input.is '.to'
-			waypoint = @model.waypoints.to()
+			waypoint = @model.waypoints.last()
 		else
 			return
 		raw_value = input.val()

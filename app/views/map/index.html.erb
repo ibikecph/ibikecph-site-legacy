@@ -1,16 +1,18 @@
 <div id="viewport">
 	<div id="ui">
-		<div class="fold"></div>
-		<div id="search"></div>
-		<div id="summary">
-			<div class="notice">
-				<%=t 'map.work_in_progress' %><br>
-				<%= link_to( t('map.bugs_and_suggestions'),issues_path) %>
-			</div>
-			<a class="details"><%=t 'map.route_instructions' %></a>
-			<span class='distance'></span> / <span class='duration'></span>
-		</div>
-		<div id="instructions_div"></div>
+        <div class="fold"></div>
+        <div id="ui_foldable">
+    		<div id="search"></div>
+    		<div id="summary">
+    			<div class="notice">
+    				<%=t 'map.work_in_progress' %><br>
+    				<%= link_to( t('map.bugs_and_suggestions'),issues_path) %>
+    			</div>
+    			<a class="details"><%=t 'map.route_instructions' %></a>
+    			<span class='distance'></span> / <span class='duration'></span>
+    		</div>
+    		<div id="instructions_div"></div>
+    	</div>
 	</div>
 	
 	<div id="help">

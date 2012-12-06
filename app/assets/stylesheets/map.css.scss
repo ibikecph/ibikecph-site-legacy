@@ -33,15 +33,15 @@ body {
     border-radius: 4px;
     border: $border_width solid $lightish;
 	background: $light;
-	&.hidden {
+  &.folded {
 		width: 16px;
 		height: 16px;
-		#ui_content {
-			display: none
-		}
 		.fold {
 			display: block;
 			background: image-url('expand.png');
+		}
+		#ui_foldable {
+			display: none;
 		}
 	}
 	.fold {

@@ -6,6 +6,10 @@ class IBikeCPH.Views.Map extends Backbone.View
 	initialize: (options) ->
 		@router = options.router
 		
+		$(window).on 'resize', ->
+			$('#map').height $(window).height() - $('#header').height()
+		$(window).trigger 'resize'
+
 		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
 		
 		@map = new L.Map @el.id, zoomControl: false		#leaflet map
@@ -20,7 +24,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@old_route     = new L.Polyline [], IBikeCPH.config.route_styles.old
 
 		@via_marker = new L.Marker null, draggable: false, icon: IBikeCPH.icons.route_marker
-
+		
 		for control in IBikeCPH.config.map_controls
 			switch control.type
 
@@ -77,6 +81,8 @@ class IBikeCPH.Views.Map extends Backbone.View
 		
 		@model.waypoints.on 'reset', (model) =>
 			@map.removeLayer @invalid_route
+			@model.waypoints.each (t) =>
+				@show_waypoint t if t.located()
 		
 	reset: ->
 		@map.removeLayer @invalid_route
@@ -88,10 +94,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 	go_to_route: ->
 		latlngs = @model.waypoints.to_latlngs()
-
-		# In order to not display route behind sidebar.
-		translate = new L.Point -374, -50
-
+		translate = new L.Point -374, -50  #In order to not display route behind sidebar.
 		for latlng in latlngs[..]
 			latlngs.push @map.layerPointToLatLng @map.latLngToLayerPoint(latlng).add(translate)
 
@@ -137,7 +140,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@map.removeLayer @invalid_route
 
 			# Autozoom on load
-			@go_to_route() if @bounds and window.location.hash
+			#@go_to_route() if @bounds and window.location.hash
 
 		else
 			@current_route.setLatLngs []

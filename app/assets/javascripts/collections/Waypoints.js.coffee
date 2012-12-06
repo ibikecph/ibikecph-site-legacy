@@ -4,73 +4,45 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 	model: IBikeCPH.Models.Waypoint
 	
 	initialize: ->
-		waypoint = new IBikeCPH.Models.Waypoint type: 'from'
-		@add waypoint, at: 0
-		waypoint = new IBikeCPH.Models.Waypoint type: 'to'
-		@add waypoint, at: 1
-		
-		@on 'remove', (model) ->
-			@waypoint_removed model
+		@reset()
+		@on 'remove add reset', (model) ->
+			@set_endpoints @model
 			
-	waypoint_removed: (model) ->
-		@to().set 'type', 'to'
-		@from().set 'type', 'from'
-
-	reset: ->
-		remove = []
-		@each (t) -> 
-			t.set address: null, location: null, silent: true
-			if t.get('type') == 'via'
-				remove.push t
-		for t in remove
-			@remove t, silent: true
-		@trigger 'change'
-	from: ->
-		@first()
-
-	to: ->
-		@last()
+	set_endpoints: (model) ->
+		@first().set 'type', 'from'
+		@last().set 'type', 'to'
 	
+	reset: (models) ->
+		@each (t) ->
+			t.set 'location', null
+			t.set 'address', null
+		Backbone.Collection.prototype.reset.call this, models, silent: true;
+		unless models
+			waypoint = new IBikeCPH.Models.Waypoint type: 'from'
+			@add waypoint, (at: 0), silent: true
+			waypoint = new IBikeCPH.Models.Waypoint type: 'to'
+			@add waypoint, (at: 1), silent: true
+		@trigger 'reset'
+		
 	all_located: ->
 		@all (waypoint) -> waypoint.located()
-		
-	get_from_and_to: ->
-		from = @at(0)
-		to = @at(@length - 1)
-
-		from = null unless from?.get and from.get('type') == 'from'
-		to = null unless to?.get and to.get('type') == 'to'
-
-		return (
-			from : from
-			to   : to
-		)
 
 	# Converts the waypoints into route points, used to display invalid/unknown routes.
 	to_latlngs: ->
 		_.filter @map((model) -> model.to_latlng()), (location) -> location
 
-	to_code: ->
-		codes = @map (waypoint) -> waypoint.to_code()
-
-		codes.unshift '' unless @from()?
-		codes.push    '' unless @to()?
-
+	to_url: ->
+		return null unless @all_located()
+		codes = @map (waypoint) -> waypoint.to_str()
 		return codes.join '/'
 
-	# Initialize collection with a string representation, fx. when the user is
-	# linking to a specific route.
-	reset_from_code: (code) ->
-		waypoints = []
-
-		for location_code in code.split '/'
-			waypoint = IBikeCPH.Models.Waypoint.from_code location_code
-			waypoints.push(waypoint) if waypoint
-
-		if waypoints.length > 0
-			waypoints[0].set 'type', 'from'
-
-		if waypoints.length > 1
-			waypoints[waypoints.length - 1].set 'type', 'to'
-
-		@reset waypoints
+	reset_from_url: (code) ->
+		codes = code.split '/'
+		if codes.length > 1
+			waypoints = []
+			for code in codes
+				waypoint = new IBikeCPH.Models.Waypoint type: 'via'
+				waypoint.from_str code
+				waypoints.push waypoint	
+			@reset waypoints
+			

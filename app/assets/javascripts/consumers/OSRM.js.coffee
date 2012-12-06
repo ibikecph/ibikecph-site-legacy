@@ -10,7 +10,7 @@ class IBikeCPH.OSRM
 
 		@url += if /\?/.test @url then '&' else '?'
 
-		@model.waypoints.on 'add remove change:location', => @waypoints_changed()
+		@model.waypoints.on 'add remove reset change:location', => @waypoints_changed()
 
 	abort: ->
 		@request.abort()
