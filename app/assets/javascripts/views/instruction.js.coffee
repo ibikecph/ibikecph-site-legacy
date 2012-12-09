@@ -4,6 +4,7 @@ class IBikeCPH.Views.Instruction extends Backbone.View
 	
 	events:
 		'mouseenter': 'show'
+		'click': 'zoom'
 	
 	render: =>
 		@$el.html @template(instruction: @model)
@@ -11,3 +12,6 @@ class IBikeCPH.Views.Instruction extends Backbone.View
 
 	show: ->
 		@model.trigger 'show_step', @model
+		
+	zoom: ->
+		@model.trigger 'zoom_to_step', @model

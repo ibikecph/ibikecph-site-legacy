@@ -84,6 +84,9 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@model.instructions.on 'show_step', (model) =>
 			@show_step model
 		
+		@model.instructions.on 'zoom_to_step', (model) =>
+			@zoom_to_step model
+
 		@model.instructions.on 'hide_step', =>
 			@hide_step()
 		
@@ -254,6 +257,11 @@ class IBikeCPH.Views.Map extends Backbone.View
 		point = @current_route._latlngs[ index ]
 		@step_marker.setLatLng point
 		@map.addLayer @step_marker
+
+	zoom_to_step: (model) ->
+		index = model.get 'index'
+		point = @current_route._latlngs[ index ]
+		@go_to_point point
 
 	hide_step: (model) ->
 		@map.removeLayer @step_marker
