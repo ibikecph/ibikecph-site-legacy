@@ -37,7 +37,6 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
 		_.filter @map((model) -> model.to_latlng()), (location) -> location
 
 	to_url: ->
-		return null unless @all_located()
 		codes = @map (waypoint) -> waypoint.to_str()
 		return codes.join '/'
 

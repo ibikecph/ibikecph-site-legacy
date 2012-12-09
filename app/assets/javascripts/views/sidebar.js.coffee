@@ -65,7 +65,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	permalink: ->
 		#url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
 		url = "#!/#{@model.waypoints.to_url()}"
-		@router.navigate url, trigger: false
+		if url
+			@router.navigate url, trigger: false
 	
 	pad_time: (min_or_hour) ->
 		("00"+min_or_hour).slice -2
