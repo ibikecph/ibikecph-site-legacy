@@ -67,6 +67,7 @@ da:
   da: Dansk
   en: Engelsk
   
+  page_title: I Bike Cph
   edit: Rediger
   new: Ny
   delete: Slet
@@ -442,7 +443,6 @@ da:
     to: B
     from_placeholder: Fra adresse
     to_placeholder: Til adresse
-    page_title: I Bike Cph
     generate_link: Lav et link
     route_instructions: Rutebeskrivelse
     distance: afstand

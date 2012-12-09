@@ -74,6 +74,7 @@ en:
   da: Danish
   en: English
 
+  page_title: I Bike Cph
   edit: Edit
   new: New
   delete: Delete
@@ -440,7 +441,6 @@ en:
     to: B
     from_placeholder: From addresse
     to_placeholder: To address
-    page_title: I Bike Cph
     generate_link: Make a Link
     route_instructions: Route Description
     distance: distance
