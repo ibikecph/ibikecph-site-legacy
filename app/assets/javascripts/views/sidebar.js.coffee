@@ -26,14 +26,11 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 		@departure = @getNow()
 		@model.summary.on 'change', @update_departure_arrival, this
-		
-		#the fold button needs to be outside the foldable area
-		#since normal events only work for html items inside @$el, use plain jquery 
-		$('.fold').on 'click', ->
-			$('#ui').toggleClass('folded')
 
 	render: ->
 		@$el.html @template()
+		$('.help').click (event) => @help()
+		$('.fold').click (event) => @fold()
 		this
 
 	getNow: ->
@@ -48,9 +45,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		point = path._latlngs[ $(event.target).attr('data-index') ]
 		@router.map.go_to_point point
 	
-	help: (event) ->
+	help: ->
 		$('#help').toggle()
-
+	
+	fold: ->
+		$('#ui').toggleClass('folded')
+		
 	select_all: (event) ->
 		$(event.target).select()
 
