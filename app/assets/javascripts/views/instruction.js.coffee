@@ -3,11 +3,11 @@ class IBikeCPH.Views.Instruction extends Backbone.View
 	tagName: 'li'
 	
 	events:
-		'click': 'indicate'
+		'mouseenter': 'show'
 	
 	render: =>
 		@$el.html @template(instruction: @model)
 		this
 
-	indicate: =>
-		console.log @model.get 'street'
+	show: ->
+		@model.trigger 'show_step', @model

@@ -125,12 +125,11 @@ body {
 		max-height: 300px;
 		overflow-y: scroll;
 		li {
-			//cursor: pointer;
-			&.even {
-				background-color: white;
-			}
+		    padding: 3px;
+			cursor: pointer;
 			&:hover {
-				color: $dark;
+				background-color: #ff4;
+				color: black;
 			};
 		}
 		li + li {

@@ -24,6 +24,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@old_route     = new L.Polyline [], IBikeCPH.config.route_styles.old
 
 		@via_marker = new L.Marker null, draggable: false, icon: IBikeCPH.icons.route_marker
+		@step_marker = new L.Marker null, draggable: false, icon: IBikeCPH.icons.step
 		
 		for control in IBikeCPH.config.map_controls
 			switch control.type
@@ -52,12 +53,8 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 		initial_location = new L.LatLng IBikeCPH.config.initial_location.lat, IBikeCPH.config.initial_location.lng
 		@map.setView initial_location, IBikeCPH.config.initial_location.zoom
-
-		#setTimeout =>
-		#	@trigger 'zoom', zoom: @map.getZoom()
-		#	@trigger 'dragging_pin', dragging_pin: @dragging_pin
-		#, 1
-
+		
+		
 		@via_marker.on 'mousedown', (event) =>
 			@initiate_via_drag event
 		
@@ -83,6 +80,12 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@map.removeLayer @invalid_route
 			@model.waypoints.each (t) =>
 				@show_waypoint t if t.located()
+
+		@model.instructions.on 'show_step', (model) =>
+			@show_step model
+		
+		@model.instructions.on 'hide_step', =>
+			@hide_step()
 		
 	reset: ->
 		@map.removeLayer @invalid_route
@@ -245,3 +248,12 @@ class IBikeCPH.Views.Map extends Backbone.View
 		model.set 'address', null
 		if model.get('type') == 'via' or @model.waypoints.length > 2
 			@model.waypoints.remove model
+
+	show_step: (model) ->
+		index = model.get 'index'
+		point = @current_route._latlngs[ index ]
+		@step_marker.setLatLng point
+		@map.addLayer @step_marker
+
+	hide_step: (model) ->
+		@map.removeLayer @step_marker

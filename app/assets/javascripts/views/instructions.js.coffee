@@ -1,9 +1,15 @@
 class IBikeCPH.Views.Instructions extends Backbone.View
 	template: JST['instructions/index']
-		
+	
+	events:
+		'mouseleave': 'hide_step'
+	
 	initialize: ->
 		@collection.on 'reset', @clear
 		@collection.on 'change', @render
+	
+	hide_step: ->
+		@collection.trigger 'hide_step'
 	
 	clear: =>
 		@$el.empty()

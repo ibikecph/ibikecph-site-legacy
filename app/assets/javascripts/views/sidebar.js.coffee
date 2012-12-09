@@ -7,7 +7,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'click .permalink'             : 'permalink'
 		'change .departure'	  		     : 'change_departure'
 		'change .arrival'	   		       : 'change_arrival'
-		'click #instructions .step'	   : 'zoom_to_instruction'
 
 	initialize: (options) ->
 		Backbone.View.prototype.initialize.apply this, options
@@ -38,13 +37,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		now.setSeconds 0		#avoid minutes that are off by one
 		now
 		
-	zoom_to_instruction: (event) ->
-		path = _.find @router.map.map._layers, (layer) ->
-			if layer._latlngs?
-				return true
-		point = path._latlngs[ $(event.target).attr('data-index') ]
-		@router.map.go_to_point point
-	
 	help: ->
 		$('#help').toggle()
 	

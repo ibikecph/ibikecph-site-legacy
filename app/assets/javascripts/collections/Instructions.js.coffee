@@ -2,7 +2,7 @@
 
 class IBikeCPH.Collections.Instructions extends Backbone.Collection
 	model: IBikeCPH.Models.Instruction
-
+		
 	reset_from_osrm: (instructions) ->
 		@reset()
 		for instruction in instructions
