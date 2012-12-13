@@ -80,7 +80,10 @@ class IBikeCPH.Views.Map extends Backbone.View
 			@map.removeLayer @invalid_route
 			@model.waypoints.each (t) =>
 				@show_waypoint t if t.located()
-
+		
+		@model.waypoints.on 'remove', (model) =>
+			@hide_waypoint model
+		
 		@model.instructions.on 'show_step', (model) =>
 			@show_step model
 		
@@ -247,11 +250,11 @@ class IBikeCPH.Views.Map extends Backbone.View
 		
 	click_marker: (view) ->
 		model = view.model
-		model.set 'location', null
-		model.set 'address', null
 		if model.get('type') == 'via' or @model.waypoints.length > 2
 			@model.waypoints.remove model
-
+		else
+			model.set 'location': null, 'address': null
+		
 	show_step: (model) ->
 		index = model.get 'index'
 		point = @current_route._latlngs[ index ]

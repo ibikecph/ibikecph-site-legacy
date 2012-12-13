@@ -63,7 +63,6 @@ class IBikeCPH.OSRM
 			@model.set 'route', response.route_geometry
 		else
 			@model.set 'route', ''
-			@model.trigger 'change:route', @model, '', {}
 				
 		if response.route_summary
 			@model.summary.set response.route_summary
