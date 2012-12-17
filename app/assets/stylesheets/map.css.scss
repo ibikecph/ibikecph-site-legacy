@@ -33,15 +33,15 @@ body {
     border-radius: 4px;
     border: $border_width solid $lightish;
 	background: $light;
-	&.hidden {
+  &.folded {
 		width: 16px;
 		height: 16px;
-		#ui_content {
-			display: none
-		}
 		.fold {
 			display: block;
 			background: image-url('expand.png');
+		}
+		#ui_foldable {
+			display: none;
 		}
 	}
 	.fold {
@@ -104,8 +104,6 @@ body {
 	#summary {
 		display: none;
 		margin-top: 10px;
-		border-top: 1px solid $medium;
-		padding-top: 10px;
 		.duration, .distance {
 			font-size: 1.3em;
 			font-weight: bold;
@@ -118,22 +116,26 @@ body {
 			margin-bottom: 10px;
 		}
 	}
-	#route {
-		display: none;
+	#instructions_div {
+	    display: none;
+	}
+	#instructions {
+	    display: block;
 		margin-top: 10px;
-		height: 300px;
+		max-height: 300px;
 		overflow-y: scroll;
-		.step {
-			padding: 6px;
-			font-size: 15px;
-			line-height: 18px;
+		li {
+		    padding: 3px;
 			cursor: pointer;
-			&.even {
-				background-color: white;
-			}
 			&:hover {
-				text-decoration: underline;
+				background-color: #ff4;
+				color: black;
 			};
+		}
+		li + li {
+			padding-top: 6px;
+			border-top: 1px solid $lightish;
+			margin-top: 6px;
 		}
 	}
 }

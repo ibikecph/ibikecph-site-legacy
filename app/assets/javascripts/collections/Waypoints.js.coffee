@@ -1,167 +1,52 @@
 # Represents the waypoints (ie. from/to/via) entered by the user.
 
-class ibikecph.Waypoints extends Backbone.Collection
-	model: ibikecph.Waypoint
-
+class IBikeCPH.Collections.Waypoints extends Backbone.Collection
+	model: IBikeCPH.Models.Waypoint
+	
 	initialize: ->
-		@_setup_event_proxy()
-
-	# Returns the model for the from/to endpoint.
-	endpoint: (type) ->
-		last = (type == 'end' || type == 'to')
-
-		if last
-			index = @length - 1
-			type  = 'to'
-		else
-			index = 0
-			type  = 'from'
-
-		waypoint   = @at index
-		type_match = waypoint?.get and waypoint.get('type') == type
-
-		unless type_match
-			waypoint = new ibikecph.Waypoint type: type
-
-			if last
-				@add [waypoint]
+		@reset()
+		@on 'remove add reset', (model) ->
+			@adjust_types()
+			
+	adjust_types: ->
+		@each (t,i) =>
+			if i==0
+				t.set 'type', 'from'
+			else if i==@length-1
+				t.set 'type', 'to'
 			else
-				@add [waypoint], at: 0
-
-		return waypoint
-
-	# Clears the from/to endpoint. If there are via points, then the next via
-	# point will become an endpoint and the proper events are triggered.
-	clear: (type) ->
-		last = (type == 'end' || type == 'to')
-
-		if last
-			if @has_to()
-				@remove [@at @length - 1]
-				next = @length - 1
-				if next > 0
-					model = @at(next)
-					model.set 'type', 'to'
-					@trigger 'to:change:location', model, model.get('location')
-					@trigger 'to:change:address' , model, model.get('address')
-					@trigger 'to:change', model
-				else
-					@trigger 'clear:to'
-		else
-			if @has_from()
-				@remove [@at 0]
-				next = 0
-				if next < @length - 1
-					model = @at(next)
-					model.set 'type', 'from'
-					@trigger 'from:change:location', model, model.get('location')
-					@trigger 'from:change:address' , model, model.get('address')
-					@trigger 'from:change', model
-				else
-					@trigger 'clear:from'
-
-	get_from_and_to: ->
-		from = @at(0)
-		to   = @at(@length - 1)
-
-		from = null unless from?.get and from.get('type') == 'from'
-		to   = null unless to?.get   and to.get('type')   == 'to'
-
-		return (
-			from : from
-			to   : to
-		)
-
-	has_from: ->
-		waypoint = @at(0)
-		waypoint?.get and waypoint.get('type') == 'from'
-
-	has_to: ->
-		waypoint = @at(@length - 1)
-		waypoint?.get and waypoint.get('type') == 'to'
-
-	has_valid_from: ->
-		@has_from() and @at(0).valid_location()
-
-	has_valid_to: ->
-		@has_to() and @at(@length - 1).valid_location()
-
-	has_endpoints: ->
-		@has_from() and @has_to()
+				t.set 'type', 'via'
+			
+	reset: (models) ->
+		@each (t) ->
+			t.set 'location', null
+			t.set 'address', null
+		Backbone.Collection.prototype.reset.call this, models, silent: true;
+		unless models
+			waypoint = new IBikeCPH.Models.Waypoint type: 'from'
+			@add waypoint, (at: 0), silent: true
+			waypoint = new IBikeCPH.Models.Waypoint type: 'to'
+			@add waypoint, (at: 1), silent: true
+		@trigger 'reset'
+		
+	all_located: ->
+		@all (waypoint) -> waypoint.located()
 
 	# Converts the waypoints into route points, used to display invalid/unknown routes.
 	to_latlngs: ->
 		_.filter @map((model) -> model.to_latlng()), (location) -> location
 
-	to_code: ->
-		codes = @map (waypoint) -> waypoint.to_code()
-
-		codes.unshift '' unless @has_from()
-		codes.push    '' unless @has_to()
-
+	to_url: ->
+		codes = @map (waypoint) -> waypoint.to_str()
 		return codes.join '/'
 
-	# Initialize collection with a string representation, fx. when the user is
-	# linking to a specific route.
-	reset_from_code: (code) ->
-		waypoints = []
-
-		for location_code in code.split '/'
-			waypoint = ibikecph.Waypoint.from_code location_code
-			waypoints.push(waypoint) if waypoint
-
-		if waypoints.length > 0
-			waypoints[0].set 'type', 'from'
-
-		if waypoints.length > 1
-			waypoints[waypoints.length - 1].set 'type', 'to'
-
-		@reset waypoints
-
-	# Event magic to forward events fromt the models of the from/to endpoints to
-	# observers of this collection. This is a bit difficult, since the events
-	# must be unregistered from the models that are removed or when resetting the
-	# whole collection.
-	_setup_event_proxy: ->
-		@_proxy_event_from = (event_name, a, b, c) =>
-			@trigger 'from:' + event_name, a, b, c
-
-		@_proxy_event_to = (event_name, a, b, c) =>
-			@trigger 'to:' + event_name, a, b, c
-
-		@on 'change:type add', (waypoint) =>
-			type = waypoint.get('type')
-
-			if type == 'from'
-				waypoint.unbind 'all', @_proxy_event_from
-				waypoint.on     'all', @_proxy_event_from
-			else if type == 'to'
-				waypoint.unbind 'all', @_proxy_event_to
-				waypoint.on     'all', @_proxy_event_to
-
-		@on 'remove', (waypoint) =>
-			type = waypoint.get('type')
-			waypoint.clear() unless type == 'via'
-
-			if type == 'from'
-				waypoint.unbind 'all', @_proxy_event_from
-			else if type == 'to'
-				waypoint.unbind 'all', @_proxy_event_to
-
-		@on 'reset', (new_waypoints) =>
-			first = @at(0)
-			first.unbind 'all', @_proxy_event_from if first
-
-			last = @at(@length - 1)
-			last.unbind 'all', @_proxy_event_to if last
-
-			first = new_waypoints.at(0)
-			last  = new_waypoints.at(new_waypoints.length - 1)
-
-			if first and first.get('type') == 'from'
-				first.unbind 'all', @_proxy_event_from
-				first.on     'all', @_proxy_event_from
-
-			if last and last.get('type') == 'to'
-				last.unbind 'all', @_proxy_event_to
-				last.on     'all', @_proxy_event_to
+	reset_from_url: (code) ->
+		codes = code.split '/'
+		if codes.length > 1
+			waypoints = []
+			for code in codes
+				waypoint = new IBikeCPH.Models.Waypoint type: 'via'
+				waypoint.from_str code
+				waypoints.push waypoint	
+			@reset waypoints
+			

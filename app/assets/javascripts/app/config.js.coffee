@@ -1,6 +1,6 @@
-window.ibikecph or= {}
+window.IBikeCPH or= {}
 
-ibikecph.config =
+IBikeCPH.config =
 
 	initial_location:
 		lat: 55.68
@@ -28,15 +28,15 @@ ibikecph.config =
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,
-		name: 'ibikecph'
+		name: 'IBikeCPH'
 		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
 		options:
-			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 ibikecph'
+			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 IBikeCPH'
 	,
-	name: 'OpenCycleMap'
-	url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
-	options:
-		attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery by Andy Allan and Dave Stubbs'
+		name: 'OpenCycleMap'
+		url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
+		options:
+			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery by Andy Allan and Dave Stubbs'
 	]
 
 	# The map controls are inserted in the specified order. Supported types:
@@ -60,7 +60,6 @@ ibikecph.config =
 		options:
 			'accept-language' : 'da'
 			countrycodes      : 'DK'
-#			viewbox           : '-27.0,72.0,46.0,36.0' # Europe
 			viewbox           : '7.6,54.4,15.7,58' # DK, Bornholm and Skåne
 			bounded           : '1'
 			email             : 'emil.tin@tmf.kk.dk'

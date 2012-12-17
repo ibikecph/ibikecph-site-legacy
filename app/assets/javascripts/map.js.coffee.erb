@@ -17,29 +17,17 @@
 #= require leaflet/L.Control.Goto
 #= require i18n
 #= require i18n/translations
+#= require ie.map
+
+#= require app/app
 #= require app/config
 #= require app/util
-#= require app/Router
-#= require consumers/Geocoder
-#= require consumers/OSRM
-#= require models/Instruction
-#= require collections/Instructions
-#= require models/Waypoint
-#= require collections/Waypoints
-#= require models/InstructionsSummary
-#= require models/Search
-#= require views/icons
-#= require views/Sidebar
-#= require views/Map
-#= require app/app
-#= require ie.map
+
 #= require_tree ./app
+#= require_tree ./routers
 #= require_tree ./collections
 #= require_tree ./consumers
 #= require_tree ./i18n
 #= require_tree ./models
-#= require_tree ./templates
+#= require_tree ../templates
 #= require_tree ./views
-
-jQuery ->
-	ibikecph.app.start()

@@ -1,0 +1,1 @@
+<%= IBikeCPH.util.instruction_string(@instruction.toJSON()) %>

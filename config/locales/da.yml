@@ -67,6 +67,7 @@ da:
   da: Dansk
   en: Engelsk
   
+  page_title: I Bike Cph
   edit: Rediger
   new: Ny
   delete: Slet
@@ -74,10 +75,6 @@ da:
   login: Log ind
   hi: "Hej %{user}"
   tags: Tags
-  departure: Afgang
-  arrival: Ankomst
-  departure_placeholder: kl.
-  arrival_placeholder: kl.
   ago: siden
   you: Dig
   or_login_with: eller log ind med
@@ -433,36 +430,36 @@ da:
       title: Ups...!
       body: Noget gik galt. Vi retter det hurtigst muligt.
 
-  map:
-    index:
-      payoff: Hurtigere på cykel
-      work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtige."
-      bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
-      help: Hjælp
-      hide_help: Skjul
-  
   application:
     please_login_first: Log venligst ind først
-  
-  #ui
-  from: A
-  to: B
-  from_placeholder: Fra adresse
-  to_placeholder: Til adresse
-  page_title: I Bike Cph
-  generate_link: Lav et link
-  route_instructions: Rutebeskrivelse
-  distance: afstand
-  duration: tid
-  clear: ryd
-  zoom_to_route: Zoom til Rute
-  use_my_location: Brug min position
 
-  normal_bike: Cykel
-  cargo_bike: Ladcykel
-  electric_bike: Elcykel
-  reset: Nulstil
-  link_for_route: Link
+  map:
+    payoff: Hurtigere på cykel
+    work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtige."
+    bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
+    help: Hjælp
+    hide_help: Skjul
+    from: A
+    to: B
+    from_placeholder: Fra adresse
+    to_placeholder: Til adresse
+    generate_link: Lav et link
+    route_instructions: Rutebeskrivelse
+    distance: afstand
+    duration: tid
+    clear: ryd
+    zoom_to_route: Zoom til Rute
+    use_my_location: Brug min position
+    departure: Afgang
+    arrival: Ankomst
+    departure_placeholder: kl.
+    arrival_placeholder: kl.
+
+    normal_bike: Cykel
+    cargo_bike: Ladcykel
+    electric_bike: Elcykel
+    reset: Nulstil
+    link_for_route: Link
   
   instructions:
     1: første
@@ -487,7 +484,7 @@ da:
     NW: mod nordvest
 
     #route description
-    head: Start ad 
+    head: Start 
     continue: Fortsæt
     #left
     turn_left: Drej til venstre

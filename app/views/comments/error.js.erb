@@ -1,5 +1,5 @@
 //show error
-$("#form_errors").html("<%= @comment.errors.full_messages.join(', ') %>.").show();
+$("#form_errors").html("<%= @comment.errors.full_messages.join(', ') %>.").request_route;
 $("#form_notice").hide();
 
 //hide flash

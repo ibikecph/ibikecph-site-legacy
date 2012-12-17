@@ -70,9 +70,7 @@ jQuery.fn.showMaxlength = function(options){
 }
 
 $(document).ready(function(){
-	var onEditCallback = function(remaining){
-		console.log(I18n.currentLocale());
-  	
+	var onEditCallback = function(remaining){  	
 		if(remaining >= 0){
 			$(this).siblings('.chars_remaining').text(' '+I18n.t('character.remaining', {count: remaining} ));
 			$(this).siblings('.chars_remaining').removeClass('too_long');

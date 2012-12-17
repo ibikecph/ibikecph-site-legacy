@@ -1,96 +1,48 @@
-class ibikecph.Geocoder
+class IBikeCPH.Geocoder
 
 	constructor: (@model) ->
-		@current =
-			address: null
-			location:
-				lat: null
-				lng: null
-
-		@request = null
-
-		@model.bind 'change:address', =>
-			@load_address @model.get 'address'
-
-		@model.bind 'change:location', =>
-			location = @model.get 'location'
-
-			@abort()
-			@wait_for 300, =>
-				@load_location @model.get 'location'
-
-	wait_for: (milliseconds, callback) ->
-		clearTimeout(@timer) if @timer
-		@timer = setTimeout callback, milliseconds
-
+		@model.on 'input:address', => @address_to_location()
+		@model.on 'input:location', => @location_to_address()
+		
 	abort: ->
-		@request.abort() if @request?.abort
+		if @request?
+			@request.abort()
+			@reqeust = null
 
-	request_init: ->
+	lookup_init: ->
 		@abort()
-		@model.set 'loading', true
 
-	request_done: ->
+	lookup_done: ->
 		@request = null
-		@model.set 'loading', false
 
-	convert_number: (value) ->
-		value = 1 * value
-		if isNaN value
-			null
-		else
-			value
-
-	load_address: (new_address) ->
-		return if new_address == @current.address
-		@current.address = new_address
-
-		unless @current.address
-			@current.location.lat = null
-			@current.location.lng = null
-			@model.set 'location', @current.location
-			@model.trigger 'change:location', @model, @current.location, {}
-			@model.trigger 'change', @model
-			return
-
-		@request_init()
-
+	address_to_location: ->
+		address =  @model.get 'address'
 		options = _.extend
 			format : 'json'
-			q      : "#{@current.address}"
+			q      : "#{address}"
 			limit  : '1'
-		, ibikecph.config.geocoding_service.options
-
-		@request = $.getJSON ibikecph.config.geocoding_service.url + '?json_callback=?', options, (result) =>
-			@request_done()
-
-			@current.location.lat = @convert_number result[0]?.lat
-			@current.location.lng = @convert_number result[0]?.lon
-			@model.set 'location', @current.location
-			@model.trigger 'change:location', @model, @current.location, {}
-			@model.trigger 'change', @model
-
-	load_location: (new_location) ->
-		return if new_location?.lat == @current.location.lat and new_location?.lng == @current.location.lng
-
-		@current.location.lat = new_location?.lat
-		@current.location.lng = new_location?.lng
-
-		return unless @current.location.lat and @current.location.lng
-
-		@request_init()
-
+		, IBikeCPH.config.geocoding_service.options
+		@lookup_init()
+		@request = $.getJSON IBikeCPH.config.geocoding_service.url + '?json_callback=?', options, (result) =>
+			if result[0] 
+				location = lat: Number(result[0].lat), lng: Number(result[0].lon)
+			else
+				location = null
+			@model.set 'location', location
+			@lookup_done()
+	
+	location_to_address: ->
+		@abort()
+		return if @model.get('type') == 'via'
+		location =  @model.get 'location'
+		return unless location
 		options = _.extend
 			format : 'json'
-			lat    : @current.location.lat or 0
-			lon    : @current.location.lng or 0
-		, ibikecph.config.geocoding_service.options
-
-		@request = $.getJSON ibikecph.config.reverse_geocoding_service.url + '?json_callback=?', options, (result) =>
-			@request_done()
-
-			address = ibikecph.util.displayable_address result
-
-			if address
-				@current.address = address
-				@model.set 'address', @current.address
+			lat    : location.lat
+			lon    : location.lng
+		, IBikeCPH.config.geocoding_service.options
+		@lookup_init()
+		@request = $.getJSON IBikeCPH.config.reverse_geocoding_service.url + '?json_callback=?', options, (result) =>
+			address = IBikeCPH.util.displayable_address result
+			@model.set 'address', address if address
+			@lookup_done()

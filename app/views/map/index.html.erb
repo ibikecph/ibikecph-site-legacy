@@ -1,53 +1,26 @@
 <div id="viewport">
-	<div id="ui">
-		<div class="fold"></div>
-		<div id="ui_content">
-			<a class="help"><%=t '.help' %></a>
-			<a class="reset"><%=t :reset %></a>
-			<a class="permalink"><%=t :link_for_route %></a> 
-			<br>
-			<div class="mode">
-				<%= radio_button_tag 'mode', :normal, true %> <span><%=t :normal_bike %></span>
-				<%= radio_button_tag 'mode', :cargo, false, :disabled => true %> <span class="proposed"><%=t :cargo_bike %></span>
-				<%= radio_button_tag 'mode', :electric, false, :disabled => true %> <span class="proposed"><%=t :electric_bike %></span>
-			</div>
-		
-			<div id="addresses">
-				<div class="address">
-					<label><%=t :from %></label>
-					<input type="text" class="from" title="<%=t :from %>" placeholder="<%=t :from_placeholder %>" tabindex=1 >
-				</div>
-				<div class="address">
-					<label><%=t :to %></label>
-					<input type="text" class="to" title="<%=t :to %>" placeholder="<%=t :to_placeholder %>" tabindex=2>
-				</div>
-			</div>
+	<div id="map"></div>
 
-			<div id="time">
-				<%=t :departure %> <input class="at departure" type="text" placeholder="<%=t :departure_placeholder %>" tabindex=3>
-				&rarr;
-				<%=t :arrival %> <input class="at arrival" type="text" placeholder="<%=t :arrival_placeholder %>" tabindex=4>
-			</div>
-		
-			<div id="summary">
-				<div class="notice">
-					<%=t '.work_in_progress' %><br>
-					<%= link_to( t('.bugs_and_suggestions'),issues_path) %>
-				</div>
-				<a class="details"><%=t :route_instructions %></a>
-				<span class='distance'></span> / <span class='duration'></span>
-			</div>
-			<div id="route">
-				route...
-			</div>
-		</div>
+	<div id="ui">
+        <div class="fold"></div>
+        <div id="ui_foldable">
+    		<div id="search"></div>
+    		<div id="summary">
+    			<div class="notice">
+    				<%=t 'map.work_in_progress' %><br>
+    				<%= link_to( t('map.bugs_and_suggestions'),issues_path) %>
+    			</div>
+    			<a class="details"><%=t 'map.route_instructions' %></a>
+    			<span class='distance'></span> / <span class='duration'></span>
+    		</div>
+    		<div id="instructions_div"></div>
+    	</div>
 	</div>
 	
 	<div id="help">
-		<a class="help"><%=t '.hide_help' %></a>
-		<h2><%=t 'help.title' %></h2>
-		<%= simple_format t('help.body') %>
+		<a class="help"><%=t 'map.hide_help' %></a>
+		<h2><%=t 'map.help.title' %></h2>
+		<%= simple_format t('map.help.body') %>
 	</div>
 	
-	<div id="map"></div>
 </div>
