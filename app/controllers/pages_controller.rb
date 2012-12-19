@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_filter :require_login, :only => [:index,:ping,:terms]
+  skip_before_filter :require_login, :only => [:index,:ping,:terms,:qr]
   
 	def index
 	end
@@ -13,4 +13,7 @@ class PagesController < ApplicationController
     render :nothing => true
   end
   
+  def qr
+    redirect_to root_path
+  end
 end
