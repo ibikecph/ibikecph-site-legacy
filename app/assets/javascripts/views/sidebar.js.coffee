@@ -9,7 +9,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'change .arrival'	   		       : 'change_arrival'
 
 	initialize: (options) ->
-		Backbone.View.prototype.initialize.apply this, options
 		@router = options.router
 				
 		@model.waypoints.on 'change:address', (model) =>

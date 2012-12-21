@@ -4,7 +4,6 @@ class IBikeCPH.Views.Summary extends Backbone.View
 		'click .details'	             : 'details'
 		
 	initialize: (options) ->
-		Backbone.View.prototype.initialize.apply this, options
 		@router = options.router
 		@model.on 'change', @render
 		@model.on 'reset', @hide
