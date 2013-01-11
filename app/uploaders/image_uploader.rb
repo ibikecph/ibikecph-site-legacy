@@ -31,7 +31,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
   
   # Include RMagick or ImageScience support:
-  include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
       
   # Setup cache dir
   if Rails.env.production? || Rails.env.staging?
