@@ -83,7 +83,7 @@ module RailsOSRM
     
     #rails-timeago gem settings
     Rails::Timeago.default_options :limit => proc { 1.month.ago }
-    Rails::Timeago.locales = [:en, :da]
+    #Rails::Timeago.locales = [:en, :da]
   end
 end
 
