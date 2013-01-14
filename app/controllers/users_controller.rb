@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    return unless params[:user] && params[:user].is_a?(Hash)
     params[:user].delete(:role)     #never allow new users with a role
     @user = User.new params[:user]
     @email = EmailAuthentication.new params[:email_authentication]
