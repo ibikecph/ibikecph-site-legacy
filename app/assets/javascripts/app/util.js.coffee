@@ -87,6 +87,8 @@ IBikeCPH.util.translate_turn_instruction = (turn) ->
 		when 13 then 'stay-on-roundabout'
 		when 14 then 'start'
 		when 15 then 'reached_destination'
+		when 16 then 'enter_opposite'
+		when 17 then 'leave_opposite'
 		else 'no-instruction'
 
 IBikeCPH.util.displayable_address = (geocoding_response) ->

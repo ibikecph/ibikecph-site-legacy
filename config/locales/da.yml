@@ -438,7 +438,6 @@ da:
     work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtige."
     bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
     help: Hjælp
-    hide_help: Skjul
     from: A
     to: B
     from_placeholder: Fra adresse
@@ -498,7 +497,10 @@ da:
     enter_roundabout: Følg rundkørslen
     take_the_nth_exit: "og tag {%nth} afkørsel"
     reached_destination: Ankomst til destinationen
-
+    
+    enter_opposite: "Træk cyklen"
+    leave_opposite: "Fortsæt på cykel"
+    
     follow: ad
     and_continue: og fortsæt
     for: og kør

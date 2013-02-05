@@ -436,7 +436,6 @@ en:
     work_in_progress: "The site is under development, and route suggestion can be inaccurate."
     bugs_and_suggestions: "Report bugs, or suggest improvements."
     help: Help
-    hide_help: Hide
     from: A
     to: B
     from_placeholder: From addresse
@@ -496,6 +495,9 @@ en:
     enter_roundabout: Enter the roundabout
     take_the_nth_exit: "and take the {%nth} exit"
     reached_destination: Arrival at destination
+
+    enter_opposite: "Push the bicycle"
+    leave_opposite: "Continue on bicycle"
 
     follow: "on"
     and_continue: and continue for

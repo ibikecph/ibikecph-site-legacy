@@ -1,6 +1,7 @@
 en:
   map:
-    help:
+    help_dialog:
+      hide_help: Hide
       title: Help
       body: |
         The site (as it is now) calculates fastest bicycle route. The service covers all of Denmark.

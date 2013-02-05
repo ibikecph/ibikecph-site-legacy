@@ -1,6 +1,7 @@
 da:
   map:
-    help:
+    help_dialog:
+      hide_help: Skjul
       title: Hjælp
       body: |
         Siden beregner (som den er lige nu) hurtigste cykelrute. Servicen fungere for hele Danmark.
