@@ -13,8 +13,8 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
 		
 		@map = new L.Map @el.id, zoomControl: false		#leaflet map
-		@map.on 'zoom', (event) =>
-			@osrm.set_zoom event.zoom
+		@map.on 'zoomend', (event) =>
+			@osrm.set_zoom @map.getZoom()
 
 		@dragging_pin = false
 		@pin_views = {}		#used to map from waypoint models to views

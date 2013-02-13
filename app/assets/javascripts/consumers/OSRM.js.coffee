@@ -17,8 +17,9 @@ class IBikeCPH.OSRM
 
 	set_zoom: (zoom) ->
 		if @zoom != zoom
-			@zoom != zoom
-			@request_route()
+			@zoom = zoom
+			if @model.waypoints.all_located()
+				@request_route()
 		
 	get_zoom: ->
 		@zoom
