@@ -5,8 +5,7 @@ RailsOSRM::Application.configure do
   #see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
    
   MAIN_DOMAIN = ENV['DOMAIN']
-  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN ? (MAIN_DOMAIN.split('.').size - 1) : 0
-  MAIN_DOMAIN_WITH_PORT = MAIN_DOMAIN
+  WEB_DOMAIN = MAIN_DOMAIN
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -75,7 +74,7 @@ RailsOSRM::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
   # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => MAIN_DOMAIN }
+  config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
   
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[Exception] ",
