@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/emiltin/auto_html.git
-  revision: 0ac8f1a33bbbbc55429c9816e9b66933d025064f
+  revision: 4633754ce8907b8f2994ae56fbab4f8a11fb40bb
   branch: master
   specs:
-    auto_html (1.5.3)
-      redcarpet (~> 2.0.0)
+    auto_html (1.6.0)
+      redcarpet (~> 2.0)
       rinku (~> 1.5.0)
 
 GIT
@@ -148,7 +148,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
-    redcarpet (2.0.1)
+    redcarpet (2.2.2)
     rinku (1.5.1)
     ruby-hmac (0.4.0)
     rush (0.6.8)
