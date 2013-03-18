@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem 'i18n-js'
 gem 'cancan', :git => 'git://github.com/emiltin/cancan.git', :branch => 'master'
