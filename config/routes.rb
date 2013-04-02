@@ -1,21 +1,34 @@
 RailsOSRM::Application.routes.draw do
   
+  namespace :api, defaults: {format: 'json'} do
+    scope module: :v1, constraints: ApiSettings.new(version: 1) do         
+      devise_for :users do
+        post "/login" => "sessions#create"
+        get "/logout", :to => "sessions#destroy"
+      end          
+      resources :reported_issues, :path => 'issues'          
+    end
+  end
+    
+    devise_for :users
+    resources :token_authentications, :only => [:create, :destroy]
+  
   scope "(:locale)", :locale => /en/ do
     #root
     root :to => 'map#index'
     get 'embed/cykelsupersti' => 'embed#cykelsupersti'
     
     #signup, login, logout
-    get "signup" => "users#new", :as => :signup
-    get "login" => "sessions#new", :as => :login
-    get "login/return" => "sessions#new_and_return", :as => :login_and_return
-    get "logout" => "sessions#destroy", :as => :logout
-    resources :sessions, :path => :login, :except => :index do
-      collection do
-        get 'unverified'
-        get 'existing'
-      end
-    end
+    #get "signup" => "users#new", :as => :signup
+    #get "login" => "sessions#new", :as => :login
+    #get "login/return" => "sessions#new_and_return", :as => :login_and_return
+    #get "logout" => "sessions#destroy", :as => :logout
+    #resources :sessions, :path => :login, :except => :index do
+    #  collection do
+    #    get 'unverified'
+    #    get 'existing'
+    #  end
+    #end
   
     resource :account do
       get 'activating'
@@ -44,12 +57,12 @@ RailsOSRM::Application.routes.draw do
       end
     end
 
-    resources :password_resets, :except => [:index,:edit], :path => 'account/password/reset' do
-      collection do
-        match ':token/edit' => :edit, :as => :reset_by_token
-      end
-      get 'unverified', :on => :collection
-    end
+    # resources :password_resets, :except => [:index,:edit], :path => 'account/password/reset' do
+      # collection do
+        # match ':token/edit' => :edit, :as => :reset_by_token
+      # end
+      # get 'unverified', :on => :collection
+    # end
   
     resources :blogs, :controller => :blog, :as => :blog_entry, :path => :blog do
       collection do

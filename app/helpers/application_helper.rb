@@ -77,4 +77,8 @@ module ApplicationHelper
     end
   end
   
+  def resource_name
+    :user
+  end
+  
 end

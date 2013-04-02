@@ -7,8 +7,8 @@ class AccountsController < ApplicationController
   before_filter :find_email_authentication_by_token, :only => [:verify_email]
     
   def show
-    @has_password = current_user.has_password?
-    @has_email = current_user.authentications.emails.active.any?
+    #@has_password = current_user.has_password?
+    #@has_email = current_user.authentications.emails.active.any?
   end
   
   def activating

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  route_segment: MyString
+  error_type: MyString
+  comment: MyText
+  is_open: false
+
+two:
+  route_segment: MyString
+  error_type: MyString
+  comment: MyText
+  is_open: false
