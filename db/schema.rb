@@ -11,20 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106105552) do
-
-  create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider",         :null => false
-    t.string   "uid",              :null => false
-    t.string   "type"
-    t.string   "state"
-    t.string   "token"
-    t.datetime "token_created_at"
-    t.datetime "activated_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130401051128) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
@@ -83,6 +70,15 @@ ActiveRecord::Schema.define(:version => 20121106105552) do
     t.datetime "updated_at",                    :null => false
   end
 
+  create_table "reported_issues", :force => true do |t|
+    t.string   "route_segment"
+    t.string   "error_type"
+    t.text     "comment"
+    t.boolean  "is_open",       :default => true
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -122,17 +118,17 @@ ActiveRecord::Schema.define(:version => 20121106105552) do
     t.string   "email"
     t.text     "about"
     t.string   "image"
-    t.string   "auth_token"
-    t.string   "password_hash"
-    t.string   "password_salt"
-    t.string   "password_reset_token"
-    t.datetime "password_reset_sent_at"
-    t.datetime "remember_me_token_saved_at"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.string   "authentication_token"
+    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
+    t.string   "password_salt",                         :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
     t.string   "role"
-    t.boolean  "notify_by_email",            :default => true
-    t.boolean  "tester",                     :default => false
+    t.boolean  "notify_by_email",                       :default => true
+    t.boolean  "tester",                                :default => false
   end
 
   create_table "votes", :force => true do |t|

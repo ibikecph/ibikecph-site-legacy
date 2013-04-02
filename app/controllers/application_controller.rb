@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :set_locale
-  before_filter :require_login, :except => [:error_forbidden,:error_route_not_found,:error_internal_error]    #require login everywhere by default
+  #before_filter :require_login, :except => [:error_forbidden,:error_route_not_found,:error_internal_error]    #require login everywhere by default
   helper_method :current_user, :auth_link
   
   unless Rails.application.config.consider_all_requests_local
@@ -42,11 +42,11 @@ class ApplicationController < ActionController::Base
     render :file => 'public/500.html', :layout => false
   end
   
-  def current_user
-    @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
+  #def current_user
+  #  @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
     #FIXME should check user.remember_me_token_saved_at to see if the token has expired
-  rescue
-  end
+  #rescue
+  #end
 
   def require_login
     unless current_user

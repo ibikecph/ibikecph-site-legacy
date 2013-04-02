@@ -1,0 +1,15 @@
+
+<div class="dialog g6">
+<h1><%=t '.title' %></h1>
+<p><%=t '.body' %></p>
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= devise_error_messages! %>
+<p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+</p>
+<p>
+    <%= f.submit t('.submit'), :class => :submit %>
+</p>
+<% end %>
+</div>

@@ -1,0 +1,25 @@
+
+
+
+<div class="dialog g4">
+<h1><%=t '.title' %></h1>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email  %>
+</p>
+<p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %> <span class="note"><%= link_to t('.forgot_it_q'), new_password_path(resource_name) %></span>
+</p>
+<p>
+    <%= f.check_box :remember_me%>
+    <%= f.label t('.remember_me') %>
+</p>
+<p>
+    <%= f.submit t('.submit'), :class => :submit %>
+    <span class="note"><%=t '.no_account_q' %>  <%= link_to t('.signup'), new_registration_path(resource_name) %></span>
+</p>
+<% end %>
+</div>

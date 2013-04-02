@@ -1,6 +1,6 @@
 class Authentication < ActiveRecord::Base
   
-  belongs_to :user
+  #belongs_to :user
   
   scope :emails, where(:type=>'EmailAuthentication')
   scope :oauths, where(:type=>'OAuthAuthentication')

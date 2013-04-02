@@ -1,28 +1,37 @@
 class User < ActiveRecord::Base
   
-  has_many :authentications, :dependent => :destroy
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :token_authenticatable
+         
+  #has_many :authentications, :dependent => :destroy
   has_many :blog_entries, :dependent => :nullify
   has_many :themes, :dependent => :nullify
   has_many :comments, :dependent => :destroy
   has_many :issues, :dependent => :destroy
-  attr_accessible :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache, :notify_by_email, :terms, :tester
+  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :remove_image, :image_cache, :notify_by_email, :terms, :tester
   
-  attr_accessor :password, :created_from_oath
+  #attr_accessor :password, :created_from_oath
   
   validates_presence_of :name
   validates_uniqueness_of :name, :case_sensitive => false
-  validates_presence_of :password, :on => :create, :unless => :has_oath_authentications
+  validates_presence_of :password, :on => :create#, :unless => :has_oath_authentications
   validates_length_of :password, :minimum => 3, :if => :password
   validates_confirmation_of :password, :if => :password
   validates_acceptance_of :terms
   
-  accepts_nested_attributes_for :authentications
+  validates_uniqueness_of :email, :case_sensitive => false
+  validates_format_of :email, :with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, :message => I18n.t('not_a_valid_email'), :allow_blank => true
+  attr_accessible :email_confirmation
+  validates_presence_of :email_confirmation, :on => :create
+  validates_confirmation_of :email
+  
+  #accepts_nested_attributes_for :authentications
   
   mount_uploader :image, SquareImageUploader
 
   MAXLENGTH = { :name => 50, :about => 2000 }
   
-  before_save :encrypt_password
+  #before_save :encrypt_password
   
 
   
@@ -92,9 +101,9 @@ class User < ActiveRecord::Base
     authentications.emails
   end
   
-  def email
-    authentications.emails.active.first
-  end
+  #def email
+  #  authentications.emails.active.first
+  #end
   
   def email_address
     authentications.emails.active.first.uid rescue nil
