@@ -3,14 +3,7 @@
 		<%= render 'sidebar' %>
 	</div>
 	<div class="g8 ge">
-		<%= render @theme if @theme %>
-		<% title = @theme ? t('.issues_title') : t('issues.all.title') %>
-		
-		<%= render 'new_button' %>
-		<h2><%= title %></h2>
+		<%= render 'top' %>
 		<%= render :partial => 'issues/issues' %>
-		<% if @theme %>
-			<p><%= link_to "#{t('issues.issues.all_issues')} &rarr;".html_safe, all_issues_path %></p>
-		<% end %>
 	</div>
 </div>

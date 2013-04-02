@@ -12,8 +12,6 @@ class Publisher
     case object
     when BlogEntry
       blog object, locale
-    when Theme
-      theme object, locale
     when Comment
       comment object, locale
     end
@@ -22,12 +20,6 @@ class Publisher
   def blog blog_entry, locale
     User.where(:notify_by_email => true).each do |user|
       UserMailer.blog_entry(user,blog_entry,locale).deliver if user != blog_entry.user
-    end
-  end
-
-  def theme theme, locale
-    User.where(:notify_by_email => true, :tester=>true).each do |user|
-      UserMailer.theme(user,theme,locale).deliver if user != theme.user
     end
   end
 

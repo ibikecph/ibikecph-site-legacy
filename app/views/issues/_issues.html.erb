@@ -15,6 +15,16 @@
 				<span class="timeago" title="<%= issue.created_at.getutc.iso8601 %>"><%= time_ago_in_words(issue.created_at) %></span>
 			</p>
 		</td>
+
+        <td class="label_list">
+		<% if issue.labels.any? %>
+        	<% for label in issue.labels %>
+        	    <%= link_to label.name.capitalize, { :controller => :issues, :action => :labels, :label => label.name } %>
+        	<% end %>
+        <% end %>
+    </td>
+
+
 		<td class="comments note">
 			<%= link_to t( 'comment', :count => issue.comments_count ), issue %>
 		</td>

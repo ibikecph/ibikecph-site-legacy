@@ -36,7 +36,6 @@ class CorpsController < ApplicationController
   private
 
   def load_sidebar
-    @themes = Theme.all
     @most_commented = Issue.most_commented.includes(:user).limit(7)
     @popular_tags = Issue.tag_counts_on(:tags).order('count desc').limit(20)
   end  

@@ -2,7 +2,6 @@ class User < ActiveRecord::Base
   
   has_many :authentications, :dependent => :destroy
   has_many :blog_entries, :dependent => :nullify
-  has_many :themes, :dependent => :nullify
   has_many :comments, :dependent => :destroy
   has_many :issues, :dependent => :destroy
   attr_accessible :name, :about, :password, :password_confirmation, :image, :remove_image, :image_cache, :notify_by_email, :terms, :tester

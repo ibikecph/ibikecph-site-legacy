@@ -6,7 +6,6 @@ class Ability < ActiveRecord::Base
 
     can [:index,:show], [Comment,User,Issue]
     can [:index,:archive,:show,:tag], [BlogEntry]
-    can [:index,:show], [Theme]
     can :create, User
     if user
       if user.role == 'super'

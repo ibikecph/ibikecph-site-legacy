@@ -10,15 +10,6 @@
 		<%= chars_remaining %>
 		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @issue.class::MAXLENGTH[:body] } %>
 	</p>
-	<% if @themes.any? %>
-	<p>
-		<%= f.label :themes %><br>
-		<% for theme in @themes %>
-			<%= check_box_tag "issue[theme_ids][]", theme.id, @issue.themes.include?(theme) %>
-			<%= theme.title %><br>
-		<% end %>
-	</p>
-	<% end %>
 	<p>
 		<%= f.label :tags %>
 		<%= f.text_area :tag_list, { :rows => 1 } %>
