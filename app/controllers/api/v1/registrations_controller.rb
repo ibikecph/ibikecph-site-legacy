@@ -26,6 +26,7 @@
         else
            render :status => 422,
            :json => { :success => false,
+                      :info => "Process Failed", 
                       :errors => @user.errors.messages}
 
         end
