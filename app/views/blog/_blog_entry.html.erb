@@ -1,5 +1,5 @@
 <div class="blog">
-	<% if can? :manage, @blog_entry %>
+	<% if can? :manage, blog_entry %>
 		<div class="buttons righty">
 			<%= link_to t('edit'),  [:edit, blog_entry] %>
 			<%= link_to t('delete'), blog_entry, :method => :delete, :confirm => t('sure_q') %>

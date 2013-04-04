@@ -43,8 +43,8 @@ da:
     next_label: Næste
         
   menu:
-    routes: Rute
-    blog: Nyheder
+    routes: Kort
+    blog: Blog
     feedback: Feedback
     signup: Opret konto
     login: Log ind

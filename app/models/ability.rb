@@ -15,7 +15,10 @@ class Ability < ActiveRecord::Base
         can [:vote,:unvote], Issue
         can :destroy, Follow do |t|
           t.user.id == user.id
-        end 
+        end
+        if user.role == 'staff'
+          can :manage, [BlogEntry,Issue,Comment,Vote]
+        end
       end
     end
     cannot :delete, User 

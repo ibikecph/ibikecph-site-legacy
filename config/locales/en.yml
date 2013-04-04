@@ -45,8 +45,8 @@ en:
     map: Map
     
   menu:
-    routes: Route
-    blog: News
+    routes: Map
+    blog: Blog
     feedback: Feedback
     signup: Sign Up
     login: Login
