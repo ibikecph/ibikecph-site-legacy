@@ -1,12 +1,8 @@
 
     class Api::V1::RegistrationsController < Devise::RegistrationsController  
       skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-      def index
-        @users = User.order('created_at desc').paginate :page => params[:page], :per_page => 100
-      end
+
       
-      def show
-      end
       
       def new
         @user = User.new

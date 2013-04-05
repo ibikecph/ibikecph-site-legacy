@@ -4,22 +4,20 @@ class Api::V1::ReportedIssuesController < ApplicationController
   
   def index
     @reported_issues=ReportedIssue.find(:all, :conditions=>{:is_open=>true})
-
   end
   
-  def create
-    
+  def create    
         @reported_issue = ReportedIssue.new params[:issue]
-        if @reported_issue.save
-          
-            render :status => 201,
+        if @reported_issue.save          
+           render :status => 201,
            :json => { :success => true,
-                      :info => "Issue created. Successfully!",
+                      :info => "Issue created successfully!",
                       :data => { :id => @reported_issue.id } }
         else
            render :status => 422,
            :json => { :success => false,
-                      :errors => @reported_issue.errors}
+                      :info => "Process Failed", 
+                      :errors => @reported_issue.errors.messages}
 
         end
     
@@ -27,10 +25,12 @@ class Api::V1::ReportedIssuesController < ApplicationController
   
   def show
      @reported_issue=ReportedIssue.find_by_id(params[:id])
-     render :status => 200,
-           :json => { :success => true,
-                      :info => "LIst of Reported Issues",
-                      :data => { :items => @reported_issue } }
+     if !@reported_issue
+           render :status => 404,
+           :json => { :success => false,
+                      :info => "Process Failed", 
+                      :errors => "Issue doesn't exist!"}      
+     end
   end
   
 end
