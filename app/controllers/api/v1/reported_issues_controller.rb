@@ -25,12 +25,11 @@ class Api::V1::ReportedIssuesController < ApplicationController
   
   def show
      @reported_issue=ReportedIssue.find_by_id(params[:id])
-     if !@reported_issue
+     rescue ActiveRecord::RecordNotFound
            render :status => 404,
            :json => { :success => false,
                       :info => "Process Failed", 
                       :errors => "Issue doesn't exist!"}      
-     end
   end
   
 end
