@@ -10,6 +10,11 @@
 		<p><%= link_to "&larr; ".html_safe+t('issues.view_all_issues'), issues_path %></p>
     	<br>
 		<h1><%= @issue.title %></h1>
+		<% if @issue.image? %>
+		<p>
+			<%= image_tag @issue.image.g6.url %>
+		</p>
+		<% end %>
 		<%= auto_html_blog @issue.body, {} %>
 		<br>
 		<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
