@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401051128) do
+ActiveRecord::Schema.define(:version => 20130411033443) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
@@ -71,12 +71,12 @@ ActiveRecord::Schema.define(:version => 20130401051128) do
   end
 
   create_table "reported_issues", :force => true do |t|
-    t.string   "route_segment"
     t.string   "error_type"
     t.text     "comment"
-    t.boolean  "is_open",       :default => true
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.boolean  "is_open",    :default => true
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "user_id"
   end
 
   create_table "taggings", :force => true do |t|

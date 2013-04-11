@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   has_many :themes, :dependent => :nullify
   has_many :comments, :dependent => :destroy
   has_many :issues, :dependent => :destroy
-  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :remove_image, :image_cache, :notify_by_email, :terms, :tester
+  has_many :reported_issues, :dependent => :destroy
+  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :image_path, :remove_image, :image_cache, :notify_by_email, :terms, :tester
   
   #attr_accessor :password, :created_from_oath
   
@@ -16,7 +17,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :name, :case_sensitive => false
   validates_presence_of :password, :on => :create#, :unless => :has_oath_authentications
   validates_length_of :password, :minimum => 3, :if => :password
+  validates :password_confirmation, :presence => true, :if => :password
   validates_confirmation_of :password, :if => :password
+  
   validates_acceptance_of :terms
   
   validates_uniqueness_of :email, :case_sensitive => false
