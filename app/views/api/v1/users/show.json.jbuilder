@@ -6,5 +6,5 @@ json.data do
     json.email @user.email
     json.about @user.about
     json.role @user.role
-    json.image_url @profile_image_url
+    json.image_url @user.image.g2.url
 end

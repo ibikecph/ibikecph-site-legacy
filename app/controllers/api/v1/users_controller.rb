@@ -11,7 +11,6 @@
       
       def show
          @user = User.find params[:id]
-         @profile_image_url="#{request.protocol}#{request.host_with_port}"+@user.image.g2.url if @user.image?
         rescue ActiveRecord::RecordNotFound
            render :status => 404,
            :json => { :success => false,
