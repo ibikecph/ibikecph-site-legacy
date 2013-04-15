@@ -17,19 +17,20 @@ class Api::V1::ReportedIssuesController < ApplicationController
         else
            render :status => 422,
            :json => { :success => false,
-                      :info => "Process Failed", 
-                      :errors => @reported_issue.errors.messages}
+                      :info => @reported_issue.errors.full_messages.first, 
+                      :errors => @reported_issue.errors.full_messages}
         end
     
   end
   
   def show
      @reported_issue=ReportedIssue.find_by_id(params[:id])
-     rescue ActiveRecord::RecordNotFound
+     if !@reported_issue
            render :status => 404,
            :json => { :success => false,
-                      :info => "Process Failed", 
-                      :errors => "Issue doesn't exist!"}      
+                      :info => "Issue doesn't exist!", 
+                      :errors => "Issue doesn't exist!"}   
+     end   
   end
   
   def update
@@ -42,8 +43,8 @@ class Api::V1::ReportedIssuesController < ApplicationController
     else
            render :status => 400,
            :json => { :success => false,
-                      :info => "Process Failed", 
-                      :errors => @reported_issue.errors.messages}   
+                      :info => @reported_issue.errors.full_messages.first, 
+                      :errors => @reported_issue.errors.full_messages}  
     end
   end
   

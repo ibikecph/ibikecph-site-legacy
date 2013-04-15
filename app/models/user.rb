@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   #attr_accessor :password, :created_from_oath
   
   validates_presence_of :name
-  validates_uniqueness_of :name, :case_sensitive => false
+  #validates_uniqueness_of :name, :case_sensitive => false
   validates_presence_of :password, :on => :create#, :unless => :has_oath_authentications
   validates_length_of :password, :minimum => 3, :if => :password
   validates :password_confirmation, :presence => true, :if => :password
