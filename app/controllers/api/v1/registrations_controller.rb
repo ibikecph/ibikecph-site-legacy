@@ -24,8 +24,8 @@
         else
            render :status => 422,
            :json => { :success => false,
-                      :info => "Process Failed", 
-                      :errors => @user.errors.messages}
+                      :info => @user.errors.full_messages.first, 
+                      :errors => @user.errors.full_messages}
 
         end
       end
@@ -43,8 +43,8 @@
         else
                render :status => 400,
                :json => { :success => false,
-                          :info => "Process Failed", 
-                          :errors => @user.errors.messages}   
+                          :info => @user.errors.full_messages.first, 
+                          :errors => @user.errors.full_messages}   
         end         
       end
       
