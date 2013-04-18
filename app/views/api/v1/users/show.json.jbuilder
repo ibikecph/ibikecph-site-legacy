@@ -6,5 +6,9 @@ json.data do
     json.email @user.email
     json.about @user.about
     json.role @user.role
-    json.image_url @user.image.g2.url
+    if @user.provider=="facebook" and @user.uid? and @user.uid!="" and !@user.image?
+    	json.image_url "http://graph.facebook.com/"+@user.uid+"/picture?type=square"
+    else
+    	json.image_url @user.image? ? @user.image.g2.url : "null"
+    end
 end
