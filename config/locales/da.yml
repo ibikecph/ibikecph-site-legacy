@@ -136,6 +136,7 @@ da:
       submit: Log ind
       forgot_it_q: Glemt det?
       signup: Opret
+      signuporlogin_with_fb: "Facebook Login"
       no_account_q: Ingen konto?
       remember_me: Husk mig
     flash:

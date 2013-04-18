@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :token_authenticatable
+         :recoverable, :rememberable, :token_authenticatable, :omniauthable, :omniauth_providers => [:facebook]
          
   #has_many :authentications, :dependent => :destroy
   has_many :blog_entries, :dependent => :nullify
@@ -9,16 +9,16 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :issues, :dependent => :destroy
   has_many :reported_issues, :dependent => :destroy
-  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :image_path, :remove_image, :image_cache, :notify_by_email, :terms, :tester
+  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :image_path, :remove_image, :image_cache, :notify_by_email, :terms, :tester, :provider, :uid
   attr_accessor :image_path
   #attr_accessor :password, :created_from_oath
   
   validates_presence_of :name
   #validates_uniqueness_of :name, :case_sensitive => false
-  validates_presence_of :password, :on => :create#, :unless => :has_oath_authentications
+  validates_presence_of :password, :on => :create, :unless => :has_oath_authentications
   validates_length_of :password, :minimum => 3, :if => :password
-  validates :password_confirmation, :presence => true, :if => :password
-  validates_confirmation_of :password, :if => :password
+  validates :password_confirmation, :presence => true, :if => :password, :unless => :has_oath_authentications
+  validates_confirmation_of :password, :if => :password, :unless => :has_oath_authentications
   
   validates_acceptance_of :terms
   
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
   
   def has_oath_authentications
-    @created_from_oath || authentications.where(:type=>'OAuthAuthentication').any?
+    @created_from_oath || self.provider=='facebook'
   end
     
   def has_password?
@@ -151,5 +151,18 @@ class User < ActiveRecord::Base
     tester == true
   end
   
+def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  user = User.where(:email => auth.info.email).first
+  unless user
+    user = User.new(:name=>auth.extra.raw_info.name,
+                         :provider=>auth.provider,
+                         :uid=>auth.uid,
+                         :email=>auth.info.email,
+                         :email_confirmation=>auth.info.email
+                         )
+   user.reset_authentication_token!
+  end
+  return user
+end
   
 end

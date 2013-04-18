@@ -20,6 +20,7 @@
 <p>
     <%= f.submit t('.submit'), :class => :submit %>
     <span class="note"><%=t '.no_account_q' %>  <%= link_to t('.signup'), new_registration_path(resource_name) %></span>
+    <span class="note"><%= link_to t('sessions.new.signuporlogin_with_fb'), user_omniauth_authorize_path(:facebook) %></span>
 </p>
 <% end %>
 </div>

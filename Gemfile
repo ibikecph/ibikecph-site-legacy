@@ -21,6 +21,8 @@ gem 'google-analytics-rails'
 gem 'rails-timeago'
 gem 'devise'
 gem 'jbuilder'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development do
   gem 'quiet_assets'

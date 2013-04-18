@@ -142,6 +142,7 @@ en:
       forgot_it_q: Forgot it?
       no_account_q: No account?
       signup: Sign Up
+      signuporlogin_with_fb: "Facebook Login"
       remember_me: Remember Me
     flash:
       logged_in: "Logged in as %{user}."
