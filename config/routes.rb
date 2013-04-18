@@ -11,7 +11,7 @@ RailsOSRM::Application.routes.draw do
     end
   end
     
-    devise_for :users
+    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
     resources :token_authentications, :only => [:create, :destroy]
   
   scope "(:locale)", :locale => /en/ do

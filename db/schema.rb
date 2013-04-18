@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412043448) do
+ActiveRecord::Schema.define(:version => 20130416060743) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
@@ -130,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20130412043448) do
     t.string   "role"
     t.boolean  "notify_by_email",                       :default => true
     t.boolean  "tester",                                :default => false
+    t.string   "provider"
+    t.string   "uid"
   end
 
   create_table "votes", :force => true do |t|
