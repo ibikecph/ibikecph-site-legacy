@@ -7,6 +7,7 @@ RailsOSRM::Application.routes.draw do
         get "/logout", :to => "sessions#destroy"
       end          
       resources :reported_issues, :path => 'issues'
+      resources :favourites
       resources :users, :only => [:index, :show]          
     end
   end
