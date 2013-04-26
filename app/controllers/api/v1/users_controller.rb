@@ -19,6 +19,14 @@
 
       end
       
+      def destroy
+        @user = User.find params[:id]
+        @user.destroy
+        render :status => 200,
+        :json => { :success => true,
+                    :info => "User deleted successfully!",
+                    :data => {} }
+      end
       
       private
       

@@ -8,7 +8,7 @@ RailsOSRM::Application.routes.draw do
       end          
       resources :reported_issues, :path => 'issues'
       resources :favourites
-      resources :users, :only => [:index, :show]          
+      resources :users, :only => [:index, :show, :destroy]          
     end
   end
     
