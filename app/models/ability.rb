@@ -22,7 +22,10 @@ class Ability < ActiveRecord::Base
         end 
       end
     end
-    cannot :delete, User 
+      can :destroy, User do |t|
+        t.id == user.id
+      end 
+    #cannot :delete, User 
   end
   
 end
