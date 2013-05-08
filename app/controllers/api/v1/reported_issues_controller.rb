@@ -1,7 +1,8 @@
-class Api::V1::ReportedIssuesController < ApplicationController 
+class Api::V1::ReportedIssuesController < Api::V1::BaseController
   
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+ 
   before_filter :check_auth_token
+  
   def index
     @reported_issues=ReportedIssue.find(:all, :conditions=>{:is_open=>true})
   end

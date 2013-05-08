@@ -4,7 +4,7 @@ class Ability < ActiveRecord::Base
   def initialize(user)
     disable_risky_blocks
 
-    can [:index,:show], [Comment,User,Issue,Favourite]
+    can [:index,:show], [Comment, User, Issue, Favourite, Route]
     can [:index,:archive,:show,:tag], [BlogEntry]
     can [:index,:show], [Theme]
     can :create, User
@@ -12,12 +12,12 @@ class Ability < ActiveRecord::Base
       if user.role == 'super'
         can :manage, :all
       else
-        can :create, [Comment,Issue,Vote]
+        can :create, [Comment, Issue, Vote]
         can [:vote,:unvote], Issue
-        can :destroy, [Follow,Favourite] do |t|
+        can :destroy, [Follow, Favourite, Route] do |t|
           t.user.id == user.id
         end 
-        can [:update,:create], Favourite do |t|
+        can [:update,:create], [Favourite, Route] do |t|
           t.user.id == user.id
         end 
       end
