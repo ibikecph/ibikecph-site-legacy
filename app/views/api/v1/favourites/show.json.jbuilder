@@ -1,5 +1,5 @@
 json.success "true"
-json.info "Favourites Details"
+json.info "Favourite Details"
 json.data do
     json.id @favourite.id
     json.user_id @favourite.user_id

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130422141408) do
+ActiveRecord::Schema.define(:version => 20130502125608) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
@@ -90,6 +90,22 @@ ActiveRecord::Schema.define(:version => 20130422141408) do
     t.datetime "updated_at",                      :null => false
     t.integer  "user_id"
     t.string   "route_segment"
+  end
+
+  create_table "routes", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "from_name"
+    t.string   "from_lattitude"
+    t.string   "from_longitude"
+    t.string   "to_name"
+    t.string   "to_lattitude"
+    t.string   "to_longitude"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "route_visited_locations"
+    t.boolean  "is_finished",             :default => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   create_table "taggings", :force => true do |t|
