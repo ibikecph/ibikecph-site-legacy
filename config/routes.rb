@@ -1,5 +1,7 @@
 RailsOSRM::Application.routes.draw do
   
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+    
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiSettings.new(version: 1) do         
       devise_for :users do
@@ -12,7 +14,7 @@ RailsOSRM::Application.routes.draw do
     end
   end
     
-    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+    #devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :confirmations => "users/confirmations" }
     resources :token_authentications, :only => [:create, :destroy]
   
   scope "(:locale)", :locale => /en/ do

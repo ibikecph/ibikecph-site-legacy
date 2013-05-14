@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :token_authenticatable, :omniauthable, :omniauth_providers => [:facebook]
+         :recoverable, :rememberable, :token_authenticatable, :confirmable, :omniauthable, :omniauth_providers => [:facebook]
          
   #has_many :authentications, :dependent => :destroy
   has_many :blog_entries, :dependent => :nullify
@@ -155,13 +155,14 @@ class User < ActiveRecord::Base
   
 def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(:email => auth.info.email).first
-  unless user
+  unless user    
     user = User.new(:name=>auth.extra.raw_info.name,
                          :provider=>auth.provider,
                          :uid=>auth.uid,
                          :email=>auth.info.email,
                          :email_confirmation=>auth.info.email
                          )
+   user.skip_confirmation!                      
    user.reset_authentication_token!
   end
   return user
