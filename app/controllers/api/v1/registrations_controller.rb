@@ -19,8 +19,8 @@
           @user.reset_authentication_token!
             render :status => 201,
            :json => { :success => true,
-                      :info => "Account created. Welcome!",
-                      :data => { :auth_token => @user.authentication_token, :id=>@user.id } }
+                      :info => "Account created. A message with a confirmation link has been sent to your email address. Please open the link to activate your account.",
+                      :data => {} }
         else
            render :status => 422,
            :json => { :success => false,
