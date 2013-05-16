@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :reported_issues, :dependent => :destroy
   has_many :favourites, :dependent => :destroy
   has_many :routes, :dependent => :destroy
-  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :image_path, :remove_image, :image_cache, :notify_by_email, :terms, :tester, :provider, :uid
+  attr_accessible :name, :about,:email, :email_confirmation, :password, :password_confirmation, :image, :image_path, :remove_image, :image_cache, :notify_by_email, :terms, :tester, :provider, :uid, :account_source
   attr_accessor :image_path
   #attr_accessor :password, :created_from_oath
   
