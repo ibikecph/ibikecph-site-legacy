@@ -7,6 +7,21 @@ IBikeCPH.util.normalize_whitespace = (text) ->
 IBikeCPH.util.instruction_string = (instruction) ->
 	string = I18n.translate('instructions.'+instruction.turn);
 
+	# if instruction.turn is 'enter_roundabout'
+	# 	string += ' ' +  I18n.t('instructions.take_the_nth_exit').replace('{%nth}', I18n.translate('instructions.'+instruction.roundabout_exit + ''));
+
+	# if instruction.street and instruction.turn isnt 'enter_roundabout'
+	# 	string += ' ' + I18n.translate('instructions.follow') + ' ' + instruction.street
+
+	# if instruction.turn is 'head'
+	# 	string += ' ' + I18n.translate('instructions.'+instruction.direction)
+
+	# if instruction.distance and instruction.turn isnt 'continue'
+	# 	string += ' ' + I18n.translate('instructions.and_continue') + ' ' + instruction.distance + 'm';
+
+	# if instruction.turn is 'continue'
+	# 	string += ' ' + I18n.translate('instructions.for') + ' ' + instruction.distance + 'm'
+
 	if instruction.turn is 'enter_roundabout'
 		string += ' ' +  I18n.t('instructions.take_the_nth_exit').replace('{%nth}', I18n.translate('instructions.'+instruction.roundabout_exit + ''));
 
@@ -15,12 +30,6 @@ IBikeCPH.util.instruction_string = (instruction) ->
 
 	if instruction.turn is 'head'
 		string += ' ' + I18n.translate('instructions.'+instruction.direction)
-
-	if instruction.distance and instruction.turn isnt 'continue'
-		string += ' ' + I18n.translate('instructions.and_continue') + ' ' + instruction.distance + 'm';
-
-	if instruction.turn is 'continue'
-		string += ' ' + I18n.translate('instructions.for') + ' ' + instruction.distance + 'm'
 
 	string
 

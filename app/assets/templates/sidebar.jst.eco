@@ -1,13 +1,13 @@
-<a class="help"><%= I18n.t 'map.help' %></a>
+<!-- <a class="help"><%= I18n.t 'map.help' %></a>
 <a class="reset"><%= I18n.t 'map.reset' %></a>
 <a class="permalink"><%= I18n.t 'map.link_for_route' %></a> 
-<br>
-<div class="mode">
+<br> -->
+<!-- <div class="mode">
 	<input type="radio" id="normal" name="mode" checked="1"/> <span><%= I18n.t 'map.normal_bike' %></span>
 	<input type="radio" id="cargo" name="mode" /> <span class="proposed"><%= I18n.t 'map.electric_bike' %></span>
 	<input type="radio" id="electric" name="mode"/> <span class="proposed"><%= I18n.t 'map.cargo_bike' %></span>
-</div>
-
+</div> -->
+<div class="clear"></div>
 <div id="addresses">
 	<div class="address">
 		<label><%= I18n.t 'map.from' %></label>
@@ -20,7 +20,13 @@
 </div>
 
 <div id="time">
-	<%= I18n.t 'map.departure' %> <input class="at departure" type="text" placeholder="<%= I18n.t 'map.departure_placeholder' %>" tabindex=3>
-	&rarr;
-	<%= I18n.t 'map.arrival' %> <input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
+	<div>
+		<span><%= I18n.t 'map.departure' %></span>
+		<input class="at departure" type="text" placeholder="<%= I18n.t 'map.departure_placeholder' %>" tabindex=3>
+	</div>
+	<div>
+		<span><%= I18n.t 'map.arrival' %></span>
+		<input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
+	</div>
+	<div class="clear"></div>
 </div>

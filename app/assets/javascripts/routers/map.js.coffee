@@ -3,16 +3,17 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 	routes:
 		'': 'index'
 		'!/*code': 'show'
+		'app': 'app'
 
 	initialize: ->
 		#TODO
 		#@search.waypoints.on 'from:change:address to:change:address reset', ->
 		#	if _gaq? and not app.map.dragging_pin
 		#		{from, to} = app.info.waypoints.get_from_and_to()
-    #
+    	#
 		#		from = from.get 'address' if from
 		#		to   = to.get   'address' if to
-    #
+		#
 		#		_gaq.push ['_trackEvent', 'location', 'from', from] if from
 		#		_gaq.push ['_trackEvent', 'location', 'to'  , to  ] if to
 		#		_gaq.push ['_trackEvent', 'location', 'route', "#{from} -- #{to}"] if from and to
@@ -30,4 +31,6 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		@search.waypoints.reset_from_url code
 		@sidebar.render()
 		@map.go_to_route()
-		
+
+	app: ->
+		console.log "aa"

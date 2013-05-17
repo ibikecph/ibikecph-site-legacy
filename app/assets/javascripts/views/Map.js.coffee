@@ -2,10 +2,11 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 	bounds: true
 
-
 	initialize: (options) ->
 		@router = options.router
 		
+		url_type = "cargo_url"
+
 		$(window).on 'resize', ->
 			$('#map').height $(window).height() - $('#header').height()
 		$(window).trigger 'resize'
@@ -97,9 +98,19 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@map.removeLayer @invalid_route
 		
 	go_to_my_location: ->
+
 		@map.locate
 			setView: true
 			enableHighAccuracy: true
+
+
+		m = @map
+		if navigator.geolocation
+			navigator.geolocation.getCurrentPosition (position) ->
+  				m.fireEvent "click",
+  					latlng: latlng = new L.LatLng(position.coords.latitude, position.coords.longitude)
+		else
+			alert "Not supported"
 
 	go_to_route: ->
 		latlngs = @model.waypoints.to_latlngs()

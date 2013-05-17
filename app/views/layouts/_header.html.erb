@@ -1,13 +1,20 @@
-<%= link_to image_tag('alpha.png'), blog_entry_index_path, :id => :alpha %>
+<!-- <%= link_to image_tag('alpha.png'), blog_entry_index_path, :id => :alpha %>-->
 <div id="header">
-	<%= link_to image_tag('ibikecph_small.png', :class => :logo), root_path %>
+	<!-- <%= link_to image_tag('ibikecph_small.png', :class => :logo), root_path %>-->
 	<div class="menu">
 		<%= render_navigation :context => :main %>
 	</div>
-	<div class="menu locales">
-		<%= render_navigation :context => :locale %>
-	</div>
-	<div class="menu login">
-		<%= render_navigation :context => :login %>
+	<div class="right_menu">
+		<div class="menu" id="">
+			<ul>
+				<li id="mobile_app"><a href="#app"><%=t 'menu.mobile_app' %></a></li>
+			</ul>
+		</div>
+		<div class="menu locales">
+			<%= render_navigation :context => :locale %>
+		</div>
+		<div class="menu login">
+			<%= render_navigation :context => :login %>
+		</div>
 	</div>
 </div>

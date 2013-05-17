@@ -27,18 +27,20 @@ body {
 	z-index: 1;
 	width: 350px;
 	box-shadow: 0px 5px 5px rgba(0,0,0,.5);
-	top: 10px;
-	left: 10px;
+	top: 20px;
+	left: 0;
     padding: $half_gutter - 2*$border_width;
-    border-radius: 4px;
+    border-radius: 0 5px 5px 0;
     border: $border_width solid $lightish;
-	background: $light;
+	background: $white;
   &.folded {
-		width: 16px;
-		height: 16px;
+		width: 51px;
+		height: 45px;
 		.fold {
+			width: 51px;
+			height: 45px;
 			display: block;
-			background: image-url('expand.png');
+			background: image-url('_new/logo.png');
 		}
 		#ui_foldable {
 			display: none;
@@ -46,12 +48,12 @@ body {
 	}
 	.fold {
 		cursor: pointer;
-		width: 16px;
-		height: 16px;
+		width: 51px;
+		height: 45px;
 		float: left;
-		background: image-url('close.png');
+		background: image-url('_new/logo.png');
 	}
-	.reset, .permalink, .details, .help {
+	.reset, .permalink, .help {
 		font-size: 0.8em;
 		float: right;
 		color: $color;
@@ -77,35 +79,145 @@ body {
 			}
 		}
 	}
+	.search_bottom {
+		display: none;
+		list-style: none;
+		font-size: 12px;
+		text-align: center;
+		text-transform: uppercase;
+		margin: 0 0 -20px -20px;
+		width: 390px;
+		padding-right: 40px;
+		font-weight: bold;
+		height: 40px;
+		overflow: hidden;
+		li {
+			margin: 0;
+			padding: 0;
+			display: block;
+			float: left;
+			width: 195px;
+			a {
+				display: block;
+				background: #f4f4f4;
+				padding: 12px 0;
+				border-left: 1px solid #fff;
+				border-right: 1px solid #d5d5d6;
+				color: #8b8b8b;
+				text-decoration: none;
+				&:hover {
+					color: #444;
+				}
+			}
+		}
+	}
 	#addresses {
+		margin: 20px 0;
 		.address {
+			position: relative;
+			margin-bottom: 10px;
+			.suggestions {
+				list-style: none;
+				font-size: 0.75em;
+				position: absolute;
+				left: 0;
+				top: 42px;
+				border-radius: 0 0 5px 5px;
+				background: #f4f4f4;
+				width: 294px;
+				padding: 10px 15px;
+				z-index: 5;
+				li {
+					padding: 5px 0;
+					border-bottom: 1px solid #eee;
+					font-weight: bold;
+				}
+			}
 			label {
 				display: inline-block;
 				width: 17px;
-				font-size: 1em;		
+				font-size: 0.75em;
 				font-weight: bold;
+				position: absolute;
+				left: 14px;
+				top: 14px;
+				z-index: 2;
+				color: #a2a2a2;
 			}
 			input {
-				width: 320px;
-				padding: 3px 1px;
-				font-size: 1em;
+				width: 280px;
+				padding: 12px 12px 12px 30px;
+				font-size: 0.80em;
+				background: #f4f4f4;
+				border-radius: 2px;
+				border: 1px solid #e3e3e3;
+				box-shadow: 0 1px 1px #c3c3c3 inset;
+				color: #333;
+				outline: none;
+				font-weight: bold;
+				position: relative;
+				z-index: 1;
 			}
-			margin-bottom: 3px;	
 		}
-		margin-bottom: 10px;	
 	}
 	#time {
-		font-size: 0.9em;
+		div {
+			width: 110px;
+			float: left;
+			margin-right: 10px;
+		}
+		.clear {
+			float: none;
+			width: 10px;
+			clear: both;
+			font-size: 1px;
+		}
+		span {
+			text-transform: uppercase;
+			display: block;
+			font-size: 0.67em;
+			margin-bottom: 2px;
+			font-weight: bold;
+			color: #666;
+		}
 		input {
-			font-size: 0.9em;
-			width: 50px;
+			width: 84px;
+			padding: 12px;
+			font-size: 0.85em;
+			background: #f4f4f4;
+			border-radius: 2px;
+			border: 1px solid #e3e3e3;
+			box-shadow: 0 1px 1px #c3c3c3 inset;
+			color: #333;
+			outline: none;
+			font-weight: bold;
+			position: relative;
+			z-index: 1;
 		}
 	}
 	#summary {
 		display: none;
-		margin-top: 10px;
+		margin: 10px 0 0 -20px;
+		padding: 10px 20px;
+		width: 100%;
+		border: 1px solid #000;
+		box-shadow: 0 0 5px #5a5a5a inset;
+		background: #444;
+		color: #9d9d9d;
+		text-align: right;
+		position: relative;
+		text-shadow: 0 -1px 1px #000;
+		.details {
+			font-size: 0.9em;
+			font-weight: bold;
+			color: $white;
+			position: absolute;
+			left: 20px;
+			top: 12px;
+			cursor: pointer;
+		}
 		.duration, .distance {
-			font-size: 1.3em;
+			font-size: 0.9em;
 			font-weight: bold;
 		}
 		.notice {
@@ -123,19 +235,47 @@ body {
 	    display: block;
 		margin-top: 10px;
 		max-height: 300px;
-		overflow-y: scroll;
+		overflow: auto;
+		border-bottom: 1px solid #d5d5d6;
+		margin: 0 0 0 -20px;
+		width: 100%;
+		padding-right: 40px;
+		list-style-type: none;
+		color: $dark;
 		li {
-		    padding: 3px;
 			cursor: pointer;
+			display: block;
+			width: 100%;
+			padding: 15px 20px;
+			border-bottom: 1px solid #d5d5d6;
+			&:last-child {
+				border: none;
+			};
 			&:hover {
-				background-color: #ff4;
+				background-color: #eee;
 				color: black;
 			};
-		}
-		li + li {
-			padding-top: 6px;
-			border-top: 1px solid $lightish;
-			margin-top: 6px;
+			span.instruction_icon {
+				width: 40px;
+				padding-top: 22px;
+				text-align: center;
+				display: block;
+				float: left;
+				margin-right: 10px;
+				font-size: 0.6em;
+			};
+			span.instruction_text {
+				font-size: 16px;
+				font-weight: bold;
+				display: block;
+				float: left;
+				width: 200px;
+			};
+			span.clear {
+				clear: both;
+				font-size: 1px;
+				display: block;
+			}
 		}
 	}
 }
@@ -172,30 +312,43 @@ body {
 	}
 }
 .leaflet-control {
-	background-color: white;
-    border: $border_width solid $lightish;
-	border-radius: 4px;
-	box-shadow: 0px 5px 5px rgba(0,0,0,.5);
+	background-color: #f4f4f4;
+    border: 1px solid #d5d5d6;
+	border-radius: 6px;
+	box-shadow: 0px 1px 2px rgba(0,0,0,.3);
+	overflow: hidden;
 }
 .leaflet-control-goto {
-	padding: 5px;
 	a {
-		width: 26px;
-		height: 26px;
+		width: 40px;
+		height: 40px;
 		background-position: 50% 50%;
 		background-repeat: no-repeat;
 		display: block;
 	}
 }
 .leaflet-control-zoom {
-	padding: 9px;
+	padding: 0;
 }
 .leaflet-control-goto-my-location {
-	background-image: image-url('location.png');
-	margin-bottom: 5px;
+	background-image: image-url('_new/location.png');
+	border-bottom: 1px solid #d5d5d6;
+	opacity: 0.5;
+	border-radius: 5px 5px 0 0;
+	&:hover {
+		opacity: 1;
+		background-color: #fff;
+	}
 }
 .leaflet-control-goto-route {
-	background-image: image-url('route.png');
+	opacity: 0.5;
+	background-image: image-url('_new/route.png');
+	border-top: 1px solid #fafafa;
+	border-radius: 0 0 5px 5px;
+	&:hover {
+		opacity: 1;
+		background-color: #fff;
+	}
 }
 ::-webkit-input-placeholder {
 	color: #ddd;

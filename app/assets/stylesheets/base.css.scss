@@ -16,6 +16,9 @@ $light: hsl( $hue, $sat, 97% );
 $back: hsl( $hue, $sat, 100% );
 $link: hsl( 230, 30%, 50% );
 
+$new_dark: hsl(0, 0, 13);
+$white: hsl(0, 0, 100);
+
 $columns: 12;
 $column: 60px;
 $gutter: 40px;
@@ -46,7 +49,8 @@ $columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 * {
 	padding: 0px;
 	margin: 0px;
-	font-family: 'Helvetica', 'Arial', sans-serif;
+	font-family: 'Helvetica Neue' 'Helvetica', 'Arial', sans-serif;
+    -webkit-font-smoothing:antialiased
 }
 html {
 	min-width: 445px;
@@ -57,7 +61,7 @@ body {
         position: absolute;
         right: 0;
         top: -3px;
-        z-index: 10;
+        z-index: 101;
     }
 }
 img {
@@ -70,40 +74,45 @@ a {
     }
 }
 #header {
-    background-color: $dark;
+    background-color: $new_dark;
+    -webkit-box-shadow: 0 0 5px $dark;
+    -moz-box-shadow: 0 0 5px $dark;
+    box-shadow: 0 0 5px $dark;
     color: white;
-    font-size: 0.9em;
+    font-size: 0.70em;
+    text-transform: uppercase;
     overflow: hidden;
     position: relative;
+    z-index: 100;
     white-space: nowrap;
-    height: 35px;
-    img.logo {
-        width: 120px;
-        height: 25px;
-        float: left;
-        margin: 4px $half_gutter;
-    }
+    height: 40px;
+}
+.right_menu {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .menu {
-    float: left;
-    margin-left: $half_gutter;
-    margin-right: $half_gutter;
+    float: left;    
     ul {
         list-style-type: none;
         li {
-            background-color: $dark;
+            text-shadow: 0 1px 1px #000;
+            background-color: $new_dark;
             float: left;
             display: inline-block;
-            height: 35px;
+            height: 40px;
+            border-right: 1px solid #000;
+            border-left: 1px solid #393939;
             &.selected, &.selected:hover {
-                background-color: $color;
+                background-color: #000;
             }
             &:hover {
-                background-color: $darkish;
+                background-color: #000;
             }
             a {
                 padding: 0px 14px;
-                line-height: 2.5em;
+                line-height: 3.7em;
                 font-weight: bold;
                 color: white;
                 font-size: 1em;
@@ -111,25 +120,38 @@ a {
             }
         }
     }
-    &.locales {
-        li {
-			a {
-				font-weight: normal;
-                padding: 0px 7px;
-			}
-            &:hover {
-                background-color: $darkish*0.8;
-            }
-            &.selected, &.selected:hover {
-                background-color: $darkish;
-            }
-        }
-    }
-    &.login {
-        position: absolute;
-        top: 0;
-        right: $gutter;
-    }
+}
+.menu #home {
+    background: url(/assets/_new/nav-map.png) no-repeat 20px center;
+    padding-left: 36px;
+    &.selected,
+    &:hover{
+        background: #000 url(/assets/_new/nav-map-active.png) no-repeat 20px center;
+    };
+}
+.menu #blog {
+    background: url(/assets/_new/nav-news.png) no-repeat 20px center;
+    padding-left: 36px;
+    &.selected,
+    &:hover{
+        background: #000 url(/assets/_new/nav-news-active.png) no-repeat 20px center;
+    };
+}
+.menu #feedback {
+    background: url(/assets/_new/nav-feedback.png) no-repeat 20px center;
+    padding-left: 36px;
+    &.selected,
+    &:hover{
+        background: #000 url(/assets/_new/nav-feedback-active.png) no-repeat 20px center;
+    };
+}
+.menu #mobile_app {
+    background: url(/assets/_new/nav-phone.png) no-repeat 20px center;
+    padding-left: 36px;
+    &.selected,
+    &:hover{
+        background: #000 url(/assets/_new/nav-phone-active.png) no-repeat 20px center;
+    };
 }
 .note {
     color: $note_color;

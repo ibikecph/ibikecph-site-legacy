@@ -9,16 +9,16 @@ IBikeCPH.config =
 
 	route_styles:
 		current:
-			color   : 'blue'
-			weight  : 5
-			opacity : 0.6
+			color   : '#00aeef'
+			weight  : 6
+			opacity : 0.8
 		old:
 			color   : 'black'
-			weight  : 5
+			weight  : 6
 			opacity : 0.4
 		invalid:
 			color   : 'grey'
-			weight  : 5
+			weight  : 6
 			opacity : 0.3
 
 	# The first tile set is used by default.
@@ -54,6 +54,7 @@ IBikeCPH.config =
 
 	routing_service:
 		url: 'http://routes.ibikecph.dk/viaroute'
+		cargo_url: 'http://routes.ibikecph.dk/cargobike/viaroute'
 
 	geocoding_service:
 		url: 'http://nominatim.openstreetmap.org/search'
@@ -70,3 +71,10 @@ IBikeCPH.config =
 			'accept-language' : 'da'
 			addressdetails    : '1'
 			email             : 'emil.tin@tmf.kk.dk'
+
+	suggestion_service:
+		foursquare:
+			url: 'https://api.foursquare.com/v2/venues/suggestcompletion?near=Copenhagen&query='
+			token: '&oauth_token=BM2LGKP3TZURURN3R0NFYGQPQH3PU3L2WDNRF1MUJPSKYV1N&v=201303'
+		oiorest:
+			url: 'http://geo.oiorest.dk/adresser.json?q='

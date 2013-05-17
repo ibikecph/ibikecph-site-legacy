@@ -1,15 +1,15 @@
 common: &common
   adapter: postgresql
   encoding: unicode
-  username: ibikecph
-  password:
+  username: postgres
+  password: rrtijb97
   pool: 5
 
 
 #we're running postgres everywhere, to avoid differences between dev and production
 development:
     <<: *common
-    database: ibikecph_development
+    database: ibikecph_dev1
 
 
 # Warning: The database defined as "test" will be erased and

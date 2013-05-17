@@ -7,6 +7,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'click .permalink'             : 'permalink'
 		'change .departure'	  		     : 'change_departure'
 		'change .arrival'	   		       : 'change_arrival'
+		'keydown .address input'		: 'findSuggestions'
 
 	initialize: (options) ->
 		@router = options.router
@@ -116,29 +117,85 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	set_loading: (field_name, loading) ->
 		@$(".#{field_name}").toggleClass 'loading', !!loading
 
-	fields_updated: (event) ->
-		input = $(event.target)
-		if input.is '.from'
-			waypoint = @model.waypoints.first()
-		else if input.is '.to'
-			waypoint = @model.waypoints.last()
-		else
-			return
-		raw_value = input.val()
-		value = IBikeCPH.util.normalize_whitespace raw_value
-		
-		#be a little smarter when parsing adresses, to make nominatim happier
-		value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København
-		value = value.replace /\b[nNøØsSvV]$/, ""					# remove north/south/east/west postfix
-		value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
-		
-		input.val(value) if value != raw_value
-		if value
-			waypoint.set 'address', value
-			waypoint.trigger 'input:address'
-		else
-			waypoint.reset()
-			if @model.waypoints.length > 2
-				@model.waypoints.remove waypoint
+	findSuggestions: ->
+		el = $(event.target)
+		parent = el.parent()
+
+		setTimeout (->
+			val = el.val().toLowerCase()
+
+			if val.length >= 4
+				items = []
+				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token
+				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+"&callback=?"
+
+				$.getJSON oiorest_url, (data) ->
+					$.each data, ->
+						unless @lat is "0.0"
+							a = @vejnavn.navn + " " + @husnr + " " + @kommune.navn
+							items.push
+								name: ""
+								address: a.replace("  ", " ")
+								lat: @wgs84koordinat.bredde
+								lng: @wgs84koordinat.længde
+
+				$.getJSON foursquare_url, (data) ->
+					$.each data.response.minivenues, ->
+						items.push
+							name: @name + ", "
+							address: @location.address + ", " + @location.postalCode + " " + @location.city
+							lat: @location.lat
+							lng: @location.lng
+
+				interval = setInterval(->
+					if items.length > 0
+						$(".suggestions").remove()
+						suggestions = $("<ul />").addClass('suggestions')
+						parent.append(suggestions)
+						$.each items, (i) ->
+							if i < 5
+								item = $("<li />").html(@address).bind("click", ->
+									el.val($(@).html()).blur()
+									suggestions.remove()
+									@fields_updated
+								)
+								suggestions.append(item)
+						clearInterval interval
+				, 500)
+						
 			else
+				return false
+
+		), 50
+
+	fields_updated: (event) ->
+		m = @model
+		setTimeout(->
+			input = $(event.target)
+			console.log input.val()
+			if input.is '.from'
+				waypoint = m.waypoints.first()
+			else if input.is '.to'
+				waypoint = m.waypoints.last()
+			else
+				return
+			raw_value = input.val()
+			console.log raw_value
+			value = IBikeCPH.util.normalize_whitespace raw_value
+			
+			#be a little smarter when parsing adresses, to make nominatim happier
+			value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København
+			value = value.replace /\b[nNøØsSvV]$/, ""					# remove north/south/east/west postfix
+			value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
+			
+			input.val(value) if value != raw_value
+			if value
+				waypoint.set 'address', value
 				waypoint.trigger 'input:address'
+			else
+				waypoint.reset()
+				if m.waypoints.length > 2
+					m.waypoints.remove waypoint
+				else
+					waypoint.trigger 'input:address'
+		, 150)
