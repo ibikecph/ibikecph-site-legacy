@@ -5,6 +5,7 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   def create
    # warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
+   Rails.logger.info("USER PARAMS ::::::: #{params.inspect}")
    if params[:user][:fb_token]
       fb = OmniAuth::Strategies::Facebook.new(ENV['IBIKECPH_FBAPP_ID'], ENV['IBIKECPH_FBAPP_SECRET']) 
       client = ::OAuth2::Client.new(ENV['IBIKECPH_FBAPP_ID'], ENV['IBIKECPH_FBAPP_SECRET'], fb.options.client_options) 
