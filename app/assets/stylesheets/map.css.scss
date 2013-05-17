@@ -22,7 +22,6 @@ body {
 	z-index: 0;
 }
 #ui {
-	overflow: hidden;
 	position: absolute;
 	z-index: 1;
 	width: 350px;
@@ -58,12 +57,29 @@ body {
 		float: right;
 		color: $color;
 		cursor: pointer;
-		margin-left: 10px;
+		margin-left: 2px;
 		text-decoration: none;
+		text-indent: -5000px;
+		overflow: hidden;
+		display: block;
+		opacity: 0.5;
+		width: 16px;
+		height: 16px;
 		&:hover {
-			color: black;
+			opacity: 1;
 		}
 	}
+
+	.helper-icons.help {
+		background: image-url('_new/help.png') no-repeat center center;
+	}
+	.helper-icons.reset {
+		background: image-url('_new/reset-search.png') no-repeat center center;
+	}
+	.helper-icons.permalink {
+		background: image-url('_new/link.png') no-repeat center center;
+	}
+	
 	h1 {
 		color: $highlight;
 		font-size: 1em;
@@ -91,12 +107,16 @@ body {
 		font-weight: bold;
 		height: 40px;
 		overflow: hidden;
+		border-radius: 0 0 5px 0;
 		li {
 			margin: 0;
 			padding: 0;
 			display: block;
 			float: left;
 			width: 195px;
+			a:last-child {
+				border-radius: 0 0 5px 0;
+			}
 			a {
 				display: block;
 				background: #f4f4f4;
@@ -113,24 +133,49 @@ body {
 	}
 	#addresses {
 		margin: 20px 0;
+		position: relative;
+		.reverse_route {
+			width: 25px;
+			height: 13px;
+			display: block;
+			background: image-url('_new/reverse_route.png');
+			opacity: 0.5;
+			right: 0;
+			position: absolute;
+			top: 50%;
+			margin: -6px 0 0;
+			cursor: pointer;
+			&:hover {
+				opacity: 1;
+			};
+		}
 		.address {
 			position: relative;
 			margin-bottom: 10px;
 			.suggestions {
+				overflow: hidden;
 				list-style: none;
 				font-size: 0.75em;
 				position: absolute;
 				left: 0;
 				top: 42px;
 				border-radius: 0 0 5px 5px;
-				background: #f4f4f4;
-				width: 294px;
-				padding: 10px 15px;
+				background: #fff;
+				border-top: 1px solid #ddd;
+				box-shadow: 0px 1px 5px rgba(0,0,0,.5);
+				width: 314px;
+				padding: 0;
 				z-index: 5;
 				li {
-					padding: 5px 0;
-					border-bottom: 1px solid #eee;
+					padding: 10px 15px 10px 30px;
+					border-bottom: 1px solid #dedede;
 					font-weight: bold;
+					cursor: pointer;
+					color: #666;
+					&:hover {
+						background: #eee;
+						color: #444;
+					}
 				}
 			}
 			label {
@@ -145,7 +190,7 @@ body {
 				color: #a2a2a2;
 			}
 			input {
-				width: 280px;
+				width: 270px;
 				padding: 12px 12px 12px 30px;
 				font-size: 0.80em;
 				background: #f4f4f4;
@@ -199,8 +244,10 @@ body {
 		display: none;
 		margin: 10px 0 0 -20px;
 		padding: 10px 20px;
-		width: 100%;
+		width: 350px;
 		border: 1px solid #000;
+		border-right: none;
+		border-left: none;
 		box-shadow: 0 0 5px #5a5a5a inset;
 		background: #444;
 		color: #9d9d9d;

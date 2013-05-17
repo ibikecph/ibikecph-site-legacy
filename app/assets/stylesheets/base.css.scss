@@ -196,3 +196,49 @@ h2 {
 p {
     margin-bottom: 0.5em;
 }
+
+#mobileapp {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 120px;
+    width: 360px;
+    height: 200px;
+    z-index: 5;
+    background: #222;
+    border: 2px solid #000;
+    box-shadow: 0 5px 5px rgba(255,255,255,0.2) inset, 0 5px 5px rgba(0,0,0,0.2);
+    color: #fff;
+    border-radius: 5px;
+    .phone {
+        width: 142px;
+        height: 162px;
+        background: image-url('_new/app-phone.png') no-repeat center center;
+        position: absolute;
+        left: 0;
+        top: -20px;
+    }
+    .text {
+        width: 160px;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        h1 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            line-height: 1;
+            color: #fff;
+        }
+        p {
+            font-size: 14px;
+            color: #999;
+        }
+    }
+}
+
+
+
+
+
+
+

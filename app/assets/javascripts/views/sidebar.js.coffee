@@ -7,7 +7,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'click .permalink'             : 'permalink'
 		'change .departure'	  		     : 'change_departure'
 		'change .arrival'	   		       : 'change_arrival'
-		'keydown .address input'		: 'findSuggestions'
+		'keydown .address input'		: 'find_suggestions'
+		'click .reverse_route'			: 'reverse_route'
 
 	initialize: (options) ->
 		@router = options.router
@@ -36,7 +37,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		now = new Date()
 		now.setSeconds 0		#avoid minutes that are off by one
 		now
-		
+
 	help: ->
 		$('#help').toggle()
 	
@@ -117,7 +118,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	set_loading: (field_name, loading) ->
 		@$(".#{field_name}").toggleClass 'loading', !!loading
 
-	findSuggestions: ->
+	reverse_route: ->
+		new_to = @get_field 'from'
+		new_from = @get_field 'to'
+
+		@set_field 'to', new_to
+		@set_field 'from', new_from
+
+		$(".address .to, .address .from").trigger('change')
+
+	find_suggestions: ->
 		el = $(event.target)
 		parent = el.parent()
 
@@ -153,7 +163,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 						suggestions = $("<ul />").addClass('suggestions')
 						parent.append(suggestions)
 						$.each items, (i) ->
-							if i < 5
+							if i < 8
 								item = $("<li />").html(@address).bind("click", ->
 									el.val($(@).html()).blur()
 									suggestions.remove()
@@ -172,7 +182,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		m = @model
 		setTimeout(->
 			input = $(event.target)
-			console.log input.val()
 			if input.is '.from'
 				waypoint = m.waypoints.first()
 			else if input.is '.to'
@@ -180,7 +189,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			else
 				return
 			raw_value = input.val()
-			console.log raw_value
 			value = IBikeCPH.util.normalize_whitespace raw_value
 			
 			#be a little smarter when parsing adresses, to make nominatim happier
