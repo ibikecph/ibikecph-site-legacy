@@ -50,6 +50,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   
   def check_login_params
     current_user=nil
+    Rails.logger.info("CURRENT USER ::::::: PBF >>>>>>> #{current_user.inspect}")
     if params[:user].blank? || (params[:user][:fb_token].blank? && params[:user][:email].blank? && params[:user][:password].blank?)
           render :status => 406,
                  :json => { :success => false,
