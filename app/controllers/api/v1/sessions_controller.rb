@@ -2,6 +2,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       
   skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   prepend_before_filter :require_no_authentication, :only => [:create ]
+  prepend_before_filter :check_login_params, :only => [:create ]
 
   def create
    # warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
@@ -45,6 +46,16 @@ class Api::V1::SessionsController < Devise::SessionsController
            :json => { :success => false,
                       :info => "Login Failed",
                       :errors => "Login Failed"}
+  end
+  
+  def check_login_params
+    current_user=nil
+    if params[:user].blank? || (params[:user][:fb_token].blank? && params[:user][:email].blank? && params[:user][:password].blank?)
+          render :status => 406,
+                 :json => { :success => false,
+                 :info => "Login Failed",
+                 :errors => "Required parameter(s) missing."}
+    end
   end
   
 end

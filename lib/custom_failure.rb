@@ -1,7 +1,7 @@
 class CustomFailure < Devise::FailureApp
 
 def respond 
-	if request.format 
+	if request.format=="json" 
 		json_failure 
 	else 
 		super 
