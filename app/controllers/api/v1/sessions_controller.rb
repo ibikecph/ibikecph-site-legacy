@@ -2,10 +2,12 @@ class Api::V1::SessionsController < Devise::SessionsController
       
   skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
   prepend_before_filter :require_no_authentication, :only => [:create ]
+  prepend_before_filter :check_login_params, :only => [:create ]
 
   def create
    # warden.authenticate!(:scope => resource_name, :recall => "#{controller_path}#failure")
    Rails.logger.info("USER PARAMS ::::::: #{params.inspect}")
+   Rails.logger.info("CURRENT USER ::::::: @@@ #{current_user.inspect}")
    if params[:user][:fb_token]
       fb = OmniAuth::Strategies::Facebook.new(ENV['IBIKECPH_FBAPP_ID'], ENV['IBIKECPH_FBAPP_SECRET']) 
       client = ::OAuth2::Client.new(ENV['IBIKECPH_FBAPP_ID'], ENV['IBIKECPH_FBAPP_SECRET'], fb.options.client_options) 
@@ -44,6 +46,17 @@ class Api::V1::SessionsController < Devise::SessionsController
            :json => { :success => false,
                       :info => "Login Failed",
                       :errors => "Login Failed"}
+  end
+  
+  def check_login_params
+    current_user=nil
+    Rails.logger.info("CURRENT USER ::::::: PBF >>>>>>> #{current_user.inspect}")
+    if params[:user].blank? || (params[:user][:fb_token].blank? && params[:user][:email].blank? && params[:user][:password].blank?)
+          render :status => 406,
+                 :json => { :success => false,
+                 :info => "Login Failed",
+                 :errors => "Required parameter(s) missing."}
+    end
   end
   
 end
