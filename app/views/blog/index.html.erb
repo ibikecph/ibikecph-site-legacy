@@ -1,8 +1,15 @@
 <div class="gr">
-	<div class="g4">
-		<%= render 'tag_cloud' %>
+	<div class="g8 left-col">
+		<div class="inner">
+			<h1 class="blog-title"><%=t 'news.title' %></h1>
+			<%= render :partial => 'blog_entry', :collection => @blog_entries %>
+		</div>
 	</div>
-	<div class="g8 ge">
-		<%= render :partial => 'blog_entry', :collection => @blog_entries %>
+	<div class="g4 ge">
+		<div class="inner">
+			<%= render 'tag_cloud' %>
+			<%= render 'links' %>
+		</div>
 	</div>
+	<div class="clear"></div>
 </div>

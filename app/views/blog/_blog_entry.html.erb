@@ -6,9 +6,9 @@
 		</div>
 	<% end %>
 	<h1><%= link_to blog_entry.title, blog_entry %></h1>
-	<p class="note">
+	<p class="meta">
 		<% if blog_entry.user %>
-			<%= blog_entry.user.name %>,
+			<span class="user"><%= blog_entry.user.name %>,</span>
 		<% end %>
 		<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
 	</p>

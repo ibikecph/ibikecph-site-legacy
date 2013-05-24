@@ -21,14 +21,14 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		@map = new IBikeCPH.Views.Map model: @search, el: '#map', router: this
 		@mobileapp = new IBikeCPH.Views.MobileApp model: @search, el: '#mobileapp', router: this
 		@sidebar = new IBikeCPH.Views.Sidebar model: @search, el: '#search', router: this
+		# @report = new IBikeCPH.Views.Report model: @search, el: '#report', router: this
 		@summary = new IBikeCPH.Views.Summary model: @search.summary, el: '#summary', router: this
 		@instructions = new IBikeCPH.Views.Instructions collection: @search.instructions, el: '#instructions_div'
-		
-
-		@mobileapp.render()
 
 	index: ->
 		@sidebar.render()
+		@mobileapp.render()
+		# @report.render()
 		
 	show: (code) ->
 		@search.waypoints.reset_from_url code

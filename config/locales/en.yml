@@ -72,6 +72,13 @@ en:
     logout: Logout
     mobile_app: Download mobile app
 
+  news:
+    title: Latest news
+    categories: Categories
+    search: Search news...
+    label_facebook: Follow us on Facebook
+    label_rss: Subscribe to RSS
+
   da: Danish
   en: English
 
@@ -505,3 +512,7 @@ en:
     and_continue: and continue for
     for: for
     towards: towards
+
+  download_app:
+    title: Keep track of the route on your mobile.
+    text: Search routes and use your favorites on the go.

@@ -2,12 +2,14 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	template: JST['sidebar']
 	
 	events:
-		'change .address input'        : 'fields_updated'
-		'click .reset'                 : 'reset'
-		'click .permalink'             : 'permalink'
-		'change .departure'	  		     : 'change_departure'
-		'change .arrival'	   		       : 'change_arrival'
+		'change .address input'			: 'fields_updated'
+		'blur .address input'			: 'hide_suggestions'
 		'keydown .address input'		: 'find_suggestions'
+		'click .suggestions li'			: 'update_field_from_suggestion'
+		'click .reset'					: 'reset'
+		'click .permalink'				: 'permalink'
+		'change .departure'				: 'change_departure'
+		'change .arrival'				: 'change_arrival'
 		'click .reverse_route'			: 'reverse_route'
 
 	initialize: (options) ->
@@ -31,6 +33,13 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@$el.html @template()
 		$('.help').click (event) => @help()
 		$('.fold').click (event) => @fold()
+		$('.search_bottom .report').click (event) ->
+			@report = new IBikeCPH.Views.Report model: this, el: '#report', router: @route
+			@report.render()
+		$('.search_bottom .favorites').click (event) ->
+			@favorites = new IBikeCPH.Views.Favorites model: this, el: '#favorites', router: @route
+			@favorites.render($('.from').val(), $('.to').val())
+			return false
 		this
 
 	getNow: ->
@@ -128,8 +137,10 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		$(".address .to, .address .from").trigger('change')
 
 	find_suggestions: ->
+		t = @
 		el = $(event.target)
 		parent = el.parent()
+		input = parent.find('input').attr('class')
 
 		setTimeout (->
 			val = el.val().toLowerCase()
@@ -137,73 +148,107 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			if val.length >= 4
 				items = []
 				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token
-				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+"&callback=?"
+				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
 
 				$.getJSON oiorest_url, (data) ->
 					$.each data, ->
-						unless @lat is "0.0"
-							a = @vejnavn.navn + " " + @husnr + " " + @kommune.navn
+						unless @wgs84koordinat['bredde'] is "0.0"
 							items.push
-								name: ""
-								address: a.replace("  ", " ")
-								lat: @wgs84koordinat.bredde
-								lng: @wgs84koordinat.længde
+								name: ''
+								address: @vejnavn.navn + " " + @husnr + ", " + @postnummer.nr + " " + @postnummer.navn
+								lat: @wgs84koordinat['bredde']
+								lng: @wgs84koordinat['længde']
 
 				$.getJSON foursquare_url, (data) ->
 					$.each data.response.minivenues, ->
-						items.push
-							name: @name + ", "
-							address: @location.address + ", " + @location.postalCode + " " + @location.city
-							lat: @location.lat
-							lng: @location.lng
+						unless @location.postalCode is ""
+							items.push
+								name: @name
+								address: @location.address + ", " + @location.postalCode + " " + @location.city
+								lat: @location.lat
+								lng: @location.lng
 
 				interval = setInterval(->
 					if items.length > 0
-						$(".suggestions").remove()
-						suggestions = $("<ul />").addClass('suggestions')
+						$('.suggestions').remove()
+						suggestions = $('<ul />').addClass('suggestions')
 						parent.append(suggestions)
-						$.each items, (i) ->
-							if i < 8
-								item = $("<li />").html(@address).bind("click", ->
-									el.val($(@).html()).blur()
-									suggestions.remove()
-									@fields_updated
-								)
-								suggestions.append(item)
+						
+						_.each items, (t,num) ->
+							unless num > 5
+								unless t.name is ''
+									container = $("<li />").attr
+										'data-lat': t.lat
+										'data-lng': t.lng
+										'data-type': input
+										'class': 'poi'
+									name = $("<span />").addClass("n").html(t.name+" ")
+									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
+									address = $("<span />").addClass("a").html(address)
+									container.append(name).append address
+								else
+									container = $("<li />").attr
+										'data-lat': t.lat
+										'data-lng': t.lng
+										'data-type': input
+										'class': 'address'
+									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
+									address = $("<span />").addClass("a").html(address)
+									container.append address
+
+								suggestions.append container
+						
 						clearInterval interval
 				, 500)
 						
 			else
 				return false
 
-		), 50
+		), 150
+	
+	update_field_from_suggestion: (event) ->
+		el = $(event.currentTarget)
+		type = el.data('type')
+		ll =
+			lat: el.data('lat')
+			lng: el.data('lng')
+		
+		if type is 'from'
+			@model.waypoints.first().set 'location', ll
+			@model.waypoints.first().trigger 'input:location'
+		else if type is 'to'
+			@model.waypoints.last().set 'location', ll
+			@model.waypoints.last().trigger 'input:location'
+		$('.suggestions').html('').hide()
+			
+	hide_suggestions: ->
+		setTimeout (->
+			$('.suggestions').html('').hide()
+		), 200
 
 	fields_updated: (event) ->
-		m = @model
-		setTimeout(->
-			input = $(event.target)
-			if input.is '.from'
-				waypoint = m.waypoints.first()
-			else if input.is '.to'
-				waypoint = m.waypoints.last()
+		input = $(event.currentTarget)
+		if input.is '.from'
+			waypoint = @model.waypoints.first()
+		else if input.is '.to'
+			waypoint = @model.waypoints.last()
+		else
+			return
+		raw_value = input.val()
+		value = IBikeCPH.util.normalize_whitespace raw_value
+		
+		#be a little smarter when parsing adresses, to make nominatim happier
+		value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København
+		value = value.replace /\b[nNøØsSvVkK]$/, ""					# remove north/south/east/west postfix
+		value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
+		
+		input.val(value) if value != raw_value
+		if value
+			waypoint.set 'address', value
+			waypoint.trigger 'input:address'
+		else
+			waypoint.reset()
+			if @model.waypoints.length > 2
+				@model.waypoints.remove waypoint
 			else
-				return
-			raw_value = input.val()
-			value = IBikeCPH.util.normalize_whitespace raw_value
-			
-			#be a little smarter when parsing adresses, to make nominatim happier
-			value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København
-			value = value.replace /\b[nNøØsSvV]$/, ""					# remove north/south/east/west postfix
-			value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
-			
-			input.val(value) if value != raw_value
-			if value
-				waypoint.set 'address', value
 				waypoint.trigger 'input:address'
-			else
-				waypoint.reset()
-				if m.waypoints.length > 2
-					m.waypoints.remove waypoint
-				else
-					waypoint.trigger 'input:address'
-		, 150)

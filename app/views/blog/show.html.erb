@@ -1,33 +1,38 @@
 <div class="gr">
-	<div class="g4">
-		<%= render 'tag_cloud' %>
-		<%= render 'latest' %>
-	</div>
-	<div class="g8 ge">
-		<% if can? :manage, @blog_entry %>
-		<div class="buttons righty">
-			<%= link_to t('edit'),  [:edit,@blog_entry] %>
-			<%= link_to t('delete'),  @blog_entry, :method => :delete, :confirm => t('sure_q') %>
-		</div>
-		<% end %>
-		<h1><%= @blog_entry.title %></h1>
-		<%= image_tag @blog_entry.image.url if @blog_entry.image? %>
-		<%= auto_html_blog @blog_entry.body, :width => 760, :height => 506 %>
-
-		<p class="note">
-			<% if @blog_entry.user %>
-				<%= @blog_entry.user.name %>,
-			<% end %>
-			<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
-		</p>
-
-		<% if @blog_entry.tags.any? %>
-			<div class="tag_cloud">
-				<% tag_cloud(@blog_entry.tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class| %>
-				  <%= link_to tag.name, { :action => :tag, :tag => tag.name }, :class => css_class %>
-				<% end %>
+	<div class="g8 left-col">
+		<div class="inner">
+			<% if can? :manage, @blog_entry %>
+			<div class="buttons righty">
+				<%= link_to t('edit'),  [:edit,@blog_entry] %>
+				<%= link_to t('delete'),  @blog_entry, :method => :delete, :confirm => t('sure_q') %>
 			</div>
-		<% end %>
-		<%= comments @blog_entry %>
+			<% end %>
+			<h1><%= @blog_entry.title %></h1>
+			<%= image_tag @blog_entry.image.url if @blog_entry.image? %>
+			<%= auto_html_blog @blog_entry.body, :width => 760, :height => 506 %>
+
+			<p class="note">
+				<% if @blog_entry.user %>
+					<%= @blog_entry.user.name %>,
+				<% end %>
+				<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
+			</p>
+
+			<% if @blog_entry.tags.any? %>
+				<div class="tag_cloud">
+					<% tag_cloud(@blog_entry.tags, %w(tag1 tag2 tag3 tag4)) do |tag, css_class| %>
+					  <%= link_to tag.name, { :action => :tag, :tag => tag.name }, :class => css_class %>
+					<% end %>
+				</div>
+			<% end %>
+			<%= comments @blog_entry %>
+		</div>
+	</div>
+	<div class="g4 ge">
+		<div class="inner">
+			<%= render 'tag_cloud' %>
+			<%= render 'latest' %>
+			<%= render 'links' %>
+		</div>
 	</div>
 </div>

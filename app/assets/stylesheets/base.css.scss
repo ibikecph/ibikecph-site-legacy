@@ -1,8 +1,10 @@
 $sat: 0;
 $hue: 25;
-$color: #ef4123;
+/*$color: #ef4123;*/
+$color: #8b8b8b;
 $yellow: #fff200;
-$hover: hsl( 10, 50%, 40% );
+/*$hover: hsl( 10, 50%, 40% );*/
+$hover: #222;
 $error: hsl( 0, 70%, 50% );
 $highlight: hsl( 90, 100%, 45% );
 $text_color: hsl( $hue, 10%, 10% );
@@ -82,10 +84,14 @@ a {
     font-size: 0.70em;
     text-transform: uppercase;
     overflow: hidden;
-    position: relative;
+    position: fixed;
+    left: 0;
+    top: 0;
     z-index: 100;
     white-space: nowrap;
     height: 40px;
+    width: 100%;
+    z-index: 4;
 }
 .right_menu {
     position: absolute;
@@ -198,9 +204,8 @@ p {
 }
 
 #mobileapp {
-    display: none;
     position: absolute;
-    top: 55px;
+    top: -255px;
     right: 120px;
     width: 360px;
     height: 200px;
@@ -210,13 +215,45 @@ p {
     box-shadow: 0 5px 5px rgba(255,255,255,0.2) inset, 0 5px 5px rgba(0,0,0,0.2);
     color: #fff;
     border-radius: 5px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    -webkit-transition: all 0.65s ease;
+    -moz-transition: all 0.65s ease;
+    -ms-transition: all 0.65s ease;
+    -o-transition: all 0.65s ease;
+    transition: all 0.65s ease;
     .phone {
         width: 142px;
         height: 162px;
         background: image-url('_new/app-phone.png') no-repeat center center;
         position: absolute;
         left: 0;
-        top: -20px;
+        top: 150px;
+        opacity: 0;
+        -webkit-transition-delay: 2s;
+        -moz-transition-delay: 2s;
+        -ms-transition-delay: 2s;
+        -o-transition-delay: 2s;
+        transition-delay: 2s;
+        -webkit-transition: all 0.65s ease;
+        -moz-transition: all 0.65s ease;
+        -ms-transition: all 0.65s ease;
+        -o-transition: all 0.65s ease;
+        transition: all 0.65s ease;
+    }
+    .download {
+        position: absolute;
+        bottom: 3px;
+        left: 20px;
+        width: 320px;
+        div {
+            width: 160px;
+            float: left;
+            &:last-child {
+                text-align: right;
+            }
+        }
     }
     .text {
         width: 160px;
@@ -235,10 +272,14 @@ p {
         }
     }
 }
-
-
-
-
-
-
+#mobileapp.rendered {
+    top: 55px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+    opacity: 1;
+    .phone {
+        top: -20px;
+        opacity: 1;
+    }
+}
 

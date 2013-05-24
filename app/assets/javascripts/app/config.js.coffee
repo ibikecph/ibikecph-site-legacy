@@ -24,7 +24,8 @@ IBikeCPH.config =
 	# The first tile set is used by default.
 	map_tiles: [
 		name: 'OpenStreetMap'
-		url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		#url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		url: 'http://{s}.tiles.mapbox.com/v3/stamen.cphbikes/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,

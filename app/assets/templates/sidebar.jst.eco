@@ -1,6 +1,6 @@
-<a class="helper-icons help"><%= I18n.t 'map.help' %></a>
-<a class="helper-icons reset"><%= I18n.t 'map.reset' %></a>
-<a class="helper-icons permalink"><%= I18n.t 'map.link_for_route' %></a>
+<a title="<%= I18n.t 'map.help' %>" class="helper-icons help"><%= I18n.t 'map.help' %></a>
+<a title="<%= I18n.t 'map.reset' %>" class="helper-icons reset"><%= I18n.t 'map.reset' %></a>
+<a title="<%= I18n.t 'map.link_for_route' %>" class="helper-icons permalink"><%= I18n.t 'map.link_for_route' %></a>
 <!-- <div class="mode">
 	<input type="radio" id="normal" name="mode" checked="1"/> <span><%= I18n.t 'map.normal_bike' %></span>
 	<input type="radio" id="cargo" name="mode" /> <span class="proposed"><%= I18n.t 'map.electric_bike' %></span>

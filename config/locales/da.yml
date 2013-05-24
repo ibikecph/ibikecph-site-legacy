@@ -64,6 +64,14 @@ da:
     login: Log ind
     logout: Log ud
     mobile_app: Hent mobil app
+    the_title: Seneste nyheder
+
+  news:
+    title: Seneste nyheder
+    categories: Kategorier
+    search: Søg nyhed...
+    label_facebook: Følg os på Facebook
+    label_rss: abonnér via rss
   
   da: Dansk
   en: Engelsk
@@ -506,4 +514,8 @@ da:
     follow: ad
     and_continue: og fortsæt
     for: og kør
-    towards: mod  
+    towards: mod
+
+  download_app:
+    title: Få styr på ruten på din mobil.
+    text: Søg ruter og brug dine favoritter på farten.  
