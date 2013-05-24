@@ -1,0 +1,77 @@
+<div class="header">
+	<h1>Feedback</h1>
+	<span class="back">Back</span>
+</div>
+<div class="inner" id="step_1">
+	<ul class="feedbackSelector">
+		<li class="bug">
+			<a href="#">
+				<h2>Rapportér problem</h2>
+				<p>
+					It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+				</p>
+			</a>
+		</li>
+		<li class="ideas">
+			<% if I18n.locale is "da": %>
+			<a href="/feedback">
+			<% else: %>
+			<a href="/en/feedback">
+			<% end %>
+				<h2>GIV OS DINE IDÉER</h2>
+				<p>
+					It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+				</p>
+			</a>
+		</li>
+	</ul>
+
+	<div class="clear"></div>
+
+</div>
+<div class="inner" id="step_2">
+	<form action="#" class="reportProblemForm">
+					
+		<select name="#" id="" class="selectReplace">
+			<option value="">Vælg trin i ruten at rapportére</option>
+			<option>Start ad Griffenfeldsgade mod sydvest</option>
+			<option>Fortsæt ad H.C. Ørsteds Vej</option>
+			<option>Drej let til venstre ad Danasvej</option>
+			<option>Drej til højre ad Sankt Knuds Vej</option>
+			<option>Fortsæt ad Sankt Knuds Vej</option>
+			<option>Ankomst til destinationen</option>
+		</select>
+
+		<p class="problem">
+			<input type="radio" id="radion_1" name="error">
+			<label for="radion_1">Vejnavn er forkert</label>
+		</p>
+		<p class="problem">
+			<input type="radio" id="radio_2" name="error">
+			<label for="radio_2">Vejen er ensrettet</label>
+		</p>
+		<p class="problem">
+			<input type="radio" id="radio_3" name="error">
+			<label for="radio_3">Vejen er lukket</label>
+		</p>
+		<p class="problem">
+			<input type="radio" id="radio_4" name="error">
+			<label for="radio_4">Ruten foreslår ulovlige sving</label>
+		</p>
+		<p class="problem">
+			<input type="radio" id="radio_5" name="error">
+			<label for="radio_5">Andet</label>
+		</p>
+
+		<p class="alert_me">
+			<input type="checkbox">
+			Giv mig besked når problemet er løst!
+			<br>
+			<input type="email" class="feedbackEmail" placeholder="Skriv din email adresse">
+		</p>
+
+	</form>
+</div>
+<p class="submits">
+	<input type="submit" class="feedbackSubmit" value="Send feedback">
+</p>

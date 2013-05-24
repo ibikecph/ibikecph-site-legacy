@@ -1,6 +1,6 @@
 <div id="viewport">
     <div id="map"></div>
-
+    
     <div id="ui">
         <div class="fold"></div>
         <div id="ui_foldable">
@@ -15,8 +15,8 @@
                 <%= link_to( t('map.bugs_and_suggestions'),issues_path) %>
             </div>-->
             <ul class="search_bottom">
-                <li><a href="#">Føj til favoritter</a></li>
-                <li><a href="#">Rapportér fejl</a></li>
+                <li class="favorites"><a href="#">Føj til favoritter</a></li>
+                <li class="report"><a href="#">Rapportér fejl</a></li>
             </ul>
         </div>
 
@@ -27,5 +27,8 @@
         <h2><%=t 'map.help_dialog.title' %></h2>
         <%= simple_format t('map.help_dialog.body') %>
     </div>
+
+    <div id="favorites"></div>
+    <div id="report"></div>
     
 </div>

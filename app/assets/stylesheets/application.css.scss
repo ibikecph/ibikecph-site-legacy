@@ -4,16 +4,26 @@ body {
     line-height: 1.3em;
 }
 div#content {
-    width: $columns_12;
-    padding: $gutter;
-    padding-top: 0.5*$gutter;
+    background: #f4f4f4;
+    margin-top: 40px;
 }
 div#footer {
     clear: both;
     height: $gutter;
 }
 div.gr {
-    float: left;
+    .clear {
+        clear: both;
+    }
+}
+.blog-title {
+    font-size: 24px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+.left-col {
+    background: #fff;
+    box-shadow: 2px 0 3px rgba(0,0,0,.3)
 }
 div {
     &.g12, &.g8, &.g6, &.g4, &.g3, &.g2, &.g1  {
@@ -25,12 +35,21 @@ div {
     }
     &.g8 {
         width: $columns_8;
+        .inner {
+            padding: $gutter;
+        }
     }
     &.g6 {
         width: $columns_6;
     }
     &.g4 {
         width: $columns_4;
+        .inner {
+            padding: $gutter 0;
+            h2 {
+                font-size: 15px;
+            }
+        }
     }
     &.g3 {
         width: $columns_3;
@@ -43,6 +62,37 @@ div {
     }
     &.ge {
         margin-right: 0;
+    }
+}
+.tags {
+    font-weight: bold;
+    font-size: 12px;
+    list-style: none;
+    padding-bottom: 10px;
+    li {
+        a {
+            display: block;
+            padding: 3px 0;
+        }
+    }
+}
+.links {
+    list-style: none;
+    padding-bottom: 13px;
+    li {
+        font-size: 12px;
+        font-weight: bold;
+        text-transform: uppercase;
+        a {
+            display: block;
+            padding: 7px 0 5px 32px;
+        }
+        a.facebook {
+            background: image-url("_new/link-facebook.png") no-repeat left center;
+        }
+        a.rss {
+            background: image-url("_new/link-rss.png") no-repeat left center;
+        }
     }
 }
 img {
@@ -245,15 +295,8 @@ div.oauth_providers {
 }
 .gr .sidebar {
   clear: both;
-  background-color: $yellow;
-  border-left: 0.5*$gutter solid $yellow;
-  margin-left: -0.5*$gutter;
-  border-right: 0.5*$gutter solid $yellow;
-  margin-right: -0.5*$gutter;
-  border-radius: 4px;
-  padding-top: 0.5*$gutter;
-  padding-bottom: 0.5*$gutter;
-  color: black;
+  border-bottom: 1px solid #fff;
+  box-shadow: 0 -1px 0 #dfdfdf inset;
 }
 .gr {
   .sidebar + .sidebar {
@@ -387,6 +430,10 @@ td.note {
 }
 div.blog {
     margin-bottom: $gutter;
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
 }
 ul.blog_entries {
   list-style: none;
@@ -471,8 +518,9 @@ p#terms {
     }
 }
 div.note {
-    font-size: 0.9;
+    font-size: 0.8;
     color: $darkish;
+    display: none;
 }
 ul.sort {
     list-style: none;

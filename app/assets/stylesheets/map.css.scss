@@ -17,7 +17,7 @@ body {
 #map {
 	position: fixed;
 	left: 0;
-	top: 0;
+	top: 40px;
 	height: 100%;
 	z-index: 0;
 }
@@ -26,12 +26,17 @@ body {
 	z-index: 1;
 	width: 350px;
 	box-shadow: 0px 5px 5px rgba(0,0,0,.5);
-	top: 20px;
+	top: 60px;
 	left: 0;
     padding: $half_gutter - 2*$border_width;
     border-radius: 0 5px 5px 0;
     border: $border_width solid $lightish;
 	background: $white;
+	-webkit-transition: left 0.2s ease;
+	-moz-transition: left 0.2s ease;
+	-ms-transition: left 0.2s ease;
+	-o-transition: left 0.2s ease;
+	transition: left 0.2s ease;
   &.folded {
 		width: 51px;
 		height: 45px;
@@ -169,13 +174,26 @@ body {
 				li {
 					padding: 10px 15px 10px 30px;
 					border-bottom: 1px solid #dedede;
-					font-weight: bold;
+					font-weight: normal;
 					cursor: pointer;
-					color: #666;
+					color: #999;
 					&:hover {
 						background: #eee;
 						color: #444;
 					}
+					&.poi {
+						background: image-url("_new/suggestion-poi.png") no-repeat 10px center;
+					}
+					&.address {
+						background: image-url("_new/suggestion-address.png") no-repeat 10px center;
+					}
+					.n {
+						font-weight: bold;
+						display: block;
+						color: #444;
+						margin-bottom: 2px;
+					}
+
 				}
 			}
 			label {
@@ -326,6 +344,319 @@ body {
 		}
 	}
 }
+#favorites, #report {
+	position: absolute;
+	z-index: 2;
+	width: 388px;
+	top: 60px;
+	left: -390px;
+	-webkit-transition: left 0.2s ease;
+	-moz-transition: left 0.2s ease;
+	-ms-transition: left 0.2s ease;
+	-o-transition: left 0.2s ease;
+	transition: left 0.2s ease;
+    border-radius: 0 5px 5px 0;
+    box-shadow: 0px 5px 5px rgba(0,0,0,.5);
+	background: #222;
+	overflow: hidden;
+	.header {
+		border-radius: 0 5px 0 0;
+		background: #000;
+		border-bottom: 1px solid #454545;
+		position: relative;
+		h1 {
+			color: #fff;
+			font-size: 14px;
+			text-transform: uppercase;
+			padding: 15px 20px 12px 20px;
+		}
+		.back {
+			text-indent: -5000px;
+			overflow: hidden;
+			position: absolute;
+			right: 10px;
+			top: 9px;
+			width: 48px;
+			height: 35px;
+			display: block;
+			background: image-url("_new/favorites-back.png") no-repeat center top;
+			cursor: pointer;
+			&:hover {
+				background-position: center bottom;	
+			};
+		}
+	}
+}
+#favorites {
+	.inner {
+		padding: 3px;
+		-webkit-transition: all 0.5s ease;
+		-moz-transition: all 0.5s ease;
+		-ms-transition: all 0.5s ease;
+		-o-transition: all 0.5s ease;
+		transition: all 0.5s ease;
+		.favorite_name {
+			background: #fff;
+			margin: 0 2%;
+			width: 96%;
+			border-radius: 3px;
+			font-size: 12px;
+			border: none;
+			padding: 5px 0;
+			text-indent: 10px;
+			color: #333;
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		.save {
+			text-align: center;
+			position: absolute;
+			left: 0;
+			bottom: 10px;
+			width: 100%;
+			button {
+				color: #fff;
+				background: #00a3e0;
+				font-size: 12px;
+				font-weight: bold;
+				text-align: center;
+				text-transform: uppercase;
+				border: 1px solid #008abd;
+				padding: 9px 0 7px;
+				width: 96%;
+				text-shadow: 0 -1px 1px #0084b5;
+				border-radius: 2px;
+				box-shadow: inset 1px 1px 0 #60c2e7, 0 1px 2px #000;
+				cursor: pointer;
+			}
+		}
+		.routes {
+			padding: 2% 2% 0;
+			list-style: none;
+			font-size: 12px;
+			li {
+				border-radius: 5px;
+				display: block;
+				background-color: #222;
+				border: 1px solid #000;
+				border-radius: 5px;
+				box-shadow: 0 2px 2px #333 inset;
+				padding: 7px 12px;
+				cursor: pointer;
+				color: #999;
+				margin: 0 0 5px;
+				background-repeat: no-repeat;
+				background-position: center 10px;
+				-webkit-transition: all 0.2s ease;
+				-moz-transition: all 0.2s ease;
+				-ms-transition: all 0.2s ease;
+				-o-transition: all 0.2s ease;
+				transition: all 0.2s ease;
+				span {
+					font-weight: bold;
+					font-size: 10px;
+					padding: 0 10px 0 0;
+				}
+				&.selected, :hover {
+					background-color: #000;
+					box-shadow: none;
+					color: #fff;
+				}
+			}
+		}
+		.types {
+			list-style-type: none;
+			font-size: 10px;
+			font-weight: bold;
+			text-transform: uppercase;
+			li {
+				width: 21%;
+				margin: 0 2%;
+				float: left;
+				span {
+					display: block;
+					width: 100%;
+					background-color: #222;
+					border: 1px solid #000;
+					text-align: center;
+					border-radius: 5px;
+					box-shadow: 0 2px 2px #333 inset;
+					padding: 40px 0 10px;
+					cursor: pointer;
+					color: #999;
+					background-repeat: no-repeat;
+					background-position: center 10px;
+					-webkit-transition: all 0.2s ease;
+					-moz-transition: all 0.2s ease;
+					-ms-transition: all 0.2s ease;
+					-o-transition: all 0.2s ease;
+					transition: all 0.2s ease;
+				}
+				&.selected span, :hover {
+					background-color: #000;
+					box-shadow: none;
+					color: #fff;
+				}
+				&.home span {
+					background-image: image-url("_new/favorite-home.png");
+					background-position: center 12px;
+				}
+				&.favorite span {
+					background-image: image-url("_new/favorite-favorite.png");
+				}
+				&.work span {
+					background-image: image-url("_new/favorite-work.png");
+				}
+				&.school span {
+					background-image: image-url("_new/favorite-school.png");
+				}
+			}
+		}
+	}
+}
+#report {
+	.submits {
+		text-align: center;
+		position: absolute;
+		padding: 10px 0;
+		bottom: -8px;
+		left: 0;
+		background: #222;
+		width: 100%;
+		display: none;
+		input {
+			color: #fff;
+			background: #00a3e0;
+			font-size: 12px;
+			font-weight: bold;
+			text-align: center;
+			text-transform: uppercase;
+			border: 1px solid #008abd;
+			padding: 9px 0 7px;
+			width: 96%;
+			text-shadow: 0 -1px 1px #0084b5;
+			border-radius: 2px;
+			box-shadow: inset 1px 1px 0 #60c2e7, 0 1px 2px #000;
+			cursor: pointer;
+		}
+	}
+	.inner {
+		background: #f4f4f4;
+		padding: 20px;
+		border-radius: 0 0 5px 0;
+		overflow: auto;
+		color: #333;
+		#step_2 {
+			display: none;
+		}
+		.intro {
+			font-size: 12px;
+			margin-bottom: 12px;
+			line-height: 1.5
+		}
+		.selectReplace {
+			height: 18px;
+			width: 319px;
+			margin-bottom: 10px;
+			font-size: 12px;
+			background: #fff image-url('_new/customSelect.png') no-repeat right center;
+			border-radius: 3px;
+			border: 1px solid #e3e3e3;
+			padding: 12px 0 7px 12px;
+		}
+		.alert_me {
+			font-size: 12px;
+			font-weight: bold;
+			border-top: 1px solid #ddd;
+			margin-top: 15px;
+			padding: 15px 0 0;
+			input[type="checkbox"] {
+				margin-right: 10px;
+			}
+			input[type="email"] {
+				display: block;
+				background: #fff;
+				border: 1px solid #e3e3e3;
+				outline: none;
+				width: 317px;
+				padding: 5px;
+				font-size: 11px;
+				margin: 10px 0 5px;
+				border-radius: 3px;
+			}
+		}
+		.problem {
+			font-size: 12px;
+			font-weight: bold;
+			margin-bottom: 5px;
+			input {
+				margin-right: 10px;
+			}
+			textarea {
+				display: block;
+				background: #fff;
+				border: 1px solid #e3e3e3;
+				outline: none;
+				height: 40px;
+				width: 292px;
+				padding: 5px;
+				font-size: 11px;
+				margin: 5px 0 5px 27px;
+				border-radius: 3px;
+			}
+		}
+		.feedbackSelector {
+			list-style-type: none;
+			font-size: 11px;
+			li {
+				float: left;
+				width: 46%;
+				margin: 0 2%;
+				&.bug a {
+					background-image: image-url("_new/bug.png");
+					background-repeat: no-repeat;
+					background-position: center 15px;
+					-webkit-background-size: 35px 35px;
+					background-size: 35px 35px;
+					&:hover {
+						background-color: #f4f4f4;
+					};
+				}
+				&.ideas a:hover {
+					background-color: #fff200;
+					h2 {
+						color: #dc1e19;
+					}
+				}
+				&.ideas a {
+					background-image: image-url("_new/blue-man.png");
+					background-repeat: no-repeat;
+					background-position: center 15px;
+					-webkit-background-size: 35px 33px;
+					background-size: 35px 33px;
+				}
+				a {
+					display: block;
+					border-radius: 5px;
+					background-color: #fff;
+					text-decoration: none;
+					padding: 55px 15px 15px;
+					box-shadow: 0 0 5px #aaa;
+					h2 {
+						text-align: center;
+						font-size: 10px;
+						text-transform: uppercase;
+						margin-bottom: 10px;
+					}
+					p {
+						line-height: 1.5;
+					}
+				}
+			}
+		}
+	}
+}
+
 #help {
 	display: none;
   opacity:0.9;

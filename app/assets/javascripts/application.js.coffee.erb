@@ -19,6 +19,17 @@
 #= require utils
 
 jQuery ->
-	$('p#terms a').click (event) ->
+	elements =
+  		content: $("#content")
+  		left_col: $("#content .left-col")
+  		terms_a: $('p#terms a')
+  		terms_textarea: $('p#terms textarea')
+
+  	elements.left_col.css
+  		"min-height": $(window).height() - 40
+  	elements.content.css
+  		"min-height": $(window).height() - 40
+
+	elements.terms_a.click (event) ->
 		event.preventDefault()
-		$('p#terms textarea').toggle()
+		elements.terms_textarea.toggle()

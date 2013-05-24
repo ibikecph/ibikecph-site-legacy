@@ -1,10 +1,7 @@
 <div class="gr">
-	<div class="g4">
-		<%= render 'tag_cloud' %>
-		<%= render 'latest' %>
-	</div>
-	<div class="g8 ge">
-		<% if can? :manage, BlogEntry %>
+	<div class="g8 left-col">
+		<div class="inner">
+			<% if can? :manage, BlogEntry %>
 			<div class="righty buttons">
 				<%= link_to "New Entry",  new_blog_entry_path %>
 			</div>
@@ -14,6 +11,14 @@
 		<ul class="blog_entries">
 			<%= render :partial => "list", :collection => @blog_entries, :as => :blog_entry%>
 		</ul>
+		</div>
+	</div>
+	<div class="g4 eg">
+		<div class="inner">
+			<%= render 'tag_cloud' %>
+			<%= render 'latest' %>
+			<%= render 'links' %>
+		</div>
 	</div>
 </div>
 
