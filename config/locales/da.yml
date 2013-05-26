@@ -454,4 +454,32 @@ da:
     follow: ad
     and_continue: og fortsæt
     for: og kør
-    towards: mod  
+    towards: mod
+    
+    mode_push: "Træk cyklen"
+    mode_ferry: "Færge"
+    mode_train: "Tog/metro"
+    
+    highway_default: "vej/sti"
+    highway_motorway: "motorvej"
+    highway_motorway_link: "motorvej"
+    highway_trunk: "hovedvej"
+    highway_trunk_link: "hovedvej"
+    highway_primary: "vej"
+    highway_primary_link: "vej"
+    highway_secondary: "vej"
+    highway_secondary_link: "vej"
+    highway_tertiary: "gade"
+    highway_tertiary_link: "gade"
+    highway_living_street: "gade"
+    highway_pedestrian: "gågade"
+    highway_residential: "gade"
+    highway_unclassified: "gade"
+    highway_service: "vej/sti"
+    highway_track: "sti"
+    highway_road: "vej"
+    highway_path: "sti"
+    highway_footway: "sti"
+    highway_cycleway: "cykelsti"
+    highway_bridleway: "ridesti"
+    highway_steps: "trappe"
