@@ -45,8 +45,11 @@ class Api::V1::SessionsController < Devise::SessionsController
                       :data => {} }
   end
 
+  private 
+
   def success logged_user    
-      Rails.logger.info("CURRENT USER ::::::: SUCCESS >>> #{logged_user.inspect}")
+      Rails.logger.info("CURRENT USER ::::::: SUCCESS > LU >>> #{logged_user.inspect} CU >>>> #{current_user.inspect}")
+      current_user=logged_user
       render :status => 200,
              :json => { :success => true,
                         :info => "Logged in",
