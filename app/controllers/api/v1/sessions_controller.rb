@@ -18,7 +18,7 @@ class Api::V1::SessionsController < Devise::SessionsController
           return failure unless @user 
             if @user
               sign_in(:user, @user)
-              success 
+              success @user
             end
         end  
    else
@@ -28,7 +28,7 @@ class Api::V1::SessionsController < Devise::SessionsController
 
         if resource.valid_password?(params[:user][:password])
           resource.ensure_authentication_token!  
-          success
+          success resource
         else
           failure
         end           
@@ -44,11 +44,11 @@ class Api::V1::SessionsController < Devise::SessionsController
                       :data => {} }
   end
 
-  def success
+  def success logged_user
       render :status => 200,
              :json => { :success => true,
                         :info => "Logged in",
-                        :data => { :auth_token => current_user.authentication_token, :id=>current_user.id } }
+                        :data => { :auth_token => logged_user.authentication_token, :id=>logged_user.id } }
   end
   
   def failure
