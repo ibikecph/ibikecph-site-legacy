@@ -30,15 +30,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@model.summary.on 'change', @update_departure_arrival, this
 
 	render: ->
+		m = @model
 		@$el.html @template()
 		$('.help').click (event) => @help()
 		$('.fold').click (event) => @fold()
 		$('.search_bottom .report').click (event) ->
-			@report = new IBikeCPH.Views.Report model: this, el: '#report', router: @route
-			@report.render()
+			@report = new IBikeCPH.Views.ReportIssue model: this, el: '#report', router: @router
+			@report.render(m.waypoints)
 		$('.search_bottom .favorites').click (event) ->
-			@favorites = new IBikeCPH.Views.Favorites model: this, el: '#favorites', router: @route
-			@favorites.render($('.from').val(), $('.to').val())
+			favourites = new IBikeCPH.Views.Favourites model: '', el: '#favorites', router: @router
+			favourites.render(m.waypoints)
 			return false
 		this
 
@@ -65,7 +66,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@departure = @getNow()
 		
 	permalink: ->
-		#url = "#{window.location.protocol}//#{window.location.host}/#!/#{@model.waypoints.to_code()}"
 		url = "#!/#{@model.waypoints.to_url()}"
 		if url
 			@router.navigate url, trigger: false
@@ -177,23 +177,25 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 						_.each items, (t,num) ->
 							unless num > 5
 								unless t.name is ''
-									container = $("<li />").attr
+									container = $('<li />').attr
+										'data-name': t.name
 										'data-lat': t.lat
 										'data-lng': t.lng
 										'data-type': input
 										'class': 'poi'
-									name = $("<span />").addClass("n").html(t.name+" ")
+									name = $('<span />').addClass('n').html(t.name+' ')
 									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
 									address = $("<span />").addClass("a").html(address)
 									container.append(name).append address
 								else
-									container = $("<li />").attr
+									container = $('<li />').attr
+										'data-name': ''
 										'data-lat': t.lat
 										'data-lng': t.lng
 										'data-type': input
 										'class': 'address'
 									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
-									address = $("<span />").addClass("a").html(address)
+									address = $('<span />').addClass('a').html(address)
 									container.append address
 
 								suggestions.append container
@@ -212,6 +214,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		ll =
 			lat: el.data('lat')
 			lng: el.data('lng')
+			name: el.data('name')
 		
 		if type is 'from'
 			@model.waypoints.first().set 'location', ll
@@ -219,6 +222,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		else if type is 'to'
 			@model.waypoints.last().set 'location', ll
 			@model.waypoints.last().trigger 'input:location'
+
+		$('.address .'+type).attr
+			'data-lat': ll.lat
+			'data-lng': ll.lng
+			'data-name': ll.name
+
 		$('.suggestions').html('').hide()
 			
 	hide_suggestions: ->

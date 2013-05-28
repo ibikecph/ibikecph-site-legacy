@@ -395,6 +395,12 @@ body {
 		-ms-transition: all 0.5s ease;
 		-o-transition: all 0.5s ease;
 		transition: all 0.5s ease;
+		.success {
+			padding: 25px;
+			color: #fff;
+			font-size: 12px;
+			display: none;
+		}
 		.favorite_name {
 			background: #fff;
 			margin: 0 2%;
@@ -407,6 +413,18 @@ body {
 			color: #333;
 			font-weight: bold;
 			margin-bottom: 20px;
+		}
+		.errors {
+			background: #e22021;
+			color: #fff;
+			list-style-type: none;
+			border-radius: 5px;
+			font-size: 11px;
+			font-weight: bold;
+			margin: 8px;
+			li {
+				padding: 5px;
+			}
 		}
 		.save {
 			text-align: center;

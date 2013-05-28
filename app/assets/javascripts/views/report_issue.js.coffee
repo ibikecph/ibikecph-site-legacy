@@ -1,4 +1,4 @@
-class IBikeCPH.Views.Report extends Backbone.View
+class IBikeCPH.Views.ReportIssue extends Backbone.View
 	template: JST['report']
 
 	events:
