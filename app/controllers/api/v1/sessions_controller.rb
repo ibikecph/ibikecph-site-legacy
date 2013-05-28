@@ -6,7 +6,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   prepend_before_filter :require_no_authentication, :only => [:create ]
   
   def create
-   Rails.logger.info("USER PARAMS ::::::: #{params.inspect}")
    if params[:user][:fb_token]
       fb = OmniAuth::Strategies::Facebook.new(ENV['IBIKECPH_FBAPP_ID'], ENV['IBIKECPH_FBAPP_SECRET']) 
       client = ::OAuth2::Client.new(ENV['IBIKECPH_FBAPP_ID'], ENV['IBIKECPH_FBAPP_SECRET'], fb.options.client_options) 
@@ -29,6 +28,7 @@ class Api::V1::SessionsController < Devise::SessionsController
 
         if resource.valid_password?(params[:user][:password])
           resource.ensure_authentication_token!  
+          sign_in(:user, resource)
           success resource
         else
           failure
@@ -48,7 +48,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   private 
 
   def success logged_user    
-      Rails.logger.info("CURRENT USER ::::::: SUCCESS > LU >>> #{logged_user.inspect} CU >>>> #{current_user.inspect}")
       current_user=logged_user
       render :status => 200,
              :json => { :success => true,
@@ -63,7 +62,8 @@ class Api::V1::SessionsController < Devise::SessionsController
                       :errors => "Login Failed"}
   end
   
-  def check_login_params    
+  def check_login_params  
+    sign_out current_user if current_user
     if params[:user].blank? || (params[:user][:fb_token].blank? && params[:user][:email].blank? && params[:user][:password].blank?)
           render :status => 406,
                  :json => { :success => false,
