@@ -34,6 +34,8 @@ RailsOSRM::Application.routes.draw do
     #  end
     #end
   
+    resources :reported_issues, :favourites
+    
     resource :account do
       get 'activating'
       get 'welcome'
