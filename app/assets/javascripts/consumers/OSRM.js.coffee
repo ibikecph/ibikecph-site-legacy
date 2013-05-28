@@ -1,6 +1,6 @@
 class IBikeCPH.OSRM
 
-	constructor: (@model, @url) ->
+	constructor: (@model) ->
 		@request      = new IBikeCPH.SmartJSONP
 		@zoom         = null
 		@instructions = true
@@ -8,9 +8,8 @@ class IBikeCPH.OSRM
 		@hints        = {}
 		@last_query   = ''
 
-		@url += if /\?/.test @url then '&' else '?'
-
 		@model.waypoints.on 'add remove reset change:location', => @waypoints_changed()
+		@model.on 'change:profile', => @profile_changed()
 
 	abort: ->
 		@request.abort()
@@ -38,6 +37,10 @@ class IBikeCPH.OSRM
 		else
 			@reset()
 	
+	profile_changed: ->
+		if @model.waypoints.all_located()
+			@request_route()
+
 	reset: ->
 		@model.set 'route', ''
 		@model.instructions.reset()
@@ -49,8 +52,13 @@ class IBikeCPH.OSRM
 		#current_query_with_instructions = "#{@zoom}/true/#{locations.join ';'}"
 		#return if current_query == @last_query or current_query_with_instructions == @last_query
 		#@last_query = current_query
+						
+		profile = @model.get('profile') or 'standard'
+		url = IBikeCPH.config.routing_service[ profile ]
+		url += if /\?/.test(url) then '&' else '?'
+		
 		do (locations) =>
-			@request.exec @url+@build_request(locations), (response) =>
+			@request.exec url + @build_request(locations), (response) =>
 				@update_model locations,response
 
 	update_model: (locations,response) ->

@@ -53,7 +53,8 @@ IBikeCPH.config =
 	]
 
 	routing_service:
-		url: 'http://routes.ibikecph.dk/viaroute'
+		standard: 'http://routes.ibikecph.dk/standard/viaroute'
+		cargobike: 'http://routes.ibikecph.dk/cargobike/viaroute'
 
 	geocoding_service:
 		url: 'http://nominatim.openstreetmap.org/search'
