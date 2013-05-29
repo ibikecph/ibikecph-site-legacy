@@ -4,18 +4,18 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 	initialize: (options) ->
 		@router = options.router
-		
-		url_type = "cargo_url"
 
 		$(window).on 'resize', ->
 			$('#map').height $(window).height() - $('#header').height()
 		$(window).trigger 'resize'
 
 		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
+		@osrm_cargo = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.cargo_url
 		
 		@map = new L.Map @el.id, zoomControl: false		#leaflet map
 		@map.on 'zoomend', (event) =>
 			@osrm.set_zoom @map.getZoom()
+			@osrm_cargo.set_zoom @map.getZoom()
 
 		@dragging_pin = false
 		@pin_views = {}		#used to map from waypoint models to views

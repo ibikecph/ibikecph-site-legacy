@@ -1,0 +1,28 @@
+<div class="header">
+	<h1>Add to favorites</h1>
+	<span class="back">Back</span>
+</div>
+<div class="inner">
+	<div class="success">
+		<h2>Favourite was added</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, impedit.</p>
+	</div>
+	<div class="form">
+		<ul class="routes">
+			<li class="selected"><span>A</span> <b class="start"></b></li>
+			<li><span>B</span> <b class="dest"></b></li>
+		</ul>
+		<ul class="errors"></ul>
+		<input type="text" class="favorite_name" placeholder="Name your favorite">
+		<ul class="types">
+			<li data-category="favorite" class="favorite selected"><span>Favortie</span></li>
+			<li data-category="home" class="home"><span>Home</span></li>
+			<li data-category="work" class="work"><span>Work</span></li>
+			<li data-category="school" class="school"><span>School</span></li>
+		</ul>
+		<div class="clear"></div>
+		<p class="save">
+			<button>Save favorite</button>
+		</p>
+	</div>
+</div>

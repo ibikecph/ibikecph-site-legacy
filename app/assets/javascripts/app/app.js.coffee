@@ -10,3 +10,5 @@ window.IBikeCPH =
 
 $(document).ready ->
 	IBikeCPH.initialize()
+	
+	BackboneRailsAuthTokenAdapter.fixSync Backbone
