@@ -18,7 +18,8 @@ class IBikeCPH.Views.Summary extends Backbone.View
 		@$el.hide() if @$el
 		$(".distance", @el).empty()
 		$(".duration", @el).empty()
-		$('.search_bottom').hide()
+		if $current_user
+			$('.search_bottom').hide()
 	
 	render: =>
 		meters = @model.get 'total_distance'
@@ -26,7 +27,8 @@ class IBikeCPH.Views.Summary extends Backbone.View
 		if meters and seconds
 			@abort_hide()
 			@$el.show()
-			$('.search_bottom').show()
+			if $current_user
+				$('.search_bottom').show()
 			if meters>=1000
 				$(".distance", @el).text((meters/1000).toFixed(2) + ' km')
 			else

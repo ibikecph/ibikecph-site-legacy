@@ -52,17 +52,6 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			left: 0
 		this
 	
-	hide: ->
-		t = @
-		$('#ui').css
-			left: 0
-		$("#favorites").css
-			left: -390
-		setTimeout ( ->
-			t.unbind()
-			t.remove()
-			$('#viewport').append('<div id="favorites"></div>');
-		), 500
 
 	select_address: (event) ->
 		el = $(event.currentTarget)
@@ -109,12 +98,14 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 					$('#favorites .errors').append('<li>'+t+'</li>')
 
 
-
-
-
-
-
-
-
-
-
+	hide: ->
+		t = @
+		$('#ui').css
+			left: 0
+		$("#favorites").css
+			left: -390
+		setTimeout ( ->
+			t.unbind()
+			t.remove()
+			$('#viewport').append('<div id="favorites"></div>');
+		), 500

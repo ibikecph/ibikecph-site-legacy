@@ -35,8 +35,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		$('.help').click (event) => @help()
 		$('.fold').click (event) => @fold()
 		$('.search_bottom .report').click (event) ->
-			@report = new IBikeCPH.Views.ReportIssue model: this, el: '#report', router: @router
-			@report.render(m.waypoints)
+			@report_issue = new IBikeCPH.Views.ReportIssue model: this, el: '#report', router: @router
+			@report_issue.render(m.waypoints, m.instructions.models)
 		$('.search_bottom .favorites').click (event) ->
 			favourites = new IBikeCPH.Views.Favourites model: '', el: '#favorites', router: @router
 			favourites.render(m.waypoints)

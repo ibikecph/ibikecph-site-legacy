@@ -1,51 +1,39 @@
-<div class="dialog g8">
-<h1><%=t '.title' %></h1>
-<p><%=t '.body' %></p>
-<br>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-<%= devise_error_messages! %>
-<p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name, :tabindex => 1 %>
-</p>
-
-    <div class="gr">
-        <div class="g4">
-            <p>
-                <%= f.label :email %><br>
-                <%= f.text_field :email, :tabindex => 2 %><br>
-            </p>
-        </div>
-        <div class="g4 ge">
-            <p>
-                <%= f.label :password %><br>
-                <%= f.password_field :password, :tabindex => 4 %>
-            </p>
-        </div>
-    </div>
-    <div class="gr">
-        <div class="g4">
-            <p>
-                <%= f.label :email_confirmation %><br>
-                <%= f.text_field :email_confirmation, :tabindex => 3 %><br>
-            </p>
-        </div>
-        <div class="g4 ge">
-            <p>
-                <%= f.label :password_confirmation %><br>
-                <%= f.password_field :password_confirmation, :tabindex => 5 %><br>
-            </p>
-        </div>
-    </div>
-
-<p id="terms">
-    <%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
-    <%= text_area_tag :terms_text, t('terms', :locale => :da), :rows => 10, :disabled => 'disabled' %>
-</p>
-<p>
-    <%= submit_tag t('.submit'), :class => :submit %>
-    <span class="note"><%=t '.already_have_account_q' %> <%= link_to t('login'), new_session_path(resource_name) %></span>
-</p>
-<% end %>
+<div class="centered_dialog small">
+    <h1><%=t '.title' %></h1>
+    <p><%=t '.body' %></p>
+    <br>
+    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+        <p>
+            <%= f.label :name %><br>
+            <%= f.text_field :name, :tabindex => 1, :class => 'text_input' %>
+        </p>
+        <p>
+            <%= f.label :email %><br>
+            <%= f.text_field :email, :tabindex => 2, :class => 'text_input' %><br>
+        </p>
+        <p>
+            <%= f.label :email_confirmation %><br>
+            <%= f.text_field :email_confirmation, :tabindex => 3, :class => 'text_input' %><br>
+        </p>
+        <p>
+            <%= f.label :password %><br>
+            <%= f.password_field :password, :tabindex => 4, :class => 'text_input' %>
+        </p>
+        <p>
+            <%= f.label :password_confirmation %><br>
+            <%= f.password_field :password_confirmation, :tabindex => 5, :class => 'text_input' %><br>
+        </p>
+        <p id="terms">
+            <%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
+            <%= text_area_tag :terms_text, t('terms', :locale => :da), :rows => 10, :disabled => 'disabled' %>
+        </p>
+        <p class="submits">
+            <%= submit_tag t('menu.signup'), :class => :submit %>
+        </p>
+        <p class="register">
+            <%=t '.already_have_account_q' %> <%= link_to t('login'), new_session_path(resource_name) %>
+        </p>
+    <% end %>
 </div>
 

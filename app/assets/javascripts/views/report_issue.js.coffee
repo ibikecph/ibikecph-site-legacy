@@ -1,17 +1,16 @@
 class IBikeCPH.Views.ReportIssue extends Backbone.View
-	template: JST['report']
+	template: JST['report_issue']
+
+	instructions: []
 
 	events:
 		'click .header .back'			: 'hide'
 		'click .bug'					: 'step_2'
+		'click .feedbackSubmit'			: 'submit_issue'
 
 	initialize: (options) ->
 
-	render: (from, to) ->
-		render: (from, to) ->
-		values =
-			from: from
-			to: to
+	render: (waypoints, instructions) ->
 		@$el.html @template()
 		$('#ui').css
 			left: 25
@@ -26,15 +25,20 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 
 	step_2: ->
 		$('#step_1').hide()
-		$('#step_2, .submits').show();
-		#select = '<select name="#" id="" class="selectReplace"><option value="">Vælg trin i ruten at rapportére</option><option>Start ad Griffenfeldsgade mod sydvest</option><option>Fortsæt ad H.C. Ørsteds Vej</option><option>Drej let til venstre ad Danasvej</option><option>Drej til højre ad Sankt Knuds Vej</option><option>Fortsæt ad Sankt Knuds Vej</option><option>Ankomst til destinationen</option></select>'
-		#$('#step_2 form').prepend(select)
+		$('#step_2, .submits').show()
+		$.each $("#instructions li .instruction_text"), ->
+  			option = $("<option />").html($(@).text())
+  			option.attr
+  				'value': $(@).text()
+
+  			$('#step_2 form select').append(option)
+
 		$('#step_2 form select').customSelect('.selectReplace')
 		$(".reportProblemForm input[type='radio']").bind "click", ->
 			container = $(this).parent()
 			explainProblem = $(".reportProblemForm .explainProblem")
 			explainProblem.remove()  if explainProblem.length > 0
-			container.append "<textarea name=\"\" id=\"\" class=\"explainProblem\" placeholder=\"Uddyb evt. problemet...\"></textarea>"
+			container.append "<textarea name=\"message\" id=\"\" class=\"explainProblem\" placeholder=\"Uddyb evt. problemet...\"></textarea>"
 			container.find("textarea").focus()
 
 
@@ -46,4 +50,17 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 			left: -390
 		setTimeout ( ->
 			t.unbind()
+			t.remove()
+			$('#viewport').append('<div id="report"></div>')
 		), 500
+
+	submit_issue: ->
+		issue = new IBikeCPH.Models.ReportIssue
+			issue:
+				error_type: $('#report input:radio[name=route]:checked').val()
+				comment: $('#report .explainProblem').val()
+				route_segment: $('#report select').val()
+
+		console.log issue
+
+		issue.save()

@@ -1,4 +1,9 @@
 <script type="text/javascript">
- 	I18n.defaultLocale = "<%= I18n.default_locale %>";
- 	I18n.locale = "<%= I18n.locale %>";
+	I18n.defaultLocale = "<%= I18n.default_locale %>";
+	I18n.locale = "<%= I18n.locale %>";
+	<% if current_user %>
+	$current_user = <%=current_user.id%>
+	<% else %>
+	$current_user = null
+	<% end %>
 </script>

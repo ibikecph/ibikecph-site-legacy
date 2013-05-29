@@ -34,40 +34,32 @@
 					
 		<select name="#" id="" class="selectReplace">
 			<option value="">Vælg trin i ruten at rapportére</option>
-			<option>Start ad Griffenfeldsgade mod sydvest</option>
-			<option>Fortsæt ad H.C. Ørsteds Vej</option>
-			<option>Drej let til venstre ad Danasvej</option>
-			<option>Drej til højre ad Sankt Knuds Vej</option>
-			<option>Fortsæt ad Sankt Knuds Vej</option>
-			<option>Ankomst til destinationen</option>
 		</select>
 
 		<p class="problem">
-			<input type="radio" id="radion_1" name="error">
+			<input type="radio" value="Vejnavn er forkert" id="radion_1" name="route">
 			<label for="radion_1">Vejnavn er forkert</label>
 		</p>
 		<p class="problem">
-			<input type="radio" id="radio_2" name="error">
+			<input type="radio" value="Vejen er ensrettet" id="radio_2" name="route">
 			<label for="radio_2">Vejen er ensrettet</label>
 		</p>
 		<p class="problem">
-			<input type="radio" id="radio_3" name="error">
+			<input type="radio" value="Vejen er lukket" id="radio_3" name="route">
 			<label for="radio_3">Vejen er lukket</label>
 		</p>
 		<p class="problem">
-			<input type="radio" id="radio_4" name="error">
+			<input type="radio" value="Ruten foreslår ulovlige sving" id="radio_4" name="route">
 			<label for="radio_4">Ruten foreslår ulovlige sving</label>
 		</p>
 		<p class="problem">
-			<input type="radio" id="radio_5" name="error">
+			<input type="radio" value="Andet" id="radio_5" name="route">
 			<label for="radio_5">Andet</label>
 		</p>
 
 		<p class="alert_me">
 			<input type="checkbox">
 			Giv mig besked når problemet er løst!
-			<br>
-			<input type="email" class="feedbackEmail" placeholder="Skriv din email adresse">
 		</p>
 
 	</form>

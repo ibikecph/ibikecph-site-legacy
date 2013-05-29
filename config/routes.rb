@@ -69,7 +69,7 @@ RailsOSRM::Application.routes.draw do
       # end
       # get 'unverified', :on => :collection
     # end
-  
+
     resources :blogs, :controller => :blog, :as => :blog_entry, :path => :blog do
       collection do
         get 'archive' => :archive
