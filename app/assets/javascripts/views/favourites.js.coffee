@@ -50,6 +50,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 		$("#favorites").css
 			height: $("#ui").outerHeight()+2
 			left: 0
+
 		this
 	
 

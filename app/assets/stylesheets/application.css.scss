@@ -2,11 +2,10 @@
 
 body {
     line-height: 1.3em;
+    background: #f4f4f4 image-url("_new/content.png");
 }
 div#content {
-    background: #f4f4f4 image-url("_new/content.png");
     margin-top: 40px;
-    padding-bottom: 50px;
 }
 div#footer {
     clear: both;
@@ -635,7 +634,7 @@ li a {
         }
     }
 }
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 767px) {
     .centered_dialog {
         padding: 20px;
         &.medium {

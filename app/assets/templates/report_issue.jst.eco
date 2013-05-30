@@ -29,12 +29,18 @@
 	<div class="clear"></div>
 
 </div>
+<div class="success">
+		<h2>Favourite was added</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, impedit.</p>
+	</div>
 <div class="inner" id="step_2">
 	<form action="#" class="reportProblemForm">
 					
 		<select name="#" id="" class="selectReplace">
 			<option value="">Vælg trin i ruten at rapportére</option>
 		</select>
+
+		<ul class="errors"></ul>
 
 		<p class="problem">
 			<input type="radio" value="Vejnavn er forkert" id="radion_1" name="route">
@@ -55,11 +61,6 @@
 		<p class="problem">
 			<input type="radio" value="Andet" id="radio_5" name="route">
 			<label for="radio_5">Andet</label>
-		</p>
-
-		<p class="alert_me">
-			<input type="checkbox">
-			Giv mig besked når problemet er løst!
 		</p>
 
 	</form>

@@ -322,4 +322,83 @@ p {
         opacity: 1;
     }
 }
-
+.mobile_nav_trigger { display: none; }
+@media only screen and (max-width: 767px) {
+    #header {
+        height: auto;
+        min-height: 40px;
+    }
+    .mobile_nav_trigger {
+        position: absolute;
+        right: 15px;
+        top: 13px;
+        width: 20px;
+        height: 13px;
+        background: image-url('_new/mobile-trigger.png');
+        -webkit-background-size: 20px 13px;
+        background-size: 20px 13px;
+        z-index: 5;
+        display: block;
+        cursor: pointer;
+    }
+    .right_menu {
+        position: relative;
+    }
+    .menu {
+        display: none;
+        float: none;
+        &.mobile { display: none; }
+        ul {
+            li {
+                height: 40px;
+                overflow: hidden;
+                float: none;
+                display: block;
+                height: auto;
+                border-top: 1px solid #313131;
+                border-bottom: 1px solid #1f1f1f;
+                border-left: none;
+                border-right: none;
+                &.selected, &.selected:hover {
+                    background-color: #000;
+                }
+                &:hover {
+                    background-color: #000;
+                }
+                a {
+                    display: block;
+                    padding: 0px 12px;
+                    line-height: 3.7em;
+                    font-weight: bold;
+                    color: white;
+                    font-size: 1em;
+                    text-decoration: none;
+                }
+            }
+        }
+        &.locales {
+            li {
+                background: $new_dark !important;
+                &:first-child {
+                    border-right: none;
+                    padding-right: 0px !important;
+                }
+                &:last-child {
+                    border-left: none;
+                    a {
+                        padding-left: 14px;
+                    }
+                }
+                a {
+                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0.5)";
+                    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0.5)0.5;
+                    opacity: 0.5;
+                }
+                &:hover a,
+                &.selected a {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

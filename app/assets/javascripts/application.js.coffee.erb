@@ -20,10 +20,12 @@
 
 jQuery ->
 	elements =
-  		content: $("#content")
-  		left_col: $("#content .left-col")
-  		terms_a: $('p#terms a')
-  		terms_textarea: $('p#terms textarea')
+    content: $("#content")
+    left_col: $("#content .left-col")
+    terms_a: $('p#terms a')
+    terms_textarea: $('p#terms textarea')
+    mobile_nav_trigger: $('#header .mobile_nav_trigger')
+    menu: $('#header .menu')
 
   	elements.left_col.css
   		"min-height": $(window).height() - 40
@@ -33,3 +35,11 @@ jQuery ->
 	elements.terms_a.click (event) ->
 		event.preventDefault()
 		elements.terms_textarea.toggle()
+
+  elements.mobile_nav_trigger.click (event) ->
+    elements.menu.toggle()
+    console.log "a"
+
+
+  
+
