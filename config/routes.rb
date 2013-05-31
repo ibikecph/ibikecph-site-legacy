@@ -108,10 +108,11 @@ RailsOSRM::Application.routes.draw do
     resources :themes
     get 'themes/:id/new' => 'issues#new_for_theme', :as => :new_issue_for_theme
     post 'themes/:id/create' => 'issues#create_for_theme', :as => :create_issue_for_theme
-
+    
+    match '/about' => 'about#index'
+    match '/about/:action' => 'about#:action'
   end
-  match '/about' => 'about#index'
-  match '/about/:action' => 'about#:action'
+
   match '/terms' => 'pages#terms'
   match '/help' => 'pages#help'
   
