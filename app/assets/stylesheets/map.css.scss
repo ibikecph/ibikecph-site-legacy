@@ -119,6 +119,16 @@ body {
 			display: block;
 			float: left;
 			width: 195px;
+			&.report a {
+				background-image: image-url("_new/bottom-bug.png");
+				background-repeat: no-repeat;
+				background-position: 20px 10px;
+			}
+			&.favorites a {
+				background-image: image-url("_new/bottom-favorite.png");
+				background-repeat: no-repeat;
+				background-position: 12px 9px;
+			}
 			a:last-child {
 				border-radius: 0 0 5px 0;
 			}
@@ -140,15 +150,15 @@ body {
 		margin: 20px 0;
 		position: relative;
 		.reverse_route {
-			width: 25px;
-			height: 13px;
+			width: 21px;
+			height: 21px;
 			display: block;
-			background: image-url('_new/reverse_route.png');
+			background: image-url('_new/reverse_route_new.png');
 			opacity: 0.5;
 			right: 0;
 			position: absolute;
 			top: 50%;
-			margin: -6px 0 0;
+			margin: -9px 0 0;
 			cursor: pointer;
 			&:hover {
 				opacity: 1;
@@ -564,6 +574,18 @@ body {
 		border-radius: 0 0 5px 0;
 		overflow: auto;
 		color: #333;
+		.errors {
+			background: #e22021;
+			color: #fff;
+			list-style-type: none;
+			border-radius: 5px;
+			font-size: 11px;
+			font-weight: bold;
+			margin: -5px 0 10px;
+			li {
+				padding: 5px;
+			}
+		}
 		#step_2 {
 			display: none;
 		}
@@ -754,4 +776,47 @@ body {
 }
 :-ms-input-placeholder {
 	color: #ddd;
+}
+
+
+@media only screen and (max-width: 767px) {
+	#ui {
+		width: 250px;
+		#addresses {
+			margin: 10px 0;
+			position: relative;
+			.address {
+				margin-bottom: 5px;
+				.suggestions {
+					font-size: 0.7em;
+					top: 38px;
+					width: 214px;
+					padding: 0;
+					z-index: 5;
+					li {
+						padding: 5px 15px 5px 30px;
+					}
+				}
+				label {
+					width: 17px;
+					top: 7px;
+					color: #a2a2a2;
+				}
+				input {
+					width: 170px;
+					padding: 5px 5px 5px 30px;
+					font-size: 0.75em;
+					background: #f4f4f4;
+					border-radius: 2px;
+					border: 1px solid #e3e3e3;
+					box-shadow: 0 1px 1px #c3c3c3 inset;
+					color: #333;
+					outline: none;
+					font-weight: bold;
+					position: relative;
+					z-index: 1;
+				}
+			}
+		}
+	}
 }

@@ -5,7 +5,6 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 
 	events:
 		'click .header .back'			: 'hide'
-		'click .bug'					: 'step_2'
 		'click .feedbackSubmit'			: 'submit_issue'
 
 	initialize: (options) ->
@@ -21,9 +20,7 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 			height: ($('#report').height()-$('#report .header').height())-40
 		$('#report #step_2.inner').css
 			height: ($('#report').height()-$('#report .header').height())-93
-		this
 
-	step_2: ->
 		$('#step_1').hide()
 		$('#step_2, .submits').show()
 		$.each $("#instructions li .instruction_text"), ->
@@ -40,6 +37,8 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 			explainProblem.remove()  if explainProblem.length > 0
 			container.append "<textarea name=\"message\" id=\"\" class=\"explainProblem\" placeholder=\"Uddyb evt. problemet...\"></textarea>"
 			container.find("textarea").focus()
+
+		this
 
 
 	hide: ->
@@ -61,6 +60,13 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 				comment: $('#report .explainProblem').val()
 				route_segment: $('#report select').val()
 
-		console.log issue
+		$('#report .errors').html('')
 
-		issue.save()
+		issue.save null,
+			success: (model, response) ->
+				$('#report .step_2').hide()
+				$('#report .success').show()
+			error: (model, response) ->
+				$('#favorites .errors').html('')
+				_.each JSON.parse(response.responseText).errors, (t,num) ->
+					$('#report .errors').append('<li>'+t+'</li>')

@@ -1,10 +1,11 @@
 <%#= link_to image_tag('alpha.png'), blog_entry_index_path, :id => :alpha %>
 <div id="header">
+	<div class="mobile_nav_trigger"></div>
 	<div class="menu">
 		<%= render_navigation :context => :main %>
 	</div>
 	<div class="right_menu">
-		<div class="menu" id="">
+		<div class="menu mobile" id="">
 			<ul>
 				<li id="mobile_app"><a href="#app"><%=t 'menu.mobile_app' %></a></li>
 			</ul>
