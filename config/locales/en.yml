@@ -71,6 +71,12 @@ en:
     login: Login
     logout: Logout
     mobile_app: Download mobile app
+    about: About I Bike CPH
+
+  about:
+    about: "About I Bike CPH"
+    faq: "FAQ"
+    api: "API"
 
   news:
     title: Latest news

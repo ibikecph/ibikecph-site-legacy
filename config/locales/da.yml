@@ -65,6 +65,12 @@ da:
     logout: Log ud
     mobile_app: Hent mobil app
     the_title: Seneste nyheder
+    about: Om I Bike CPH
+
+  about:
+    about: "Om I Bike CPH"
+    faq: "FAQ"
+    api: "API"
 
   news:
     title: Seneste nyheder
