@@ -20,26 +20,31 @@
 
 jQuery ->
 	elements =
-    content: $("#content")
-    left_col: $("#content .left-col")
-    terms_a: $('p#terms a')
-    terms_textarea: $('p#terms textarea')
-    mobile_nav_trigger: $('#header .mobile_nav_trigger')
-    menu: $('#header .menu')
+		content: $("#content")
+		left_col: $("#content .left-col")
+		right_col: $("#content .right-col")
+		terms_a: $('p#terms a')
+		terms_textarea: $('p#terms textarea')
+		mobile_nav_trigger: $('#header .mobile_nav_trigger')
+		menu: $('#header .menu')
 
-  	elements.left_col.css
-  		"min-height": $(window).height() - 40
-  	elements.content.css
-  		"min-height": $(window).height() - 40
+
+	if elements.right_col.length > 0
+		mobile_trigger = $("<div />").addClass('mobile-sidebar-trigger').click ->
+			elements.right_col.toggle()
+		elements.left_col.prepend(mobile_trigger)
+
+	if elements.left_col.outerHeight() < elements.right_col.outerHeight() and $(window).width() > 767
+		elements.left_col.css
+			height: elements.right_col.outerHeight()
 
 	elements.terms_a.click (event) ->
 		event.preventDefault()
 		elements.terms_textarea.toggle()
 
-  elements.mobile_nav_trigger.click (event) ->
-    elements.menu.toggle()
-    console.log "a"
+	elements.mobile_nav_trigger.click ->
+		elements.menu.toggle()
 
 
-  
+	
 

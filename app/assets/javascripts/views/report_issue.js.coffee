@@ -54,6 +54,7 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 		), 500
 
 	submit_issue: ->
+		t = @
 		issue = new IBikeCPH.Models.ReportIssue
 			issue:
 				error_type: $('#report input:radio[name=route]:checked').val()
@@ -64,8 +65,9 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 
 		issue.save null,
 			success: (model, response) ->
+				t.hide()
 				$('#report .step_2').hide()
-				$('#report .success').show()
+				
 			error: (model, response) ->
 				$('#favorites .errors').html('')
 				_.each JSON.parse(response.responseText).errors, (t,num) ->

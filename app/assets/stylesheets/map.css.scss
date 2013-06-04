@@ -197,13 +197,24 @@ body {
 					&.address {
 						background: image-url("_new/suggestion-address.png") no-repeat 10px center;
 					}
+					&.favorite {
+						background: image-url("_new/suggestion-favorite.png") no-repeat 10px center;
+					}
+					&.home {
+						background: image-url("_new/suggestion-home.png") no-repeat 10px center;
+					}
+					&.work {
+						background: image-url("_new/suggestion-work.png") no-repeat 10px center;
+					}
+					&.school {
+						background: image-url("_new/suggestion-school.png") no-repeat 10px center;
+					}
 					.n {
 						font-weight: bold;
 						display: block;
 						color: #444;
 						margin-bottom: 2px;
 					}
-
 				}
 			}
 			label {
@@ -782,6 +793,7 @@ body {
 @media only screen and (max-width: 767px) {
 	#ui {
 		width: 250px;
+		top: 50px;
 		#addresses {
 			margin: 10px 0;
 			position: relative;
@@ -816,6 +828,93 @@ body {
 					position: relative;
 					z-index: 1;
 				}
+			}
+		}
+		#summary {
+			padding: 5px 10px 10px 10px;
+			width: 270px;
+			.details {
+				font-size: 0.75em;
+				left: 10px;
+				top: 9px;
+			}
+			.duration, .distance {
+				font-size: 0.7em;
+			}
+		}
+		#time {
+			input {
+				width: 74px;
+				padding: 5px;
+				font-size: 0.75em;
+			}
+		}
+		#instructions {
+			max-height: auto;
+			height: 100%;
+		}
+		.search_bottom {
+			display: none;
+			margin: 0;
+			width: 290px;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			li {
+				margin: 0;
+				padding: 0;
+				display: block;
+				float: left;
+				width: 144px;
+				&:last-child {
+					width: 143px;
+				}
+				&.report a {
+					background-image: none;
+				}
+				&.favorites a {
+					background-image: none;
+				}
+				a:last-child {
+					border-radius: 0 0 5px 0;
+				}
+				a {
+					display: block;
+					background: #f4f4f4;
+					padding: 12px 0;
+					border-left: 1px solid #fff;
+					border-right: 1px solid #d5d5d6;
+					color: #8b8b8b;
+					text-decoration: none;
+					&:hover {
+						color: #444;
+					}
+				}
+			}
+		}
+	}
+	#favorites, #report {
+		width: 288px;
+		top: 50px;
+		left: -288px;
+	}
+	#report {
+		.selectReplace {
+			height: 18px;
+			width: 179px !important;
+			margin-bottom: 7px;
+			font-size: 11px !important;
+			background: #fff !important;
+			border-radius: 3px;
+			border: 1px solid #e3e3e3;
+			padding: 12px 40px 7px 12px !important;
+			white-space: nowrap !important;
+			overflow: ellipsis !important;
+		}
+		.problem {
+			font-size: 11px !important;
+			textarea {
+				width: 192px !important;
 			}
 		}
 	}

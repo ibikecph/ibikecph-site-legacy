@@ -1,5 +1,31 @@
 <%if I18n.locale==:en%>
-ABOUT/API - EN Content
+<div class="gr">
+	<div class="g8 left-col">
+		<div class="inner">
+			<h1 class="blog-title"><%=t 'about.api' %></h1>
+			<p>api</p>
+		</div>
+	</div>
+	<div class="g4 ge">
+		<div class="inner">
+			<%= render :partial => 'navigation' %>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
 <%else%>
-ABOUT/API - DA Content
+<div class="gr">    
+	<div class="g8 left-col">
+		<div class="inner">
+			<h1 class="blog-title"><%=t 'about.api' %></h1>
+			<p>api</p>
+		</div>
+	</div>
+	<div class="g4 ge right-col">
+		<div class="inner">
+			<%= render :partial => 'navigation' %>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
 <%end%>

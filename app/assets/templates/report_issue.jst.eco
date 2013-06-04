@@ -29,10 +29,10 @@
 	<div class="clear"></div>
 
 </div>
-<div class="success">
-		<h2>Favourite was added</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, impedit.</p>
-	</div>
+<!-- <div class="success">
+	<h2>Favourite was added</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, impedit.</p>
+</div> -->
 <div class="inner" id="step_2">
 	<form action="#" class="reportProblemForm">
 					

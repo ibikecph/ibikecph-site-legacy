@@ -80,6 +80,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 		@data.name = el.val()
 
 	save_favourite: ->
+		t = @
 		fav = new IBikeCPH.Models.Favourites
 			favourite:
 				name: @data.name
@@ -91,6 +92,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			
 		fav.save null,
 			success: (model, response) ->
+				t.hide()
 				$('#favorites .form').hide()
 				$('#favorites .success').show()
 			error: (model, response) ->

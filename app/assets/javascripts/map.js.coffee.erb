@@ -33,3 +33,21 @@
 #= require_tree ./models
 #= require_tree ../templates
 #= require_tree ./views
+
+$().ready ->
+	ui_height()
+
+window.onresize = (event) ->
+	ui_height()
+
+ui_height = ->
+	if $(window).width() < 767
+		$("#ui #ui_foldable").css
+			height: $(window).height()-100
+		$("#instructions_div").css
+			height: $("#ui_foldable").height() - 225
+			overflow: "hidden"
+	
+	else
+		$("#ui").css
+			height: 'auto'

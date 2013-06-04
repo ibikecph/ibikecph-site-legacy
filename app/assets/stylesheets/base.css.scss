@@ -55,7 +55,7 @@ $columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
     -webkit-font-smoothing:antialiased
 }
 html {
-	min-width: 445px;
+	/*min-width: 445px;*/
 }
 body {
     position: relative;
@@ -175,6 +175,14 @@ a {
         background: #000 url(/assets/_new/nav-feedback-active.png) no-repeat 20px center;
     };
 }
+.menu #about {
+    background: url(/assets/_new/nav-about.png) no-repeat 20px center;
+    padding-left: 36px;
+    &.selected,
+    &:hover{
+        background: #000 url(/assets/_new/nav-about-active.png) no-repeat 20px center;
+    };
+}
 .menu #mobile_app {
     background: url(/assets/_new/nav-phone.png) no-repeat 20px center;
     padding-left: 36px;
@@ -224,6 +232,11 @@ hr {
     &.empty {
         background-color: transparent;
     }   
+}
+#content {
+    #flash {
+        top: -40px !important;
+    }
 }
 h1, h2 {
     color: $dark;
@@ -323,6 +336,41 @@ p {
     }
 }
 .mobile_nav_trigger { display: none; }
+@media only screen and (max-width: 900px) and (min-width: 767px) {
+    .menu {
+        float: left;
+        &.mobile {
+            display: none;
+        }
+        ul {
+            list-style-type: none;
+            li {
+                text-shadow: 0 1px 1px #000;
+                background-color: $new_dark;
+                float: left;
+                display: inline-block;
+                height: 40px;
+                border-right: 1px solid #000;
+                border-left: 1px solid #393939;
+                &.selected, &.selected:hover {
+                    background-color: #000;
+                }
+                &:hover {
+                    background-color: #000;
+                }
+                a {
+                    padding: 0px 8px;
+                    line-height: 3.7em;
+                    font-weight: bold;
+                    color: white;
+                    font-size: 1em;
+                    text-decoration: none;
+                }
+            }
+        }
+        
+    }
+}
 @media only screen and (max-width: 767px) {
     #header {
         height: auto;
@@ -347,7 +395,9 @@ p {
     .menu {
         display: none;
         float: none;
-        &.mobile { display: none; }
+        &.mobile {
+            display: none !important;
+        }
         ul {
             li {
                 height: 40px;
