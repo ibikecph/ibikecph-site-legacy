@@ -11,7 +11,7 @@ RailsOSRM::Application.routes.draw do
       resources :reported_issues, :path => 'issues'
       resources :favourites do
         collection do
-          get :reorder
+          post :reorder
           end  
       end
       resources :routes
