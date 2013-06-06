@@ -7,10 +7,10 @@
     <% end %>
     </p>
     <% if can? :manage, reported_issue %>
-        <div class="buttons righty">
-            <%= link_to t('edit'),  [:edit, reported_issue] %>
-            <!--= link_to t('delete'), reported_issue, :method => :delete, :confirm => t('sure_q')--> 
-        </div>
+       <!-- <div class="buttons righty">
+             = link_to t('edit'),  [:edit, reported_issue] 
+            = link_to t('delete'), reported_issue, :method => :delete, :confirm => t('sure_q')
+        </div>--> 
     <% end %>
     <p>
     <h1><%= reported_issue.route_segment %></h1>
