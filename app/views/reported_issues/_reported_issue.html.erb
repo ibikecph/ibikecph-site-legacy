@@ -1,0 +1,21 @@
+<div class="theme">
+    <p class="note">
+    <% if reported_issue == ReportedIssue.order('created_at desc').first %>
+        <%=t '.title_current' %>
+    <% else %>
+        <%=t '.title' %>
+    <% end %>
+    </p>
+    <% if can? :manage, reported_issue %>
+        <div class="buttons righty">
+            <%= link_to t('edit'),  [:edit, reported_issue] %>
+            <!--= link_to t('delete'), reported_issue, :method => :delete, :confirm => t('sure_q')--> 
+        </div>
+    <% end %>
+    <p>
+    <h1><%= reported_issue.route_segment %></h1>
+    <%= reported_issue.error_type %>
+    <br><br>
+    <%= reported_issue.comment %>
+    </p>
+</div>

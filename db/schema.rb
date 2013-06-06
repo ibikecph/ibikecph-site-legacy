@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516085838) do
+ActiveRecord::Schema.define(:version => 20130605042950) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
@@ -58,8 +58,9 @@ ActiveRecord::Schema.define(:version => 20130516085838) do
     t.string   "longitude"
     t.string   "source"
     t.string   "sub_source"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "position",   :default => 0
   end
 
   create_table "follows", :force => true do |t|
