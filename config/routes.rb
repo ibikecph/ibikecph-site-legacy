@@ -9,7 +9,12 @@ RailsOSRM::Application.routes.draw do
         get "/logout", :to => "sessions#destroy"
       end          
       resources :reported_issues, :path => 'issues'
-      resources :favourites, :routes
+      resources :favourites do
+        collection do
+          get :reorder
+          end  
+      end
+      resources :routes
       resources :users, :only => [:index, :show, :destroy]          
     end
   end
@@ -33,8 +38,8 @@ RailsOSRM::Application.routes.draw do
     #    get 'existing'
     #  end
     #end
-  
-    resources :reported_issues, :favourites
+    match "issues/:filter", :to => "reported_issues#index"
+    resources :reported_issues, :path => 'issues' 
     
     resource :account do
       get 'activating'

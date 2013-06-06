@@ -1,0 +1,21 @@
+<div class="gr">
+	<div class="g8 ge">
+		<% if can? :manage, @reported_issue %>
+		<div class="buttons righty">
+			<%= link_to t('edit'),  [:edit,@reported_issue] %>
+			<%= link_to t('delete'),  @reported_issue, :method => :delete, :confirm => t('sure_q') %>
+		</div>
+		<% end %>
+    <h1><%= @reported_issue.route_segment %></h1>
+    <%= @reported_issue.error_type %>
+    <br><br>
+    <%= @reported_issue.comment %>
+		<p class="note">
+			<% if @reported_issue.user %>
+				<%= @reported_issue.user.name %>,
+			<% end %>
+			<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@reported_issue.created_at).capitalize %> <%=t 'ago' %></span>
+		</p>
+
+	</div>
+</div>

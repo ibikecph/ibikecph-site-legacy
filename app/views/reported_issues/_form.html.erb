@@ -1,0 +1,19 @@
+<%= form_for @reported_issue, :url => url do |f| %>
+<%= errors_for( @reported_issue ).html_safe %>
+
+	<p>
+		<%= f.label :route_segment %>
+		<%= f.select :route_segment, %w(test test1 test2) %>
+	</p>
+	<p>
+		<%= f.label :error_type %>
+		<%= f.text_field :error_type%>
+	</p>
+	<p>
+		<%= f.label :comment %>
+		<%= f.text_area :comment, { :rows => 3 } %>
+	</p>
+	
+	<p><%= f.submit t('.submit'), :class => :submit %></p>
+
+<% end %>
