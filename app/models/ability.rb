@@ -19,7 +19,10 @@ class Ability < ActiveRecord::Base
         end 
         can [:update,:create], [Favourite, Route] do |t|
           t.user.id == user.id
-        end 
+        end
+        can [:reorder], Favourite do |t|
+          t.user.id == user.id
+        end  
       end
     end
       can :destroy, User do |t|
