@@ -17,6 +17,7 @@
 #= require jquery.timeago
 #= require rails-timeago
 #= require utils
+#= require plugins
 
 jQuery ->
 	elements =
@@ -25,9 +26,13 @@ jQuery ->
 		right_col: $("#content .right-col")
 		terms_a: $('p#terms a')
 		terms_textarea: $('p#terms textarea')
-		mobile_nav_trigger: $('#header .mobile_nav_trigger')
 		menu: $('#header .menu')
+		masonry: $('.masonry')
 
+
+	if elements.masonry.length > 0
+		elements.masonry.simplemasonry()
+		console.log "a"
 
 	if elements.right_col.length > 0
 		mobile_trigger = $("<div />").addClass('mobile-sidebar-trigger').click ->
@@ -41,10 +46,3 @@ jQuery ->
 	elements.terms_a.click (event) ->
 		event.preventDefault()
 		elements.terms_textarea.toggle()
-
-	elements.mobile_nav_trigger.click ->
-		elements.menu.toggle()
-
-
-	
-

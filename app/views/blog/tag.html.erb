@@ -1,24 +1,12 @@
-<div class="gr">
-	<div class="g8 left-col">
-		<div class="inner">
-			<% if can? :manage, BlogEntry %>
-			<div class="righty buttons">
-				<%= link_to "New Entry",  new_blog_entry_path %>
-			</div>
-		<% end %>
-		<h1><%=t '.title', :tag => params[:tag] %></h1>
-		<br>
-		<ul class="blog_entries">
-			<%= render :partial => "list", :collection => @blog_entries, :as => :blog_entry%>
-		</ul>
-		</div>
-	</div>
-	<div class="g4 ge right-col">
-		<div class="inner">
-			<%= render 'tag_cloud' %>
-			<%= render 'latest' %>
+<div id="news_container">
+	<div id="news_list">
+		<div id="news_top">
 			<%= render 'links' %>
+			<%= render 'tag_cloud' %>
 		</div>
+
+		<h1 class="blog-title"><%=t '.title', :tag => params[:tag] %></h1>
+		<%= render :partial => "blog_entry", :collection => @blog_entries, :as => :blog_entry%>
+		<div class="clear"></div>
 	</div>
 </div>
-

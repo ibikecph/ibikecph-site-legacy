@@ -70,5 +70,5 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 				
 			error: (model, response) ->
 				$('#favorites .errors').html('')
-				_.each JSON.parse(response.responseText).errors, (t,num) ->
+				_.each $.parseJSON(response.responseText).errors, (t,num) ->
 					$('#report .errors').append('<li>'+t+'</li>')

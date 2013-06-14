@@ -18,4 +18,24 @@
 		</div>
 	</div>
 </div>
-<div id="mobileapp"></div>
+<div id="mobileapp">
+	<div class="close"></div>
+	<div class="phone"></div>
+	<div class="text">
+		<% if I18n.locale == "da" then %>
+			<h1>Få styr på ruten på din mobil.</h1>
+			<p>Søg ruter og brug dine favoritter på farten.</p>
+		<% else %>
+			<h1>Keep track of the route on your mobile.</h1>
+			<p>Search routes and use your favorites on the go.</p>
+		<% end %>
+	</div>
+	<div class="download">
+		<div class="appstore">
+			<a href="#"><img src="/assets/_new/badge-appstore.png"></a>
+		</div>
+		<div class="googleplay">
+			<a href="#"><img src="/assets/_new/badge-googleplay.png"></a>
+		</div>
+	</div>
+</div>

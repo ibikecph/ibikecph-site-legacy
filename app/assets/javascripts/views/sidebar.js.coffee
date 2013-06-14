@@ -11,6 +11,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'change .departure'				: 'change_departure'
 		'change .arrival'				: 'change_arrival'
 		'click .reverse_route'			: 'reverse_route'
+		'change .mode [type=radio]'	    : 'change_mode'
+		'click #cargobike_trigger'		: 'toggle_mode'
 
 	initialize: (options) ->
 		@router = options.router
@@ -127,15 +129,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	set_loading: (field_name, loading) ->
 		@$(".#{field_name}").toggleClass 'loading', !!loading
 
-	reverse_route: ->
-		new_to = @get_field 'from'
-		new_from = @get_field 'to'
-
-		@set_field 'to', new_to
-		@set_field 'from', new_from
-
-		$(".address .to, .address .from").trigger('change')
-
 	find_suggestions: ->
 		t = @
 		el = $(event.target)
@@ -236,6 +229,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 		), 150
 	
+	reverse_route: ->
+		new_first_location = @model.waypoints.last().toJSON().location
+		new_last_location = @model.waypoints.first().toJSON().location
+		new_first_address = @model.waypoints.last().toJSON().address
+		new_last_address = @model.waypoints.first().toJSON().address
+		@model.waypoints.first().set 'location', new_first_location
+		@model.waypoints.last().set 'location', new_last_location
+		@set_field 'from', new_last_address
+		@set_field 'to', new_first_address
+
 	update_field_from_suggestion: (event) ->
 		el = $(event.currentTarget)
 		type = el.data('type')
@@ -289,3 +292,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				@model.waypoints.remove waypoint
 			else
 				waypoint.trigger 'input:address'
+
+	change_mode: (event) ->
+		profile = $(event.target).attr('id')
+		@model.set 'profile', profile, silent: true
+		@model.trigger 'change:profile'
+
+	toggle_mode: (event) ->
+		el = $(event.currentTarget)
+		el.toggleClass('active')
+		if not el.hasClass('active')
+			$('.mode #standard').trigger 'click'
+		else
+			$('.mode #cargobike').trigger 'click'

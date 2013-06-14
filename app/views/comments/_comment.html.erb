@@ -1,4 +1,4 @@
-<tr id="comment_<%= comment.id %>">
+<tr class="a_comment" id="comment_<%= comment.id %>">
 	<td class="avatar">
 		<%= profile_image comment.user %>
 	</td>
@@ -8,12 +8,12 @@
 				<%= link_to t('delete'), comment, :remote => true, :method => :delete, :confirm => t('sure_q') %>
 			</p>
 		<% end %>
-		<%= auto_html_basic(comment.body) %>
 		<p class="note">
 			<%= link_to comment.user.name, comment.user %>, 
 			<span class="timeago" title="<%= comment.created_at.getutc.iso8601 %>">
 				<%= timeago_tag comment.created_at %> ago
 			</span>
 		</p>
+		<%= auto_html_basic(comment.body) %>
 	</td>
 </tr>

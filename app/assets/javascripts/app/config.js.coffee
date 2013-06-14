@@ -10,15 +10,15 @@ IBikeCPH.config =
 	route_styles:
 		current:
 			color   : '#00aeef'
-			weight  : 6
+			weight  : 5
 			opacity : 0.8
 		old:
 			color   : 'black'
-			weight  : 6
+			weight  : 5
 			opacity : 0.4
 		invalid:
 			color   : 'grey'
-			weight  : 6
+			weight  : 5
 			opacity : 0.3
 
 	# The first tile set is used by default.
@@ -53,9 +53,12 @@ IBikeCPH.config =
 		position : 'topright'
 	]
 
+	maxbounds:
+		value: new L.LatLngBounds(new L.LatLng(55.885903, 12.019043), new L.LatLng(55.489553, 12.989209)) # Max bounds of the map
+
 	routing_service:
-		url: 'http://routes.ibikecph.dk/viaroute'
-		cargo_url: 'http://routes.ibikecph.dk/cargobike/viaroute'
+		standard: 'http://routes.ibikecph.dk/standard/viaroute'
+		cargobike: 'http://routes.ibikecph.dk/cargobike/viaroute'
 
 	geocoding_service:
 		url: 'http://nominatim.openstreetmap.org/search'

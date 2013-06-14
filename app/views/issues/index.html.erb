@@ -1,178 +1,37 @@
-<div class="page_content">
-
-	<ul class="grid">
+<div id="content_responsive">
 	
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
+	<div class="page_header">
 		
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-
-		<li class="item">
-			<div class="item_thumb">
-				<h2>Hvad med at app’en kan måle min hastighed undervejs?</h2>
-				<p class="from">af Maria Skov</p>
-				<div class="soc">
-					<div class="soc_vote">
-						<a href="#" class="soc_vote_like">Stem</a>
-						<span class="soc_vote_comments">121</span>
-					</div>
-					<div class="soc_comment">
-						21 kommentar
-					</div>
-				</div>
-			</div>
-		</li>
-		
-	</ul>        		
+		<%= render :partial => 'top' %>
 	
-	<div class="clear"></div>
-
-    <div class="panel" id="template">
-        <div class="panel_inner">
-        
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus porttitor arcu. Cras pretium sem nec sapien condimentum lobortis. Vestibulum iaculis sem in purus iaculis id volutpat ligula malesuada. Aliquam lacus mi, consequat id congue at, volutpat non tellus. In accumsan, justo a tempor elementum, sapien nulla condimentum velit, vitae pellentesque elit magna a arcu. Aenean tortor tellus, cursus quis blandit non, mollis a elit. Nullam eleifend mi ut leo tempor feugiat. Nulla porta augue dui, mattis consequat lorem. Ut ultricies elit elit. Morbi at turpis nisl.
-            
-            <a href="#" class="panel_close" title="Close"></a>  
-        </div>
-    </div>
-
-</div>
-<div class="gr">
-	<div class="g4">
-		<%= render 'sidebar' %>
 	</div>
-	<div class="g8 ge">
-		<%= render @theme if @theme %>
-		<% title = @theme ? t('.issues_title') : t('issues.all.title') %>
-		
-		<%= render 'new_button' %>
-		<h2><%= title %></h2>
-		<%= render :partial => 'issues/issues' %>
-		<% if @theme %>
-			<p><%= link_to "#{t('issues.issues.all_issues')} &rarr;".html_safe, all_issues_path %></p>
-		<% end %>
+	
+	<div class="page_content">
+	    <div class="panel" id="template">
+	        <div class="panel_inner">
+	        
+	            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus porttitor arcu. Cras pretium sem nec sapien condimentum lobortis. Vestibulum iaculis sem in purus iaculis id volutpat ligula malesuada. Aliquam lacus mi, consequat id congue at, volutpat non tellus. In accumsan, justo a tempor elementum, sapien nulla condimentum velit, vitae pellentesque elit magna a arcu. Aenean tortor tellus, cursus quis blandit non, mollis a elit. Nullam eleifend mi ut leo tempor feugiat. Nulla porta augue dui, mattis consequat lorem. Ut ultricies elit elit. Morbi at turpis nisl.
+	            
+	            <a href="#" class="panel_close" title="Close"></a>  
+	        </div>
+	    </div>
+
+	    <%= render :partial => 'issues/issues' %>
+
 	</div>
+	<!-- <div class="gr">
+		<div class="g4">
+			<%= render 'sidebar' %>
+		</div>
+		<div class="g8 ge">
+			<%= render @theme if @theme %>
+			<% title = @theme ? t('.issues_title') : t('issues.all.title') %>
+			
+			<h2><%= title %></h2>
+			
+			<% if @theme %>
+				<p><%= link_to "#{t('issues.issues.all_issues')} &rarr;".html_safe, all_issues_path %></p>
+			<% end %>
+		</div>
+	</div> -->
 </div>

@@ -4,16 +4,16 @@
 	<p>
 		<%= f.label :title %>
 		<%= chars_remaining %><br>
-		<%= f.text_field :title, { "data-maxlength" => @blog_entry.class::MAXLENGTH[:title] } %>
+		<%= f.text_field :title, { "data-maxlength" => @blog_entry.class::MAXLENGTH[:title], :class => 'text_input' } %>
 	</p>
 	<p>
 		<%= f.label :body %>
 		<%= chars_remaining %><br>
-		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @blog_entry.class::MAXLENGTH[:body] } %>
+		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @blog_entry.class::MAXLENGTH[:body], :class => 'text_input' } %>
 	</p>
 	<p>
-		<%= f.label :tags %>
-		<%= f.text_area :tag_list, { :rows => 1 } %>
+		<%= f.label :tag_list %>
+		<%= f.text_field :tag_list, { :rows => 1, :class => 'text_input' } %>
 	</p>
 	<p>
 		<%= image_fields f, @blog_entry %>
@@ -22,6 +22,6 @@
 		<%= f.label :sticky %><br>
 		<%= f.check_box :sticky %> <%=t '.make_sticky'%>
 	</p>
-	<p><%= f.submit t('.submit'), :class => :submit %></p>
+	<p class="submits"><%= f.submit t('.submit'), :class => :submit %></p>
 
 <% end %>

@@ -92,6 +92,7 @@ body {
 		font-style: italic;
 	}
 	.mode {
+		display: none;
 		margin: 10px 0;
 		span {
 			margin-right: 10px;
@@ -219,14 +220,20 @@ body {
 			}
 			label {
 				display: inline-block;
-				width: 17px;
-				font-size: 0.75em;
+				font-size: 0.7em;
 				font-weight: bold;
 				position: absolute;
-				left: 14px;
-				top: 14px;
+				left: 5px;
+				top: 10px;
 				z-index: 2;
-				color: #a2a2a2;
+				border-radius: 12px; /* one half of ( (border * 2) + height + padding ) */
+				background: #dc1e19;
+			    color: white;
+			    font: bold 15px/13px Helvetica, Verdana, Tahoma;
+			    height: 16px; 
+			    min-width: 14px;
+			    padding: 4px 3px 0 3px;
+			    text-align: center;
 			}
 			input {
 				width: 270px;
@@ -278,6 +285,22 @@ body {
 			position: relative;
 			z-index: 1;
 		}
+		div#cargobike_trigger {
+			width: 70px;
+			height: 41px;
+			margin-top: 15px;
+			background: #f4f4f4 image-url("_new/cargo-normal.png") no-repeat center center;
+			cursor: pointer;
+			border-radius: 2px;
+			border: 1px solid #e3e3e3;
+			box-shadow: 0 1px 2px #c3c3c3;
+			&:hover, &.active {
+				background: #f4f4f4 image-url("_new/cargo-active.png") no-repeat center center;
+			};
+			&.active {
+				box-shadow: 0 2px 2px #c3c3c3 inset;
+			}
+		}
 	}
 	#summary {
 		display: none;
@@ -316,51 +339,58 @@ body {
 	}
 	#instructions_div {
 	    display: none;
-	}
-	#instructions {
-	    display: block;
-		margin-top: 10px;
-		max-height: 300px;
-		overflow: auto;
-		border-bottom: 1px solid #d5d5d6;
-		margin: 0 0 0 -20px;
-		width: 100%;
-		padding-right: 40px;
-		list-style-type: none;
-		color: $dark;
-		li {
-			cursor: pointer;
-			display: block;
-			width: 100%;
-			padding: 15px 20px;
+	    overflow-y: auto;
+	    margin-left: -20px;
+	    width: 390px;
+	    #instructions {
+		    display: block;
+			margin-top: 10px;
 			border-bottom: 1px solid #d5d5d6;
-			&:last-child {
-				border: none;
-			};
-			&:hover {
-				background-color: #eee;
-				color: black;
-			};
-			span.instruction_icon {
-				width: 40px;
-				padding-top: 22px;
-				text-align: center;
+			margin: 0;
+			list-style-type: none;
+			color: $dark;
+			li {
+				cursor: pointer;
 				display: block;
-				float: left;
-				margin-right: 10px;
-				font-size: 0.6em;
-			};
-			span.instruction_text {
-				font-size: 16px;
-				font-weight: bold;
-				display: block;
-				float: left;
-				width: 200px;
-			};
-			span.clear {
-				clear: both;
-				font-size: 1px;
-				display: block;
+				padding: 15px 20px;
+				border-bottom: 1px solid #d5d5d6;
+				&:last-child {
+					border: none;
+				};
+				&:hover {
+					background-color: #eee;
+					color: black;
+				};
+				span.instruction_icon {
+					width: 40px;
+					padding-top: 22px;
+					text-align: center;
+					display: block;
+					float: left;
+					margin-right: 10px;
+					font-size: 0.6em;
+				};
+				span.instruction_text {
+					font-size: 16px;
+					font-weight: bold;
+					display: block;
+					float: left;
+					width: 200px;
+				};
+				span.clear {
+					clear: both;
+					font-size: 1px;
+					display: block;
+				}
+			}
+		}
+		&.mobile {
+			z-index: 99;
+			position: absolute;
+			top: -11px;
+			left: 0;
+			background: #fff;
+			#instructions {
 			}
 		}
 	}
@@ -794,6 +824,7 @@ body {
 	#ui {
 		width: 250px;
 		top: 50px;
+		padding-bottom: 40px;
 		#addresses {
 			margin: 10px 0;
 			position: relative;
@@ -815,7 +846,7 @@ body {
 					color: #a2a2a2;
 				}
 				input {
-					width: 170px;
+					width: 180px;
 					padding: 5px 5px 5px 30px;
 					font-size: 0.75em;
 					background: #f4f4f4;
@@ -843,15 +874,23 @@ body {
 			}
 		}
 		#time {
+			div {
+				width: 75px;
+			}
 			input {
-				width: 74px;
+				width: 65px;
 				padding: 5px;
 				font-size: 0.75em;
 			}
-		}
-		#instructions {
-			max-height: auto;
-			height: 100%;
+			div#cargobike_trigger {
+				width: 45px;
+				height: 25px;
+				margin-top: 15px;
+				background: #f4f4f4 image-url("_new/cargo_mobile-normal.png") no-repeat center center;
+				&:hover, &.active {
+					background: #f4f4f4 image-url("_new/cargo_mobile-active.png") no-repeat center center;
+				};
+			}
 		}
 		.search_bottom {
 			display: none;

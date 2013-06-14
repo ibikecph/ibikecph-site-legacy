@@ -519,6 +519,34 @@ en:
     for: for
     towards: towards
 
+    mode_push: Push the bike
+    mode_ferry: Ferry
+    mode_train: Train/Metro
+
+    highway_default: "street/path"
+    highway_motorway: "motorway"
+    highway_motorway_link: "motorway"
+    highway_trunk: "trunk road"
+    highway_trunk_link: "trunk road"
+    highway_primary: "primary road"
+    highway_primary_link: "primary road"
+    highway_secondary: "road"
+    highway_secondary_link: "road"
+    highway_tertiary: "street"
+    highway_tertiary_link: "street"
+    highway_living_street: "gade"
+    highway_pedestrian: "pedestrian street"
+    highway_residential: "residential street"
+    highway_unclassified: "street"
+    highway_service: "service street"
+    highway_track: "track"
+    highway_road: "road"
+    highway_path: "path"
+    highway_footway: "footway"
+    highway_cycleway: "cycleway"
+    highway_bridleway: "bridleway"
+    highway_steps: "steps"
+
   download_app:
     title: Keep track of the route on your mobile.
     text: Search routes and use your favorites on the go.

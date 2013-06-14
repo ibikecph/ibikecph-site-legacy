@@ -97,7 +97,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 				$('#favorites .success').show()
 			error: (model, response) ->
 				$('#favorites .errors').html('')
-				_.each JSON.parse(response.responseText).errors, (t,num) ->
+				_.each $.parseJSON(response.responseText).errors, (t,num) ->
 					$('#favorites .errors').append('<li>'+t+'</li>')
 
 

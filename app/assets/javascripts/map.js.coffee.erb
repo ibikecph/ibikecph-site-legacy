@@ -41,13 +41,19 @@ window.onresize = (event) ->
 	ui_height()
 
 ui_height = ->
-	if $(window).width() < 767
-		$("#ui #ui_foldable").css
-			height: $(window).height()-100
-		$("#instructions_div").css
-			height: $("#ui_foldable").height() - 225
-			overflow: "hidden"
-	
+	win = $(window)
+	width = win.width()
+	total = win.height()
+	misc = 120 # header and maring
+	search_area = $('#ui').outerHeight()
+	ui = $('#ui_foldable').outerHeight()
+
+	if $(window).width() > 767
+		$('#instructions_div').removeClass('mobile').css
+			'max-height': total-misc-304
+			width: 390
 	else
-		$("#ui").css
-			height: 'auto'
+		$('#instructions_div').addClass('mobile').css
+			'max-height': 1024
+			height: total-40
+			width: width+20

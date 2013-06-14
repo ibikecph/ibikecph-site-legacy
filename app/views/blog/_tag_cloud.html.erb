@@ -1,11 +1,13 @@
 <% if @tags.any? %>
-	<div class="sidebar">
-		<h2><%=t 'news.categories' %></h2>
-		<ul class="tags">
-			<% tag_cloud(@tags, [:tag1,:tag2,:tag3,:tag4]) do |tag, css_class| %>
-				<% css_class = "#{css_class} on" if params[:tag]==tag.name %>
-				<li><%= link_to tag.name, { :action => :tag, :tag => tag.name }, :class => css_class %></li>
-			<% end %>
-		</ul>
-	</div>
+	<ul class="drop_down">
+		<li class="title">
+			<span><%=t 'news.categories' %></span>
+			<ul>
+				<% tag_cloud(@tags, [:tag1,:tag2,:tag3,:tag4]) do |tag, css_class| %>
+					<% css_class = "#{css_class} on" if params[:tag]==tag.name %>
+					<li><%= link_to tag.name, { :action => :tag, :tag => tag.name }, :class => css_class %></li>
+				<% end %>
+			</ul>
+		</li>
+	</ul>
 <% end %>

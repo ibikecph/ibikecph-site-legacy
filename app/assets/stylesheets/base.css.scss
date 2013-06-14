@@ -1,9 +1,7 @@
 $sat: 0;
 $hue: 25;
-/*$color: #ef4123;*/
-$color: #8b8b8b;
+$color: #555;
 $yellow: #fff200;
-/*$hover: hsl( 10, 50%, 40% );*/
 $hover: #222;
 $error: hsl( 0, 70%, 50% );
 $highlight: hsl( 90, 100%, 45% );
@@ -68,6 +66,7 @@ body {
 }
 img {
 	border: none;	//avoid stupid borders arond logo and alpha flag in IE
+    max-width: 100%;
 }
 a {
     color: $color;
@@ -203,11 +202,11 @@ hr {
     clear: both;
 }
 #flash {
-    -webkit-transition: top 0.2s ease;
-    -moz-transition: top 0.2s ease;
-    -ms-transition: top 0.2s ease;
-    -o-transition: top 0.2s ease;
-    transition: top 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
     position: absolute;
     top: -10px;
     left: 50%;

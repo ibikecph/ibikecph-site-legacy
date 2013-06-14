@@ -11,54 +11,54 @@
 
 function preg_quote( str ) { return (str+'').replace(/([\\\.\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|\:])/g, "\\$1"); }
 
-/*!
- * backbone.basicauth.js v0.2.0
- * Copyright 2013, Tom Spencer (@fiznool)
- * backbone.basicauth.js may be freely distributed under the MIT license.
- */
- ;(function(window) {
+// /*!
+//  * backbone.basicauth.js v0.2.0
+//  * Copyright 2013, Tom Spencer (@fiznool)
+//  * backbone.basicauth.js may be freely distributed under the MIT license.
+//  */
+//  ;(function(window) {
 
-  // Local copy of global variables
-  var _ = window._;
-  var Backbone = window.Backbone;
-  var btoa = window.btoa;
+//   // Local copy of global variables
+//   var _ = window._;
+//   var Backbone = window.Backbone;
+//   var btoa = window.btoa;
 
-  var token = null;
+//   var token = null;
 
-  var encode = function(username, password) {
-    // Use Base64 encoding to create the authentication details
-    // If btoa is not available on your target browser there is a polyfill:
-    // https://github.com/davidchambers/Base64.js
-    return btoa(username + ':' + password);
-  };
+//   var encode = function(username, password) {
+//     // Use Base64 encoding to create the authentication details
+//     // If btoa is not available on your target browser there is a polyfill:
+//     // https://github.com/davidchambers/Base64.js
+//     return btoa(username + ':' + password);
+//   };
 
-  // Store a copy of the original Backbone.sync
-  var originalSync = Backbone.sync;
+//   // Store a copy of the original Backbone.sync
+//   var originalSync = Backbone.sync;
 
-  // Override Backbone.sync for all future requests.
-  // If a token is present, set the Basic Auth header
-  // before the sync is performed.
-  Backbone.sync = function(method, model, options) {
-    if (typeof token !== "undefined" && token !== null) {
-      options.headers = options.headers || {};
-      _.extend(options.headers, { 'Authorization': 'Basic ' + token });
-    }
-    return originalSync.call(model, method, model, options);
-  };
+//   // Override Backbone.sync for all future requests.
+//   // If a token is present, set the Basic Auth header
+//   // before the sync is performed.
+//   Backbone.sync = function(method, model, options) {
+//     if (typeof token !== "undefined" && token !== null) {
+//       options.headers = options.headers || {};
+//       _.extend(options.headers, { 'Authorization': 'Basic ' + token });
+//     }
+//     return originalSync.call(model, method, model, options);
+//   };
 
-  Backbone.BasicAuth = {
-    // Setup Basic Authentication for all future requests
-    set: function(username, password) {
-      token = encode(username, password);
-    },
+//   Backbone.BasicAuth = {
+//     // Setup Basic Authentication for all future requests
+//     set: function(username, password) {
+//       token = encode(username, password);
+//     },
 
-    // Clear Basic Authentication for all future requests
-    clear: function() {
-      token = null;
-    }
-  };
+//     // Clear Basic Authentication for all future requests
+//     clear: function() {
+//       token = null;
+//     }
+//   };
 
-})(this);
+// })(this);
 
 //
 // With additions by Maciej Adwent http://github.com/Maciek416
@@ -116,3 +116,135 @@ var BackboneRailsAuthTokenAdapter = {
     Backbone.sync = Backbone._sync;
   }
 };
+
+(function($) {
+
+  Array.max = function( array ){
+      return Math.max.apply( Math, array );
+  };
+
+  $.easing.__Slide = function (x, t, b, c, d) {
+    return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
+  };
+
+  $.simplemasonry = function(element, options) {
+
+        var defaults = {
+          'animate': false,
+          'easing': '__Slide',
+          'timeout': 800
+        };
+        var settings = $.extend({}, defaults, options);         
+    var $element = $(element);    
+    var _sm = this;
+
+    $.extend(_sm, {
+
+      refresh: function() {
+
+            var $images = $('img', element);
+            var numImages = $images.length;
+            var imgLoadCount = 0;
+
+            if ( $images.length > 0 )
+              $element.addClass('sm-images-waiting').removeClass('sm-images-loaded');
+
+        $images.on('load', function(i) {
+          imgLoadCount++;
+          
+          if ( imgLoadCount == numImages ) {
+            _sm.resize();
+            $element.removeClass('sm-images-waiting').addClass('sm-images-loaded');
+          }           
+        });
+
+        _sm.resize();
+      },
+
+      resize: function() {
+        var $children = $element.children();      
+        var childInfo = childElementInfo($children[0]);
+        var width = childInfo['width'];
+        var columns = childInfo['num'];
+        var column_matrix = initialRange(columns);
+        
+        var renderChild = function(i) {
+          var height = $(this).outerHeight();
+          var col = 0;
+          var addToCol = minIndex(column_matrix);
+          var leftPos = Math.round((addToCol * width) * 10) / 10;
+          var positionProps = { 
+            'left'     : leftPos + '%',
+            'top'      : column_matrix[addToCol] + 'px'
+          };
+
+          $(this)
+            .css({
+              'position' : 'absolute'
+            })
+            .stop();
+
+          if ( settings['animate'] )
+            $(this).animate(positionProps, settings['timeout'], settings['easing']);
+          else
+            $(this).css(positionProps);
+
+          column_matrix[addToCol] += height;
+        };
+
+        $children
+          .css({ 'overflow': 'hidden', 'zoom': '1' })
+          .each(renderChild);
+
+        $element.css({ 
+          'position': 'relative',
+          'height'  : Array.max(column_matrix) + 'px'
+        });
+      }
+
+    });
+
+    $(window).resize(_sm.resize);
+    $element.addClass('sm-loaded');
+    _sm.refresh();
+  };
+
+  function minIndex(arry) {
+    var minValue = Math.min.apply(Math, arry);
+    return $.inArray(minValue,arry);
+  }
+
+  function initialRange(num) {
+    var arry = [];
+    for ( var i=0; i < num; i++ )
+      arry.push(0);
+    return arry;
+  }
+
+  function childElementInfo(elem) {
+    var width = $(elem).outerWidth();
+    var parentWidth = $(elem).offsetParent().width();
+    return {
+      'width' : 100 * width / parentWidth,
+      'num'   : Math.floor(parentWidth / width)
+    };
+  }
+
+    $.fn.simplemasonry = function(options) {
+    if ( typeof options == 'string') {
+      var instance = $(this).data('simplemasonry');
+      var args = Array.prototype.slice.call(arguments, 1);
+      if ( instance[options] )
+        return instance[options].apply(instance, args);
+      return;
+    } else {
+      return this.each(function() {
+        if (undefined == $(this).data('simplemasonry')) {
+          var plugin = new $.simplemasonry(this, options);
+          $(this).data('simplemasonry', plugin);
+        }
+      });
+    }
+    }
+
+})(jQuery);

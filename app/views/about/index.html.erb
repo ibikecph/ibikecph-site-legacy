@@ -1,59 +1,54 @@
-<%if I18n.locale==:en%>
-<div class="gr">
-	<div class="g8 left-col">
-		<div class="inner">
-			<h1 class="blog-title"><%=t 'about.about' %></h1>
-			<p>Siden beregner (som den er lige nu) hurtigste cykelrute. Servicen fungere for hele Danmark.</p>
+<div id="news_container">
+	<%= render :partial => 'navigation' %>
+	<div id="news_list">
+		<article class="item single">
+			<div class="inner">
+				<div class="aside">
+					<h1><%=t 'about.about' %></h1>
+					<%= image_tag('_new/about-image.jpg') %>
+				</div>
+				<div class="main">
+					<%if I18n.locale==:da%>
 
-			<p>Træk i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og - knapperne. Knappen med den stiplede firkant centerer kortet omkring den aktuelle rute. Knappen med pilen centerer kortet omkring din fysiske position.</p>
+						<p>Siden beregner (som den er lige nu) hurtigste cykelrute. Servicen fungere for hele Danmark.</p>
 
-			<p>Klik på på kortet for at sætte fra og til punkter, eller udfyld adressefelterne (ex: Krystalgade 15, 1172 København). Så snart en adresse er fundet, placeres den tilsvarende markør på kortet. Vær opmærksom på at der søges på adresser i hele Danmark. Tilføj evt. bynavn eller postnummer for at sikre at det er den rigtige vej du finder.</p>
+						<p>Træk i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og - knapperne. Knappen med den stiplede firkant centerer kortet omkring den aktuelle rute. Knappen med pilen centerer kortet omkring din fysiske position.</p>
 
-			<p>Så snart både fra og til markørerne er sat, beregenes ruten autoamtisk. Estimeret længde og tid vises under adressefelterne. Klik evt. på 'Rutebeskrivelse' for at se en trin-for-trin beskrivelse af ruten.</p>
+						<p>Klik på på kortet for at sætte fra og til punkter, eller udfyld adressefelterne (ex: Krystalgade 15, 1172 København). Så snart en adresse er fundet, placeres den tilsvarende markør på kortet. Vær opmærksom på at der søges på adresser i hele Danmark. Tilføj evt. bynavn eller postnummer for at sikre at det er den rigtige vej du finder.</p>
 
-			<p>Du kan trække et sted på ruten for at sætte via-punkter, dvs. punkter som ruten skal følge. Via-punkter kan fjernes igen ved at klikke på dem.</p>
+						<p>Så snart både fra og til markørerne er sat, beregenes ruten autoamtisk. Estimeret længde og tid vises under adressefelterne. Klik evt. på 'Rutebeskrivelse' for at se en trin-for-trin beskrivelse af ruten.</p>
 
-			<p>Når en rute er funde, kan du angive tidspunktet for enten afgangs eller ankomst, og det modsatte tidspunkt vil blive beregnet for dig på baggrund af rejsetiden.</p>
+						<p>Du kan trække et sted på ruten for at sætte via-punkter, dvs. punkter som ruten skal følge. Via-punkter kan fjernes igen ved at klikke på dem.</p>
 
-			<p>Når du trækker i markørne, bliver ruten opdateret løbende - prøv selv :-)</p>
+						<p>Når en rute er funde, kan du angive tidspunktet for enten afgangs eller ankomst, og det modsatte tidspunkt vil blive beregnet for dig på baggrund af rejsetiden.</p>
 
-			<p>Du kan genere et link til den aktuelle rute ved at klikke på 'Link'. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx indsættes i kommentarer eller emails.</p>
+						<p>Når du trækker i markørne, bliver ruten opdateret løbende - prøv selv :-)</p>
+
+						<p>Du kan genere et link til den aktuelle rute ved at klikke på 'Link'. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx indsættes i kommentarer eller emails.</p>
+
+					<%else%>
+
+						<p>The site (as it is now) calculates fastest bicycle route. The service covers all of Denmark.</p>
+
+						<p>Drag the map to pan. Double click to zoom in, or use the + and - buttons. The button with the dashed rectangle centers the map around the current route. The button with the arrow centers the map around your current physical location.</p>
+
+						<p>Click on the map to set from and to points, or fill our the address fields (ex: Krystalgade 15, 1172 København). As soon as the adresss is found, the corresponding marker is placed/moved on the map. Note that addresses in all of Denmark are searched. You might want to add a city or zip code to make sure the correct street is found.</p>
+
+						<p>As soon as both from and to addresses are found, the route is calculated automatically. Estimated distance and time is shown below the address fields. Click 'Route Description' to view a step-by-step riding instruction.</p>
+
+						<p>Drag the route to set via points (points that the route must pass through). Via points can be removed by clicking on them.</p>
+
+						<p>When a route has been found, you can specify departure or arrival time, and the opposite time will be calculated, based on the time or travel.</p>
+
+						<p>When you drag markers around, the route will be update live - try it :-)</p>
+
+						<p>You can generate a link to the current route by clicking 'Link'. The adress bar of your browser will be updated, and from there the link can be copied, and can (for example) be pasted into comment fields or emails.</p>
+					<%end%>
+				</div>
+			</div>
+
+			<div class="clear"></div>
 		</div>
 	</div>
-	<div class="g4 ge">
-		<div class="inner">
-			<%= render :partial => 'navigation' %>
-		</div>
-	</div>
-	<div class="clear"></div>
+
 </div>
-<%else%>
-<div class="gr">    
-	<div class="g8 left-col">
-		<div class="inner">
-			<h1 class="blog-title"><%=t 'about.about' %></h1>
-			<p>The site (as it is now) calculates fastest bicycle route. The service covers all of Denmark.</p>
-
-			<p>Drag the map to pan. Double click to zoom in, or use the + and - buttons. The button with the dashed rectangle centers the map around the current route. The button with the arrow centers the map around your current physical location.</p>
-
-			<p>Click on the map to set from and to points, or fill our the address fields (ex: Krystalgade 15, 1172 København). As soon as the adresss is found, the corresponding marker is placed/moved on the map. Note that addresses in all of Denmark are searched. You might want to add a city or zip code to make sure the correct street is found.</p>
-
-			<p>As soon as both from and to addresses are found, the route is calculated automatically. Estimated distance and time is shown below the address fields. Click 'Route Description' to view a step-by-step riding instruction.</p>
-
-			<p>Drag the route to set via points (points that the route must pass through). Via points can be removed by clicking on them.</p>
-
-			<p>When a route has been found, you can specify departure or arrival time, and the opposite time will be calculated, based on the time or travel.</p>
-
-			<p>When you drag markers around, the route will be update live - try it :-)</p>
-
-			<p>You can generate a link to the current route by clicking 'Link'. The adress bar of your browser will be updated, and from there the link can be copied, and can (for example) be pasted into comment fields or emails.</p>
-		</div>
-	</div>
-	<div class="g4 ge right-col">
-		<div class="inner">
-			<%= render :partial => 'navigation' %>
-		</div>
-	</div>
-	<div class="clear"></div>
-</div>
-<%end%>

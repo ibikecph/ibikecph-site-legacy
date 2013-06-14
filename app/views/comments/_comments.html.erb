@@ -2,8 +2,8 @@
 	<div class="righty">
 		<%= render :partial => 'follows/follow', :locals => { :target => target } %>
 	</div>
-	<h2><a name="comments"><%=t '.title' %></a></h2>
-	<table>
+	<h2 id="comments"><%=t '.title' %></h2>
+	<table class="comments_table">
 		<%= render :partial => '/comments/comment', :collection => target.comments %>
 	</table>
 	<%= render :partial => '/comments/new', :locals => { :target => target } %>

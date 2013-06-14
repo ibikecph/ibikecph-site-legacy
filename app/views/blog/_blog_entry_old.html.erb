@@ -1,0 +1,27 @@
+<div class="blog">
+	<% if can? :manage, @blog_entry %>
+		<div class="buttons righty">
+			<%= link_to t('edit'),  [:edit, blog_entry] %>
+			<%= link_to t('delete'), blog_entry, :method => :delete, :confirm => t('sure_q') %>
+		</div>
+	<% end %>
+	<h1><%= link_to blog_entry.title, blog_entry %></h1>
+	<p class="meta">
+		<% if blog_entry.user %>
+			<span class="user"><%= blog_entry.user.name %>,</span>
+		<% end %>
+		<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
+	</p>
+	<% if blog_entry.image? %>
+		<%= link_to blog_entry do %>
+			<%= image_tag blog_entry.image.url %>
+		<% end %>
+	<% end %>
+	
+	<%= auto_html_blog truncate(blog_entry.body, :length => 250), :width => 760, :height => 506 %>
+	
+	<%= link_to "#{blog_entry.comments_count.to_i > 0 ?
+		t( 'comment', :count => blog_entry.comments_count ) :
+		t('be_the_first_to_comment')} &rarr;".html_safe,
+		 	{ :controller => :blog, :action => :show, :id => blog_entry.id, :anchor => :comments }, :class => :note %>
+</div>

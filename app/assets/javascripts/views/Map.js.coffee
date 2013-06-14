@@ -9,13 +9,20 @@ class IBikeCPH.Views.Map extends Backbone.View
 			$('#map').height $(window).height() - $('#header').height()
 		$(window).trigger 'resize'
 
-		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
-		@osrm_cargo = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.cargo_url
+		@osrm = new IBikeCPH.OSRM @model
 		
-		@map = new L.Map @el.id, zoomControl: false		#leaflet map
+		bounds = IBikeCPH.config.maxbounds.value
+		
+		@map = new L.Map(@el.id,
+			zoomControl: false
+			worldCopyJump: false
+			maxBounds: bounds
+		)
+		
+		@map.setMaxBounds bounds 	#Limit the max bounds of the map
+
 		@map.on 'zoomend', (event) =>
 			@osrm.set_zoom @map.getZoom()
-			@osrm_cargo.set_zoom @map.getZoom()
 
 		@dragging_pin = false
 		@pin_views = {}		#used to map from waypoint models to views
@@ -54,7 +61,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 		initial_location = new L.LatLng IBikeCPH.config.initial_location.lat, IBikeCPH.config.initial_location.lng
 		@map.setView initial_location, IBikeCPH.config.initial_location.zoom
-		
 		
 		@via_marker.on 'mousedown', (event) =>
 			@initiate_via_drag event
@@ -102,7 +108,6 @@ class IBikeCPH.Views.Map extends Backbone.View
 		@map.locate
 			setView: true
 			enableHighAccuracy: true
-
 
 		m = @map
 		if navigator.geolocation

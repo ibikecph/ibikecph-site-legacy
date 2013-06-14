@@ -1,31 +1,26 @@
-<%if I18n.locale==:en%>
-<div class="gr">
-	<div class="g8 left-col">
-		<div class="inner">
-			<h1 class="blog-title"><%=t 'about.api' %></h1>
-			<p>api</p>
+<div id="news_container">
+	<%= render :partial => 'navigation' %>
+	<div id="news_list">
+		<article class="item single">
+			<div class="inner">
+				<div class="aside">
+					<h1><%=t 'about.apid' %></h1>
+					<%= image_tag('_new/about-image.jpg') %>
+				</div>
+				<div class="main">
+					<%if I18n.locale==:da%>
+
+						<p>API DA</p>
+
+					<%else%>
+
+						<p>API EN</p>
+					<%end%>
+				</div>
+			</div>
+
+			<div class="clear"></div>
 		</div>
 	</div>
-	<div class="g4 ge">
-		<div class="inner">
-			<%= render :partial => 'navigation' %>
-		</div>
-	</div>
-	<div class="clear"></div>
+
 </div>
-<%else%>
-<div class="gr">    
-	<div class="g8 left-col">
-		<div class="inner">
-			<h1 class="blog-title"><%=t 'about.api' %></h1>
-			<p>api</p>
-		</div>
-	</div>
-	<div class="g4 ge right-col">
-		<div class="inner">
-			<%= render :partial => 'navigation' %>
-		</div>
-	</div>
-	<div class="clear"></div>
-</div>
-<%end%>

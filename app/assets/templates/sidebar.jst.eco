@@ -1,11 +1,11 @@
 <a title="<%= I18n.t 'map.help' %>" class="helper-icons help"><%= I18n.t 'map.help' %></a>
 <a title="<%= I18n.t 'map.reset' %>" class="helper-icons reset"><%= I18n.t 'map.reset' %></a>
 <a title="<%= I18n.t 'map.link_for_route' %>" class="helper-icons permalink"><%= I18n.t 'map.link_for_route' %></a>
-<!-- <div class="mode">
-	<input type="radio" id="normal" name="mode" checked="1"/> <span><%= I18n.t 'map.normal_bike' %></span>
-	<input type="radio" id="cargo" name="mode" /> <span class="proposed"><%= I18n.t 'map.electric_bike' %></span>
-	<input type="radio" id="electric" name="mode"/> <span class="proposed"><%= I18n.t 'map.cargo_bike' %></span>
-</div> -->
+
+<div class="mode">
+	<input type="radio" id="standard" name="mode" checked="1"/> <span><%= I18n.t 'map.normal_bike' %></span>
+	<input type="radio" id="cargobike" name="mode" /> <%= I18n.t 'map.cargo_bike' %></span>
+</div>
 <div class="clear"></div>
 <div id="addresses">
 	<div class="address">
@@ -28,5 +28,6 @@
 		<span><%= I18n.t 'map.arrival' %></span>
 		<input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
 	</div>
+	<div id="cargobike_trigger"></div>
 	<div class="clear"></div>
 </div>

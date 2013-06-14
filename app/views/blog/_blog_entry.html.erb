@@ -1,27 +1,35 @@
-<div class="blog">
-	<% if can? :manage, @blog_entry %>
-		<div class="buttons righty">
-			<%= link_to t('edit'),  [:edit, blog_entry] %>
-			<%= link_to t('delete'), blog_entry, :method => :delete, :confirm => t('sure_q') %>
+<% klass = cycle 'first', 'second' %>
+<article class="item <%= klass %>">
+	<div class="inner">
+		<div class="top">
+			<h1><%= link_to blog_entry.title, blog_entry %></h1>
+			<p class="posted_at" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> <%=t 'ago' %></p>
 		</div>
-	<% end %>
-	<h1><%= link_to blog_entry.title, blog_entry %></h1>
-	<p class="meta">
-		<% if blog_entry.user %>
-			<span class="user"><%= blog_entry.user.name %>,</span>
+		<% if blog_entry.image? %>
+			<div class="image">
+				<%= link_to blog_entry do %>
+					<%= image_tag blog_entry.image.url %>
+				<% end %>
+			</div>
 		<% end %>
-		<span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(blog_entry.created_at).capitalize %> <%=t 'ago' %></span>
-	</p>
-	<% if blog_entry.image? %>
-		<%= link_to blog_entry do %>
-			<%= image_tag blog_entry.image.url %>
+		<div class="text">
+			<%= auto_html_blog truncate(blog_entry.body, :length => 250), :width => 760, :height => 506 %>
+		</div>
+		
+		<div class="read_more">
+			<%= link_to "#{blog_entry.comments_count.to_i > 0 ?
+			t( 'comment', :count => blog_entry.comments_count ) :
+			t('be_the_first_to_comment')} &rarr;".html_safe,
+			 	{ :controller => :blog, :action => :show, :id => blog_entry.id, :anchor => :comments }, :class => :note %>
+		</div>
+		<% if can? :manage, @blog_entry %>
+			<div class="">
+				<%= link_to t('edit'),  [:edit, blog_entry] %>
+				<%= link_to t('delete'), blog_entry, :method => :delete, :confirm => t('sure_q') %>
+			</div>
 		<% end %>
-	<% end %>
-	
-	<%= auto_html_blog blog_entry.body, :width => 760, :height => 506 %>
-	
-	<%= link_to "#{blog_entry.comments_count.to_i > 0 ?
-		t( 'comment', :count => blog_entry.comments_count ) :
-		t('be_the_first_to_comment')} &rarr;".html_safe,
-		 	{ :controller => :blog, :action => :show, :id => blog_entry.id, :anchor => :comments }, :class => :note %>
-</div>
+	</div>
+</article>
+<% if klass == "second" then %>
+	<div class="clear"></div>
+<% end %>

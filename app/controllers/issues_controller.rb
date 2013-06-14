@@ -22,6 +22,12 @@ class IssuesController < ApplicationController
   
   def show
     #count_votes
+    if params[:color]
+      @klass = params[:color]
+    else
+      colors = ["red", "blue", "orange"]
+      @klass = colors[rand(colors.length-1)]
+    end
     @comments = @issue.comments
     @related = @issue.find_related_tags.limit(20)
     @tags = @issue.tags
@@ -41,6 +47,7 @@ class IssuesController < ApplicationController
   def new
     @issue = Issue.new
     @themes = Theme.all
+    # render :layout => false
   end
  
   def new_for_theme
