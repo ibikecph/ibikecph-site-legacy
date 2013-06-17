@@ -1,5 +1,4 @@
 <%= form_for @issue, :url => url do |f| %>
-	<h1><%=t 'issues.new.title' %></h1>
 	<%= errors_for( @issue ).html_safe %>
 	<p>
 		<%= f.label :title %>

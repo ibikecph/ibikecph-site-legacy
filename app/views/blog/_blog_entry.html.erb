@@ -23,10 +23,10 @@
 			 	{ :controller => :blog, :action => :show, :id => blog_entry.id, :anchor => :comments }, :class => :note %>
 		</div>
 		<% if can? :manage, @blog_entry %>
-			<div class="">
-				<%= link_to t('edit'),  [:edit, blog_entry] %>
-				<%= link_to t('delete'), blog_entry, :method => :delete, :confirm => t('sure_q') %>
-			</div>
+			<ul class="admin_panel">
+				<li><%= link_to t('edit'),  [:edit, blog_entry] %></li>
+				<li><%= link_to t('delete'), blog_entry, :method => :delete, :confirm => t('sure_q') %></li>
+			</ul>
 		<% end %>
 	</div>
 </article>

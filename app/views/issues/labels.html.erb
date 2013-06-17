@@ -1,44 +1,35 @@
-<div class="gr">
-	<div class="g4 ">
-		<%= render 'sidebar' %>
+<div id="content_responsive">
+
+	<div class="page_header">
+
+		<%= render :partial => 'top' %>
 	</div>
-	<div class="g8 ge">
-		<h1><%=t '.title', :label => params[:label] %></h1>
+
+	<div class="page_content">
+
+	    <h1><%=t '.title', :label => params[:label] %></h1>
 		<%= render 'labels' %>
-		
+		<br>
 		<%= will_paginate @issues, :class => :pagination %>
-		
-		<table class="issues">
+		<ul class="grid">
 			<% for issue in @issues %>
-			<tr class="<%= cycle 'even', 'odd' %>">
-				<td class="note">
-					#<%= issue.id %>
-				</td>
-				<td>
-					<h4>
-						<%= link_to issue.title, issue %>
-					</h4>
-					<p class="note">
-						<%= link_to issue.user.name, issue.user, :class => :user %>,
-						<span class="timeago" title="<%= issue.created_at.getutc.iso8601 %>"><%= time_ago_in_words(issue.created_at) %></span>
-					</p>
-				</td>
-				<td class="comments note">
-					<%= link_to t( 'comment', :count => issue.comments_count ), issue %>
-				</td>
-				<% if can? :manage, issue %>
-				<td class="editing buttons last">
-					<%= link_to t('edit'), [:edit,issue] %>
-					<%= link_to t('delete'), issue, :method => :delete, :confirm => t('sure_q') %>
-				</td>
-				<% end %>
-			</tr>
+				<% klass = cycle 'red', 'blue', 'orange' %>
+				<li class="item">
+					<div class="item_thumb <%= klass %>">
+						<%= link_to(issue_path(issue, :color => klass)) do %>
+							<h2><%= issue.title %></h2>
+							<p class="from">af <%= issue.user.name %></p>
+							<div class="soc">
+								<div class="soc_comment">
+									<%= t( 'comment', :count => issue.comments_count ) %>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				</li>
 			<% end %>
-		</table>
+		</ul>
 		<%= will_paginate @issues, :class => :pagination %>
-		
-		<% if @issues.empty? %>
-			<p><%= t '.no_items' %></p>
-		<% end %>
+
 	</div>
 </div>

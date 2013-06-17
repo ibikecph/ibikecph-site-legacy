@@ -203,12 +203,12 @@ div#form_errors, div#form_notice {
     text-align: center;
 }
 .toggle {
-    background-color: $medium;	
+    background-color: $medium;
     &.on {
-        background-color: $highlight;	
+        background-color: $highlight;
     }
     &:hover {
-        background-color: $hover;	
+        background-color: $hover;
     }
 }
 input.submit {
@@ -802,7 +802,7 @@ li a {
                 }
             }
             .soc_comment {
-                background: image-url("_new/comment_count.png") left no-repeat;
+                background: image-url('_new/comment_count.png') left no-repeat;
                 color: rgba(0, 0, 0, 0.5);
                 font-size: 13px;
                 margin-left: 2px;
@@ -810,21 +810,32 @@ li a {
                 padding-left: 22px;
             }
         }
+        &.active {
+            overflow: hidden;
+            .item_thumb {
+                background-image: image-url('_new/issue-active.png') !important;
+                background-repeat: no-repeat !important;
+                background-position: center bottom !important;
+            }
+            a, .soc {
+                margin-left: -1000px;
+            }
+        }
     }
 }
 .issue, .item_thumb {
     &.red {
-        background: #dc1e19 !important;
+        background-color: #dc1e19 !important;
         box-shadow: 0 1px 2px #e55955 inset, 0 2px 5px #b5b5b5 !important;
         border: 2px solid #a81813 !important;
     }
     &.orange {
-        background: #fa9100 !important;
+        background-color: #fa9100 !important;
         box-shadow: 0 1px 2px #fbae43 inset, 0 2px 5px #b5b5b5 !important;
         border: 2px solid #c77400 !important;
     }
     &.blue {
-        background: #00aeef !important;
+        background-color: #00aeef !important;
         box-shadow: 0 1px 2px #41b0d9 inset, 0 2px 5px #b5b5b5 !important;
         border: 2px solid #008abd !important;
     }
@@ -838,11 +849,51 @@ li a {
         border-radius: 5px;
         padding: 10px;
     }
+    .submits {
+        padding: 10px;
+        background: rgba(0,0,0,0.05);
+        text-align: center;
+        border-radius: 5px;
+        input {
+            color: #fff;
+            background: #00a3e0;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            text-transform: uppercase;
+            border: 1px solid #008abd;
+            padding: 9px 0 7px;
+            text-shadow: 0 -1px 1px #0084b5;
+            border-radius: 2px;
+            box-shadow: inset 1px 1px 0 #60c2e7;
+            cursor: pointer;
+        }
+    }
 }
 .issue {
     padding-right: 25%;
     position: relative;
     border-radius: 5px;
+    margin-bottom: 20px;
+    .close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 16px;
+        height: 16px;
+        background: image-url("_new/issue-close.png") no-repeat center center;
+        cursor: pointer;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+        };
+    }
+    .admin_panel {
+        a {
+            color: #fff;
+        }
+    }
     h1 {
         color: #fff !important;
     }
@@ -857,15 +908,27 @@ li a {
             background: rgba(0,0,0,0.1);
         }
         label, .chars_remaining {
-            
+            color: #fff;
         }
         .comments_table {
             border-spacing: 0;
             border-collapse: collapse;
             box-shadow: 0 2px 1px rgba(0,0,0,0.3);
+            color: #333;
+            a {
+                color: #333;
+            }
+            .note {
+                font-style: italic;
+            }
         }
         h1, h2, h3 {
             color: #fff !important;
+        }
+        .righty {
+            .button {
+                background-color: rgba(0,0,0,0.2)
+            }
         }
         .a_comment {
             background: #fff;
@@ -967,7 +1030,6 @@ li a {
 
 .expand {
     border-radius: 6px;
-    margin: 0 10px;
 }
 
 .grid .item {
@@ -1016,6 +1078,24 @@ li a {
         background: #fff;
         box-shadow: 0 0 5px rgba(0,0,0,.1);
         border-radius: 5px;
+    }
+    .back {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 5;
+        a {
+            display: block;
+            width: 48px;
+            height: 35px;
+            background: image-url('_new/favorites-back.png') no-repeat top left;
+            cursor: pointer;
+            text-indent: -50000px;
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            };
+        }
     }
     .blog-title {
         text-transform: uppercase;
@@ -1137,10 +1217,12 @@ li a {
                 float: left;
                 padding-left: 3%;
                 padding-top: 53px;
+                position: relative;
             }
         }
         .inner {
             padding: 20px;
+            position: relative;
         }
         .top {
             position: relative;
@@ -1165,6 +1247,21 @@ li a {
                 max-width: 100%;
             }
         }
+    }
+}
+
+.admin_panel {
+    list-style: none;
+    font-weight: bold;
+    font-size: 13px;
+    background: rgba(0,0,0,0.05);
+    padding: 12px 15px;
+    border-radius: 5px;
+    text-align: right;
+    margin: 20px 0 10px;
+    li {
+        display: inline;
+        margin-left: 10px;
     }
 }
 
@@ -1209,6 +1306,12 @@ li a {
                 height: auto;
                 padding-bottom: 40px;
                 .soc { opacity: 1; }
+            }
+            &.active {
+                overflow: hidden;
+                .item_thumb {
+                    background-position: center 20px !important;
+                }
             }
         }
     }

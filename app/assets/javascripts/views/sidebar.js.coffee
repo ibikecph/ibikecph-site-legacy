@@ -232,8 +232,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	reverse_route: ->
 		new_first_location = @model.waypoints.last().toJSON().location
 		new_last_location = @model.waypoints.first().toJSON().location
-		new_first_address = @model.waypoints.last().toJSON().address
-		new_last_address = @model.waypoints.first().toJSON().address
+		new_first_address = $("#addresses .from").val()
+		new_last_address = $("#addresses .to").val()
 		@model.waypoints.first().set 'location', new_first_location
 		@model.waypoints.last().set 'location', new_last_location
 		@set_field 'from', new_last_address

@@ -228,7 +228,7 @@ body {
 				z-index: 2;
 				border-radius: 12px; /* one half of ( (border * 2) + height + padding ) */
 				background: #dc1e19;
-			    color: white;
+			    color: white !important;
 			    font: bold 15px/13px Helvetica, Verdana, Tahoma;
 			    height: 16px; 
 			    min-width: 14px;
@@ -383,6 +383,7 @@ body {
 					display: block;
 				}
 			}
+			li.close { display: none; }
 		}
 		&.mobile {
 			z-index: 99;
@@ -391,6 +392,26 @@ body {
 			left: 0;
 			background: #fff;
 			#instructions {
+				span.instruction_text {
+					font-size: 14px;
+				}
+				li.close {
+					display: block;
+					cursor: pointer;
+					height: 13px;
+					padding: 14px;
+					position: relative;
+					background: #373737;
+					span {
+						background: image-url('_new/app-close.png') no-repeat center center;
+						display: block;
+						width: 13px;
+						height: 14px;
+						position: absolute;
+						right: 10px;
+						top: 12px;
+					}
+				}
 			}
 		}
 	}
@@ -832,7 +853,8 @@ body {
 				margin-bottom: 5px;
 				.suggestions {
 					font-size: 0.7em;
-					top: 38px;
+					top: 26px;
+					left: 2px;
 					width: 214px;
 					padding: 0;
 					z-index: 5;
@@ -841,9 +863,10 @@ body {
 					}
 				}
 				label {
-					width: 17px;
-					top: 7px;
+					width: 14px;
+					top: 4px;
 					color: #a2a2a2;
+					font-size: 11px;
 				}
 				input {
 					width: 180px;

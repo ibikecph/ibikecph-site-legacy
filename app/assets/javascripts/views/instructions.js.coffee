@@ -3,6 +3,7 @@ class IBikeCPH.Views.Instructions extends Backbone.View
 	
 	events:
 		'mouseleave': 'hide_step'
+		'click .close': 'details'
 	
 	initialize: ->
 		@collection.on 'reset', @clear
@@ -11,6 +12,9 @@ class IBikeCPH.Views.Instructions extends Backbone.View
 	hide_step: ->
 		@collection.trigger 'hide_step'
 	
+	details: ->
+		$('#instructions_div').stop().slideToggle(250)
+
 	clear: =>
 		@$el.empty()
 		

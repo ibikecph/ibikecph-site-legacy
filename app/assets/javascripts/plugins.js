@@ -248,3 +248,20 @@ var BackboneRailsAuthTokenAdapter = {
     }
 
 })(jQuery);
+
+function remove_flash() {
+    if($('#flash').length > 0) {
+        $('#flash').css({
+            top: '+=50'
+        });
+        setTimeout(function(){
+            $('#flash').css({
+                top: '-=70',
+                opacity: 0
+            });
+            setTimeout(function(){
+                $('#flash').remove();
+            }, 500);
+        }, 5000);
+    };
+}

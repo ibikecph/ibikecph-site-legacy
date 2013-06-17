@@ -90,7 +90,7 @@ a {
     white-space: nowrap;
     height: 40px;
     width: 100%;
-    z-index: 4;
+    z-index: 6;
 }
 .right_menu {
     position: absolute;
@@ -102,11 +102,12 @@ a {
     ul {
         list-style-type: none;
         li {
+            margin: 0;
+            padding: 0;
             text-shadow: 0 1px 1px #000;
             background-color: $new_dark;
             float: left;
-            display: inline-block;
-            height: 40px;
+            display: block;
             border-right: 1px solid #000;
             border-left: 1px solid #393939;
             &.selected, &.selected:hover {
@@ -116,8 +117,9 @@ a {
                 background-color: #000;
             }
             a {
-                padding: 0px 14px;
-                line-height: 3.7em;
+                line-height: 1.8;
+                display: block;
+                padding: 11px 14px;
                 font-weight: bold;
                 color: white;
                 font-size: 1em;
@@ -151,44 +153,44 @@ a {
     }
 }
 .menu #home {
-    background: url(/assets/_new/nav-map.png) no-repeat 20px center;
-    padding-left: 36px;
+    background: url(/assets/_new/nav-map.png) no-repeat 15px center;
     &.selected,
     &:hover{
-        background: #000 url(/assets/_new/nav-map-active.png) no-repeat 20px center;
+        background: #000 url(/assets/_new/nav-map-active.png) no-repeat 15px center;
     };
+    a { padding-left: 40px; }
 }
 .menu #blog {
-    background: url(/assets/_new/nav-news.png) no-repeat 20px center;
-    padding-left: 36px;
+    background: url(/assets/_new/nav-news.png) no-repeat 15px center;
     &.selected,
     &:hover{
-        background: #000 url(/assets/_new/nav-news-active.png) no-repeat 20px center;
+        background: #000 url(/assets/_new/nav-news-active.png) no-repeat 15px center;
     };
+    a { padding-left: 40px; }
 }
 .menu #feedback {
-    background: url(/assets/_new/nav-feedback.png) no-repeat 20px center;
-    padding-left: 36px;
+    background: url(/assets/_new/nav-feedback.png) no-repeat 15px center;
     &.selected,
     &:hover{
-        background: #000 url(/assets/_new/nav-feedback-active.png) no-repeat 20px center;
+        background: #000 url(/assets/_new/nav-feedback-active.png) no-repeat 15px center;
     };
+    a { padding-left: 40px; }
 }
 .menu #about {
-    background: url(/assets/_new/nav-about.png) no-repeat 20px center;
-    padding-left: 36px;
+    background: url(/assets/_new/nav-about.png) no-repeat 15px center;
     &.selected,
     &:hover{
-        background: #000 url(/assets/_new/nav-about-active.png) no-repeat 20px center;
+        background: #000 url(/assets/_new/nav-about-active.png) no-repeat 15px center;
     };
+    a { padding-left: 40px; }
 }
 .menu #mobile_app {
-    background: url(/assets/_new/nav-phone.png) no-repeat 20px center;
-    padding-left: 36px;
+    background: url(/assets/_new/nav-phone.png) no-repeat 15px center;
     &.selected,
     &:hover{
-        background: #000 url(/assets/_new/nav-phone-active.png) no-repeat 20px center;
+        background: #000 url(/assets/_new/nav-phone-active.png) no-repeat 15px center;
     };
+    a { padding-left: 40px; }
 }
 .note {
     color: $note_color;

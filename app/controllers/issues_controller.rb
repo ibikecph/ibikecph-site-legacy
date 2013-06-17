@@ -32,6 +32,9 @@ class IssuesController < ApplicationController
     @related = @issue.find_related_tags.limit(20)
     @tags = @issue.tags
     @labels = @issue.labels
+    if params[:ajax]
+      render :layout => false
+    end
   end
   
   def tags

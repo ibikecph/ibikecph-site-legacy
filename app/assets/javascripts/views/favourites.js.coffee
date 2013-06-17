@@ -94,7 +94,11 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			success: (model, response) ->
 				t.hide()
 				$('#favorites .form').hide()
-				$('#favorites .success').show()
+				flash = $('<div />').html('Saved').attr
+					id: 'flash'
+					class: 'notice'
+				$('body').append(flash)
+				remove_flash()
 			error: (model, response) ->
 				$('#favorites .errors').html('')
 				_.each $.parseJSON(response.responseText).errors, (t,num) ->

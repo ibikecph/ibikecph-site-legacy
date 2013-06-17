@@ -8,7 +8,9 @@
 				<%= chars_remaining %>
 				<%= f.text_area :body, :rows => 5, "data-maxlength" => Comment::MAXLENGTH[:body] %>
 			</p>
-			<%= submit_tag t('.submit'), :class => :submit %>
+			<div class="submits">
+				<%= submit_tag t('.submit') %>
+			</div>
 		<% end -%>
 	<% else %>
 		<p class="login_to_comment"><%=t 'comments.new.login_to_comment_html', :link => link_to(t('.login'), '/users/sign_in') %></p>

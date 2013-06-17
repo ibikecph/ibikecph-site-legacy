@@ -217,7 +217,10 @@ I18n.translations = {
                 "hide_help": "Skjul",
                 "title": "Hj\u00e6lp",
                 "body": "Siden beregner (som den er lige nu) hurtigste cykelrute. Servicen fungere for hele Danmark.\n\nTr\u00e6k i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og - knapperne. Knappen med den stiplede firkant centerer kortet omkring den aktuelle rute. Knappen med pilen centerer kortet omkring din fysiske position.\n\nKlik p\u00e5 p\u00e5 kortet for at s\u00e6tte fra og til punkter, eller udfyld adressefelterne (ex: Krystalgade 15, 1172 K\u00f8benhavn). S\u00e5 snart en adresse er fundet, placeres den tilsvarende mark\u00f8r p\u00e5 kortet. V\u00e6r opm\u00e6rksom p\u00e5 at der s\u00f8ges p\u00e5 adresser i hele Danmark. Tilf\u00f8j evt. bynavn eller postnummer for at sikre at det er den rigtige vej du finder. \n\nS\u00e5 snart b\u00e5de fra og til mark\u00f8rerne er sat, beregenes ruten autoamtisk. Estimeret l\u00e6ngde og tid vises under adressefelterne. Klik evt. p\u00e5 'Rutebeskrivelse' for at se en trin-for-trin beskrivelse af ruten.\n\nDu kan tr\u00e6kke et sted p\u00e5 ruten for at s\u00e6tte via-punkter, dvs. punkter som ruten skal f\u00f8lge. Via-punkter kan fjernes igen ved at klikke p\u00e5 dem.\n\nN\u00e5r en rute er funde, kan du angive tidspunktet for enten afgangs eller ankomst, og det modsatte tidspunkt vil blive beregnet for dig p\u00e5 baggrund af rejsetiden.\n\nN\u00e5r du tr\u00e6kker i mark\u00f8rne, bliver ruten opdateret l\u00f8bende - pr\u00f8v selv :-)\n\nDu kan genere et link til den aktuelle rute ved at klikke p\u00e5 'Link'. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx inds\u00e6ttes i kommentarer eller emails.\n"
-            }
+            },
+        },
+        "favourites": {
+            "success": "Favorit gemt"
         }
     }
 };
