@@ -12,10 +12,10 @@ da:
       vote: Stemme
     attributes:
       email_authentication:
-        uid: 'Email'                            
+        uid: 'Email'
         uid_confirmation: 'Bekræft email'
       authentications:
-        uid: 'Email'      
+        uid: 'Email'
         uid_confirmation: 'Bekræft email'
       blog_entry:
         title: Overskrift
@@ -453,6 +453,8 @@ da:
     payoff: Hurtigere på cykel
     work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtige."
     bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
+    bugs_and_suggestions_short: "Rapporter fejl"
+    add_favorite: "Føj til favoritter"
     help: Hjælp
     from: A
     to: B
@@ -545,6 +547,20 @@ da:
     highway_bridleway: "ridesti"
     highway_steps: "trappe"
 
+  user_info:
+    edit: Rediger
+    name: Navn
+    email: Email
+    waiting_for_confirmation: I øjeblikket venter bekræftelse for
+    password_leave_blank: Password (står tom hvis du ikke ønsker at ændre det)
+    password_current: Nuværende adgangskode (vi har brug for din nuværende adgangskode for at bekræfte dine ændringer)
+    submit_update: Opdater
+    token_use: Du kan bruge denne webadresse til at logge
+    cancel: Annuller min konto
+    unhappy: Ikke tilfreds?
+    submit_cancel: Annuller min konto
+    back: Tilbage
+
   download_app:
     title: Få styr på ruten på din mobil.
-    text: Søg ruter og brug dine favoritter på farten.  
+    text: Søg ruter og brug dine favoritter på farten.

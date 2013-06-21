@@ -1,25 +1,25 @@
 <div class="centered_dialog small">
-  <h1>Edit <%= resource_name.to_s.humanize %></h1>
+  <h1><%=t 'user_info.edit' %> <%= resource.name %></h1>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true, :method => :put }) do |f| %>
     <%= devise_error_messages! %>
 
     <p>
-      <%= f.label :name %><br />
+      <%= f.label t 'user_info.name' %><br />
       <%= f.text_field :name, :class => 'text_input'%>
     </p>
 
     <p>
-      <%= f.label :email %><br />
+      <%= f.label t 'user_info.email' %><br />
       <%= f.email_field :email, :class => 'text_input'%>
     </p>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <p><%= t 'user_info.waiting_for_confirmation' %>: <%= resource.unconfirmed_email %></p>
     <% end %>
 
     <p>
-      <%= f.label "Password (leave blank if you don't want to change it)" %><br />
+      <%= f.label t "user_info.password_leave_blank" %><br />
       <%= f.password_field :password, :autocomplete => "off", :class => 'text_input' %>
     </p>
 
@@ -29,7 +29,7 @@
     </p>
 
     <p>
-      <%= f.label "Current password (we need your current password to confirm your changes)" %><br />
+      <%= f.label t "user_info.password_current" %><br />
       <%= f.password_field :current_password, :class => 'text_input' %>
     </p>
 
@@ -38,7 +38,7 @@
     </p>
 
     <p class="submits">
-      <%= f.submit "Update" %>
+      <%= f.submit t "user_info.submit_update" %>
     </p>
     <div class="tokens">
       <p><%= f.label :token_authentication_key %><br />
@@ -51,17 +51,17 @@
       </p>
 
       <% if resource.authentication_token %>
-        <p>You can use this url to login<br />
+        <p><%= t "user_info.token_use" %><br />
         <%= link_to "http://localhost:3000#{root_path(:auth_token => resource.authentication_token)}", root_path(:auth_token => resource.authentication_token)  %></p>
       <% end %>
     </div>
     
   <% end %>
 
-  <h1>Cancel my account</h1>
+  <h1><%= t "user_info.cancel" %></h1>
 
-  <p>Unhappy?</p>
-  <div class="submits"><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></div>
+  <p><%= t "user_info.unhappy" %></p>
+  <div class="submits"><%= button_to "Cancel", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></div>
 
   <%= link_to "Back", :back %>
 

@@ -16,12 +16,9 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 		$('#report').css
 			height: $("#ui").outerHeight()+2
 			left: 0
-		$('#report #step_1.inner').css
-			height: ($('#report').height()-$('#report .header').height())-40
 		$('#report #step_2.inner').css
 			height: ($('#report').height()-$('#report .header').height())-93
 
-		$('#step_1').hide()
 		$('#step_2, .submits').show()
 		$.each $("#instructions li .instruction_text"), ->
   			option = $("<option />").html($(@).text())
@@ -32,14 +29,14 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 
 		$('#step_2 form select').customSelect('.selectReplace')
 		$(".reportProblemForm input[type='radio']").bind "click", ->
+			placeholder = I18n.t('report_issue.textarea')
 			container = $(this).parent()
 			explainProblem = $(".reportProblemForm .explainProblem")
 			explainProblem.remove()  if explainProblem.length > 0
-			container.append "<textarea name=\"message\" id=\"\" class=\"explainProblem\" placeholder=\"Uddyb evt. problemet...\"></textarea>"
+			container.append "<textarea name=\"message\" id=\"\" class=\"explainProblem\" placeholder=\""+placeholder+"\"></textarea>"
 			container.find("textarea").focus()
 
 		this
-
 
 	hide: ->
 		t = @

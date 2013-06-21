@@ -1,70 +1,38 @@
 <div class="header">
-	<h1>Feedback</h1>
+	<h1><%= I18n.t 'report_issue.title' %></h1>
 	<span class="back">Back</span>
 </div>
-<div class="inner" id="step_1">
-	<ul class="feedbackSelector">
-		<li class="bug">
-			<a href="#">
-				<h2>Rapportér problem</h2>
-				<p>
-					It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-				</p>
-			</a>
-		</li>
-		<li class="ideas">
-			<% if I18n.locale is "da": %>
-			<a href="/feedback">
-			<% else: %>
-			<a href="/en/feedback">
-			<% end %>
-				<h2>GIV OS DINE IDÉER</h2>
-				<p>
-					It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-				</p>
-			</a>
-		</li>
-	</ul>
-
-	<div class="clear"></div>
-
-</div>
-<!-- <div class="success">
-	<h2>Favourite was added</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, impedit.</p>
-</div> -->
 <div class="inner" id="step_2">
 	<form action="#" class="reportProblemForm">
-					
 		<select name="#" id="" class="selectReplace">
-			<option value="">Vælg trin i ruten at rapportére</option>
+			<option value=""><%= I18n.t 'report_issue.select' %></option>
 		</select>
 
 		<ul class="errors"></ul>
 
 		<p class="problem">
 			<input type="radio" value="Vejnavn er forkert" id="radion_1" name="route">
-			<label for="radion_1">Vejnavn er forkert</label>
+			<label for="radion_1"><%= I18n.t 'report_issue.errors.road_name' %></label>
 		</p>
 		<p class="problem">
 			<input type="radio" value="Vejen er ensrettet" id="radio_2" name="route">
-			<label for="radio_2">Vejen er ensrettet</label>
+			<label for="radio_2"><%= I18n.t 'report_issue.errors.road_one_way' %></label>
 		</p>
 		<p class="problem">
 			<input type="radio" value="Vejen er lukket" id="radio_3" name="route">
-			<label for="radio_3">Vejen er lukket</label>
+			<label for="radio_3"><%= I18n.t 'report_issue.errors.road_closed' %></label>
 		</p>
 		<p class="problem">
 			<input type="radio" value="Ruten foreslår ulovlige sving" id="radio_4" name="route">
-			<label for="radio_4">Ruten foreslår ulovlige sving</label>
+			<label for="radio_4"><%= I18n.t 'report_issue.errors.road_illegal_turn' %></label>
 		</p>
 		<p class="problem">
 			<input type="radio" value="Andet" id="radio_5" name="route">
-			<label for="radio_5">Andet</label>
+			<label for="radio_5"><%= I18n.t 'report_issue.errors.road_other' %></label>
 		</p>
 
 	</form>
 </div>
 <p class="submits">
-	<input type="submit" class="feedbackSubmit" value="Send feedback">
+	<input type="submit" class="feedbackSubmit" value="<%= I18n.t 'report_issue.submit' %>">
 </p>

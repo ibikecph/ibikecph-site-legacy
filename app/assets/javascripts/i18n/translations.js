@@ -107,7 +107,31 @@ I18n.translations = {
                 "hide_help": "Hide",
                 "title": "Help",
                 "body": "The site (as it is now) calculates fastest bicycle route. The service covers all of Denmark.\n\nDrag the map to pan. Double click to zoom in, or use the + and - buttons. The button with the dashed rectangle centers the map around the current route. The button with the arrow centers the map around your current physical location.\n\nClick on the map to set from and to points, or fill our the address fields (ex: Krystalgade 15, 1172 K\u00f8benhavn). As soon as the adresss is found, the corresponding marker is placed/moved on the map. Note that addresses in all of Denmark are searched. You might want to add a city or zip code to make sure the correct street is found.\n\nAs soon as both from and to addresses are found, the route is calculated automatically. Estimated distance and time is shown below the address fields. Click 'Route Description' to view a step-by-step riding instruction.\n\nDrag the route to set via points (points that the route must pass through). Via points can be removed by clicking on them.\n\nWhen a route has been found, you can specify departure or arrival time, and the opposite time will be calculated, based on the time or travel.\n\nWhen you drag markers around, the route will be update live - try it :-)\n\nYou can generate a link to the current route by clicking 'Link'. The adress bar of your browser will be updated, and from there the link can be copied, and can (for example) be pasted into comment fields or emails."
-            }
+            },
+        },
+        "favourites": {
+            "title": "Add to favourites",
+            "placeholder": "Name your favorite",
+            "types": {
+                "favourite": "Favourite",
+                "home": "Home",
+                "work": "Work",
+                "school": "School"
+            },
+            "save": "Save"
+        },
+        "report_issue": {
+            "title": "Feedback",
+            "errors": {
+                "road_name": "Street address is wrong",
+                "road_one_way": "The road is one-way",
+                "road_closed": "The road is closed",
+                "road_illegal_turn": "The route proposed illegal turn",
+                "road_other": "Other"
+            },
+            "submit": "Send feedback",
+            "select": "Select step in the route to report",
+            "textarea": "Please elaborate if necessary. the problem ..."
         }
     },
     "da": {
@@ -220,7 +244,28 @@ I18n.translations = {
             },
         },
         "favourites": {
-            "success": "Favorit gemt"
+            "title": "Tilføj til favoritter",
+            "placeholder": "Navngiv din favorit",
+            "types": {
+                "favourite": "Favorit",
+                "home": "Hjem",
+                "work": "Arbejde",
+                "school": "Skole"
+            },
+            "save": "Gem"
+        },
+        "report_issue": {
+            "title": "Feedback",
+            "errors": {
+                "road_name": "Vejnavn er forkert",
+                "road_one_way": "Vejen er ensrettet",
+                "road_closed": "Vejen er lukket",
+                "road_illegal_turn": "Ruten foreslår ulovlige sving",
+                "road_other": "Andet"
+            },
+            "submit": "Send feedback",
+            "select": "Vælg trin i ruten at rapportére",
+            "textarea": "Uddyb evt. problemet..."
         }
     }
 };

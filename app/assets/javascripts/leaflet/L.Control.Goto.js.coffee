@@ -18,8 +18,8 @@ L.Control.Goto = L.Control.extend
 		class_name = 'leaflet-control-goto'
 		container  = L.DomUtil.create 'div', class_name
 
-		@_createButton I18n.t('use_my_location'), "#{class_name}-my-location", container, => @go_to_my_location()
-		@_createButton I18n.t('zoom_to_route'), "#{class_name}-route"      , container, => @go_to_route()
+		@_createButton I18n.t('map.use_my_location'), "#{class_name}-my-location", container, => @go_to_my_location()
+		@_createButton I18n.t('map.zoom_to_route'), "#{class_name}-route"      , container, => @go_to_route()
 
 		container
 

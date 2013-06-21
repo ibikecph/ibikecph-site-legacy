@@ -450,6 +450,8 @@ en:
     payoff: Faster on Bike
     work_in_progress: "The site is under development, and route suggestion can be inaccurate."
     bugs_and_suggestions: "Report bugs, or suggest improvements."
+    bugs_and_suggestions_short: "Report bugs"
+    add_favorite: "Add to favorites"
     help: Help
     from: A
     to: B
@@ -546,6 +548,20 @@ en:
     highway_cycleway: "cycleway"
     highway_bridleway: "bridleway"
     highway_steps: "steps"
+
+  user_info:
+    edit: Edit
+    name: Name
+    email: Email
+    waiting_for_confirmation: Currently waiting confirmation for
+    password_leave_blank: Password (leave blank if you don't want to change it)
+    password_current: Current password (we need your current password to confirm your changes)
+    submit_update: Update
+    token_use: You can use this url to login
+    cancel: Cancel my account
+    unhappy: Unhappy?
+    submit_cancel: Cancel my account
+    back: Back
 
   download_app:
     title: Keep track of the route on your mobile.
