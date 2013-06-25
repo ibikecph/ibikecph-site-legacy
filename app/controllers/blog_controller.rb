@@ -60,6 +60,13 @@ class BlogController < ApplicationController
     redirect_to blog_entry_index_path
   end
   
+  def feed
+    @blog_entries = BlogEntry.latest
+    respond_to do |format|
+      format.rss { render :layout => false }
+    end
+  end
+  
   private
   
   def find_entry
