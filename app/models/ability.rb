@@ -5,7 +5,7 @@ class Ability < ActiveRecord::Base
     disable_risky_blocks
 
     can [:index,:show], [Comment, User, Issue, Favourite, Route]
-    can [:index,:archive,:show,:tag], [BlogEntry]
+    can [:index,:archive,:show,:tag, :feed], [BlogEntry]
     can [:index,:show], [Theme]
     can :create, User
     if user
