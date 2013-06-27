@@ -11,3 +11,5 @@ $().ready ->
 
 	$('#header .mobile_nav_trigger').click ->
 		$('#header .menu').slideToggle(50)
+
+	$('input, textarea').placeholder();
