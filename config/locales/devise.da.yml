@@ -61,6 +61,7 @@ da:
         title: Log ind
         submit: Log ind
         forgot_it_q: Glemt det?
+        email_rc_q: Modtog ikke bekræftelse?
         signup: Opret
         no_account_q: Ingen konto?
         remember_me: Husk mig

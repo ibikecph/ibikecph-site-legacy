@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Favourite < ActiveRecord::Base
   belongs_to :user
   attr_accessible :name, :address, :lattitude, :longitude, :source, :sub_source, :position

@@ -61,6 +61,7 @@ en:
         title: Login
         submit: Login
         forgot_it_q: Forgot it?
+        email_rc_q: Didn't receive confirmation instructions?
         no_account_q: No account?
         signup: Sign Up
         remember_me: Remember Me
