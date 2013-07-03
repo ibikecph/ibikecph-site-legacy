@@ -7,7 +7,6 @@ da:
       issue: Indlæg
       user: Bruger
       blog_entry: Blogindlæg
-      theme: Tema
       comment: Kommentar
       vote: Stemme
     attributes:
@@ -23,43 +22,30 @@ da:
         tags: Tags
         image: Billede
         sticky: Fasthold
-      theme:
-        title: Overskrift
-        body: Indhold
-        label: Mærkat
-        image: Billede
-        sticky: Hold Øverst
       issue:
         title: Overskrift
         body: Beskrivelse
         labels: Mærkater
-        tags: Tags
-        themes: Temaer
+        tags: Tags/Emneord
       user:
         name: Navn
         about: Om
         image: Billede
-        tags: Tags
+        tags: Tags/Emneord
         terms: Brugerbetingelserne
         password: Kodeord
         password_confirmation: Bekræft kodeord
         current_password: Nuværende kodeord
         new_password_confirmation: Bekræft nyt kodeord
-    errors:
-      models:
-        issue:
-          attributes:
-            themes:
-              blank: kan ikke alle være slået fra
   
   will_paginate:
     previous_label: Forrige
     next_label: Næste
         
   menu:
-    routes: Rute
-    blog: Nyheder
-    feedback: Vær med
+    routes: Kort
+    blog: Blog
+    feedback: Feedback
     signup: Opret konto
     login: Log ind
     logout: Log ud
@@ -74,7 +60,7 @@ da:
   submit: Gem
   login: Log ind
   hi: "Hej %{user}"
-  tags: Tags
+  tags: Tags/Emneord
   ago: siden
   you: Dig
   or_login_with: eller log ind med
@@ -217,34 +203,6 @@ da:
       updated: Blogindlæg opdateret.
       destroyed: Blogindlæg slettet.
 
-  themes:
-    index:
-      new: Nyt Tema
-    show:
-      new_issue: Opret nyt indlæg
-      issues: Indlæg for dette tema
-    new:
-      title: Nyt Tema
-    edit:
-      title: Rediger Tema
-    form:
-      make_sticky: Hold dette tema øverst i listen
-      submit: Gem
-    latest:
-      title: Temaer
-      new: Nyt Tema
-    theme:
-      title: Tema
-      title_current: Aktuelt tema
-      num_issues: "%{count} indlæg"
-    flash:
-      created: Tema oprettet.
-      updated: Tema opdateret.
-      destroyed: Tema slettet.
-    themes:
-      title: Temaer
-      new_theme: Nyt Tema
-
   comments:
     new:
       add_comment: Kommentar
@@ -319,9 +277,6 @@ da:
     blog_entry:
       subject: "Blogindlæg: %{title}"
       body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph:"
-    theme:
-      subject: "Tema: %{title}"
-      body: "Et nyt tema med titlen '%{title}' er oprettet på I Bike Cph:"
     comment:
       subject: "Kommentar: %{title}"
       body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph:"
@@ -330,32 +285,27 @@ da:
   issues:
     view_all_issues: Se alle indlæg
     index:
+      title: Feedback
       num_issues: "%{count} indlæg"
-      issues_title: Indlæg til dette tema
     welcome:
-      title: Vær med!
       body: |
-        Har du idéer til forbedringer af cykelruteplanlæggeren og websiden? Er der noget der ikke virker, eller mangler der en sti på kortet?
-        
-        Så fortæl det her!
+        Har du idéer til forbedringer af cykelruteplanlæggeren? Er der noget der ikke virker, eller mangler der en sti på kortet? Så fortæl det her!
       note: |
         Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklame her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
     issues:
       no_items: Ingen indlæg
-      new: Opret nyt indlæg
+      new: Nyt indlæg
       all_issues: Se alle indlæg
     all:
       title: Alle indlæg
     new:
-      title: Opret nyt indlæg
-    new_for_theme:
-      title: Opret nyt indlæg
+      title: Nyt indlæg
     edit:
       title: Rediger indlæg
     show:
       back_to_list: Tilbage til listen
       labels: Mærkater
-      tags: Tags
+      tags: Tags/Emneord
     related:
       title: Relaterede indlæg
     most_commented:
@@ -505,4 +455,32 @@ da:
     follow: ad
     and_continue: og fortsæt
     for: og kør
-    towards: mod  
+    towards: mod
+    
+    mode_push: "Træk cyklen"
+    mode_ferry: "Færge"
+    mode_train: "Tog/metro"
+    
+    highway_default: "vej/sti"
+    highway_motorway: "motorvej"
+    highway_motorway_link: "motorvej"
+    highway_trunk: "hovedvej"
+    highway_trunk_link: "hovedvej"
+    highway_primary: "vej"
+    highway_primary_link: "vej"
+    highway_secondary: "vej"
+    highway_secondary_link: "vej"
+    highway_tertiary: "gade"
+    highway_tertiary_link: "gade"
+    highway_living_street: "gade"
+    highway_pedestrian: "gågade"
+    highway_residential: "gade"
+    highway_unclassified: "gade"
+    highway_service: "vej/sti"
+    highway_track: "sti"
+    highway_road: "vej"
+    highway_path: "sti"
+    highway_footway: "sti"
+    highway_cycleway: "cykelsti"
+    highway_bridleway: "ridesti"
+    highway_steps: "trappe"

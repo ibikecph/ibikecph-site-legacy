@@ -4,7 +4,7 @@
 en:
   activerecord:
     models:
-      issue: Issue
+      issue: Entry
       user: User
       blog_entry: Blog Entry
       comment: Comment
@@ -22,12 +22,6 @@ en:
         tags: Tags
         image: Image
         sticky: Sticky
-      theme:
-        title: Title
-        body: Description
-        label: Label
-        image: Image
-        sticky: Keep at top
       issue:
         title: Title
         body: Description
@@ -40,19 +34,6 @@ en:
         tags: Tags
         current_password: Current Password
         new_password_confirmation: Confirm New Password
-    errors:
-      models:
-        issue:
-          attributes:
-            themes:
-              blank: cannot all be deselected
-  
-  
-  
-  
-  
-  
-  
   
   will_paginate:
     previous_label: Previous
@@ -64,8 +45,8 @@ en:
     map: Map
     
   menu:
-    routes: Route
-    blog: News
+    routes: Map
+    blog: Blog
     feedback: Feedback
     signup: Sign Up
     login: Login
@@ -104,8 +85,8 @@ en:
     other: "%{count} comments"
   
   issue:
-    one: 1 issue
-    other: "%{count} issues"
+    one: 1 entry
+    other: "%{count} entries"
   
   character:
     one: 1 character
@@ -223,34 +204,6 @@ en:
       created: Blog entry created.
       updated: Blog entry updated.
       deleted: Blog entry deleted.
-
-  themes:
-    index:
-      new: New Theme
-    show:
-      new_issue: Add New Issue
-      issues: Issues for this Theme
-    new:
-      title: New Theme
-    edit:
-      title: Edit Theme
-    form:
-      make_sticky: Keep this theme at the top
-      submit: Save
-    latest:
-      title: Themes
-      new: New Theme
-    theme:
-      title: Theme
-      title_current: Current theme
-      num_issues: "%{count} issues"
-    flash:
-      created: Theme added.
-      updated: Theme updated.
-      destroyed: Theme deleted.
-    themes:
-      title: Themes
-      new_theme: New Theme
       
   comments:
     new:
@@ -332,44 +285,41 @@ en:
     unsubscribing: "You cannot reply to this email. If you don't want to receive emails from I Bike CPH, you can change your settings at %{link}."
   
   issues:
-    view_all_issues: View all Issues
+    view_all_issues: View all Entrys
     index:
-      num_issues: "%{count} issues"
-      issues_title: Issues for this theme
+      title: Feedback
+      num_issues: "%{count} topics"
     welcome:
-      title: Get Involved!
-      body: "Du you have ideas for improving the bike route planner or website? Did you encounter bugs, or a path missing on the map? Then  let us know!"
+      body: "Du you have ideas for improving the bike route planner? Did you encounter bugs, or a path missing on the map? Then let us know!"
       note: |
         This site is only for discussing the digital bicycle route planner. Please send other ideas for improving biking in Copenhagen to <a href="http://kk.dk/cyklernesby" target="_blank">Copenhagen Municipality</a>. You can report 'analog' problems, like holes in the road, at <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's social forum is located on <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Advertising is not allowed at this site. See the <a href="http://ibikecph.dk/terms" target="_blank">user terms</a> for more info.
     issues:
       no_items: No issues.
-      new: Add New Issue
+      new: New Entry
       all_issues: View all issues
     all:
-      title: All Issues
+      title: All Entrys
     new:
-      title: Add New Issue
-    new_for_theme:
-      title: Add New Issue
+      title: New Entry
     edit:
-      title: Edit Issue
+      title: Edit Entry
     show:
       back_to_list: Back to list
       labels: Labels
       tags: Tags
     related:
-      title: Related issues
+      title: Related Entries
     most_commented:
       title: Most Commented
     votes:
       vote: Click to Vote
       unvote: Click to Remove Vote
     tags:
-      title: "Issues tagged with..."
+      title: "Entrys tagged with..."
       popular_tags: Popular tags
       all_tags: View all tags
     labels:
-      title: "Issues labelled as.."
+      title: "Entrys labelled as.."
       no_items: No issues found
     corps:
       title: Test Corps
@@ -378,12 +328,12 @@ en:
     search_form:
       submit: Search
     search:
-      title: Search for Issue
-      num_found: "Issues found: %{count}"
+      title: Search for Entry
+      num_found: "Entrys found: %{count}"
     flash:
-      created: Issue added.
-      updated: Issue updated.
-      destroyed: Issue deleted.
+      created: Entry added.
+      updated: Entry updated.
+      destroyed: Entry deleted.
 
   corps:
     index:
@@ -504,3 +454,31 @@ en:
     and_continue: and continue for
     for: for
     towards: towards
+    
+    mode_push: Push the bike
+    mode_ferry: Ferry
+    mode_train: Train/Metro
+
+    highway_default: "street/path"
+    highway_motorway: "motorway"
+    highway_motorway_link: "motorway"
+    highway_trunk: "trunk road"
+    highway_trunk_link: "trunk road"
+    highway_primary: "primary road"
+    highway_primary_link: "primary road"
+    highway_secondary: "road"
+    highway_secondary_link: "road"
+    highway_tertiary: "street"
+    highway_tertiary_link: "street"
+    highway_living_street: "gade"
+    highway_pedestrian: "pedestrian street"
+    highway_residential: "residential street"
+    highway_unclassified: "street"
+    highway_service: "service street"
+    highway_track: "track"
+    highway_road: "road"
+    highway_path: "path"
+    highway_footway: "footway"
+    highway_cycleway: "cycleway"
+    highway_bridleway: "bridleway"
+    highway_steps: "steps"

@@ -7,6 +7,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'click .permalink'             : 'permalink'
 		'change .departure'	  		     : 'change_departure'
 		'change .arrival'	   		       : 'change_arrival'
+		'change .mode [type=radio]' 	 : 'change_mode'
 
 	initialize: (options) ->
 		@router = options.router
@@ -142,3 +143,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				@model.waypoints.remove waypoint
 			else
 				waypoint.trigger 'input:address'
+
+	change_mode: (event) ->
+		profile = $(event.target).attr('id')
+		@model.set 'profile', profile, silent: true
+		@model.trigger 'change:profile'

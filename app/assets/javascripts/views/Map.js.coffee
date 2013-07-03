@@ -10,7 +10,7 @@ class IBikeCPH.Views.Map extends Backbone.View
 			$('#map').height $(window).height() - $('#header').height()
 		$(window).trigger 'resize'
 
-		@osrm = new IBikeCPH.OSRM @model, IBikeCPH.config.routing_service.url
+		@osrm = new IBikeCPH.OSRM @model
 		
 		@map = new L.Map @el.id, zoomControl: false		#leaflet map
 		@map.on 'zoomend', (event) =>

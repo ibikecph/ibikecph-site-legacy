@@ -29,14 +29,6 @@ class UserMailer < ActionMailer::Base
     mail :to => @user.email_address, :subject => t('user_mailer.blog_entry.subject', :title => blog_entry.title)
   end
   
-  def theme user, theme, locale
-    @user = user
-    @theme = theme
-    @url = url_for :controller => :themes, :action => :show, :id => theme.id,  :locale => locale
-    @settings_url = settings_url locale
-    mail :to => @user.email_address, :subject => t('user_mailer.theme.subject', :title => theme.title)
-  end
-
   def comment user, comment, locale
     @user = user
     @comment = comment

@@ -1,0 +1,14 @@
+<div class="issue_top">
+	<h1><%= t('issues.index.title') %></h1>
+	<br>
+    <%= render 'new_button' %>
+    <%= form_tag :post_search_issues do %>
+    	<%= t('issues.search_form.submit') %>:
+    	<%= text_field_tag :search, params[:search] %>
+    	<% if params[:search] %>
+    	    <%= link_to t('issues.view_all_issues'), issues_path %>
+		<% end %>
+    <% end %>
+</div>
+<hr class="clear">
+<br>

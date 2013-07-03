@@ -1,14 +1,20 @@
 <div class="gr">
 	<div class="g4">
-		<%= render 'issues/welcome' %>
-		<%= render 'themes/themes' %>
-		<%= render 'issues/related' %>
-		<%= render 'issues/search' %>
+        <%= render 'issues/most_commented' %>
 		<%= render 'issues/tags' %>
+		<%= render 'issues/related' %>
 	</div>
 	<div class="g8 ge">
 		<%= render 'issues/editing' %>
+		
+		<p><%= link_to "&larr; ".html_safe+t('issues.view_all_issues'), issues_path %></p>
+    	<br>
 		<h1><%= @issue.title %></h1>
+		<% if @issue.image? %>
+		<p>
+			<%= image_tag @issue.image.g6.url %>
+		</p>
+		<% end %>
 		<%= auto_html_blog @issue.body, {} %>
 		<br>
 		<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>

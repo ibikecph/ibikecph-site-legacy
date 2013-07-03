@@ -9,9 +9,15 @@ IBikeCPH.util.instruction_string = (instruction) ->
 
 	if instruction.turn is 'enter_roundabout'
 		string += ' ' +  I18n.t('instructions.take_the_nth_exit').replace('{%nth}', I18n.translate('instructions.'+instruction.roundabout_exit + ''));
-
+	
+	street = instruction.street.match /\{highway:(.*)\}/
+	if street
+		street = I18n.translate('instructions.highway_'+street[1], {defaultValue: I18n.translate('instructions.highway_default') } )
+	else
+		street = instruction.street
+	
 	if instruction.street and instruction.turn isnt 'enter_roundabout'
-		string += ' ' + I18n.translate('instructions.follow') + ' ' + instruction.street
+		string += ' ' + I18n.translate('instructions.follow') + ' ' + street
 
 	if instruction.turn is 'head'
 		string += ' ' + I18n.translate('instructions.'+instruction.direction)
@@ -21,7 +27,14 @@ IBikeCPH.util.instruction_string = (instruction) ->
 
 	if instruction.turn is 'continue'
 		string += ' ' + I18n.translate('instructions.for') + ' ' + instruction.distance + 'm'
-
+	
+	if instruction.mode == 2
+		string +=  " (#{I18n.translate('instructions.mode_push')})"
+	else if instruction.mode == 3
+		string +=  " (#{I18n.translate('instructions.mode_ferry')})"
+	else if instruction.mode == 4
+		string +=  " (#{I18n.translate('instructions.mode_train')})"
+	
 	string
 
 IBikeCPH.util.decode_path = (encoded) ->
