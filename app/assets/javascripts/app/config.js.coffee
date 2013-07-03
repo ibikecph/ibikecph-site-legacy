@@ -9,7 +9,8 @@ IBikeCPH.config =
 
 	route_styles:
 		current:
-			color   : '#00aeef'
+			# color   : '#0078a3'
+			color	: '#0063c9'
 			weight  : 5
 			opacity : 0.8
 		old:
@@ -25,7 +26,8 @@ IBikeCPH.config =
 	map_tiles: [
 		name: 'OpenStreetMap'
 		#url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-		url: 'http://{s}.tiles.mapbox.com/v3/stamen.cphbikes/{z}/{x}/{y}.png'
+		#url: 'http://{s}.tiles.mapbox.com/v3/stamen.cphbikes/{z}/{x}/{y}.png'
+		url: 'http://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,

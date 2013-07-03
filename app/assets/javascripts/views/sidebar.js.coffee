@@ -230,14 +230,29 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		), 150
 	
 	reverse_route: ->
-		new_first_location = @model.waypoints.last().toJSON().location
-		new_last_location = @model.waypoints.first().toJSON().location
-		new_first_address = $("#addresses .from").val()
-		new_last_address = $("#addresses .to").val()
-		@model.waypoints.first().set 'location', new_first_location
-		@model.waypoints.last().set 'location', new_last_location
-		@set_field 'from', new_last_address
-		@set_field 'to', new_first_address
+		@model.waypoints.models.reverse()
+		# new_first_location = @model.waypoints.last().toJSON().location
+		# new_last_location = @model.waypoints.first().toJSON().location
+		# new_first_address = $("#addresses .from").val()
+		# new_last_address = $("#addresses .to").val()
+		# @model.waypoints.first().set 'location', new_first_location
+		# @model.waypoints.last().set 'location', new_last_location
+		# @set_field 'from', new_last_address
+		# @set_field 'to', new_first_address
+
+		# if @model.waypoints.models.length > 2
+		# 	m = @model
+		# 	locations = m.waypoints.models
+		# 	reversed_locations = m.waypoints.models.reverse()
+		# 	locations_array = []
+		# 	$.each reversed_locations, (i) ->
+		# 		if i isnt 0 and i isnt m.waypoints.models.length - 1
+		# 			# locations[i].set 'location', @attributes.location
+		# 			locations_array.push @attributes.location
+
+		# 	$.each locations, (i)  ->
+		# 		console.log @attributes
+
 
 	update_field_from_suggestion: (event) ->
 		el = $(event.currentTarget)

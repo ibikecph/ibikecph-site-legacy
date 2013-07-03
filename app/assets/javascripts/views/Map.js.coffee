@@ -11,15 +11,14 @@ class IBikeCPH.Views.Map extends Backbone.View
 
 		@osrm = new IBikeCPH.OSRM @model
 		
-		bounds = IBikeCPH.config.maxbounds.value
+		# bounds = IBikeCPH.config.maxbounds.value
 		
 		@map = new L.Map(@el.id,
 			zoomControl: false
 			worldCopyJump: false
-			maxBounds: bounds
+			minZoom: 5
+			maxZoom: 17
 		)
-		
-		@map.setMaxBounds bounds 	#Limit the max bounds of the map
 
 		@map.on 'zoomend', (event) =>
 			@osrm.set_zoom @map.getZoom()

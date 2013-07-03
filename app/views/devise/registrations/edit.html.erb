@@ -1,5 +1,5 @@
 <div class="centered_dialog small">
-  <h1><%=t 'user_info.edit' %> <%= resource.name %></h1>
+  <h1><%=t 'user_info.edit' %> <%# = resource.name %></h1>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true, :method => :put }) do |f| %>
     <%= devise_error_messages! %>
@@ -40,7 +40,7 @@
     <p class="submits">
       <%= f.submit t "user_info.submit_update" %>
     </p>
-    <div class="tokens">
+    <!-- <div class="tokens">
       <p><%= f.label :token_authentication_key %><br />
         <%= resource.authentication_token.blank? ? "Token Empty" : resource.authentication_token %>
       </p>
@@ -54,15 +54,13 @@
         <p><%= t "user_info.token_use" %><br />
         <%= link_to "http://localhost:3000#{root_path(:auth_token => resource.authentication_token)}", root_path(:auth_token => resource.authentication_token)  %></p>
       <% end %>
-    </div>
+    </div> -->
     
   <% end %>
-
+  <br><br>
   <h1><%= t "user_info.cancel" %></h1>
 
   <p><%= t "user_info.unhappy" %></p>
   <div class="submits"><%= button_to "Cancel", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></div>
-
-  <%= link_to "Back", :back %>
 
 </div>

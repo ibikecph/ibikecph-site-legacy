@@ -13,3 +13,9 @@ $().ready ->
 		$('#header .menu').slideToggle(50)
 
 	$('input, textarea').placeholder();
+
+	$(window).on 'resize', ->
+		if $(window).width() > 767
+			$('.menu').show()
+		else
+			$('.menu').hide()

@@ -6,7 +6,7 @@
 				<div class="item_thumb <%= klass %>">
 					<%= link_to(issue_path(issue, :color => klass)) do %>
 						<h2><%= issue.title %></h2>
-						<p class="from">af <%= issue.user.name %></p>
+						<p class="from"><%= t('issues.issues.of') %> <%= issue.user.name %></p>
 						<div class="soc">
 							<div class="soc_comment">
 								<%= t( 'comment', :count => issue.comments_count ) %>

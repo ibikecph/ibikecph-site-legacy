@@ -356,9 +356,12 @@ da:
       note: |
         Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklame her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
     issues:
+      title: Vær med!
+      sub_title: Gi’ os dine forslag til forbedringer.
       no_items: Ingen indlæg
       new: Opret nyt indlæg
       all_issues: Se alle indlæg
+      of: af
     all:
       title: Alle indlæg
     new:
@@ -548,12 +551,12 @@ da:
     highway_steps: "trappe"
 
   user_info:
-    edit: Rediger
+    edit: Rediger din profil
     name: Navn
     email: Email
     waiting_for_confirmation: I øjeblikket venter bekræftelse for
-    password_leave_blank: Password (står tom hvis du ikke ønsker at ændre det)
-    password_current: Nuværende adgangskode (vi har brug for din nuværende adgangskode for at bekræfte dine ændringer)
+    password_leave_blank: Kodeord (lad feltet være tomt hvis du ikke ønsker at ændre det)
+    password_current: Nuværende kodeord (vi skal bruge dit nuværende kodeord for at bekræfte dine ændringer)
     submit_update: Opdater
     token_use: Du kan bruge denne webadresse til at logge
     cancel: Annuller min konto

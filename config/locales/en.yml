@@ -356,9 +356,12 @@ en:
       note: |
         This site is only for discussing the digital bicycle route planner. Please send other ideas for improving biking in Copenhagen to <a href="http://kk.dk/cyklernesby" target="_blank">Copenhagen Municipality</a>. You can report 'analog' problems, like holes in the road, at <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's social forum is located on <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Advertising is not allowed at this site. See the <a href="http://ibikecph.dk/terms" target="_blank">user terms</a> for more info.
     issues:
+      title: Get involved!
+      sub_title: Give us your suggestions for improvements.
       no_items: No issues.
       new: Add New Issue
       all_issues: View all issues
+      of: from
     all:
       title: All Issues
     new:
@@ -550,7 +553,7 @@ en:
     highway_steps: "steps"
 
   user_info:
-    edit: Edit
+    edit: Edit your profile
     name: Name
     email: Email
     waiting_for_confirmation: Currently waiting confirmation for
