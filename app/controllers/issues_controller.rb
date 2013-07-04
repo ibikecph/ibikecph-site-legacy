@@ -1,6 +1,6 @@
 class IssuesController < ApplicationController
-       
-  skip_before_filter :require_login, :only => [:index,:show,:tags,:labels,:search,:searched]
+  
+  before_filter :authenticate_user!, :except => [:index,:show,:tags,:labels,:search,:searched]    
   load_and_authorize_resource :except => [:tags,:labels,:search,:searched]
   skip_authorize_resource :only => [:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
