@@ -320,3 +320,4 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			$('.mode #standard').trigger 'click'
 		else
 			$('.mode #cargobike').trigger 'click'
+

@@ -1,22 +1,13 @@
 class IssuesController < ApplicationController
        
-  skip_before_filter :require_login, :only => [:index,:all,:show,:tags,:labels,:search,:searched]
-  load_and_authorize_resource :except => [:new_for_theme,:create_for_theme,:tags,:labels,:all,:search,:searched]
-  skip_authorize_resource :only => [:all,:new_for_theme,:create_for_theme,:tags,:labels]
+  skip_before_filter :require_login, :only => [:index,:show,:tags,:labels,:search,:searched]
+  load_and_authorize_resource :except => [:tags,:labels,:search,:searched]
+  skip_authorize_resource :only => [:tags,:labels]
   #before_filter :find_vote, :only => [:show,:vote,:unvote]
-  before_filter :load_sidebar, :only => [:index,:all,:tags,:labels,:show,:corps,:search,:searched]
+  before_filter :load_sidebar, :only => [:new,:index,:tags,:labels,:show,:corps,:search,:searched]
   before_filter :find_popular_tags, :only => [:index,:show,:tags,:labels]
 
   def index
-    @theme = Theme.latest.first
-    if @theme
-      @issues = @theme.issues.lastest.includes(:user).paginate :page => params[:page], :per_page => 50
-    else
-      all
-    end
-  end
-  
-  def all
     @issues = Issue.lastest.includes(:user).paginate :page => params[:page], :per_page => 30
   end
   
@@ -49,28 +40,14 @@ class IssuesController < ApplicationController
   
   def new
     @issue = Issue.new
-    @themes = Theme.all
-    # render :layout => false
   end
- 
-  def new_for_theme
-    @theme = Theme.find params[:id]
-    @issue = Issue.new
-    @issue.themes << @theme
-    @themes = Theme.all  end
  
   def create
     do_create @issue, :new
   end
   
-  def create_for_theme
-    @theme = Theme.find params[:id]
-    do_create @theme, :new_for_theme
-  end
-  
   def edit
     @users = User.all
-    @themes = Theme.all
   end
 
   def update
@@ -79,7 +56,6 @@ class IssuesController < ApplicationController
       redirect_to @issue
     else
       @users = User.all
-      @themes = Theme.all
       render :action => :edit
     end
   end
@@ -136,7 +112,6 @@ class IssuesController < ApplicationController
       flash[:notice] = t('issues.flash.created')
       redirect_to redirect_to
     else
-      @themes = Theme.all
       render rerender_to
     end
   end
@@ -154,7 +129,6 @@ class IssuesController < ApplicationController
   end
   
   def load_sidebar
-    @themes = Theme.all
     @most_commented = Issue.most_commented.includes(:user).limit(7)
     #@most_voted = Issue.most_voted.includes(:user).limit(7)
   end

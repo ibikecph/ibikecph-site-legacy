@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
          
   #has_many :authentications, :dependent => :destroy
   has_many :blog_entries, :dependent => :nullify
-  has_many :themes, :dependent => :nullify
   has_many :comments, :dependent => :destroy
   has_many :issues, :dependent => :destroy
   has_many :reported_issues, :dependent => :destroy

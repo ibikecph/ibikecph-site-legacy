@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130605042950) do
     t.integer  "votes_count",    :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.string   "image"
   end
 
   create_table "reported_issues", :force => true do |t|
