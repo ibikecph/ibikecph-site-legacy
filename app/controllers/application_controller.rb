@@ -94,4 +94,12 @@ class ApplicationController < ActionController::Base
     redirect_to path, :notice => options[:notice] || "Logged in."
   end
 
+  def store_location
+    session[:user_return_to] = request.fullpath
+  end
+
+   def after_sign_in_path_for(resource)
+     session[:user_return_to] || user_path(current_user)
+   end
+
 end

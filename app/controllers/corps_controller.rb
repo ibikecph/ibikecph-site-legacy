@@ -1,6 +1,6 @@
 class CorpsController < ApplicationController
 
-  skip_before_filter :require_login, :only => [:index, :show]
+  before_filter :authenticate_user!, :except =>  [:index, :show]
   before_filter :load_sidebar
   before_filter :find_users, :except => [:show]
   
