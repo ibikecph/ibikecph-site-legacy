@@ -32,7 +32,8 @@
             <%= submit_tag t('menu.signup'), :class => :submit %>
         </p>
         <p class="register">
-            <%=t '.already_have_account_q' %> <%= link_to t('login'), new_session_path(resource_name) %>
+            <%= link_to t('devise.sessions.new.email_rc_q'), new_confirmation_path(resource_name) %>
+            <!--<%=t '.already_have_account_q' %> <%= link_to t('login'), new_session_path(resource_name) %>-->
         </p>
     <% end %>
 </div>

@@ -31,6 +31,8 @@
 			<label for="radio_5"><%= I18n.t 'report_issue.errors.road_other' %></label>
 		</p>
 
+		<%= I18n.t 'report_issue.errors.road_name' %>
+
 	</form>
 </div>
 <p class="submits">

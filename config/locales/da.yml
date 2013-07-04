@@ -41,10 +41,10 @@ da:
         image: Billede
         tags: Tags
         terms: Brugerbetingelserne
-        password: Kodeord
-        password_confirmation: Bekræft kodeord
-        current_password: Nuværende kodeord
-        new_password_confirmation: Bekræft nyt kodeord
+        password: Adgangskode
+        password_confirmation: Bekræft adgangskode
+        current_password: Nuværende adgangskode
+        new_password_confirmation: Bekræft nyt adgangskode
     errors:
       models:
         issue:
@@ -157,7 +157,7 @@ da:
     flash:
       logged_in: "Logget ind som %{user}."
       logged_in_oath: "Logget ind som %{user} med %{provider}."
-      invalid_login: Email eller kodeord var forkert.
+      invalid_login: Email eller adgangskode var forkert.
       oath_cancel: Login afbrudt.
       oath_error: "Kunne ikke logge ind: %{error}."
       email_not_verified: "Email %{email} ikke verificeret."
@@ -172,9 +172,9 @@ da:
       image: Billede
       about: Om mig
       email: Email
-      password: Kodeord
+      password: Adgangskode
       change_email: Ændr Email
-      change_password: Ændr kodeord
+      change_password: Ændr adgangskode
       change_settings: Rediger indstillinger
       notify_by_email: Beskeder via email
       unverified: Uverficiret
@@ -188,9 +188,9 @@ da:
       body: "For at aktivere din konto, bedes du venligst følge instruktionerne i den email vi har sendt til dig."
       link: Gensend aktiveringsemail
     edit_password:
-      title: Ændr Kodeord
+      title: Ændr adgangskode
       forgotten_q: Glemt det?
-      new_password: Nyt kodeord
+      new_password: Nyt adgangskode
       submit: Gem
     welcome:
       title: Velkommen!
@@ -203,8 +203,8 @@ da:
       submit: Gem
     flash:
       email_not_found: Email ikke fundet.
-      password_changed: Kodeord ændret.
-      invalid_password: Nuværende kodeord ikke korrekt.
+      password_changed: Adgangskode ændret.
+      invalid_password: Nuværende adgangskode ikke korrekt.
       updated: Konto opdateret.
       settings_updated: Indstillinger opdateret.
       activation_sent: "Aktiveringsemail gensendt til %{email}."
@@ -293,33 +293,33 @@ da:
       verified: "Emailen %{email} verificeret."
       not_found: "Emailen %{email} ikke fundet."
       verification_expired: Verifikationlinket er udløbet.
-      verified_with_password: "Emailen #{@email} verificeret, og kodeord gemt."
+      verified_with_password: "Emailen #{@email} verificeret, og adgangskode gemt."
       verification_wait: "Verifikationsemail kan kun sendes hver %{time}. Vent venligst lidt, og prøv så igen."
       verification_not_found: Ugyldigt verifikationslink.
       
   password_resets:
     new_ask:
-      title: Nulstil Kodeord
-      body: "Indtast din email nedenfor, så sender vi instruktioner om hvordan du nulstiller dit kodeord."
+      title: Nulstil adgangskode
+      body: "Indtast din email nedenfor, så sender vi instruktioner om hvordan du nulstiller dit adgangskode."
       submit: Send Instruktioner
     new_select:
-      title: Nulstil Kodeord
-      body: "Instruktioner om hvordan du nulstiller dit kodeord vil blive sendt til %{user}."
+      title: Nulstil adgangskode
+      body: "Instruktioner om hvordan du nulstiller dit adgangskode vil blive sendt til %{user}."
       submit: Send Instruktioner
     new_fixed:
-      title: Nulstil kodeord
-      body: "Instruktioner om hvordan du nulstiller dit kodeord vil blive sendt til %{user}."
+      title: Nulstil adgangskode
+      body: "Instruktioner om hvordan du nulstiller dit adgangskode vil blive sendt til %{user}."
       submit: Send Instruktioner
     edit:
-      title: Ændr Kodeord
-      for_user: "Ændr kodeord for brugeren %{user}."
-      submit: Ændr Kodeord
+      title: Ændr adgangskode
+      for_user: "Ændr adgangskode for brugeren %{user}."
+      submit: Ændr adgangskode
     flash:
-      instructions_sent: "Instruktioner om hvordan du nulstiller dit kodeord er sendt til %{email}."
+      instructions_sent: "Instruktioner om hvordan du nulstiller dit adgangskode er sendt til %{email}."
       email_not_found: "Emailen %{email} ikke fundet."
-      password_changed: Kodeord Ændret
-      invalid_link: Ugyldigt link til nulstilling af kodeord.
-      expired_link: Link til nulstilling af kodeord er udløbet.
+      password_changed: Adgangskode Ændret
+      invalid_link: Ugyldigt link til nulstilling af adgangskode.
+      expired_link: Link til nulstilling af adgangskode er udløbet.
       
   user_mailer:
     activation:
@@ -329,8 +329,8 @@ da:
       subject: Verificering af din I Bike Cph konto
       body: "For at verificere din email til brug på I Bike Cph, bedes du gå til:"
     password_reset:
-      subject: Nulstilling af dit I Bike Cph kodeord
-      body: "For at nulstille dit I Bike Cph kodeord, bedes du gå til:"
+      subject: Nulstilling af dit I Bike Cph adgangskode
+      body: "For at nulstille dit I Bike Cph adgangskode, bedes du gå til:"
     blog_entry:
       subject: "Blogindlæg: %{title}"
       body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph:"
@@ -555,8 +555,8 @@ da:
     name: Navn
     email: Email
     waiting_for_confirmation: I øjeblikket venter bekræftelse for
-    password_leave_blank: Kodeord (lad feltet være tomt hvis du ikke ønsker at ændre det)
-    password_current: Nuværende kodeord (vi skal bruge dit nuværende kodeord for at bekræfte dine ændringer)
+    password_leave_blank: Adgangskode (lad feltet være tomt hvis du ikke ønsker at ændre det)
+    password_current: Nuværende adgangskode (vi skal bruge dit nuværende adgangskode for at bekræfte dine ændringer)
     submit_update: Opdater
     token_use: Du kan bruge denne webadresse til at logge
     cancel: Annuller min konto

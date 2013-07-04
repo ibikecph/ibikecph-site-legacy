@@ -9,7 +9,7 @@
 		<p>
 		    <%= f.label :password %><br>
 		    <%= f.password_field :password, :class => 'text_input' %> <span class="note"><%= link_to t('.forgot_it_q'), new_password_path(resource_name) %> <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-            <%= link_to t('.email_rc_q'), new_confirmation_path(resource_name) %><br />
+            <br />
         <% end -%></span>
 		</p>
 		<p>
