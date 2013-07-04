@@ -101,7 +101,6 @@ RailsOSRM::Application.routes.draw do
       collection do
         get 'search'
         post 'search' => :searched, :as => :post_search
-        get 'all'
         get 'cards'
         get 'tags(/:tag)' => :tags
         get 'labels(/:label)' => :labels
@@ -111,10 +110,6 @@ RailsOSRM::Application.routes.draw do
         post 'unvote'
       end
     end
-
-    resources :themes
-    get 'themes/:id/new' => 'issues#new_for_theme', :as => :new_issue_for_theme
-    post 'themes/:id/create' => 'issues#create_for_theme', :as => :create_issue_for_theme
     
     match '/about' => 'about#index'
     match '/about/:action' => 'about#:action'

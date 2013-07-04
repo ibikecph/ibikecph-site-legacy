@@ -6,7 +6,6 @@ class Ability < ActiveRecord::Base
 
     can [:index,:show], [Comment, User, Issue, Favourite, Route]
     can [:index,:archive,:show,:tag, :feed], [BlogEntry]
-    can [:index,:show], [Theme]
     can :create, User
     if user
       if user.role == 'super'
@@ -16,7 +15,10 @@ class Ability < ActiveRecord::Base
         can [:vote,:unvote], Issue
         can :destroy, [Follow, Favourite, Route] do |t|
           t.user.id == user.id
-        end 
+        end
+        if user.role == 'staff'
+          can :manage, [BlogEntry,Issue,Comment,Vote]
+        end
         can [:update,:create], [Favourite, Route] do |t|
           t.user.id == user.id
         end

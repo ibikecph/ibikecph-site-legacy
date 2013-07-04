@@ -9,7 +9,7 @@
 			</p>
 		<% end %>
 		<p class="note">
-			<%= link_to comment.user.name, comment.user %>, 
+			<%= link_to comment.user.name, comment.user %>,
 			<span class="timeago" title="<%= comment.created_at.getutc.iso8601 %>">
 				<%= timeago_tag comment.created_at %> ago
 			</span>

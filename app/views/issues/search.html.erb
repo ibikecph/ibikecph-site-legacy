@@ -3,12 +3,10 @@
 		<%= render 'sidebar' %>
 	</div>
 	<div class="g8 ge">
-		<h1><%=t '.title' %></h1>
-		<%= render 'search_form' %>
-		<br>
-		<hr>
+		<%= render 'top' %>
 		<% if @issues %>
-			<%=t '.num_found', :count => @issues.size %>
+			<h3><%=t '.num_found', :count => @issues.size %></h3>
+			<br>
 			<%= render :partial => 'issues/issues' if @issues.any? %>
 		<% end %>
 	</div>
