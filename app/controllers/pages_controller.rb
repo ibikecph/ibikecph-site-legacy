@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_filter :require_login, :only => [:index,:ping,:terms,:qr]
+  before_filter :authenticate_user!, :except => [:index,:ping,:terms,:qr]
   
 	def index
 	end
