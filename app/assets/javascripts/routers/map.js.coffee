@@ -29,6 +29,7 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		@mobileapp.render()
 		
 	show: (code) ->
+		code = code.replace('/mode:cargobike', '')
 		@search.waypoints.reset_from_url code
 		@sidebar.render()
 		@map.go_to_route()

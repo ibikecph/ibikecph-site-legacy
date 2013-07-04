@@ -28,13 +28,13 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
   			$('#step_2 form select').append(option)
 
 		$('#step_2 form select').customSelect('.selectReplace')
-		$(".reportProblemForm input[type='radio']").bind "click", ->
-			placeholder = I18n.t('report_issue.textarea')
-			container = $(this).parent()
-			explainProblem = $(".reportProblemForm .explainProblem")
-			explainProblem.remove()  if explainProblem.length > 0
-			container.append "<textarea name=\"message\" id=\"\" class=\"explainProblem\" placeholder=\""+placeholder+"\"></textarea>"
-			container.find("textarea").focus()
+		# $(".reportProblemForm input[type='radio']").bind "click", ->
+		# 	placeholder = I18n.t('report_issue.textarea')
+		# 	container = $(this).parent()
+		# 	explainProblem = $(".reportProblemForm .explainProblem")
+		# 	explainProblem.remove()  if explainProblem.length > 0
+		# 	container.append "<textarea name=\"message\" id=\"\" class=\"explainProblem\" placeholder=\""+placeholder+"\"></textarea>"
+		# 	container.find("textarea").focus()
 
 		this
 

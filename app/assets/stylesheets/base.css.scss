@@ -56,7 +56,6 @@ html {
 	/*min-width: 445px;*/
 }
 body {
-    position: relative;
     #alpha {
         position: absolute;
         right: 0;
@@ -258,7 +257,7 @@ p {
 }
 
 #mobileapp {
-    position: absolute;
+    position: fixed;
     top: -255px;
     right: 120px;
     width: 360px;

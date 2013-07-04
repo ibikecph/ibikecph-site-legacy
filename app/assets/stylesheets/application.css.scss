@@ -600,6 +600,9 @@ li a {
         margin: 40px 0 0;
         padding: 0;
         text-align: center;
+        a {
+            margin: 0 4px;
+        }
     }
     .text_input {
         padding: 10px 10px 8px;

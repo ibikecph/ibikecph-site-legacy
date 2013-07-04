@@ -5,10 +5,10 @@
 class IBikeCPH.Models.Search extends Backbone.Model
 
 	initialize: ->
-		@waypoints    = new IBikeCPH.Collections.Waypoints
-		@instructions = new IBikeCPH.Collections.Instructions
-		@summary      = new IBikeCPH.Models.Summary
-		@profile			= 'standard'
+		@waypoints    	= new IBikeCPH.Collections.Waypoints
+		@instructions 	= new IBikeCPH.Collections.Instructions
+		@summary      	= new IBikeCPH.Models.Summary
+		@profile		= 'standard'
 		
 	reset: ->
 		@waypoints.reset()

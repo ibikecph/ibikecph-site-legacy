@@ -43,6 +43,11 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			favourites = new IBikeCPH.Views.Favourites model: '', el: '#favorites', router: @router
 			favourites.render(m.waypoints)
 			return false
+		if window.location.hash.match 'mode:cargobike'
+			setTimeout (->
+				$('#cargobike_trigger').trigger 'click'
+			), 200
+
 		this
 
 	getNow: ->
@@ -68,7 +73,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@departure = @getNow()
 		
 	permalink: ->
-		url = "#!/#{@model.waypoints.to_url()}"
+		mode = ""
+		if $('#cargobike').attr('checked')
+			mode = '/mode:cargobike'
+
+		console.log mode
+		url = "#!/#{@model.waypoints.to_url()+mode}"
 		if url
 			@router.navigate url, trigger: false
 	
@@ -137,6 +147,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 		setTimeout (->
 			val = el.val().toLowerCase()
+			console.log val
 
 			if val.length >= 4
 				items = []
@@ -225,9 +236,10 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				, 500)
 						
 			else
+				$('.suggestions').html('').hide()
 				return false
 
-		), 150
+		), 500
 	
 	reverse_route: ->
 		# @model.waypoints.models.reverse()

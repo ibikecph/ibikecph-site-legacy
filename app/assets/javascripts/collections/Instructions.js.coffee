@@ -19,8 +19,8 @@ class IBikeCPH.Collections.Instructions extends Backbone.Collection
 				roundabout_exit : roundabout_exit
 				distance        : distance
 				direction       : direction
-				mode						: mode
-				index			      : index
+				mode			: mode
+				index			: index
 			),
 			silent: true
 		@trigger 'change' if instructions.length>0

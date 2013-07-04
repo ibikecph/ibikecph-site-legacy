@@ -127,7 +127,8 @@ I18n.translations = {
                 "road_one_way": "The road is one-way",
                 "road_closed": "The road is closed",
                 "road_illegal_turn": "The route proposed illegal turn",
-                "road_other": "Other"
+                "road_other": "Other",
+                "message": "Message"
             },
             "submit": "Send feedback",
             "select": "Select step in the route to report",
@@ -261,7 +262,8 @@ I18n.translations = {
                 "road_one_way": "Vejen er ensrettet",
                 "road_closed": "Vejen er lukket",
                 "road_illegal_turn": "Ruten foreslår ulovlige sving",
-                "road_other": "Andet"
+                "road_other": "Andet",
+                "message": "Besked"
             },
             "submit": "Send feedback",
             "select": "Vælg trin i ruten at rapportére",

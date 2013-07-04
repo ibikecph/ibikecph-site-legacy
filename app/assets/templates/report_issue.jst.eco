@@ -30,8 +30,9 @@
 			<input type="radio" value="Andet" id="radio_5" name="route">
 			<label for="radio_5"><%= I18n.t 'report_issue.errors.road_other' %></label>
 		</p>
-
-		<%= I18n.t 'report_issue.errors.road_name' %>
+		<p>
+			<textarea name="message" id="" class="explainProblem" placeholder="<%= I18n.t('report_issue.textarea') %>"></textarea>
+		</p>
 
 	</form>
 </div>
