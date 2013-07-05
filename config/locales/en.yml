@@ -265,7 +265,8 @@ en:
       password_changed: Password changed
       invalid_link: Invalid password reset link.
       expired_link: Password reset link has expired.
-      
+      fb_user_AD: "Access Denied : Facebook Users can't reset password!"
+            
   user_mailer:
     activation:
       subject: Activating your I Bike Cph account
