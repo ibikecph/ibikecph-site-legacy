@@ -58,7 +58,7 @@ class AccountsController < ApplicationController
   end
   
   def settings
-    @has_email = current_user.authentications.emails.active.any?
+    #@has_email = current_user.authentications.emails.active.any?
   end
   
   def update_settings

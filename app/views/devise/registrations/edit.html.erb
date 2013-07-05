@@ -1,66 +1,28 @@
 <div class="centered_dialog small">
-  <h1><%=t 'user_info.edit' %> <%# = resource.name %></h1>
-
+  <h1><%=t 'user_info.edit' %> </h1>
+  
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true, :method => :put }) do |f| %>
-    <%= devise_error_messages! %>
+  <%= devise_error_messages! %>
+  
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email%></div>
 
-    <p>
-      <%= f.label t 'user_info.name' %><br />
-      <%= f.text_field :name, :class => 'text_input'%>
-    </p>
-
-    <p>
-      <%= f.label t 'user_info.email' %><br />
-      <%= f.email_field :email, :class => 'text_input'%>
-    </p>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p><%= t 'user_info.waiting_for_confirmation' %>: <%= resource.unconfirmed_email %></p>
-    <% end %>
-
-    <p>
-      <%= f.label t "user_info.password_leave_blank" %><br />
-      <%= f.password_field :password, :autocomplete => "off", :class => 'text_input' %>
-    </p>
-
-    <p>
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, :class => 'text_input' %>
-    </p>
-
-    <p>
-      <%= f.label t "user_info.password_current" %><br />
-      <%= f.password_field :current_password, :class => 'text_input' %>
-    </p>
-
-    <p>
-      <%= image_fields f, current_user %>
-    </p>
-
-    <p class="submits">
-      <%= f.submit t "user_info.submit_update" %>
-    </p>
-    <!-- <div class="tokens">
-      <p><%= f.label :token_authentication_key %><br />
-        <%= resource.authentication_token.blank? ? "Token Empty" : resource.authentication_token %>
-      </p>
-
-      <p>
-        <%= link_to "Generate Token", token_authentications_path(:user_id => resource.id), :method => :post, :confirm => "Are you sure?"  %>
-        <%= link_to "Delete Token", token_authentication_path(resource), :method => :delete, :confirm => "Are you sure?" if resource.authentication_token? %>
-      </p>
-
-      <% if resource.authentication_token %>
-        <p><%= t "user_info.token_use" %><br />
-        <%= link_to "http://localhost:3000#{root_path(:auth_token => resource.authentication_token)}", root_path(:auth_token => resource.authentication_token)  %></p>
-      <% end %>
-    </div> -->
-    
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
-  <br><br>
-  <h1><%= t "user_info.cancel" %></h1>
 
-  <p><%= t "user_info.unhappy" %></p>
-  <div class="submits"><%= button_to "Cancel", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></div>
+  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <%= f.password_field :current_password %></div>
+
+
+  <div><%= f.submit "Update" %></div>
+    
+<% end %>
 
 </div>

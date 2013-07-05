@@ -1,10 +1,8 @@
 RailsOSRM::Application.routes.draw do
-  
-  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
     
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiSettings.new(version: 1) do         
-      devise_for :users do
+      devise_for :users, :skip => [:confirmations] do
         post "/login" => "sessions#create"
         get "/logout", :to => "sessions#destroy"
       end          
@@ -54,8 +52,8 @@ RailsOSRM::Application.routes.draw do
     #post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
 
   #  resources :users
-    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do 
-       get 'users/edit/:id' => 'devise/registrations#edit/:id', :as => :edit_user_registration
+    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks",  :registrations => "registrations" } do 
+       get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
     end
     resources :users
     
