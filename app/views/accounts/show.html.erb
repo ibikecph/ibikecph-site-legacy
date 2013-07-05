@@ -20,29 +20,20 @@
 <% end %>
 
 
-<hr>
 
+
+
+
+
+
+
+<% if !current_user.facebook_user? %>
+<hr>
 <h1><%=t '.title_login' %></h1>
 
-<% if current_user.authentications.emails.any? %>
-<%= link_to t('.change_email'),new_email_path, :class => "note button righty" %>
+<%= link_to t('.change_password'), edit_user_registration_path(current_user), :class => "note button righty" %>
 <label><%=t '.email' %></label>
-<p>
-	<% for email in current_user.emails %>
-		<%= email.address %>
-		<% unless email.active? %>
-			<span class="note">(<%= t('.unverified') %>)</span>
-		<% end %>
-		<br>
-	<% end %>
-</p>
-<% end %>
-
-
-<% if @has_password %>
-<%= link_to t('.change_password'), edit_password_path, :class => "note button righty" %>
-<label><%=t '.password' %></label>
-<p>(<%=t '.password_hidden' %>)</p>
+<p><%= current_user.email %></p>
 <% end %>
 
 

@@ -2,9 +2,6 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true, :method => :put }) do |f| %>
   <%= devise_error_messages! %>
-
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name%></div>
   
   <div><%= f.label :email %><br />
   <%= f.email_field :email%></div>
@@ -22,31 +19,12 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
-    <div>
-        <%= image_fields f, current_user %>
-    </div>
 
   <div><%= f.submit "Update" %></div>
-  
-  <p><%= f.label :token_authentication_key %><br />
-<%= resource.authentication_token.blank? ? "Token Empty" : resource.authentication_token %></p>
-
-<p><%= link_to "Generate Token", token_authentications_path(:user_id => resource.id), :method => :post, :confirm => "Are you sure?"  %>
-<%= link_to "Delete Token", token_authentication_path(resource), :method => :delete, :confirm => "Are you sure?" if resource.authentication_token? %></p>
-
-<% if resource.authentication_token %>
-  <p>You can use this url to login<br />
-  <%= link_to "http://localhost:3000#{root_path(:auth_token => resource.authentication_token)}", root_path(:auth_token => resource.authentication_token)  %></p>
-<% end %>
-  
-  
+    
 <% end %>
 
-<h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
 
 
 

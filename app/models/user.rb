@@ -152,6 +152,10 @@ class User < ActiveRecord::Base
     tester == true
   end
   
+  def facebook_user?
+    return true if self.provider == "facebook"
+  end
+  
 def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(:email => auth.info.email).first
   unless user    

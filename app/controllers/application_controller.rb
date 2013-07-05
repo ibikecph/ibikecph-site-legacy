@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
   end
 
    def after_sign_in_path_for(resource)
-     session[:user_return_to] || user_path(current_user)
+     session[:user_return_to] || account_path
    end
 
 end
