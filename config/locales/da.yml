@@ -281,10 +281,11 @@ da:
     flash:
       instructions_sent: "Instruktioner om hvordan du nulstiller dit adgangskode er sendt til %{email}."
       email_not_found: "Emailen %{email} ikke fundet."
-      password_changed: Adgangskode Ændret
-      invalid_link: Ugyldigt link til nulstilling af adgangskode.
-      expired_link: Link til nulstilling af adgangskode er udløbet.
-      
+      password_changed: Kodeord Ændret
+      invalid_link: Ugyldigt link til nulstilling af kodeord.
+      expired_link: Link til nulstilling af kodeord er udløbet.
+      fb_user_AD: "Adgang nægtet: Facebook-brugere kan ikke nulstille kodeord!"
+            
   user_mailer:
     activation:
       subject: Aktiver din I Bike Cph konto
