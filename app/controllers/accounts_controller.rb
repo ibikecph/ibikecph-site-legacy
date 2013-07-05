@@ -1,10 +1,10 @@
 class AccountsController < ApplicationController
   
-  skip_before_filter :require_login, :only => [:activating,:unverified_email,:new_activation,
+  before_filter :authenticate_user!, :except => [:activating,:unverified_email,:new_activation,
       :create_activation,:activate,:resend_activation,:verify_email,:existing]
   
-  before_filter :check_can_set_password, :only => [:new_password, :create_password]
-  before_filter :find_email_authentication_by_token, :only => [:verify_email]
+  #before_filter :check_can_set_password, :only => [:new_password, :create_password]
+  #before_filter :find_email_authentication_by_token, :only => [:verify_email]
     
   def show
     #@has_password = current_user.has_password?
