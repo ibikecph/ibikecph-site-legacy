@@ -1,25 +1,22 @@
-<div class="g6">
+<div class="centered_dialog small">
 
+	<%= link_to t('edit'), [:edit,:account], :class => "button righty" %>
+	<h1><%=t '.title' %></h1>
 
-<%= link_to t('edit'), [:edit,:account], :class => "button righty" %>
-<h1><%=t '.title' %></h1>
+	<label><%=t '.name' %></label>
+	<p><%= current_user.name %></p>
 
-<label><%=t '.name' %></label>
-<p><%= current_user.name %></p>
+	<label><%=t '.image' %></label>
+	<p>
+		<%= image_tag current_user.image.g2.url, :class => 'g2 square' %>
+	</p>
 
-<label><%=t '.image' %></label>
-<p>
-	<%= image_tag current_user.image.g2.url, :class => 'g2 square' %>
-</p>
-
-<label><%=t '.about' %></label>
-<% if current_user.about.present? %>
-	<%= simple_format(current_user.about) %>
-<% else %>
-	<p>(<%=t 'empty' %>)</p>
-<% end %>
-
-
+	<label><%=t '.about' %></label>
+	<% if current_user.about.present? %>
+		<%= simple_format(current_user.about) %>
+	<% else %>
+		<p>(<%=t 'empty' %>)</p>
+	<% end %>
 
 
 
@@ -27,26 +24,28 @@
 
 
 
-<% if !current_user.facebook_user? %>
-<hr>
-<h1><%=t '.title_login' %></h1>
-
-<%= link_to t('.change_password'), edit_user_registration_path(current_user), :class => "note button righty" %>
-<label><%=t '.email' %></label>
-<p><%= current_user.email %></p>
-<% end %>
 
 
-<hr>
+	<% if !current_user.facebook_user? %>
+	<hr>
+	<h1><%=t '.title_login' %></h1>
+
+	<%= link_to t('.change_password'), edit_user_registration_path(current_user), :class => "note button righty" %>
+	<label><%=t '.email' %></label>
+	<p><%= current_user.email %></p>
+	<% end %>
 
 
-<h1><%=t '.title_settings' %></h1>
+	<hr>
 
-<%= link_to t('.change_settings'),settings_account_path, :class => "note button righty" %>
-<label><%=t '.notify_by_email' %></label>
-<p>
-	<%= current_user.notify_by_email ? t('yes') : t('no') %>
-</p>
+
+	<h1><%=t '.title_settings' %></h1>
+
+	<%= link_to t('.change_settings'),settings_account_path, :class => "note button righty" %>
+	<label><%=t '.notify_by_email' %></label>
+	<p>
+		<%= current_user.notify_by_email ? t('yes') : t('no') %>
+	</p>
 
 
 </div>

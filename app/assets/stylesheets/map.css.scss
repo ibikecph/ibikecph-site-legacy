@@ -840,9 +840,23 @@ body {
 	color: #ddd;
 }
 
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px){
+	#ui {
+		.reset, .permalink, .help {
+			width: 24px !important;
+			height: 24px !important;
+		}
+	}
+}
 
 @media only screen and (max-width: 767px) {
 	#ui {
+		.reset, .permalink, .help {
+			width: 24px !important;
+			height: 24px !important;
+		}
 		width: 250px;
 		top: 50px;
 		padding-bottom: 40px;

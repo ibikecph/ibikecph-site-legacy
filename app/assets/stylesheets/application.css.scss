@@ -5,6 +5,15 @@ body {
     background: #f4f4f4 image-url("_new/content.png");
     position: relative;
 }
+hr {
+    border: none;
+    border-top: 1px solid $lightish;
+}
+.g2.square {
+    display: block;
+    margin: 5px 0;
+    border-radius: 5px;
+}
 div#content {
     padding: 40px 0 20px 0;
 }
@@ -1274,8 +1283,34 @@ li a {
         margin-left: 10px;
     }
 }
+div.issues {
+    max-width: 960px;
+    margin: 20px auto;
+    font-size: 14px;
+    .inner {
+        padding: 0 20px;
+        .issue {
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            h1 {
+                color: $dark !important;
+                font-size: 18px;
+            }
+        }
+    }
+}
 
 @media only screen and (max-width: 767px) {
+    div.issues {
+        margin: 10px auto;
+        .inner {
+            padding: 0 10px;
+            .issue {
+                margin-bottom: 10px;
+            }
+        }
+    }
     #content_responsive {
         padding: 10px;
     }

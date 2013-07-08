@@ -1,9 +1,5 @@
-<div class="gr">
-    <%=link_to "new Issue", new_reported_issue_path%>
-    <div class="g8">
+<div class="issues">
+    <div class="inner">
         <%= render :partial => 'reported_issue', :collection => @reported_issues %>
-    </div>
-    <div class="g1">&nbsp;</div>
-    <div class="g3 ge">
     </div>
 </div>
