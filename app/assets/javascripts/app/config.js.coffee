@@ -29,9 +29,14 @@ IBikeCPH.config =
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
 	,
 		name: 'IBikeCPH'
-		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
+		url: 'http://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 IBikeCPH'
+	,
+		name: 'I Bike CPH (Big)'
+		url: 'http://tiles.ibikecph.dk/tiles/{z}/{x}/{y}.png'
+		options:
+			attribution: '(work in progress) Map data &copy OpenStreetMap contributors, Design by Stamen Design'
 	,
 		name: 'OpenCycleMap'
 		url: 'http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png'
