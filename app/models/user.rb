@@ -16,19 +16,21 @@ class User < ActiveRecord::Base
   
   validates_presence_of :name
   #validates_uniqueness_of :name, :case_sensitive => false
+  
+  validates_presence_of :email
+  validates_presence_of :email_confirmation, :on => :create
+  validates_uniqueness_of :email, :case_sensitive => false
+  validates_format_of :email, :with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, :message => I18n.t('not_a_valid_email'), :allow_blank => true
+  attr_accessible :email_confirmation    
+  validates_confirmation_of :email
+  
   validates_presence_of :password, :on => :create, :unless => :has_oath_authentications
   validates_length_of :password, :minimum => 3, :if => :password
   validates :password_confirmation, :presence => true, :if => :password, :unless => :has_oath_authentications
   validates_confirmation_of :password, :if => :password, :unless => :has_oath_authentications
   
   validates_acceptance_of :terms
-  
-  validates_uniqueness_of :email, :case_sensitive => false
-  validates_format_of :email, :with => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, :message => I18n.t('not_a_valid_email'), :allow_blank => true
-  attr_accessible :email_confirmation
-  validates_presence_of :email_confirmation, :on => :create
-  validates_confirmation_of :email
-  
+    
   #accepts_nested_attributes_for :authentications
   
   mount_uploader :image, SquareImageUploader
