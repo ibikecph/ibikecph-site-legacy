@@ -262,7 +262,7 @@ function remove_flash() {
             setTimeout(function(){
                 $('#flash').remove();
             }, 500);
-        }, 5000);
+        }, 9000);
     };
 }
 
