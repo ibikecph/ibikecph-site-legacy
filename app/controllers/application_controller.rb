@@ -6,9 +6,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :auth_link
   
   unless Rails.application.config.consider_all_requests_local
-    rescue_from CanCan::AccessDenied, :with => :error_forbidden
+    rescue_from CanCan::AccessDenied, :with => :error_forbidden    
+    rescue_from ActionView::MissingTemplate, :with => :error_internal_error
   end
-   
+  
   def error_forbidden
     render 'errors/forbidden', :status => :forbidden rescue last_chance
   end
