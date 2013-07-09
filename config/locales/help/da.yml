@@ -4,19 +4,25 @@ da:
       hide_help: Skjul
       title: Hjælp
       body: |
-        Siden beregner (som den er lige nu) hurtigste cykelrute. Servicen fungere for hele Danmark.
-      
-        Træk i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og - knapperne. Knappen med den stiplede firkant centerer kortet omkring den aktuelle rute. Knappen med pilen centerer kortet omkring din fysiske position.
-      
-        Klik på på kortet for at sætte fra og til punkter, eller udfyld adressefelterne (ex: Krystalgade 15, 1172 København). Så snart en adresse er fundet, placeres den tilsvarende markør på kortet. Vær opmærksom på at der søges på adresser i hele Danmark. Tilføj evt. bynavn eller postnummer for at sikre at det er den rigtige vej du finder. 
-      
-        Så snart både fra og til markørerne er sat, beregenes ruten autoamtisk. Estimeret længde og tid vises under adressefelterne. Klik evt. på 'Rutebeskrivelse' for at se en trin-for-trin beskrivelse af ruten.
-      
-        Du kan trække et sted på ruten for at sætte via-punkter, dvs. punkter som ruten skal følge. Via-punkter kan fjernes igen ved at klikke på dem.
-      
-        Når en rute er funde, kan du angive tidspunktet for enten afgangs eller ankomst, og det modsatte tidspunkt vil blive beregnet for dig på baggrund af rejsetiden.
-      
-        Når du trækker i markørne, bliver ruten opdateret løbende - prøv selv :-)
-      
-        Du kan genere et link til den aktuelle rute ved at klikke på 'Link'. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx indsættes i kommentarer eller emails.
-      
+        Med I Bike CPH kan du nemt finde de hurtigste cykelruter i hele Danmark. Hvis du har en ladcykel kan du ved at trykke på ladcykel-ikonet få ruten tilpasset til din cykel, fx. ruter uden trapper og snævre passagerer. 
+
+        <b>Navigering:</b>
+        Træk i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og – knapperne. Knappen med den stiplede firkant centrerer kortet omkring den aktuelle rute. Knappen med pilen centrerer kortet omkring din fysiske position.
+        
+        <b>Søgning:</b>
+        Klik på kortet for at sætte et A og et B punkt, eller udfyld adressefelterne (fx: Krystalgade 15, 1172 København) til venstre. Så snart en adresse er fundet, placeres den tilsvarende markør på kortet. Vær opmærksom på at der søges på adresser i hele Danmark. Tilføj evt. bynavn eller postnummer for at sikre at det er den rigtige vej du finder.
+
+        Så snart både A og B punkterne er sat beregnes ruten automatisk. Estimeret længde og tid vises under adressefelterne. Du kan klikke på ‘Rutebeskrivelse’ for at se en trin-for-trin beskrivelse af ruten.
+        
+        Når en rute er fundet, kan du angive tidspunktet for enten afgang eller ankomst.
+        
+        Du opdaterer nemt din rute ved trække i A og B punkterne. Det er også muligt at anbringe via-punkter på din rute, dvs. punkter som ruten skal følge. Dette gør du ved at trække i selve ruten.
+        
+        <b>Favoritter:</b>
+        Opretter du en konto og/eller logger ind, kan du gemme dine søgninger som favoritter. Du kan finde dine favoritter på tværs af ibikecph.dk og appen.
+        
+        <b>Rapporter felj:</b>
+        Hvis der er et problem eller en fejl på ruten kan du logge ind og ‘Rapporter Fejl’. På den måde hjælper du os til at forbedre de problmer og fejl der nu skulle være.
+        
+        <b>Link:</b>
+        Du kan genere et link til din rute ved at klikke på link-ikonet. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx. indsættes i kommentarer eller i en email.

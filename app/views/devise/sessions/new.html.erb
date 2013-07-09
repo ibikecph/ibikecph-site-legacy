@@ -17,11 +17,12 @@
 		    <%= f.label t('.remember_me'), :for => 'user_remember_me' %>
 		</p>
 		<p class="submits">
-		    <%= f.submit t('.submit'), :class => 'submit_button' %>
+		    <%= f.submit t('login'), :class => 'submit_button' %>
+		    <%= link_to t('sessions.new.signuporlogin_with_fb'), user_omniauth_authorize_path(:facebook), :class => 'facebook' %>
 		</p>
 		<p class="register">
-			<%=t '.no_account_q' %>  <%= link_to t('.signup'), new_registration_path(resource_name) %>
-			<%= link_to t('sessions.new.signuporlogin_with_fb'), user_omniauth_authorize_path(:facebook) %>
+			<%#=t '.no_account_q' %>
+			<%= link_to t('sessions.new.signup_account'), new_registration_path(resource_name) %>
 			<%= link_to t('devise.sessions.new.email_rc_q'), new_confirmation_path(resource_name) %>
 		</p>
 	<% end %>

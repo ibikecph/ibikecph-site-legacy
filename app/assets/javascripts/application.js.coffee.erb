@@ -11,6 +11,7 @@
 # GO AFTER THE REQUIRES BELOW.
 #= require jquery
 #= require jquery_ujs
+#= require underscore_min
 #= require i18n
 #= require i18n/translations
 #= require rails-timeago-all
@@ -28,7 +29,33 @@ jQuery ->
 		terms_textarea: $('p#terms textarea')
 		menu: $('#header .menu')
 		masonry: $('.masonry')
+		button_validation: $('.button_validation input')
+		comment_form: $('#new_comment_form')
+		facebook_button: $('.submits .facebook')
 
+	if elements.facebook_button.length > 0
+		elements.facebook_button.parent().find('input').css
+			width: elements.facebook_button.outerWidth()
+
+	if elements.comment_form.length > 0
+		elements.comment_form.submit ->
+			elements.button_validation.parent().parent().find('p').remove()
+			elements.button_validation.remove()
+
+	if elements.button_validation.length > 0
+		$.each elements.button_validation, ->
+			el = $(@)
+			textarea = el.parent().parent().find 'textarea'
+			setInterval ( ->
+				if textarea.val() is ""
+					el.css
+						opacity: 0.8
+					el.prop('disabled', true);
+				else
+					el.css
+						opacity: 1
+					el.prop('disabled', false);
+			), 500
 
 	if elements.masonry.length > 0
 		elements.masonry.simplemasonry()
@@ -53,6 +80,8 @@ jQuery ->
 			items: $('.grid .item')
 			thumb: $('.grid .item .item_thumb')
 			win: $(window)
+
+		open_box: null
 
 		config:
 			box_styles: [
@@ -116,11 +145,15 @@ jQuery ->
 
 			xmsall:
 				columns: 1
-
 		init: ->
-			ibg = this
+			ibg = @
+			
 			ibg.elements.win.bind 'resize', ->
 				ibg.resize ibg
+			
+			ibg.elements.win.resize _.debounce(->
+				ibg.open_box.trigger 'click'
+			, 250)
 
 			setTimeout (->
 				ibg.resize ibg
@@ -128,6 +161,7 @@ jQuery ->
 
 			ibg.elements.items.click ->
 				el = $(@)
+				ibg.open_box = el
 				url = el.find('a').attr 'href'
 				target = el.nextAll('.expand').eq 0
 				active = $('.grid').find '.active'

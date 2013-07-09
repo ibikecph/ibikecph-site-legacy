@@ -8,7 +8,7 @@
 				<%= chars_remaining %>
 				<%= f.text_area :body, :rows => 5, "data-maxlength" => Comment::MAXLENGTH[:body] %>
 			</p>
-			<div class="submits">
+			<div class="submits button_validation">
 				<%= submit_tag t('.submit') %>
 			</div>
 		<% end -%>

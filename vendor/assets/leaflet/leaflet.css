@@ -148,8 +148,8 @@ a.leaflet-active {
 	background-color: #fff;
 	}
 .leaflet-touch .leaflet-control-zoom a {
-	width: 27px;
-	height: 27px;
+	width: 40px;
+	height: 40px;
 }
 .leaflet-control-zoom-in {
 	background-image: url(_new/zoom-in.png);

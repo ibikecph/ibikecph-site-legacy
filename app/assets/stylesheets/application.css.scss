@@ -587,6 +587,20 @@ li a {
     .submits {
         text-align: center;
         margin: 15px 0;
+        .facebook {
+            color: #fff;
+            background: #4c66a4;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #344670;
+            padding: 14px 32px 11px;
+            text-shadow: 0 -1px 1px #3f568a;
+            border-radius: 2px;
+            box-shadow: inset 1px 1px 0 #6385d6;
+            cursor: pointer;
+            text-decoration: none;
+        }
         button,
         input {
             color: #fff;
@@ -594,10 +608,8 @@ li a {
             font-size: 12px;
             font-weight: bold;
             text-align: center;
-            text-transform: uppercase;
             border: 1px solid #008abd;
-            padding: 9px 0 7px;
-            width: 100%;
+            padding: 14px 32px 11px;
             text-shadow: 0 -1px 1px #0084b5;
             border-radius: 2px;
             box-shadow: inset 1px 1px 0 #60c2e7;
@@ -605,10 +617,12 @@ li a {
         }
     }
     .register {
+        border-top: 1px solid #ddd;
         font-weight: bold;
         margin: 40px 0 0;
-        padding: 0;
+        padding: 20px 0 0;
         text-align: center;
+        font-size: 12px;
         a {
             margin: 0 4px;
         }
@@ -649,8 +663,22 @@ li a {
 }
 
 .page_header {
-    overflow: hidden;
     margin: 0px 15px 10px;
+    .welcome {
+        color: #333;
+        margin: -45px 300px 0 -5px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        h3 {
+            p {
+                font-size: 16px;
+            }
+        }
+        p {
+            font-size: 12px;
+        }
+    }
     .header_title {
         float: left;
         padding-left: 10%;
@@ -868,9 +896,14 @@ li a {
         border-radius: 5px;
         padding: 10px;
     }
+    .righty {
+        a {
+            background: red;
+            color: white !important;
+        }
+    }
     .submits {
         padding: 10px;
-        background: rgba(0,0,0,0.05);
         text-align: center;
         border-radius: 5px;
         input {
@@ -879,10 +912,8 @@ li a {
             font-size: 12px;
             font-weight: bold;
             text-align: center;
-            width: 100%;
-            text-transform: uppercase;
             border: 1px solid #008abd;
-            padding: 9px 0 7px;
+            padding: 14px 32px 11px;
             text-shadow: 0 -1px 1px #0084b5;
             border-radius: 2px;
             box-shadow: inset 1px 1px 0 #60c2e7;
@@ -891,10 +922,11 @@ li a {
     }
 }
 .issue {
-    padding-right: 25%;
+    padding-right: 0;
     position: relative;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
+    max-width: 600px;
     .close {
         position: absolute;
         right: 20px;
@@ -1317,6 +1349,10 @@ div.issues {
     .page_header {
         overflow: hidden;
         margin: 0 0 10px;
+        .welcome {
+            margin: 0;
+            padding: 20px;
+        }
         .header_title {
             float: none;
             padding-left: 0;

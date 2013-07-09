@@ -4,21 +4,21 @@
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true, :method => :put }) do |f| %>
   <%= devise_error_messages! %>
   
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, { :class => 'text_input' } %></div>
+  <p><%= f.label :email %><br />
+  <%= f.email_field :email, { :class => 'text_input' } %></p>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
   <% end %>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off", :class => 'text_input' %></div>
+  <p><%= f.label t('user_info.password_leave_blank') %><br />
+  <%= f.password_field :password, :autocomplete => "off", :class => 'text_input' %></p>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation, :class => 'text_input' %></div>
+  <p><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation, :class => 'text_input' %></p>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password, :class => 'text_input' %></div>
+  <p><%= f.label t('user_info.password_current') %><br />
+  <%= f.password_field :current_password, :class => 'text_input' %></p>
 
 
   <p class="submits">

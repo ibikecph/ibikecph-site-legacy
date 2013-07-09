@@ -41,7 +41,6 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 		@data.sub_source = 'favorite'
 
 		$('#favorites .favorite_name').focus()
-		
 		unless from.name == ''
 			$('#favorites .favorite_name').val(from.name)
 
@@ -52,7 +51,6 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			left: 0
 
 		this
-	
 
 	select_address: (event) ->
 		el = $(event.currentTarget)

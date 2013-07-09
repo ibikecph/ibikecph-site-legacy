@@ -10,6 +10,12 @@ da:
       comment: Kommentar
       vote: Stemme
     attributes:
+      favourite:
+        name: Navn
+        address: Adresse
+      reported_issue:
+        comment: Kommentar
+        error_type: Fejltype
       email_authentication:
         uid: 'Email'
         uid_confirmation: 'Bekræft email'
@@ -52,7 +58,7 @@ da:
     routes: Kort
     blog: Blog
     feedback: Feedback
-    signup: Opret konto
+    signup: Opret
     login: Log ind
     logout: Log ud
     mobile_app: Hent mobil app
@@ -66,7 +72,7 @@ da:
 
   news:
     title: Seneste nyheder
-    categories: Kategorier
+    categories: Tags
     search: Søg nyhed...
     label_facebook: Følg os på Facebook
     label_rss: abonnér via rss
@@ -131,6 +137,7 @@ da:
         En I Bike CPH konto er gratis og uden forpligtelser, og giver mulighed for at komme med input og kommentarer.
         Du vælger selv om du vil have tilsendt email med nyheder etc.
       i_accept: Jeg accepterer
+      email_confirmation: 'Bekræft email'
       terms: Brugerbetingelserne
       submit: Gem
       already_have_account_q: Har du allerede en konto?
@@ -143,6 +150,7 @@ da:
       submit: Log ind
       forgot_it_q: Glemt det?
       signup: Opret
+      signup_account: Opret konto
       signuporlogin_with_fb: "Facebook Login"
       no_account_q: Ingen konto?
       remember_me: Husk mig
@@ -524,3 +532,8 @@ da:
   download_app:
     title: Få styr på ruten på din mobil.
     text: Søg ruter og brug dine favoritter på farten.
+
+  resend_confirmation:
+    title: Send bekræftelse igen
+    email: Email adresse
+    submit: Send

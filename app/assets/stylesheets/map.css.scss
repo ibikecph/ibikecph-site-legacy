@@ -484,7 +484,7 @@ body {
 			text-indent: 10px;
 			color: #333;
 			font-weight: bold;
-			margin-bottom: 20px;
+			margin-bottom: 3px;
 		}
 		.errors {
 			background: #e22021;
@@ -559,6 +559,7 @@ body {
 			font-size: 10px;
 			font-weight: bold;
 			text-transform: uppercase;
+			margin-top: 14px;
 			li {
 				width: 21%;
 				margin: 0 2%;
@@ -840,17 +841,6 @@ body {
 	color: #ddd;
 }
 
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px){
-	#ui {
-		.reset, .permalink, .help {
-			width: 24px !important;
-			height: 24px !important;
-		}
-	}
-}
-
 @media only screen and (max-width: 767px) {
 	#ui {
 		.reset, .permalink, .help {
@@ -992,6 +982,20 @@ and (max-device-width : 1024px){
 			textarea {
 				width: 192px !important;
 			}
+		}
+	}
+}
+/* iPad */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px){
+	#ui {
+		.reset, .permalink, .help {
+			width: 24px !important;
+			height: 24px !important;
+		}
+		div#cargobike_trigger {
+			margin-top: 18px !important;
 		}
 	}
 }

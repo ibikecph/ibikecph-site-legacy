@@ -1,16 +1,14 @@
 <div class="centered_dialog small">
-	<h1>Resend confirmation instructions</h1>
+	<h1><%= t('resend_confirmation.title') %></h1>
 
 	<%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
 	  <%= devise_error_messages! %>
 
-	  <div><%= f.label :email %><br />
-	  <%= f.email_field :email, :autofocus => true %></div>
+	  <div><%= f.label t('resend_confirmation.email') %><br />
+	  <%= f.email_field :email, :autofocus => true, :class => 'text_input' %></div>
 
 	  <p class="submits">
-		<%= f.submit "Resend confirmation instructions" %>
+		<%= f.submit t('resend_confirmation.submit') %>
 	  </p>
 	<% end %>
-
-	<%= render "devise/shared/links" %>
 </div>

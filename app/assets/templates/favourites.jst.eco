@@ -8,8 +8,8 @@
 			<li class="selected"><span>A</span> <b class="start"></b></li>
 			<li><span>B</span> <b class="dest"></b></li>
 		</ul>
-		<ul class="errors"></ul>
 		<input type="text" class="favorite_name" placeholder="<%= I18n.t 'favourites.placeholder' %>">
+		<ul class="errors"></ul>
 		<ul class="types">
 			<li data-category="favorite" class="favorite selected"><span><%= I18n.t 'favourites.types.favourite' %></span></li>
 			<li data-category="home" class="home"><span><%= I18n.t 'favourites.types.home' %></span></li>

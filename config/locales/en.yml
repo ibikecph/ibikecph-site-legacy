@@ -10,6 +10,12 @@ en:
       comment: Comment
       vote: Vote
     attributes:
+      favourite:
+        name: Name
+        address: Address
+      reported_issue:
+        comment: Comment
+        error_type: Error type
       email_authentication:
         uid: 'Email'                            
         uid_confirmation: 'Email confirmation'
@@ -61,7 +67,7 @@ en:
 
   news:
     title: Latest news
-    categories: Categories
+    categories: Tags
     search: Search news...
     label_facebook: Follow us on Facebook
     label_rss: Subscribe to RSS
@@ -124,6 +130,7 @@ en:
         An I Bike CPH account is free and without obligations, og enables you to uplaod ideas and comments.
         You choose wether you want emails with news, etc.
       i_accept: I accept the
+      email_confirmation: 'Email confirmation'
       terms: Terms of Service
       submit: Create Account
       already_have_account_q: Already have an account?
@@ -137,6 +144,7 @@ en:
       forgot_it_q: Forgot it?
       no_account_q: No account?
       signup: Sign Up
+      signup_account: Create account
       signuporlogin_with_fb: "Facebook Login"
       remember_me: Remember Me
     flash:
@@ -518,3 +526,8 @@ en:
   download_app:
     title: Keep track of the route on your mobile.
     text: Search routes and use your favorites on the go.
+
+  resend_confirmation:
+    title: Resend confirmation instructions
+    email: Email address
+    submit: Send
