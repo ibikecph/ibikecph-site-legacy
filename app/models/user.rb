@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   #attr_accessor :password, :created_from_oath
   
   validates_presence_of :name
+  validates_length_of :name, :minimum => 2, :maximum => 50
   #validates_uniqueness_of :name, :case_sensitive => false
   
   validates_presence_of :email
@@ -30,7 +31,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => :password, :unless => :has_oath_authentications
   
   validates_acceptance_of :terms
-    
+  validates_length_of :about, :maximum => 2000  
   #accepts_nested_attributes_for :authentications
   
   mount_uploader :image, SquareImageUploader
