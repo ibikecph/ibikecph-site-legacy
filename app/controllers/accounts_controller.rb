@@ -36,10 +36,12 @@ class AccountsController < ApplicationController
   end
   
   def edit
+    @user=current_user
   end
   
   def update
-    if current_user.update_attributes(params[:user])
+    @user=User.find(current_user.id)
+    if @user.update_attributes(params[:user])
       flash[:notice] = t('accounts.flash.updated')
       redirect_to account_path
     else
