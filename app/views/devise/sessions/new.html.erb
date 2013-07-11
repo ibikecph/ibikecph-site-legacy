@@ -1,6 +1,5 @@
 <div class="centered_dialog small">
 	<h1><%=t '.title' %></h1>
-
 	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 		<p>
 		    <%= f.label :email %><br>
@@ -18,7 +17,7 @@
 		</p>
 		<p class="submits">
 		    <%= f.submit t('login'), :class => 'submit_button' %>
-		    <%= link_to t('sessions.new.signuporlogin_with_fb'), user_omniauth_authorize_path(:facebook), :class => 'facebook' %>
+			<%= link_to t('sessions.new.signuporlogin_with_fb'), user_omniauth_authorize_path(:facebook), :class => 'facebook' %>
 		</p>
 		<p class="register">
 			<%#=t '.no_account_q' %>

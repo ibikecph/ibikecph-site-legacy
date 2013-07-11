@@ -39,7 +39,7 @@ jQuery ->
 
 	if elements.comment_form.length > 0
 		elements.comment_form.submit ->
-			elements.button_validation.parent().parent().find('p').remove()
+			elements.button_validation.parent().parent().find('p').hide()
 			elements.button_validation.remove()
 
 	if elements.button_validation.length > 0
