@@ -1,6 +1,6 @@
 class ApiSettings
   def initialize(options)
-    @verison = options[:version]
+    @version = options[:version]
     @default = options[:default]
   end
 
