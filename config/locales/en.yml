@@ -32,6 +32,9 @@ en:
         about: About
         image: Image
         tags: Tags
+        terms: Terms of Service
+        password: Password
+        password_confirmation: Confirm Password
         current_password: Current Password
         new_password_confirmation: Confirm New Password
   
