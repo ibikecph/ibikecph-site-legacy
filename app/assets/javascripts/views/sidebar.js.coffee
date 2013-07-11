@@ -146,12 +146,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 		setTimeout (->
 			val = el.val().toLowerCase()
-			console.log val
 
 			if val.length >= 4
 				items = []
 				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token
 				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
+				kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'*'
 
 				if $current_user
 						favourites = new IBikeCPH.Models.Favourites
@@ -176,6 +176,11 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 								lat: @wgs84koordinat['bredde']
 								lng: @wgs84koordinat['længde']
 								type: 'address'
+
+				$.getJSON kms_url, (data) ->
+					unless data is null
+						$.each data.features, ->
+							console.log @attributes
 
 				$.getJSON foursquare_url, (data) ->
 					$.each data.response.minivenues, ->

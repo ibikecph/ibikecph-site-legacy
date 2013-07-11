@@ -4,18 +4,22 @@ en:
       hide_help: Hide
       title: Help
       body: |
-        The site (as it is now) calculates fastest bicycle route. The service covers all of Denmark.
-      
+        <div class="left">
+        With I Bike CPH you can easily find the fastest bicycle routes throughout Denmark. If you have a cargo bike press the cargo 'bike icon' and get your route customised, e.g. routes without stairs and narrow passages.
+        
+        <b>Navigation:</b>
         Drag the map to pan. Double click to zoom in, or use the + and - buttons. The button with the dashed rectangle centers the map around the current route. The button with the arrow centers the map around your current physical location.
-      
-        Click on the map to set from and to points, or fill our the address fields (ex: Krystalgade 15, 1172 København). As soon as the adresss is found, the corresponding marker is placed/moved on the map. Note that addresses in all of Denmark are searched. You might want to add a city or zip code to make sure the correct street is found.
-      
-        As soon as both from and to addresses are found, the route is calculated automatically. Estimated distance and time is shown below the address fields. Click 'Route Description' to view a step-by-step riding instruction.
-      
-        Drag the route to set via points (points that the route must pass through). Via points can be removed by clicking on them.
-      
-        When a route has been found, you can specify departure or arrival time, and the opposite time will be calculated, based on the time or travel.
-      
-        When you drag markers around, the route will be update live - try it :-)
-      
-        You can generate a link to the current route by clicking 'Link'. The adress bar of your browser will be updated, and from there the link can be copied, and can (for example) be pasted into comment fields or emails.
+
+        <b>Search:</b>
+        Click on the map to set an A and a B position or fill in the address fields on the left (e.g. Krystalgade 15, 1172 København). As soon as the address is found, the corresponding marker is placed on the map. Note that addresses in all of Denmark are searched. You might want to add a city or zip code to make sure the correct street is found.
+
+        As soon as both the A and the B address is found the route is calculated automatically. Estimated distance and time of arrival is shown below the address fields. Click 'Route Description' to get step-by-step instructions for the route. When a route has been found you can specify departure or arrival time.
+
+        Pull the A and B points to update your route. You can also place via points on your route, i.e. points that the route must pass through. Drag the route to set via points and remove them again by clicking on them.</div><div class="right"><b>Add favourite:</b>
+        By creating an account and/or logging in you can save your searches as favourites by clicking ‘Add as Favourite’. You can only add a favourite when both A and B addresses are filled in. You can find your favourites across I Bike CPH website and the app.
+
+        <b>Report error:</b>
+        If there is an error or bug with the route you can log in and 'Report Error'. You can only report an error when both A and B addresses are filled in. This way you help us improve and fix the errors and bugs there might accrue.
+
+        <b>Link:</b>
+        You can generate a link to your route by clicking on the 'link icon'. The URL in your browser will then be updated and you can copie the link and e.g. insert it in an email.</div>

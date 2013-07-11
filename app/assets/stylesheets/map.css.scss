@@ -762,7 +762,7 @@ body {
 
 #help {
 	display: none;
-  opacity:0.9;
+	opacity:0.9;
 	overflow: hidden;
 	position: absolute;
 	z-index: 1;
@@ -771,11 +771,23 @@ body {
 	margin-left: 10px;
 	margin-right: 10px;
 	bottom: 45px;
-  padding: $half_gutter - 2*$border_width;
-  border-radius: 4px;
+	padding: $half_gutter - 2*$border_width;
+	border-radius: 4px;
 	background: $dark;
 	color:white;
 	line-height: 1.3em;
+	max-height: 77%;
+	overflow: auto;
+	.left {
+		width: 47%;
+		float: left;
+		padding-right: 3%;
+	}
+	.right {
+		float: left;
+		width: 47%;
+		padding-left: 3%;
+	}
 	h2 {
 		color: white;
 	}
@@ -783,12 +795,12 @@ body {
 	a.help {
 		font-size: 0.8em;
 		float: right;
-		color: $color;
+		color: #ccc;
 		cursor: pointer;
 		margin-left: 10px;
 		text-decoration: none;
 		&:hover {
-			color: black;
+			color: #fff;
 		}
 	}
 }

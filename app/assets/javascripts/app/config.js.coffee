@@ -29,7 +29,7 @@ IBikeCPH.config =
 		#url: 'http://{s}.tiles.mapbox.com/v3/stamen.cphbikes/{z}/{x}/{y}.png'
 		url: 'http://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png'
 		options:
-			attribution: 'Map data &copy 2012 OpenStreetMap contributors, Imagery &copy 2012 Mapnik'
+			attribution: 'Map data © OpenStreetMap contributors (ODbL), Imagery © City of Copenhagen.'
 	,
 		name: 'IBikeCPH'
 		url: 'http://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png'
@@ -89,3 +89,5 @@ IBikeCPH.config =
 			token: '&oauth_token=BM2LGKP3TZURURN3R0NFYGQPQH3PU3L2WDNRF1MUJPSKYV1N&v=201303'
 		oiorest:
 			url: 'http://geo.oiorest.dk/adresser.json?q='
+		kms:
+			url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=vej&georef=EPSG:4326&outgeoref=EPSG:4326&login=nikolamarkovic&password=spoiledmilk&komkode=0101&vejnavn='

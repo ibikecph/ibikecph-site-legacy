@@ -14,7 +14,7 @@
 				<p class="meta">
 					<b><%= @issue.user.name %></b>
 					<span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
-						<%= time_ago_in_words @issue.created_at %> _password
+						<%= time_ago_in_words @issue.created_at %>
 					</span>
 				</p>
 				<%= auto_html_blog @issue.body, {} %>

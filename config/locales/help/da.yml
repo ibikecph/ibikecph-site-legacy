@@ -4,7 +4,7 @@ da:
       hide_help: Skjul
       title: Hjælp
       body: |
-        Med I Bike CPH kan du nemt finde de hurtigste cykelruter i hele Danmark. Hvis du har en ladcykel kan du ved at trykke på ladcykel-ikonet få ruten tilpasset til din cykel, fx. ruter uden trapper og snævre passagerer. 
+        <div class="left">Med I Bike CPH kan du nemt finde de hurtigste cykelruter i hele Danmark. Hvis du har en ladcykel kan du ved at trykke på ladcykel-ikonet få ruten tilpasset til din cykel, fx. ruter uden trapper og snævre passagerer. 
 
         <b>Navigering:</b>
         Træk i kortet for at panorere. Dobbeltklik for at zoome ind, eller brug + og – knapperne. Knappen med den stiplede firkant centrerer kortet omkring den aktuelle rute. Knappen med pilen centrerer kortet omkring din fysiske position.
@@ -17,12 +17,11 @@ da:
         Når en rute er fundet, kan du angive tidspunktet for enten afgang eller ankomst.
         
         Du opdaterer nemt din rute ved trække i A og B punkterne. Det er også muligt at anbringe via-punkter på din rute, dvs. punkter som ruten skal følge. Dette gør du ved at trække i selve ruten.
-        
-        <b>Favoritter:</b>
+        </div><div class="right"><b>Favoritter:</b>
         Opretter du en konto og/eller logger ind, kan du gemme dine søgninger som favoritter. Du kan finde dine favoritter på tværs af ibikecph.dk og appen.
         
         <b>Rapporter felj:</b>
         Hvis der er et problem eller en fejl på ruten kan du logge ind og ‘Rapporter Fejl’. På den måde hjælper du os til at forbedre de problmer og fejl der nu skulle være.
         
         <b>Link:</b>
-        Du kan genere et link til din rute ved at klikke på link-ikonet. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx. indsættes i kommentarer eller i en email.
+        Du kan genere et link til din rute ved at klikke på link-ikonet. Adressebaren i din browser vil blive opdateret, og linket kan herfra kopieres og fx. indsættes i kommentarer eller i en email.</div><div class="clear"></div>
