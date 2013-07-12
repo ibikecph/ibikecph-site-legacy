@@ -15,6 +15,9 @@
 			<%= chars_remaining %>
 			<%= f.text_area :about, { :rows => 6, "data-maxlength" => User::MAXLENGTH[:about], :class => 'text_input' } %>
 		</p>
-		<p class="submits"><%= f.submit t('.submit') %></p>
+		<p class="submits">
+			<%= f.submit t('.submit') %>
+			<%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
+		</p>
 	<% end %>
 </div>

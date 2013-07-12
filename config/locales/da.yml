@@ -165,7 +165,7 @@ da:
       
   accounts:
     show:
-      title: Profil
+      title: Konto indstillinger
       title_login: Log ind
       title_settings: Indstillinger
       name: Navn
@@ -173,8 +173,8 @@ da:
       about: Om mig
       email: Email
       password: Adgangskode
-      change_email: Ændr Email
-      change_password: Ændr adgangskode
+      change_email: Ændre Email
+      change_password: Ændre adgangskode og email
       change_settings: Rediger indstillinger
       notify_by_email: Beskeder via email
       unverified: Uverficiret
@@ -188,7 +188,7 @@ da:
       body: "For at aktivere din konto, bedes du venligst følge instruktionerne i den email vi har sendt til dig."
       link: Gensend aktiveringsemail
     edit_password:
-      title: Ændr adgangskode
+      title: Ændre adgangskode og email
       forgotten_q: Glemt det?
       new_password: Nyt adgangskode
       submit: Gem
@@ -208,6 +208,8 @@ da:
       updated: Konto opdateret.
       settings_updated: Indstillinger opdateret.
       activation_sent: "Aktiveringsemail gensendt til %{email}."
+    misc:
+      cancel: Annuller
       
   blog:
     index:

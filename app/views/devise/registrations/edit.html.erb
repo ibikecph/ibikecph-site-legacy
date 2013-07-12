@@ -11,7 +11,7 @@
         </p>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+            <p><%= t('user_info.waiting_for_confirmation') %>: <%= resource.unconfirmed_email %></p>
         <% end %>
 
         <p>
@@ -32,6 +32,7 @@
 
         <p class="submits">
             <%= f.submit t 'accounts.edit_password.title' %>
+            <%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
         </p>
 
     <% end %>

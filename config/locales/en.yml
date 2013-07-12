@@ -161,7 +161,7 @@ en:
       
   accounts:
     show:
-      title: Profile
+      title: Account settings
       title_login: Login
       title_settings: Settings
       name: Name
@@ -204,6 +204,8 @@ en:
       updated: Account updated.
       settings_updated: Settings updated.
       activation_sent: "Activation email resent to %{email}."
+    misc:
+      cancel: Cancel
       
   blog:
     index:

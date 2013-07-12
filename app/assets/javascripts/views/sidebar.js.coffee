@@ -154,18 +154,18 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'*'
 
 				if $current_user
-						favourites = new IBikeCPH.Models.Favourites
-						favourites.fetch
-							success: ->
-								_.each favourites.attributes.data, (t, num) ->
-									if t.name.toLowerCase().match(val.toLowerCase()) or t.address.toLowerCase().match(val.toLowerCase())
-										items.push
-											name: t.name
-											address: t.address
-											lat: t.lattitude
-											lng: t.longitude
-											type: 'favourite'
-											fav_class: t.source
+					favourites = new IBikeCPH.Models.Favourites
+					favourites.fetch
+						success: ->
+							_.each favourites.attributes.data, (t, num) ->
+								if t.name.toLowerCase().match(val.toLowerCase()) or t.address.toLowerCase().match(val.toLowerCase())
+									items.push
+										name: t.name
+										address: t.address
+										lat: t.lattitude
+										lng: t.longitude
+										type: 'favourite'
+										fav_class: t.source
 
 				$.getJSON oiorest_url, (data) ->
 					$.each data, ->
@@ -180,17 +180,18 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				$.getJSON kms_url, (data) ->
 					unless data is null
 						$.each data.features, ->
-							console.log @attributes
+							# console.log @attributes
 
 				$.getJSON foursquare_url, (data) ->
-					$.each data.response.minivenues, ->
-						unless @location.postalCode is ""
-							items.push
-								name: @name
-								address: @location.address + ", " + @location.postalCode + " " + @location.city
-								lat: @location.lat
-								lng: @location.lng
-								type: 'poi'
+					unless data.response.minivenues.length is 0
+						$.each data.response.minivenues, ->
+							unless @location.postalCode is ""
+								items.push
+									name: @name
+									address: @location.address + ", " + @location.postalCode + " " + @location.city
+									lat: @location.lat
+									lng: @location.lng
+									type: 'poi'
 
 				interval = setInterval(->
 
