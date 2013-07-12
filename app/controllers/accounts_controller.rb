@@ -18,21 +18,18 @@ class AccountsController < ApplicationController
   end
   
   def edit_password
+    @user=current_user
   end
   
   def update_password
-    if current_user.authenticate params[:password]
-      if current_user.update_attributes params[:user]
-        current_user.password_reset_token = nil
-        current_user.save!
-        redirect_to account_path, :notice => t('accounts.flash.password_changed')
+    @user=User.find(current_user.id)    
+    isemailchanged = params[:user][:email] != @user.email ? true : false    
+      if @user.update_with_password(params[:user])
+        sign_in(:user, @user, :bypass => true)
+        redirect_to account_path, :notice =>  isemailchanged ? t('accounts.flash.activate_new_email') : t('accounts.flash.password_changed')
       else
         render :edit_password
       end
-    else
-      flash.now.alert = t('accounts.flash.invalid_password')
-      render :edit_password
-    end
   end
   
   def edit

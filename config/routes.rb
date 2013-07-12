@@ -45,8 +45,8 @@ RailsOSRM::Application.routes.draw do
       get 'settings'
       post 'settings' => :update_settings
     end
-   # get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
-   # put 'account/password' => 'accounts#update_password', :as => :update_password  
+    get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
+    put 'account/password' => 'accounts#update_password', :as => :update_password  
    # delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
     #get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
     #post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation

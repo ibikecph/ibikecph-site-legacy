@@ -204,6 +204,7 @@ en:
       updated: Account updated.
       settings_updated: Settings updated.
       activation_sent: "Activation email resent to %{email}."
+      activate_new_email: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
     misc:
       cancel: Cancel
       
