@@ -1,13 +1,7 @@
 <div class="centered_dialog small">
 	<h1><%=t '.title' %></h1>
-<<<<<<< HEAD
-	<%= errors_for( current_user ).html_safe %>
-	<%= form_for current_user, :url => account_path, :html => {:multipart => true} do |f| %>
-=======
-	asd
 	<%= errors_for( @user ).html_safe %>
 	<%= form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
->>>>>>> b2c2a1c981952f68104aaf13be9eb3ab5f71bd8e
 		<p>
 			<%= f.label :name %>
 			<%= chars_remaining %><br>
