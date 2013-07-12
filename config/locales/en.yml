@@ -421,6 +421,7 @@ en:
     bugs_and_suggestions_short: "Report bugs"
     add_favorite: "Add to favorites"
     help: Help
+    reverse_route: Reverse route
     from: A
     to: B
     from_placeholder: From addresse

@@ -427,6 +427,7 @@ da:
     bugs_and_suggestions_short: "Rapporter fejl"
     add_favorite: "Føj til favoritter"
     help: Hjælp
+    reverse_route: Vend rute
     from: A
     to: B
     from_placeholder: Fra adresse

@@ -1349,6 +1349,14 @@ div.issues {
         }
     }
 }
+div.ajax_dialog {
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 0 5px 70px 100px;
+}
 
 @media only screen and (max-width: 767px) {
     div.issues {

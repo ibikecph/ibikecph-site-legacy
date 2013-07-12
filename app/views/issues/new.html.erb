@@ -1,6 +1,16 @@
-<div class="centered_dialog small">	
-	<div class="comment_panel"> 
+<% if params[:ajax] %>
+<div class="ajax_dialog">
+	<div class="close"></div>
+	<div class="comment_panel">
 		<h1><%=t '.title' %></h1>
 		<%= render :partial => 'form', :locals => { :url => issues_path } %>
 	</div>
 </div>
+<% else %>
+<div class="centered_dialog small">
+	<div class="comment_panel">
+		<h1><%=t '.title' %></h1>
+		<%= render :partial => 'form', :locals => { :url => issues_path } %>
+	</div>
+</div>
+<% end %>

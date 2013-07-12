@@ -40,6 +40,9 @@ class IssuesController < ApplicationController
   
   def new
     @issue = Issue.new
+    if params[:ajax]
+      render :layout => false
+    end
   end
  
   def create

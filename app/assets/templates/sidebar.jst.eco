@@ -16,7 +16,7 @@
 		<label><%= I18n.t 'map.to' %></label>
 		<input type="text" class="to" title="<%= I18n.t 'map.to' %>" placeholder="<%= I18n.t 'map.to_placeholder' %>" tabindex=2>
 	</div>
-	<span class="reverse_route"></span>
+	<span title="<%= I18n.t 'map.reverse_route' %>" class="reverse_route"></span>
 </div>
 
 <div id="time">
@@ -28,6 +28,6 @@
 		<span><%= I18n.t 'map.arrival' %></span>
 		<input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
 	</div>
-	<div id="cargobike_trigger"></div>
+	<div id="cargobike_trigger" title="<%= I18n.t 'map.cargo_bike' %>"></div>
 	<div class="clear"></div>
 </div>

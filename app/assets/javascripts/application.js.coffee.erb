@@ -32,6 +32,12 @@ jQuery ->
 		button_validation: $('.button_validation input')
 		comment_form: $('#new_comment_form')
 		facebook_button: $('.submits .facebook')
+		new_button: $('.header_open a')
+
+	if elements.new_button.length > 0
+		elements.new_button.click ->
+			$('#new_issue').load $(@).attr('href')+'?ajax=1'
+			false
 
 	if elements.facebook_button.length > 0
 		elements.facebook_button.parent().find('input').css
@@ -147,6 +153,9 @@ jQuery ->
 				columns: 1
 		init: ->
 			ibg = @
+
+			if window.location.hash.match('feedback')
+				window.location.href = window.location.hash.replace('#', '')
 			
 			ibg.elements.win.bind 'resize', ->
 				ibg.resize ibg
@@ -166,6 +175,7 @@ jQuery ->
 				target = el.nextAll('.expand').eq 0
 				active = $('.grid').find '.active'
 				unless el.hasClass 'active'
+					window.location.hash = url
 					active.removeClass 'active'
 					el.addClass 'active'
 					$('.expand').html ''
@@ -176,6 +186,7 @@ jQuery ->
 						$('.close').click ->
 							$('html, body').animate
 								scrollTop: el.offset().top - 50
+								window.location.hash = ""
 							, 400
 							el.removeClass 'active'
 							$('.expand').html ''
