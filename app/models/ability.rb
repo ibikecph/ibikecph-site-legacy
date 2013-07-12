@@ -4,7 +4,8 @@ class Ability < ActiveRecord::Base
   def initialize(user)
     disable_risky_blocks
 
-    can [:index,:show], [Comment, User, Issue, Favourite, Route]
+    can [:index], [Comment, Issue, Favourite, Route]
+    can [:show], [Comment, User, Issue, Favourite, Route]
     can [:index,:archive,:show,:tag, :feed], [BlogEntry]
     can :create, User
     if user
