@@ -21,8 +21,7 @@
 	<% if !current_user.facebook_user? %>
 	<hr>
 	<h1><%=t '.title_login' %></h1>
-
-	<%= link_to t('.change_password'), edit_user_registration_path(current_user), :class => "note button righty" %>
+     <%= link_to t('.change_password'), edit_password_path, :class => "note button righty" %>
 	<label><%=t '.email' %></label>
 	<p><%= current_user.email %></p>
 	<% end %>

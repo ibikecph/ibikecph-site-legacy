@@ -208,6 +208,7 @@ da:
       updated: Konto opdateret.
       settings_updated: Indstillinger opdateret.
       activation_sent: "Aktiveringsemail gensendt til %{email}."
+      activate_new_email: "Du har opdateret din konto med succes, men vi er nødt til at bekræfte din nye e-mailadresse. Tjek venligst din e-mail og klik på bekræft link til færdiggøre bekræfter din nye e-mailadresse."
       
   blog:
     index:
