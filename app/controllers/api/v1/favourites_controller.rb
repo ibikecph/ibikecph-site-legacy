@@ -13,7 +13,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
         if @favourite.save          
            render :status => 201,
            :json => { :success => true,
-                      :info => "Favourite created successfully!",
+                      :info => t('favourites.flash.created'),
                       :data => { :id => @favourite.id } }
         else
            render :status => 422,
@@ -28,17 +28,23 @@ class Api::V1::FavouritesController < Api::V1::BaseController
        if !@favourite
              render :status => 404,
              :json => { :success => false,
-                        :info => "Favourite doesn't exist!", 
-                        :errors => "Favourite doesn't exist!"}   
+                        :info => t('favourites.flash.fav_not_found'), 
+                        :errors => t('favourites.flash.fav_not_found')}   
        end   
   end
   
   def update
     @favourite=current_user.favourites.find_by_id(params[:id])
+    if !@favourite
+             render :status => 404,
+             :json => { :success => false,
+                        :info => t('favourites.flash.fav_not_found'), 
+                        :errors => t('favourites.flash.fav_not_found')}   
+    else  
       if @favourite.update_attributes(params[:favourite])
              render :status => 200,
              :json => { :success => true,
-                        :info => "Favourite updated successfully!",
+                        :info => t('favourites.flash.updated'),
                         :data => { :id => @favourite.id } }
       else
              render :status => 400,
@@ -46,6 +52,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
                         :info => @favourite.errors.full_messages.first, 
                         :errors => @favourite.errors.full_messages}  
       end
+    end
   end
   
   def destroy
@@ -54,13 +61,13 @@ class Api::V1::FavouritesController < Api::V1::BaseController
          @favourite.destroy
          render :status => 200,
          :json => { :success => true,
-                    :info => "Favourite deleted successfully!",
+                    :info => t('favourites.flash.deleted'),
                     :data => {} }  
       else
         render :status => 404,
         :json => { :success => false,
-                  :info => "Favourite doesn't exist!", 
-                  :errors => "Favourite doesn't exist!"}                 
+                  :info => t('favourites.flash.fav_not_found'), 
+                  :errors => t('favourites.flash.fav_not_found')}                 
       end           
   end
   
@@ -76,7 +83,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
     #we only consider success case only
      render :status => 200,
      :json => { :success => true,
-                :info => "Favourites position updated successfully!",
+                :info => t('favourites.flash.position_updated'),
                 :data => { :user_id => current_user.id } }
   end          
       

@@ -41,7 +41,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     #current_user.update_column(:authentication_token, nil)
     render :status => 200,
            :json => { :success => true,
-                      :info => "Logged out",
+                      :info => t('sessions.flash.logged_out'),
                       :data => {} }
   end
 
@@ -51,15 +51,15 @@ class Api::V1::SessionsController < Devise::SessionsController
       current_user=logged_user
       render :status => 200,
              :json => { :success => true,
-                        :info => "Logged in",
+                        :info => t('sessions.flash.logged_in', :user => current_user.name),
                         :data => { :auth_token => logged_user.authentication_token, :id=>logged_user.id } }
   end
   
   def failure
     render :status => 401,
            :json => { :success => false,
-                      :info => "Login Failed",
-                      :errors => "Login Failed"}
+                      :info => t('sessions.flash.invalid_login'),
+                      :errors => t('sessions.flash.invalid_login')}
   end
   
   def check_login_params  
@@ -67,8 +67,8 @@ class Api::V1::SessionsController < Devise::SessionsController
     if params[:user].blank? || (params[:user][:fb_token].blank? && params[:user][:email].blank? && params[:user][:password].blank?)
           render :status => 406,
                  :json => { :success => false,
-                 :info => "Login Failed",
-                 :errors => "Required parameter(s) missing."}
+                 :info => t('sessions.flash.invalid_attempt'),
+                 :errors => t('sessions.flash.params_missing')}
     end
   end
   

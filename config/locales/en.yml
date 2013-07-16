@@ -139,7 +139,39 @@ en:
       already_have_account_q: Already have an account?
     show:
       joined_at_html: "Joined %{ago}"
-  
+    flash:
+      user_not_found: User doesn't exist!
+      deleted: User deleted successfully!
+      activate_account: Account created. A message with a confirmation link has been sent to your email address. Please open the link to activate your account.
+      updated: User details updated successfully!  
+
+  api:
+    flash:
+      unauthorized: Unauthorized access!
+      invalid_token: Invalid authentication token!
+      
+  favourites:
+    flash:
+      fav_not_found: Favourite doesn't exist!
+      updated: Favourite updated successfully!
+      created: Favourite created successfully!
+      deleted: Favourite deleted successfully!
+      position_update: Favourites position updated successfully!
+
+  reported_issues:
+    flash:
+      issue_not_found: Issue doesn't exist!
+      updated: Issue updated successfully!
+      created: Issue created successfully!
+      deleted: Issue deleted successfully!
+      
+  routes:
+    flash:
+      route_not_found: Route doesn't exist!
+      updated: Route updated successfully!
+      created: Route created successfully!
+      deleted: Route deleted successfully!
+      
   sessions:
     new:
       title: Login
@@ -158,6 +190,8 @@ en:
       oath_error: "Could not log in: %{error}."
       email_not_verified: "Email %{email} not verified."
       logged_out: Logged out.
+      invalid_attempt: Login Failed
+      params_missing: Required parameter(s) missing.
       
   accounts:
     show:

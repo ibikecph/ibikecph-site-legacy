@@ -5,8 +5,8 @@ class Api::V1::BaseController < ApplicationController
   rescue_from CanCan::AccessDenied do |exception|
          render :status => 401,
          :json => { :success => false,
-                    :info => "Unauthorized access!", 
-                  :errors => "Unauthorized access!"}
+                    :info => t('api.flash.unauthorized'), 
+                  :errors => t('api.flash.unauthorized')}
   end
 
  private
@@ -17,7 +17,7 @@ class Api::V1::BaseController < ApplicationController
        :json => { :success => false,
                   :info => "Login Failed",
                   :invalid_token=>true,
-                  :errors => "Invalid authentication token."}
+                  :errors => t('api.flash.invalid_token')}
     end
   end   
 

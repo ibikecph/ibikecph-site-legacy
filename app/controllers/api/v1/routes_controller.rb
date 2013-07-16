@@ -14,7 +14,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
         if @route.save          
            render :status => 201,
            :json => { :success => true,
-                      :info => "Route created successfully!",
+                      :info => t('routes.flash.created'),
                       :data => { :id => @route.id } }
         else
            render :status => 422,
@@ -30,8 +30,8 @@ class Api::V1::RoutesController < Api::V1::BaseController
      if !@route
            render :status => 404,
            :json => { :success => false,
-                      :info => "Route doesn't exist!", 
-                      :errors => "Route doesn't exist!"}   
+                      :info => t('routes.flash.route_not_found'), 
+                      :errors => t('routes.flash.route_not_found')}   
      end   
   end
   
@@ -40,7 +40,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
     if @route.update_attributes(params[:route])
            render :status => 200,
            :json => { :success => true,
-                      :info => "Route updated successfully!",
+                      :info => t('routes.flash.updated'),
                       :data => { :id => @route.id } }
     else
            render :status => 400,
@@ -57,13 +57,13 @@ class Api::V1::RoutesController < Api::V1::BaseController
        @route.destroy
        render :status => 200,
        :json => { :success => true,
-                  :info => "Route deleted successfully!",
+                  :info => t('routes.flash.deleted'),
                   :data => {} }  
     else
     render :status => 404,
      :json => { :success => false,
-                :info => "Route doesn't exist!", 
-                :errors => "Route doesn't exist!"}                 
+                :info => t('routes.flash.route_not_found'), 
+                :errors => t('routes.flash.route_not_found')}                 
     end           
   end
   
