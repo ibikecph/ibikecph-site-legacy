@@ -1,8 +1,11 @@
 <div id="content_responsive">
 
 	<div class="page_header">
-
+	
 		<%= render :partial => 'top' %>
+		<div class="back">
+			<%= link_to '← '+t('issues.view_all_issues'), '/feedback' %>
+		</div>
 	</div>
 
 	<div class="page_content">

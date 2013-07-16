@@ -80,6 +80,12 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		url = "#!/#{@model.waypoints.to_url()+mode}"
 		if url
 			@router.navigate url, trigger: false
+		$('#flash').remove()
+		flash = $('<div />').html(I18n.t 'map.permalink').attr
+			id: 'flash'
+			class: 'notice'
+		$('body').append(flash)
+		remove_flash()
 	
 	pad_time: (min_or_hour) ->
 		("00"+min_or_hour).slice -2
@@ -149,9 +155,15 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
 			if val.length >= 4
 				items = []
+				numberPattern = /\d+/g
+				val_number = val.match(numberPattern);
+				val_address = val.replace(' '+val_number, '');
 				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token
 				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
-				kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'*'
+				if val_number
+					kms_url = IBikeCPH.config.suggestion_service.kms.url+val_address+'*'+'&husnr='+val_number
+				else
+					kms_url = IBikeCPH.config.suggestion_service.kms.url+val_address+'*'
 
 				if $current_user
 					favourites = new IBikeCPH.Models.Favourites
@@ -167,20 +179,24 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 										type: 'favourite'
 										fav_class: t.source
 
-				$.getJSON oiorest_url, (data) ->
-					$.each data, ->
-						unless @wgs84koordinat['bredde'] is "0.0"
-							items.push
-								name: ''
-								address: @vejnavn.navn + " " + @husnr + ", " + @postnummer.nr + " " + @postnummer.navn
-								lat: @wgs84koordinat['bredde']
-								lng: @wgs84koordinat['længde']
-								type: 'address'
+				# $.getJSON oiorest_url, (data) ->
+				# 	$.each data, ->
+				# 		unless @wgs84koordinat['bredde'] is "0.0"
+				# 			items.push
+				# 				name: ''
+				# 				address: @vejnavn.navn + " " + @husnr + ", " + @postnummer.nr + " " + @postnummer.navn
+				# 				lat: @wgs84koordinat['bredde']
+				# 				lng: @wgs84koordinat['længde']
+				# 				type: 'address'
 
 				$.getJSON kms_url, (data) ->
-					unless data is null
-						$.each data.features, ->
-							# console.log @attributes
+					$.each data.features, ->
+						items.push
+							name: ''
+							address: @attributes.vej.navn + " " + @attributes.husnr + ", " + @attributes.postdistrikt.kode + " " + @attributes.postdistrikt.navn
+							lat: @geometry.y
+							lng: @geometry.x
+							type: 'address'
 
 				$.getJSON foursquare_url, (data) ->
 					unless data.response.minivenues.length is 0
@@ -273,7 +289,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			'data-name': ll.name
 
 		$('.suggestions').html('').hide()
-			
+
 	hide_suggestions: ->
 		setTimeout (->
 			$('.suggestions').html('').hide()
@@ -318,4 +334,3 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			$('.mode #standard').trigger 'click'
 		else
 			$('.mode #cargobike').trigger 'click'
-

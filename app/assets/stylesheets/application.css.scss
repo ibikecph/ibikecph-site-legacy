@@ -681,6 +681,15 @@ li a {
 
 .page_header {
     margin: 0px 15px 10px;
+    .back {
+        margin-left: -12px;
+        a {
+            color: #dc1e19;
+            &:hover {
+                color: #a81813;
+            }
+        }
+    }
     .welcome {
         color: #333;
         margin: -45px 300px 0 -5px;
@@ -799,11 +808,6 @@ li a {
     .item {
         display: inline-block;
         vertical-align: top;
-        -moz-transition: all .2s ease;
-        -ms-transition: all .2s ease;
-        -o-transition: all .2s ease;
-        transition: all .2s ease;
-        -webkit-transition: all .2s ease;
         margin: 10px;
         .item_thumb {
             background: #ccc;
@@ -1356,6 +1360,82 @@ div.ajax_dialog {
     border: 1px solid #ccc;
     padding: 20px;
     margin: 0 5px 70px 100px;
+    position: relative;
+    .close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 16px;
+        height: 16px;
+        background: image-url("_new/issue-close.png") no-repeat center center;
+        cursor: pointer;
+        opacity: 0.5;
+        &:hover {
+            opacity: 1;
+        };
+    }
+    .left {
+        width: 65%;
+        padding-right: 5%;
+        float: left;
+        margin: 0;
+        .form {
+            padding: 15px;
+            p {
+                margin-bottom: 3px;
+            }
+            label {
+                font-size: 12px;
+                display: block;
+            }
+            .text_input {
+                padding: 10px 10px 8px;
+                font-size: 0.80em;
+                background: #f4f4f4 !important;
+                border-radius: 2px;
+                border: 1px solid #e3e3e3;
+                box-shadow: 0 1px 1px #c3c3c3 inset;
+                color: #333;
+                outline: none;
+                font-weight: bold;
+                position: relative;
+                z-index: 1;
+                width: 90%;
+            }
+            .submits {
+                input {
+                    color: #fff;
+                    background: #00a3e0;
+                    font-size: 12px;
+                    font-weight: bold;
+                    text-align: center;
+                    border: 1px solid #008abd;
+                    padding: 14px 32px 11px;
+                    text-shadow: 0 -1px 1px #0084b5;
+                    border-radius: 2px;
+                    box-shadow: inset 1px 1px 0 #60c2e7;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .right {
+        float: left;
+        width: 30%;
+        margin: 0;
+        .text {
+            padding: 15px;
+            h3 {
+                color: #666;
+                p {
+                    font-size: 14px;
+                }
+            }
+            p {
+                font-size: 11px;
+            }
+        }
+    }
 }
 
 @media only screen and (max-width: 767px) {

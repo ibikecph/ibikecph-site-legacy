@@ -90,4 +90,4 @@ IBikeCPH.config =
 		oiorest:
 			url: 'http://geo.oiorest.dk/adresser.json?q='
 		kms:
-			url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=vej&georef=EPSG:4326&outgeoref=EPSG:4326&login=nikolamarkovic&password=spoiledmilk&komkode=0101&vejnavn='
+			url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=adresse&postdist=K%C3%B8benhavn*&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='

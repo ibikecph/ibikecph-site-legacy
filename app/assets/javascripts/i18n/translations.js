@@ -79,6 +79,7 @@ I18n.translations = {
             "too_long": "%{count} characters too long"
         },
         "map": {
+            "permalink": "The address bar is now updated, copy the link",
             "payoff": "Faster on Bike",
             "work_in_progress": "The site is under development, and route suggestion can be inaccurate.",
             "bugs_and_suggestions": "Report bugs, or suggest improvements.",
@@ -215,6 +216,7 @@ I18n.translations = {
             "character": null
         },
         "map": {
+            "permalink": "Adressebaren er nu opdateret, kopier linket",
             "payoff": "Hurtigere p\u00e5 cykel",
             "work_in_progress": "Siden er under udvikling, og ruteforslag kan v\u00e6re un\u00f8jagtige.",
             "bugs_and_suggestions": "Rapporter fejl, eller foresl\u00e5 forbedringer.",

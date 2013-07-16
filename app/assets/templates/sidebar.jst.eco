@@ -9,11 +9,11 @@
 <div class="clear"></div>
 <div id="addresses">
 	<div class="address">
-		<label><%= I18n.t 'map.from' %></label>
+		<label class="a"><%= I18n.t 'map.from' %></label>
 		<input type="text" class="from" title="<%= I18n.t 'map.from' %>" placeholder="<%= I18n.t 'map.from_placeholder' %>" tabindex=1 >
 	</div>
 	<div class="address">
-		<label><%= I18n.t 'map.to' %></label>
+		<label class="b"><%= I18n.t 'map.to' %></label>
 		<input type="text" class="to" title="<%= I18n.t 'map.to' %>" placeholder="<%= I18n.t 'map.to_placeholder' %>" tabindex=2>
 	</div>
 	<span title="<%= I18n.t 'map.reverse_route' %>" class="reverse_route"></span>
