@@ -12,8 +12,8 @@ class Api::V1::UsersController < Api::V1::BaseController
       rescue ActiveRecord::RecordNotFound
         render :status => 404,
         :json => { :success => false,
-                :info => "User doesn't exist!", 
-                :errors => "User doesn't exist!"}
+                :info => t('users.flash.user_not_found'), 
+                :errors => t('users.flash.user_not_found')}
   end
   
   def destroy
@@ -21,7 +21,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user.destroy
     render :status => 200,
     :json => { :success => true,
-                :info => "User deleted successfully!",
+                :info => t('users.flash.deleted'),
                 :data => {} }
   end
   

@@ -13,7 +13,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
         if @reported_issue.save          
            render :status => 201,
            :json => { :success => true,
-                      :info => "Issue created successfully!",
+                      :info => t('reported_issues.flash.created'),
                       :data => { :id => @reported_issue.id } }
         else
            render :status => 422,
@@ -29,8 +29,8 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
      if !@reported_issue
            render :status => 404,
            :json => { :success => false,
-                      :info => "Issue doesn't exist!", 
-                      :errors => "Issue doesn't exist!"}   
+                      :info => t('reported_issues.flash.issue_not_found'), 
+                      :errors => t('reported_issues.flash.issue_not_found')}   
      end   
   end
   
@@ -39,7 +39,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
     if @reported_issue.update_attributes(params[:issue])
            render :status => 200,
            :json => { :success => true,
-                      :info => "Issue updated successfully!",
+                      :info => t('reported_issues.flash.updated'),
                       :data => { :id => @reported_issue.id } }
     else
            render :status => 400,
@@ -51,11 +51,18 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   
   def destroy
     @reported_issue=ReportedIssue.find_by_id(params[:id])
+    if @reported_issue
     @reported_issue.destroy
      render :status => 200,
      :json => { :success => true,
-                :info => "Issue deleted successfully!",
+                :info => t('reported_issues.flash.deleted'),
                 :data => {} }
+    else
+      render :status => 404,
+      :json => { :success => false,
+                :info => t('reported_issues.flash.issue_not_found'), 
+                :errors => t('reported_issues.flash.issue_not_found')}                 
+    end              
   end
   
   private

@@ -19,7 +19,7 @@
           @user.reset_authentication_token!
             render :status => 201,
            :json => { :success => true,
-                      :info => "Account created. A message with a confirmation link has been sent to your email address. Please open the link to activate your account.",
+                      :info => t('users.flash.activate_account'),
                       :data => {} }
         else
            render :status => 422,
@@ -38,7 +38,7 @@
         if @user.update_attributes(params[:user])
                render :status => 200,
                :json => { :success => true,
-                          :info => "User details updated successfully!",
+                          :info => t('users.flash.updated'),
                           :data => { :id => @user.id } }
         else
                render :status => 400,

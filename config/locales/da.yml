@@ -143,7 +143,39 @@ da:
       already_have_account_q: Har du allerede en konto?
     show:
       joined_at_html: "Oprettet %{ago}"
-  
+    flash:
+      user_not_found: Bruger findes ikke!
+      deleted: Bruger slettet!  
+      activate_account: Konto oprettet. En meddelelse med en bekræftelse link er blevet sendt til din email-adresse. Venligst åbne linket for at aktivere din konto.
+      updated: Bruger detaljer opdateret! 
+
+  api:
+    flash:
+      unauthorized: Uautoriseret adgang!
+      invalid_token: Ugyldig ægthedsbekræftelsestoken!
+            
+  favourites:
+    flash:
+      fav_not_found: Favourite findes ikke!
+      updated: Favourite opdateret!
+      created: Favourite skabte succes!
+      deleted: Favourite slettet!
+      position_updated: Favoritter position opdateret!
+
+  reported_issues:
+    flash:
+      issue_not_found: Issue findes ikke!
+      updated: Issue opdateret!
+      created: Udstedelse skabte succes!
+      deleted: Issue slettet!
+      
+  routes:
+    flash:
+      route_not_found: Rute findes ikke!
+      updated: Rute opdateret!
+      created: Rute skabte succes!
+      deleted: Rute slettet!
+        
   sessions:
     new:
       title: Log ind
@@ -162,6 +194,8 @@ da:
       oath_error: "Kunne ikke logge ind: %{error}."
       email_not_verified: "Email %{email} ikke verificeret."
       logged_out: Logget ud.
+      invalid_attempt: login mislykkedes
+      params_missing: Nødvendig parameter (r) mangler.
       
   accounts:
     show:
