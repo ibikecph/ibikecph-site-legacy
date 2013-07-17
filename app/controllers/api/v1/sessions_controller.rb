@@ -45,6 +45,14 @@ class Api::V1::SessionsController < Devise::SessionsController
                       :data => {} }
   end
 
+  def setlocale
+    #action for setting default locale value
+        render :status => 200,
+           :json => { :success => true,
+                      :info => '',
+                      :data => {} }
+  end
+
   private 
 
   def success logged_user    
