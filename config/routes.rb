@@ -5,7 +5,6 @@ RailsOSRM::Application.routes.draw do
       devise_for :users, :skip => [:confirmations] do
         post "/login" => "sessions#create"
         get "/logout", :to => "sessions#destroy"
-        get "/settings", :to => "sessions#setlocale"
       end          
       resources :reported_issues, :path => 'issues'
       resources :favourites do
