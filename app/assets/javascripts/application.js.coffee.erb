@@ -12,6 +12,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require underscore_min
+#= require backbone_min
 #= require i18n
 #= require i18n/translations
 #= require rails-timeago-all
@@ -19,6 +20,7 @@
 #= require rails-timeago
 #= require utils
 #= require plugins
+
 
 jQuery ->
 	elements =
@@ -33,6 +35,38 @@ jQuery ->
 		comment_form: $('#new_comment_form')
 		facebook_button: $('.submits .facebook')
 		new_button: $('.header_open a')
+		favourites_list: $('#favourites_list')
+
+	if elements.favourites_list.length > 0
+		class Favourites extends Backbone.Model
+			sync: (method, model, options) ->
+				options or (options = {})
+				switch method
+					when "create"
+						options.url = "/api/favourites"
+					when "read"
+						if model.get("id")
+							options.url = "/api/favourites/" + model.get("id")
+						else
+							options.url = "/api/favourites/"
+					when "delete"
+						options.url = "/api/favourites/" + model.get("id")
+					when "update"
+						options.url = "/api/favourites/" + model.get("id")
+
+				options.headers = options.headers or {}
+				_.extend options.headers,
+					'accept': 'application/vnd.ibikecph.v1'
+					'contentType': 'application/json'
+
+				
+				Backbone.sync.call model, method, model, options  if options.url
+
+		favourites = new Favourites
+		favourites.fetch
+			success: ->
+				_.each favourites.attributes.data, (t, num) ->
+					elements.favourites_list.append('<li>'+t.address+'</li>')
 
 	if elements.new_button.length > 0
 		elements.new_button.click ->
