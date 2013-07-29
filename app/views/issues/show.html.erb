@@ -17,6 +17,12 @@
 						<%= time_ago_in_words @issue.created_at %>
 					</span>
 				</p>
+				<% if @issue.image? %>
+  <p>
+       <br />
+   <%= image_tag @issue.image.g6.url %>
+  </p>
+  <% end %>
 				<%= auto_html_blog @issue.body, {} %>
 			</div>
 			<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
@@ -45,6 +51,12 @@
 							<%= time_ago_in_words @issue.created_at %> _password
 						</span>
 					</p>
+                <% if @issue.image? %>
+  <p>
+      <br />
+   <%= image_tag @issue.image.g6.url %>
+  </p>
+  <% end %>
 					<%= auto_html_blog @issue.body, {} %>
 				</div>
 				<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>

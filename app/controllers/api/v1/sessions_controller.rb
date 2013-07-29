@@ -44,7 +44,7 @@ class Api::V1::SessionsController < Devise::SessionsController
                       :info => t('sessions.flash.logged_out'),
                       :data => {} }
   end
-
+  
   private 
 
   def success logged_user    
