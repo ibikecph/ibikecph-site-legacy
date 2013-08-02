@@ -9,7 +9,6 @@ IBikeCPH.config =
 
 	route_styles:
 		current:
-			# color   : '#0078a3'
 			color	: '#0063c9'
 			weight  : 5
 			opacity : 0.8
@@ -90,4 +89,6 @@ IBikeCPH.config =
 		oiorest:
 			url: 'http://geo.oiorest.dk/adresser.json?q='
 		kms:
-			url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=adresse&postdist=K%C3%B8benhavn*&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='
+			url: 'http://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&login=ibikecphsite&password=bikebike13&crs=EPSG:4326&search='
+			# url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=adresse&postdist=K%C3%B8benhavn*&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='
+			# url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=vej&husnr=1&geop=55.111111,12.222222&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='

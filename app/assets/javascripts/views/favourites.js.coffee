@@ -102,7 +102,6 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 				_.each $.parseJSON(response.responseText).errors, (t,num) ->
 					$('#favorites .errors').append('<li>'+t+'</li>')
 
-
 	hide: ->
 		t = @
 		$('#ui').css

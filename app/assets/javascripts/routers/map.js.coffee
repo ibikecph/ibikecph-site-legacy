@@ -25,7 +25,8 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 		@instructions = new IBikeCPH.Views.Instructions collection: @search.instructions, el: '#instructions_div'
 
 	index: ->
-		@sidebar.render()
+		console.log
+		@sidebar.render(@map)
 		@mobileapp.render()
 		
 	show: (code) ->

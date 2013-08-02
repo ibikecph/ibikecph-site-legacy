@@ -70,7 +70,15 @@ jQuery ->
 
 	if elements.new_button.length > 0
 		elements.new_button.click ->
-			$('#new_issue').load $(@).attr('href')+'?ajax=1'
+			if $current_user
+				$('#new_issue').load $(@).attr('href')+'?ajax=1'
+			else
+				$("#flash").remove()
+				flash = $('<div />').html(I18n.t('report_issue.errors.please_login')).attr
+					id: 'flash'
+					class: 'notice'
+				$('body').append(flash)
+				remove_flash()
 			false
 
 	if elements.facebook_button.length > 0
@@ -99,6 +107,7 @@ jQuery ->
 
 	if elements.masonry.length > 0
 		elements.masonry.simplemasonry()
+
 
 	if elements.right_col.length > 0
 		mobile_trigger = $('<div />').addClass('mobile-sidebar-trigger').click ->
@@ -191,12 +200,13 @@ jQuery ->
 			if window.location.hash.match('feedback')
 				window.location.href = window.location.hash.replace('#', '')
 			
-			ibg.elements.win.bind 'resize', ->
-				ibg.resize ibg
-			
-			ibg.elements.win.resize _.debounce(->
-				ibg.open_box.trigger 'click'
-			, 250)
+			unless /MSIE (\d+\.\d+);/.test(navigator.userAgent)
+				ibg.elements.win.bind 'resize', ->
+					ibg.resize ibg
+				
+				ibg.elements.win.resize _.debounce(->
+					ibg.open_box.trigger 'click'
+				, 250)
 
 			setTimeout (->
 				ibg.resize ibg

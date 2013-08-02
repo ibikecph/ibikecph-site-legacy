@@ -14,6 +14,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		'change .mode [type=radio]'	    : 'change_mode'
 		'click #cargobike_trigger'		: 'toggle_mode'
 
+	map: null
+
 	initialize: (options) ->
 		@router = options.router
 				
@@ -31,7 +33,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		@departure = @getNow()
 		@model.summary.on 'change', @update_departure_arrival, this
 
-	render: ->
+	render: (map) ->
+		@map = map
 		m = @model
 		@$el.html @template()
 		$('.help').click (event) => @help()
@@ -147,8 +150,26 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	find_suggestions: ->
 		t = @
 		el = $(event.target)
+
 		parent = el.parent()
 		input = parent.find('input').attr('class')
+
+		if event.keyCode is 40 or event.keyCode is 38
+			if $('.suggestions').html()
+				selected_element = $('.suggestions li.selected').index()
+				switch event.keyCode
+					when 40
+						$('.suggestions li').eq(selected_element).removeClass 'selected'
+						$('.suggestions li').eq(selected_element+1).addClass 'selected'
+					when 38
+						$('.suggestions li').eq(selected_element).removeClass 'selected'
+						$('.suggestions li').eq(selected_element-1).addClass 'selected'
+			
+			return false
+
+		if event.keyCode is 13 and $('.suggestions li.selected').length is 1
+			$('.suggestions li.selected').trigger('click')
+			return false
 
 		setTimeout (->
 			val = el.val().toLowerCase()
@@ -157,13 +178,10 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				items = []
 				numberPattern = /\d+/g
 				val_number = val.match(numberPattern);
-				val_address = val.replace(' '+val_number, '');
+				val_address = val.replace(' '+val_number, '')
 				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token
 				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
-				if val_number
-					kms_url = IBikeCPH.config.suggestion_service.kms.url+val_address+'*'+'&husnr='+val_number
-				else
-					kms_url = IBikeCPH.config.suggestion_service.kms.url+val_address+'*'
+				kms_url = IBikeCPH.config.suggestion_service.kms.url+val
 
 				if $current_user
 					favourites = new IBikeCPH.Models.Favourites
@@ -179,23 +197,19 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 										type: 'favourite'
 										fav_class: t.source
 
-				# $.getJSON oiorest_url, (data) ->
-				# 	$.each data, ->
-				# 		unless @wgs84koordinat['bredde'] is "0.0"
-				# 			items.push
-				# 				name: ''
-				# 				address: @vejnavn.navn + " " + @husnr + ", " + @postnummer.nr + " " + @postnummer.navn
-				# 				lat: @wgs84koordinat['bredde']
-				# 				lng: @wgs84koordinat['længde']
-				# 				type: 'address'
-
 				$.getJSON kms_url, (data) ->
-					$.each data.features, ->
+					$.each data.data, ->
+						if @x
+							lat = @y
+							lng = @x
+						else
+							lat = (@yMin+@yMax)/2
+							lng = (@xMin+@xMax)/2
 						items.push
 							name: ''
-							address: @attributes.vej.navn + " " + @attributes.husnr + ", " + @attributes.postdistrikt.kode + " " + @attributes.postdistrikt.navn
-							lat: @geometry.y
-							lng: @geometry.x
+							address: @presentationString
+							lat: lat
+							lng: lng
 							type: 'address'
 
 				$.getJSON foursquare_url, (data) ->
@@ -210,7 +224,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 									type: 'poi'
 
 				interval = setInterval(->
-
 					if items.length > 0
 						$('.suggestions').remove()
 						suggestions = $('<ul />').addClass('suggestions')
@@ -252,6 +265,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 									container.append address
 
 								suggestions.append container
+								$('.suggestions li:first').addClass('selected')
 						
 						clearInterval interval
 				, 500)
@@ -275,6 +289,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			lat: el.data('lat')
 			lng: el.data('lng')
 			name: el.data('name')
+
+		@map.map.panTo new L.LatLng(ll.lat, ll.lng)
 		
 		if type is 'from'
 			@model.waypoints.first().set 'location', ll

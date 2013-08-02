@@ -125,6 +125,7 @@ I18n.translations = {
         "report_issue": {
             "title": "Feedback",
             "errors": {
+                "please_login": "Please login to add feedback",
                 "road_name": "Street address is wrong",
                 "road_one_way": "The road is one-way",
                 "road_closed": "The road is closed",
@@ -262,6 +263,7 @@ I18n.translations = {
         "report_issue": {
             "title": "Feedback",
             "errors": {
+                "please_login": "Venligst login for at tilføje feedback",
                 "road_name": "Vejnavn er forkert",
                 "road_one_way": "Vejen er ensrettet",
                 "road_closed": "Vejen er lukket",

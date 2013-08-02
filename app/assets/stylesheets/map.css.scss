@@ -202,6 +202,9 @@ body {
 						background: #eee;
 						color: #444;
 					}
+					&.selected {
+						background-color: #eee !important;
+					}
 					&.poi {
 						background: image-url("_new/suggestion-poi.png") no-repeat 10px center;
 					}
@@ -385,7 +388,7 @@ body {
 					font-size: 0.6em;
 				};
 				span.instruction_text {
-					font-size: 16px;
+					font-size: 17px;
 					font-weight: bold;
 					display: block;
 					float: left;
