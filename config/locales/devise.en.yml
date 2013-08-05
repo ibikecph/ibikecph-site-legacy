@@ -54,6 +54,11 @@ en:
         terms: Terms of Service
         submit: Create Account
         already_have_account_q: Already have an account?
+      edit:
+        title: Change your password
+        new_password: New password
+        confirm_password: Confirm new password
+        submit: Save
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."

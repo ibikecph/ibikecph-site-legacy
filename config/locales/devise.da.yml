@@ -36,6 +36,11 @@ da:
         title: Gendan adgangskode
         body: "Indtast din email adresse i feltet og tryk send. Du vil modtage instruktioner til hvordan du gendanner din adgangskode."
         submit: SEND
+      edit:
+        title: Ændre din adgangskode
+        new_password: Ny adgangskode
+        confirm_password: Bekræft ny adgangskode
+        submit: Gem
     registrations:
       destroyed: "Din konto er nu slettet. Vi håber på at se dig igen snarest."
       signed_up: "Velkommen! Din konto er nu oprettet."
