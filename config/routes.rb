@@ -54,6 +54,7 @@ RailsOSRM::Application.routes.draw do
   #  resources :users
     devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations", :passwords=>"passwords" } do 
        get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
+       get 'users/new' => 'devise/registrations#new'
     end
     resources :users
     
