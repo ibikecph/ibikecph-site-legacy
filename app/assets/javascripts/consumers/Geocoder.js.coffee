@@ -14,6 +14,7 @@ class IBikeCPH.Geocoder
 
 	lookup_done: ->
 		@request = null
+		$('.from, .to').blur()
 
 	address_to_location: ->
 		address =  @model.get 'address'

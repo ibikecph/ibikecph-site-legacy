@@ -100,6 +100,10 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			@pad_time(adjusted.getHours()) + ':' + @pad_time(adjusted.getMinutes())
 	
 	parse_time: (str) ->
+		if str % 1 is 0 and str.length is 2
+			str = str+':00'
+		else if str % 1 is 0 and str.length is 4
+			str = str.substr(0,2)+':'+str.substr(2,2)
 		time = new Date()
 		time.setSeconds 0
 		if /\d{1,2}[:\.]\d{1,2}/.test str  #looks like valid time? hh:mm and variations
