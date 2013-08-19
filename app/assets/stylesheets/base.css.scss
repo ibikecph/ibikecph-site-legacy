@@ -276,6 +276,19 @@ p {
     -ms-transition: all 0.65s ease;
     -o-transition: all 0.65s ease;
     transition: all 0.65s ease;
+    .close {
+        position: absolute;
+        cursor: pointer;
+        width: 13px;
+        height: 14px;
+        opacity: 0.4;
+        top: 12px;
+        right: 12px;
+        background: image-url('_new/app-close.png') no-repeat center center;
+        &:hover {
+            opacity: 1;
+        }
+    }
     .phone {
         width: 142px;
         height: 162px;
@@ -449,6 +462,39 @@ p {
                     opacity: 1;
                 }
             }
+        }
+    }
+    #mobileapp {
+        position: fixed;
+        top: 40px;
+        left: 50%;
+        width: 300px;
+        margin-left: -150px;
+        .text {
+            width: 120px;
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            h1 {
+                font-size: 15px;
+                margin-bottom: 8px;
+                line-height: 1;
+                color: #fff;
+            }
+            p {
+                font-size: 13px;
+                color: #999;
+            }
+        }
+    }
+    #mobileapp.rendered {
+        top: 55px;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+        opacity: 1;
+        .phone {
+            top: -20px;
+            opacity: 1;
         }
     }
 }

@@ -2,13 +2,13 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-	<meta name="apple-itunes-app" content="app-id=542512225">
+	
 	<%= stylesheet_link_tag "map", :media => "all" %>
 	
 	<!--[if lte IE 8]>
 		<%= stylesheet_link_tag "leaflet.ie.css", :media => "all" %>
 	<![endif]-->
-
+	<%= javascript_include_tag "map" %>
 	<%= render 'layouts/locale' %>
 	<%= csrf_meta_tags %>
 	<!--  favicon -->
@@ -20,6 +20,5 @@
 	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
 	<%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
 	<%= yield %>
-	<%= javascript_include_tag "map" %>
 </body>
 </html>

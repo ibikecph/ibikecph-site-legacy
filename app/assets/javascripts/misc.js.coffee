@@ -1,4 +1,9 @@
 $().ready ->
+
+	unless $.cookie('trigger_mobile') is 'done'
+		$("#mobile_app a").parent().addClass 'selected'
+		$("#mobileapp").toggleClass 'rendered'
+
 	remove_flash()
 
 	if $('.drop_down .on').length > 0
@@ -8,6 +13,10 @@ $().ready ->
 		$(this).parent().toggleClass "selected"
 		$("#mobileapp").toggleClass 'rendered'
 		return false
+
+	$("#mobileapp .close").click ->
+		$.cookie('trigger_mobile', 'done', { expires: 30 });
+		$("#mobile_app a").trigger 'click'
 
 	$('#header .mobile_nav_trigger').click ->
 		$('#header .menu').slideToggle(50)

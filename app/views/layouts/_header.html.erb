@@ -4,11 +4,11 @@
 		<%= render_navigation :context => :main %>
 	</div>
 	<div class="right_menu">
-		<!--<div class="menu mobile" id="">
+		<div class="menu mobile" id="">
 			<ul>
 				<li id="mobile_app"><a href="#app"><%=t 'menu.mobile_app' %></a></li>
 			</ul>
-		</div>-->
+		</div>
 		<div class="menu locales">
 			<%= render_navigation :context => :locale %>
 		</div>
@@ -21,7 +21,7 @@
 	<div class="close"></div>
 	<div class="phone"></div>
 	<div class="text">
-		<% if I18n.locale == "da" then %>
+		<% if I18n.locale.to_s == "da" %>
 			<h1>Få styr på ruten på din mobil.</h1>
 			<p>Søg ruter og brug dine favoritter på farten.</p>
 		<% else %>
@@ -30,11 +30,12 @@
 		<% end %>
 	</div>
 	<div class="download">
-		<div class="appstore">
-			<a href="#"><img src="/assets/_new/badge-appstore.png"></a>
+		<a href="https://itunes.apple.com/dk/app/i-bike-cph/id684768054?l=da&amp;mt=8" target="_blank"><img src="/assets/_new/badge-appstore.png"></a>
+		<!-- <div class="appstore">
+			<a href="https://itunes.apple.com/dk/app/i-bike-cph/id684768054?l=da&amp;mt=8" target="_blank"><img src="/assets/_new/badge-appstore.png"></a>
 		</div>
 		<div class="googleplay">
 			<a href="#"><img src="/assets/_new/badge-googleplay.png"></a>
-		</div>
+		</div> -->
 	</div>
 </div>

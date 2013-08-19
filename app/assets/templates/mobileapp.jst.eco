@@ -1,7 +1,7 @@
 <div class="close"></div>
 <div class="phone"></div>
 <div class="text">
-	<% if I18n.locale is "da": %>
+	<% if I18n.locale.to_s is "da": %>
 		<h1>Få styr på ruten på din mobil.</h1>
 		<p>Søg ruter og brug dine favoritter på farten.</p>
 	<% else: %>
@@ -10,10 +10,11 @@
 	<% end %>
 </div>
 <div class="download">
-	<div class="appstore">
-		<a href="#"><img src="/assets/_new/badge-appstore.png"></a>
+	<a href="https://itunes.apple.com/dk/app/i-bike-cph/id684768054?l=da&amp;mt=8" target="_blank"><img src="/assets/_new/badge-appstore.png"></a>
+	<!-- <div class="appstore">
+		<a href="https://itunes.apple.com/dk/app/i-bike-cph/id684768054?l=da&amp;mt=8" target="_blank"><img src="/assets/_new/badge-appstore.png"></a>
 	</div>
 	<div class="googleplay">
 		<a href="#"><img src="/assets/_new/badge-googleplay.png"></a>
-	</div>
+	</div> -->
 </div>
