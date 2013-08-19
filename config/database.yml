@@ -9,7 +9,7 @@ common: &common
 #we're running postgres everywhere, to avoid differences between dev and production
 development:
     <<: *common
-    database: ibikecph_dev1
+    database: ibikecph_development
 
 
 # Warning: The database defined as "test" will be erased and
