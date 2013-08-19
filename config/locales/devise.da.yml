@@ -19,10 +19,22 @@ da:
     mailer:
       confirmation_instructions:
         subject: "Instruktioner til konto bekræftelse"
+        addressuser: "Velkommen"
+        confirmlink: "Bekræft min konto"
+        contentblock_1: "Du kan bekræfte din konto e-mail via nedenstående link:"
       reset_password_instructions:
         subject: "Instruktioner til gendannelse af adgangskode"
+        addressuser: "Hej"
+        rplink: "Ændre min adgangskode"
+        contentblock_1: "Nogen har anmodet om et link til at ændre din adgangskode. Du kan gøre dette via nedenstående link."
+        contentblock_2: "Hvis du ikke har anmodet dette, bedes du se bort fra denne e-mail."
+        contentblock_3: "Din adgangskode vil ikke ændre sig, indtil du får adgang til linket ovenfor og oprette en ny."  
       unlock_instructions:
         subject: "Instruktioner til oplåsning"
+        addressuser: "Hej"
+        ualink: "Låse min konto"
+        contentblock_1: "Din konto er blevet låst på grund af et for stort antal mislykkede tegn i forsøg."
+        contentblock_2: "Klik på linket nedenfor for at låse din konto:"
     omniauth_callbacks:
       failure: "Kunne ikke autentificere dig fra %{kind} fordi \"%{reason}\"."
       success: "Succesfuld autentificeret fra %{kind} konto."

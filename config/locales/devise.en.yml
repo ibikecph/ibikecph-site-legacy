@@ -19,10 +19,22 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
+        addressuser: "Welcome"
+        confirmlink: "Confirm my account"
+        contentblock_1: "You can confirm your account email through the link below:"    
       reset_password_instructions:
         subject: "Reset password instructions"
+        addressuser: "Hello"
+        rplink: "Change my password"
+        contentblock_1: "Someone has requested a link to change your password. You can do this through the link below."
+        contentblock_2: "If you didn't request this, please ignore this email."
+        contentblock_3: "Your password won't change until you access the link above and create a new one."  
       unlock_instructions:
         subject: "Unlock Instructions"
+        addressuser: "Hello"
+        ualink: "Unlock my account"
+        contentblock_1: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
+        contentblock_2: "Click the link below to unlock your account:"       
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
@@ -35,7 +47,12 @@ en:
       new:
         title: Reset Password
         body: "Please enter your email, and we'll send you instructions for resetting your password."
-        submit: Send Instructions      
+        submit: Send Instructions
+      edit:
+        title: Change your password
+        new_password: New password
+        confirm_password: Confirm new password
+        submit: Save      
     registrations:
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -54,11 +71,6 @@ en:
         terms: Terms of Service
         submit: Create Account
         already_have_account_q: Already have an account?
-      edit:
-        title: Change your password
-        new_password: New password
-        confirm_password: Confirm new password
-        submit: Save
     sessions:
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
