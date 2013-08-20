@@ -151,9 +151,9 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	set_loading: (field_name, loading) ->
 		@$(".#{field_name}").toggleClass 'loading', !!loading
 
-	find_suggestions: ->
+	find_suggestions: (event) ->
 		t = @
-		el = $(event.target)
+		el = $('.'+$(event.currentTarget).attr('class'))
 
 		parent = el.parent()
 		input = parent.find('input').attr('class')
@@ -183,9 +183,9 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 				numberPattern = /\d+/g
 				val_number = val.match(numberPattern);
 				val_address = val.replace(' '+val_number, '')
-				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token
+				foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token+'&callback=?'
 				oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
-				kms_url = IBikeCPH.config.suggestion_service.kms.url+val
+				kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'&callback=?'
 
 				if $current_user
 					favourites = new IBikeCPH.Models.Favourites
@@ -201,20 +201,39 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 										type: 'favourite'
 										fav_class: t.source
 
-				$.getJSON kms_url, (data) ->
-					$.each data.data, ->
-						if @x
-							lat = @y
-							lng = @x
-						else
-							lat = (@yMin+@yMax)/2
-							lng = (@xMin+@xMax)/2
-						items.push
-							name: ''
-							address: @presentationString
-							lat: lat
-							lng: lng
-							type: 'address'
+				$.ajax
+					type: 'get'
+					url: kms_url
+					cache: false
+					dataType: 'json'
+					success: (data) ->
+						$.each data.data, ->
+							if @x
+								lat = @y
+								lng = @x
+							else
+								lat = (@yMin+@yMax)/2
+								lng = (@xMin+@xMax)/2
+							items.push
+								name: ''
+								address: @presentationString
+								lat: lat
+								lng: lng
+								type: 'address'
+				# $.getJSON kms_url, (data) ->
+					# $.each data.data, ->
+					# 	if @x
+					# 		lat = @y
+					# 		lng = @x
+					# 	else
+					# 		lat = (@yMin+@yMax)/2
+					# 		lng = (@xMin+@xMax)/2
+					# 	items.push
+					# 		name: ''
+					# 		address: @presentationString
+					# 		lat: lat
+					# 		lng: lng
+					# 		type: 'address'
 
 				$.getJSON foursquare_url, (data) ->
 					unless data.response.minivenues.length is 0
