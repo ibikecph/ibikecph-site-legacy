@@ -9,7 +9,9 @@ class Api::V1::RoutesController < Api::V1::BaseController
     @routes=current_user.routes.recent_routes
   end
   
-  def create    
+  def create 
+        params[:route][:from_name]=params[:route][:from_name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:route] && params[:route][:from_name]
+        params[:route][:to_name]=params[:route][:to_name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:route] && params[:route][:to_name]         
         @route = current_user.routes.new params[:route]
         if @route.save          
            render :status => 201,
@@ -37,6 +39,8 @@ class Api::V1::RoutesController < Api::V1::BaseController
   
   def update
     @route=current_user.routes.find_by_id(params[:id])
+    params[:route][:from_name]=params[:route][:from_name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:route] && params[:route][:from_name]
+    params[:route][:to_name]=params[:route][:to_name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:route] && params[:route][:to_name]      
     if @route.update_attributes(params[:route])
            render :status => 200,
            :json => { :success => true,

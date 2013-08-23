@@ -7,7 +7,9 @@ class Api::V1::FavouritesController < Api::V1::BaseController
     @favourites=current_user.favourites.all_favourites
   end
   
-  def create    
+  def create
+        params[:favourite][:address]=params[:favourite][:address].force_encoding('ISO-8859-15').encode('UTF-8') if params[:favourite] && params[:favourite][:address]    
+        params[:favourite][:name]=params[:favourite][:name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:favourite] && params[:favourite][:name]
         @favourite = current_user.favourites.new params[:favourite]
         @favourite.position=current_user.favourites.length
         if @favourite.save          
@@ -33,14 +35,16 @@ class Api::V1::FavouritesController < Api::V1::BaseController
        end   
   end
   
-  def update
+  def update    
     @favourite=current_user.favourites.find_by_id(params[:id])
     if !@favourite
              render :status => 404,
              :json => { :success => false,
                         :info => t('favourites.flash.fav_not_found'), 
                         :errors => t('favourites.flash.fav_not_found')}   
-    else  
+    else 
+      params[:favourite][:address]=params[:favourite][:address].force_encoding('ISO-8859-15').encode('UTF-8') if params[:favourite] && params[:favourite][:address] 
+      params[:favourite][:name]=params[:favourite][:name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:favourite] && params[:favourite][:name]
       if @favourite.update_attributes(params[:favourite])
              render :status => 200,
              :json => { :success => true,
