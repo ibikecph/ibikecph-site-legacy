@@ -496,5 +496,16 @@ p {
             top: -20px;
             opacity: 1;
         }
+        .download {
+            left: 10px;
+            width: 280px;
+            div {
+                width: 140px;
+                float: left;
+                &:last-child {
+                    text-align: right;
+                }
+            }
+        }
     }
 }
