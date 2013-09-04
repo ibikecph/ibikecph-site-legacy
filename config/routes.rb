@@ -2,7 +2,7 @@ RailsOSRM::Application.routes.draw do
     
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiSettings.new(version: 1) do         
-      devise_for :users, :skip => [:confirmations] do
+      devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks"}, :skip => [:confirmations] do
         post "/login" => "sessions#create"
         get "/logout", :to => "sessions#destroy"
       end          

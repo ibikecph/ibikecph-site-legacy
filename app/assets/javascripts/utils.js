@@ -107,6 +107,8 @@ $(document).ready(function(){
 	
 	//set focus in forms
 	$('#focus_input').focus()
+	
+	if (window.location.href.indexOf('#_=_') > 0) { window.location = window.location.href.replace(/#.*/, '') };
 });
 
 

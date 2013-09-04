@@ -7,9 +7,11 @@
 			<%= chars_remaining %><br>
 			<%= f.text_field :name, { "data-maxlength" => User::MAXLENGTH[:name], :class => 'text_input' } %>
 		</p>
-		<p>
+		<%if !@user.facebook_user?%>   
+		<p>		    	    
 			<%= image_fields f, @user %>
 		</p>
+		<%end%>
 		<p>
 			<%= f.label :about %>
 			<%= chars_remaining %>

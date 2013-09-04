@@ -14,7 +14,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       @fbauth_hash=fb.auth_hash rescue nil    
       return failure unless @fbauth_hash 
         if @fbauth_hash 
-          @user = User.find_for_facebook_oauth(@fbauth_hash, current_user)
+          @user = User.find_for_facebook_oauth(@fbauth_hash)
           return failure unless @user 
             if @user
               sign_in(:user, @user)

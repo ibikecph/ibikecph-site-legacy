@@ -187,4 +187,3 @@ IBikeCPH.util.displayable_address = (geocoding_response) ->
 
 	return display_address or null
 
-if window.location.href.indexOf('#_=_') > 0 then window.location = window.location.href.replace(/#.*/, '')

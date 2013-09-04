@@ -5,10 +5,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       #sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       sign_in(:user, @user)
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-      redirect_to root_url
+      redirect_to account_path
     else
       set_flash_message(:notice, :success, :kind => "Facebook")
-      redirect_to root_url
+      redirect_to account_path
     end
   end
+ 
+  def after_omniauth_failure_path_for(scope)
+    '/users/sign_in'
+  end 
 end

@@ -49,7 +49,9 @@ module ApplicationHelper
 	
 	def profile_image user
 	  h  = { :class => :avatar, :title => user.name, :alt => user.name }
-	  if user.image.present?
+	  if user.facebook_user? and user.uid?
+	    return image_tag "http://graph.facebook.com/#{user.uid}/picture?width=60&height=60", { :class => 'g1 square', :title => user.name, :alt => user.name }
+	  elsif user.image.present?
 	    return image_tag user.image.g1.url, { :class => 'g1 square', :title => user.name, :alt => user.name }
 	  end
     
