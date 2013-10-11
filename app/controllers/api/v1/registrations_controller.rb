@@ -7,7 +7,11 @@
       end
     
       def create
-        params[:user].delete(:role)     #never allow new users with a role    
+        params[:user].delete(:role)     #never allow new users with a role   
+        params[:user][:name]=params[:user][:name].force_encoding('ISO-8859-15').encode('UTF-8') if params[:user] && params[:user][:name]
+        params[:user][:password]=params[:user][:password].force_encoding('ISO-8859-15').encode('UTF-8') if params[:user] && params[:user][:password]
+        params[:user][:password_confirmation]=params[:user][:password_confirmation].force_encoding('ISO-8859-15').encode('UTF-8') if params[:user] && params[:user][:password_confirmation]    
+         
         #handle images                       
         if params[:user][:image_path] && params[:user][:image_path]["file"]
           prepare_image_data(params[:user][:image_path])

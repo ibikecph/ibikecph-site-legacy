@@ -40,7 +40,7 @@ RailsOSRM::Application.routes.draw do
     resources :reported_issues, :path => 'issues' 
     
     resource :account do
-      get 'activating'
+      #get 'activating'
       get 'welcome'
       get 'settings'
       post 'settings' => :update_settings
