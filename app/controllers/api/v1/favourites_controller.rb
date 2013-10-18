@@ -8,8 +8,8 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
   
   def create
-        params[:favourite][:address]=params[:favourite][:address].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:address]    
-        params[:favourite][:name]=params[:favourite][:name].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:name]
+        params[:favourite][:address]=params[:favourite][:address].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:address] && !params[:favourite][:address].force_encoding('UTF-8').valid_encoding?    
+        params[:favourite][:name]=params[:favourite][:name].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:name] && !params[:favourite][:name].force_encoding('UTF-8').valid_encoding?
         @favourite = current_user.favourites.new params[:favourite]
         @favourite.position=current_user.favourites.length
         if @favourite.save          
@@ -43,8 +43,8 @@ class Api::V1::FavouritesController < Api::V1::BaseController
                         :info => t('favourites.flash.fav_not_found'), 
                         :errors => t('favourites.flash.fav_not_found')}   
     else 
-      params[:favourite][:address]=params[:favourite][:address].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:address] 
-      params[:favourite][:name]=params[:favourite][:name].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:name]
+      params[:favourite][:address]=params[:favourite][:address].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:address] && !params[:favourite][:address].force_encoding('UTF-8').valid_encoding? 
+      params[:favourite][:name]=params[:favourite][:name].force_encoding('ISO-8859-1').encode('UTF-8') if params[:favourite] && params[:favourite][:name] && !params[:favourite][:name].force_encoding('UTF-8').valid_encoding?
       if @favourite.update_attributes(params[:favourite])
              render :status => 200,
              :json => { :success => true,
