@@ -114,6 +114,7 @@ RailsOSRM::Application.routes.draw do
     end
     
     match '/about' => 'about#index'
+    match '/signal' => 'about#signal'
     match '/about/:action' => 'about#:action'
   end
 
