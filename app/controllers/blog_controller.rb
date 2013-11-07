@@ -8,11 +8,11 @@ class BlogController < ApplicationController
   before_filter :check_return_path, :only=>:show
   
   def index
-    @blog_entries = BlogEntry.latest.paginate :page => params[:page], :per_page => 10
+    @blog_entries = BlogEntry.news.latest.paginate :page => params[:page], :per_page => 10
   end
   
   def archive
-    @blog_entries = BlogEntry.latest.paginate :page => params[:page], :per_page => 10
+    @blog_entries = BlogEntry.news.latest.paginate :page => params[:page], :per_page => 10
   end
   
   def show
@@ -24,7 +24,7 @@ class BlogController < ApplicationController
   end
   
   def tag
-    @blog_entries = BlogEntry.tagged_with(params[:tag]).latest.paginate :page => params[:page], :per_page => 10
+    @blog_entries = BlogEntry.news.tagged_with(params[:tag]).latest.paginate :page => params[:page], :per_page => 10
   end
   
   def new
@@ -62,7 +62,7 @@ class BlogController < ApplicationController
   end
   
   def feed
-    @blog_entries = BlogEntry.latest
+    @blog_entries = BlogEntry.news.latest
     respond_to do |format|
       format.rss { render :layout => false }
     end
@@ -75,11 +75,11 @@ class BlogController < ApplicationController
   end
   
   def latest
-    @latest = BlogEntry.latest.limit(10)
+    @latest = BlogEntry.news.latest.limit(10)
   end
   
   def tag_cloud
-    @tags = BlogEntry.tag_counts_on(:tags)
+    @tags = BlogEntry.news.tag_counts_on(:tags)
   end
   
   def check_return_path

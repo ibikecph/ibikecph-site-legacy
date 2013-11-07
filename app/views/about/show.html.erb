@@ -1,0 +1,25 @@
+<div class="gr">
+	<div class="g2 about_sidebar">
+		<ul>
+			<li><%= link_to t('about.about'), { :controller => :about, :action => :index } %></li>
+			<li><%= link_to t('about.signal'), { :controller => :about, :action => :signal } %></li>
+		</ul>
+	</div>
+	<div class="g8 about_entry">
+			<% if @entry %>
+				<h1><%= @entry.title %></h1>
+				<% if @entry.image? %>
+					<div class="image">
+						<%= image_tag @entry.image.g4 %>
+					</div>
+				<% end %>
+				<%= auto_html_blog @entry.body, :width => 760, :height => 506 %>
+				<% if can? :manage, @entry %>
+					<ul class="admin_panel">
+						<li class="edit"><%= link_to t('edit'),  [:edit,@entry] %></li>
+						<li class="delete"><%= link_to t('delete'),  @entry, :method => :delete, :confirm => t('sure_q') %></li>
+					</ul>
+				<% end %>
+			<% end %>
+	</div>
+</div>
