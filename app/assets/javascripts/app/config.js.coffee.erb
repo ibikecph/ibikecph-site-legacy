@@ -1,5 +1,8 @@
 window.IBikeCPH or= {}
 
+`kms_username = "<%=ENV['KMS_USERNAME']%>";
+kms_pswd = "<%=ENV['KMS_PSWD']%>"`
+
 IBikeCPH.config =
 
 	initial_location:
@@ -89,6 +92,6 @@ IBikeCPH.config =
 		oiorest:
 			url: 'http://geo.oiorest.dk/adresser.json?q='
 		kms:
-			url: 'http://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&login=ibikecphsite&password=bikebike13&crs=EPSG:4326&search='
+			url: 'http://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&login='+kms_username+'&password='+kms_pswd+'&crs=EPSG:4326&search='
 			# url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=adresse&postdist=K%C3%B8benhavn*&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='
 			# url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=vej&husnr=1&geop=55.111111,12.222222&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='
