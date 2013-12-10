@@ -146,7 +146,7 @@ da:
     flash:
       user_not_found: Bruger findes ikke!
       deleted: Bruger slettet!  
-      activate_account: Konto oprettet. En meddelelse med en bekræftelse link er blevet sendt til din email-adresse. Venligst åbne linket for at aktivere din konto.
+      activate_account: Konto oprettet. En meddelelse med et bekræftelse link er blevet sendt til din email adresse. Åben venligst linket for at aktivere din konto.                        
       updated: Bruger detaljer opdateret! 
 
   api:
