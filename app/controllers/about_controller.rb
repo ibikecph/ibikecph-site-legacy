@@ -12,6 +12,15 @@ class AboutController < ApplicationController
     render :show
   end
 
+  def api
+    @entry = BlogEntry.tagged_with(["about/"]).first
+    render :show
+  end
+  
+  def faq
+    @entry = BlogEntry.tagged_with(["about/"]).first
+    render :show
+  end
 
   private
   def find_entries

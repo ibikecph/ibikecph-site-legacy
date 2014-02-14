@@ -115,7 +115,9 @@ RailsOSRM::Application.routes.draw do
     
     match '/about' => 'about#index'
     match '/signal' => 'about#signal'
-    match '/about/:action' => 'about#:action'
+    match '/faq' => 'about#faq'
+    match '/api' => 'about#api'
+    #match '/about/:action' => 'about#:action'
   end
 
   match '/terms' => 'pages#terms'
