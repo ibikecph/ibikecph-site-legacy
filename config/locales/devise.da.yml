@@ -28,18 +28,18 @@ da:
         rplink: "Ændre min adgangskode"
         contentblock_1: "Nogen har anmodet om et link til at ændre din adgangskode. Du kan gøre dette via nedenstående link."
         contentblock_2: "Hvis du ikke har anmodet dette, bedes du se bort fra denne e-mail."
-        contentblock_3: "Din adgangskode vil ikke ændre sig, indtil du får adgang til linket ovenfor og oprette en ny."  
+        contentblock_3: "Din adgangskode vil ikke ændre sig, indtil du får adgang til linket ovenfor og opretter en ny."  
       unlock_instructions:
         subject: "Instruktioner til oplåsning"
         addressuser: "Hej"
-        ualink: "Låse min konto"
+        ualink: "Lås min konto"
         contentblock_1: "Din konto er blevet låst på grund af et for stort antal mislykkede tegn i forsøg."
         contentblock_2: "Klik på linket nedenfor for at låse din konto:"
     omniauth_callbacks:
       failure: "Kunne ikke autentificere dig fra %{kind} fordi \"%{reason}\"."
-      success: "Succesfuld autentificeret fra %{kind} konto."
+      success: "Succesfuldt autentificeret fra %{kind} konto."
     passwords:
-      no_token: "Du kan ikke få adgang til denne side uden at komme fra din registrerede email adresse. Hvis du kommer fra din registrerede email adresse, skal du sørge for at bruge den fulde URL du fik tilsendt."
+      no_token: "Du kan ikke få adgang til denne side uden at komme fra din registrerede emailadresse. Hvis du kommer fra din registrerede emailadresse, skal du sørge for at bruge den fulde URL du fik tilsendt."
       send_instructions: "Om få minutter vil du modtage instruktioner til hvordan du gendanner din adgangskode."
       send_paranoid_instructions: "Hvis din email findes i vores database, vil du om få minutter modtage instruktioner til hvordan du gendanner din adgangskode."
       updated: "Din adgangskode er blevet ændret. Du er nu logget ind."
@@ -56,7 +56,7 @@ da:
     registrations:
       destroyed: "Din konto er nu slettet. Vi håber på at se dig igen snarest."
       signed_up: "Velkommen! Din konto er nu oprettet."
-      signed_up_but_inactive: "Din konto er nu oprette. Vi kan dog ikke logge dig ind før du bekræfter din konto."
+      signed_up_but_inactive: "Din konto er nu oprettet. Vi kan dog ikke logge dig ind før du bekræfter din konto."
       signed_up_but_locked: "Din konto er nu oprette. Vi kan dog ikke logge dig ind da din konto er låst."
       signed_up_but_unconfirmed: "En mail med et bekræftelse link er blevet sendt til din email adresse. Følg linket for at aktivere din konto."
       update_needs_confirmation: "Din konto er blevet opdateret, men din nye email adresse mangler at blive bekræftet. Vi har sendt en mail til din nye email adresse, du bekræfter din email adresse ved at følge linket i mailen."
@@ -66,7 +66,7 @@ da:
         body: |
           En I Bike CPH konto er gratis og uforpligtende. Med en konto har du mulighed for at komme med input og kommentarer samt at modtage vores nyheder. Som noget nyt kan du også gemme favoritter og søgninger på tværs af ibikecph.dk og appen.
         i_accept: Jeg accepterer
-        terms: Brugerbetingelserne
+        terms: Brugerbetingelser
         submit: OPRET KONTO
         already_have_account_q: Har du allerede en konto?
     sessions:
