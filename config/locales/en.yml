@@ -193,8 +193,8 @@ en:
       invalid_attempt: Login Failed
       params_missing: Required parameter(s) missing.
       confirm_account: |
-                       Almost there..
-                       Before you can login, please click on the link in the e-mail we sent you.
+                       Almost there...
+                       Before you can log in, please click on the link in the e-mail we have sent to you. You can resend the e-mail from ibikecph.dk.
       
   accounts:
     show:
