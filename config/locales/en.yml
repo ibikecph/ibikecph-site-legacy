@@ -192,6 +192,9 @@ en:
       logged_out: Logged out.
       invalid_attempt: Login Failed
       params_missing: Required parameter(s) missing.
+      confirm_account: |
+                       Almost there..
+                       Before you can login, please click on the link in the e-mail we sent you.
       
   accounts:
     show:
