@@ -196,9 +196,9 @@ da:
       logged_out: Logget ud.
       invalid_attempt: login mislykkedes
       params_missing: Nødvendige parameterer mangler.
-      confirm_account: |
-                       Næsten i mål...
-                       Før du kan logge ind, bedes du klikke på linket i den e-mail vi har sendt til dig. Du kan gensende e-mailen fra ibikecph.dk.
+      confirm_account_title: Næsten i mål...
+      confirm_account: Før du kan logge ind, bedes du klikke på linket i den e-mail vi har sendt til dig. Du kan gensende e-mailen fra ibikecph.dk.
+  
   accounts:
     show:
       title: Konto indstillinger
