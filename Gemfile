@@ -21,10 +21,10 @@ gem 'acts-as-taggable-on'
 gem 'exception_notification', '2.6.1'   #there's UTF bug with 3.0.0
 gem 'google-analytics-rails'
 gem 'rails-timeago'
-gem 'devise'
+gem 'devise', '2.2.5'
 gem 'jbuilder'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.1'
 
 group :development do
   gem 'quiet_assets'

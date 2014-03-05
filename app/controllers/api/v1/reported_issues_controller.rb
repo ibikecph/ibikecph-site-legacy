@@ -7,7 +7,10 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
     @reported_issues=ReportedIssue.find(:all, :conditions=>{:is_open=>true})
   end
   
-  def create    
+  def create
+        params[:issue][:comment]=params[:issue][:comment].force_encoding('ISO-8859-1').encode('UTF-8') if params[:issue] && params[:issue][:comment] && !params[:issue][:comment].force_encoding('UTF-8').valid_encoding?
+        params[:issue][:route_segment]=params[:issue][:route_segment].force_encoding('ISO-8859-1').encode('UTF-8') if params[:issue] && params[:issue][:route_segment] && !params[:issue][:route_segment].force_encoding('UTF-8').valid_encoding?
+        params[:issue][:error_type]=params[:issue][:error_type].force_encoding('ISO-8859-1').encode('UTF-8') if params[:issue] && params[:issue][:error_type] && !params[:issue][:error_type].force_encoding('UTF-8').valid_encoding?    
         @reported_issue = ReportedIssue.new params[:issue]
         @reported_issue.user_id=current_user.id if current_user
         if @reported_issue.save          
@@ -36,6 +39,9 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   
   def update
     @reported_issue=ReportedIssue.find_by_id(params[:id])
+    params[:issue][:comment]=params[:issue][:comment].force_encoding('ISO-8859-1').encode('UTF-8') if params[:issue] && params[:issue][:comment] && !params[:issue][:comment].force_encoding('UTF-8').valid_encoding?
+    params[:issue][:route_segment]=params[:issue][:route_segment].force_encoding('ISO-8859-1').encode('UTF-8') if params[:issue] && params[:issue][:route_segment] && !params[:issue][:route_segment].force_encoding('UTF-8').valid_encoding?
+    params[:issue][:error_type]=params[:issue][:error_type].force_encoding('ISO-8859-1').encode('UTF-8') if params[:issue] && params[:issue][:error_type] && !params[:issue][:error_type].force_encoding('UTF-8').valid_encoding?
     if @reported_issue.update_attributes(params[:issue])
            render :status => 200,
            :json => { :success => true,

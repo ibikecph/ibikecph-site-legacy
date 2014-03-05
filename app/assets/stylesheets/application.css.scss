@@ -1660,3 +1660,24 @@ div.ajax_dialog {
         }
     }
 }
+
+.about_entry {
+    margin-top: $half_gutter;
+    margin-bottom: $half_gutter;
+    border-radius: 5px 5px 5px 5px;
+    padding: $half_gutter;
+    background-color: white;
+    img {
+        margin-top: $half_gutter;
+        margin-bottom: $half_gutter;
+    }
+}
+.about_sidebar {
+    margin-top: $half_gutter;
+    margin-bottom: $half_gutter;
+    padding-left: $half_gutter;
+    padding-top: $half_gutter;
+    li {
+        font-weight: bold;
+    }
+}

@@ -40,7 +40,7 @@ RailsOSRM::Application.routes.draw do
     resources :reported_issues, :path => 'issues' 
     
     resource :account do
-      get 'activating'
+      #get 'activating'
       get 'welcome'
       get 'settings'
       post 'settings' => :update_settings
@@ -114,7 +114,10 @@ RailsOSRM::Application.routes.draw do
     end
     
     match '/about' => 'about#index'
-    match '/about/:action' => 'about#:action'
+    match '/signal' => 'about#signal'
+    match '/faq' => 'about#faq'
+    match '/api' => 'about#api'
+    #match '/about/:action' => 'about#:action'
   end
 
   match '/terms' => 'pages#terms'

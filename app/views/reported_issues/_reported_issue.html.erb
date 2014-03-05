@@ -14,5 +14,5 @@
         <% end %>
     <h1><%= reported_issue.route_segment %></h1>
     <p><%= reported_issue.error_type %></p>
-    <p><%=simple_format(reported_issue.comment) %></p>
+    <p><%=simple_format(reported_issue.comment, {}, :sanitize=>false)%></p>
 </div>

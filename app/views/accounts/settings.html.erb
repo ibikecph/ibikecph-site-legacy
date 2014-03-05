@@ -15,8 +15,7 @@
 			<p><%= f.label :token_authentication_key %><br />
 			<%= current_user.authentication_token.blank? ? "Token Empty" : current_user.authentication_token %></p>
 
-			<p><%= link_to "Generate New Token", token_authentications_path(:user_id => current_user.id), :method => :post, :confirm => "Are you sure?"  %>
-			<%= link_to "Delete Token", token_authentication_path(current_user), :method => :delete, :confirm => "Are you sure?" if current_user.authentication_token? %></p>
+			<p><%= link_to "Generate New Token", token_authentications_path(:user_id => current_user.id), :method => :post, :confirm => "Are you sure?"  %></p>
 		</div>
 
 		

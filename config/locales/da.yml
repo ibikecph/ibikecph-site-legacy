@@ -27,7 +27,7 @@ da:
         body: Indhold
         tags: Tags
         image: Billede
-        sticky: Fasthold
+        sticky: Sticky
       issue:
         title: Overskrift
         body: Beskrivelse
@@ -38,11 +38,11 @@ da:
         about: Om
         image: Billede
         tags: Tags/Emneord
-        terms: Brugerbetingelserne
+        terms: Brugerbetingelser
         password: Adgangskode
         password_confirmation: Bekræft adgangskode
         current_password: Nuværende adgangskode
-        new_password_confirmation: Bekræft nyt adgangskode
+        new_password_confirmation: Bekræft ny adgangskode
     errors:
       models:
         issue:
@@ -124,7 +124,7 @@ da:
   follows:
     follow:
         follow: Følg
-        start: Klik for a følge
+        start: Klik for at følge
         stop: Klik for at stoppe med at følge
 
   users:
@@ -134,11 +134,11 @@ da:
       title: Opret I Bike CPH konto
       body: |
         Vær med!
-        En I Bike CPH konto er gratis og uden forpligtelser, og giver mulighed for at komme med input og kommentarer.
+        En I Bike CPH konto er gratis og uden forpligtelser, og giver dig mulighed for at komme med input og kommentarer.
         Du vælger selv om du vil have tilsendt email med nyheder etc.
       i_accept: Jeg accepterer
       email_confirmation: 'Bekræft email'
-      terms: Brugerbetingelserne
+      terms: Brugerbetingelser
       submit: Gem
       already_have_account_q: Har du allerede en konto?
     show:
@@ -146,34 +146,34 @@ da:
     flash:
       user_not_found: Bruger findes ikke!
       deleted: Bruger slettet!  
-      activate_account: Konto oprettet. En meddelelse med en bekræftelse link er blevet sendt til din email-adresse. Venligst åbne linket for at aktivere din konto.
-      updated: Bruger detaljer opdateret! 
+      activate_account: Konto oprettet. En meddelelse med et bekræftelseslink er blevet sendt til din email-adresse. Åben linket for at aktivere din konto.                        
+      updated: Brugerdetaljer opdateret! 
 
   api:
     flash:
       unauthorized: Uautoriseret adgang!
-      invalid_token: Ugyldig ægthedsbekræftelsestoken!
+      invalid_token: Ugyldigt token!
             
   favourites:
     flash:
-      fav_not_found: Favourite findes ikke!
-      updated: Favourite opdateret!
-      created: Favourite skabte succes!
-      deleted: Favourite slettet!
-      position_updated: Favoritter position opdateret!
+      fav_not_found: Favorit findes ikke!
+      updated: Favorit opdateret!
+      created: Favorit skabte succes!
+      deleted: Favorit slettet!
+      position_updated: Favorits position opdateret!
 
   reported_issues:
     flash:
       issue_not_found: Issue findes ikke!
       updated: Issue opdateret!
-      created: Udstedelse skabte succes!
+      created: Issue lavet!
       deleted: Issue slettet!
       
   routes:
     flash:
       route_not_found: Rute findes ikke!
       updated: Rute opdateret!
-      created: Rute skabte succes!
+      created: Rute lavet!
       deleted: Rute slettet!
         
   sessions:
@@ -195,8 +195,10 @@ da:
       email_not_verified: "Email %{email} ikke verificeret."
       logged_out: Logget ud.
       invalid_attempt: login mislykkedes
-      params_missing: Nødvendig parameter (r) mangler.
-      
+      params_missing: Nødvendige parameterer mangler.
+      confirm_account_title: Næsten i mål...
+      confirm_account: Før du kan logge ind, bedes du klikke på linket i den e-mail vi har sendt til dig. Du kan gensende e-mailen fra ibikecph.dk.
+  
   accounts:
     show:
       title: Konto indstillinger
@@ -211,7 +213,7 @@ da:
       change_password: Ændre adgangskode og email
       change_settings: Rediger indstillinger
       notify_by_email: Beskeder via email
-      unverified: Uverficiret
+      unverified: Uverificeret
       password_hidden: Skjult
       no_image: Intet
     edit:
@@ -228,12 +230,12 @@ da:
       submit: Gem
     welcome:
       title: Velkommen!
-      body: Tak for din indmeldelse. Vi håber du før fornøjelse af dit ophold på I Bike Cph.
+      body: Tak for din indmeldelse. Vi håber du for fornøjelse af I Bike CPH.
       view_account: Se din konto
     settings:
       title: Rediger Indstillinger
       unverified: "For at modtage emailbeskeder, er det nødvendig at du verificerer din emailadresse."
-      email_notifications: "Send mig email når der er nye blog indlæg, folk kommenterer på mine indlæg, etc."
+      email_notifications: "Send mig en email når der er nye blogindlæg og når folk kommenterer på mine indlæg, etc."
       submit: Gem
     flash:
       email_not_found: Email ikke fundet.
@@ -242,17 +244,17 @@ da:
       updated: Konto opdateret.
       settings_updated: Indstillinger opdateret.
       activation_sent: "Aktiveringsemail gensendt til %{email}."
-      activate_new_email: "Du har opdateret din konto med succes, men vi er nødt til at bekræfte din nye e-mailadresse. Tjek venligst din e-mail og klik på bekræft link til færdiggøre bekræfter din nye e-mailadresse."
+      activate_new_email: "Du har opdateret din konto, men vi er nødt til at bekræfte din nye e-mailadresse. Tjek venligst din e-mail og klik på bekræft link til færdiggøre bekræftelsen din nye e-mailadresse."
     misc:
       cancel: Annuller
 
   blog:
     index:
-      new: Nyt Blogindlæg
+      new: Nyt blogindlæg
     new:
-      title: Nyt Blogindlæg
+      title: Nyt blogindlæg
     edit:
-      title: Rediger Blogindlæg
+      title: Rediger blogindlæg
     form:
       make_sticky: Hold dette indlæg øverst (kan ændres senere).
       submit: Gem
@@ -261,7 +263,7 @@ da:
     latest:
       title: Seneste blogindlæg
       archive: Se alle blogindlæg
-      new: Nyt Indlæg
+      new: Nyt indlæg
     tag:
       title: "Indlæg tagget med: %{tag}"
     flash:
@@ -280,13 +282,13 @@ da:
   
   emails:
     new:
-      title: Ændr Email
+      title: Ændre Email
       new_email: Ny Email
-      new_email_confirmation: Ny Email Konfirmering
+      new_email_confirmation: Ny Email bekræftelse
       submit: Gem
     unverified:
       title: Uverificeret Email
-      body: "Du skulle gerne have modtaget en email med instruktioner om hvordan du verificerer din email. Eller kan de få den gensendt ved at klikke nedenfor."
+      body: "Du skulle gerne have modtaget en email med instruktioner om hvordan du verificerer din email. Ellers kan de få den gensendt ved at klikke nedenfor."
       submit: Gensend Verificeringsemail
     verification_sent:
       title: Verificeringsemail Sendt
@@ -301,7 +303,7 @@ da:
       already_verified: "Emailen %{email} er allerede verificeret."
       verified: "Emailen %{email} verificeret."
       not_found: "Emailen %{email} ikke fundet."
-      verification_expired: Verifikationlinket er udløbet.
+      verification_expired: Verifikationslinket er udløbet.
       verified_with_password: "Emailen #{@email} verificeret, og adgangskode gemt."
       verification_wait: "Verifikationsemail kan kun sendes hver %{time}. Vent venligst lidt, og prøv så igen."
       verification_not_found: Ugyldigt verifikationslink.
@@ -309,22 +311,22 @@ da:
   password_resets:
     new_ask:
       title: Nulstil adgangskode
-      body: "Indtast din email nedenfor, så sender vi instruktioner om hvordan du nulstiller dit adgangskode."
+      body: "Indtast din email nedenfor, så sender vi instruktioner om hvordan du nulstiller din adgangskode."
       submit: Send Instruktioner
     new_select:
       title: Nulstil adgangskode
-      body: "Instruktioner om hvordan du nulstiller dit adgangskode vil blive sendt til %{user}."
+      body: "Instruktioner om hvordan du nulstiller din adgangskode vil blive sendt til %{user}."
       submit: Send Instruktioner
     new_fixed:
       title: Nulstil adgangskode
-      body: "Instruktioner om hvordan du nulstiller dit adgangskode vil blive sendt til %{user}."
+      body: "Instruktioner om hvordan du nulstiller din adgangskode vil blive sendt til %{user}."
       submit: Send Instruktioner
     edit:
       title: Ændr adgangskode
-      for_user: "Ændr adgangskode for brugeren %{user}."
-      submit: Ændr adgangskode
+      for_user: "Ændre adgangskode for brugeren %{user}."
+      submit: Ændre adgangskode
     flash:
-      instructions_sent: "Instruktioner om hvordan du nulstiller dit adgangskode er sendt til %{email}."
+      instructions_sent: "Instruktioner om hvordan du nulstiller din adgangskode er sendt til %{email}."
       email_not_found: "Emailen %{email} ikke fundet."
       password_changed: Kodeord Ændret
       invalid_link: Ugyldigt link til nulstilling af kodeord.
@@ -334,13 +336,13 @@ da:
   user_mailer:
     activation:
       subject: Aktiver din I Bike Cph konto
-      body: "Tak for indmeldingen på I Bike Cph! For at verificere din email, bedes du gå til:"
+      body: "Tak for tilmeldingen til I Bike Cph! For at verificere din email, bedes du gå til:"
     verify_email:
       subject: Verificering af din I Bike Cph konto
       body: "For at verificere din email til brug på I Bike Cph, bedes du gå til:"
     password_reset:
-      subject: Nulstilling af dit I Bike Cph adgangskode
-      body: "For at nulstille dit I Bike Cph adgangskode, bedes du gå til:"
+      subject: Nulstilling af din I Bike Cph adgangskode
+      body: "For at nulstille din I Bike Cph adgangskode, bedes du gå til:"
     blog_entry:
       subject: "Blogindlæg: %{title}"
       body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph:"
@@ -358,7 +360,7 @@ da:
       body: |
         Har du idéer til forbedringer af cykelruteplanlæggeren? Er der noget der ikke virker, eller mangler der en sti på kortet? Så fortæl det her!
       note: |
-        Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklame her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
+        Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklamere her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
     issues:
       title: Vær med!
       sub_title: Gi’ os dine forslag til forbedringer.
@@ -557,7 +559,7 @@ da:
     edit: Rediger din profil
     name: Navn
     email: Email
-    waiting_for_confirmation: I øjeblikket venter bekræftelse for
+    waiting_for_confirmation: Afventer bekræftelse
     password_leave_blank: Adgangskode (lad feltet være tomt hvis du ikke ønsker at ændre det)
     password_current: Nuværende adgangskode (vi skal bruge dit nuværende adgangskode for at bekræfte dine ændringer)
     submit_update: Opdater
