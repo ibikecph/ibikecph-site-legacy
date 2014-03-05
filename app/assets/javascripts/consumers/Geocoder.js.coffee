@@ -25,8 +25,9 @@ class IBikeCPH.Geocoder
 		, IBikeCPH.config.geocoding_service.options
 		@lookup_init()
 		@request = $.getJSON IBikeCPH.config.geocoding_service.url + '?json_callback=?', options, (result) =>
-			if result[0] 
+			if result[0]
 				location = lat: Number(result[0].lat), lng: Number(result[0].lon)
+				# L.Map.panTo(Number(result[0].lat), Number(result[0].lon))
 			else
 				location = null
 			@model.set 'location', location

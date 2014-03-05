@@ -212,8 +212,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 								lat = @y
 								lng = @x
 							else
-								lat = (@yMin+@yMax)/2
-								lng = (@xMin+@xMax)/2
+								lat = @yMin
+								lng = @xMin
 							items.push
 								name: ''
 								address: @presentationString
@@ -260,6 +260,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 										'data-lat': t.lat
 										'data-lng': t.lng
 										'data-type': input
+										'data-address': t.address
+										'data-class': 'favorite'
 										'class': 'favourite '+t.fav_class
 									name = $('<span />').addClass('n').html(t.name+' ')
 									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
@@ -271,6 +273,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 										'data-lat': t.lat
 										'data-lng': t.lng
 										'data-type': input
+										'data-address': t.address
+										'data-class': 'poi'
 										'class': 'poi'
 									name = $('<span />').addClass('n').html(t.name+' ')
 									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
@@ -282,9 +286,11 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 										'data-lat': t.lat
 										'data-lng': t.lng
 										'data-type': input
+										'data-address': t.address
+										'data-class': 'address'
 										'class': 'address'
 									address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
-									address = $('<span />').addClass('a').html(address)
+									address = $('<span />').addClass('a').html(address.replace('(', '').replace(')', ''))
 									container.append address
 
 								suggestions.append container
@@ -308,26 +314,50 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 	update_field_from_suggestion: (event) ->
 		el = $(event.currentTarget)
 		type = el.data('type')
+		source = el.data 'class'
+
 		ll =
 			lat: el.data('lat')
 			lng: el.data('lng')
 			name: el.data('name')
+			
+		if el.data('class') is 'address'
+			value = @normalize_address IBikeCPH.util.normalize_whitespace el.data('address')
 
-		@map.map.panTo new L.LatLng(ll.lat, ll.lng)
-		
-		if type is 'from'
-			@model.waypoints.first().set 'location', ll
-			@model.waypoints.first().trigger 'input:location'
-		else if type is 'to'
-			@model.waypoints.last().set 'location', ll
-			@model.waypoints.last().trigger 'input:location'
+			if type is 'from'
+				@set_field 'from', value
+				waypoint = @model.waypoints.first()
+				waypoint.set 'address', value
+				waypoint.trigger 'input:address'
+				$('.from').blur()
+			else if type is 'to'
+				@set_field 'to', value
+				waypoint = @model.waypoints.last()
+				waypoint.set 'address', value
+				waypoint.trigger 'input:address'
+				$('.to').blur()
 
-		$('.address .'+type).attr
-			'data-lat': ll.lat
-			'data-lng': ll.lng
-			'data-name': ll.name
+			$('.address .'+type).attr
+				'data-lat': ll.lat
+				'data-lng': ll.lng
+				'data-name': ll.name
 
-		$('.suggestions').html('').hide()
+			$('.suggestions').html('').hide()
+		else
+			if type is 'from'
+				@model.waypoints.first().set 'location', ll
+				@model.waypoints.first().trigger 'input:location'
+
+			else if type is 'to'
+				@model.waypoints.last().set 'location', ll
+				@model.waypoints.last().trigger 'input:location'
+
+			$('.address .'+type).attr
+				'data-lat': ll.lat
+				'data-lng': ll.lng
+				'data-name': ll.name
+
+			$('.suggestions').html('').hide()
 
 	hide_suggestions: ->
 		setTimeout (->
@@ -335,6 +365,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 		), 200
 
 	fields_updated: (event) ->
+		return false
 		input = $(event.currentTarget)
 		if input.is '.from'
 			waypoint = @model.waypoints.first()
@@ -373,3 +404,20 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 			$('.mode #standard').trigger 'click'
 		else
 			$('.mode #cargobike').trigger 'click'
+
+	normalize_address: (value) ->
+		value = IBikeCPH.util.normalize_whitespace value
+		value = value.replace /\b[kK][bB][hH]\b/g, "København"		# kbh -> København
+		value = value.replace /\b[nNøØsSvVkK]$/, ""					# remove north/south/east/west postfix
+		value = value.replace /(\d+)\s+(\d+)/, "$1, $2"				# add comma between street nr and zip code
+		
+		value = value.replace 'København SV', 'København'
+		value = value.replace 'København S', 'København'
+		value = value.replace 'København NV', 'København'
+		value = value.replace 'København N', 'København'
+		value = value.replace 'København Ø', 'København'
+		value = value.replace 'København V', 'København'
+		value = value.replace '(', ''
+		value = value.replace ')', ''
+		
+		value

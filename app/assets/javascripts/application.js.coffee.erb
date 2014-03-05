@@ -212,6 +212,17 @@ jQuery ->
 				ibg.resize ibg
 			), 0
 
+			$.each ibg.elements.items.find('h2'), ->
+				el = $(@)
+				letterLength = 0
+				words = el.text().split(' ')
+				$.each words, ->
+					if this.length > letterLength
+						letterLength = this.length
+				if letterLength > 12
+					el.addClass 'smaller'
+
+
 			ibg.elements.items.click ->
 				el = $(@)
 				ibg.open_box = el
