@@ -1,8 +1,9 @@
 $().ready ->
 
-	unless $.cookie('trigger_mobile') is 'done'
-		$("#mobile_app a").parent().addClass 'selected'
-		$("#mobileapp").toggleClass 'rendered'
+	unless window.location.href.match('account')
+		unless $.cookie('trigger_mobile') is 'done'
+			$("#mobile_app a").parent().addClass 'selected'
+			$("#mobileapp").toggleClass 'rendered'
 
 	remove_flash()
 

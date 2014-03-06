@@ -604,6 +604,7 @@ li a {
             box-shadow: inset 1px 1px 0 #6385d6;
             cursor: pointer;
             text-decoration: none;
+            display: inline-block
         }
         button,
         input {
@@ -618,6 +619,9 @@ li a {
             border-radius: 2px;
             box-shadow: inset 1px 1px 0 #60c2e7;
             cursor: pointer;
+            display: inline-block;
+            margin-bottom: 10px;
+            -webkit-appearance: none;
         }
         .cancel {
             color: #fff;
