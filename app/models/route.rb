@@ -1,10 +1,10 @@
 class Route < ActiveRecord::Base
   
-  attr_accessible :from_name, :from_lattitude, :from_longitude, :to_name, :to_lattitude, :to_longitude, :route_geometry, :route_instructions, :route_summary, :route_name, :start_date, :end_date, :route_visited_locations, :is_finished
+  attr_accessible :from_name, :from_latitude, :from_longitude, :to_name, :to_latitude, :to_longitude, :route_geometry, :route_instructions, :route_summary, :route_name, :start_date, :end_date, :route_visited_locations, :is_finished
  
   belongs_to :user
   
-  validates_presence_of :from_name, :from_lattitude, :from_longitude, :to_name, :to_lattitude, :to_longitude, :start_date
+  validates_presence_of :from_name, :from_latitude, :from_longitude, :to_name, :to_latitude, :to_longitude, :start_date
   validates_presence_of :end_date, :route_visited_locations,  :if => lambda {|s| s.is_finished == true } 
   
   scope :finished_routes, where('is_finished = true').order('created_at desc')

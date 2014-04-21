@@ -196,7 +196,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 									items.push
 										name: t.name
 										address: t.address
-										lat: t.lattitude
+										lat: t.latitude
 										lng: t.longitude
 										type: 'favourite'
 										fav_class: t.source

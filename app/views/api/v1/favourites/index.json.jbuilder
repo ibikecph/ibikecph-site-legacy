@@ -5,7 +5,7 @@ json.data @favourites do |json, favourite|
     json.user_id favourite.user_id
     json.name favourite.name
     json.address favourite.address
-    json.lattitude favourite.lattitude
+    json.latitude favourite.latitude
     json.longitude favourite.longitude
     json.source favourite.source
     json.sub_source favourite.sub_source

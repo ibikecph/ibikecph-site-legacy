@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131021101718) do
+ActiveRecord::Schema.define(:version => 20140421103015) do
 
   create_table "blog_entries", :force => true do |t|
     t.string   "title"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(:version => 20131021101718) do
     t.integer  "user_id"
     t.string   "name"
     t.text     "address"
-    t.string   "lattitude"
+    t.string   "latitude"
     t.string   "longitude"
     t.string   "source"
     t.string   "sub_source"
@@ -97,10 +97,10 @@ ActiveRecord::Schema.define(:version => 20131021101718) do
   create_table "routes", :force => true do |t|
     t.integer  "user_id"
     t.string   "from_name"
-    t.string   "from_lattitude"
+    t.string   "from_latitude"
     t.string   "from_longitude"
     t.string   "to_name"
-    t.string   "to_lattitude"
+    t.string   "to_latitude"
     t.string   "to_longitude"
     t.datetime "start_date"
     t.datetime "end_date"
