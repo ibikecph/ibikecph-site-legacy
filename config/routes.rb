@@ -52,9 +52,10 @@ RailsOSRM::Application.routes.draw do
     #post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
 
   #  resources :users
-    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations", :passwords=>"passwords" } do 
+    devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :registrations => "registrations", :passwords=>"passwords", :sessions=>"sessions" } do 
        get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
        get 'users/new' => 'devise/registrations#new'
+       get "infopage", :to => "sessions#infopage", :as => "infopage"
     end
     resources :users
     

@@ -182,6 +182,11 @@ en:
       signup_account: Create account
       signuporlogin_with_fb: "Facebook Login"
       remember_me: Remember Me
+    infopage:
+      title: "Email not verified!"
+      text: "Could not login, because the email used is not yet verified. To verify it, please follow the instructions in the email we sent you."
+      text1: "Please follow the instructions in the email we sent you when you signed up, or click below to have the instructions resend to your email."
+      reconfirm_link: "Resend Verification Email"
     flash:
       logged_in: "Logged in as %{user}."
       logged_in_oath: "Logged in as %{user} using %{provider}."
