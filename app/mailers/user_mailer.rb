@@ -18,7 +18,7 @@ class UserMailer < ActionMailer::Base
   def password_reset user_id, locale
     @user = User.find user_id
     @url = url_for :controller => :password_resets, :action => :edit, :token => @user.password_reset_token, :locale => locale
-    mail :to => @user.email_address, :subject => t('user_mailer.password_reset.subject')
+    mail :to => @user.email, :subject => t('user_mailer.password_reset.subject')
   end
   
   def blog_entry user, blog_entry, locale
@@ -26,7 +26,7 @@ class UserMailer < ActionMailer::Base
     @blog_entry = blog_entry
     @url = url_for :controller => :blog, :action => :show, :id => blog_entry.id,  :locale => locale
     @settings_url = settings_url locale
-    mail :to => @user.email_address, :subject => t('user_mailer.blog_entry.subject', :title => blog_entry.title)
+    mail :to => @user.email, :subject => t('user_mailer.blog_entry.subject', :title => blog_entry.title)
   end
   
   def comment user, comment, locale
@@ -44,7 +44,7 @@ class UserMailer < ActionMailer::Base
       return
     end
     @settings_url = settings_url locale
-    mail :to => @user.email_address, :subject => t('user_mailer.comment.subject', :title => @title)
+    mail :to => @user.email, :subject => t('user_mailer.comment.subject', :title => @title)
   end
   
   private

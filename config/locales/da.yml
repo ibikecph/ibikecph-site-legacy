@@ -187,10 +187,10 @@ da:
       no_account_q: Ingen konto?
       remember_me: Husk mig
     infopage:
-      title: Email not verified!
-      text: "Could not login, because the email used is not yet verified. To verify it, please follow the instructions in the email we sent you."
-      text1: "Please follow the instructions in the email we sent you when you signed up, or click below to have the instructions resend to your email."
-      reconfirm_link: "Resend Verification Email"
+      title: Email ikke bekræftet!
+      text: "Du kan ikke logge ind, fordi du ikke har bekræftet din email adresse. For at gøre dette skal du følge instruktionerne i den email vi har sendt dig."
+      text1: "Følg instruktionerne fra den email vi sendte dig, da du meldte dig til eller klik her for at få instruktionerne gensendt til din email adresse"
+      reconfirm_link: "send bekræftelses-email igen"
     flash:
       logged_in: "Logget ind som %{user}."
       logged_in_oath: "Logget ind som %{user} med %{provider}."
