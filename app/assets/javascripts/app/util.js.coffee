@@ -112,7 +112,7 @@ IBikeCPH.util.decode_path = (encoded) ->
 
 		lng += dlng
 
-		points.push new L.LatLng(lat * 1e-5, lng * 1e-5)
+		points.push new L.LatLng(lat * 1e-6, lng * 1e-6)
 
 	return points
 
