@@ -55,14 +55,14 @@ module RailsOSRM
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
+
     #avoid loading environment during asset precompilation. required on heroku
     config.assets.initialize_on_precompile = false
-    
+
     #3.2 way of catching exceptions
     config.exceptions_app = self.routes
-    
-    
+
+
     #modify the way rails styles fields with errors in forms.
     #by default rails wraps fields with erros in <div class="field_with_errors">.
     #this is a problem if the <div> is inside an inline element like <p>.
@@ -76,11 +76,11 @@ module RailsOSRM
         html_tag    #don't wrap other tags (line input or text-area)
       end
     end
-    
+
     #configure acts_as_taggable
     ActsAsTaggableOn.remove_unused_tags = true  #remove unused tag objects after removing taggings
     ActsAsTaggableOn.force_lowercase = true     #save all tags as lowercase
-    
+
     #rails-timeago gem settings
     Rails::Timeago.default_options :limit => proc { 1.month.ago }
     #Rails::Timeago.locales = [:en, :da]

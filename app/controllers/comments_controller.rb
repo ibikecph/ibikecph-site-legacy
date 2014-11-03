@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  
+
   load_and_authorize_resource
 
   def create
@@ -8,27 +8,28 @@ class CommentsController < ApplicationController
       @comment.commentable_type = params[:commentable_type]
       @comment.commentable_id = params[:commentable_id]
       @comment.user_id = current_user.id
+
       if @comment.save
-        current_user.follow @comment.commentable, :unless_set => true
+        current_user.follow @comment.commentable, unless_set: true
         Publisher.publish @comment
       else
         render :error
       end
     else
-      render :nothing => true
+      render nothing: true
     end
   end
-  
+
   def destroy
     @comment.destroy
   end
 
   private
-  
+
   def find_comment
     @comment = Comment.find params[:id]
   end
-  
+
   def authorize_create
     authorize! :create, Comment
   end
@@ -36,5 +37,5 @@ class CommentsController < ApplicationController
   def authorize_manage
     authorize! :manage, @comment
   end
-  
+
 end
