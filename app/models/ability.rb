@@ -8,6 +8,7 @@ class Ability < ActiveRecord::Base
     can [:show], [Comment, User, Issue, Favourite, Route]
     can [:index,:archive,:show,:tag, :feed], [BlogEntry]
     can :create, User
+
     if user
       if user.role == 'super'
         can :manage, :all
@@ -25,13 +26,15 @@ class Ability < ActiveRecord::Base
         end
         can [:reorder], Favourite do |t|
           t.user.id == user.id
-        end  
+        end
       end
     end
-      can :destroy, User do |t|
-        t.id == user.id
-      end 
-    #cannot :delete, User 
+
+    can :destroy, User do |t|
+      t.id == user.id
+    end
+
+    #cannot :delete, User
   end
-  
+
 end

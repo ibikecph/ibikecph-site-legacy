@@ -1,18 +1,21 @@
 class PagesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index,:ping,:terms,:qr]
-  
-	def index
-	end
+
+  before_filter :authenticate_user!, except: [:index,:ping,:terms,:qr]
+
+  def index
+  end
 
   def ping
-    render :text => 'pong'
+    render text: 'pong'
   end
-  
+
   def fail
-    raise "Raising an error for testing!" if current_user && current_user.role == 'super'
-    render :nothing => true
+    if current_user && current_user.role == 'super'
+      raise "Raising an error for testing!"
+    end
+    render nothing: true
   end
-  
+
   def qr
     redirect_to root_path
   end
