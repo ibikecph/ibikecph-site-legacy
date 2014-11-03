@@ -16,7 +16,7 @@ class AboutController < ApplicationController
     @entry = BlogEntry.tagged_with(["about/"]).first
     render :show
   end
-  
+
   def faq
     @entry = BlogEntry.tagged_with(["about/"]).first
     render :show

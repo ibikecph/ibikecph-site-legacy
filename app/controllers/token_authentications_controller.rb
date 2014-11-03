@@ -1,5 +1,5 @@
 class TokenAuthenticationsController < ApplicationController
-  
+
   def create
     @user = User.find_by_id(params[:user_id])
     @user.reset_authentication_token!
