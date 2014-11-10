@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   def create
     if current_user
-      @comment = Comment.new params[:comment]
+      @comment = Comment.new comment_params
       @comment.commentable_type = params[:commentable_type]
       @comment.commentable_id = params[:commentable_id]
       @comment.user_id = current_user.id
@@ -25,6 +25,10 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def comment_params
+    params.require(:comment).permit(:title, :body)
+  end
 
   def find_comment
     @comment = Comment.find params[:id]
