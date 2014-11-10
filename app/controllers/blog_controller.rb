@@ -5,7 +5,7 @@ class BlogController < ApplicationController
   authorize_resource class: "BlogEntry", except: [:transition]
   before_filter :latest, only: [:show,:tag,:transition]
   before_filter :tag_cloud, only: [:index,:archive,:show,:tag,:transition]
-  before_filter :check_return_path, onl::show
+  before_filter :check_return_path, only: :show
 
   def index
     @blog_entries = BlogEntry.news.latest.paginate page: params[:page], per_page: 10
