@@ -37,15 +37,15 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     end
 
     # handle images
-    if params[:user][:image_path] && params[:user][:image_path]["file"]
+    if params[:user][:image_path] && params[:user][:image_path]['file']
       prepare_image_data(params[:user][:image_path])
     end
 
     @user = User.new params[:user]
 
     if @user.save
-      #auto_login @user
-      #logged_in account_path, notice: "Account created. Welcome!"
+      # auto_login @user
+      # logged_in account_path, notice: "Account created. Welcome!"
       @user.reset_authentication_token!
 
       render status: 201,
@@ -66,9 +66,9 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    @user=User.find_by_id(params[:id])
+    @user = User.find_by_id(params[:id])
 
-    if params[:user][:image_path] && params[:user][:image_path]["file"]
+    if params[:user][:image_path] && params[:user][:image_path]['file']
       prepare_image_data(params[:user][:image_path])
     end
 
@@ -105,14 +105,14 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def prepare_image_data(image_path_params)
-    tempfile = Tempfile.new("fileupload")
+    tempfile = Tempfile.new('fileupload')
     tempfile.binmode
-    tempfile.write(Base64.decode64(image_path_params["file"]))
+    tempfile.write(Base64.decode64(image_path_params['file']))
 
     uploaded_file = ActionDispatch::Http::UploadedFile.new(
       tempfile: tempfile,
-      filename: image_path_params["filename"],
-      original_filename: image_path_params["original_filename"]
+      filename: image_path_params['filename'],
+      original_filename: image_path_params['original_filename']
     )
     params[:user][:image] = uploaded_file
 

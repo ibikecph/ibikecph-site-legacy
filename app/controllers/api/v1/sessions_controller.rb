@@ -3,8 +3,8 @@ class Api::V1::SessionsController < Devise::SessionsController
   skip_before_filter :verify_authenticity_token, if: Proc.new do |c|
     c.request.format == 'application/json'
   end
-  prepend_before_filter :check_login_params, only: [:create ]
-  prepend_before_filter :require_no_authentication, only: [:create ]
+  prepend_before_filter :check_login_params, only: [:create]
+  prepend_before_filter :require_no_authentication, only: [:create]
 
   def create
     if params[:user][:fb_token]
@@ -21,9 +21,9 @@ class Api::V1::SessionsController < Devise::SessionsController
         client,
         params[:user][:fb_token]
       )
-      fb.instance_variable_set("@access_token", access_token)
+      fb.instance_variable_set('@access_token', access_token)
 
-      @fbauth_hash=fb.auth_hash rescue nil
+      @fbauth_hash = fb.auth_hash rescue nil
       return failure unless @fbauth_hash
 
       if @fbauth_hash
@@ -51,8 +51,8 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def destroy
-    #warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
-    #current_user.update_column(:authentication_token, nil)
+    # warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
+    # current_user.update_column(:authentication_token, nil)
     render status: 200,
            json: {
              success: true,
@@ -64,7 +64,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   private
 
   def success logged_user
-    current_user=logged_user
+    current_user = logged_user
     render status: 200,
            json: {
              success: true,

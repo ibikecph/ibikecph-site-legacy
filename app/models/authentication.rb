@@ -1,6 +1,6 @@
 class Authentication < ActiveRecord::Base
 
-  #belongs_to :user
+  # belongs_to :user
 
   scope :emails, where(type: 'EmailAuthentication')
   scope :oauths, where(type: 'OAuthAuthentication')
@@ -40,13 +40,13 @@ class Authentication < ActiveRecord::Base
     uid
   end
 
-  #make Authentication.build type: 'SubClass' work
-  #http://coderrr.wordpress.com/2008/04/22/building-the-right-class-with-sti-in-rails/
+  # make Authentication.build type: 'SubClass' work
+  # http://coderrr.wordpress.com/2008/04/22/building-the-right-class-with-sti-in-rails/
   class << self
     def new_with_cast(*a, &b)
       if (h = a.first).is_a? Hash and (type = h[:type] || h['type']) and (klass = type.constantize) != self
         h.delete :type
-        raise "Cannot build, because requested type is not a descendant."  unless klass < self  # klass should be a descendant of us
+        raise 'Cannot build, because requested type is not a descendant.'  unless klass < self  # klass should be a descendant of us
         return klass.new(*a, &b)
       end
 

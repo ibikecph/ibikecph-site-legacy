@@ -58,7 +58,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    if params[:message]= 'invalid_credentials'
+    if params[:message] = 'invalid_credentials'
       redirect_to (current_user ? account_path : root_path),
                   alert: t('sessions.flash.oath_cancel')
     else
@@ -70,25 +70,25 @@ class SessionsController < ApplicationController
   private
 
   def find_auth_info
-    @auth = request.env["omniauth.auth"]
+    @auth = request.env['omniauth.auth']
   end
 
   def oauth_login_existing_user
-    authentication = Authentication.find_by_provider_and_uid @auth["provider"], @auth["uid"]
+    authentication = Authentication.find_by_provider_and_uid @auth['provider'], @auth['uid']
     if authentication
       user = authentication.user
       if current_user
         if user == current_user
-          redirect_to account_path, notice: "#{@auth["provider"].titleize} account #{@auth['info']['name']} already added."
+          redirect_to account_path, notice: "#{@auth['provider'].titleize} account #{@auth['info']['name']} already added."
         else
-          redirect_to account_path, alert: "#{@auth["provider"].titleize} account #{@auth['info']['name']} belongs to user #{user.name}."
+          redirect_to account_path, alert: "#{@auth['provider'].titleize} account #{@auth['info']['name']} belongs to user #{user.name}."
         end
         return
       end
       copy_return_to
       reset_session
       auto_login user
-      logged_in account_path, notice: "Logged in as #{user.name} using #{@auth["provider"].titleize} account #{@auth['info']['name']}."
+      logged_in account_path, notice: "Logged in as #{user.name} using #{@auth['provider'].titleize} account #{@auth['info']['name']}."
     end
   end
 
@@ -99,13 +99,13 @@ class SessionsController < ApplicationController
       copy_return_to
       reset_session
       auto_login user
-      logged_in account_path, notice: "Added login using #{@auth["provider"].titleize} account #{@auth['info']['name']}."
+      logged_in account_path, notice: "Added login using #{@auth['provider'].titleize} account #{@auth['info']['name']}."
     end
   end
 
   def oauth_link_via_email
-    if @auth['info']["email"]
-      email = EmailAuthentication.find_by_uid @auth['info']["email"]
+    if @auth['info']['email']
+      email = EmailAuthentication.find_by_uid @auth['info']['email']
 
       if email
         user = email.user
@@ -115,10 +115,10 @@ class SessionsController < ApplicationController
           copy_return_to
           reset_session
           auto_login user
-          logged_in account_path, notice: "Logged in as #{user.name} using #{@auth["provider"].titleize} account #{@auth['info']['name']}."
+          logged_in account_path, notice: "Logged in as #{user.name} using #{@auth['provider'].titleize} account #{@auth['info']['name']}."
         else
           flash[:existing_user_id] = user.id
-          flash[:provider_name] = @auth["provider"]
+          flash[:provider_name] = @auth['provider']
           redirect_to existing_sessions_path
         end
       end
@@ -129,13 +129,13 @@ class SessionsController < ApplicationController
     @user = User.find_by_name @auth['info']['name']
     if @user
       flash[:existing_user_id] = @user.id
-      flash[:provider_name] = @auth["provider"]
+      flash[:provider_name] = @auth['provider']
       redirect_to existing_sessions_path
     end
   end
 
   def add_oauth user
-    a = OAuthAuthentication.new provider: @auth["provider"], uid: @auth["uid"]
+    a = OAuthAuthentication.new provider: @auth['provider'], uid: @auth['uid']
     a.user = user
     a.save!
     a

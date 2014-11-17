@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:new,:create,:show]
+  before_filter :authenticate_user!, except: [:new, :create, :show]
   load_and_authorize_resource
 
   def index
@@ -30,8 +30,8 @@ class UsersController < ApplicationController
       copy_return_to
       @email.send_activation
       redirect_to activating_account_path
-    #auto_login @user
-    #logged_in account_path, notice: "Account created. Welcome!"
+    # auto_login @user
+    # logged_in account_path, notice: "Account created. Welcome!"
     else
       @existing_user = User.find_by_name params[:user][:name]
       render action: 'new'
