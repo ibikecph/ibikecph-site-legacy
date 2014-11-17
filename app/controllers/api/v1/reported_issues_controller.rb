@@ -33,7 +33,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
     end
 
     @reported_issue = ReportedIssue.new params[:issue]
-    @reported_issue.user_id=current_user.id if current_user
+    @reported_issue.user_id = current_user.id if current_user
 
     if @reported_issue.save
       render status: 201,
@@ -54,7 +54,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def show
-    @reported_issue=ReportedIssue.find_by_id(params[:id])
+    @reported_issue = ReportedIssue.find_by_id(params[:id])
 
     unless @reported_issue
       render status: 404,
@@ -67,7 +67,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def update
-    @reported_issue=ReportedIssue.find_by_id(params[:id])
+    @reported_issue = ReportedIssue.find_by_id(params[:id])
 
     if params[:issue] &&
        params[:issue][:comment] &&
@@ -112,7 +112,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def destroy
-    @reported_issue=ReportedIssue.find_by_id(params[:id])
+    @reported_issue = ReportedIssue.find_by_id(params[:id])
 
     if @reported_issue
       @reported_issue.destroy

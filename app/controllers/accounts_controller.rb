@@ -11,12 +11,12 @@ class AccountsController < ApplicationController
                   :existing
                 ]
 
-  #before_filter :check_can_set_password, only: [:new_password, :create_password]
-  #before_filter :find_email_authentication_by_token, only: [:verify_email]
+  # before_filter :check_can_set_password, only: [:new_password, :create_password]
+  # before_filter :find_email_authentication_by_token, only: [:verify_email]
 
   def show
-    #@has_password = current_user.has_password?
-    #@has_email = current_user.authentications.emails.active.any?
+    # @has_password = current_user.has_password?
+    # @has_email = current_user.authentications.emails.active.any?
   end
 
   def activating
@@ -66,7 +66,7 @@ class AccountsController < ApplicationController
     @auth = current_user.authentications.oauths.find params[:id]
 
     if @auth.active? && current_user.authentications.active.count == 1
-      redirect_to account_path, alert: "Cannot remove the last active login."
+      redirect_to account_path, alert: 'Cannot remove the last active login.'
     else
       @auth.destroy
       redirect_to account_path
@@ -74,7 +74,7 @@ class AccountsController < ApplicationController
   end
 
   def settings
-    #@has_email = current_user.authentications.emails.active.any?
+    # @has_email = current_user.authentications.emails.active.any?
   end
 
   def update_settings

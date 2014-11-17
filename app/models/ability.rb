@@ -6,7 +6,7 @@ class Ability < ActiveRecord::Base
 
     can [:index], [Comment, Issue, Favourite, Route]
     can [:show], [Comment, User, Issue, Favourite, Route]
-    can [:index,:archive,:show,:tag, :feed], [BlogEntry]
+    can [:index, :archive, :show, :tag, :feed], [BlogEntry]
     can :create, User
 
     if user
@@ -14,14 +14,14 @@ class Ability < ActiveRecord::Base
         can :manage, :all
       else
         can :create, [Comment, Issue, Vote]
-        can [:vote,:unvote], Issue
+        can [:vote, :unvote], Issue
         can :destroy, [Follow, Favourite, Route] do |t|
           t.user.id == user.id
         end
         if user.role == 'staff'
-          can :manage, [BlogEntry,Issue,Comment,Vote]
+          can :manage, [BlogEntry, Issue, Comment, Vote]
         end
-        can [:update,:create], [Favourite, Route] do |t|
+        can [:update, :create], [Favourite, Route] do |t|
           t.user.id == user.id
         end
         can [:reorder], Favourite do |t|
@@ -34,7 +34,7 @@ class Ability < ActiveRecord::Base
       t.id == user.id
     end
 
-    #cannot :delete, User
+    # cannot :delete, User
   end
 
 end

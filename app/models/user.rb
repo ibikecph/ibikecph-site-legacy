@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          :omniauthable,
          omniauth_providers: [:facebook]
 
-  #has_many :authentications, :dependent => :destroy
+  # has_many :authentications, :dependent => :destroy
   has_many :blog_entries, dependent: :nullify
   has_many :comments, dependent: :destroy
   has_many :issues, dependent: :destroy
@@ -33,11 +33,11 @@ class User < ActiveRecord::Base
                   :uid,
                   :account_source
   attr_accessor :image_path
-  #attr_accessor :password, :created_from_oath
+  # attr_accessor :password, :created_from_oath
 
   validates_presence_of :name
   validates_length_of :name, minimum: 2, maximum: 50
-  #validates_uniqueness_of :name, case_sensitive: false
+  # validates_uniqueness_of :name, case_sensitive: false
 
   validates_presence_of :email
   validates_presence_of :email_confirmation, on: :create
@@ -61,13 +61,13 @@ class User < ActiveRecord::Base
 
   validates_acceptance_of :terms
   validates_length_of :about, maximum: 2000
-  #accepts_nested_attributes_for :authentications
+  # accepts_nested_attributes_for :authentications
 
   mount_uploader :image, SquareImageUploader
 
   MAXLENGTH = { name: 50, about: 2000 }
 
-  #before_save :encrypt_password
+  # before_save :encrypt_password
 
 
   def facebook_auth
@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
 
   def authenticate password
     if password_hash && password_salt
-      password_hash == BCrypt::Engine.hash_secret(password,password_salt)
+      password_hash == BCrypt::Engine.hash_secret(password, password_salt)
     else
       false
     end
@@ -142,9 +142,9 @@ class User < ActiveRecord::Base
     authentications.emails
   end
 
-  #def email
+  # def email
   #  authentications.emails.active.first
-  #end
+  # end
 
   def email_address
     authentications.emails.active.first.uid rescue nil
@@ -196,10 +196,10 @@ class User < ActiveRecord::Base
   end
 
   def facebook_user?
-    self.provider == "facebook"
+    self.provider == 'facebook'
   end
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+  def self.find_for_facebook_oauth(auth, signed_in_resource = nil)
     user = User.where(email: auth.info.email).first
 
     unless user
