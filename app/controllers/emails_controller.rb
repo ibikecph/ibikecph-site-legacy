@@ -1,7 +1,7 @@
 class EmailsController < ApplicationController
 
-  #FIXME to be able to use distance_of_time_in_words when construction flash messages.
-  #since it's a view helper, it's not standard to use it here in the controller.
+  # FIXME to be able to use distance_of_time_in_words when construction flash messages.
+  # since it's a view helper, it's not standard to use it here in the controller.
 
   include ActionView::Helpers::DateHelper
 
@@ -153,7 +153,7 @@ class EmailsController < ApplicationController
   end
 
   def create_set_password
-    if current_user.update_attributes params[:user].merge({password_reset_token: nil})
+    if current_user.update_attributes params[:user].merge({ password_reset_token: nil })
       redirect_to account_path,
                   notice: t('emails.flash.verified_with_password', email: @auth.uid)
     else

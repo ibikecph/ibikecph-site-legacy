@@ -20,7 +20,7 @@ class Api::V1::BaseController < ApplicationController
       render status: 403,
              json: {
                success: false,
-               info: "Login Failed",
+               info: 'Login Failed',
                invalid_token: true,
                errors: t('api.flash.invalid_token')
              }

@@ -1,10 +1,10 @@
 class BlogController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:index,:archive,:show,:tag,:transition]
-  before_filter :find_entry, only: [:show,:edit,:update,:destroy]
-  authorize_resource class: "BlogEntry", except: [:transition]
-  before_filter :latest, only: [:show,:tag,:transition]
-  before_filter :tag_cloud, only: [:index,:archive,:show,:tag,:transition]
+  before_filter :authenticate_user!, except: [:index, :archive, :show, :tag, :transition]
+  before_filter :find_entry, only: [:show, :edit, :update, :destroy]
+  authorize_resource class: 'BlogEntry', except: [:transition]
+  before_filter :latest, only: [:show, :tag, :transition]
+  before_filter :tag_cloud, only: [:index, :archive, :show, :tag, :transition]
   before_filter :check_return_path, only: :show
 
   def index

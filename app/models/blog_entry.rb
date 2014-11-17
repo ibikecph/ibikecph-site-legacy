@@ -8,8 +8,8 @@ class BlogEntry < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :categories
 
-  scope :news, tagged_with(["news"])
-  scope :about, tagged_with(["about"])
+  scope :news, tagged_with(['news'])
+  scope :about, tagged_with(['about'])
   scope :latest, order('sticky desc, created_at desc')
   mount_uploader :image, ResizedImageUploader
   attr_accessible :title, :body, :tag_list, :category_list, :image, :remove_image, :image_cache, :sticky

@@ -14,7 +14,7 @@ class IssuesController < ApplicationController
                                 :search,
                                 :searched
                               ]
-  skip_authorize_resource only: [:tags,:labels]
+  skip_authorize_resource only: [:tags, :labels]
   # before_filter :find_vote, only: [:show,:vote,:unvote]
   before_filter :load_sidebar, only: [
                   :new,
@@ -26,7 +26,7 @@ class IssuesController < ApplicationController
                   :search,
                   :searched
                 ]
-  before_filter :find_popular_tags, only: [:index,:show,:tags,:labels]
+  before_filter :find_popular_tags, only: [:index, :show, :tags, :labels]
 
   def index
     @issues = Issue.lastest
@@ -39,8 +39,8 @@ class IssuesController < ApplicationController
     if params[:color]
       @klass = params[:color]
     else
-      colors = ["red", "blue", "orange"]
-      @klass = colors[rand(colors.length-1)]
+      colors = ['red', 'blue', 'orange']
+      @klass = colors[rand(colors.length - 1)]
     end
 
     @comments = @issue.comments
@@ -102,7 +102,7 @@ class IssuesController < ApplicationController
       @vote.user = current_user
       @vote.issue = @issue
       if @vote.save
-        #count_votes
+        # count_votes
         render 'votes'
         return
       end
@@ -114,7 +114,7 @@ class IssuesController < ApplicationController
     if @vote
       @vote.destroy
       @vote = nil
-      #count_votes
+      # count_votes
       render 'votes'
       return
     end
@@ -126,7 +126,7 @@ class IssuesController < ApplicationController
 
   def searched
     query = "%#{params[:search]}%".downcase
-    @issues = Issue.where("LOWER(title) LIKE ? OR LOWER(body) LIKE ?", query, query)
+    @issues = Issue.where('LOWER(title) LIKE ? OR LOWER(body) LIKE ?', query, query)
               .lastest
               .includes(:user)
               .paginate page: params[:page], per_page: 30
@@ -167,7 +167,7 @@ class IssuesController < ApplicationController
 
   def load_sidebar
     @most_commented = Issue.most_commented.includes(:user).limit(7)
-    #@most_voted = Issue.most_voted.includes(:user).limit(7)
+    # @most_voted = Issue.most_voted.includes(:user).limit(7)
   end
 
   def find_popular_tags

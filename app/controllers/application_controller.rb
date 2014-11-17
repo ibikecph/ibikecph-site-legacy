@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     render 'errors/forbidden', status: :forbidden rescue last_chance
   end
 
-  #these error handlers are called from rack middleware, see routes.rb
+  # these error handlers are called from rack middleware, see routes.rb
   def error_route_not_found
     render 'errors/route_not_found', status: :not_found rescue last_chance
   end
@@ -32,11 +32,11 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
-    #if I18n.available_locales.include?(params[:locale].to_sym)
+    # if I18n.available_locales.include?(params[:locale].to_sym)
     I18n.locale =  params[:locale] || request.headers['LANGUAGE_CODE'] || I18n.default_locale
   end
 
-  def default_url_options options={}
+  def default_url_options options = {}
     { locale: locale_for_url }
   end
 
@@ -49,11 +49,11 @@ class ApplicationController < ActionController::Base
     render file: 'public/500.html', layout: false
   end
 
-  #def current_user
+  # def current_user
   #  @current_user ||= User.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
-  #FIXME should check user.remember_me_token_saved_at to see if the token has expired
-  #rescue
-  #end
+  # FIXME should check user.remember_me_token_saved_at to see if the token has expired
+  # rescue
+  # end
 
   def require_login
     unless current_user
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def auto_login user, options={}
+  def auto_login user, options = {}
     user.generate_token :auth_token
 
     if options[:remember_me]
@@ -94,8 +94,8 @@ class ApplicationController < ActionController::Base
     @return_to_saved_at = session[:return_to_saved_at]
   end
 
-  def logged_in default_path, options={}
-    #use saved location unless it's outdated
+  def logged_in default_path, options = {}
+    # use saved location unless it's outdated
     if @return_to && @return_to_saved_at && @return_to_saved_at > 5.minute.ago
       return_to = @return_to
     end
@@ -105,7 +105,7 @@ class ApplicationController < ActionController::Base
     @return_to = session[:return_to] = nil
     @return_to_saved_at = session[:return_to_saved_at] = nil
 
-    redirect_to path, notice: options[:notice] || "Logged in."
+    redirect_to path, notice: options[:notice] || 'Logged in.'
   end
 
   def store_location

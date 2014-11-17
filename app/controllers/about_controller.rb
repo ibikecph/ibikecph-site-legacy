@@ -3,22 +3,22 @@ class AboutController < ApplicationController
   before_filter :find_entries
 
   def index
-    @entry = BlogEntry.tagged_with(["about/"]).first
+    @entry = BlogEntry.tagged_with(['about/']).first
     render :show
   end
 
   def signal
-    @entry = BlogEntry.tagged_with(["about/signal"]).first
+    @entry = BlogEntry.tagged_with(['about/signal']).first
     render :show
   end
 
   def api
-    @entry = BlogEntry.tagged_with(["about/"]).first
+    @entry = BlogEntry.tagged_with(['about/']).first
     render :show
   end
 
   def faq
-    @entry = BlogEntry.tagged_with(["about/"]).first
+    @entry = BlogEntry.tagged_with(['about/']).first
     render :show
   end
 
