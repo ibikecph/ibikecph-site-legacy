@@ -1,18 +1,9 @@
 GIT
-  remote: git://github.com/emiltin/auto_html.git
-  revision: 4633754ce8907b8f2994ae56fbab4f8a11fb40bb
+  remote: git://github.com/mfaerevaag/cancan.git
+  revision: fab079088a8a1828b5f9e10f48e193ec0c254872
   branch: master
   specs:
-    auto_html (1.6.0)
-      redcarpet (~> 2.0)
-      rinku (~> 1.5.0)
-
-GIT
-  remote: git://github.com/emiltin/cancan.git
-  revision: b51e63a4ce2dfaf36caa8ac1dc31ed806dea9b0d
-  branch: master
-  specs:
-    cancan (1.6.7)
+    cancan (1.6.10)
 
 GEM
   remote: https://rubygems.org/
@@ -47,6 +38,9 @@ GEM
     acts-as-taggable-on (3.4.2)
       activerecord (>= 3.2, < 5)
     arel (3.0.3)
+    auto_html (1.6.4)
+      redcarpet (~> 3.1)
+      rinku (~> 1.5.0)
     bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
@@ -198,7 +192,7 @@ GEM
     rake (10.3.2)
     rdoc (3.12.2)
       json (~> 1.4)
-    redcarpet (2.3.0)
+    redcarpet (3.2.0)
     rinku (1.5.1)
     rush (0.6.8)
       session
@@ -243,7 +237,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on (~> 3.4)
-  auto_html!
+  auto_html
   bcrypt-ruby
   cancan!
   carrierwave
@@ -251,7 +245,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise (= 2.2.5)
   eco
-  exception_notification (= 2.6.1)
+  exception_notification
   fog
   google-analytics-rails
   i18n-js
