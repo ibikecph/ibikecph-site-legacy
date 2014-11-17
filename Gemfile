@@ -17,7 +17,7 @@ gem 'will_paginate'
 gem 'thin'
 gem 'auto_html', require: 'auto_html', git: 'git://github.com/emiltin/auto_html.git', branch: 'master'
 gem 'rails_autolink'
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '~> 3.4'
 gem 'exception_notification', '2.6.1'   #there's UTF bug with 3.0.0
 gem 'google-analytics-rails'
 gem 'rails-timeago'
