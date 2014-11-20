@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'omniauth-facebook', '1.4.1'
 gem 'cancan', git: 'git://github.com/mfaerevaag/cancan.git', branch: 'master'
 
+gem 'backbone-rails'
 gem 'jquery-rails'
 gem 'i18n-js'
 gem 'carrierwave'
