@@ -72,7 +72,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       prepare_image_data(params[:user][:image_path])
     end
 
-    if @user.update_attributes(params[:user])
+    if @user.update_with_password(params[:user])
       render status: 200,
              json: {
                success: true,

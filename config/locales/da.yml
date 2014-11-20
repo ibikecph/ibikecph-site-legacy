@@ -186,6 +186,11 @@ da:
       signuporlogin_with_fb: "Facebook Login"
       no_account_q: Ingen konto?
       remember_me: Husk mig
+    infopage:
+      title: Email ikke bekræftet!
+      text: "Du kan ikke logge ind, fordi du ikke har bekræftet din email adresse. For at gøre dette skal du følge instruktionerne i den email vi har sendt dig."
+      text1: "Følg instruktionerne fra den email vi sendte dig, da du meldte dig til eller klik her for at få instruktionerne gensendt til din email adresse"
+      reconfirm_link: "send bekræftelses-email igen"
     flash:
       logged_in: "Logget ind som %{user}."
       logged_in_oath: "Logget ind som %{user} med %{provider}."

@@ -604,6 +604,7 @@ li a {
             box-shadow: inset 1px 1px 0 #6385d6;
             cursor: pointer;
             text-decoration: none;
+            display: inline-block
         }
         button,
         input {
@@ -618,6 +619,9 @@ li a {
             border-radius: 2px;
             box-shadow: inset 1px 1px 0 #60c2e7;
             cursor: pointer;
+            display: inline-block;
+            margin-bottom: 10px;
+            -webkit-appearance: none;
         }
         .cancel {
             color: #fff;
@@ -681,6 +685,7 @@ li a {
 
 .page_header {
     margin: 0px 15px 10px;
+    position: relative;
     .back {
         margin-left: -12px;
         a {
@@ -688,6 +693,40 @@ li a {
             &:hover {
                 color: #a81813;
             }
+        }
+    }
+    .search_form {
+        position: absolute;
+        right: 250px;
+        top: 128px;
+        height: 40px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        .search_field {
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 10px 9px;
+            border: 1px solid #ccc;
+            box-shadow: 0 1px 0 #ccc inset;
+            outline: none;
+            color: #333;
+            width: 188px;
+            padding-right: 48px;
+        }
+        .submit {
+            position: absolute;
+            right: 0;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            width: 46px;
+            height: 40px;
+            border-radius: 0 4px 4px 0;
+            text-indent: -5000px;
+            overflow: hidden;
+            background: #009ee7 image-url("_new/feedback-search-icon.png") no-repeat center center;
+            border: 2px solid #009ee7 !important;
         }
     }
     .welcome {
@@ -707,7 +746,7 @@ li a {
     }
     .header_title {
         float: left;
-        padding-left: 10%;
+        padding-left: 0;
         h1 {
             color: #dc1e19;
             font-size: 42px;
@@ -724,7 +763,7 @@ li a {
         float: right;
         height: 40px;
         width: 180px;
-        padding: 140px 0 0 60px;
+        padding: 140px 0 0 55px;
         a {
             color: #fff!important;
             text-decoration: none!important;
@@ -826,6 +865,9 @@ li a {
             font-size: 24px;
             line-height: 1.1em;
             padding: 30px 20px 0;
+            &.smaller {
+                font-size: 14px;
+            }
         }
         .from {
             color: rgba(0, 0, 0, 0.5);

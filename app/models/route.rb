@@ -1,10 +1,10 @@
 class Route < ActiveRecord::Base
 
   attr_accessible :from_name,
-                  :from_lattitude,
+                  :from_latitude,
                   :from_longitude,
                   :to_name,
-                  :to_lattitude,
+                  :to_latitude,
                   :to_longitude,
                   :route_geometry,
                   :route_instructions,
@@ -18,12 +18,13 @@ class Route < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :from_name,
-                        :from_lattitude,
+                        :from_latitude,
                         :from_longitude,
                         :to_name,
-                        :to_lattitude,
+                        :to_latitude,
                         :to_longitude,
                         :start_date
+
   validates_presence_of :end_date,
                         :route_visited_locations,
                         if: lambda { |s| s.is_finished }

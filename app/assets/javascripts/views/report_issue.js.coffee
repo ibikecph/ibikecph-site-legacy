@@ -64,7 +64,7 @@ class IBikeCPH.Views.ReportIssue extends Backbone.View
 			success: (model, response) ->
 				t.hide()
 				$('#report .step_2').hide()
-				flash = $('<div />').html('Saved').attr
+				flash = $('<div />').html('Problem reported').attr
 					id: 'flash'
 					class: 'notice'
 				$('body').append(flash)

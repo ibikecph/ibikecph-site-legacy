@@ -11,7 +11,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 	data:
 		name: ''
 		address: ''
-		lattitude: ''
+		latitude: ''
 		longitude: ''
 		source: ''
 		sub_source: ''
@@ -35,7 +35,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			'data-lng': to.location.lng
 
 		@data.address = from.address
-		@data.lattitude = from.location.lat
+		@data.latitude = from.location.lat
 		@data.longitude = from.location.lng
 		@data.source = 'favorite'
 		@data.sub_source = 'favorite'
@@ -60,7 +60,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			$('.routes .selected').removeClass('selected')
 			el.addClass('selected')
 			@data.address = input.data('address')
-			@data.lattitude = input.data('lat')
+			@data.latitude = input.data('lat')
 			@data.longitude = input.attr('data-lng')
 
 		return false
@@ -83,7 +83,7 @@ class IBikeCPH.Views.Favourites extends Backbone.View
 			favourite:
 				name: @data.name
 				address: @data.address
-				lattitude: @data.lattitude
+				latitude: @data.latitude
 				longitude: @data.longitude
 				source: @data.source
 				sub_source: @data.sub_source
