@@ -1,11 +1,7 @@
 class Api::V1::RoutesController < Api::V1::BaseController
 
-  skip_before_filter :verify_authenticity_token, if: Proc.new do |c|
-    c.request.format == 'application/json'
-  end
-  before_filter :check_auth, if: Proc.new do |c|
-    c.request.format == 'application/json'
-  end
+  skip_before_filter :verify_authenticity_token, if: Proc.new { |c| c.request.format == 'application/json' }
+  before_filter :check_auth, if: Proc.new { |c| c.request.format == 'application/json' }
   before_filter :manage_duplicate_routes, only: :create
   load_and_authorize_resource :user
 

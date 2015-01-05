@@ -1,8 +1,6 @@
 class Api::V1::BaseController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, if: Proc.new do |c|
-    c.request.format == 'application/json'
-  end
+  skip_before_filter :verify_authenticity_token, if: Proc.new { |c| c.request.format == 'application/json' }
 
   rescue_from CanCan::AccessDenied do |exception|
     render status: 401,

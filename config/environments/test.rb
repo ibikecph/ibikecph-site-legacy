@@ -1,4 +1,13 @@
 RailsOSRM::Application.configure do
+
+  #we're using www.localhost because you can't save cookies with only localhost
+  #login doesn't work well unless cookies are on
+  #adjust your host file to point www.localhost to 127.0.0.1 just like the normal localhost
+  MAIN_DOMAIN = 'www.localhost'
+  MAIN_PORT = '3000'
+  MAIN_DOMAIN_LEVEL = MAIN_DOMAIN.split('.').size - 1
+  MAIN_DOMAIN_WITH_PORT = [MAIN_DOMAIN,MAIN_PORT].join(':')
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's

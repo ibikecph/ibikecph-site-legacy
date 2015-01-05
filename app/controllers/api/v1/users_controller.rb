@@ -1,8 +1,6 @@
 class Api::V1::UsersController < Api::V1::BaseController
 
-  before_filter :check_auth, if: Proc.new do |c|
-    c.request.format == 'application/json'
-  end
+  before_filter :check_auth, if: Proc.new { |c| c.request.format == 'application/json' }
   load_and_authorize_resource :user, find_by: :find_by_id
 
   def index
