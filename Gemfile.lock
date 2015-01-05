@@ -90,6 +90,11 @@ GEM
       activesupport (>= 3.0.4)
     excon (0.42.1)
     execjs (2.2.2)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
+      railties (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fission (0.5.0)
@@ -316,6 +321,7 @@ DEPENDENCIES
   devise (= 2.2.5)
   eco
   exception_notification
+  factory_girl_rails (~> 4.0)
   fog
   google-analytics-rails
   i18n-js
