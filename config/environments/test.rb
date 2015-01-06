@@ -27,6 +27,14 @@ RailsOSRM::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { host: MAIN_DOMAIN_WITH_PORT }
+  # A dummy setup for development - no deliveries, but logged
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default charset: 'utf-8'
+
   # Raise exceptions instead of rendering exception templates
   config.action_dispatch.show_exceptions = false
 

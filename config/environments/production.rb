@@ -1,13 +1,13 @@
 RailsOSRM::Application.configure do
-  
-  #note:
-  #heroku config vars normally stored in ENV is not available during asset precompiling
-  #see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
-   
+
+  # note:
+  # heroku config vars normally stored in ENV is not available during asset precompiling
+  # see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
+
   MAIN_DOMAIN = ENV['DOMAIN']
   WEB_DOMAIN = "www.#{ENV['DOMAIN']}"
-  
-  #google analytics
+
+  # google analytics
   GA.tracker = ENV['GOOGLE_ANALYTICS_KEY']
 
   # Code is not reloaded between requests
@@ -27,10 +27,10 @@ RailsOSRM::Application.configure do
   config.assets.compile = true
 
   # Generate digests for assets URLs
-  config.assets.digest = true  
-  
+  config.assets.digest = true
+
   config.assets.initialize_on_precompile = false
-  
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
@@ -75,10 +75,10 @@ RailsOSRM::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
+
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
-  
+
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[Exception] ",
     :sender_address => %{"notifier" <auto@#{MAIN_DOMAIN}>},
