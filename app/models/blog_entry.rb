@@ -12,7 +12,8 @@ class BlogEntry < ActiveRecord::Base
   scope :about, tagged_with(['about'])
   scope :latest, order('sticky desc, created_at desc')
   mount_uploader :image, ResizedImageUploader
-  attr_accessible :title, :body, :tag_list, :category_list, :image, :remove_image, :image_cache, :sticky
+  attr_accessible :title, :body, :tag_list, :category_list, :image,
+                  :remove_image, :image_cache, :sticky
   MAXLENGTH = { title: 100, body: 5000 }
 
   validates :title, presence: true, uniqueness: true, length: { maximum: MAXLENGTH[:title] }
