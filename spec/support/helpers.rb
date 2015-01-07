@@ -5,4 +5,6 @@ def sign_in(user)
   fill_in 'user_password', with: @user.password
 
   click_button I18n.t('sessions.new.submit')
+
+  expect(page).to have_content I18n.t('devise.sessions.signed_in')
 end
