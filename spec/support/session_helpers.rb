@@ -8,8 +8,8 @@ module SessionHelpers
       @request.env['devise.mapping'] = Devise.mappings[:user]
 
       post :create, user: { email: @user.email, password: @user.password }
-      expect(response).to have_http_status(200)
       expect(response).to be_success
+      expect(response).to have_http_status(200)
 
     elsif type == :feature
       visit new_user_session_path
