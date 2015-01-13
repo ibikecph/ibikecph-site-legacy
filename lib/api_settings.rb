@@ -5,6 +5,6 @@ class ApiSettings
   end
 
   def matches?(req)
-    @default || req.headers['Accept'].include?("application/vnd.ibikecph.v#{@version}")
+    @default || (req.headers['Accept'] && req.headers['Accept'].include?("application/vnd.ibikecph.v#{@version}"))
   end
 end

@@ -5,10 +5,10 @@ ruby '2.1.5'
 gem 'rails', '3.2.19'
 gem 'pg'
 
-gem 'bcrypt-ruby', require: 'bcrypt'
+gem 'bcrypt', require: 'bcrypt'
 gem 'devise', '2.2.5'
 gem 'omniauth'
-gem 'omniauth-facebook', '1.4.1'
+gem 'omniauth-facebook'
 gem 'cancan', git: 'git://github.com/mfaerevaag/cancan.git', branch: 'master'
 
 gem 'backbone-rails'
@@ -33,6 +33,16 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
+group :test do
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara'
+  gem 'database_cleaner'
+end
+
 # asset gems not required in production
 group :assets do
   gem 'sass-rails'
@@ -45,10 +55,4 @@ end
 group :production, :staging do
   gem 'workless', '~> 1.1.1'
   gem 'newrelic_rpm'
-end
-
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails', '~> 4.0'
-  gem 'capybara'
 end
