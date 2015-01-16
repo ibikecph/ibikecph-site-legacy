@@ -2,7 +2,7 @@ class Ability < ActiveRecord::Base
   include CanCan::Ability
 
   def initialize(user)
-    disable_risky_blocks
+    # disable_risky_blocks
 
     can [:index], [Comment, Issue, Favourite, Route]
     can [:show], [Comment, User, Issue, Favourite, Route]

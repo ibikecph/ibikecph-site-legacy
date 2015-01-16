@@ -1,8 +1,5 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
-  include Sprockets::Helpers::RailsHelper
-  include Sprockets::Helpers::IsolatedHelper
-
   COLUMN_WIDTH = 60
   GUTTER_WIDTH = 40
   ASPECT_RATIO = 2.0 / 3.0
@@ -46,8 +43,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
-    # "/images/fallback/default.png"
-    image_path "default/#{model.class.to_s.underscore}/#{version_name}.png"
+    "default/#{model.class.to_s.underscore}/#{version_name}.png"
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

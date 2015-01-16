@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 
 ruby '2.1.5'
 
-gem 'rails', '3.2.19'
+gem 'rails', '4.0.0'
 gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
-gem 'devise', '2.2.5'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'cancan', git: 'git://github.com/mfaerevaag/cancan.git', branch: 'master'
+gem 'cancancan', '~> 1.10'
 
 gem 'backbone-rails'
 gem 'jquery-rails'
@@ -43,7 +43,6 @@ group :test do
   gem 'database_cleaner'
 end
 
-# asset gems not required in production
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'

@@ -1,10 +1,17 @@
 RailsOSRM::Application.routes.draw do
+
+  # api
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1, constraints: ApiSettings.new(version: 1) do
-      devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' } do
+
+      devise_for :users,
+                 controllers: {
+                   omniauth_callbacks: 'omniauth_callbacks'
+                 } do
         post '/login' => 'sessions#create'
         get '/logout', to: 'sessions#destroy'
       end
+
       resources :reported_issues, path: 'issues'
       resources :favourites do
         collection do
@@ -16,26 +23,18 @@ RailsOSRM::Application.routes.draw do
     end
   end
 
-  # devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks", :confirmations => "users/confirmations" }
   resources :token_authentications, only: [:create, :destroy]
 
+  devise_for :users,
+             skip: [:session, :password, :registration],
+             controllers: { omniauth_callbacks: "devise/omniauth_callbacks" }
+
   scope '(:locale)', locale: /en/ do
-    # root
     root to: 'map#index'
+
     get 'embed/cykelsupersti' => 'embed#cykelsupersti'
 
-    # signup, login, logout
-    # get "signup" => "users#new", :as => :signup
-    # get "login" => "sessions#new", :as => :login
-    # get "login/return" => "sessions#new_and_return", :as => :login_and_return
-    # get "logout" => "sessions#destroy", :as => :logout
-    # resources :sessions, :path => :login, :except => :index do
-    #  collection do
-    #    get 'unverified'
-    #    get 'existing'
-    #  end
-    # end
-    match 'issues/:filter', to: 'reported_issues#index'
+    get 'issues/:filter', to: 'reported_issues#index'
     resources :reported_issues, path: 'issues'
 
     resource :account do
@@ -46,37 +45,23 @@ RailsOSRM::Application.routes.draw do
     end
     get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
     put 'account/password' => 'accounts#update_password', :as => :update_password
-   # delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
+    # delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
     # get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
     # post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
 
-  #  resources :users
-    devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks', registrations: 'registrations', passwords: 'passwords', sessions: 'sessions' } do
+    devise_for :users,
+               skip: :omniauth_callbacks,
+               controllers: {
+                 # omniauth_callbacks: 'omniauth_callbacks',
+                 registrations: 'registrations',
+                 passwords: 'passwords',
+                 sessions: 'sessions'
+               } do
       get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
       get 'users/new' => 'devise/registrations#new'
       get 'infopage', to: 'sessions#infopage', as: 'infopage'
     end
     resources :users
-
-    # resources :emails, :path => 'account/emails' do
-      # collection do
-        # match ':token/verify' => :verify, :as => :verify_by_token
-        # get 'verify' => :new_verification
-        # post 'verify' => :create_verification
-        # get 'unverified'
-        # get 'verification_sent'
-      # end
-      # member do
-        # get 'verify/resend' => :resend_verification, :as => :resend_verification
-      # end
-    # end
-
-    # resources :password_resets, :except => [:index,:edit], :path => 'account/password/reset' do
-      # collection do
-        # match ':token/edit' => :edit, :as => :reset_by_token
-      # end
-      # get 'unverified', :on => :collection
-    # end
 
     resources :blogs, controller: :blog, as: :blog_entry, path: :blog do
       collection do
@@ -87,10 +72,10 @@ RailsOSRM::Application.routes.draw do
       end
     end
     resources :comments, only: [:destroy]
-    match 'comments/:commentable_type/:commentable_id' => 'comments#create', :via => :post
+    post 'comments/:commentable_type/:commentable_id' => 'comments#create'
 
-    match 'follows/:followable_type/:followable_id' => 'follows#follow', :via => :post
-    match 'follows/:followable_type/:followable_id' => 'follows#unfollow', :via => :delete
+    post 'follows/:followable_type/:followable_id' => 'follows#follow'
+    delete 'follows/:followable_type/:followable_id' => 'follows#unfollow'
 
     resources :corps, only: [:index, :show] do
       collection do
@@ -113,31 +98,32 @@ RailsOSRM::Application.routes.draw do
       end
     end
 
-    match '/about' => 'about#index'
-    match '/signal' => 'about#signal'
-    match '/faq' => 'about#faq'
-    match '/api' => 'about#api'
-    # match '/about/:action' => 'about#:action'
+    get '/about' => 'about#index'
+    get '/signal' => 'about#signal'
+    get '/faq' => 'about#faq'
+    get '/api' => 'about#api'
+    # get '/about/:action' => 'about#:action'
   end
 
-  match '/terms' => 'pages#terms'
-  match '/help' => 'pages#help'
 
-  match '/ping' => 'pages#ping'
-  match '/fail' => 'pages#fail'
+  get '/terms' => 'pages#terms'
+  get '/help' => 'pages#help'
 
-  match 'qr/:code' => 'pages#qr'
+  get '/ping' => 'pages#ping'
+  get '/fail' => 'pages#fail'
+
+  get 'qr/:code' => 'pages#qr'
 
   # rail 3.2 exception handling
-  match '/404', to: 'application#error_route_not_found'
-  match '/500', to: 'application#error_internal_error'
+  get '/404', to: 'application#error_route_not_found'
+  get '/500', to: 'application#error_internal_error'
 
 
-  match 'medlemmer/*path' => 'blog#transition'
-  match 'groupper/*path' => 'blog#transition'
-  match 'cykler/*path' => 'blog#transition'
-  match 'steder/*path' => 'blog#transition'
-  match 'tips/*path' => 'blog#transition'
-  match 'indlaeg/*path' => 'blog#transition'
-  match 'cykelguide' => 'blog#transition'
+  get 'medlemmer/*path' => 'blog#transition'
+  get 'groupper/*path' => 'blog#transition'
+  get 'cykler/*path' => 'blog#transition'
+  get 'steder/*path' => 'blog#transition'
+  get 'tips/*path' => 'blog#transition'
+  get 'indlaeg/*path' => 'blog#transition'
+  get 'cykelguide' => 'blog#transition'
 end
