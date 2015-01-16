@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :controller do
-  include SessionHelpers
 
   before :each do
     @user = build :user

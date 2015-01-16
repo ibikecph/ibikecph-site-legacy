@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Authentication:', type: :feature do
-  include SessionHelpers
 
   before :all do
     @user = build :user
@@ -37,14 +36,14 @@ RSpec.describe 'Authentication:', type: :feature do
 
       expect(page).to have_content I18n.t('devise.sessions.new.title')
 
-      sign_in @user, type: :feature
+      sign_in @user
 
       expect(page).to have_content I18n.t('devise.sessions.signed_in')
       expect(page).to have_content I18n.t('accounts.show.title')
     end
 
     it 'can sign out' do
-      sign_in @user, type: :feature
+      sign_in @user
 
       click_link I18n.t('menu.logout')
 

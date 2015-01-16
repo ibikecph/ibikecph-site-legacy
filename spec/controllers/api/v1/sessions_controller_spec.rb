@@ -1,19 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :controller do
-  include SessionHelpers
 
   before :each do
     @user = build :user
     @user.skip_confirmation!
     @user.save!
-
-    @request.env['devise.mapping'] = Devise.mappings[:user]
   end
 
   describe 'GET #create' do
     it "responds with success" do
-      sign_in @user, type: :controller
+      sign_in @user
     end
 
     it "responds with failure when wrong password" do
