@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::UsersController, type: :controller do
   include SessionHelpers
 
-  before :all do
+  before :each do
     @user = build :user
     @user.skip_confirmation!
     @user.save!
