@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/mfaerevaag/auto_html.git
+  remote: git://github.com/ibikecph/auto_html.git
   revision: 6f4ce92fcbfcb7c195d4af3ff2299a91b7dd2e00
   branch: master
   specs:
