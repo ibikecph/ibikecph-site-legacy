@@ -17,12 +17,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    return unless params[:user] && params[:user].is_a?(Hash)
+    return unless user_params # && params[:user].is_a?(Hash)
 
-    # never allow new users with a role
-    params[:user].delete(:role)
-
-    @user = User.new params[:user]
+    @user = User.new user_params
     @email = EmailAuthentication.new params[:email_authentication]
     @user.authentications << @email
 
@@ -39,6 +36,28 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(
+      :name,
+      :about,
+      :email,
+      :email_confirmation,
+      :password,
+      :password_confirmation,
+      :image,
+      :image_path,
+      :remove_image,
+      :image_cache,
+      :notify_by_email,
+      :terms,
+      :tester,
+      :provider,
+      :uid,
+      :account_source,
+      :email_confirmation
+    )
+  end
 
   def warn_about_existing_name
     user = User.find_by_name @user.name

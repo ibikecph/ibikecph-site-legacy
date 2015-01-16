@@ -39,7 +39,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       prepare_image_data(params[:user][:image_path])
     end
 
-    @user = User.new params[:user]
+    @user = User.new user_params
 
     if @user.save
       # auto_login @user
@@ -70,7 +70,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
       prepare_image_data(params[:user][:image_path])
     end
 
-    if @user.update_with_password(params[:user])
+    if @user.update_with_password user_params
       render status: 200,
              json: {
                success: true,
@@ -88,6 +88,28 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   private
+
+  def user_params
+  params.require(:user).permit(
+    :name,
+    :about,
+    :email,
+    :email_confirmation,
+    :password,
+    :password_confirmation,
+    :image,
+    :image_path,
+    :remove_image,
+    :image_cache,
+    :notify_by_email,
+    :terms,
+    :tester,
+    :provider,
+    :uid,
+    :account_source,
+    :email_confirmation
+  )
+  end
 
   def warn_about_existing_name
     user = User.find_by_name @user.name

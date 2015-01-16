@@ -81,7 +81,7 @@ class IssuesController < ApplicationController
   end
 
   def update
-    if @issue.update_attributes(params[:issue])
+    if @issue.update_attributes issue_params
       flash[:notice] = t('issues.flash.updated')
       redirect_to @issue
     else
@@ -136,10 +136,34 @@ class IssuesController < ApplicationController
 
   private
 
-  def do_create redirect_to, rerender_to
-    params[:issue].delete(:label_list) unless can? :manage, Issue
+  def issue_params
+    if can? :manage, Issue
+      params.require(:issue).permit(
+        :title,
+        :body,
+        :tag_list,
+        :label_list,
+        :labels,
+        :image,
+        :remove_image,
+        :image_cache
+      )
+    else
+      params.require(:issue).permit(
+        :title,
+        :body,
+        :tag_list,
+        :image,
+        :labels,
+        :image,
+        :remove_image,
+        :image_cache
+      )
+    end
+  end
 
-    @issue = Issue.new(params[:issue])
+  def do_create(redirect_to, rerender_to)
+    @issue = Issue.new issue_params
     @issue.user = current_user
 
     if @issue.save

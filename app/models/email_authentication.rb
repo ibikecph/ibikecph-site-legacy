@@ -1,11 +1,12 @@
 class EmailAuthentication < Authentication
 
+  # attr_accessible :uid_confirmation
+
   validates_uniqueness_of :uid, case_sensitive: false
   validates_format_of :uid,
                       with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\z/i,
                       message: I18n.t('not_a_valid_email'),
                       allow_blank: true
-  attr_accessible :uid_confirmation
   validates_presence_of :uid_confirmation, on: :create
   validates_confirmation_of :uid
 

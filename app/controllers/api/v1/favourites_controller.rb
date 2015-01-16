@@ -25,7 +25,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
                                   .encode('UTF-8')
     end
 
-    @favourite = current_user.favourites.new params[:favourite]
+    @favourite = current_user.favourites.new favourite_params
     @favourite.position = current_user.favourites.length
 
     if @favourite.save
@@ -84,7 +84,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
                                     .encode('UTF-8')
       end
 
-      if @favourite.update_attributes(params[:favourite])
+      if @favourite.update_attributes(favourite_params)
         render status: 200,
                json: {
                  success: true,
@@ -142,6 +142,20 @@ class Api::V1::FavouritesController < Api::V1::BaseController
              info: t('favourites.flash.position_updated'),
              data: { user_id: current_user.id }
            }
+  end
+
+  private
+
+  def favourite_params
+    params.require(:favourite).permit(
+      :name,
+      :address,
+      :latitude,
+      :longitude,
+      :source,
+      :sub_source,
+      :position
+    )
   end
 
 end

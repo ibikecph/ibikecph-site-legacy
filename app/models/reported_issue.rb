@@ -1,7 +1,7 @@
 class ReportedIssue < ActiveRecord::Base
 
   belongs_to :user
-  attr_accessible :route_segment, :comment, :error_type, :is_open
+  # attr_accessible :route_segment, :comment, :error_type, :is_open
   validates_presence_of :comment, :error_type
 
   scope :all_issues, order('created_at desc')

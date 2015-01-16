@@ -8,7 +8,7 @@ class Authentication < ActiveRecord::Base
   scope :facebooks, where(type: 'OAuthAuthentication', provider: 'facebook')
   scope :unverified, where(state: 'unverified').order('created_at desc')
 
-  attr_accessible :provider, :uid
+  # attr_accessible :provider, :uid
 
   validates_presence_of :uid
   validates_uniqueness_of :uid

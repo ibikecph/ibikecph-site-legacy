@@ -1,7 +1,6 @@
 class ReportedIssuesController < ApplicationController
 
   def index
-
     case params[:filter]
     when 'open'
       @reported_issues = ReportedIssue.open_issues
@@ -17,7 +16,7 @@ class ReportedIssuesController < ApplicationController
   end
 
   def create
-    @reported_issue = ReportedIssue.new params[:reported_issue]
+    @reported_issue = ReportedIssue.new reported_issue_params
     @reported_issue.user_id = current_user.id if current_user
     if @reported_issue.save
       flash[:notice] = t('reported_issues.flash.created')
@@ -39,7 +38,7 @@ class ReportedIssuesController < ApplicationController
   def update
     @reported_issue = ReportedIssue.find_by_id(params[:id])
 
-    if @reported_issue.update_attributes(params[:reported_issue])
+    if @reported_issue.update_attributes reported_issue_params
       flash[:notice] = t('reported_issues.flash.updated')
       redirect_to @reported_issue
     else
@@ -55,5 +54,15 @@ class ReportedIssuesController < ApplicationController
     redirect_to action: :index
   end
 
+  private
+
+  def reported_issue_params
+    params.require(:reported_issue).permit(
+      :route_segment,
+      :comment,
+      :error_type,
+      :is_open
+    )
+  end
 
 end

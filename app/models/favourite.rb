@@ -2,13 +2,14 @@ class Favourite < ActiveRecord::Base
 
   belongs_to :user
 
-  attr_accessible :name,
-                  :address,
-                  :latitude,
-                  :longitude,
-                  :source,
-                  :sub_source,
-                  :position
+  # attr_accessible :name,
+  #                 :address,
+  #                 :latitude,
+  #                 :longitude,
+  #                 :source,
+  #                 :sub_source,
+  #                 :position
+
   validates_presence_of :name,
                         :address,
                         :latitude,

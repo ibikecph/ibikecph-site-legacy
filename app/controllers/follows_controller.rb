@@ -21,6 +21,10 @@ class FollowsController < ApplicationController
 
   private
 
+  def follow_params
+    params.require(:follow).permit(:active)
+  end
+
   def require_user
     render nothing: true unless current_user
   end

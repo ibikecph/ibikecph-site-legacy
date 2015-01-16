@@ -32,7 +32,7 @@ class BlogController < ApplicationController
   end
 
   def create
-    @blog_entry = current_user.blog_entries.build params[:blog_entry]
+    @blog_entry = current_user.blog_entries.build blog_params
 
     if @blog_entry.save
       current_user.follow @blog_entry
@@ -49,7 +49,7 @@ class BlogController < ApplicationController
   end
 
   def update
-    if @blog_entry.update_attributes(params[:blog_entry])
+    if @blog_entry.update_attributes blog_params
       flash[:notice] = t('blog.flash.updated')
       redirect_to @blog_entry
     else
@@ -71,6 +71,19 @@ class BlogController < ApplicationController
   end
 
   private
+
+  def blog_params
+    params.require(:blog_entry).permit(
+      :title,
+      :body,
+      :tag_list,
+      :category_list,
+      :image,
+      :remove_image,
+      :image_cache,
+      :sticky
+    )
+  end
 
   def find_entry
     @blog_entry = BlogEntry.find params[:id]

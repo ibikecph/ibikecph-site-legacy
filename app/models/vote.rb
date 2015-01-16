@@ -3,8 +3,6 @@ class Vote < ActiveRecord::Base
   belongs_to :issue, counter_cache: true
   belongs_to :user
 
-  attr_accessible
-
   def self.has_voted? user, idea
     return nil unless user && idea
 

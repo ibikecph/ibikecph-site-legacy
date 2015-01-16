@@ -27,7 +27,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
                                  .encode('UTF-8')
     end
 
-    @route = current_user.routes.new params[:route]
+    @route = current_user.routes.new route_params
     if @route.save
       render status: 201,
              json: {
@@ -78,7 +78,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
                                  .encode('UTF-8')
     end
 
-    if @route.update_attributes(params[:route])
+    if @route.update_attributes(route_params)
       render status: 200,
              json: {
                success: true,
@@ -117,6 +117,25 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   private
+
+  def route_params
+    params.require(:route).permit(
+      :from_name,
+      :from_latitude,
+      :from_longitude,
+      :to_name,
+      :to_latitude,
+      :to_longitude,
+      :route_geometry,
+      :route_instructions,
+      :route_summary,
+      :route_name,
+      :start_date,
+      :end_date,
+      :route_visited_locations,
+      :is_finished
+    )
+  end
 
   def manage_duplicate_routes
     @croute = current_user.routes

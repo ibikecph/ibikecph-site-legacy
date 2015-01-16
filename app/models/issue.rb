@@ -20,14 +20,14 @@ class Issue < ActiveRecord::Base
   scope :most_commented, where('comments_count > 0').order('comments_count desc')
   scope :most_voted, where('votes_count > 0').order('votes_count desc')
 
-  attr_accessible :title,
-                  :body,
-                  :tag_list,
-                  :label_list,
-                  :labels,
-                  :image,
-                  :remove_image,
-                  :image_cache
+  # attr_accessible :title,
+  #                 :body,
+  #                 :tag_list,
+  #                 :label_list,
+  #                 :labels,
+  #                 :image,
+  #                 :remove_image,
+  #                 :image_cache
 
   mount_uploader :image, ResizedImageUploader
 

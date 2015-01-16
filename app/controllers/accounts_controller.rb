@@ -32,7 +32,7 @@ class AccountsController < ApplicationController
   def update_password
     @user = User.find(current_user.id)
 
-    if @user.update_with_password(params[:user])
+    if @user.update_with_password user_params
       sign_in(:user, @user, bypass: true)
 
       # email changed
@@ -54,7 +54,7 @@ class AccountsController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes user_params
       flash[:notice] = t('accounts.flash.updated')
       redirect_to account_path
     else
@@ -78,12 +78,37 @@ class AccountsController < ApplicationController
   end
 
   def update_settings
-    if current_user.update_attributes(params[:user])
+    if current_user.update_attributes user_params
       flash[:notice] = t('accounts.flash.settings_updated')
       redirect_to account_path
     else
       render :settings
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(
+      :name,
+      :about,
+      :email,
+      :email_confirmation,
+      :current_password,
+      :password,
+      :password_confirmation,
+      :image,
+      :image_path,
+      :remove_image,
+      :image_cache,
+      :notify_by_email,
+      :terms,
+      :tester,
+      :provider,
+      :uid,
+      :account_source,
+      :email_confirmation
+    )
   end
 
 end
