@@ -54,4 +54,5 @@ end
 group :production, :staging do
   gem 'workless', '~> 1.1.1'
   gem 'newrelic_rpm'
+  gem 'rails_12factor'
 end
