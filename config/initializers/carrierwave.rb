@@ -1,15 +1,22 @@
-
 CarrierWave.configure do |config|
-  config.fog_credentials = {
-    :provider               => 'AWS',
-    :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
-    :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
-    :region                 => 'us-east-1' #must match actual location of bucket. might want to make sure it also is the same as where servers are hosted - then transfer inbetween is free
-  }
-  config.fog_directory  = "ibikecph-#{Rails.env}"
-  #config.fog_host       = 'https://assets.example.com'
-  config.fog_public     = true
-  #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
+  if Rails.env.production? || Rails.env.staging?
+    config.storage = :fog
+    config.fog_credentials = {
+      :provider               => 'AWS',
+      :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],        # values from Heroku configs
+      :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
+      :region                 => 'us-east-1' #must match actual location of bucket. might want to make sure it also is the same as where servers are hosted - then transfer inbetween is free
+    }
+    config.fog_directory  = "ibikecph-#{Rails.env}"
+    #config.fog_host       = 'https://assets.example.com'
+    config.fog_public     = true
+    #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
+  elsif Rails.env.test?
+    config.storage :file
+    config.enable_processing = false
+  else Rails.env.development?
+    config.storage :file
+  end
 end
 
 ##enable setting of quality when resizing images with RMagick

@@ -18,13 +18,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-  # Choose what kind of storage to use for this uploader:
-  if Rails.env.production? || Rails.env.staging?
-    storage :fog
-  else
-    storage :file
-  end
-
   # Include RMagick or ImageScience support:
   include CarrierWave::MiniMagick
 
