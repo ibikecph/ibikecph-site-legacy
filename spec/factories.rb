@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :issue do
-    title 'Moby Dick'
-    body 'Call me Ishmael.'
+  factory :reported_issue do
+    comment "sux"
+    error_type "problemz"
   end
 
   factory :user do
