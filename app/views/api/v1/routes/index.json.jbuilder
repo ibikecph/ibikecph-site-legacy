@@ -1,6 +1,6 @@
 json.success "true"
 json.info "Routes"
-json.data @routes do |json, route|
+json.data @routes do |route|
     json.id route.id
     json.user_id route.user_id
     json.fromName route.from_name
@@ -14,5 +14,5 @@ json.data @routes do |json, route|
     json.endDate route.end_date? ? route.end_date.strftime("%Y-%m-%dT%H:%M:%SZ%Z") : "null"
     #json.endDate route.end_date
     json.visitedLocations route.route_visited_locations
-    json.finishedRoute route.is_finished    
+    json.finishedRoute route.is_finished
 end
