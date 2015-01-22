@@ -3,7 +3,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   before_filter :check_auth_token
 
   def index
-    @reported_issues = ReportedIssue.find(:all, conditions: { is_open: true })
+    @reported_issues = ReportedIssue.where(is_open: true)
   end
 
   def create
@@ -54,7 +54,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def show
-    @reported_issue = ReportedIssue.find_by_id(params[:id])
+    @reported_issue = ReportedIssue.find(params[:id])
 
     unless @reported_issue
       render status: 404,
@@ -67,7 +67,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def update
-    @reported_issue = ReportedIssue.find_by_id(params[:id])
+    @reported_issue = ReportedIssue.find(params[:id])
 
     if params[:issue] &&
        params[:issue][:comment] &&
@@ -112,7 +112,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def destroy
-    @reported_issue = ReportedIssue.find_by_id(params[:id])
+    @reported_issue = ReportedIssue.find(params[:id])
 
     if @reported_issue
       @reported_issue.destroy

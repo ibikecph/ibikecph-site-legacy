@@ -46,7 +46,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
 
   def show
-    @favourite = current_user.favourites.find_by_id(params[:id])
+    @favourite = current_user.favourites.find(params[:id])
     unless @favourite
       render status: 404,
              json: {
@@ -58,7 +58,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
 
   def update
-    @favourite = current_user.favourites.find_by_id(params[:id])
+    @favourite = current_user.favourites.find(params[:id])
     unless @favourite
       render status: 404,
              json: {
@@ -103,7 +103,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
 
   def destroy
-    @favourite = current_user.favourites.find_by_id(params[:id])
+    @favourite = current_user.favourites.find(params[:id])
 
     if @favourite
       @favourite.destroy
@@ -130,7 +130,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
       @pos_ary = params[:pos_ary]
 
       @pos_ary.each do |fav|
-        @fav = current_user.favourites.find_by_id(fav[:id]) if fav.length == 2
+        @fav = current_user.favourites.find(fav[:id]) if fav.length == 2
         @fav.update_attributes(position: fav[:position]) if @fav
       end
     end

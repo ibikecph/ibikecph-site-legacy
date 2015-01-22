@@ -64,7 +64,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    @user = User.find_by_id(params[:id])
+    @user = User.find(params[:id])
 
     if params[:user][:image_path] && params[:user][:image_path]['file']
       prepare_image_data(params[:user][:image_path])
@@ -112,16 +112,12 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def warn_about_existing_name
-    user = User.find_by_name @user.name
+    user = User.find_by(name: @user.name)
 
     if user
       @name = @auth['info']['name']
       render :existing_name
     end
-  end
-
-  def find_user
-    @user = User.find params[:id]
   end
 
   def prepare_image_data(image_path_params)
