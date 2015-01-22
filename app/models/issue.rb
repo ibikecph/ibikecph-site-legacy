@@ -1,11 +1,12 @@
 class Issue < ActiveRecord::Base
 
   belongs_to :user
+
   has_many :votes, dependent: :destroy
   has_many :comments,
+           -> { order('created_at asc') },
            as: :commentable,
-           dependent: :destroy,
-           order: 'created_at asc'
+           dependent: :destroy
   has_many :follows,
            as: :followable,
            dependent: :destroy
@@ -16,9 +17,9 @@ class Issue < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :labels
 
-  scope :lastest, order('created_at desc')
-  scope :most_commented, where('comments_count > 0').order('comments_count desc')
-  scope :most_voted, where('votes_count > 0').order('votes_count desc')
+  scope :lastest, -> { order('created_at desc') }
+  scope :most_commented, -> { where('comments_count > 0').order('comments_count desc') }
+  scope :most_voted, -> { where('votes_count > 0').order('votes_count desc') }
 
   # attr_accessible :title,
   #                 :body,

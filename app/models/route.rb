@@ -28,8 +28,8 @@ class Route < ActiveRecord::Base
                         :route_visited_locations,
                         if: lambda { |s| s.is_finished }
 
-  scope :finished_routes, where('is_finished = true').order('created_at desc')
-  scope :recent_routes, where('is_finished = false').order('created_at desc').limit(50)
+  scope :finished_routes, -> { where('is_finished = true').order('created_at desc') }
+  scope :recent_routes, -> { where('is_finished = false').order('created_at desc').limit(50) }
 
   def finished_route?
     is_finished

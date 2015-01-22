@@ -1,16 +1,16 @@
 class BlogEntry < ActiveRecord::Base
 
   belongs_to :user
-  has_many :comments, as: :commentable, dependent: :destroy, order: 'created_at ASC'
+  has_many :comments, -> { order('created_at ASC') }, as: :commentable, dependent: :destroy
   has_many :follows, as: :followable, dependent: :destroy
   has_many :followers, through: :follows, source: :user
 
   acts_as_taggable
   acts_as_taggable_on :categories
 
-  scope :news, tagged_with(['news'])
-  scope :about, tagged_with(['about'])
-  scope :latest, order('sticky desc, created_at desc')
+  scope :news, -> { tagged_with(['news']) }
+  scope :about, -> { tagged_with(['about']) }
+  scope :latest, -> { order('sticky desc, created_at desc') }
   mount_uploader :image, ResizedImageUploader
   # attr_accessible :title,
   #                 :body,

@@ -156,11 +156,11 @@ class User < ActiveRecord::Base
 
   def find_follow target
     if target
-      Follow.first conditions: {
-                     user_id: self.id,
-                     followable_type: target.class.name,
-                     followable_id: target.id
-                   }
+      Follow.find_by(
+        user_id: self.id,
+        followable_type: target.class.name,
+        followable_id: target.id
+      )
     end
   end
 
