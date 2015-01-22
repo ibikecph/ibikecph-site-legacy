@@ -34,12 +34,11 @@ class Api::V1::SessionsController < Devise::SessionsController
         end
       end
     else
-      build_resource
+      resource_class.new
       resource = User.find_for_database_authentication(email: params[:user][:email])
       return failure unless resource
 
       if resource.valid_password?(params[:user][:password])
-        resource.ensure_authentication_token!
         sign_in(:user, resource)
         success resource
       else
