@@ -3,7 +3,7 @@ RailsOSRM::Application.configure do
   #note:
   #heroku config vars normally stored in ENV is not available during asset precompiling
   #see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
-   
+
   MAIN_DOMAIN = ENV['DOMAIN']
   WEB_DOMAIN = MAIN_DOMAIN
 
@@ -25,9 +25,9 @@ RailsOSRM::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  
+
   config.assets.initialize_on_precompile = false
-  
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
@@ -69,13 +69,8 @@ RailsOSRM::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
-
 
   config.middleware.use ExceptionNotification::Rack,
     :email => {
