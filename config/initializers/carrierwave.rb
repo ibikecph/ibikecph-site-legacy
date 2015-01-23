@@ -5,9 +5,9 @@ CarrierWave.configure do |config|
       :provider               => 'AWS',
       :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],        # values from Heroku configs
       :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
-      :region                 => 'us-east-1' #must match actual location of bucket. might want to make sure it also is the same as where servers are hosted - then transfer inbetween is free
+      :region                 => ENV['S3_BUCKET_REGION'] #must match actual location of bucket. might want to make sure it also is the same as where servers are hosted - then transfer inbetween is free
     }
-    config.fog_directory  = "ibikecph-#{Rails.env}"
+    config.fog_directory  = ENV['S3_BUCKET_NAME']
     #config.fog_host       = 'https://assets.example.com'
     config.fog_public     = true
     #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
