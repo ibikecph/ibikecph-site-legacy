@@ -5,7 +5,7 @@ RailsOSRM::Application.configure do
   #see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
 
   MAIN_DOMAIN = ENV['DOMAIN']
-  WEB_DOMAIN = "www.#{ENV['DOMAIN']}"
+  WEB_DOMAIN = MAIN_DOMAIN
 
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -54,7 +54,7 @@ RailsOSRM::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+   config.assets.precompile += %w( map.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -72,8 +72,10 @@ RailsOSRM::Application.configure do
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
 
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[Exception] ",
-    :sender_address => %{"notifier" <auto@#{MAIN_DOMAIN}>},
-    :exception_recipients => ENV['EXCEPTION_RECIPIENTS']
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "[Exception] ",
+      :sender_address => %{"notifier" <auto@#{MAIN_DOMAIN}>},
+      :exception_recipients => ENV['EXCEPTION_RECIPIENTS']
+    }
 end
