@@ -28,6 +28,10 @@ gem 'exception_notification'
 gem 'google-analytics-rails'
 gem 'rails-timeago'
 gem 'jbuilder'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'eco'
 
 group :development do
   gem 'quiet_assets'
@@ -41,13 +45,6 @@ group :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'capybara'
   gem 'database_cleaner'
-end
-
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-  gem 'eco'
 end
 
 # place last to allow other stuff to be instrumented
