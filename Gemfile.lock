@@ -193,8 +193,8 @@ GEM
       multi_json (~> 1.8)
     hike (1.2.3)
     i18n (0.7.0)
-    i18n-js (2.1.2)
-      i18n
+    i18n-js (3.0.0.rc8)
+      i18n (~> 0.6)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jbuilder (2.2.6)
@@ -367,7 +367,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   fog
   google-analytics-rails
-  i18n-js
+  i18n-js (~> 3.0.0.rc8)
   jbuilder
   jquery-rails
   mini_magick

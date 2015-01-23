@@ -13,7 +13,7 @@ gem 'cancancan', '~> 1.10'
 
 gem 'backbone-rails'
 gem 'jquery-rails'
-gem 'i18n-js'
+gem 'i18n-js', '~> 3.0.0.rc8'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
