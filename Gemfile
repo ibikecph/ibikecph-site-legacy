@@ -51,7 +51,7 @@ group :assets do
 end
 
 # place last to allow other stuff to be instrumented
-group :production, :staging do
+group :production do
   gem 'workless', '~> 1.1.1'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
