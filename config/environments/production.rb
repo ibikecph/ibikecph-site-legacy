@@ -76,8 +76,12 @@ RailsOSRM::Application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
-
-
+  
+  # only send email to whitelisted addressed, useful during staging
+  if ENV['ACCEPTED_EMAIL_RECIPIENTS']
+    Mail.register_interceptor RecipientInterceptor.new(ENV['ACCEPTED_EMAIL_RECIPIENTS'])
+  end
+  
   config.middleware.use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[Exception] ",
