@@ -5,7 +5,7 @@ RailsOSRM::Application.configure do
   # see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
 
   MAIN_DOMAIN = ENV['DOMAIN']
-  WEB_DOMAIN = "www.#{ENV['DOMAIN']}"     # was MAIN_DOMAIN in staging
+  WEB_DOMAIN = ENV['WEB_DOMAIN']
 
   # google analytics
   GA.tracker = ENV['GOOGLE_ANALYTICS_KEY']
