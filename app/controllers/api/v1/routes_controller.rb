@@ -31,7 +31,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   def show
-    @route = current_user.routes.find(params[:id])
+    @route = current_user.routes.find_by id: params[:id]
 
     unless @route
       render status: 404,
@@ -44,7 +44,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   def update
-    @route = current_user.routes.find(params[:id])
+    @route = current_user.routes.find_by id: params[:id]
 
     unless @route
       render status: 404,
@@ -75,7 +75,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   def destroy
-    @route = current_user.routes.find(params[:id])
+    @route = current_user.routes.find_by id: params[:id]
 
     if @route
       @route.destroy

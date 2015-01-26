@@ -43,7 +43,8 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
 
   def update
-    @favourite = current_user.favourites.find(params[:id])
+    @favourite = current_user.favourites.find_by id: params[:id]
+
     unless @favourite
       render status: 404,
              json: {
@@ -73,7 +74,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
 
   def destroy
-    @favourite = current_user.favourites.find(params[:id])
+    @favourite = current_user.favourites.find_by id: params[:id]
 
     if @favourite
       @favourite.destroy
