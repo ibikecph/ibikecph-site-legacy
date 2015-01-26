@@ -8,27 +8,38 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def show
-    @user = User.find params[:id]
-  rescue ActiveRecord::RecordNotFound
+    @user = User.find_by id: params[:id]
 
-    render status: 404,
-           json: {
-             success: false,
-             info: t('users.flash.user_not_found'),
-             errors: t('users.flash.user_not_found')
-           }
+    unless @user
+      render status: 404,
+             json: {
+               success: false,
+               info: t('users.flash.user_not_found'),
+               errors: t('users.flash.user_not_found')
+             }
+    end
   end
 
   def destroy
-    @user = User.find params[:id]
-    @user.destroy
+    @user = User.find_by id: params[:id]
 
-    render status: 200,
-           json: {
-             success: true,
-             info: t('users.flash.deleted'),
-             data: {}
-           }
+    unless @user
+      render status: 404,
+             json: {
+               success: false,
+               info: t('users.flash.user_not_found'),
+               errors: t('users.flash.user_not_found')
+             }
+    else
+      @user.destroy
+
+      render status: 200,
+             json: {
+               success: true,
+               info: t('users.flash.deleted'),
+               data: {}
+             }
+    end
   end
 
 end
