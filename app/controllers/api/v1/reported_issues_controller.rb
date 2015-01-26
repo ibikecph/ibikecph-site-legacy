@@ -44,44 +44,54 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def update
-    check_issue_encoding!
+    @reported_issue = ReportedIssue.find_by id: params[:id]
 
-    @reported_issue = ReportedIssue.find(params[:id])
-
-    if @reported_issue.update_attributes(params[:issue])
-      render status: 200,
-             json: {
-               success: true,
-               info: t('reported_issues.flash.updated'),
-               data: { id: @reported_issue.id }
-             }
-    else
-      render status: 400,
+    unless @reported_issue
+      render status: 404,
              json: {
                success: false,
-               info: @reported_issue.errors.full_messages.first,
-               errors: @reported_issue.errors.full_messages
+               info: t('reported_issues.flash.issue_not_found'),
+               errors: t('reported_issues.flash.issue_not_found')
              }
+    else
+      check_issue_encoding!
+
+      if @reported_issue.update_attributes issue_params
+        render status: 200,
+               json: {
+                 success: true,
+                 info: t('reported_issues.flash.updated'),
+                 data: { id: @reported_issue.id }
+               }
+      else
+        render status: 400,
+               json: {
+                 success: false,
+                 info: @reported_issue.errors.full_messages.first,
+                 errors: @reported_issue.errors.full_messages
+               }
+      end
     end
   end
 
   def destroy
-    @reported_issue = ReportedIssue.find(params[:id])
+    @reported_issue = ReportedIssue.find_by id: params[:id]
 
-    if @reported_issue
-      @reported_issue.destroy
-      render status: 200,
-             json: {
-               success: true,
-                     info: t('reported_issues.flash.deleted'),
-                     data: {}
-             }
-    else
+    unless @reported_issue
       render status: 404,
              json: {
                success: false,
-                     info: t('reported_issues.flash.issue_not_found'),
-                     errors: t('reported_issues.flash.issue_not_found')
+               info: t('reported_issues.flash.issue_not_found'),
+               errors: t('reported_issues.flash.issue_not_found')
+             }
+    else
+      @reported_issue.destroy
+
+      render status: 200,
+             json: {
+               success: true,
+               info: t('reported_issues.flash.deleted'),
+               data: {}
              }
     end
   end
