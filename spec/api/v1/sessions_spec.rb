@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Sessions API' do
+describe 'Sessions API', api: :v1 do
 
   before :each do
     @user = build :user

@@ -29,7 +29,8 @@ RSpec.configure do |config|
 
   # helpers
   config.include FeatureHelpers, type: :feature
-  config.include RequestHelpers, type: :request
+  config.include ApiHelpers, type: :request
+  config.include ApiHelpers::V1, api: :v1
 
   # automatically mix in different behaviours to your tests
   # based on their file location
