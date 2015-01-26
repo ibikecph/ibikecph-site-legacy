@@ -40,6 +40,24 @@ describe 'Users API', api: :v1 do
         expect(json['data']).to have_key('id')
         expect(json['data']['id']).to eq(otheruser.id)
       end
+
+      # it 'update user' do
+      #   sign_in @user
+
+      #   patch "/api/users", { user: @user }, headers
+
+      #   expect(response).to be_success
+      #   expect(response).to have_http_status(200)
+      # end
+
+      it 'destroy user' do
+        sign_in @user
+
+        delete "/api/users/#{@user.id}", {}, headers
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
     end
   end
 
@@ -51,6 +69,18 @@ describe 'Users API', api: :v1 do
         get '/api/users', {}, headers
 
         # unautorized
+        expect(response).not_to be_success
+        expect(response).to have_http_status(401)
+      end
+
+      it 'destroy elses user' do
+        sign_in @user
+
+        otheruser = create :user
+
+        delete "/api/users/#{otheruser.id}", {}, headers
+
+        # access denied
         expect(response).not_to be_success
         expect(response).to have_http_status(401)
       end
@@ -66,6 +96,14 @@ describe 'Users API', api: :v1 do
 
       it 'index users' do
         get '/api/users', {}, headers
+
+        # not logged in
+        expect(response).not_to be_success
+        expect(response).to have_http_status(403)
+      end
+
+      it 'destroy user' do
+        delete "/api/users/#{@user.id}", {}, headers
 
         # not logged in
         expect(response).not_to be_success
