@@ -9,30 +9,8 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   def create
     # never allow new users with a role
     params[:user].delete(:role)
-    if params[:user] &&
-       params[:user][:name] &&
-       !params[:user][:name].force_encoding('UTF-8').valid_encoding?
 
-      params[:user][:name] = params[:user][:name]
-                             .force_encoding('ISO-8859-1')
-                             .encode('UTF-8')
-    end
-    if params[:user] &&
-       params[:user][:password] &&
-       !params[:user][:password].force_encoding('UTF-8').valid_encoding?
-
-      params[:user][:password] = params[:user][:password]
-                                 .force_encoding('ISO-8859-1')
-                                 .encode('UTF-8')
-    end
-    if params[:user] &&
-       params[:user][:password_confirmation] &&
-       !params[:user][:password_confirmation].force_encoding('UTF-8').valid_encoding?
-
-      params[:user][:password_confirmation] = params[:user][:password_confirmation]
-                                              .force_encoding('ISO-8859-1')
-                                              .encode('UTF-8')
-    end
+    check_user_encoding!
 
     # handle images
     if params[:user][:image_path] && params[:user][:image_path]['file']
@@ -64,51 +42,60 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find_by id: params[:id]
 
-    if params[:user][:image_path] && params[:user][:image_path]['file']
-      prepare_image_data(params[:user][:image_path])
-    end
-
-    if @user.update_with_password user_params
-      render status: 200,
-             json: {
-               success: true,
-               info: t('users.flash.updated'),
-               data: { id: @user.id }
-             }
-    else
-      render status: 400,
+    unless @user
+      render status: 404,
              json: {
                success: false,
-               info: @user.errors.full_messages.first,
-               errors: @user.errors.full_messages
+               info: t('users.flash.user_not_found'),
+               errors: t('users.flash.user_not_found')
              }
+    else
+      if params[:user][:image_path] && params[:user][:image_path]['file']
+        prepare_image_data(params[:user][:image_path])
+      end
+
+      if @user.update_with_password(user_params)
+        render status: 200,
+               json: {
+                 success: true,
+                 info: t('users.flash.updated'),
+                 data: { id: @user.id }
+               }
+      else
+        render status: 400,
+               json: {
+                 success: false,
+                 info: @user.errors.full_messages.first,
+                 errors: @user.errors.full_messages
+               }
+      end
     end
   end
 
   private
 
   def user_params
-  params.require(:user).permit(
-    :name,
-    :about,
-    :email,
-    :email_confirmation,
-    :password,
-    :password_confirmation,
-    :image,
-    :image_path,
-    :remove_image,
-    :image_cache,
-    :notify_by_email,
-    :terms,
-    :tester,
-    :provider,
-    :uid,
-    :account_source,
-    :email_confirmation
-  )
+    params.require(:user).permit(
+      :name,
+      :about,
+      :email,
+      :email_confirmation,
+      :password,
+      :password_confirmation,
+      :image,
+      :image_path,
+      :remove_image,
+      :image_cache,
+      :notify_by_email,
+      :terms,
+      :tester,
+      :provider,
+      :uid,
+      :account_source,
+      :email_confirmation
+    )
   end
 
   def warn_about_existing_name
@@ -133,6 +120,33 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
     params[:user][:image] = uploaded_file
 
     tempfile.delete
+  end
+
+  def check_user_encoding!
+    if params[:user] &&
+       params[:user][:name] &&
+       !params[:user][:name].force_encoding('UTF-8').valid_encoding?
+
+      params[:user][:name] = params[:user][:name]
+                             .force_encoding('ISO-8859-1')
+                             .encode('UTF-8')
+    end
+    if params[:user] &&
+       params[:user][:password] &&
+       !params[:user][:password].force_encoding('UTF-8').valid_encoding?
+
+      params[:user][:password] = params[:user][:password]
+                                 .force_encoding('ISO-8859-1')
+                                 .encode('UTF-8')
+    end
+    if params[:user] &&
+       params[:user][:password_confirmation] &&
+       !params[:user][:password_confirmation].force_encoding('UTF-8').valid_encoding?
+
+      params[:user][:password_confirmation] = params[:user][:password_confirmation]
+                                              .force_encoding('ISO-8859-1')
+                                              .encode('UTF-8')
+    end
   end
 
 end
