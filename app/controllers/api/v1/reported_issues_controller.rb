@@ -9,8 +9,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   def create
     check_issue_encoding!
 
-
-    @reported_issue = ReportedIssue.new params[:issue]
+    @reported_issue = ReportedIssue.new issue_params
     @reported_issue.user_id = current_user.id if current_user
 
     if @reported_issue.save
@@ -47,6 +46,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   def update
     check_issue_encoding!
 
+    @reported_issue = ReportedIssue.find(params[:id])
 
     if @reported_issue.update_attributes(params[:issue])
       render status: 200,
@@ -87,6 +87,15 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   private
+
+  def issue_params
+    params.require(:issue).permit(
+      :route_segment,
+      :comment,
+      :error_type,
+      :is_open
+    )
+  end
 
   def check_auth_token
     if params[:auth_token] && !params[:auth_token].nil?
