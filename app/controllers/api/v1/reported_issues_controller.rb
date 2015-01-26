@@ -7,30 +7,8 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def create
-    if params[:issue] &&
-       params[:issue][:comment] &&
-       !params[:issue][:comment].force_encoding('UTF-8').valid_encoding?
+    check_issue_encoding!
 
-      params[:issue][:comment] = params[:issue][:comment]
-                                 .force_encoding('ISO-8859-1')
-                                 .encode('UTF-8')
-    end
-    if params[:issue] &&
-       params[:issue][:route_segment] &&
-       !params[:issue][:route_segment].force_encoding('UTF-8').valid_encoding?
-
-      params[:issue][:route_segment] = params[:issue][:route_segment]
-                                       .force_encoding('ISO-8859-1')
-                                       .encode('UTF-8')
-    end
-    if params[:issue] &&
-       params[:issue][:error_type] &&
-       !params[:issue][:error_type].force_encoding('UTF-8').valid_encoding?
-
-      params[:issue][:error_type] = params[:issue][:error_type]
-                                    .force_encoding('ISO-8859-1')
-                                    .encode('UTF-8')
-    end
 
     @reported_issue = ReportedIssue.new params[:issue]
     @reported_issue.user_id = current_user.id if current_user
@@ -67,32 +45,8 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def update
-    @reported_issue = ReportedIssue.find(params[:id])
+    check_issue_encoding!
 
-    if params[:issue] &&
-       params[:issue][:comment] &&
-       !params[:issue][:comment].force_encoding('UTF-8').valid_encoding?
-
-      params[:issue][:comment] = params[:issue][:comment]
-                                 .force_encoding('ISO-8859-1')
-                                 .encode('UTF-8')
-    end
-    if params[:issue] &&
-       params[:issue][:route_segment] &&
-       !params[:issue][:route_segment].force_encoding('UTF-8').valid_encoding?
-
-      params[:issue][:route_segment] = params[:issue][:route_segment]
-                                       .force_encoding('ISO-8859-1')
-                                       .encode('UTF-8')
-    end
-    if params[:issue] &&
-       params[:issue][:error_type] &&
-       !params[:issue][:error_type].force_encoding('UTF-8').valid_encoding?
-
-      params[:issue][:error_type] = params[:issue][:error_type]
-                                    .force_encoding('ISO-8859-1')
-                                    .encode('UTF-8')
-    end
 
     if @reported_issue.update_attributes(params[:issue])
       render status: 200,
@@ -137,6 +91,33 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   def check_auth_token
     if params[:auth_token] && !params[:auth_token].nil?
       :authenticate_user!
+    end
+  end
+
+  def check_issue_encoding!
+    if params[:issue] &&
+       params[:issue][:comment] &&
+       !params[:issue][:comment].force_encoding('UTF-8').valid_encoding?
+
+      params[:issue][:comment] = params[:issue][:comment]
+                                 .force_encoding('ISO-8859-1')
+                                 .encode('UTF-8')
+    end
+    if params[:issue] &&
+       params[:issue][:route_segment] &&
+       !params[:issue][:route_segment].force_encoding('UTF-8').valid_encoding?
+
+      params[:issue][:route_segment] = params[:issue][:route_segment]
+                                       .force_encoding('ISO-8859-1')
+                                       .encode('UTF-8')
+    end
+    if params[:issue] &&
+       params[:issue][:error_type] &&
+       !params[:issue][:error_type].force_encoding('UTF-8').valid_encoding?
+
+      params[:issue][:error_type] = params[:issue][:error_type]
+                                    .force_encoding('ISO-8859-1')
+                                    .encode('UTF-8')
     end
   end
 
