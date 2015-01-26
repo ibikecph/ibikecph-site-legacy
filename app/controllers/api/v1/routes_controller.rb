@@ -10,22 +10,7 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   def create
-    if params[:route] &&
-       params[:route][:from_name] &&
-       !params[:route][:from_name].force_encoding('UTF-8').valid_encoding?
-
-      params[:route][:from_name] = params[:route][:from_name]
-                                   .force_encoding('ISO-8859-1')
-                                   .encode('UTF-8')
-    end
-    if params[:route] &&
-       params[:route][:to_name] &&
-       !params[:route][:to_name].force_encoding('UTF-8').valid_encoding?
-
-      params[:route][:to_name] = params[:route][:to_name]
-                                 .force_encoding('ISO-8859-1')
-                                 .encode('UTF-8')
-    end
+    check_route_encoding!
 
     @route = current_user.routes.new route_params
     if @route.save
@@ -61,37 +46,31 @@ class Api::V1::RoutesController < Api::V1::BaseController
   def update
     @route = current_user.routes.find(params[:id])
 
-    if params[:route] &&
-       params[:route][:from_name] &&
-       !params[:route][:from_name].force_encoding('UTF-8').valid_encoding?
-
-      params[:route][:from_name] = params[:route][:from_name]
-                                   .force_encoding('ISO-8859-1')
-                                   .encode('UTF-8')
-    end
-    if params[:route] &&
-       params[:route][:to_name] &&
-       !params[:route][:to_name].force_encoding('UTF-8').valid_encoding?
-
-      params[:route][:to_name] = params[:route][:to_name]
-                                 .force_encoding('ISO-8859-1')
-                                 .encode('UTF-8')
-    end
-
-    if @route.update_attributes(route_params)
-      render status: 200,
-             json: {
-               success: true,
-               info: t('routes.flash.updated'),
-               data: { id: @route.id }
-             }
-    else
-      render status: 400,
+    unless @route
+      render status: 404,
              json: {
                success: false,
-               info: @route.errors.full_messages.first,
-               errors: @route.errors.full_messages
+               info: t('routes.flash.route_not_found'),
+               errors: t('routes.flash.route_not_found')
              }
+    else
+      check_route_encoding!
+
+      if @route.update_attributes(route_params)
+        render status: 200,
+               json: {
+                 success: true,
+                 info: t('routes.flash.updated'),
+                 data: { id: @route.id }
+               }
+      else
+        render status: 400,
+               json: {
+                 success: false,
+                 info: @route.errors.full_messages.first,
+                 errors: @route.errors.full_messages
+               }
+      end
     end
   end
 
@@ -144,6 +123,25 @@ class Api::V1::RoutesController < Api::V1::BaseController
     )
 
     @croute.destroy if @croute
+  end
+
+  def check_route_encoding!
+    if params[:route] &&
+       params[:route][:from_name] &&
+       !params[:route][:from_name].force_encoding('UTF-8').valid_encoding?
+
+      params[:route][:from_name] = params[:route][:from_name]
+                                   .force_encoding('ISO-8859-1')
+                                   .encode('UTF-8')
+    end
+    if params[:route] &&
+       params[:route][:to_name] &&
+       !params[:route][:to_name].force_encoding('UTF-8').valid_encoding?
+
+      params[:route][:to_name] = params[:route][:to_name]
+                                 .force_encoding('ISO-8859-1')
+                                 .encode('UTF-8')
+    end
   end
 
 end

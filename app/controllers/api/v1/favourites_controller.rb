@@ -8,22 +8,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   end
 
   def create
-    if params[:favourite] &&
-       params[:favourite][:address] &&
-       !params[:favourite][:address].force_encoding('UTF-8').valid_encoding?
-
-      params[:favourite][:address] = params[:favourite][:address]
-                                     .force_encoding('ISO-8859-1')
-                                     .encode('UTF-8')
-    end
-    if params[:favourite] &&
-       params[:favourite][:name] &&
-       !params[:favourite][:name].force_encoding('UTF-8').valid_encoding?
-
-      params[:favourite][:name] = params[:favourite][:name]
-                                  .force_encoding('ISO-8859-1')
-                                  .encode('UTF-8')
-    end
+    check_favourite_encoding!
 
     @favourite = current_user.favourites.new favourite_params
     @favourite.position = current_user.favourites.length
@@ -67,22 +52,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
                errors: t('favourites.flash.fav_not_found')
              }
     else
-      if params[:favourite] &&
-         params[:favourite][:address] &&
-         !params[:favourite][:address].force_encoding('UTF-8').valid_encoding?
-
-        params[:favourite][:address] = params[:favourite][:address]
-                                       .force_encoding('ISO-8859-1')
-                                       .encode('UTF-8')
-      end
-      if params[:favourite] &&
-         params[:favourite][:name] &&
-         !params[:favourite][:name].force_encoding('UTF-8').valid_encoding?
-
-        params[:favourite][:name] = params[:favourite][:name]
-                                    .force_encoding('ISO-8859-1')
-                                    .encode('UTF-8')
-      end
+      check_favourite_encoding!
 
       if @favourite.update_attributes(favourite_params)
         render status: 200,
@@ -156,6 +126,25 @@ class Api::V1::FavouritesController < Api::V1::BaseController
       :sub_source,
       :position
     )
+  end
+
+  def check_favourite_encoding!
+    if params[:favourite] &&
+       params[:favourite][:address] &&
+       !params[:favourite][:address].force_encoding('UTF-8').valid_encoding?
+
+      params[:favourite][:address] = params[:favourite][:address]
+                                     .force_encoding('ISO-8859-1')
+                                     .encode('UTF-8')
+    end
+    if params[:favourite] &&
+       params[:favourite][:name] &&
+       !params[:favourite][:name].force_encoding('UTF-8').valid_encoding?
+
+      params[:favourite][:name] = params[:favourite][:name]
+                                  .force_encoding('ISO-8859-1')
+                                  .encode('UTF-8')
+    end
   end
 
 end
