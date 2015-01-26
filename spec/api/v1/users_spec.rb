@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Users API' do
+describe 'Users API', api: :v1 do
 
   before :each do
     @user = build :user

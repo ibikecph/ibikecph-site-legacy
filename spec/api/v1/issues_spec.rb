@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Issues API' do
+describe 'Issues API', api: :v1 do
 
   before :each do
     @issue = create :reported_issue
