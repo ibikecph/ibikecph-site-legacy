@@ -5,7 +5,7 @@ RailsOSRM::Application.configure do
   # see https://devcenter.heroku.com/articles/rails3x-asset-pipeline-cedar
 
   MAIN_DOMAIN = ENV['DOMAIN']
-  WEB_DOMAIN = "www.#{ENV['DOMAIN']}"
+  WEB_DOMAIN = ENV['WEB_DOMAIN']
 
   # google analytics
   GA.tracker = ENV['GOOGLE_ANALYTICS_KEY']
@@ -54,7 +54,7 @@ RailsOSRM::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  config.action_controller.asset_host = ENV['ASSET_HOST']
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( map.css )
@@ -76,8 +76,12 @@ RailsOSRM::Application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
-
-
+  
+  # only send email to whitelisted addressed, useful during staging
+  if ENV['INTERCEPT_EMAIL']
+    Mail.register_interceptor RecipientInterceptor.new(ENV['INTERCEPT_EMAIL'])
+  end
+  
   config.middleware.use ExceptionNotification::Rack,
     :email => {
       :email_prefix => "[Exception] ",

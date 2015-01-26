@@ -13,7 +13,7 @@ gem 'cancancan', '~> 1.10'
 
 gem 'backbone-rails'
 gem 'jquery-rails'
-gem 'i18n-js'
+gem 'i18n-js', '~> 3.0.0.rc8'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
@@ -28,6 +28,11 @@ gem 'exception_notification'
 gem 'google-analytics-rails'
 gem 'rails-timeago'
 gem 'jbuilder'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'eco'
+gem 'recipient_interceptor'
 
 group :development do
   gem 'quiet_assets'
@@ -43,15 +48,8 @@ group :test do
   gem 'database_cleaner'
 end
 
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-  gem 'eco'
-end
-
 # place last to allow other stuff to be instrumented
-group :production, :staging do
+group :production do
   gem 'workless', '~> 1.1.1'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
