@@ -15,7 +15,7 @@ class Ability
         can :create, [Favourite, Route, Comment, Issue, ReportedIssue, Vote]
         can [:vote, :unvote], Issue
         can :destroy, [Follow, Favourite, Route] do |t|
-          t.user.id == user.id
+          t.user_id == user.id
         end
         if user.staff?
           can :manage, [BlogEntry, Issue, ReportedIssue, Comment, Vote]
