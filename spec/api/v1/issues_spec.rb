@@ -27,30 +27,11 @@ describe 'Issues API', api: :v1 do
       end
 
       it 'show issue' do
-        @issue.user_id = @user.id
+        @user.reported_issues << @issue
 
         sign_in @user
 
         get "/api/issues/#{@issue.id}", {}, headers
-
-        expect(response).to be_success
-        expect(response).to have_http_status(200)
-
-        expect(json['data']).to have_key('id')
-        expect(json['data']['id']).to eq(@issue.id)
-      end
-
-      it 'update issue' do
-        @issue.user_id = @user.id
-
-        sign_in @user
-
-        newissue = {
-          comment: 'foo',
-          error_type: 'bar'
-        }
-
-        patch "/api/issues/#{@issue.id}", { issue: newissue }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -71,22 +52,40 @@ describe 'Issues API', api: :v1 do
 
         expect(json['data']).to have_key('id')
       end
-
-      it 'destroy issue' do
-        @issue.user_id = @user.id
-
-        sign_in @user
-
-        delete "/api/issues/#{@issue.id}", {}, headers
-
-        expect(response).to be_success
-        expect(response).to have_http_status(200)
-      end
     end
   end
 
   context 'should not' do
     context 'when logged in' do
+      it 'update issue' do
+        @user.reported_issues << @issue
+
+        sign_in @user
+
+        newissue = {
+          comment: 'foo',
+          error_type: 'bar'
+        }
+
+        patch "/api/issues/#{@issue.id}", { issue: newissue }, headers
+
+        # unauthorized
+        expect(response).not_to be_success
+        expect(response).to have_http_status(401)
+      end
+
+      it 'destroy issue' do
+        @user.reported_issues << @issue
+
+        sign_in @user
+
+        delete "/api/issues/#{@issue.id}", {}, headers
+
+        # unauthorized
+        expect(response).not_to be_success
+        expect(response).to have_http_status(401)
+      end
+
       it 'update elses issue' do
         @issue.user_id = @user.id
 
@@ -98,14 +97,14 @@ describe 'Issues API', api: :v1 do
 
         newissue = {
           comment: 'foo',
-          error_type: bar
+          error_type: 'bar'
         }
 
         patch "/api/issues/#{@issue.id}", { issue: newissue }, headers
 
         # not found
         expect(response).not_to be_success
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(401)
       end
 
       it 'destroy elses issue' do
@@ -121,7 +120,7 @@ describe 'Issues API', api: :v1 do
 
         # not found
         expect(response).not_to be_success
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(401)
       end
     end
 

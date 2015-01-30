@@ -3,8 +3,8 @@ class Ability
 
   def initialize(user)
 
-    can [:index], [Comment, Issue, Favourite, Route]
-    can [:show], [Comment, User, Issue, Favourite, Route]
+    can [:index], [Comment, Issue, ReportedIssue, Favourite, Route]
+    can [:show], [Comment, User, Issue, ReportedIssue, Favourite, Route]
     can [:index, :archive, :show, :tag, :feed], [BlogEntry]
     can :create, User
 
@@ -12,13 +12,14 @@ class Ability
       if user.role == 'super'
         can :manage, :all
       else
-        can :create, [Comment, Issue, Vote]
+        can :create, [Favourite, Route, Comment, Issue, ReportedIssue, Vote]
         can [:vote, :unvote], Issue
         can :destroy, [Follow, Favourite, Route] do |t|
           t.user.id == user.id
         end
         if user.role == 'staff'
           can :manage, [BlogEntry, Issue, Comment, Vote]
+          can :manage, [BlogEntry, Issue, ReportedIssue, Comment, Vote]
         end
         can [:update, :create], [Favourite, Route] do |t|
           t.user.id == user.id
