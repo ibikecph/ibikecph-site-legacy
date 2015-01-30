@@ -67,7 +67,7 @@ describe 'Sessions API', api: :v1 do
       expect(response).to be_success
       expect(response).to have_http_status(200)
 
-      delete '/api/users/sign_out', { user: @user }, headers
+      sign_out @user
 
       expect(response).to be_success
       expect(response).to have_http_status(200)
