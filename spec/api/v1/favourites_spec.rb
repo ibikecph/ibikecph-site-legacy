@@ -117,9 +117,9 @@ describe 'Favourites API', api: :v1 do
 
         patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite }, headers
 
-        # not found
+        # unauthorized
         expect(response).not_to be_success
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(401)
       end
 
       it 'destroy elses favourite' do
@@ -133,9 +133,9 @@ describe 'Favourites API', api: :v1 do
 
         delete "/api/favourites/#{@favourite.id}", {}, headers
 
-        # not found
+        # unauthorized
         expect(response).not_to be_success
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(401)
       end
     end
 

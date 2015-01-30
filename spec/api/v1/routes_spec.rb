@@ -117,9 +117,9 @@ describe 'Routes API', api: :v1 do
 
         patch "/api/routes/#{@route.id}", { route: newroute }, headers
 
-        # not found
+        # unauthorized
         expect(response).not_to be_success
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(401)
       end
 
       it 'destroy elses route' do
@@ -133,9 +133,9 @@ describe 'Routes API', api: :v1 do
 
         delete "/api/routes/#{@route.id}", {}, headers
 
-        # not found
+        # unauthorized
         expect(response).not_to be_success
-        expect(response).to have_http_status(404)
+        expect(response).to have_http_status(401)
       end
     end
 
