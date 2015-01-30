@@ -9,7 +9,7 @@ class Ability
     can :create, User
 
     if user
-      if user.role == 'super'
+      if user.admin?
         can :manage, :all
       else
         can :create, [Favourite, Route, Comment, Issue, ReportedIssue, Vote]
@@ -17,24 +17,22 @@ class Ability
         can :destroy, [Follow, Favourite, Route] do |t|
           t.user.id == user.id
         end
-        if user.role == 'staff'
-          can :manage, [BlogEntry, Issue, Comment, Vote]
+        if user.staff?
           can :manage, [BlogEntry, Issue, ReportedIssue, Comment, Vote]
         end
-        can [:update, :create], [Favourite, Route] do |t|
-          t.user.id == user.id
+        can [:update], [Favourite, Route] do |t|
+          t.user_id == user.id
         end
         can [:reorder], Favourite do |t|
-          t.user.id == user.id
+          t.user_id == user.id
         end
       end
-    end
 
-    can :destroy, User do |t|
-      t.id == user.id
+      # cannot :delete, User
+      can :destroy, User do |t|
+        t.id == user.id
+      end
     end
-
-    # cannot :delete, User
   end
 
 end
