@@ -3,7 +3,7 @@
 da:
   devise:
     confirmations:
-      confirmed: "Din konto blev bekræftet. Du er nu logget ind."
+      confirmed: "Din konto blev bekræftet. Du kan nu logge ind."
       send_instructions: "Om få minutter vil du modtage instruktioner til hvordan du bekræfter din konto."
       send_paranoid_instructions: "Hvis din email findes i vores database, vil du om få minutter modtage instruktioner til hvordan du bekræfter din konto."
     failure:
@@ -28,7 +28,7 @@ da:
         rplink: "Ændre min adgangskode"
         contentblock_1: "Nogen har anmodet om et link til at ændre din adgangskode. Du kan gøre dette via nedenstående link."
         contentblock_2: "Hvis du ikke har anmodet dette, bedes du se bort fra denne e-mail."
-        contentblock_3: "Din adgangskode vil ikke ændre sig, indtil du får adgang til linket ovenfor og opretter en ny."  
+        contentblock_3: "Din adgangskode vil ikke ændre sig, indtil du får adgang til linket ovenfor og opretter en ny."
       unlock_instructions:
         subject: "Instruktioner til oplåsning"
         addressuser: "Hej"
