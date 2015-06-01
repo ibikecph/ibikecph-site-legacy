@@ -2,4 +2,4 @@
 
 <p><%=t('devise.mailer.confirmation_instructions.contentblock_1')%></p>
 
-<p><%= link_to t('devise.mailer.confirmation_instructions.confirmlink'), user_confirmation_url(:confirmation_token => @resource.confirmation_token) %></p>
+<p><%= link_to t('devise.mailer.confirmation_instructions.confirmlink'), user_confirmation_url(:confirmation_token => @token) %></p>
