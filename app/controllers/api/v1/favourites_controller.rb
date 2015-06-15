@@ -121,6 +121,9 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   private
 
   def favourite_params
+    # preserve backwards compatability
+    params[:favourite][:latitude] = params[:favourite][:lattitude]
+
     params.require(:favourite).permit(
       :name,
       :address,

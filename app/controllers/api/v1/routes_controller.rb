@@ -100,6 +100,10 @@ class Api::V1::RoutesController < Api::V1::BaseController
   private
 
   def route_params
+    # preserve backwards compatability
+    params[:route][:from_latitude] = params[:route][:from_lattitude]
+    params[:route][:to_latitude] = params[:route][:to_lattitude]
+
     params.require(:route).permit(
       :from_name,
       :from_latitude,
