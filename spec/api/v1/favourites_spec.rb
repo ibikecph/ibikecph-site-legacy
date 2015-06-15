@@ -46,15 +46,10 @@ describe 'Favourites API', api: :v1 do
         sign_in @user
 
         newfavourite = {
-          from_name: 'asdf',
-          from_latitude: '123',
-          from_longitude: '123',
-
-          to_name: 'oiup',
-          to_latitude: '321',
-          to_longitude: '321',
-
-          start_date: Date.new
+          name: 'asdf42',
+          address: 'asdfvej 42',
+          lattitude: '55.123',
+          longitude: '12.321'
         }
 
         patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite }, headers
