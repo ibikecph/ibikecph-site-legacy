@@ -5,11 +5,12 @@ RailsOSRM::Application.routes.draw do
     scope module: :v1, constraints: ApiSettings.new(version: 1) do
 
       devise_for :users,
-                 controllers: {
-                   omniauth_callbacks: 'omniauth_callbacks'
-                 } do
-        post '/login' => 'sessions#create'
-        get '/logout', to: 'sessions#destroy'
+                 skip: [:sessions],
+                 controllers: { omniauth_callbacks: 'devise/omniauth_callbacks' }
+      as :user do
+        get 'login' => 'sessions#new', as: :new_user_session
+        post 'login' => 'sessions#create', as: :user_session
+        delete 'logout' => 'sessions#destroy', as: :destroy_user_session
       end
 
       resources :reported_issues, path: 'issues'

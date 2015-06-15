@@ -1,6 +1,9 @@
 class Api::V1::ReportedIssuesController < Api::V1::BaseController
 
-  before_filter :check_auth_token
+  before_filter :check_auth, if: Proc.new { |c| c.request.format == 'application/json' }
+
+  load_and_authorize_resource :user
+  load_and_authorize_resource :reported_issue
 
   def index
     @reported_issues = ReportedIssue.where(is_open: true)
@@ -9,8 +12,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   def create
     check_issue_encoding!
 
-    @reported_issue = ReportedIssue.new issue_params
-    @reported_issue.user_id = current_user.id if current_user
+    @reported_issue = current_user.reported_issues.new issue_params
 
     if @reported_issue.save
       render status: 201,
@@ -31,7 +33,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def show
-    @reported_issue = ReportedIssue.find(params[:id])
+    @reported_issue = current_user.reported_issues.find_by(id: params[:id])
 
     unless @reported_issue
       render status: 404,
@@ -44,7 +46,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def update
-    @reported_issue = ReportedIssue.find_by id: params[:id]
+    @reported_issue = current_user.reported_issues.find_by(id: params[:id])
 
     unless @reported_issue
       render status: 404,
@@ -55,6 +57,8 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
              }
     else
       check_issue_encoding!
+
+      # can? :update, ReportedIssue
 
       if @reported_issue.update_attributes issue_params
         render status: 200,
@@ -75,7 +79,7 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
   end
 
   def destroy
-    @reported_issue = ReportedIssue.find_by id: params[:id]
+    @reported_issue = current_user.reported_issues.find_by(id: params[:id])
 
     unless @reported_issue
       render status: 404,
@@ -107,11 +111,11 @@ class Api::V1::ReportedIssuesController < Api::V1::BaseController
     )
   end
 
-  def check_auth_token
-    if params[:auth_token] && !params[:auth_token].nil?
-      :authenticate_user!
-    end
-  end
+  # def check_auth_token
+  #   if params[:auth_token] && !params[:auth_token].nil?
+  #     :authenticate_user!
+  #   end
+  # end
 
   def check_issue_encoding!
     if params[:issue] &&

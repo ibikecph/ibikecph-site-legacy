@@ -1,7 +1,9 @@
 class Api::V1::FavouritesController < Api::V1::BaseController
 
   before_filter :check_auth, if: Proc.new { |c| c.request.format == 'application/json' }
+
   load_and_authorize_resource :user
+  load_and_authorize_resource :favourite
 
   def index
     @favourites = current_user.favourites.all_favourites
@@ -32,6 +34,7 @@ class Api::V1::FavouritesController < Api::V1::BaseController
 
   def show
     @favourite = current_user.favourites.find(params[:id])
+
     unless @favourite
       render status: 404,
              json: {
@@ -118,6 +121,9 @@ class Api::V1::FavouritesController < Api::V1::BaseController
   private
 
   def favourite_params
+    # preserve backwards compatability
+    params[:favourite][:latitude] = params[:favourite][:lattitude]
+
     params.require(:favourite).permit(
       :name,
       :address,

@@ -3,7 +3,7 @@
 en:
   devise:
     confirmations:
-      confirmed: "Your account was successfully confirmed. You are now signed in."
+      confirmed: "Your account was successfully confirmed. You can now sign in."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
     failure:
@@ -21,20 +21,20 @@ en:
         subject: "Confirmation instructions"
         addressuser: "Welcome"
         confirmlink: "Confirm my account"
-        contentblock_1: "You can confirm your account email through the link below:"    
+        contentblock_1: "You can confirm your account email through the link below:"
       reset_password_instructions:
         subject: "Reset password instructions"
         addressuser: "Hello"
         rplink: "Change my password"
         contentblock_1: "Someone has requested a link to change your password. You can do this through the link below."
         contentblock_2: "If you didn't request this, please ignore this email."
-        contentblock_3: "Your password won't change until you access the link above and create a new one."  
+        contentblock_3: "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         subject: "Unlock Instructions"
         addressuser: "Hello"
         ualink: "Unlock my account"
         contentblock_1: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
-        contentblock_2: "Click the link below to unlock your account:"       
+        contentblock_2: "Click the link below to unlock your account:"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
@@ -52,7 +52,7 @@ en:
         title: Change your password
         new_password: New password
         confirm_password: Confirm new password
-        submit: Save      
+        submit: Save
     registrations:
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
@@ -63,7 +63,7 @@ en:
       updated: "You updated your account successfully."
       new:
         title: Create I Bike CPH account
-        body: | 
+        body: |
           Join!
           An I Bike CPH account is free and without obligations, og enables you to uplaod ideas and comments.
           You choose wether you want emails with news, etc.

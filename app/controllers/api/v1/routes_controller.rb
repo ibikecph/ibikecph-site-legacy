@@ -3,7 +3,9 @@ class Api::V1::RoutesController < Api::V1::BaseController
   skip_before_filter :verify_authenticity_token, if: Proc.new { |c| c.request.format == 'application/json' }
   before_filter :check_auth, if: Proc.new { |c| c.request.format == 'application/json' }
   before_filter :manage_duplicate_routes, only: :create
+
   load_and_authorize_resource :user
+  load_and_authorize_resource :route
 
   def index
     @routes = current_user.routes.recent_routes
@@ -98,6 +100,10 @@ class Api::V1::RoutesController < Api::V1::BaseController
   private
 
   def route_params
+    # preserve backwards compatability
+    params[:route][:from_latitude] = params[:route][:from_lattitude]
+    params[:route][:to_latitude] = params[:route][:to_lattitude]
+
     params.require(:route).permit(
       :from_name,
       :from_latitude,

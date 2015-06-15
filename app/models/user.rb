@@ -227,6 +227,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def admin?
+    self.role == 'super'
+  end
+
+  def staff?
+    self.role == 'staff'
+  end
+
   private
 
   def generate_authentication_token

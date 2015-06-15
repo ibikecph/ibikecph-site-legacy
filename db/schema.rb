@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20141117160813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "blog_entries", force: :cascade do |t|
     t.string   "title",          limit: 255

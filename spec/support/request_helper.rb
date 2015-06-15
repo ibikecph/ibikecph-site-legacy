@@ -1,8 +1,12 @@
 module ApiHelpers
   def sign_in(user)
-    post '/api/users/sign_in', {
+    post '/api/login', {
            user: { email: user.email, password: user.password }
          }, headers
+  end
+
+  def sign_out(user)
+    delete '/api/logout', { user: user }, headers
   end
 
   def json
