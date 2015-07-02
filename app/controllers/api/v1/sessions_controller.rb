@@ -1,6 +1,6 @@
 class Api::V1::SessionsController < Devise::SessionsController
 
-  skip_before_filter :verify_authenticity_token, if: Proc.new { |c| c.request.format == 'application/json' }
+  skip_before_filter :check_auth_token!
   prepend_before_filter :check_login_params, only: [:create]
   prepend_before_filter :require_no_authentication, only: [:create]
 
@@ -60,7 +60,7 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   private
 
-  def success logged_user
+  def success(logged_user)
     current_user = logged_user
     render status: 200,
            json: {
