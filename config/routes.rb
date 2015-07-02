@@ -6,7 +6,7 @@ RailsOSRM::Application.routes.draw do
 
       devise_for :users,
                  skip: [:sessions],
-                 controllers: { omniauth_callbacks: 'devise/omniauth_callbacks' }
+                 controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
       as :user do
         get 'login' => 'sessions#new', as: :new_user_session
         post 'login' => 'sessions#create', as: :user_session
@@ -28,7 +28,7 @@ RailsOSRM::Application.routes.draw do
 
   devise_for :users,
              skip: [:session, :password, :registration],
-             controllers: { omniauth_callbacks: "devise/omniauth_callbacks" }
+             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope '(:locale)', locale: /en/ do
     root to: 'map#index'
