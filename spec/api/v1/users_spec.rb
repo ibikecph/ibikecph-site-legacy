@@ -16,7 +16,7 @@ describe 'Users API', api: :v1 do
         expect(response).to be_success
         expect(response).to have_http_status(200)
 
-        get "/api/users/#{@user.id}", {}, headers
+        get "/api/users/#{@user.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -32,7 +32,7 @@ describe 'Users API', api: :v1 do
 
         sign_in @user
 
-        get "/api/users/#{otheruser.id}", {}, headers
+        get "/api/users/#{otheruser.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -53,7 +53,7 @@ describe 'Users API', api: :v1 do
       it 'destroy user' do
         sign_in @user
 
-        delete "/api/users/#{@user.id}", {}, headers
+        delete "/api/users/#{@user.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -66,7 +66,7 @@ describe 'Users API', api: :v1 do
       it 'index users' do
         sign_in @user
 
-        get '/api/users', {}, headers
+        get '/api/users', { auth_token: token }, headers
 
         # unautorized
         expect(response).not_to be_success
@@ -78,7 +78,7 @@ describe 'Users API', api: :v1 do
 
         otheruser = create :user
 
-        delete "/api/users/#{otheruser.id}", {}, headers
+        delete "/api/users/#{otheruser.id}", { auth_token: token }, headers
 
         # access denied
         expect(response).not_to be_success

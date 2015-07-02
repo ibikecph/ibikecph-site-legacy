@@ -9,6 +9,10 @@ module ApiHelpers
     delete '/api/logout', { user: user }, headers
   end
 
+  def token
+    @token ||= JSON.parse(response.body)['data']['auth_token']
+  end
+
   def json
     @json ||= JSON.parse(response.body)
   end
