@@ -1,6 +1,7 @@
 class Api::V1::BaseController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+
   before_filter :check_format!
   before_filter :check_auth_token!
 
@@ -24,7 +25,8 @@ class Api::V1::BaseController < ApplicationController
       # actually stored in the session and a token is needed
       # for every request. If you want the token to work as a
       # sign in token, you can simply remove store: false.
-      sign_in user, store: false
+      #sign_in user, store: false
+      sign_in :user, user, store: false
     else
       render status: 403,
              json: {

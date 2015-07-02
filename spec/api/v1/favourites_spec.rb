@@ -26,6 +26,17 @@ describe 'Favourites API', api: :v1 do
         expect(json['data'].first['id']).to eq(@favourite.id)
       end
 
+      it 'index own favourites when none' do
+        sign_in @user
+
+        get "/api/favourites", { auth_token: token }, headers
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+
+        expect(json['data'].length).to eq(0)
+      end
+
       it 'show route' do
         @user.favourites << @favourite
 
