@@ -54,6 +54,9 @@ RailsOSRM::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
+  # note: serving asset from Amazon CloudFront from a custom domain via https
+  # requires using either paying or usign SNI which doens't work on all browswer.
+  # for the time being we just use the cloudfront domain name instead.
   config.action_controller.asset_host = ENV['ASSET_HOST']
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
