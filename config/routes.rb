@@ -21,6 +21,8 @@ RailsOSRM::Application.routes.draw do
       end
       resources :routes
       resources :users, only: [:index, :show, :destroy]
+
+      get "terms" => "terms#index"
     end
   end
 
