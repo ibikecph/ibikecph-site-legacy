@@ -22,3 +22,8 @@
 logfile
 .sass-cache/
 .env
+
+#emacs
+*~
+\#*\#
+.\#*
