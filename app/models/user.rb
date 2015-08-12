@@ -223,6 +223,27 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.find_for_facebook_uid(fb_user)
+    user = User.find_by_uid fb_user['id']
+
+    unless user
+
+      user = User.new(
+          name: fb_user['name'],
+          provider: 'facebook',
+          uid: fb_user['id'],
+          email: fb_user['email'],
+          email_confirmation: fb_user['email']
+      )
+
+      user.skip_confirmation!
+      user.reset_authentication_token!
+      user.save!
+    end
+
+    user
+  end
+
   def ensure_authentication_token
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
