@@ -48,6 +48,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.4.3)
       activerecord (>= 3.2, < 5)
+    addressable (2.3.8)
     arel (6.0.0)
     backbone-rails (1.1.2)
       rails (>= 3.0.0)
@@ -206,6 +207,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.2)
     jwt (1.2.1)
+    koala (2.2.0)
+      addressable
+      faraday
+      multi_json
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -370,6 +375,7 @@ DEPENDENCIES
   i18n-js (~> 3.0.0.rc8)
   jbuilder
   jquery-rails
+  koala
   mini_magick
   newrelic_rpm
   omniauth
@@ -388,3 +394,6 @@ DEPENDENCIES
   uglifier
   will_paginate
   workless (~> 1.1.1)
+
+BUNDLED WITH
+   1.10.6
