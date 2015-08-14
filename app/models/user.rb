@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_for_facebook_uid(fb_user)
-    user = User.find_by_uid fb_user['id']
+    user = User.where(uid: fb_user['id']).first
 
     unless user
 
