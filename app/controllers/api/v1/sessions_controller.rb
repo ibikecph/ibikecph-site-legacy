@@ -34,6 +34,8 @@ class Api::V1::SessionsController < Devise::SessionsController
           sign_in(:user, @user)
           success @user
         end
+      else
+        failure
       end
     else
       resource_class.new
