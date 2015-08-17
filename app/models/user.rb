@@ -223,11 +223,10 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_for_facebook_uid(fb_user)
-    user = User.where(uid: fb_user['id']).first
+  def self.find_for_facebook_email(fb_user)
+    user = User.where(email: fb_user['email']).first
 
     unless user
-
       user = User.new(
           name: fb_user['name'],
           provider: 'facebook',
@@ -239,6 +238,7 @@ class User < ActiveRecord::Base
       user.skip_confirmation!
       user.reset_authentication_token!
       user.save!
+
     end
 
     user
