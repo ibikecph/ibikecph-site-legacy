@@ -25,6 +25,7 @@ class Api::V1::BaseController < ApplicationController
       # for every request. If you want the token to work as a
       # sign in token, you can simply remove store: false.
       sign_in user, store: false
+      @current_user = user
     else
       render status: 403,
              json: {
