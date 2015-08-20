@@ -25,13 +25,8 @@ class Api::V1::BaseController < ApplicationController
       # actually stored in the session and a token is needed
       # for every request. If you want the token to work as a
       # sign in token, you can simply remove store: false.
-<<<<<<< HEAD
-      sign_in user, store: false
-      @current_user = user
-=======
       #sign_in user, store: false
       sign_in :user, user, store: false
->>>>>>> 6a1b303... fix current_user nil
     else
       render status: 403,
              json: {
