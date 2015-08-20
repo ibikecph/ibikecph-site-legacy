@@ -4,10 +4,10 @@ json.data do
     json.id @route.id
     json.user_id @route.user_id
     json.fromName @route.from_name
-    json.fromLatitude @route.from_latitude
+    json.fromLattitude @route.from_latitude #should be mispelled in v1!
     json.fromLongitude @route.from_longitude
     json.toName @route.to_name
-    json.toLatitude @route.to_latitude
+    json.toLattitude @route.to_latitude #should be mispelled in v1!
     json.toLongitude @route.to_longitude
     json.startDate @route.start_date? ? @route.start_date.strftime("%Y-%m-%dT%H:%M:%SZ%Z") : "null"
     #json.startDate @route.start_date

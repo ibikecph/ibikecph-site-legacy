@@ -5,7 +5,7 @@ json.data do
     json.user_id @favourite.user_id
     json.name @favourite.name
     json.address @favourite.address
-    json.latitude @favourite.latitude
+    json.lattitude @favourite.latitude #json should be mispelled in v1!
     json.longitude @favourite.longitude
     json.source @favourite.source
     json.sub_source @favourite.sub_source
