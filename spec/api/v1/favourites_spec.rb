@@ -85,6 +85,26 @@ describe 'Favourites API', api: :v1 do
         expect(json['data']).to have_key('id')
       end
 
+      it 'create favourite with lattitude' do
+        sign_in @user
+
+        attrs = {
+            name:"Fav",
+            address: "Vestergade 27-29, 1550 København V",
+            lattitude: "55.677276",
+            longitude: "12.569467",
+            source: "favorite",
+            sub_source: "favorite"
+        }
+
+        post "/api/favourites", { favourite: attrs, auth_token: token }, headers
+
+        expect(response).to be_success
+        expect(response).to have_http_status(201)
+
+        expect(json['data']).to have_key('id')
+      end
+
       it 'destroy favourite' do
         @user.favourites << @favourite
 
