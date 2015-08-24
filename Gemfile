@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.3'
 gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
@@ -38,6 +38,7 @@ gem 'koala'
 
 group :development do
   gem 'quiet_assets'
+  gem 'brakeman', :require => false
 end
 
 group :development, :test do
