@@ -17,7 +17,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in @user
 
-        get "/api/favourites", {}, headers
+        get "/api/favourites", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -26,12 +26,23 @@ describe 'Favourites API', api: :v1 do
         expect(json['data'].first['id']).to eq(@favourite.id)
       end
 
+      it 'index own favourites when none' do
+        sign_in @user
+
+        get "/api/favourites", { auth_token: token }, headers
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+
+        expect(json['data'].length).to eq(0)
+      end
+
       it 'show route' do
         @user.favourites << @favourite
 
         sign_in @user
 
-        get "/api/favourites/#{@favourite.id}", {}, headers
+        get "/api/favourites/#{@favourite.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -52,7 +63,7 @@ describe 'Favourites API', api: :v1 do
           longitude: '12.321'
         }
 
-        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite }, headers
+        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite, auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -66,7 +77,27 @@ describe 'Favourites API', api: :v1 do
 
         attrs = attributes_for :favourite
 
-        post "/api/favourites", { favourite: attrs }, headers
+        post "/api/favourites", { favourite: attrs, auth_token: token }, headers
+
+        expect(response).to be_success
+        expect(response).to have_http_status(201)
+
+        expect(json['data']).to have_key('id')
+      end
+
+      it 'create favourite with lattitude' do
+        sign_in @user
+
+        attrs = {
+            name:"Fav",
+            address: "Vestergade 27-29, 1550 København V",
+            lattitude: "55.677276",
+            longitude: "12.569467",
+            source: "favorite",
+            sub_source: "favorite"
+        }
+
+        post "/api/favourites", { favourite: attrs, auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -79,7 +110,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in @user
 
-        delete "/api/favourites/#{@favourite.id}", {}, headers
+        delete "/api/favourites/#{@favourite.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -110,7 +141,7 @@ describe 'Favourites API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite }, headers
+        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite, auth_token: token }, headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -126,7 +157,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in otheruser
 
-        delete "/api/favourites/#{@favourite.id}", {}, headers
+        delete "/api/favourites/#{@favourite.id}", { auth_token: token }, headers
 
         # unauthorized
         expect(response).not_to be_success

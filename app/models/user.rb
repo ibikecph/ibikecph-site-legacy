@@ -203,7 +203,7 @@ class User < ActiveRecord::Base
     self.provider == 'facebook'
   end
 
-  def self.find_for_facebook_oauth(auth, signed_in_resource = nil)
+  def self.find_for_facebook_oauth(auth)
     user = User.where(email: auth.info.email).first
 
     unless user
@@ -212,10 +212,33 @@ class User < ActiveRecord::Base
         provider: auth.provider,
         uid: auth.uid,
         email: auth.info.email,
-        email_confirmation: auth.info.email
+        email_confirmation: auth.info.email,
       )
+
       user.skip_confirmation!
       user.reset_authentication_token!
+      user.save!
+    end
+
+    user
+  end
+
+  def self.find_for_facebook_email(fb_user)
+    user = User.where(email: fb_user['email']).first
+
+    unless user
+      user = User.new(
+          name: fb_user['name'],
+          provider: 'facebook',
+          uid: fb_user['id'],
+          email: fb_user['email'],
+          email_confirmation: fb_user['email']
+      )
+
+      user.skip_confirmation!
+      user.reset_authentication_token!
+      user.save!
+
     end
 
     user

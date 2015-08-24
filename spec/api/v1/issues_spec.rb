@@ -17,7 +17,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in @user
 
-        get "/api/issues", {}, headers
+        get "/api/issues", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -31,7 +31,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in @user
 
-        get "/api/issues/#{@issue.id}", {}, headers
+        get "/api/issues/#{@issue.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -45,7 +45,7 @@ describe 'Issues API', api: :v1 do
 
         attrs = attributes_for :reported_issue
 
-        post "/api/issues", { issue: attrs }, headers
+        post "/api/issues", { issue: attrs, auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -67,7 +67,7 @@ describe 'Issues API', api: :v1 do
           error_type: 'bar'
         }
 
-        patch "/api/issues/#{@issue.id}", { issue: newissue }, headers
+        patch "/api/issues/#{@issue.id}", { issue: newissue, auth_token: token }, headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -79,7 +79,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in @user
 
-        delete "/api/issues/#{@issue.id}", {}, headers
+        delete "/api/issues/#{@issue.id}", { auth_token: token }, headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -100,7 +100,7 @@ describe 'Issues API', api: :v1 do
           error_type: 'bar'
         }
 
-        patch "/api/issues/#{@issue.id}", { issue: newissue }, headers
+        patch "/api/issues/#{@issue.id}", { issue: newissue, auth_token: token }, headers
 
         # not found
         expect(response).not_to be_success
@@ -116,7 +116,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in otheruser
 
-        delete "/api/issues/#{@issue.id}", {}, headers
+        delete "/api/issues/#{@issue.id}", { auth_token: token }, headers
 
         # not found
         expect(response).not_to be_success

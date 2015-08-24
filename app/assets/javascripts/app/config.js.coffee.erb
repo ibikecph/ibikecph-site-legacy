@@ -29,7 +29,7 @@ IBikeCPH.config =
 		name: 'OpenStreetMap'
 		#url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 		#url: 'http://{s}.tiles.mapbox.com/v3/stamen.cphbikes/{z}/{x}/{y}.png'
-		url: 'http://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png'
+		url: 'https://tiles.ibikecph.dk/webtiles/{z}/{x}/{y}.png'
 		options:
 			attribution: 'Map data © OpenStreetMap contributors (ODbL), Imagery © City of Copenhagen.'
 	,
@@ -66,12 +66,12 @@ IBikeCPH.config =
 		value: new L.LatLngBounds(new L.LatLng(55.885903, 12.019043), new L.LatLng(55.489553, 12.989209)) # Max bounds of the map
 
 	routing_service:
-		standard: 'http://routes.ibikecph.dk/v1.1/fast/viaroute'
-		cargobike: 'http://routes.ibikecph.dk/v1.1/cargo/viaroute'
-		greenbike: 'http://routes.ibikecph.dk/v1.1/green/viaroute'
+		standard: 'https://routes.ibikecph.dk/v1.1/fast/viaroute'
+		cargobike: 'https://routes.ibikecph.dk/v1.1/cargo/viaroute'
+		greenbike: 'https://routes.ibikecph.dk/v1.1/green/viaroute'
 
 	geocoding_service:
-		url: 'http://nominatim.openstreetmap.org/search'
+		url: 'https://nominatim.openstreetmap.org/search'
 		options:
 			'accept-language' : 'da'
 			countrycodes      : 'DK'
@@ -80,7 +80,7 @@ IBikeCPH.config =
 			email             : 'emil.tin@tmf.kk.dk'
 
 	reverse_geocoding_service:
-		url: 'http://nominatim.openstreetmap.org/reverse'
+		url: 'https://nominatim.openstreetmap.org/reverse'
 		options:
 			'accept-language' : 'da'
 			addressdetails    : '1'
@@ -89,10 +89,10 @@ IBikeCPH.config =
 	suggestion_service:
 		foursquare:
 			url: 'https://api.foursquare.com/v2/venues/suggestcompletion?near=Copenhagen&query='
-			token: '&oauth_token=BM2LGKP3TZURURN3R0NFYGQPQH3PU3L2WDNRF1MUJPSKYV1N&v=201303'
+			token: '&oauth_token=BM2LGKP3TZURURN3R0NFYGQPQH3PU3L2WDNRF1MUJPSKYV1N&v=20130303' # version number should probably be updated, but this still works
 		oiorest:
-			url: 'http://geo.oiorest.dk/adresser.json?q='
+			url: 'https://geo.oiorest.dk/adresser.json?q='
 		kms:
-			url: 'http://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&login='+kms_username+'&password='+kms_pswd+'&crs=EPSG:4326&search='
+			url: 'https://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&login='+kms_username+'&password='+kms_pswd+'&crs=EPSG:4326&search='
 			# url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=adresse&postdist=K%C3%B8benhavn*&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='
 			# url: 'http://kortforsyningen.kms.dk/?servicename=RestGeokeys&method=vej&husnr=1&geop=55.111111,12.222222&georef=EPSG:4326&outgeoref=EPSG:4326&login=ibikecphsite&password=bikebike13&vejnavn='

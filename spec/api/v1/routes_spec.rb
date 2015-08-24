@@ -17,7 +17,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in @user
 
-        get "/api/routes", {}, headers
+        get "/api/routes", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -31,7 +31,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in @user
 
-        get "/api/routes/#{@route.id}", {}, headers
+        get "/api/routes/#{@route.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -57,7 +57,7 @@ describe 'Routes API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/routes/#{@route.id}", { route: newroute }, headers
+        patch "/api/routes/#{@route.id}", { route: newroute, auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -71,7 +71,7 @@ describe 'Routes API', api: :v1 do
 
         attrs = attributes_for :route
 
-        post "/api/routes", { route: attrs }, headers
+        post "/api/routes", { route: attrs, auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -84,7 +84,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in @user
 
-        delete "/api/routes/#{@route.id}", {}, headers
+        delete "/api/routes/#{@route.id}", { auth_token: token }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -115,7 +115,7 @@ describe 'Routes API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/routes/#{@route.id}", { route: newroute }, headers
+        patch "/api/routes/#{@route.id}", { route: newroute, auth_token: token }, headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -131,7 +131,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in otheruser
 
-        delete "/api/routes/#{@route.id}", {}, headers
+        delete "/api/routes/#{@route.id}", { auth_token: token }, headers
 
         # unauthorized
         expect(response).not_to be_success

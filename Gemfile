@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.2.2'
 
 gem 'rails', '4.2.0'
 gem 'pg'
@@ -33,6 +33,8 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'eco'
 gem 'recipient_interceptor'
+
+gem 'koala'
 
 group :development do
   gem 'quiet_assets'
