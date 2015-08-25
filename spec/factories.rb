@@ -55,7 +55,7 @@ FactoryGirl.define do
   factory :coordinate do
     timestamp Time.now
     latitude '55.677276'
-    longtitude '12.569467'
+    longitude '12.569467'
   end
 
 end

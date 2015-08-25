@@ -37,7 +37,7 @@ class Api::V1::TracksController < Api::V1::BaseController
       coordinates_attributes: [
           :timestamp,
           :latitude,
-          :longtitude
+          :longitude
       ]
     )
   end

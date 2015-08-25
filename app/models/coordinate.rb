@@ -3,5 +3,5 @@ class Coordinate < ActiveRecord::Base
 
   validates_presence_of :timestamp,
                         :latitude,
-                        :longtitude
+                        :longitude
 end
