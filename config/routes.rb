@@ -19,7 +19,7 @@ RailsOSRM::Application.routes.draw do
           post :reorder
         end
       end
-      resources :routes
+      resources :routes, :tracks
       resources :users, only: [:index, :show, :destroy]
 
       get "terms" => "terms#index"

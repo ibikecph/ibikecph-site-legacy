@@ -45,4 +45,17 @@ FactoryGirl.define do
     source 'favorite'
     sub_source 'favorite'
   end
+
+  factory :track do
+    start_date Date.today
+    from_name 'Vestergade 27-29, 1550 København V'
+    to_name 'Lille Kannikestræde 3, 1170 København K'
+  end
+
+  factory :coordinate do
+    timestamp Time.now
+    latitude '55.677276'
+    longtitude '12.569467'
+  end
+
 end

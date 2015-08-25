@@ -12,7 +12,7 @@ class Ability
       if user.admin?
         can :manage, :all
       else
-        can :create, [Favourite, Route, Comment, Issue, ReportedIssue, Vote]
+        can :create, [Favourite, Route, Comment, Issue, ReportedIssue, Vote, Track, Coordinate]
         can [:vote, :unvote], Issue
         can :destroy, [Follow, Favourite, Route] do |t|
           t.user_id == user.id
@@ -20,7 +20,7 @@ class Ability
         if user.staff?
           can :manage, [BlogEntry, Issue, ReportedIssue, Comment, Vote]
         end
-        can [:update], [Favourite, Route] do |t|
+        can [:update], [Favourite, Route, Track] do |t|
           t.user_id == user.id
         end
         can [:reorder], Favourite do |t|

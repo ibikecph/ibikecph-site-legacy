@@ -33,7 +33,6 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'eco'
 gem 'recipient_interceptor'
-
 gem 'koala'
 
 group :development do
