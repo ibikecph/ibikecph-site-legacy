@@ -1,6 +1,6 @@
 class Track < ActiveRecord::Base
   belongs_to :user
-  has_many :coordinates
+  has_many :coordinates, dependent: :destroy
 
   accepts_nested_attributes_for :coordinates
 

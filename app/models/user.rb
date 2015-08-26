@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :reported_issues, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :routes, dependent: :destroy
+  has_many :tracks, dependent: :destroy
 
   # attr_accessible :name,
   #                 :about,

@@ -1,5 +1,7 @@
 class Api::V1::TracksController < Api::V1::BaseController
 
+  #TODO create strings for all messages
+
   load_and_authorize_resource :user
   load_and_authorize_resource :track
 
@@ -8,8 +10,9 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def create
-    @track = Track.new track_params
+    @track = current_user.tracks.new track_params
 
+    pp @track
     if @track.save && @count == @track.coordinates.count
       render status: 201,
              json: {
@@ -23,6 +26,26 @@ class Api::V1::TracksController < Api::V1::BaseController
                  success: false,
                  info: @track.errors.full_messages.first,
                  errors: @track.errors.full_messages
+             }
+    end
+  end
+
+  def destroy
+    @track = current_user.tracks.find_by id: params[:id]
+
+    if @track.try(:destroy)
+      render status: 200,
+             json: {
+                 success: true,
+                 info: t('routes.flash.deleted'),
+                 data: {}
+             }
+    else
+      render status: 404,
+             json: {
+                 success: false,
+                 info: t('routes.flash.route_not_found'),
+                 errors: t('routes.flash.route_not_found')
              }
     end
   end

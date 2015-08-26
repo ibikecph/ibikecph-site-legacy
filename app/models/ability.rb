@@ -13,8 +13,11 @@ class Ability
         can :manage, :all
       else
         can :create, [Favourite, Route, Comment, Issue, ReportedIssue, Vote, Track, Coordinate]
+        can :show, Track do |t|
+          t.user_id == user.id
+        end
         can [:vote, :unvote], Issue
-        can :destroy, [Follow, Favourite, Route] do |t|
+        can :destroy, [Follow, Favourite, Route, Track] do |t|
           t.user_id == user.id
         end
         if user.staff?
