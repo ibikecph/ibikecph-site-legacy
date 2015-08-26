@@ -10,7 +10,7 @@ class Api::V1::TracksController < Api::V1::BaseController
   def create
     @track = Track.new track_params
 
-    if @track.save
+    if @track.save && @count == @track.coordinates.count
       render status: 201,
              json: {
                  success: true,
@@ -30,15 +30,34 @@ class Api::V1::TracksController < Api::V1::BaseController
   private
 
   def track_params
+    @count = params[:track][:coordinates_attributes].try(:count) || 0
+
     params.require(:track).permit(
-      :start_date,
+      :timestamp,
       :from_name,
       :to_name,
       coordinates_attributes: [
-          :timestamp,
+          :seconds_passed,
           :latitude,
           :longitude
       ]
     )
   end
+
+  # Support for shortened params - not working yet
+  # def format_params
+  #   track_attrs = params[:track]
+  #
+  #   formatted_params = {track: {coordinates_attributes: Array.new }}
+  #
+  #   formatted_params[:track][:timestamp]=track_attrs[:ts]
+  #   formatted_params[:track][:from_name]=track_attrs[:fn]
+  #   formatted_params[:track][:to_name]=track_attrs[:tn]
+  #
+  #   track_attrs[:ca].each do |x,i|
+  #     formatted_params[:track][:coordinates_attributes] << {seconds_passed: x[:sp], latitude: x[:lt], longitude: x[:tg]}
+  #   end
+  #
+  #   params[:track] = formatted_params[:track]
+  # end
 end

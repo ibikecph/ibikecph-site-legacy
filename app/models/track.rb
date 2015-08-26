@@ -4,8 +4,10 @@ class Track < ActiveRecord::Base
 
   accepts_nested_attributes_for :coordinates
 
-  validates_presence_of :start_date,
+  validates_presence_of :timestamp,
                         :to_name,
                         :from_name
+
+
 
 end

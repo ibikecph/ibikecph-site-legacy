@@ -4,6 +4,7 @@ FactoryGirl.define do
   sequence(:title) { |n| "Title#{n}" }
   sequence(:name)  { |n| "Person#{n}" }
   sequence(:email) { |n| "person#{n}@example.com" }
+  sequence(:seconds_passed) {|n| n*3}
 
   factory :user do
     name
@@ -47,13 +48,17 @@ FactoryGirl.define do
   end
 
   factory :track do
-    start_date Date.today
+    timestamp Time.now.to_i
     from_name 'Vestergade 27-29, 1550 København V'
     to_name 'Lille Kannikestræde 3, 1170 København K'
+
+    factory :track_with_coords do
+      coordinates_attributes {Array.new(5){ attributes_for :coordinate }}
+    end
   end
 
   factory :coordinate do
-    timestamp Time.now
+    seconds_passed
     latitude '55.677276'
     longitude '12.569467'
   end
