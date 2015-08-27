@@ -55,6 +55,18 @@ describe 'Tracks API', api: :v1 do
   end
   context 'should not' do
     context 'when logged in' do
+      it 'create track with invalid coords' do
+        attrs = attributes_for :track_with_coords
+        attrs[:coordinates_attributes] << {seconds_passed: 5, latitude:'hohoho', longitude:'lalala'}
+
+        sign_in @user
+
+        post "/api/tracks", {track: attrs, auth_token: token}, headers
+
+        expect(response).to_not be_succes
+        expect(response).to have_http_status(422)
+      end
+
       it 'destroy others track' do
         @user.tracks << @track
 
