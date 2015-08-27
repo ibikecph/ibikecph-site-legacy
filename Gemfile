@@ -7,7 +7,6 @@ gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
 gem 'devise', '3.5.2'
-#gem 'devise-token_authenticatable', '0.4'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancancan', '~> 1.10'
