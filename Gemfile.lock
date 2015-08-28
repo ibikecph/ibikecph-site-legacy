@@ -401,7 +401,7 @@ DEPENDENCIES
   backbone-rails
   bcrypt
   brakeman
-  cancancan (~> 1.10)
+  cancancan (~> 1.12.0)
   capybara
   carrierwave
   coffee-rails
