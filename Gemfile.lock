@@ -90,7 +90,7 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
-    devise (3.4.0)
+    devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -147,7 +147,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.5)
+    fog-aws (0.7.6)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -378,7 +378,7 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
@@ -401,13 +401,13 @@ DEPENDENCIES
   backbone-rails
   bcrypt
   brakeman
-  cancancan (~> 1.10)
+  cancancan (~> 1.12.0)
   capybara
   carrierwave
   coffee-rails
   database_cleaner
   delayed_job_active_record
-  devise (= 3.4.0)
+  devise (= 3.5.2)
   eco
   exception_notification
   factory_girl_rails (~> 4.0)
