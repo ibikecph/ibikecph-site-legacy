@@ -12,7 +12,7 @@ class Api::V1::TracksController < Api::V1::BaseController
   def create
     @track = current_user.tracks.new track_params
 
-    if @track.save && params[:track][:count].try(:to_i) == @track.coordinates.count.try(:to_i)
+    if @track.save && params[:track][:count].try(:to_s) == @track.coordinates.count.try(:to_s)
       render status: 201,
              json: {
                  success: true,
