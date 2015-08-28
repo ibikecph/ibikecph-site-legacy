@@ -29,6 +29,7 @@ describe 'Tracks API', api: :v1 do
 
       it 'create track with coords' do
         attrs = attributes_for :track_with_coords
+        attrs[:count]=5
 
         sign_in @user
 
