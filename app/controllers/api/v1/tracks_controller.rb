@@ -12,7 +12,7 @@ class Api::V1::TracksController < Api::V1::BaseController
   def create
     @track = current_user.tracks.new track_params
 
-    if @track.save && params[:track][:count].try(:to_s) == @track.coordinates.count.try(:to_s)
+    if @track.save && @track.coordinates.try(:count).to_s == params[:track][:count].try(:to_s)
       render status: 201,
              json: {
                  success: true,
@@ -52,17 +52,11 @@ class Api::V1::TracksController < Api::V1::BaseController
   private
 
   def track_params
-    #@count = params[:track][:coordinates_attributes].try(:count) || 0
-
     params.require(:track).permit(
       :timestamp,
       :from_name,
       :to_name,
-      coordinates_attributes: [
-          :seconds_passed,
-          :latitude,
-          :longitude
-      ]
+      :coordinates => [:latitude,:longitude,:seconds_passed]
     )
   end
 

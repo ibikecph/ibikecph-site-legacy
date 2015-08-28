@@ -53,7 +53,7 @@ FactoryGirl.define do
     to_name 'Lille Kannikestræde 3, 1170 København K'
 
     factory :track_with_coords do
-      coordinates_attributes {Array.new(5){ attributes_for :coordinate }}
+      coordinates {Array.new(5){ attributes_for :coordinate }}
     end
   end
 
