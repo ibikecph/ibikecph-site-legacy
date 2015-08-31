@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828130613) do
+ActiveRecord::Schema.define(version: 20150831113728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,12 @@ ActiveRecord::Schema.define(version: 20150828130613) do
     t.string   "image"
   end
 
+  create_table "privacy_tokens", force: :cascade do |t|
+    t.string   "signature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reported_issues", force: :cascade do |t|
     t.string   "error_type"
     t.text     "comment"
@@ -170,6 +176,7 @@ ActiveRecord::Schema.define(version: 20150828130613) do
     t.integer  "timestamp"
     t.integer  "user_id"
     t.text     "coordinates"
+    t.string   "signature"
   end
 
   create_table "users", force: :cascade do |t|

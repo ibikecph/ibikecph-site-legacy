@@ -6,11 +6,11 @@ class Api::V1::TracksController < Api::V1::BaseController
   load_and_authorize_resource :track
 
   def index
-    @tracks = current_user.tracks
+    @tracks = Track.where(signature: params[:signature])
   end
 
   def create
-    @track = current_user.tracks.new track_params
+    @track = Track.new track_params
 
     if @track.save && @track.coordinates.try(:count).to_s == params[:track][:count].try(:to_s)
       render status: 201,
@@ -56,6 +56,7 @@ class Api::V1::TracksController < Api::V1::BaseController
       :timestamp,
       :from_name,
       :to_name,
+      :signature,
       :coordinates => [:latitude,:longitude,:seconds_passed]
     )
   end

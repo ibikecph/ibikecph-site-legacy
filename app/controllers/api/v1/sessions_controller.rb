@@ -7,24 +7,6 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   def create
     if params[:user][:fb_token]
-      #  fb = OmniAuth::Strategies::Facebook.new(
-      #    ENV['IBIKECPH_FBAPP_ID'],
-      #    ENV['IBIKECPH_FBAPP_SECRET']
-      # )
-      # client = ::OAuth2::Client.new(
-      #   ENV['IBIKECPH_FBAPP_ID'],
-      #   ENV['IBIKECPH_FBAPP_SECRET'],
-      #   fb.options.client_options
-      # )
-      # access_token = ::OAuth2::AccessToken.new(
-      #   client,
-      #   params[:user][:fb_token]
-      # )
-      # fb.instance_variable_set('@access_token', access_token)
-      #
-      # @fbauth_hash = fb.auth_hash rescue nil
-      # return failure unless @fbauth_hash
-
       fb_user = Koala::Facebook::API.new(params[:user][:fb_token]).get_object('me', fields: 'id,name,email')
 
       if fb_user

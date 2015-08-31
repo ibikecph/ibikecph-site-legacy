@@ -52,6 +52,19 @@ describe 'Tracks API', api: :v1 do
         expect(response).to be_success
         expect(response).to have_http_status(200)
       end
+
+      context 'and user has privacy token' do
+        it 'show tracks' do
+          attrs = attributes_for :track_with_coords
+          attrs[:count]=5
+
+          sign_in @user
+
+          3.times { post "/api/tracks", {track: attrs, auth_token: token}, headers }
+
+          get "/api/tracks/", {auth_token: token, signature: '3ECCRWkkjjvD6cV7_7yzCw'}, headers
+        end
+      end
     end
   end
   context 'should not' do

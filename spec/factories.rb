@@ -51,6 +51,7 @@ FactoryGirl.define do
     timestamp Time.now.to_i
     from_name 'Vestergade 27-29, 1550 København V'
     to_name 'Lille Kannikestræde 3, 1170 København K'
+    signature '3ECCRWkkjjvD6cV7_7yzCw'
 
     factory :track_with_coords do
       coordinates {Array.new(5){ attributes_for :coordinate }}
