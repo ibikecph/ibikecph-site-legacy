@@ -2,9 +2,9 @@
 # See https://github.com/svenfuchs/rails_i18n/tree/master/rails%2Flocale for starting points.
 
 da:
-  terms:
-    version: 1
-    important_parts_description: Lorem ipsum dolor sit amet. Her kommer nogle vigtige oplysninger.
+  mobileterms:
+    v1:
+      important_parts_description: Lorem ipsum dolor sit amet. Her kommer nogle vigtige oplysninger.
   activerecord:
     models:
       issue: Indlæg
