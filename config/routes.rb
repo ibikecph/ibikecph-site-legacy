@@ -22,6 +22,10 @@ RailsOSRM::Application.routes.draw do
       resources :routes, :tracks
       resources :users, only: [:index, :show, :destroy]
 
+      get   'privacy_tokens/' => 'privacy_tokens#show'
+      post  'privacy_tokens/' => 'privacy_tokens#create'
+      patch 'privacy_tokens/' => 'privacy_tokens#update'
+
       get "terms" => "terms#index"
     end
   end

@@ -2,17 +2,19 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   #TODO create strings for all messages
 
+  before_action :check_privacy_token
+
   load_and_authorize_resource :user
   load_and_authorize_resource :track
 
   def index
-    @tracks = Track.where(signature: params[:signature])
+    @tracks = privacy_token.tracks
   end
 
   def create
-    @track = Track.new track_params
+    @track = privacy_token.tracks.new track_params
 
-    if @track.save && @track.coordinates.try(:count).to_s == params[:track][:count].try(:to_s)
+    if @track.save && @track.coordinates.count.to_s == params[:track][:count].try(:to_s)
       render status: 201,
              json: {
                  success: true,
@@ -30,7 +32,7 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def destroy
-    @track = current_user.tracks.find_by id: params[:id]
+    @track = privacy_token.tracks.find_by id: params[:id]
 
     if @track.try(:destroy)
       render status: 200,
@@ -56,25 +58,22 @@ class Api::V1::TracksController < Api::V1::BaseController
       :timestamp,
       :from_name,
       :to_name,
-      :signature,
       :coordinates => [:latitude,:longitude,:seconds_passed]
     )
   end
 
-  # Support for shortened params - not working yet
-  # def format_params
-  #   track_attrs = params[:track]
-  #
-  #   formatted_params = {track: {coordinates_attributes: Array.new }}
-  #
-  #   formatted_params[:track][:timestamp]=track_attrs[:ts]
-  #   formatted_params[:track][:from_name]=track_attrs[:fn]
-  #   formatted_params[:track][:to_name]=track_attrs[:tn]
-  #
-  #   track_attrs[:ca].each do |x,i|
-  #     formatted_params[:track][:coordinates_attributes] << {seconds_passed: x[:sp], latitude: x[:lt], longitude: x[:tg]}
-  #   end
-  #
-  #   params[:track] = formatted_params[:track]
-  # end
+  def check_privacy_token
+    unless privacy_token
+      render status: 403,
+             json: {
+                 success: false,
+                 invalid_privacy_token: true,
+                 errors: t('api.flash.invalid_token')
+             }
+    end
+  end
+
+  def privacy_token
+    @token ||= PrivacyToken.find_by_signature(params[:signature])
+  end
 end

@@ -1,12 +1,11 @@
 class Track < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :privacy_token
 
   serialize :coordinates, JSON
 
   validates_presence_of :timestamp,
                         :to_name,
                         :from_name,
-                        :signature,
                         :coordinates
 
   def time_at_point i

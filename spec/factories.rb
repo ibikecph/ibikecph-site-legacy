@@ -64,4 +64,14 @@ FactoryGirl.define do
     longitude '12.569467'
   end
 
+  factory :privacy_token do
+    email 'email@ibikecph.dk'
+    password 'password'
+
+    factory :privacy_token_new do
+      old_password 'password'
+      password 'password123'
+    end
+  end
+
 end

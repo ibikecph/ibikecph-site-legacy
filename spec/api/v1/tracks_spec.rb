@@ -8,6 +8,7 @@ describe 'Tracks API', api: :v1 do
     @user.save!
 
     @track = create :track_with_coords
+    @privacy_token = create :privacy_token
   end
 
   context 'should' do
@@ -33,7 +34,7 @@ describe 'Tracks API', api: :v1 do
 
         sign_in @user
 
-        post "/api/tracks", {track: attrs, auth_token: token}, headers
+        post "/api/tracks", {track: attrs, auth_token: token, signature: @privacy_token.signature}, headers
 
         expect(response).to be_succes
         expect(response).to have_http_status(201)
