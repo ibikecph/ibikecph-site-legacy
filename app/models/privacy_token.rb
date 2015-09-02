@@ -21,6 +21,6 @@ class PrivacyToken < ActiveRecord::Base
   end
 
   def self.generate_signature(email, password)
-    BCrypt::Engine.hash_secret email + password, Rails.application.secrets.bcrypt_salt
+    BCrypt::Engine.hash_secret email + password, ENV['BCRYPT_SALT']
   end
 end
