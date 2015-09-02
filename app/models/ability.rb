@@ -17,9 +17,10 @@ class Ability
           t.user_id == user.id
         end
         can [:vote, :unvote], Issue
-        can :destroy, [Follow, Favourite, Route, Track] do |t|
+        can :destroy, [Follow, Favourite, Route] do |t|
           t.user_id == user.id
         end
+        can :destroy, Track
         if user.staff?
           can :manage, [BlogEntry, Issue, ReportedIssue, Comment, Vote]
         end

@@ -7,7 +7,7 @@ describe 'Tracks API', api: :v1 do
     @user.skip_confirmation!
     @user.save!
 
-    @track = create :track_with_coords
+    @track         = create :track_with_coords
     @privacy_token = create :privacy_token
   end
 
@@ -44,11 +44,11 @@ describe 'Tracks API', api: :v1 do
       end
 
       it 'destroy own track' do
-        @user.tracks << @track
+        @privacy_token.tracks << @track
 
         sign_in @user
 
-        delete "/api/tracks/#{@track.id}", { auth_token: token }, headers
+        delete "/api/tracks/#{@track.id}", { auth_token: token, signature: @privacy_token.signature }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
