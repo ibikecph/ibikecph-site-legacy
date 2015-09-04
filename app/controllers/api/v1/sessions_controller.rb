@@ -26,7 +26,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       return failure unless resource
 
       if resource.valid_password?(params[:user][:password])
-        privacy_token = PrivacyToken.find_for_user_info(params[:user][:email], params[:user][:password])
+        privacy_token = PrivacyToken.find_or_create_by_user_info(params[:user][:email], params[:user][:password])
         sign_in(:user, resource)
         success resource, signature: privacy_token.signature
       else

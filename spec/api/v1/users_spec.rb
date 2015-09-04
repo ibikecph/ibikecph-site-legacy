@@ -58,10 +58,27 @@ describe 'Users API', api: :v1 do
         expect(response).to be_success
         expect(response).to have_http_status(200)
       end
+
+      it 'change password and token' do
+        privacy_token = create :privacy_token, email: @user.email, password: @user.password
+
+        user = {email: @user.email, current_password: @user.password, password: 'password123'}
+
+        sign_in @user
+
+        post '/api/users/change_password', {user: user, auth_token: token}, headers
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+
+        expect(json['data']).to have_key('signature')
+        expect(json['data']['signature'].length).to eq(60)
+        expect(json['data']['signature']).to_not eq(privacy_token.signature)
+      end
     end
     context 'when not logged in' do
       it 'sign in' do
-        token = create :privacy_token
+        token = create :privacy_token, email: @user.email, password: @user.password
 
         sign_in @user
 

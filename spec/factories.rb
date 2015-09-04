@@ -61,7 +61,7 @@ FactoryGirl.define do
   end
 
   factory :privacy_token do
-    email 'person1@example.com'
+    email 'email@ibikecph.dk'
     password 'password'
 
     factory :privacy_token_new do

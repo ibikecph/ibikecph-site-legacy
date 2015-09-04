@@ -26,6 +26,8 @@ RailsOSRM::Application.routes.draw do
       post  'privacy_tokens/' => 'privacy_tokens#create'
       patch 'privacy_tokens/' => 'privacy_tokens#update'
 
+      post 'users/change_password' => 'users#change_password'
+
       get "terms" => "terms#index"
     end
   end

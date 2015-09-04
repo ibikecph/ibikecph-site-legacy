@@ -259,6 +259,22 @@ class User < ActiveRecord::Base
     self.role == 'staff'
   end
 
+  def change_password_and_token(params)
+    token = PrivacyToken.find_by_email_and_password params[:email], params[:current_password]
+
+    if token
+      ActiveRecord::Base.transaction do
+        self.update_with_password params
+        token.update_attributes! email: params[:email], password: params[:password]
+      end
+    else
+      self.errors.add(:base, 'No privacy token matching credentials.')
+      nil
+    end
+
+    token
+  end
+
   private
 
   def generate_authentication_token

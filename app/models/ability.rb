@@ -26,6 +26,10 @@ class Ability
         can [:reorder], Favourite do |t|
           t.user_id == user.id
         end
+
+        can :change_password, User do |t|
+          t.id == user.id
+        end
       end
 
       # cannot :delete, User

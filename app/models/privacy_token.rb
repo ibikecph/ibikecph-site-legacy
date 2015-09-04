@@ -13,18 +13,8 @@ class PrivacyToken < ActiveRecord::Base
     PrivacyToken.find_by_signature signature
   end
 
-  def self.find_for_user_info(email, password)
-    token = PrivacyToken.find_by_email_and_password email, password
-
-    unless token
-      PrivacyToken.new do |t|
-        t.email = email
-        t.password = password
-        t.save
-      end
-    end
-
-    token
+  def self.find_or_create_by_user_info(email, password)
+    PrivacyToken.find_by_email_and_password(email, password) || PrivacyToken.create(email: email, password: password)
   end
 
   private
