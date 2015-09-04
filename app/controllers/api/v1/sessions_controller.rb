@@ -7,10 +7,10 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   def create
     if params[:user][:fb_token]
-      fb_user = Koala::Facebook::API.new(params[:user][:fb_token]).get_object('me', fields: 'id,name,email')
+      fb_user = Koala::Facebook::API.new(params[:user][:fb_token]).get_object('me', fields: 'id,name,email,picture')
 
       if fb_user
-        @user = User.find_for_facebook_email(fb_user)
+        @user = User.find_for_facebook_user(fb_user)
         return failure unless @user
 
         if @user
@@ -26,13 +26,32 @@ class Api::V1::SessionsController < Devise::SessionsController
       return failure unless resource
 
       if resource.valid_password?(params[:user][:password])
+        privacy_token = PrivacyToken.find_for_user_info(params[:user][:email], params[:user][:password])
         sign_in(:user, resource)
-        success resource
+        success resource, signature: privacy_token.signature
       else
         failure
       end
     end
   end
+
+  # def create
+  #   if params[:user][:fb_token]
+  #     fb_user = Koala::Facebook::API.new(params[:user][:fb_token]).get_object('me', fields: 'id,name,email')
+  #     @user   = User.find_for_facebook_email(fb_user) if fb_user
+  #   else
+  #     @user   = User.find_for_database_authentication(email: params[:user][:email])
+  #   end
+  #
+  #   return failure unless @user
+  #
+  #   if @user.valid_password?(params[:user][:password])
+  #       sign_in(:user, @user)
+  #       success @user
+  #   else
+  #     failure
+  #   end
+  # end
 
   def destroy
     # warden.authenticate!(scope: resource_name, recall: "#{controller_path}#failure")
@@ -47,13 +66,13 @@ class Api::V1::SessionsController < Devise::SessionsController
 
   private
 
-  def success(logged_user)
+  def success(logged_user, options={})
     current_user = logged_user
     render status: 200,
            json: {
              success: true,
              info: t('sessions.flash.logged_in', user: current_user.name),
-             data: { auth_token: logged_user.authentication_token, id: logged_user.id }
+             data: ({ auth_token: logged_user.authentication_token, id: logged_user.id}.merge options)
            }
   end
 

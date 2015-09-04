@@ -59,6 +59,19 @@ describe 'Users API', api: :v1 do
         expect(response).to have_http_status(200)
       end
     end
+    context 'when not logged in' do
+      it 'sign in' do
+        token = create :privacy_token
+
+        sign_in @user
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+
+        expect(json['data']).to have_key('signature')
+        expect(json['data']['signature']).to eq(token.signature)
+      end
+    end
   end
 
   context 'should not' do

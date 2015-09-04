@@ -51,11 +51,7 @@ FactoryGirl.define do
     timestamp Time.now.to_i
     from_name 'Vestergade 27-29, 1550 København V'
     to_name 'Lille Kannikestræde 3, 1170 København K'
-    signature '3ECCRWkkjjvD6cV7_7yzCw'
-
-    factory :track_with_coords do
-      coordinates {Array.new(5){ attributes_for :coordinate }}
-    end
+    coordinates {Array.new(5){ attributes_for :coordinate }}
   end
 
   factory :coordinate do
@@ -65,11 +61,11 @@ FactoryGirl.define do
   end
 
   factory :privacy_token do
-    email 'email@ibikecph.dk'
+    email 'person1@example.com'
     password 'password'
 
     factory :privacy_token_new do
-      old_password 'password'
+      current_password 'password'
       password 'password123'
     end
   end

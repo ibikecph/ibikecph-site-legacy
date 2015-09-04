@@ -12,7 +12,7 @@ class Api::V1::PrivacyTokensController < Api::V1::BaseController
   end
 
   def update
-    @token = PrivacyToken.find_by_email_and_password(params[:user][:email], params[:user][:old_password])
+    @token = PrivacyToken.find_by_email_and_password(params[:user][:email], params[:user][:current_password])
 
     if @token
       @token.update_attributes(token_params) ? success : error
@@ -22,7 +22,6 @@ class Api::V1::PrivacyTokensController < Api::V1::BaseController
   end
 
   private
-
   def token_params
     params.require(:user).permit(:email, :password)
   end

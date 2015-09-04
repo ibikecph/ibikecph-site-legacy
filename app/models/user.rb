@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_for_facebook_email(fb_user)
+  def self.find_for_facebook_user(fb_user)
     user = User.where(email: fb_user['email']).first
 
     unless user
