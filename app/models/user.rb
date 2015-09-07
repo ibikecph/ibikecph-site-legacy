@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   #                 :account_source,
   #                 :email_confirmation
 
-  attr_accessor :image_path
+  attr_accessor :image_path, :signature
   # attr_accessor :password, :created_from_oath
 
   validates_presence_of :name
@@ -267,12 +267,12 @@ class User < ActiveRecord::Base
         self.update_with_password params
         token.update_attributes! email: params[:email], password: params[:password]
       end
+      self.signature = token.signature
+      true
     else
       self.errors.add(:base, 'No privacy token matching credentials.')
-      nil
+      false
     end
-
-    token
   end
 
   private

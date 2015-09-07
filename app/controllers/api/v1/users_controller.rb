@@ -42,14 +42,11 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def change_password
-    @user = User.find(current_user.id)
+    @user = User.find current_user.id
 
-    token = @user.change_password_and_token user_params
-
-    if token
+    if @user.change_password_and_token user_params
       sign_in(:user, @user, bypass: true)
 
-      # email changed
       notice = if params[:user][:email] != @user.email
                  t('accounts.flash.activate_new_email')
                else
@@ -60,7 +57,7 @@ class Api::V1::UsersController < Api::V1::BaseController
              json: {
                  success: true,
                  info: notice,
-                 data: { signature: token.signature }
+                 data: { signature: @user.signature }
              }
     else
       render status: 400,
