@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902094252) do
+ActiveRecord::Schema.define(version: 20150907143524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 20150902094252) do
     t.datetime "confirmation_sent_at"
     t.string   "account_source",                     default: "ibikecph"
     t.string   "unconfirmed_email"
+    t.integer  "track_count"
   end
 
   create_table "votes", force: :cascade do |t|

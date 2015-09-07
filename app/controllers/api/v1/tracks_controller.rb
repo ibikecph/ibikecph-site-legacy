@@ -8,13 +8,16 @@ class Api::V1::TracksController < Api::V1::BaseController
   load_and_authorize_resource :track
 
   def index
-    @tracks = privacy_token.tracks
+    @tracks = Track.find_all_by_signature privacy_token, current_user.track_count
   end
 
   def create
-    @track = privacy_token.tracks.new track_params
+    @track = Track.new track_params
+    @track.count = current_user.track_count
 
-    if @track.save && @track.coordinates.count.to_s == params[:track][:count].try(:to_s)
+    current_user.track_count += 1
+
+    if @track.save && current_user.save && @track.coordinates.count.to_s == params[:track][:count].try(:to_s)
       render status: 201,
              json: {
                  success: true,
@@ -32,7 +35,7 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def destroy
-    @track = privacy_token.tracks.find_by id: params[:id]
+    @track = privacy_token.tracks.where(id: params[:id]).first
 
     if @track.try(:destroy)
       render status: 200,
@@ -55,6 +58,7 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   def track_params
     params.require(:track).permit(
+      :unsalted_signature,
       :timestamp,
       :from_name,
       :to_name,
@@ -74,6 +78,6 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def privacy_token
-    @token ||= PrivacyToken.find_by_signature(params[:signature])
+    @token ||= params[:track][:unsalted_signature]
   end
 end

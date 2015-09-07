@@ -116,4 +116,10 @@ class ApplicationController < ActionController::Base
     session[:user_return_to] || account_path
   end
 
+  module PrivacyTokens
+    def self.generate_signature(email, password)
+      BCrypt::Engine.hash_secret email + password, ENV['BCRYPT_SALT']
+    end
+  end
+
 end

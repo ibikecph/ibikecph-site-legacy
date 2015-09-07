@@ -6,9 +6,8 @@ class Api::V1::PrivacyTokensController < Api::V1::BaseController
   end
 
   def show
-    @token = PrivacyToken.new token_params
-
-    @token.valid? ? success : error
+    @signature = PrivacyTokens.generate_signature params[:user][:email], params[:user][:current_password]
+    success
   end
 
   def update
@@ -27,11 +26,11 @@ class Api::V1::PrivacyTokensController < Api::V1::BaseController
   end
 
   def success
-    render status: 201,
+    render status: 200,
            json: {
                success: true,
                info: {},
-               data: { signature: @token.signature }
+               data: { signature: @signature }
            }
   end
 
