@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907143524) do
+ActiveRecord::Schema.define(version: 20150908111422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 20150907143524) do
     t.integer  "timestamp"
     t.integer  "user_id"
     t.text     "coordinates"
-    t.string   "signature"
+    t.string   "salted_signature"
     t.integer  "privacy_token_id"
   end
 
@@ -203,7 +203,7 @@ ActiveRecord::Schema.define(version: 20150907143524) do
     t.datetime "confirmation_sent_at"
     t.string   "account_source",                     default: "ibikecph"
     t.string   "unconfirmed_email"
-    t.integer  "track_count"
+    t.integer  "track_count",                        default: 0
   end
 
   create_table "votes", force: :cascade do |t|

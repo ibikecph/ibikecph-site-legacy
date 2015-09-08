@@ -6,7 +6,7 @@ class Api::V1::PrivacyTokensController < Api::V1::BaseController
   end
 
   def show
-    @signature = PrivacyTokens.generate_signature params[:user][:email], params[:user][:current_password]
+    @signature = PrivacyToken.generate_signature params[:user][:email], params[:user][:current_password]
     success
   end
 

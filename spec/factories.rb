@@ -5,6 +5,7 @@ FactoryGirl.define do
   sequence(:name)  { |n| "Person#{n}" }
   sequence(:email) { |n| "person#{n}@example.com" }
   sequence(:seconds_passed) {|n| n*3}
+  sequence(:count) {|n| n}
 
   factory :user do
     name
@@ -48,11 +49,12 @@ FactoryGirl.define do
   end
 
   factory :track do
-    unsalted_signature ''
+    signature '$2a$10$2P0pOzG9DbwSBD1FSHjuYuwMWld1MCIZIiQ0ZSTP/5FtTwhx66ETW'
     timestamp Time.now.to_i
     from_name 'Vestergade 27-29, 1550 København V'
     to_name 'Lille Kannikestræde 3, 1170 København K'
     coordinates {Array.new(5){ attributes_for :coordinate }}
+    count
   end
 
   factory :coordinate do

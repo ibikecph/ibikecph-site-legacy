@@ -1,5 +1,5 @@
 class PrivacyToken < ActiveRecord::Base
-  before_validation       :set_signature
+  before_validation       :salt_signature
 
   validates_uniqueness_of :signature
   validates_presence_of   :signature, :email, :password

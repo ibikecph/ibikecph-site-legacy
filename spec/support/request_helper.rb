@@ -13,6 +13,10 @@ module ApiHelpers
     @token ||= JSON.parse(response.body)['data']['auth_token']
   end
 
+  def signature
+    @signature ||= JSON.parse(response.body)['data']['signature']
+  end
+
   def json
     @json ||= JSON.parse(response.body)
   end

@@ -2,7 +2,7 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   #TODO create strings for all messages
 
-  before_action :check_privacy_token
+  before_action :check_privacy_token, only: [:index, :destroy]
 
   load_and_authorize_resource :user
   load_and_authorize_resource :track
@@ -13,11 +13,8 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   def create
     @track = Track.new track_params
-    @track.count = current_user.track_count
 
-    current_user.track_count += 1
-
-    if @track.save && current_user.save && @track.coordinates.count.to_s == params[:track][:count].try(:to_s)
+    if @track.save_and_update_count(current_user) && @track.coordinates.count.to_s == params[:track][:count].try(:to_s)
       render status: 201,
              json: {
                  success: true,
@@ -35,15 +32,26 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def destroy
-    @track = privacy_token.tracks.where(id: params[:id]).first
+    @track = Track.find_by_id(params[:id])
 
-    if @track.try(:destroy)
-      render status: 200,
-             json: {
-                 success: true,
-                 info: t('routes.flash.deleted'),
-                 data: {}
-             }
+    if @track
+      if @track.validate_ownership(privacy_token, current_user.track_count)
+        if @track.destroy
+          render status: 200,
+                 json: {
+                     success: true,
+                     info: t('routes.flash.deleted'),
+                     data: {}
+                 }
+        end
+      else
+        render status: 401,
+               json: {
+                   success: true,
+                   info: t('api.flash.unauthorized'),
+                   data: t('api.flash.unauthorized')
+               }
+      end
     else
       render status: 404,
              json: {
@@ -54,11 +62,15 @@ class Api::V1::TracksController < Api::V1::BaseController
     end
   end
 
+  def token
+    @signature = Track.generate_signature params[:user][:email], params[:user][:password]
+  end
+
   private
 
   def track_params
     params.require(:track).permit(
-      :unsalted_signature,
+      :signature,
       :timestamp,
       :from_name,
       :to_name,
@@ -78,6 +90,6 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def privacy_token
-    @token ||= params[:track][:unsalted_signature]
+    @token ||= params[:signature]
   end
 end

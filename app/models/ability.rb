@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can [:index], [Comment, Issue, ReportedIssue, Favourite, Route]
+    can [:index], [Comment, Issue, ReportedIssue, Favourite, Route, Track]
     can [:show], [Comment, User, Issue, ReportedIssue, Favourite, Route]
     can [:index, :archive, :show, :tag, :feed], [BlogEntry]
     can :create, User
