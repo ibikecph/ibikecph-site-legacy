@@ -19,10 +19,9 @@ describe 'Tracks API', api: :v1 do
       end
 
       it 'index tracks' do
-        5.times {create :track; @user.track_count += 1}
-        @user.save!
-
         sign_in @user
+
+        5.times {post "/api/tracks", {track: attributes_for(:track), auth_token: token, signature: signature}, headers}
 
         get '/api/tracks', {auth_token: token, signature: signature}, headers
 
@@ -32,8 +31,7 @@ describe 'Tracks API', api: :v1 do
       it 'create track' do
         sign_in @user
 
-        attrs = attributes_for :track
-        attrs[:count] = 5
+        attrs = attributes_for :track_with_counts
 
         post "/api/tracks", {track: attrs, auth_token: token, signature: signature}, headers
 
@@ -41,17 +39,17 @@ describe 'Tracks API', api: :v1 do
         expect(response).to have_http_status(201)
 
         expect(json['data']).to have_key('id')
-        expect(json['data']['count']).to eq(5)
+        expect(json['data']['count']).to eq(attrs[:coord_count])
       end
 
       it 'destroy own track' do
-        track = create :track
-        @user.track_count += 1
-        @user.save!
-
         sign_in @user
 
-        delete "/api/tracks/#{track.id}", { auth_token: token, signature: signature }, headers
+        attrs = attributes_for :track_with_counts
+
+        post "/api/tracks", {track: attrs, auth_token: token, signature: signature}, headers
+
+        delete "/api/tracks/#{json['data']['id']}", { auth_token: token, signature: signature }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -73,10 +71,9 @@ describe 'Tracks API', api: :v1 do
       end
 
       it 'destroy others track' do
-        track = create :track
+        track = create :track_with_counts
 
         otheruser = build :user
-        otheruser.track_count = 5
         otheruser.skip_confirmation!
         otheruser.save!
 
@@ -89,13 +86,13 @@ describe 'Tracks API', api: :v1 do
         expect(response).to have_http_status(401)
 
       end
-      it 'destroy non-existent track' do
-        sign_in @user
-
-        delete "/api/tracks/100", { auth_token: token, signature: signature }, headers
-
-        p json
-      end
+      # it 'destroy non-existent track' do
+      #   sign_in @user
+      #
+      #   delete "/api/tracks/100", { auth_token: token, signature: signature }, headers
+      #
+      #   p json
+      # end
     end
   end
 end
