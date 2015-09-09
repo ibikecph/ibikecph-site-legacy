@@ -18,7 +18,11 @@ module ApiHelpers
   end
 
   def json
-    @json ||= JSON.parse(response.body)
+    @json ||= json_newest
+  end
+
+  def json_newest
+    JSON.parse(response.body)
   end
 
   module V1

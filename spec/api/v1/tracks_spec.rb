@@ -33,7 +33,7 @@ describe 'Tracks API', api: :v1 do
 
         attrs = attributes_for :track_with_counts
 
-        post "/api/tracks", {track: attrs, auth_token: token, signature: signature}, headers
+        post "/api/tracks", {track: attrs, auth_token: token}, headers
 
         expect(response).to be_succes
         expect(response).to have_http_status(201)

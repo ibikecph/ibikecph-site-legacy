@@ -14,7 +14,7 @@ class Api::V1::TracksController < Api::V1::BaseController
   def create
     @track = Track.new track_params
 
-    if @track.save_and_update_count(current_user) && @track.coordinates.count.to_s == params[:track][:coord_count].try(:to_s)
+    if @track.save_and_update_count(current_user)
       render status: 201,
              json: {
                  success: true,
@@ -74,6 +74,7 @@ class Api::V1::TracksController < Api::V1::BaseController
       :timestamp,
       :from_name,
       :to_name,
+      :coord_count,
       :coordinates => [:latitude,:longitude,:seconds_passed]
     )
   end
@@ -90,6 +91,6 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def privacy_token
-    @token ||= params[:signature]
+    @token ||= (params[:signature] || params[:track][:signature])
   end
 end

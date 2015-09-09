@@ -8,9 +8,10 @@ class Track < ActiveRecord::Base
                           :timestamp,
                           :to_name,
                           :from_name,
-                          :coordinates
+                          :coordinates,
+                          :coord_count
 
-  attr_accessor :signature, :count
+  attr_accessor :signature, :count, :coord_count
 
   serialize     :coordinates, JSON
 
@@ -56,6 +57,10 @@ class Track < ActiveRecord::Base
 
   def self.generate_signature(signature, count)
     BCrypt::Engine.hash_secret signature + count.to_s, ENV['BCRYPT_SALT']
+  end
+
+  def coordinates_created?
+    (self.coordinates.count.to_s == self.coord_count.to_s) ? true : self.errors.add(:base, "Invalid number of coordinates created")
   end
 
   private

@@ -69,6 +69,37 @@ class Api::V1::UsersController < Api::V1::BaseController
     end
   end
 
+  def add_password
+    @user = User.find current_user.id
+
+    if @user.encrypted_password.blank? && @user.provider == 'facebook'
+      @user.password = params[:user][:password]
+      if @user.save
+        signature = Track.generate_signature @user.email, params[:user][:password]
+        render status: 200,
+               json: {
+                   success: true,
+                   info: notice,
+                   data: { signature: signature }
+               }
+      else
+        render status: 400,
+               json: {
+                   success: false,
+                   info: {},
+                   data: { errors: @user.errors.full_messages}
+               }
+      end
+    end
+  end
+
+  def has_password
+    has_password = false
+    has_password = true if current_user.encrypted_password.present?
+
+    render status: 200, json: {has_password: has_password}
+  end
+
   private
 
   def user_params
@@ -93,4 +124,11 @@ class Api::V1::UsersController < Api::V1::BaseController
     )
   end
 
+  def add_password_params
+    params.require(:user).permit(
+        :current_password,
+        :password,
+        :password_confirmation,
+    )
+  end
 end

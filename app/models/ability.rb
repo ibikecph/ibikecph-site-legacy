@@ -27,7 +27,7 @@ class Ability
           t.user_id == user.id
         end
 
-        can :change_password, User do |t|
+        can [:change_password,:add_password,:has_password], User do |t|
           t.id == user.id
         end
       end

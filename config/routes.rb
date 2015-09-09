@@ -25,6 +25,8 @@ RailsOSRM::Application.routes.draw do
       get 'tracks/token' => 'tracks#token'
 
       post 'users/change_password' => 'users#change_password'
+      post 'users/add_password'    => 'users#add_password'
+      post 'users/has_password'    => 'users#has_password'
 
       get "terms" => "terms#index"
     end

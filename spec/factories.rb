@@ -10,11 +10,21 @@ FactoryGirl.define do
   factory :user do
     name
     email
-    track_count 0
-
     after :build do |u|
       u.email_confirmation = u.email
       u.password = u.password_confirmation = 'password'
+    end
+  end
+
+  factory :user_with_facebook, class: :user do
+    name
+    email
+    provider 'facebook'
+
+    after :build do |u|
+      u.email_confirmation = u.email
+      u.skip_confirmation!
+      u.reset_authentication_token!
     end
   end
 
