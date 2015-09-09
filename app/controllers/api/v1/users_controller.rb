@@ -44,7 +44,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   def change_password
     @user = User.find current_user.id
 
-    if @user.change_password_and_token user_params
+    if @user.change_password_and_signature user_params
       sign_in(:user, @user, bypass: true)
 
       notice = if params[:user][:email] != @user.email

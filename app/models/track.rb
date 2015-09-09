@@ -8,8 +8,7 @@ class Track < ActiveRecord::Base
                           :timestamp,
                           :to_name,
                           :from_name,
-                          :coordinates,
-                          :coord_count
+                          :coordinates
 
   attr_accessor :signature, :count, :coord_count
 
@@ -29,14 +28,13 @@ class Track < ActiveRecord::Base
     Track.where('salted_signature IN (:signatures)', signatures: signatures)
   end
 
-  # def self.update_all_signatures(old_signature, new_signature, count)
-  #   tracks = Track.find_all_by_signature(old_signature, count)
-  #
-  #
-  #   ActiveRecord::Base.transaction do
-  #     tracks.each_with_index { |track, i| track.sig }
-  #   end
-  # end
+  def self.update_all_signatures(old_signature, new_signature, count)
+    tracks = Track.find_all_by_signature(old_signature, count)
+
+    tracks.each_with_index do |track,i|
+      track.update_attributes!(signature: new_signature, count: i)
+    end
+  end
 
   def validate_ownership(signature, count)
     (0..count).each do |i|
@@ -46,8 +44,8 @@ class Track < ActiveRecord::Base
   end
 
   def save_and_update_count(user)
+    self.count = user.track_count
     user.track_count += 1
-    self.count        = user.track_count
 
     ActiveRecord::Base.transaction do
       user.save!

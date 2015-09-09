@@ -82,11 +82,11 @@ describe 'Users API', api: :v1 do
       end
 
       it 'change password and token' do
-        privacy_token = create :privacy_token, email: @user.email, password: @user.password
-
         user = {email: @user.email, current_password: @user.password, password: 'password123'}
 
         sign_in @user
+
+        5.times {post "/api/tracks", {track: attributes_for(:track), auth_token: token, signature: signature}, headers}
 
         post '/api/users/change_password', {user: user, auth_token: token}, headers
 
@@ -95,7 +95,7 @@ describe 'Users API', api: :v1 do
 
         expect(json['data']).to have_key('signature')
         expect(json['data']['signature'].length).to eq(60)
-        expect(json['data']['signature']).to_not eq(privacy_token.signature)
+        expect(json['data']['signature']).to_not eq(signature)
       end
     end
     context 'when not logged in' do
