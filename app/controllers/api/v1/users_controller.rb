@@ -44,9 +44,9 @@ class Api::V1::UsersController < Api::V1::BaseController
   def change_password
     @user = User.find current_user.id
 
-    if @user.change_password_and_signature user_params
+    if @user.update_and_generate_signature user_params
       sign_in(:user, @user, bypass: true)
-
+      pp @user.email
       notice = if params[:user][:email] != @user.email
                  t('accounts.flash.activate_new_email')
                else

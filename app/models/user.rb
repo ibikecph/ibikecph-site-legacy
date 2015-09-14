@@ -259,9 +259,12 @@ class User < ActiveRecord::Base
     self.role == 'staff'
   end
 
-  def change_password_and_signature(params)
-    old_signature = Track.generate_signature params[:email], params[:current_password]
-    new_signature = Track.generate_signature params[:email], params[:password]
+  def update_and_generate_signature(params)
+    email    = params[:email]    || self.email
+    password = params[:password] || params[:current_password]
+
+    old_signature = Track.generate_signature self.email, params[:current_password]
+    new_signature = Track.generate_signature email, password
 
     if old_signature && new_signature
       ActiveRecord::Base.transaction do

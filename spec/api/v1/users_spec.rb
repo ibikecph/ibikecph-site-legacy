@@ -82,7 +82,7 @@ describe 'Users API', api: :v1 do
       end
 
       it 'change password and token' do
-        user = {email: @user.email, current_password: @user.password, password: 'password123'}
+        user = {email:'lol@lol.com',current_password: @user.password, password: 'password123'}
 
         sign_in @user
 
