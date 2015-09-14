@@ -36,6 +36,13 @@ class Track < ActiveRecord::Base
     end
   end
 
+  def self.delete_all_by_info(email, password, count)
+    signature = Track.generate_signature(email, password)
+    tracks    = Track.find_all_by_signature(signature, count)
+
+    tracks.delete_all
+  end
+
   def validate_ownership(signature, count)
     (0..count).each do |i|
      return true if self.salted_signature == Track.generate_signature(signature, i)

@@ -17,7 +17,7 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def check_auth_token!
-    auth_token = params[:auth_token].presence
+    auth_token = cookies.permanent.signed[:auth_token].presence || params[:auth_token].presence
     user       = auth_token && User.find_by_authentication_token(auth_token.to_s)
 
     if user

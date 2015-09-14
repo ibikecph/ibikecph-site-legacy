@@ -215,6 +215,7 @@ en:
       change_email: Change Email
       change_password: Change Password
       change_settings: Edit Setting
+      manage_tracks: Manage tracks
       notify_by_email: Email Notifications
       unverified: Unverified
       password_hidden: Hidden
@@ -250,6 +251,10 @@ en:
       activate_new_email: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
     misc:
       cancel: Cancel
+    tracks:
+      title: Tracks
+      destroy_tracks: Destroy tracks
+      wrong_password: Wrong password
       
   blog:
     index:

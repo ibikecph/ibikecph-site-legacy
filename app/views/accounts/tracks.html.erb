@@ -1,0 +1,11 @@
+<div class="centered_dialog small">
+  <h1><%=t '.title' %></h1>
+  <%= errors_for( current_user ).html_safe %>
+  <%= form_for current_user, url: delete_tracks_path, :html => {:method => :post} do |f| %>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+
+    <%= f.submit t('.destroy_tracks') %>
+
+  <% end %>
+</div>

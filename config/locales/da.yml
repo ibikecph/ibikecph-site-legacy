@@ -220,6 +220,7 @@ da:
       change_email: Ændre Email
       change_password: Ændre adgangskode og email
       change_settings: Rediger indstillinger
+      manage_tracks: Se tracks
       notify_by_email: Beskeder via email
       unverified: Uverificeret
       password_hidden: Skjult
@@ -255,6 +256,10 @@ da:
       activate_new_email: "Du har opdateret din konto, men vi er nødt til at bekræfte din nye e-mailadresse. Tjek venligst din e-mail og klik på bekræft link til færdiggøre bekræftelsen din nye e-mailadresse."
     misc:
       cancel: Annuller
+    tracks:
+      title: Tracks
+      destroy_tracks: Slet tracks
+      wrong_password: Forkert adgangskode
 
   blog:
     index:
