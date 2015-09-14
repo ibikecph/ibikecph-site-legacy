@@ -54,7 +54,10 @@ class Api::V1::SessionsController < Devise::SessionsController
            json: {
              success: true,
              info: t('sessions.flash.logged_in', user: current_user.name),
-             data: ({ auth_token: logged_user.authentication_token, id: logged_user.id}.merge options)
+             data: ({ auth_token: logged_user.authentication_token,
+                      id: logged_user.id,
+                      provider: logged_user.provider
+                    }.merge options)
            }
   end
 
