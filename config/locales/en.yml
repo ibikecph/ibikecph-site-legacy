@@ -255,6 +255,7 @@ en:
       title: Tracks
       destroy_tracks: Destroy tracks
       wrong_password: Wrong password
+      tracks_deleted: Your tracks have been deleted.
       
   blog:
     index:

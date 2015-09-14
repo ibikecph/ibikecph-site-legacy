@@ -36,11 +36,14 @@ class Track < ActiveRecord::Base
     end
   end
 
-  def self.delete_all_by_info(email, password, count)
-    signature = Track.generate_signature(email, password)
-    tracks    = Track.find_all_by_signature(signature, count)
+  def self.delete_all_by_info(user, password)
+    signature = Track.generate_signature(user.email, password)
+    tracks    = Track.find_all_by_signature(signature, user.track_count)
 
-    tracks.delete_all
+    ActiveRecord::Base.transaction do
+      user.update_attributes!(track_count: 0)
+      tracks.delete_all
+    end
   end
 
   def validate_ownership(signature, count)

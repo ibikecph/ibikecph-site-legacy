@@ -260,6 +260,7 @@ da:
       title: Tracks
       destroy_tracks: Slet tracks
       wrong_password: Forkert adgangskode
+      tracks_deleted: Dine tracks er blevet slettet.
 
   blog:
     index:

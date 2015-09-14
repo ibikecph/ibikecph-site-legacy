@@ -100,15 +100,13 @@ describe 'Users API', api: :v1 do
     end
     context 'when not logged in' do
       it 'sign in' do
-        token = create :privacy_token, email: @user.email, password: @user.password
-
         sign_in @user
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
 
         expect(json['data']).to have_key('signature')
-        expect(json['data']['signature']).to eq(token.signature)
+        expect(json['data']['signature'].length).to eq(60)
       end
     end
   end
