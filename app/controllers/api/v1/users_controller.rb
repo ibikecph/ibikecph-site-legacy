@@ -46,7 +46,6 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     if @user.update_and_generate_signature user_params
       sign_in(:user, @user, bypass: true)
-      pp @user.email
       notice = if params[:user][:email] != @user.email
                  t('accounts.flash.activate_new_email')
                else
@@ -121,14 +120,6 @@ class Api::V1::UsersController < Api::V1::BaseController
         :provider,
         :uid,
         :account_source
-    )
-  end
-
-  def add_password_params
-    params.require(:user).permit(
-        :current_password,
-        :password,
-        :password_confirmation,
     )
   end
 end

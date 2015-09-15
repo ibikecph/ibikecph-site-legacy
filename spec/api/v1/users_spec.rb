@@ -78,24 +78,28 @@ describe 'Users API', api: :v1 do
         expect(json_newest['has_password']).to eq(true)
       end
 
-      it 'has_password' do
-      end
-
       it 'change password and token' do
-        user = {email:'lol@lol.com',current_password: @user.password, password: 'password123'}
+        user = {email:'person100@example.com',
+                current_password: @user.password,
+                password: 'password123',
+                password_confirmation:'password123'}
 
         sign_in @user
 
-        5.times {post "/api/tracks", {track: attributes_for(:track), auth_token: token, signature: signature}, headers}
+        3.times do
+          track = attributes_for(:track)
+          track[:signature] = signature
+          post "/api/tracks", {track: track, auth_token: token}, headers
+        end
 
         post '/api/users/change_password', {user: user, auth_token: token}, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
 
-        expect(json['data']).to have_key('signature')
-        expect(json['data']['signature'].length).to eq(60)
-        expect(json['data']['signature']).to_not eq(signature)
+        expect(json_newest['data']).to have_key('signature')
+        expect(json_newest['data']['signature'].length).to eq(60)
+        expect(json_newest['data']['signature']).to_not eq(signature)
       end
     end
     context 'when not logged in' do

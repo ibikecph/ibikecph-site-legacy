@@ -260,24 +260,21 @@ class User < ActiveRecord::Base
   end
 
   def update_and_generate_signature(params)
-    email    = params[:email]    || self.email
-    password = params[:password] || params[:current_password]
+    ActiveRecord::Base.transaction do
+      if params[:password].present?
+        old_signature = self.generate_signature params[:current_password]
+        new_signature = self.generate_signature params[:password]
 
-    old_signature = Track.generate_signature self.email, params[:current_password]
-    new_signature = Track.generate_signature email, password
-
-    if old_signature && new_signature
-      ActiveRecord::Base.transaction do
-        self.update_with_password params
         Track.update_all_signatures old_signature, new_signature, self.track_count
+        self.signature = new_signature
       end
 
-      self.signature = new_signature
-      true
-    else
-      self.errors.add(:base, 'No privacy token matching credentials.')
-      false
+      self.update_with_password params
     end
+  end
+
+  def generate_signature(password)
+    BCrypt::Engine.hash_secret self.created_at.to_s+self.id.to_s+password.to_s, ENV['BCRYPT_USER_SALT']
   end
 
   private

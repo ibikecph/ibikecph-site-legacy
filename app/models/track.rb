@@ -1,7 +1,7 @@
 class Track < ActiveRecord::Base
   before_validation       :set_salted_signature
-  validates_uniqueness_of :salted_signature
 
+  validates_uniqueness_of :salted_signature
   validates_presence_of   :signature,
                           :salted_signature,
                           :count,
@@ -10,9 +10,11 @@ class Track < ActiveRecord::Base
                           :from_name,
                           :coordinates
 
-  attr_accessor :signature, :count, :coord_count
+  attr_accessor           :signature,
+                          :count,
+                          :coord_count
 
-  serialize     :coordinates, JSON
+  serialize :coordinates, JSON
 
   def time_at_point i
     Time.at(self.timestamp.to_i + self.coordinates[i]['seconds_passed'].to_i)
@@ -37,7 +39,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.delete_all_by_info(user, password)
-    signature = Track.generate_signature(user.email, password)
+    signature = user.generate_signature(password)
     tracks    = Track.find_all_by_signature(signature, user.track_count)
 
     ActiveRecord::Base.transaction do
@@ -64,7 +66,7 @@ class Track < ActiveRecord::Base
   end
 
   def self.generate_signature(signature, count)
-    BCrypt::Engine.hash_secret signature + count.to_s, ENV['BCRYPT_SALT']
+    BCrypt::Engine.hash_secret signature + count.to_s, ENV['BCRYPT_TRACK_SALT']
   end
 
   def coordinates_created?

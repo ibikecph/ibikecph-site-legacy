@@ -60,7 +60,6 @@ FactoryGirl.define do
   end
 
   factory :track do
-    signature '$2a$10$2P0pOzG9DbwSBD1FSHjuYuwMWld1MCIZIiQ0ZSTP/5FtTwhx66ETW'
     timestamp Time.now.to_i
     from_name 'Vestergade 27-29, 1550 København V'
     to_name 'Lille Kannikestræde 3, 1170 København K'

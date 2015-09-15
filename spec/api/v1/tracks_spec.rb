@@ -21,17 +21,22 @@ describe 'Tracks API', api: :v1 do
       it 'index tracks' do
         sign_in @user
 
-        5.times {post "/api/tracks", {track: attributes_for(:track), auth_token: token, signature: signature}, headers}
+        3.times do
+          track = attributes_for(:track)
+          track[:signature] = signature
+          post "/api/tracks", {track: track, auth_token: token}, headers
+        end
 
         get '/api/tracks', {auth_token: token, signature: signature}, headers
 
         expect(response).to be_success
-        expect(json['data'].count).to eq(5)
+        expect(json['data'].count).to eq(3)
       end
       it 'create track' do
         sign_in @user
 
         attrs = attributes_for :track_with_counts
+        attrs[:signature] = signature
 
         post "/api/tracks", {track: attrs, auth_token: token}, headers
 
@@ -46,8 +51,9 @@ describe 'Tracks API', api: :v1 do
         sign_in @user
 
         attrs = attributes_for :track_with_counts
+        attrs[:signature] = signature
 
-        post "/api/tracks", {track: attrs, auth_token: token, signature: signature}, headers
+        post "/api/tracks", {track: attrs, auth_token: token}, headers
 
         delete "/api/tracks/#{json['data']['id']}", { auth_token: token, signature: signature }, headers
 
@@ -58,28 +64,15 @@ describe 'Tracks API', api: :v1 do
   end
   context 'should not' do
     context 'when logged in' do
-      it 'create track with invalid coords' do
-        attrs = attributes_for :track
-        attrs[:coordinates] << {seconds_passed: 5, latitude:'hohoho', longitude:'lalala'}
-
+      it 'destroy without valid signature' do
         sign_in @user
 
-        post "/api/tracks", {track: attrs, auth_token: token, signature: signature}, headers
+        attrs = attributes_for :track
+        attrs[:signature] = signature
 
-        expect(response).to_not be_succes
-        expect(response).to have_http_status(422)
-      end
+        post "/api/tracks", {track: attrs, auth_token: token}, headers
 
-      it 'destroy others track' do
-        track = create :track_with_counts
-
-        otheruser = build :user
-        otheruser.skip_confirmation!
-        otheruser.save!
-
-        sign_in otheruser
-
-        delete "/api/tracks/#{track.id}", { auth_token: token, signature: signature }, headers
+        delete "/api/tracks/#{json['data']['id']}", { auth_token: token, signature: 'signature' }, headers
 
         # unauthorized
         expect(response).not_to be_success

@@ -252,10 +252,10 @@ en:
     misc:
       cancel: Cancel
     tracks:
-      title: Tracks
-      destroy_tracks: Destroy tracks
+      title: Delete my bike data
+      destroy_tracks: Delete my data
       wrong_password: Wrong password
-      tracks_deleted: Your tracks have been deleted.
+      tracks_deleted: Your location data has been deleted.
       
   blog:
     index:

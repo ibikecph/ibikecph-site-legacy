@@ -257,10 +257,10 @@ da:
     misc:
       cancel: Annuller
     tracks:
-      title: Tracks
-      destroy_tracks: Slet tracks
+      title: Slet min indsamlede cykeldata
+      destroy_tracks: Slet min data
       wrong_password: Forkert adgangskode
-      tracks_deleted: Dine tracks er blevet slettet.
+      tracks_deleted: Din lokationsdata er blevet slettet.
 
   blog:
     index:
