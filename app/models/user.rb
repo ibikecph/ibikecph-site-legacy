@@ -224,21 +224,25 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_or_create_by_uid(fb_user)
-    user = User.where(uid: fb_user['id']).first
+  def self.find_for_facebook_user(fb_user)
+    user = User.where(email: fb_user['email']).first
 
-    return user if user
+    unless user
+      user = User.new(
+          name: fb_user['name'],
+          provider: 'facebook',
+          uid: fb_user['id'],
+          email: fb_user['email'],
+          email_confirmation: fb_user['email']
+      )
 
-    User.new do |u|
-      u.name = fb_user['name']
-      u.provider = 'facebook'
-      u.uid = fb_user['id']
-      u.email = fb_user['email']
-      u.email_confirmation = fb_user['email']
-      u.skip_confirmation!
-      u.reset_authentication_token!
-      u.save!
+      user.skip_confirmation!
+      user.reset_authentication_token!
+      user.save!
+
     end
+
+    user
   end
 
   def ensure_authentication_token

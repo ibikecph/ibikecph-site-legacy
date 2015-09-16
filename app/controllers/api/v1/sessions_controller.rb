@@ -10,7 +10,7 @@ class Api::V1::SessionsController < Devise::SessionsController
       fb_user = Koala::Facebook::API.new(params[:user][:fb_token]).get_object('me', fields: 'id,name,email')
 
       if fb_user
-        @user = User.find_or_create_by_uid(fb_user)
+        @user = User.find_for_facebook_user(fb_user)
         return failure unless @user
 
         if @user
