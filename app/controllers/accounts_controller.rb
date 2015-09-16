@@ -32,7 +32,7 @@ class AccountsController < ApplicationController
   def update_password
     @user = User.find(current_user.id)
 
-    if @user.update_with_password user_params
+    if @user.update_and_generate_signature user_params
       sign_in(:user, @user, bypass: true)
 
       # email changed

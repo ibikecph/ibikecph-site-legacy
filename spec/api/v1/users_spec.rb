@@ -86,20 +86,11 @@ describe 'Users API', api: :v1 do
 
         sign_in @user
 
-        3.times do
-          track = attributes_for(:track)
-          track[:signature] = signature
-          post "/api/tracks", {track: track, auth_token: token}, headers
-        end
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
 
-        post '/api/users/change_password', {user: user, auth_token: token}, headers
+        put update_password_path, {user: user, auth_token: token}, headers
 
-        expect(response).to be_success
-        expect(response).to have_http_status(200)
-
-        expect(json_newest['data']).to have_key('signature')
-        expect(json_newest['data']['signature'].length).to eq(60)
-        expect(json_newest['data']['signature']).to_not eq(signature)
+        expect(response).to redirect_to(account_path)
       end
     end
     context 'when not logged in' do
