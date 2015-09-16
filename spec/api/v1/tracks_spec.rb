@@ -21,22 +21,17 @@ describe 'Tracks API', api: :v1 do
       it 'index tracks' do
         sign_in @user
 
-        3.times do
-          track = attributes_for(:track)
-          track[:signature] = signature
-          post "/api/tracks", {track: track, auth_token: token}, headers
-        end
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
 
         get '/api/tracks', {auth_token: token, signature: signature}, headers
 
         expect(response).to be_success
-        expect(json['data'].count).to eq(3)
+        expect(json['data'].count).to eq(@user.track_count)
       end
       it 'create track' do
         sign_in @user
 
-        attrs = attributes_for :track_with_counts
-        attrs[:signature] = signature
+        attrs = attributes_for :track, signature: signature, count: 0
 
         post "/api/tracks", {track: attrs, auth_token: token}, headers
 
@@ -50,12 +45,9 @@ describe 'Tracks API', api: :v1 do
       it 'destroy own track' do
         sign_in @user
 
-        attrs = attributes_for :track_with_counts
-        attrs[:signature] = signature
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
 
-        post "/api/tracks", {track: attrs, auth_token: token}, headers
-
-        delete "/api/tracks/#{json['data']['id']}", { auth_token: token, signature: signature }, headers
+        delete "/api/tracks/#{Track.last.id}", { auth_token: token, signature: signature }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)

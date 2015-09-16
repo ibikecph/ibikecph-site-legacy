@@ -2,13 +2,13 @@ class Track < ActiveRecord::Base
   before_validation       :set_salted_signature
 
   validates_uniqueness_of :salted_signature
-  validates_presence_of   :signature,
-                          :salted_signature,
-                          :count,
+  validates_presence_of   :salted_signature,
                           :timestamp,
                           :to_name,
                           :from_name,
-                          :coordinates
+                          :coordinates,
+                          :signature,
+                          :count
 
   attr_accessor           :signature,
                           :count,

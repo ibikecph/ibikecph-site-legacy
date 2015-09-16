@@ -10,6 +10,7 @@ FactoryGirl.define do
   factory :user do
     name
     email
+    track_count 5
     after :build do |u|
       u.email_confirmation = u.email
       u.password = u.password_confirmation = 'password'
@@ -65,10 +66,6 @@ FactoryGirl.define do
     to_name 'Lille Kannikestræde 3, 1170 København K'
     coordinates {Array.new(5){ attributes_for :coordinate }}
     coord_count 5
-
-    factory :track_with_counts do
-      count
-    end
   end
 
   factory :coordinate do
