@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_or_create_by_uid(fb_user)
-    user = User.where(uid: fb_user['uid']).first
+    user = User.where(uid: fb_user['id']).first
 
     return user if user
 
