@@ -4,6 +4,10 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   before_action :check_privacy_token, only: [:index, :destroy]
 
+  # something, somewhere, somehow is causing find_by_id to
+  # raise an exception when it shouldn't. Therefore:
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
   load_and_authorize_resource :user
   load_and_authorize_resource :track
 
@@ -34,30 +38,21 @@ class Api::V1::TracksController < Api::V1::BaseController
   def destroy
     @track = Track.find_by_id(params[:id])
 
-    if @track
-      if @track.validate_ownership(privacy_token, current_user.track_count)
-        if @track.destroy
-          render status: 200,
-                 json: {
-                     success: true,
-                     info: t('routes.flash.deleted'),
-                     data: {}
-                 }
-        end
-      else
-        render status: 401,
+    if @track.validate_ownership(privacy_token, current_user.track_count)
+      if @track.destroy
+        render status: 200,
                json: {
-                   success: false,
-                   info: t('api.flash.unauthorized'),
-                   data: t('api.flash.unauthorized')
+                   success: true,
+                   info: t('routes.flash.deleted'),
+                   data: {}
                }
       end
     else
-      render status: 404,
+      render status: 401,
              json: {
                  success: false,
-                 info: t('routes.flash.route_not_found'),
-                 errors: t('routes.flash.route_not_found')
+                 info: t('api.flash.unauthorized'),
+                 data: t('api.flash.unauthorized')
              }
     end
   end
@@ -92,5 +87,14 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   def privacy_token
     @token ||= (params[:signature] || params[:track][:signature])
+  end
+
+  def record_not_found
+    render status: 404,
+           json: {
+               success: false,
+               info: t('routes.flash.route_not_found'),
+               errors: t('routes.flash.route_not_found')
+           }
   end
 end

@@ -78,13 +78,13 @@ describe 'Tracks API', api: :v1 do
         expect(response).to have_http_status(401)
 
       end
-      # it 'destroy non-existent track' do
-      #   sign_in @user
-      #
-      #   delete "/api/tracks/100", { auth_token: token, signature: signature }, headers
-      #
-      #   p json
-      # end
+      it 'destroy non-existent track' do
+        sign_in @user
+        delete "/api/tracks/100", { auth_token: token, signature: signature }, headers
+
+        expect(response).not_to be_success
+        expect(response).to have_http_status(404)
+      end
     end
   end
 end
