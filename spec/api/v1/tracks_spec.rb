@@ -52,13 +52,15 @@ describe 'Tracks API', api: :v1 do
         expect(response).to be_success
         expect(response).to have_http_status(200)
       end
-      # it 'destroy all tracks' do
-      #   sign_in @user
-      #
-      #   (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
-      #
-      #   post delete_tracks_path, {auth_token: token, user:{password: @user.password}}
-      # end
+      it 'destroy all tracks' do
+        sign_in @user
+
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
+
+        pp Benchmark.realtime{
+          post delete_tracks_path, {auth_token: token, user:{password: @user.password}}
+        }
+      end
     end
   end
   context 'should not' do
