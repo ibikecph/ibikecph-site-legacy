@@ -47,7 +47,7 @@ class Api::V1::TracksController < Api::V1::BaseController
       else
         render status: 401,
                json: {
-                   success: true,
+                   success: false,
                    info: t('api.flash.unauthorized'),
                    data: t('api.flash.unauthorized')
                }
