@@ -71,11 +71,12 @@ class Api::V1::UsersController < Api::V1::BaseController
   def add_password
     if current_user.encrypted_password.blank? && current_user.provider == 'facebook'
       if current_user.update_attributes password: params[:user][:password]
+        signature = current_user.generate_signature params[:user][:password]
         render status: 200,
                json: {
                    success: true,
                    info: notice,
-                   data: { signature: current_user.generate_signature params[:user][:password] }
+                   data: { signature: signature }
                }
       else
         render status: 400,
