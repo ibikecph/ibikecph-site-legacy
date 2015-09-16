@@ -1,14 +1,15 @@
 <div class="centered_dialog small">
-  <h1><%=t '.title' %></h1>
-  <%= errors_for( current_user ).html_safe %>
-  <%= form_for current_user, url: delete_tracks_path, :html => {:method => :post} do |f| %>
-    <p>
-      <%= f.label :password %>
-      <%= f.password_field :password,  :class => 'text_input'  %>
-    </p>
-    <div class="submits">
-        <%= f.submit t('.destroy_tracks') %>
-        <%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
-    </div>
-  <% end %>
+    <h1><%=t '.title' %></h1>
+    <%= errors_for( current_user ).html_safe %>
+    <%= form_for current_user, url: delete_tracks_path, :html => {:method => :post} do |f| %>
+        <p><%= t '.info' %></p>
+        <p>
+          <%= f.label :password %>
+          <%= f.password_field :password,  :class => 'text_input'  %>
+        </p>
+        <div class="submits">
+            <%= f.submit t('.destroy_tracks') %>
+            <%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
+        </div>
+    <% end %>
 </div>

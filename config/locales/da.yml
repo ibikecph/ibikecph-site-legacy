@@ -257,10 +257,11 @@ da:
     misc:
       cancel: Annuller
     tracks:
-      title: Slet min indsamlede cykeldata
+      title: Slet din indsamlede cykeldata
       destroy_tracks: Slet min data
       wrong_password: Forkert adgangskode
-      tracks_deleted: Din lokationsdata er blevet slettet.
+      tracks_deleted: Din lokationsdata er blevet slettet
+      info: Du kan slette samtlige data du har indsamlet via din mobile app.  Du skal skrive det password du har opgivet da du oprettede indsamling af cykeldata.
 
   blog:
     index:
