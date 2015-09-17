@@ -38,12 +38,12 @@ class Track < ActiveRecord::Base
     end
   end
 
-  def self.delete_all_by_info(user, password)
+  def self.delete_all_by_info(user, password, reset_count=true)
     signature = user.generate_signature(password)
     tracks    = Track.find_all_by_signature(signature, user.track_count)
 
     ActiveRecord::Base.transaction do
-      user.update_attributes!(track_count: 0)
+      user.update_attributes!(track_count: 0) if reset_count
       tracks.delete_all
     end
   end

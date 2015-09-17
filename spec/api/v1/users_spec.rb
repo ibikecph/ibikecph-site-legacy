@@ -53,10 +53,14 @@ describe 'Users API', api: :v1 do
       it 'destroy user' do
         sign_in @user
 
-        delete "/api/users/#{@user.id}", { auth_token: token }, headers
+        delete "/api/users/#{@user.id}", { auth_token: token, user: {password: @user.password} }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
+
+        expect(User.find_by_id(@user.id)).to eq nil
+
+        expect(Time.now - Delayed::Job.last.run_at).to be < 1
       end
 
       it 'add_password' do

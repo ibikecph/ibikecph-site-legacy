@@ -259,6 +259,16 @@ class User < ActiveRecord::Base
     self.role == 'staff'
   end
 
+  def destroy_with_tracks(password)
+    if self.valid_password? password
+      Track.delay.delete_all_by_info self, password, false
+      self.destroy
+    else
+      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      false
+    end
+  end
+
   def update_and_generate_signature(params)
     ActiveRecord::Base.transaction do
       if params[:password].present?
