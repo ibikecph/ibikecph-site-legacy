@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   has_many :reported_issues, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :routes, dependent: :destroy
-  has_many :tracks, dependent: :destroy
 
   # attr_accessible :name,
   #                 :about,
@@ -261,10 +260,11 @@ class User < ActiveRecord::Base
 
   def destroy_with_tracks(password)
     if self.valid_password? password
-      Track.delay.delete_all_by_info self, password, false
+      signature = self.generate_signature password
+      Track.delay.delete_all_by_signature signature, self.track_count
       self.destroy
     else
-      self.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
+      self.errors.add(:password, password.blank? ? :blank : :invalid)
       false
     end
   end

@@ -53,6 +53,8 @@ describe 'Users API', api: :v1 do
       it 'destroy user' do
         sign_in @user
 
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
+
         delete "/api/users/#{@user.id}", { auth_token: token, user: {password: @user.password} }, headers
 
         expect(response).to be_success
@@ -60,7 +62,11 @@ describe 'Users API', api: :v1 do
 
         expect(User.find_by_id(@user.id)).to eq nil
 
-        expect(Time.now - Delayed::Job.last.run_at).to be < 1
+        tracks = Track.all.count
+
+        expect(Delayed::Worker.new.work_off).to eq [1, 0]
+
+        expect(Track.all.count).to eq(tracks - @user.track_count)
       end
 
       it 'add_password' do
