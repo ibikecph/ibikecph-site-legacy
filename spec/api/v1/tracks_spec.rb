@@ -57,9 +57,13 @@ describe 'Tracks API', api: :v1 do
 
         (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
 
-        pp Benchmark.realtime{
-          post delete_tracks_path, {auth_token: token, user:{password: @user.password}}
-        }
+        tracks = Track.all.count
+
+        post delete_tracks_path, {auth_token: token, user:{password: @user.password}}
+
+        expect(Delayed::Worker.new.work_off).to eq [1, 0]
+
+        expect(Track.all.count).to eq(tracks - @user.track_count)
       end
     end
   end
