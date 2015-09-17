@@ -34,8 +34,8 @@ class Api::V1::UsersController < Api::V1::BaseController
         render status: 401,
                json: {
                    success: false,
-                   info: @user.errors,
-                   data: @user.errors
+                   info: {},
+                   data: {errors: @user.errors}
                }
       end
     else
