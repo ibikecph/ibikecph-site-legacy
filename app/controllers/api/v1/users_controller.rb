@@ -23,7 +23,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     @user = User.find_by id: params[:id]
 
     if @user
-      if @user.destroy_with_tracks params[:user][:password],
+      if @user.destroy_with_tracks params[:user][:password]
         render status: 200,
                json: {
                    success: true,
