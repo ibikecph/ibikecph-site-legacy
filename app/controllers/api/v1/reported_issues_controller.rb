@@ -1,7 +1,4 @@
 class Api::V1::ReportedIssuesController < Api::V1::BaseController
-
-  #skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-
   load_and_authorize_resource :user
   load_and_authorize_resource :reported_issue
 

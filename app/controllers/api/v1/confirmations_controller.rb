@@ -1,7 +1,4 @@
 class Api::V1::ConfirmationsController < Devise::ConfirmationsController
-
-  #skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-
   def create
     @user = User.find_by(email: params[:user][:email])
 

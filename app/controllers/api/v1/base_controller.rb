@@ -5,13 +5,7 @@ class Api::V1::BaseController < ApplicationController
   before_filter :check_format!
   before_filter :check_auth_token!
 
-  # something, somewhere, somehow is causing find_by_id to
-  # raise an exception when it shouldn't. Therefore:
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-
-  rescue_from CanCan::AccessDenied do |exception|
-    unauthorized
-  end
+  rescue_from CanCan::AccessDenied, :with => :unauthorized
 
   private
 
