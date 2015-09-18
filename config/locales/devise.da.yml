@@ -47,6 +47,7 @@ da:
       new:
         title: Gendan adgangskode
         body: "Indtast din email adresse i feltet og tryk send. Du vil modtage instruktioner til hvordan du gendanner din adgangskode."
+        warning_html: "<strong>Vigtigt:</strong> Hvis du nulstiller din adgangskode mister du adgangen til den cykeldata vi har indsamlet om dig. Hvis du kan huske din kode skal du i stedet logge ind og ændre den gennem dine kontoindstillinger."
         submit: SEND
       edit:
         title: Ændre din adgangskode
