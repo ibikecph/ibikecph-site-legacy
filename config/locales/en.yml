@@ -151,6 +151,12 @@ en:
     flash:
       unauthorized: Unauthorized access!
       invalid_token: Invalid authentication token!
+      not_found: doesn't exist!
+    resources:
+      favourite: Favourite
+      reported_issue: Issue
+      route: Route
+      user: User
       
   favourites:
     flash:
