@@ -10,8 +10,9 @@ class Api::V1::BaseController < ApplicationController
   private
 
   def check_auth_token!
-    auth_token = cookies.permanent.signed[:auth_token].presence || params[:auth_token].presence
-    user       = auth_token && User.find_by_authentication_token(auth_token.to_s)
+    auth_token   = verified_request? && cookies.signed[:auth_token].presence
+    auth_token ||= params[:auth_token].presence
+    user         = auth_token && User.find_by_authentication_token(auth_token.to_s)
 
     if user
       # Notice we are passing store false, so the user is not
