@@ -3,9 +3,8 @@ class Api::V1::TracksController < Api::V1::BaseController
   #TODO create strings for all messages
 
   before_action :check_privacy_token, only: [:index, :destroy]
-  before_action :find_track, :only => :destroy
 
-  load_and_authorize_resource :track
+  load_and_authorize_resource except: [:destroy]
 
   def index
     @tracks = Track.find_all_by_signature privacy_token, current_user.track_count
@@ -32,6 +31,12 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def destroy
+    @track = Track.find_by id: params[:id]
+
+    return record_not_found unless @track
+
+    authorize! :destroy, @track
+
     if @track.validate_ownership(privacy_token, current_user.track_count)
       if @track.destroy
         render status: 200,
@@ -81,9 +86,5 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   def privacy_token
     @token ||= (params[:signature] || params[:track][:signature])
-  end
-
-  def find_track
-    @track = Track.find_by id: params[:id]
   end
 end
