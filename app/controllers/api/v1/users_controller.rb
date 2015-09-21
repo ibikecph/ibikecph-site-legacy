@@ -8,43 +8,19 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def show
     @user = User.find_by id: params[:id]
-
-    unless @user
-      render status: 404,
-             json: {
-               success: false,
-               info: t('users.flash.user_not_found'),
-               errors: t('users.flash.user_not_found')
-             }
-    end
   end
 
   def destroy
     @user = User.find_by id: params[:id]
 
-    if @user
+    if @user.encrypted_password.present?
       if @user.destroy_with_tracks params[:user][:password]
-        render status: 200,
-               json: {
-                   success: true,
-                   info: t('users.flash.deleted'),
-                   data: {}
-               }
+        success t('users.flash.deleted')
       else
-        render status: 401,
-               json: {
-                   success: false,
-                   info: {},
-                   data: {errors: @user.errors}
-               }
+        failure @user
       end
-    else
-      render status: 404,
-             json: {
-                 success: false,
-                 info: t('users.flash.user_not_found'),
-                 errors: t('users.flash.user_not_found')
-             }
+    elsif @user.destroy
+      success t('users.flash.deleted')
     end
   end
 
@@ -53,25 +29,10 @@ class Api::V1::UsersController < Api::V1::BaseController
 
     if @user.update_and_generate_signature user_params
       sign_in(:user, @user, bypass: true)
-      notice = if params[:user][:email] != @user.email
-                 t('accounts.flash.activate_new_email')
-               else
-                 t('accounts.flash.password_changed')
-               end
 
-      render status: 200,
-             json: {
-                 success: true,
-                 info: notice,
-                 data: { signature: @user.signature }
-             }
+      success notice, signature: @user.signature
     else
-      render status: 400,
-             json: {
-                 success: false,
-                 info: {},
-                 data: { errors: @user.errors.full_messages}
-             }
+      failure @user
     end
   end
 
@@ -79,19 +40,10 @@ class Api::V1::UsersController < Api::V1::BaseController
     if current_user.encrypted_password.blank? && current_user.provider == 'facebook'
       if current_user.update_attributes password: params[:user][:password]
         signature = current_user.generate_signature params[:user][:password]
-        render status: 200,
-               json: {
-                   success: true,
-                   info: notice,
-                   data: { signature: signature }
-               }
+
+        success nil, signature: signature
       else
-        render status: 400,
-               json: {
-                   success: false,
-                   info: {},
-                   data: { errors: @user.errors.full_messages}
-               }
+        failure @user
       end
     end
   end
@@ -125,5 +77,15 @@ class Api::V1::UsersController < Api::V1::BaseController
         :uid,
         :account_source
     )
+  end
+
+  def notice
+    self.unconfirmed_email.present? ?
+        t('accounts.flash.activate_new_email') :
+        t('accounts.flash.password_changed')
+  end
+
+  def record_not_found
+    super t('api.resources.user')
   end
 end

@@ -156,6 +156,12 @@ da:
     flash:
       unauthorized: Uautoriseret adgang!
       invalid_token: Ugyldigt token!
+      not_found: findes ikke!
+    resources:
+      favourite: Favorit
+      reported_issue: Issue
+      route: Rute
+      user: Bruger
             
   favourites:
     flash:

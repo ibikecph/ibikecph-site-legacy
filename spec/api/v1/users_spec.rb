@@ -72,19 +72,23 @@ describe 'Users API', api: :v1 do
       it 'add_password' do
         fb_user = create :user_with_facebook
 
-        attrs = {password:'coolpassword'}
-
-        post '/api/users/has_password', {auth_token: fb_user.authentication_token}, headers
-
-        expect(json_newest['has_password']).to eq(false)
-
-        post '/api/users/add_password', {user:attrs, auth_token: fb_user.authentication_token}, headers
+        post '/api/users/add_password', {user:{password:'coolpassword'},
+                                         auth_token: fb_user.authentication_token
+                                        }, headers
 
         expect(response).to be_success
         expect(json_newest['data']['signature'].length).to eq(60)
+      end
+
+      it 'has_password' do
+        fb_user = create :user_with_facebook
 
         post '/api/users/has_password', {auth_token: fb_user.authentication_token}, headers
+        expect(json_newest['has_password']).to eq(false)
 
+        fb_user.update_attributes password: 'coolpassword'
+
+        post '/api/users/has_password', {auth_token: fb_user.authentication_token}, headers
         expect(json_newest['has_password']).to eq(true)
       end
 

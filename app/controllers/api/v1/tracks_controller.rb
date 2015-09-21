@@ -4,12 +4,7 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   before_action :check_privacy_token, only: [:index, :destroy]
 
-  # something, somewhere, somehow is causing find_by_id to
-  # raise an exception when it shouldn't. Therefore:
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
-
-  load_and_authorize_resource :user
-  load_and_authorize_resource :track
+  load_and_authorize_resource except: [:destroy]
 
   def index
     @tracks = Track.find_all_by_signature privacy_token, current_user.track_count
@@ -36,7 +31,11 @@ class Api::V1::TracksController < Api::V1::BaseController
   end
 
   def destroy
-    @track = Track.find_by_id(params[:id])
+    @track = Track.find_by id: params[:id]
+
+    return record_not_found unless @track
+
+    authorize! :destroy, @track
 
     if @track.validate_ownership(privacy_token, current_user.track_count)
       if @track.destroy
@@ -87,14 +86,5 @@ class Api::V1::TracksController < Api::V1::BaseController
 
   def privacy_token
     @token ||= (params[:signature] || params[:track][:signature])
-  end
-
-  def record_not_found
-    render status: 404,
-           json: {
-               success: false,
-               info: t('routes.flash.route_not_found'),
-               errors: t('routes.flash.route_not_found')
-           }
   end
 end

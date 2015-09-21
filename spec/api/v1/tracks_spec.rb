@@ -10,14 +10,6 @@ describe 'Tracks API', api: :v1 do
 
   context 'should' do
     context 'when logged in' do
-      it 'generate token' do
-        sign_in @user
-
-        expect(response).to be_succes
-        expect(json['data']).to have_key('signature')
-        expect(json['data']['signature'].length).to eq(60)
-      end
-
       it 'index tracks' do
         sign_in @user
 
@@ -31,7 +23,7 @@ describe 'Tracks API', api: :v1 do
       it 'create track' do
         sign_in @user
 
-        attrs = attributes_for :track, signature: signature, count: 0
+        attrs = attributes_for :track, signature: signature
 
         post "/api/tracks", {track: attrs, auth_token: token}, headers
 
@@ -72,12 +64,9 @@ describe 'Tracks API', api: :v1 do
       it 'destroy without valid signature' do
         sign_in @user
 
-        attrs = attributes_for :track
-        attrs[:signature] = signature
+        track = create :track, signature: signature, count:0
 
-        post "/api/tracks", {track: attrs, auth_token: token}, headers
-
-        delete "/api/tracks/#{json['data']['id']}", { auth_token: token, signature: 'signature' }, headers
+        delete "/api/tracks/#{track.id}", { auth_token: token, signature: 'signature' }, headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -90,6 +79,15 @@ describe 'Tracks API', api: :v1 do
 
         expect(response).not_to be_success
         expect(response).to have_http_status(404)
+      end
+    end
+    context 'when not logged in' do
+      it 'destroy tracks' do
+        delete "/api/tracks/1", { signature: 'signature' }, headers
+
+        # unauthorized
+        expect(response).not_to be_success
+        expect(response).to have_http_status(403)
       end
     end
   end
