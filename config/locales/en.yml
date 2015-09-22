@@ -152,6 +152,7 @@ en:
       unauthorized: Unauthorized access!
       invalid_token: Invalid authentication token!
       not_found: doesn't exist!
+      created: created succesfully!
     resources:
       favourite: Favourite
       reported_issue: Issue

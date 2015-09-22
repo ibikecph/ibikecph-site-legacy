@@ -39,19 +39,38 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def success(info=nil, options={})
-    json_response 200, true, info, data:options
+    json_response 200,
+                  true,
+                  info,
+                  data:options
+  end
+
+  def created(options={})
+    json_response 201,
+                  true,
+                  controller_name.classify + ' ' + t('api.flash.created'),
+                  data:options
   end
 
   def failure(resource)
-    json_response 400, false, nil, errors: resource.errors.full_messages
+    json_response 400,
+                  false,
+                  resource.errors.full_messages.first,
+                  errors: resource.errors.full_messages
   end
 
   def unauthorized
-    json_response 401, false, t('api.flash.unauthorized'), errors: t('api.flash.unauthorized')
+    json_response 401,
+                  false,
+                  t('api.flash.unauthorized'),
+                  errors: [t('api.flash.unauthorized')]
   end
 
   def record_not_found(resource_name=nil)
-    json_response 404, false, resource_name.to_s + ' ' + t('api.flash.not_found'), errors: resource_name.to_s + ' ' + t('api.flash.not_found')
+    json_response 404,
+                  false,
+                  controller_name.classify + ' ' + t('api.flash.not_found'),
+                  errors: [controller_name.classify + ' ' + t('api.flash.not_found')]
   end
 
   def json_response(status, success, info, options={})

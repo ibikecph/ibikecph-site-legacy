@@ -157,6 +157,7 @@ da:
       unauthorized: Uautoriseret adgang!
       invalid_token: Ugyldigt token!
       not_found: findes ikke!
+      created: skabte succes!
     resources:
       favourite: Favorit
       reported_issue: Issue

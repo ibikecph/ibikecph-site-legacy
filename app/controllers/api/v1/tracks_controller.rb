@@ -14,19 +14,9 @@ class Api::V1::TracksController < Api::V1::BaseController
     @track = Track.new track_params
 
     if @track.save_and_update_count(current_user)
-      render status: 201,
-             json: {
-                 success: true,
-                 info: t('routes.flash.created'),
-                 data: { id: @track.id, count: @track.coordinates.count }
-             }
+      created id: @track.id, count: @track.coordinates.count
     else
-      render status: 422,
-             json: {
-                 success: false,
-                 info: @track.errors.full_messages.first,
-                 errors: @track.errors.full_messages
-             }
+      failure @track
     end
   end
 
@@ -39,20 +29,10 @@ class Api::V1::TracksController < Api::V1::BaseController
 
     if @track.validate_ownership(privacy_token, current_user.track_count)
       if @track.destroy
-        render status: 200,
-               json: {
-                   success: true,
-                   info: t('routes.flash.deleted'),
-                   data: {}
-               }
+        success t('routes.flash.deleted')
       end
     else
-      render status: 401,
-             json: {
-                 success: false,
-                 info: t('api.flash.unauthorized'),
-                 data: t('api.flash.unauthorized')
-             }
+      unauthorized
     end
   end
 
