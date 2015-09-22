@@ -4,8 +4,6 @@ class Track < ActiveRecord::Base
   validates_uniqueness_of :salted_signature
   validates_presence_of   :salted_signature,
                           :timestamp,
-                          :to_name,
-                          :from_name,
                           :coordinates,
                           :signature,
                           :count
