@@ -35,6 +35,10 @@ class AccountsController < ApplicationController
     if @user.update_and_generate_signature user_params
       sign_in(:user, @user, bypass: true)
 
+      cookies.permanent.signed[:auth_token] = {
+          value:    @user.authentication_token,
+          httponly: true
+      }
       # email changed
       notice = if params[:user][:email] != @user.email
                  t('accounts.flash.activate_new_email')

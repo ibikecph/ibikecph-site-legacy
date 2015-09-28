@@ -279,6 +279,7 @@ class User < ActiveRecord::Base
         self.signature = new_signature
       end
 
+      self.authentication_token=generate_authentication_token
       self.update_with_password params
     end
   end
