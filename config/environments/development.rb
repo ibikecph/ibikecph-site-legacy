@@ -44,6 +44,8 @@ RailsOSRM::Application.configure do
 
   config.eager_load = false
 
-  Delayed::Worker.delay_jobs = false
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
 
 end

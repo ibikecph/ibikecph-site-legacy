@@ -91,4 +91,8 @@ RailsOSRM::Application.configure do
       :sender_address => %{"notifier" <auto@#{MAIN_DOMAIN}>},
       :exception_recipients => ENV['EXCEPTION_RECIPIENTS']
     }
+
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
 end
