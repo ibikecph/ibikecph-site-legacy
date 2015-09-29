@@ -53,7 +53,7 @@ end
 
 # place last to allow other stuff to be instrumented
 group :production do
-  gem 'workless', '~> 1.1.1'
+  gem 'workless', '~> 1.2.2'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
 end
