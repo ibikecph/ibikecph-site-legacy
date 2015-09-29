@@ -23,7 +23,7 @@ da:
         confirmlink: "Bekræft min konto"
         contentblock_1: "Du kan bekræfte din konto e-mail via nedenstående link:"
       reset_password_instructions:
-        subject: "Instruktioner til nulstillning af adgangskode"
+        subject: "Instruktioner til nulstilling af adgangskode"
         addressuser: "Hej"
         rplink: "Ændre min adgangskode"
         contentblock_1: "Nogen har anmodet om et link til at ændre din adgangskode. Du kan gøre dette via nedenstående link."
