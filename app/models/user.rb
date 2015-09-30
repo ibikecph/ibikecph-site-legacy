@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   #                 :account_source,
   #                 :email_confirmation
 
-  attr_accessor :image_path
+  attr_accessor :image_path, :signature
   # attr_accessor :password, :created_from_oath
 
   validates_presence_of :name
@@ -223,7 +223,7 @@ class User < ActiveRecord::Base
     user
   end
 
-  def self.find_for_facebook_email(fb_user)
+  def self.find_for_facebook_user(fb_user)
     user = User.where(email: fb_user['email']).first
 
     unless user
@@ -256,6 +256,36 @@ class User < ActiveRecord::Base
 
   def staff?
     self.role == 'staff'
+  end
+
+  def destroy_with_tracks(password)
+    if self.valid_password? password
+      signature = self.generate_signature password
+      Track.delay.delete_all_by_signature signature, self.track_count
+      self.destroy
+    else
+      self.errors.add(:password, password.blank? ? :blank : :invalid)
+      false
+    end
+  end
+
+  def update_and_generate_signature(params)
+    ActiveRecord::Base.transaction do
+      if params[:password].present?
+        old_signature = self.generate_signature params[:current_password]
+        new_signature = self.generate_signature params[:password]
+
+        Track.update_all_signatures old_signature, new_signature, self.track_count
+        self.signature = new_signature
+      end
+
+      self.authentication_token=generate_authentication_token
+      self.update_with_password params
+    end
+  end
+
+  def generate_signature(password)
+    BCrypt::Engine.hash_secret self.created_at.to_s+self.id.to_s+password.to_s, ENV['BCRYPT_USER_SALT']
   end
 
   private

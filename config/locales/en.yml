@@ -151,6 +151,13 @@ en:
     flash:
       unauthorized: Unauthorized access!
       invalid_token: Invalid authentication token!
+      not_found: doesn't exist!
+      created: created succesfully!
+    resources:
+      favourite: Favourite
+      reported_issue: Issue
+      route: Route
+      user: User
       
   favourites:
     flash:
@@ -215,6 +222,7 @@ en:
       change_email: Change Email
       change_password: Change Password
       change_settings: Edit Setting
+      manage_tracks: Manage tracks
       notify_by_email: Email Notifications
       unverified: Unverified
       password_hidden: Hidden
@@ -250,6 +258,12 @@ en:
       activate_new_email: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
     misc:
       cancel: Cancel
+    tracks:
+      title: Delete my bike data
+      destroy_tracks: Delete my data
+      wrong_password: Wrong password
+      tracks_deleted: Your location data has been deleted
+      info: You can delete all of the data that has been gathered by your mobile app. You need to input the password you created, when you signed up for collection of your bicycle data.
       
   blog:
     index:
