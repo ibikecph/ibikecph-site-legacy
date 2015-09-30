@@ -1,7 +1,4 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
-
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-
   def new
     @user = User.new
   end

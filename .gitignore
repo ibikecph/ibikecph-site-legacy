@@ -27,3 +27,6 @@ logfile
 *~
 \#*\#
 .\#*
+config/database.yml
+config/secrets.yml
+.gitignore

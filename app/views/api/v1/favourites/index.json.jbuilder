@@ -6,6 +6,7 @@ json.data @favourites do |favourite|
     json.name favourite.name
     json.address favourite.address
     json.lattitude favourite.latitude #json should be mispelled in v1!
+    json.latitude favourite.latitude
     json.longitude favourite.longitude
     json.source favourite.source
     json.sub_source favourite.sub_source

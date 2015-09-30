@@ -4,14 +4,28 @@ FactoryGirl.define do
   sequence(:title) { |n| "Title#{n}" }
   sequence(:name)  { |n| "Person#{n}" }
   sequence(:email) { |n| "person#{n}@example.com" }
+  sequence(:seconds_passed) {|n| n*3}
+  sequence(:count) {|n| n}
 
   factory :user do
     name
     email
-
+    track_count 5
     after :build do |u|
       u.email_confirmation = u.email
       u.password = u.password_confirmation = 'password'
+    end
+  end
+
+  factory :user_with_facebook, class: :user do
+    name
+    email
+    provider 'facebook'
+
+    after :build do |u|
+      u.email_confirmation = u.email
+      u.skip_confirmation!
+      u.reset_authentication_token!
     end
   end
 
@@ -45,4 +59,29 @@ FactoryGirl.define do
     source 'favorite'
     sub_source 'favorite'
   end
+
+  factory :track do
+    timestamp Time.now.to_i
+    from_name 'Vestergade 27-29, 1550 København V'
+    to_name 'Lille Kannikestræde 3, 1170 København K'
+    coordinates {Array.new(5){ attributes_for :coordinate }}
+    coord_count 5
+  end
+
+  factory :coordinate do
+    seconds_passed
+    latitude '55.677276'
+    longitude '12.569467'
+  end
+
+  factory :privacy_token do
+    email 'email@ibikecph.dk'
+    password 'password'
+
+    factory :privacy_token_new do
+      current_password 'password'
+      password 'password123'
+    end
+  end
+
 end

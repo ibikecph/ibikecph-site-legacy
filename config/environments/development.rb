@@ -45,5 +45,4 @@ RailsOSRM::Application.configure do
   config.eager_load = false
 
   Delayed::Worker.delay_jobs = false
-
 end

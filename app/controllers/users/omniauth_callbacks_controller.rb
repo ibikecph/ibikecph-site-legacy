@@ -4,6 +4,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_facebook_oauth(request.env['omniauth.auth'])
 
     if @user.persisted?
+      cookies.permanent.signed[:auth_token] = { value: @user.authentication_token, httponly: true }
       sign_in_and_redirect :user, @user, event: :authentication
       set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
     else

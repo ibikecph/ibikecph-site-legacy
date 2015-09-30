@@ -33,7 +33,6 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'eco'
 gem 'recipient_interceptor'
-
 gem 'koala'
 
 group :development do
@@ -43,6 +42,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'figaro'
 end
 
 group :test do
@@ -53,7 +53,7 @@ end
 
 # place last to allow other stuff to be instrumented
 group :production do
-  gem 'workless', '~> 1.1.1'
+  gem 'workless', '~> 1.2.2'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
 end

@@ -53,10 +53,69 @@ describe 'Users API', api: :v1 do
       it 'destroy user' do
         sign_in @user
 
-        delete "/api/users/#{@user.id}", { auth_token: token }, headers
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
+
+        delete "/api/users/#{@user.id}", { auth_token: token, user: {password: @user.password} }, headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
+
+        expect(User.find_by_id(@user.id)).to eq nil
+
+        tracks = Track.all.count
+
+        expect(Delayed::Worker.new.work_off).to eq [1, 0]
+
+        expect(Track.all.count).to eq(tracks - @user.track_count)
+      end
+
+      it 'add_password' do
+        fb_user = create :user_with_facebook
+
+        post '/api/users/add_password', {user:{password:'coolpassword'},
+                                         auth_token: fb_user.authentication_token
+                                        }, headers
+
+        expect(response).to be_success
+        expect(json_newest['data']['signature'].length).to eq(60)
+      end
+
+      it 'has_password' do
+        fb_user = create :user_with_facebook
+
+        post '/api/users/has_password', {auth_token: fb_user.authentication_token}, headers
+        expect(json_newest['has_password']).to eq(false)
+
+        fb_user.update_attributes password: 'coolpassword'
+
+        post '/api/users/has_password', {auth_token: fb_user.authentication_token}, headers
+        expect(json_newest['has_password']).to eq(true)
+      end
+
+      it 'change password and token' do
+        user = {email:'person100@example.com',
+                current_password: @user.password,
+                password: 'password123',
+                password_confirmation:'password123'}
+
+        sign_in @user
+
+        (0...@user.track_count).each { |x| create :track, signature: signature, count: x }
+
+        put update_password_path, {user: user, auth_token: token}, headers
+
+        expect(response).to redirect_to(account_path)
+      end
+    end
+    context 'when not logged in' do
+      it 'sign in' do
+        sign_in @user
+
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+
+        expect(json['data']).to have_key('signature')
+        expect(json['data']['signature'].length).to eq(60)
       end
     end
   end

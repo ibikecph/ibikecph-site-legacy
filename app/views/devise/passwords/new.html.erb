@@ -1,6 +1,7 @@
 <div class="centered_dialog small">
 	<h1><%=t '.title' %></h1>
-	<p><%=t '.body' %></p>
+    <p><%=t '.body' %></p>
+	<p><%=t '.warning_html' %></p>
 	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
 	  <%= devise_error_messages! %>
 	<p>

@@ -39,5 +39,10 @@
 		<%= current_user.notify_by_email ? t('yes') : t('no') %>
 	</p>
 
+    <hr>
+
+    <%= link_to t('.manage_tracks'),tracks_account_path, :class => "note button righty" %>
+    <label><%='Tracks' %></label>
+
 </div>
 
