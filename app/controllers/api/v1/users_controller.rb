@@ -43,7 +43,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
         success nil, signature: signature
       else
-        failure @user
+        failure current_user
       end
     end
   end

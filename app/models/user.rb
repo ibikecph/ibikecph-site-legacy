@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :email
 
   validates_presence_of :password, on: :create, unless: :has_oath_authentications
-  validates_length_of :password, minimum: 3, if: :password
+  validates_length_of :password, minimum: 6, if: :password
   validates :password_confirmation,
             presence: true,
             if: :password,
