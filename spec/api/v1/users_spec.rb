@@ -117,6 +117,16 @@ describe 'Users API', api: :v1 do
         expect(json['data']).to have_key('signature')
         expect(json['data']['signature'].length).to eq(60)
       end
+      it 'show invalid password on failed fb-login' do
+        @user.update_attributes provider:'facebook'
+
+        post '/api/login', {user: { email: @user.email, password: 'wrongpassword', facebook:'true' } }, headers
+
+        expect(response).to_not be_success
+        expect(response).to have_http_status(401)
+
+        expect(json['errors']).to eq(I18n.t('sessions.flash.invalid_password'))
+      end
     end
   end
 

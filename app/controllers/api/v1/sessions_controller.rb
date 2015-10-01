@@ -29,7 +29,7 @@ class Api::V1::SessionsController < Devise::SessionsController
         sign_in(:user, resource)
         success resource, signature: privacy_token
       else
-        failure
+        failure resource
       end
     end
   end
@@ -60,12 +60,12 @@ class Api::V1::SessionsController < Devise::SessionsController
            }
   end
 
-  def failure
+  def failure(user=nil)
     render status: 401,
            json: {
              success: false,
-             info: t('sessions.flash.invalid_login'),
-             errors: t('sessions.flash.invalid_login')
+             info: failure_message(user),
+             errors: failure_message(user)
            }
   end
 
@@ -85,6 +85,10 @@ class Api::V1::SessionsController < Devise::SessionsController
                errors: t('sessions.flash.params_missing')
              }
     end
+  end
+
+  def failure_message(user)
+    @message ||= (user && params[:user][:facebook] == 'true' && user.provider == 'facebook') ? t('sessions.flash.invalid_password') : t('sessions.flash.invalid_login')
   end
 
 end

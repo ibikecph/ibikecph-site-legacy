@@ -201,6 +201,7 @@ en:
       logged_in: "Logged in as %{user}."
       logged_in_oath: "Logged in as %{user} using %{provider}."
       invalid_login: Email or password was invalid.
+      invalid_password: Password was invalid.
       oath_cancel: Login cancelled.
       oath_error: "Could not log in: %{error}."
       email_not_verified: "Email %{email} not verified."
