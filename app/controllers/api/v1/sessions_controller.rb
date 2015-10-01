@@ -8,14 +8,14 @@ class Api::V1::SessionsController < Devise::SessionsController
     if params[:user][:fb_token]
       fb_user = Koala::Facebook::API.new(params[:user][:fb_token]).get_object('me', fields: 'id,name,email')
 
-      if fb_user
-        @user = User.find_for_facebook_user(fb_user)
-        return failure unless @user
+      return failure unless fb_user
+      return permissions_error unless fb_user['email'].present?
 
-        if @user
-          sign_in(:user, @user)
-          success @user
-        end
+      @user = User.find_for_facebook_user(fb_user)
+
+      if @user
+        sign_in(:user, @user)
+        success @user
       else
         failure
       end
@@ -66,6 +66,16 @@ class Api::V1::SessionsController < Devise::SessionsController
              success: false,
              info: failure_message(user),
              errors: failure_message(user)
+           }
+  end
+
+  def permissions_error
+    render status: 409,
+           json: {
+               success: false,
+               permission_error: true,
+               info: t('sessions.flash.permissions_error'),
+               errors: t('sessions.flash.permissions_error')
            }
   end
 

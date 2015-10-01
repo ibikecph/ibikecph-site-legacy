@@ -210,6 +210,7 @@ en:
       params_missing: Required parameter(s) missing.
       confirm_account_title: Almost there...
       confirm_account: Before you can log in, please click on the link in the e-mail we have sent to you. You can resend the e-mail from ibikecph.dk.
+      permissions_error: You need to enable the facebook email permission.
       
   accounts:
     show:
