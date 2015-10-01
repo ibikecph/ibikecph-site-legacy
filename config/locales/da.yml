@@ -214,7 +214,7 @@ da:
       params_missing: Nødvendige parameterer mangler.
       confirm_account_title: Næsten i mål...
       confirm_account: Før du kan logge ind, bedes du klikke på linket i den e-mail vi har sendt til dig. Du kan gensende e-mailen fra ibikecph.dk.
-      permissions_error: Du skal give tilladelse til, at vi kan se din facebook emailaddresse.
+      permissions_error: Du skal give tilladelse til, at vi kan se din Facebook-emailaddresse.
   
   accounts:
     show:
