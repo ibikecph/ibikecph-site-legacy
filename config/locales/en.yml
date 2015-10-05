@@ -221,6 +221,7 @@ en:
       image: Image
       about: About me
       email: Email
+      tracks: Tracking of cycling data
       password: Password
       change_email: Change Email
       change_password: Change Password
@@ -262,11 +263,11 @@ en:
     misc:
       cancel: Cancel
     tracks:
-      title: Delete my bicycle data
+      title: Delete my cycling data
       destroy_tracks: Delete my data
       wrong_password: Wrong password
-      tracks_deleted: Your bicycle data has been deleted
-      info: You can delete all of the bicycle data that has been gathered by your mobile app. You need to input the password you created, when you signed up for collection of your bicycle data.
+      tracks_deleted: Your cycling data has been deleted
+      info: You can delete all of the cycling data that has been gathered by your mobile app. You need to input the password you created, when you signed up for collection of your cycling data.
       
   blog:
     index:
