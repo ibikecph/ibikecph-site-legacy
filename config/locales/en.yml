@@ -225,7 +225,7 @@ en:
       change_email: Change Email
       change_password: Change Password
       change_settings: Edit Setting
-      manage_tracks: Manage tracks
+      manage_tracks: More
       notify_by_email: Email Notifications
       unverified: Unverified
       password_hidden: Hidden
@@ -262,11 +262,11 @@ en:
     misc:
       cancel: Cancel
     tracks:
-      title: Delete my bike data
+      title: Delete my bicycle data
       destroy_tracks: Delete my data
       wrong_password: Wrong password
-      tracks_deleted: Your location data has been deleted
-      info: You can delete all of the data that has been gathered by your mobile app. You need to input the password you created, when you signed up for collection of your bicycle data.
+      tracks_deleted: Your bicycle data has been deleted
+      info: You can delete all of the bicycle data that has been gathered by your mobile app. You need to input the password you created, when you signed up for collection of your bicycle data.
       
   blog:
     index:
