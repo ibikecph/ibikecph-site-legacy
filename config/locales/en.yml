@@ -2,8 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  terms:
-    important_parts_description: Lorem ipsum dolor sit amet. Important parts go here.
+  mobileterms:
+    v1:
+      important_parts_description: Lorem ipsum dolor sit amet. Important parts go here.
   activerecord:
     models:
       issue: Entry
@@ -151,6 +152,13 @@ en:
     flash:
       unauthorized: Unauthorized access!
       invalid_token: Invalid authentication token!
+      not_found: doesn't exist!
+      created: created succesfully!
+    resources:
+      favourite: Favourite
+      reported_issue: Issue
+      route: Route
+      user: User
       
   favourites:
     flash:
@@ -193,6 +201,7 @@ en:
       logged_in: "Logged in as %{user}."
       logged_in_oath: "Logged in as %{user} using %{provider}."
       invalid_login: Email or password was invalid.
+      invalid_password: Password was invalid.
       oath_cancel: Login cancelled.
       oath_error: "Could not log in: %{error}."
       email_not_verified: "Email %{email} not verified."
@@ -201,6 +210,7 @@ en:
       params_missing: Required parameter(s) missing.
       confirm_account_title: Almost there...
       confirm_account: Before you can log in, please click on the link in the e-mail we have sent to you. You can resend the e-mail from ibikecph.dk.
+      permissions_error: You need to enable the Facebook email permission.
       
   accounts:
     show:
@@ -215,6 +225,7 @@ en:
       change_email: Change Email
       change_password: Change Password
       change_settings: Edit Setting
+      manage_tracks: More
       notify_by_email: Email Notifications
       unverified: Unverified
       password_hidden: Hidden
@@ -250,6 +261,12 @@ en:
       activate_new_email: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
     misc:
       cancel: Cancel
+    tracks:
+      title: Delete my bicycle data
+      destroy_tracks: Delete my data
+      wrong_password: Wrong password
+      tracks_deleted: Your bicycle data has been deleted
+      info: You can delete all of the bicycle data that has been gathered by your mobile app. You need to input the password you created, when you signed up for collection of your bicycle data.
       
   blog:
     index:

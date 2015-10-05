@@ -9,7 +9,7 @@ describe 'Terms API', api: :v1 do
       expect(response).to be_success
       expect(response).to have_http_status(200)
 
-      p json
+      expect(json['version']).to eq ENV['TERMS_VERSION']
     end
   end
 end

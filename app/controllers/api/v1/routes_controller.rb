@@ -1,7 +1,4 @@
 class Api::V1::RoutesController < Api::V1::BaseController
-
-  skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
-
   before_filter :manage_duplicate_routes, only: :create
 
   load_and_authorize_resource :user
@@ -77,24 +74,24 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   def destroy
-    @route = current_user.routes.find_by id: params[:id]
+      @route = current_user.routes.find_by id: params[:id]
 
-    if @route
-      @route.destroy
-      render status: 200,
-             json: {
-               success: true,
-               info: t('routes.flash.deleted'),
-               data: {}
-             }
-    else
-      render status: 404,
-             json: {
-               success: false,
-               info: t('routes.flash.route_not_found'),
-               errors: t('routes.flash.route_not_found')
-             }
-    end
+      if @route
+        @route.destroy
+        render status: 200,
+               json: {
+                   success: true,
+                   info: t('routes.flash.deleted'),
+                   data: {}
+               }
+      else
+        render status: 404,
+               json: {
+                   success: false,
+                   info: t('routes.flash.route_not_found'),
+                   errors: t('routes.flash.route_not_found')
+               }
+      end
   end
 
   private

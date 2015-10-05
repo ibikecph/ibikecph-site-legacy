@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  protect_from_forgery
+  protect_from_forgery with: :null_session
 
   before_filter :set_locale
   # # require login everywhere by default
@@ -115,5 +115,4 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     session[:user_return_to] || account_path
   end
-
 end

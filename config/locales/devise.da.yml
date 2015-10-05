@@ -23,7 +23,7 @@ da:
         confirmlink: "Bekræft min konto"
         contentblock_1: "Du kan bekræfte din konto e-mail via nedenstående link:"
       reset_password_instructions:
-        subject: "Instruktioner til gendannelse af adgangskode"
+        subject: "Instruktioner til nulstilling af adgangskode"
         addressuser: "Hej"
         rplink: "Ændre min adgangskode"
         contentblock_1: "Nogen har anmodet om et link til at ændre din adgangskode. Du kan gøre dette via nedenstående link."
@@ -40,13 +40,14 @@ da:
       success: "Succesfuldt autentificeret fra %{kind} konto."
     passwords:
       no_token: "Du kan ikke få adgang til denne side uden at komme fra din registrerede emailadresse. Hvis du kommer fra din registrerede emailadresse, skal du sørge for at bruge den fulde URL du fik tilsendt."
-      send_instructions: "Om få minutter vil du modtage instruktioner til hvordan du gendanner din adgangskode."
-      send_paranoid_instructions: "Hvis din email findes i vores database, vil du om få minutter modtage instruktioner til hvordan du gendanner din adgangskode."
+      send_instructions: "Om få minutter vil du modtage instruktioner til hvordan du nulstiller din adgangskode."
+      send_paranoid_instructions: "Hvis din email findes i vores database, vil du om få minutter modtage instruktioner til hvordan du nulstiller din adgangskode."
       updated: "Din adgangskode er blevet ændret. Du er nu logget ind."
       updated_not_active: "Din adgangskode er blevet ændret."
       new:
-        title: Gendan adgangskode
-        body: "Indtast din email adresse i feltet og tryk send. Du vil modtage instruktioner til hvordan du gendanner din adgangskode."
+        title: Nulstil adgangskode
+        body: "Indtast din email adresse i feltet og tryk send. Du vil modtage instruktioner til hvordan du nulstiller din adgangskode."
+        warning_html: "<strong>Vigtigt:</strong> Hvis du nulstiller din adgangskode mister du adgangen til den cykeldata vi har indsamlet om dig. Hvis du kan huske din kode skal du i stedet logge ind og ændre den gennem dine kontoindstillinger."
         submit: SEND
       edit:
         title: Ændre din adgangskode

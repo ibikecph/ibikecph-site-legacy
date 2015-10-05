@@ -19,8 +19,14 @@ RailsOSRM::Application.routes.draw do
           post :reorder
         end
       end
-      resources :routes
+      resources :routes, :tracks
       resources :users, only: [:index, :show, :destroy]
+
+      get 'tracks/token' => 'tracks#token'
+
+      post 'users/change_password' => 'users#change_password'
+      post 'users/add_password'    => 'users#add_password'
+      post 'users/has_password'    => 'users#has_password'
 
       get "terms" => "terms#index"
     end
@@ -44,10 +50,12 @@ RailsOSRM::Application.routes.draw do
       # get 'activating'
       get 'welcome'
       get 'settings'
+      get 'tracks'
       post 'settings' => :update_settings
     end
     get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
     put 'account/password' => 'accounts#update_password', :as => :update_password
+    post 'account/tracks/delete_all' => 'tracks#delete_all', :as => :delete_tracks
     # delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
     # get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
     # post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation

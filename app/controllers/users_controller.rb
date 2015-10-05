@@ -38,25 +38,24 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit! # (
-    #   :name,
-    #   :about,
-    #   :email,
-    #   :email_confirmation,
-    #   :password,
-    #   :password_confirmation,
-    #   :image,
-    #   :image_path,
-    #   :remove_image,
-    #   :image_cache,
-    #   :notify_by_email,
-    #   :terms,
-    #   :tester,
-    #   :provider,
-    #   :uid,
-    #   :account_source,
-    #   :email_confirmation
-    # )
+    params.require(:user).permit(
+       :name,
+       :about,
+       :email,
+       :email_confirmation,
+       :password,
+       :password_confirmation,
+       :image,
+       :image_path,
+       :remove_image,
+       :image_cache,
+       :notify_by_email,
+       :terms,
+       :tester,
+       :provider,
+       :uid,
+       :account_source
+     )
   end
 
   def warn_about_existing_name

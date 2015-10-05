@@ -156,6 +156,13 @@ da:
     flash:
       unauthorized: Uautoriseret adgang!
       invalid_token: Ugyldigt token!
+      not_found: findes ikke!
+      created: skabte succes!
+    resources:
+      favourite: Favorit
+      reported_issue: Issue
+      route: Rute
+      user: Bruger
             
   favourites:
     flash:
@@ -198,6 +205,7 @@ da:
       logged_in: "Logget ind som %{user}."
       logged_in_oath: "Logget ind som %{user} med %{provider}."
       invalid_login: Email eller adgangskode var forkert.
+      invalid_password: Adgangskode var forkert.
       oath_cancel: Login afbrudt.
       oath_error: "Kunne ikke logge ind: %{error}."
       email_not_verified: "Email %{email} ikke verificeret."
@@ -206,6 +214,7 @@ da:
       params_missing: Nødvendige parameterer mangler.
       confirm_account_title: Næsten i mål...
       confirm_account: Før du kan logge ind, bedes du klikke på linket i den e-mail vi har sendt til dig. Du kan gensende e-mailen fra ibikecph.dk.
+      permissions_error: Du skal give tilladelse til, at vi kan se din Facebook-emailaddresse.
   
   accounts:
     show:
@@ -220,6 +229,7 @@ da:
       change_email: Ændre Email
       change_password: Ændre adgangskode og email
       change_settings: Rediger indstillinger
+      manage_tracks: Mere
       notify_by_email: Beskeder via email
       unverified: Uverificeret
       password_hidden: Skjult
@@ -255,6 +265,12 @@ da:
       activate_new_email: "Du har opdateret din konto, men vi er nødt til at bekræfte din nye e-mailadresse. Tjek venligst din e-mail og klik på bekræft link til færdiggøre bekræftelsen din nye e-mailadresse."
     misc:
       cancel: Annuller
+    tracks:
+      title: Slet min indsamlede cykeldata
+      destroy_tracks: Slet min data
+      wrong_password: Forkert adgangskode
+      tracks_deleted: Din cykeldata er blevet slettet
+      info: Du kan slette samtlig data du har indsamlet via din mobile app.  Du skal skrive den adgangskode du opgav da du oprettede indsamling af cykeldata.
 
   blog:
     index:

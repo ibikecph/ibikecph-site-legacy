@@ -30,6 +30,7 @@ class FollowsController < ApplicationController
   end
 
   def find_followable
+    return nil unless %w(BlogEntry Issue).include? params[:followable_type]
     @followable = params[:followable_type]
                   .constantize
                   .find params[:followable_id] rescue nil
