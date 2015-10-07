@@ -74,7 +74,7 @@ da:
     api: "API"
 
   news:
-    title: Seneste nyheder
+    title: Blog
     categories: Tags
     search: Søg nyhed...
     label_facebook: Følg os på Facebook

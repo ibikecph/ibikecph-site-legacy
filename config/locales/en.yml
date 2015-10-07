@@ -72,7 +72,7 @@ en:
     api: "API"
 
   news:
-    title: Latest news
+    title: Blog
     categories: Tags
     search: Search news...
     label_facebook: Follow us on Facebook
