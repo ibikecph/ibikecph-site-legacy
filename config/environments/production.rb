@@ -79,6 +79,11 @@ RailsOSRM::Application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
+
+  # Setup Workless
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
   
   # only send email to whitelisted addressed, useful during staging
   if ENV['INTERCEPT_EMAIL']
