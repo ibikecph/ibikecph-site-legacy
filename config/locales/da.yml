@@ -225,11 +225,12 @@ da:
       image: Billede
       about: Om mig
       email: Email
+      tracks: Indsamling af cykeldata
       password: Adgangskode
       change_email: Ændre Email
       change_password: Ændre adgangskode og email
       change_settings: Rediger indstillinger
-      manage_tracks: Mere
+      manage_tracks: Slet data
       notify_by_email: Beskeder via email
       unverified: Uverificeret
       password_hidden: Skjult

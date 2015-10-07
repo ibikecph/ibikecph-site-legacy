@@ -1,8 +1,8 @@
 common: &common
   adapter: postgresql
   encoding: unicode
-  username: shamal
-  password: google
+  username: 
+  password:
   pool: 5
 
 
