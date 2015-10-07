@@ -8,7 +8,7 @@ class BlogController < ApplicationController
   before_filter :check_return_path, only: :show
 
   def index
-    @blog_entries = BlogEntry.all.paginate page: params[:page], per_page: 10
+    @blog_entries = BlogEntry.news.latest.paginate page: params[:page], per_page: 10
   end
 
   def archive
