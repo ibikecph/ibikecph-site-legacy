@@ -34,6 +34,7 @@ gem 'uglifier'
 gem 'eco'
 gem 'recipient_interceptor'
 gem 'koala'
+gem 'httparty'
 
 group :development do
   gem 'quiet_assets'
