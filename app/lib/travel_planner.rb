@@ -1,15 +1,12 @@
 class TravelPlanner
-  require 'travel_planner/leg'
-
   include HTTParty
+  require 'travel_planner/leg'
 
   base_uri ENV['REJSEPLANEN_API_URL']
 
-  @headers = {'Content-Type' => 'application/json'}
-
   def self.get_journey(options={})
     trips = Rails.cache.fetch('journe', expires_in: 30.minutes) do
-      get('/trips/', query: options,  headers: @headers )['TripList']['Trip']
+      get('/trips/', query: options,  headers: {'Content-Type' => 'application/json'} )['TripList']['Trip']
     end
 
     format_trips trips
@@ -21,38 +18,35 @@ class TravelPlanner
     formatted_trips=[]
 
     trips.each do |trip|
-      formatted_legs=[]
-
-      trip['Leg'].each do |leg|
-        formatted_legs.push (leg['type'] == 'BIKE') ? format_bike : format_train(leg)
-      end
-
-      formatted_trips.push formatted_legs
+      formatted_trips.push (trip['Leg'].map {|leg| (leg['type'] == 'BIKE') ? format_bike : format_train(leg)})
     end
 
     formatted_trips
   end
 
-  def self.format_train(leg)
-    current_leg = Leg.new leg
-    current_trip = {}
-    current_trip[:route_name] = [current_leg.origin['name'], current_leg.destination['name']]
+  # We're formatting the response so it mirrors our OSRM-routers bike response.
+  def self.format_train(current_leg)
+    leg = Leg.new current_leg
+    {
+      route_name: [
+        leg.origin['name'],
+        leg.destination['name']
+      ],
 
-    current_trip[:route_summary] = {
-        end_point: current_leg.destination['name'],
-        start_point: current_leg.origin['name'],
-        total_time: current_leg.total_time
+      route_summary: {
+          end_point:   leg.destination['name'],
+          start_point: leg.origin['name'],
+          total_time:  leg.total_time
+      },
+
+      via_points: leg.coords,
+
+      route_instructions: build_route_instructions(leg),
+      route_geometry: Polylines::Encoder.encode_points(leg.coords)
     }
-
-    current_trip[:via_points] = current_leg.coords
-
-    current_trip[:route_instructions] = build_route_instructions current_leg
-    current_trip[:route_geometry] = Polylines::Encoder.encode_points(current_leg.coords)
-
-    current_trip
   end
 
-  # route_instructions structure
+  # Route_instructions structure
   # 0 - ordinalDirection
   # 1 - name
   # 2 - prevLengthInMeters
@@ -87,12 +81,14 @@ class TravelPlanner
 
   def self.format_bike
     options = {
-        loc: ['55.677567,12.569259','55.670627,12.558336'],
+        loc: %w(55.677567,12.569259 55.670627,12.558336),
         z: 18,
         alt: false,
         instructions:true
     }
+
+    # This enables us to send loc as an array.
     disable_rails_query_string_format
-    get("http://routes.ibikecph.dk/v1.1/fast/viaroute", query: options)
+    get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
   end
 end
