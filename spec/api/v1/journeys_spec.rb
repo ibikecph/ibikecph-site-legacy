@@ -15,10 +15,8 @@ describe 'Journey API', api: :v1 do
 
         journey = {
             options:{
-              originId: 8600626,
+              coords: [55.682061,12.571311,55.759048,12.458082],
               originCoordName: '\0',
-              destCoordX: 12557000,
-              destCoordY: 55672000,
               destCoordName: '\0',
               useBicycle: 1,
               maxCyclingDistanceDep: 20000,
@@ -30,8 +28,8 @@ describe 'Journey API', api: :v1 do
         get "/api/journey", { auth_token: token, journey: journey }, headers
 
         expect(response).to be_success
-        expect(json.length).to eq(3)
         pp json
+        expect(json.length).to eq(3)
       end
     end
   end

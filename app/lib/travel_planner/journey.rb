@@ -4,10 +4,11 @@ class TravelPlanner::Journey
   base_uri ENV['REJSEPLANEN_API_URL']
 
   def initialize(options)
-    @origin_coord_x = options[:originCoordX]
-    @origin_coord_y = options[:originCoordY]
-    @destination_coord_x = options[:destinationCoordX]
-    @destination_coord_y = options[:destinationCoordY]
+    @coords = TravelPlanner::CoordSet.new options[:coords]
+    #@origin_coord_x = options[:originCoordX]
+    #@origin_coord_y = options[:originCoordY]
+    #@dest_coord_x = options[:destCoordX]
+    #@dest_coord_y = options[:destCoordY]
 
     @journey_data = fetch_journey_data(options)
   end
@@ -18,7 +19,9 @@ class TravelPlanner::Journey
 
   private
   def fetch_journey_data(options)
-    Rails.cache.fetch('journey', expires_in: 30.minutes) do
+    Rails.cache.fetch('journeysan', expires_in: 2.minutes) do
+      coords = TravelPlanner::CoordSet.new options[:coords]
+      options.merge!(coords.as_travel).delete(:coords)
       self.class.get('/trips/', query: options,  headers: {'Content-Type' => 'application/json'} )['TripList']['Trip']
     end
   end
@@ -28,8 +31,8 @@ class TravelPlanner::Journey
   end
 
   # We're formatting the response so it mirrors our OSRM-routers bike response.
-  def format_train(current_leg)
-    leg = TravelPlanner::Leg.new current_leg
+  def format_train(leg_data)
+    leg = TravelPlanner::Leg.new leg_data
     {
         route_name: [
             leg.origin['name'],
@@ -84,7 +87,7 @@ class TravelPlanner::Journey
 
   def format_bike
     options = {
-        loc: %w(55.677567,12.569259 55.670627,12.558336),
+        loc: @coords.as_ibike,
         z: 18,
         alt: false,
         instructions:true
