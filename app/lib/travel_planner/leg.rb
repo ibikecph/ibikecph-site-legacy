@@ -2,7 +2,7 @@ class TravelPlanner::Leg
   include HTTParty
   def initialize(data)
     @data = data
-    @coords = ref_coords
+    @coords #= TravelPlanner::CoordSet.new(ref_coords)
   end
 
   def origin
@@ -26,16 +26,7 @@ class TravelPlanner::Leg
   end
 
   private
-  def ref_coords
-    stops = HTTParty.get(ref)['JourneyDetail']['Stop']
-    origin_stop = stops.detect {|s| s['name'] == origin['name']}
-    destination_stop = stops.detect {|s| s['name'] == destination['name']}
 
-    origin_coords = [origin_stop['x'].insert(2,'.').to_f, origin_stop['y'].insert(2,'.').to_f]
-    destination_coords = [destination_stop['x'].insert(2,'.').to_f, destination_stop['y'].insert(2,'.').to_f]
-
-    [origin_coords, destination_coords]
-  end
 
   def parse_time
     format = '%d.%m.%y%H:%M'
