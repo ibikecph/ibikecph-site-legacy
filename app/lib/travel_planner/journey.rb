@@ -12,22 +12,28 @@ class TravelPlanner::Journey
   end
 
   def trips
-    format_trips @journey_data
+    format_journeys @journey_data
   end
 
   private
   def fetch_journey_data(options)
-    data = Rails.cache.fetch('journeys', expires_in: 10.minutes) do
-      coords = TravelPlanner::CoordSet.new options[:coords]
-      options.merge!(coords.for_travel).delete(:coords)
-      self.class.get('/trips/', query: options,  headers: @headers )['TripList']['Trip']
-    end
-
-    data ? data : raise("Format doesn't work")
+    coords = TravelPlanner::CoordSet.new options[:coords]
+    options.merge!(coords.for_travel).delete(:coords)
+    self.class.get('/trips/', query: options,  headers: @headers )['TripList']['Trip']
   end
 
-  def format_trips(trips)
-    trips.map {|trip| (trip['Leg'].map {|leg| format(leg) }) }
+  def format_journeys(journey_data)
+    summary = {
+        route_summary: {
+            end_point: 'filler_end_point',
+            start_point: 'filler_start_point',
+            total_time: '5555',
+            total_distance: '5555'
+        }
+    }
+    journeys = journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
+
+    {meta: summary, journeys: journeys}
   end
 
   def format(leg)
@@ -114,7 +120,7 @@ class TravelPlanner::Journey
   def extract_coords(point_pos,point)
     case point['type']
       when 'ST'
-        Rails.cache.fetch(point['name'], expires_in: 10.seconds) do
+        Rails.cache.fetch(point['name'], expires_in: 3.days) do
           query = {'input': point['name']}
           location = self.class.get('/location/', query: query, headers: @headers)['LocationList']['StopLocation']
           station = location.detect{|s| s['name'] == point['name']}

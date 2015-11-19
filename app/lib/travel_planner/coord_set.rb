@@ -19,7 +19,7 @@ class TravelPlanner::CoordSet
   def as_via_points
     [[ coords[0],coords[1]], [coords[2],coords[3]]]
   end
-  
+
   def for_travel
     travel_coords = coords.flatten.map { |x| x.tr('.','') }
     {

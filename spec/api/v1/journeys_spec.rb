@@ -25,7 +25,7 @@ describe 'Journey API', api: :v1 do
         get "/api/journey", { auth_token: token, journey: journey }, headers
 
         expect(response).to be_success
-        expect(json.length).to eq(3)
+        expect(json['routes'].length).to eq(3)
       end
     end
   end

@@ -2,7 +2,6 @@ class TravelPlanner::Leg
   include HTTParty
   def initialize(data)
     @data = data
-    @coords #= TravelPlanner::CoordSet.new(ref_coords)
   end
 
   def origin
@@ -17,17 +16,7 @@ class TravelPlanner::Leg
     @total_time ||= parse_time
   end
 
-  def ref
-    @ref ||= @data['JourneyDetailRef']['ref']
-  end
-
-  def coords
-    @coords
-  end
-
   private
-
-
   def parse_time
     format = '%d.%m.%y%H:%M'
     start_time =  DateTime.strptime(origin['date'] + origin['time'],format)
