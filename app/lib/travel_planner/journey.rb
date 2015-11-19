@@ -3,37 +3,31 @@ class TravelPlanner::Journey
 
   base_uri ENV['REJSEPLANEN_API_URL']
 
-  @headers = {'Content-Type' => 'application/json'}
-
   def initialize(options)
-    @coords = TravelPlanner::CoordSet.new options[:coords]
-
-    @journey_data = fetch_journey_data(options)
+    @coords = TravelPlanner::CoordSet.new options[:loc]
+    @journey_data = fetch_journey_data options.merge(@coords.for_travel)
   end
 
   def trips
     format_journeys @journey_data
   end
 
-  private
-  def fetch_journey_data(options)
-    coords = TravelPlanner::CoordSet.new options[:coords]
-    options.merge!(coords.for_travel).delete(:coords)
-    self.class.get('/trips/', query: options,  headers: @headers )['TripList']['Trip']
+  def fetch_journey_data(query)
+    self.class.get('/trips/', query: query)['TripList']['Trip']
   end
 
+  private
   def format_journeys(journey_data)
-    summary = {
+    { meta: {
         route_summary: {
             end_point: 'filler_end_point',
             start_point: 'filler_start_point',
             total_time: '5555',
             total_distance: '5555'
         }
+    },
+      journeys: journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
     }
-    journeys = journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
-
-    {meta: summary, journeys: journeys}
   end
 
   def format(leg)
@@ -115,14 +109,13 @@ class TravelPlanner::Journey
 
     [start_instructions,end_instructions]
   end
-
-  #TODO move somewhere else
+  
   def extract_coords(point_pos,point)
     case point['type']
       when 'ST'
         Rails.cache.fetch(point['name'], expires_in: 3.days) do
           query = {'input': point['name']}
-          location = self.class.get('/location/', query: query, headers: @headers)['LocationList']['StopLocation']
+          location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
           station = location.detect{|s| s['name'] == point['name']}
 
           [station['y'].insert(2,'.'), station['x'].insert(2,'.')]

@@ -1,5 +1,4 @@
 class TravelPlanner::Leg
-  include HTTParty
   def initialize(data)
     @data = data
   end

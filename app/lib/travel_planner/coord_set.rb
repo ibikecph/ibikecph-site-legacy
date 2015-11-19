@@ -1,6 +1,5 @@
 class TravelPlanner::CoordSet
   def initialize(coord_data)
-    raise TravelPlanner::FormattingError 'Coordinates formatted incorrectly' unless coord_data.is_a?(Array) && coord_data.length == 4
     @coords = coord_data
   end
 
