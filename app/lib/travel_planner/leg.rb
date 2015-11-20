@@ -11,6 +11,10 @@ class TravelPlanner::Leg
     @destination ||= @data['Destination']
   end
 
+  def type
+    @type ||= @data['type']
+  end
+
   def total_time
     @total_time ||= parse_time
   end

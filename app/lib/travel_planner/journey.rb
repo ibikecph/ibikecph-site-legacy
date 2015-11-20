@@ -54,7 +54,8 @@ class TravelPlanner::Journey
         route_summary: {
             end_point:   leg.destination['name'],
             start_point: leg.origin['name'],
-            total_time:  leg.total_time
+            total_time:  leg.total_time,
+            type:        leg.type
         },
 
         via_points: coords.as_via_points,
@@ -74,7 +75,9 @@ class TravelPlanner::Journey
 
     # This HTTParty method enables us to send loc as an array.
     self.class.disable_rails_query_string_format
-    self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    response = self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    response['route_summary']['type']='BIKE'
+    response
   end
 
   # Route_instructions structure
@@ -109,7 +112,7 @@ class TravelPlanner::Journey
 
     [start_instructions,end_instructions]
   end
-  
+
   def extract_coords(point_pos,point)
     case point['type']
       when 'ST'
