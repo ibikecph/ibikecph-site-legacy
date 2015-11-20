@@ -13,7 +13,8 @@ class TravelPlanner::Journey
   end
 
   def fetch_journey_data(query)
-    self.class.get('/trips/', query: query)['TripList']['Trip']
+    response = self.class.get('/trips/', query: query)
+    response ? response['TripList']['Trip'] : raise('Rejseplanen could could not be reached.')
   end
 
   private
@@ -76,6 +77,7 @@ class TravelPlanner::Journey
     # This HTTParty method enables us to send loc as an array.
     self.class.disable_rails_query_string_format
     response = self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    raise 'ibike routing server could not be reached.' unless response['route_summary']
     response['route_summary']['type']='BIKE'
     response
   end
@@ -120,6 +122,7 @@ class TravelPlanner::Journey
           query = {'input': point['name']}
 
           location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
+          raise 'An unknown error occurred' unless location
           station = location.detect{|s| s['name'] == point['name']}
 
           %w(y x).map{|coord| (station[coord].to_f / 10**6).to_s}
@@ -131,10 +134,10 @@ class TravelPlanner::Journey
           when :destination
             @coords.dest_coords
           else
-            raise StandardError
+            raise 'Correct coords not supplied.'
         end
       else
-        raise StandardError
+        raise 'We cannot fetch.'
     end
   end
 end
