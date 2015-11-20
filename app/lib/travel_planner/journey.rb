@@ -118,10 +118,11 @@ class TravelPlanner::Journey
       when 'ST'
         Rails.cache.fetch(point['name'], expires_in: 3.days) do
           query = {'input': point['name']}
+
           location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
           station = location.detect{|s| s['name'] == point['name']}
 
-          [station['y'].insert(2,'.'), station['x'].insert(2,'.')]
+          %w(y x).map{|coord| (station[coord].to_f / 10**6).to_s}
         end
       when 'ADR'
         case point_pos

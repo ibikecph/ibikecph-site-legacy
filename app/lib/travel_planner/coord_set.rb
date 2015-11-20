@@ -8,19 +8,19 @@ class TravelPlanner::CoordSet
   end
 
   def origin_coords
-    [@coords[0],@coords[1]]
+    [coords[0],coords[1]]
   end
 
   def dest_coords
-    [@coords[2],@coords[3]]
+    [coords[2],coords[3]]
   end
 
   def as_via_points
-    [[ coords[0],coords[1]], [coords[2],coords[3]]]
+    [[coords[0],coords[1]], [coords[2],coords[3]]]
   end
 
   def for_travel
-    travel_coords = coords.flatten.map { |x| x.tr('.','') }
+    travel_coords = coords.flatten.map { |x| (x.to_f * (10**6)).to_i }
     {
         originCoordX: travel_coords[1],
         originCoordY: travel_coords[0],
