@@ -7,6 +7,8 @@ class TravelPlanner::Journey
     @coords = TravelPlanner::CoordSet.new options[:loc]
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
 
+    # This HTTParty method enables us to send loc as an array.
+    self.class.disable_rails_query_string_format
   end
 
   def trips
@@ -22,7 +24,7 @@ class TravelPlanner::Journey
   def format_journeys(journey_data)
     journeys = journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
     meta = meta_data
-    {meta:meta, journeys: journeys}
+    {meta: meta, journeys: journeys}
   end
 
   def meta_data
@@ -45,7 +47,7 @@ class TravelPlanner::Journey
     coords = TravelPlanner::CoordSet.new points.map { |point_pos,point| extract_coords(point_pos,point)}.flatten
 
     if leg['type']=='BIKE'
-      format_bike(coords)
+      format_bike(leg,coords)
     else
       format_train(leg,coords)
     end
@@ -62,11 +64,13 @@ class TravelPlanner::Journey
         ],
 
         route_summary: {
-            end_point:   leg.destination['name'],
-            start_point: leg.origin['name'],
-            total_time:  leg.total_time,
-            type:        leg.type,
-            name:        leg.name
+            end_point:      leg.destination['name'],
+            start_point:    leg.origin['name'],
+            total_time:     leg.total_time,
+            type:           leg.type,
+            name:           leg.name,
+            departure_time: leg.departure_time,
+            arrival_time:   leg.arrival_time
         },
 
         via_points: coords.as_via_points,
@@ -76,7 +80,9 @@ class TravelPlanner::Journey
     }
   end
 
-  def format_bike(coords)
+  def format_bike(leg_data,coords)
+    leg = TravelPlanner::Leg.new leg_data
+
     options = {
         loc: coords.for_ibike,
         z: 18,
@@ -84,12 +90,14 @@ class TravelPlanner::Journey
         instructions:true
     }
 
-    # This HTTParty method enables us to send loc as an array.
-    self.class.disable_rails_query_string_format
     response = self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
     raise 'ibike routing server could not be reached.' unless response['route_summary']
 
-    response['route_summary']['type']='BIKE'
+    response['route_summary'].merge!({
+        type: leg.type,
+        departure_time: leg.departure_time,
+        arrival_time: leg.arrival_time
+    })
     @total_time += response['route_summary']['total_time']
     @total_bike_distance += response['route_summary']['total_distance']
 

@@ -15,6 +15,14 @@ class TravelPlanner::Leg
     @name ||= @data['name']
   end
 
+  def departure_time
+    @departure_time ||= @data['Origin']['time']
+  end
+
+  def arrival_time
+    @arrival_time ||= @data['Destination']['time']
+  end
+
   def type
     @type ||= @data['type']
   end
