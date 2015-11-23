@@ -31,14 +31,14 @@ class TravelPlanner::Journey
 
     journey = journey_data['Leg'].map { |leg| format(leg) }
 
-    [{journey_summary:{
+    {journey_summary:{
         end_point: 'filler_end_point',
         start_point: 'filler_start_point',
         total_time: @total_time,
         total_bike_distance: @total_bike_distance
       },
       journey:journey
-    }]
+    }
   end
 
   def format(leg)
