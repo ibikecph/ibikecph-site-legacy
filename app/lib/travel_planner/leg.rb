@@ -11,6 +11,10 @@ class TravelPlanner::Leg
     @destination ||= @data['Destination']
   end
 
+  def name
+    @name ||= @data['name']
+  end
+
   def type
     @type ||= @data['type']
   end

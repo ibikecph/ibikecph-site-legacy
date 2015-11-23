@@ -6,6 +6,7 @@ class TravelPlanner::Journey
   def initialize(options)
     @coords = TravelPlanner::CoordSet.new options[:loc]
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
+
   end
 
   def trips
@@ -19,19 +20,26 @@ class TravelPlanner::Journey
 
   private
   def format_journeys(journey_data)
-    { meta: {
+    journeys = journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
+    meta = meta_data
+    {meta:meta, journeys: journeys}
+  end
+
+  def meta_data
+    {
         route_summary: {
             end_point: 'filler_end_point',
             start_point: 'filler_start_point',
-            total_time: '5555',
-            total_distance: '5555'
+            total_time: @total_time,
+            total_bike_distance: @total_bike_distance
         }
-    },
-      journeys: journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
     }
   end
 
   def format(leg)
+    @total_time = 0
+    @total_bike_distance = 0
+
     points = {origin: leg['Origin'], destination: leg['Destination']}
 
     coords = TravelPlanner::CoordSet.new points.map { |point_pos,point| extract_coords(point_pos,point)}.flatten
@@ -46,6 +54,7 @@ class TravelPlanner::Journey
   # We're formatting the response so it mirrors our OSRM-routers bike response.
   def format_train(leg_data,coords)
     leg = TravelPlanner::Leg.new leg_data
+    @total_time += leg.total_time
     {
         route_name: [
             leg.origin['name'],
@@ -56,7 +65,8 @@ class TravelPlanner::Journey
             end_point:   leg.destination['name'],
             start_point: leg.origin['name'],
             total_time:  leg.total_time,
-            type:        leg.type
+            type:        leg.type,
+            name:        leg.name
         },
 
         via_points: coords.as_via_points,
@@ -78,7 +88,11 @@ class TravelPlanner::Journey
     self.class.disable_rails_query_string_format
     response = self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
     raise 'ibike routing server could not be reached.' unless response['route_summary']
+
     response['route_summary']['type']='BIKE'
+    @total_time += response['route_summary']['total_time']
+    @total_bike_distance += response['route_summary']['total_distance']
+
     response
   end
 
@@ -116,28 +130,25 @@ class TravelPlanner::Journey
   end
 
   def extract_coords(point_pos,point)
-    case point['type']
-      when 'ST'
-        Rails.cache.fetch(point['name'], expires_in: 3.days) do
-          query = {'input': point['name']}
+    if point['type'] == 'ADR'
+      case point_pos
+        when :origin
+          @coords.origin_coords
+        when :destination
+          @coords.dest_coords
+        else
+          raise 'An unknown error occurred.'
+      end
+    else
+      Rails.cache.fetch(point['name'], expires_in: 3.days) do
+        query = {'input': point['name']}
 
-          location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
-          raise 'An unknown error occurred' unless location
-          station = location.detect{|s| s['name'] == point['name']}
+        location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
+        raise 'An unknown error occurred.' unless location
+        station = location.detect{|s| s['name'] == point['name']}
 
-          %w(y x).map{|coord| (station[coord].to_f / 10**6).to_s}
-        end
-      when 'ADR'
-        case point_pos
-          when :origin
-            @coords.origin_coords
-          when :destination
-            @coords.dest_coords
-          else
-            raise 'Correct coords not supplied.'
-        end
-      else
-        raise 'We cannot fetch.'
+        %w(y x).map{|coord| (station[coord].to_f / 10**6).to_s}
+      end
     end
   end
 end

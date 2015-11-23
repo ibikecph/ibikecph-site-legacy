@@ -9,8 +9,8 @@ module TravelPlanner
       originCoordName: '\0',
       destCoordName: '\0',
       useBicycle: 1,
-      maxCyclingDistanceDep: 20000,
-      maxCyclingDistanceDest: 20000,
+      maxCyclingDistanceDep: 5000,
+      maxCyclingDistanceDest: 5000,
       format: 'json' }
   end
 end
