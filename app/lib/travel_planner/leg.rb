@@ -34,6 +34,6 @@ class TravelPlanner::Leg
   private
   def parse_time(point)
     format = '%d.%m.%y%H:%M'
-    DateTime.strptime(point['date'] + point['time'],format).to_i
+    DateTime.strptime(point['date'] + point['time'],format).in_time_zone('Copenhagen').to_i
   end
 end

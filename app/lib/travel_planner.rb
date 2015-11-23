@@ -1,4 +1,6 @@
 module TravelPlanner
+  require 'travel_planner/errors'
+
   def self.get_journey(loc)
     journey = Journey.new(options(loc))
     journey.trips

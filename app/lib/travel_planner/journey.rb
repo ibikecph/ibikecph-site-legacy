@@ -18,7 +18,7 @@ class TravelPlanner::Journey
   private
   def fetch_journey_data(query)
     response = self.class.get('/trips/', query: query)
-    response ? response['TripList']['Trip'] : raise('Rejseplanen could could not be reached.')
+    response ? response['TripList']['Trip'] : raise(TravelPlanner::ConnectionError)
   end
 
   def format_journeys(journey_data)
@@ -91,7 +91,7 @@ class TravelPlanner::Journey
     }
 
     response = self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
-    raise 'ibike routing server could not be reached.' unless response['route_summary']
+    raise TravelPlanner::ConnectionError unless response['route_summary']
 
     response['route_summary'].merge!({
         type: leg.type,
@@ -145,14 +145,14 @@ class TravelPlanner::Journey
         when :destination
           @coords.dest_coords
         else
-          raise 'An unknown error occurred.'
+          raise TravelPlanner::Error
       end
     else
       Rails.cache.fetch(point['name'], expires_in: 3.days) do
         query = {'input': point['name']}
 
         location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
-        raise 'An unknown error occurred.' unless location
+        raise TravelPlanner::Error unless location
         station = location.detect{|s| s['name'] == point['name']}
 
         %w(y x).map{|coord| (station[coord].to_f / 10**6).to_s}

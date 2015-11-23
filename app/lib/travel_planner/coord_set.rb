@@ -1,6 +1,6 @@
 class TravelPlanner::CoordSet
   def initialize(coord_data)
-    raise 'Invalid coords supplied.' unless coord_data.is_a?(Array) and coord_data.length == 4
+    raise TravelPlanner::InvalidCoordsError unless coord_data.is_a?(Array) and coord_data.length == 4
     @coords = coord_data
   end
 
