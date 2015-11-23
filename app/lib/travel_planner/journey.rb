@@ -15,33 +15,33 @@ class TravelPlanner::Journey
     format_journeys @journey_data
   end
 
+  private
   def fetch_journey_data(query)
     response = self.class.get('/trips/', query: query)
     response ? response['TripList']['Trip'] : raise('Rejseplanen could could not be reached.')
   end
 
-  private
   def format_journeys(journey_data)
-    journeys = journey_data.map {|journey| (journey['Leg'].map {|leg| format(leg) }) }
-    meta = meta_data
-    {meta: meta, journeys: journeys}
+    journey_data.map {|journey| format_legs(journey) }
   end
 
-  def meta_data
-    {
-        route_summary: {
-            end_point: 'filler_end_point',
-            start_point: 'filler_start_point',
-            total_time: @total_time,
-            total_bike_distance: @total_bike_distance
-        }
+  def format_legs(journey_data)
+    @total_time = 0
+    @total_bike_distance = 0
+
+    journey = journey_data['Leg'].map { |leg| format(leg) }
+
+    {journey_summary:{
+        end_point: 'filler_end_point',
+        start_point: 'filler_start_point',
+        total_time: @total_time,
+        total_bike_distance: @total_bike_distance
+      },
+      journey:journey
     }
   end
 
   def format(leg)
-    @total_time = 0
-    @total_bike_distance = 0
-
     points = {origin: leg['Origin'], destination: leg['Destination']}
 
     coords = TravelPlanner::CoordSet.new points.map { |point_pos,point| extract_coords(point_pos,point)}.flatten
