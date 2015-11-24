@@ -27,6 +27,7 @@ class TravelPlanner::Journey
 
   def format_legs(journey_data)
     @total_time = 0
+    @total_distance = 0
     @total_bike_distance = 0
 
     journey = journey_data['Leg'].map { |leg| format(leg) }
@@ -35,6 +36,7 @@ class TravelPlanner::Journey
         end_point: 'filler_end_point',
         start_point: 'filler_start_point',
         total_time: @total_time,
+        total_distance: @total_distance,
         total_bike_distance: @total_bike_distance
       },
       journey:journey
@@ -57,6 +59,7 @@ class TravelPlanner::Journey
   def format_train(leg_data,coords)
     leg = TravelPlanner::Leg.new leg_data
     @total_time += leg.total_time
+    @total_distance += leg.distance(coords.for_polyline)
     {
         route_name: [
             leg.origin['name'],
@@ -66,7 +69,8 @@ class TravelPlanner::Journey
         route_summary: {
             end_point:      leg.destination['name'],
             start_point:    leg.origin['name'],
-            total_time:     leg.total_time,
+            time:           leg.total_time,
+            distance:       leg.distance(coords.for_polyline),
             type:           leg.type,
             name:           leg.name,
             departure_time: leg.departure_time,
@@ -99,6 +103,7 @@ class TravelPlanner::Journey
         arrival_time: leg.arrival_time
     })
     @total_time += response['route_summary']['total_time']
+    @total_distance += response['route_summary']['total_distance']
     @total_bike_distance += response['route_summary']['total_distance']
 
     response
