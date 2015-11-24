@@ -33,7 +33,9 @@ class TravelPlanner::Leg
 
   private
   def parse_time(point)
-    format = '%d.%m.%y%H:%M'
-    Time.strptime(point['date'] + point['time'],format).to_i
+    format = '%d.%m.%y%H:%M%Z'
+    Time.zone = 'Copenhagen'
+    zone = Time.zone.now.zone # a little hacky but Rails didn't seem to have any easier ways.
+    Time.strptime(point['date'] + point['time'] + zone,format).to_i
   end
 end
