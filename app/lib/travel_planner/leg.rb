@@ -33,11 +33,9 @@ class TravelPlanner::Leg
 
   private
   def parse_time(point)
-    format = '%d.%m.%y%H:%M%Z'
-    Time.zone = 'Copenhagen'
-    zone = Time.zone.now.zone # a little hacky but Rails didn't seem to have any easier ways.
-    time = Time.strptime(point['date'] + point['time'] + zone,format)
-    Rails.logger.info(time)
-    p time.to_i
+    format = '%d.%m.%y%H:%M%z'
+    offset = '+0' + (ActiveSupport::TimeZone['Copenhagen'].utc_offset / 3600).to_s
+
+    Time.strptime(point['date'] + point['time'] + offset,format).to_i
   end
 end
