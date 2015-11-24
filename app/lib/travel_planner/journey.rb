@@ -69,8 +69,8 @@ class TravelPlanner::Journey
         route_summary: {
             end_point:      leg.destination['name'],
             start_point:    leg.origin['name'],
-            time:           leg.total_time,
-            distance:       leg.distance(coords.for_polyline),
+            total_time:     leg.total_time,
+            total_distance: leg.distance(coords.for_polyline),
             type:           leg.type,
             name:           leg.name,
             departure_time: leg.departure_time,
