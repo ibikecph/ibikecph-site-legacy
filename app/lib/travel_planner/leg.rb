@@ -36,6 +36,8 @@ class TravelPlanner::Leg
     format = '%d.%m.%y%H:%M%Z'
     Time.zone = 'Copenhagen'
     zone = Time.zone.now.zone # a little hacky but Rails didn't seem to have any easier ways.
-    Time.strptime(point['date'] + point['time'] + zone,format).to_i
+    time = Time.strptime(point['date'] + point['time'] + zone,format)
+    Rails.logger.info(time)
+    p time.to_i
   end
 end
