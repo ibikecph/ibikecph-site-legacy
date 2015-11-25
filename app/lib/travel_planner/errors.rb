@@ -1,4 +1,5 @@
 module TravelPlanner
+  #todo improve and translate error messages
   class Error < StandardError
     def message
       'An unexpected error occurred.'

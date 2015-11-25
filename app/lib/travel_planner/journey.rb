@@ -1,14 +1,11 @@
 class TravelPlanner::Journey
   include HTTParty
-
+  disable_rails_query_string_format # for ibike routing server
   base_uri ENV['REJSEPLANEN_API_URL']
 
   def initialize(options)
     @coords = TravelPlanner::CoordSet.new options[:loc]
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
-
-    # This HTTParty method enables us to send loc as an array.
-    self.class.disable_rails_query_string_format
   end
 
   def trips
@@ -22,7 +19,7 @@ class TravelPlanner::Journey
   end
 
   def format_journeys(journey_data)
-    journey_data.map {|journey| format_legs(journey) }
+    journey_data.first(3).map {|journey| format_legs(journey) }
   end
 
   def format_legs(journey_data)
@@ -32,7 +29,8 @@ class TravelPlanner::Journey
 
     journey = journey_data['Leg'].map { |leg| format(leg) }
 
-    {journey_summary:{
+    {
+      journey_summary:{
         end_point: 'filler_end_point',
         start_point: 'filler_start_point',
         total_time: @total_time,
@@ -46,20 +44,20 @@ class TravelPlanner::Journey
   def format(leg)
     points = {origin: leg['Origin'], destination: leg['Destination']}
 
-    coords = TravelPlanner::CoordSet.new points.map { |point_pos,point| extract_coords(point_pos,point)}.flatten
+    coord_data =  points.map { |point_pos,point| extract_coords(point_pos,point)}.flatten
 
     if leg['type']=='BIKE'
-      format_bike(leg,coords)
+      format_bike(leg,coord_data)
     else
-      format_train(leg,coords)
+      format_public(leg,coord_data)
     end
   end
 
   # We're formatting the response so it mirrors our OSRM-routers bike response.
-  def format_train(leg_data,coords)
-    leg = TravelPlanner::Leg.new leg_data
+  def format_public(leg_data,coords)
+    leg = TravelPlanner::Leg.new leg_data, coords
     @total_time += leg.total_time
-    @total_distance += leg.distance(coords.for_polyline)
+    @total_distance += leg.distance
     {
         route_name: [
             leg.origin['name'],
@@ -67,28 +65,28 @@ class TravelPlanner::Journey
         ],
 
         route_summary: {
-            end_point:      leg.destination['name'],
             start_point:    leg.origin['name'],
+            end_point:      leg.destination['name'],
             total_time:     leg.total_time,
-            total_distance: leg.distance(coords.for_polyline),
+            total_distance: leg.distance,
             type:           leg.type,
             name:           leg.name,
             departure_time: leg.departure_time,
             arrival_time:   leg.arrival_time
         },
 
-        via_points: coords.as_via_points,
+        route_instructions: leg.route_instructions,
+        route_geometry:     leg.route_geometry,
 
-        route_instructions: build_route_instructions(leg),
-        route_geometry: Polylines::Encoder.encode_points(coords.for_polyline)
+        via_points: leg.coords.as_via_points
     }
   end
 
-  def format_bike(leg_data,coords)
-    leg = TravelPlanner::Leg.new leg_data
+  def format_bike(leg_data,coord_data)
+    leg = TravelPlanner::Leg.new leg_data, coord_data
 
     options = {
-        loc: coords.for_ibike,
+        loc: leg.coords.for_ibike,
         z: 18,
         alt: false,
         instructions:true
@@ -109,39 +107,6 @@ class TravelPlanner::Journey
     response
   end
 
-  # Route_instructions structure
-  # 0 - ordinalDirection
-  # 1 - name
-  # 2 - prevLengthInMeters
-  # 3 - timeInSeconds
-  # 4 - prevLengthInUnit
-  # 5 - directionAbbreviation
-  # 6 - azimuth
-  # 7 - vehicle
-  def build_route_instructions(leg)
-    start_instructions = [
-        '18',
-        leg.origin['name'],
-        0,
-        0,
-        '0m',
-        'N',
-        '4'
-    ]
-
-    end_instructions = [
-        '19',
-        leg.destination['name'],
-        0,
-        leg.total_time,
-        leg.total_time.to_s + 'm',
-        'N',
-        '4'
-    ]
-
-    [start_instructions,end_instructions]
-  end
-
   def extract_coords(point_pos,point)
     if point['type'] == 'ADR'
       case point_pos
@@ -156,11 +121,11 @@ class TravelPlanner::Journey
       Rails.cache.fetch(point['name'], expires_in: 3.days) do
         query = {'input': point['name']}
 
-        location = self.class.get('/location/', query: query)['LocationList']['StopLocation']
-        raise TravelPlanner::Error unless location
-        station = location.detect{|s| s['name'] == point['name']}
+        location = self.class.get('/location/', query: query)
+        raise TravelPlanner::ConnectionError unless location
+        station = location['LocationList']['StopLocation'].detect{|s| s['name'] == point['name']}
 
-        %w(y x).map{|coord| (station[coord].to_f / 10**6).to_s}
+        %w(y x).map{|coord| (station[coord].to_f / 10**6)}
       end
     end
   end

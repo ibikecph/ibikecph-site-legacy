@@ -1,6 +1,11 @@
 class TravelPlanner::Leg
-  def initialize(data)
-    @data = data
+  def initialize(leg_data,coord_data)
+    @data = leg_data
+    @coords = TravelPlanner::CoordSet.new coord_data
+  end
+
+  def coords
+    @coords
   end
 
   def origin
@@ -12,27 +17,31 @@ class TravelPlanner::Leg
   end
 
   def name
-    @name ||= @data['name']
+    @data['name']
   end
 
   def type
-    @type ||= @data['type']
+    @data['type']
   end
 
   def departure_time
-    @departure_time ||= parse_time(origin)
+    @departure_time ||= parse_time(origin['date'],origin['time'])
   end
 
   def arrival_time
-    @arrival_time ||= parse_time(destination)
+    @arrival_time ||= parse_time(destination['date'],destination['time'])
   end
 
   def total_time
     @total_time ||= (arrival_time-departure_time)
   end
 
+  def distance
+    @distance ||= calculate_distance @coords.for_polyline
+  end
+
   # taken from http://stackoverflow.com/questions/12966638/how-to-calculate-the-distance-between-two-gps-coordinates-without-using-google-m
-  def distance loc
+  def calculate_distance(loc)
     loc1 = loc[0]
     loc2 = loc[1]
     rad_per_deg = Math::PI/180  # PI / 180
@@ -51,11 +60,61 @@ class TravelPlanner::Leg
     (rm * c).to_i # Delta in meters
   end
 
-  private
-  def parse_time(point)
-    format = '%d.%m.%y%H:%M%z'
-    offset = '+0' + (ActiveSupport::TimeZone['Copenhagen'].utc_offset / 3600).to_s
+  def route_geometry
+    ref = HTTParty.get(@data['JourneyDetailRef']['ref'])['JourneyDetail']['Stop']
+    raise TravelPlanner::ConnectionError unless ref
 
-    Time.strptime(point['date'] + point['time'] + offset,format).to_i
+    coords = (origin['routeIdx']..destination['routeIdx']).map do |id|
+      station = ref.detect{ |s| s['routeIdx'] == id }
+      Rails.cache.fetch(station['name'], expires_in: 3.days) do
+        %w(y x).map{|coord| (station[coord].to_f / 10**6)}
+      end
+    end
+
+    Polylines::Encoder.encode_points(coords)
+  end
+
+  # Route_instructions structure
+  # 0 - ordinalDirection
+  # 1 - name
+  # 2 - prevLengthInMeters
+  # 3 - waypointIndex
+  # 4 - timeInSeconds
+  # 5 - prevLengthInUnit
+  # 6 - directionAbbreviation
+  # 7 - azimuth
+  # 8 - vehicle
+  def route_instructions
+    start_instructions = [
+        '18',
+        origin['name'],
+        0,
+        0,
+        0,
+        '0m',
+        'N',
+        '4'
+    ]
+
+    end_instructions = [
+        '19',
+        destination['name'],
+        distance,
+        1,
+        total_time,
+        distance.to_s + 'm',
+        'N',
+        '4'
+    ]
+
+    [start_instructions,end_instructions]
+  end
+
+  private
+  def parse_time(date,time)
+    format = '%d.%m.%y%H:%M'
+    offset = ActiveSupport::TimeZone['Copenhagen'].utc_offset
+
+    Time.strptime(date + time, format).to_i - offset
   end
 end

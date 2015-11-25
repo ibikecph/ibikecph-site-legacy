@@ -1,12 +1,10 @@
 class Api::V1::JourneyController < Api::V1::BaseController
-  #todo improve and translate error messages
   skip_before_filter :check_auth_token!
 
   rescue_from TravelPlanner::Error, with: :error_message
 
   def show
-    @journey = TravelPlanner.get_journey(params[:loc])
-    render json: @journey
+    render json: TravelPlanner.get_journey(params[:loc])
   end
 
   def error_message(e)
