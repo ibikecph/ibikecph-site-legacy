@@ -23,41 +23,44 @@ class TravelPlanner::Journey
   end
 
   def format_legs(journey_data)
-    @total_time = 0
-    @total_distance = 0
-    @total_bike_distance = 0
+    total_time = total_distance = total_bike_distance = 0
 
-    journey = journey_data['Leg'].map { |leg| format(leg) }
+    journey = journey_data['Leg'].map do |leg|
+      formatted_leg = format(leg)
+
+      total_time          += formatted_leg['route_summary']['total_time']
+      total_distance      += formatted_leg['route_summary']['total_distance']
+      total_bike_distance += formatted_leg['route_summary']['total_distance'] if leg['type'] == 'BIKE'
+
+      formatted_leg
+    end
 
     {
       journey_summary:{
-        end_point: 'filler_end_point',
-        start_point: 'filler_start_point',
-        total_time: @total_time,
-        total_distance: @total_distance,
-        total_bike_distance: @total_bike_distance
+        total_time: total_time,
+        total_distance: total_distance,
+        total_bike_distance: total_bike_distance
       },
       journey:journey
     }
   end
 
-  def format(leg)
-    points = {origin: leg['Origin'], destination: leg['Destination']}
+  def format(leg_data)
+    stops = {origin: leg_data['Origin'], destination: leg_data['Destination']}
 
-    coord_data =  points.map { |point_pos,point| extract_coords(point_pos,point)}.flatten
+    coords = stops.map { |stop_end,stop| extract_coords(stop_end, stop)}.flatten
 
-    if leg['type']=='BIKE'
-      format_bike(leg,coord_data)
+    leg = TravelPlanner::Leg.new leg_data, coords
+
+    if leg.type=='BIKE'
+      format_bike(leg)
     else
-      format_public(leg,coord_data)
+      format_public(leg)
     end
   end
 
   # We're formatting the response so it mirrors our OSRM-routers bike response.
-  def format_public(leg_data,coords)
-    leg = TravelPlanner::Leg.new leg_data, coords
-    @total_time += leg.total_time
-    @total_distance += leg.distance
+  def format_public(leg)
     {
         route_name: [
             leg.origin['name'],
@@ -79,12 +82,10 @@ class TravelPlanner::Journey
         route_geometry:     leg.route_geometry,
 
         via_points: leg.coords.as_via_points
-    }
+    }.with_indifferent_access
   end
 
-  def format_bike(leg_data,coord_data)
-    leg = TravelPlanner::Leg.new leg_data, coord_data
-
+  def format_bike(leg)
     options = {
         loc: leg.coords.for_ibike,
         z: 18,
@@ -96,14 +97,10 @@ class TravelPlanner::Journey
     raise TravelPlanner::ConnectionError unless response['route_summary']
 
     response['route_summary'].merge!({
-        type: leg.type,
-        departure_time: leg.departure_time,
-        arrival_time: leg.arrival_time
+        'type': leg.type,
+        'departure_time': leg.departure_time,
+        'arrival_time': leg.arrival_time
     })
-    @total_time += response['route_summary']['total_time']
-    @total_distance += response['route_summary']['total_distance']
-    @total_bike_distance += response['route_summary']['total_distance']
-
     response
   end
 
