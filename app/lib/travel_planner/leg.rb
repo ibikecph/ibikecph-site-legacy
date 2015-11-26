@@ -1,72 +1,66 @@
 class TravelPlanner::Leg
-  def initialize(leg_data,coord_data)
-    @data = leg_data
-    @coords = TravelPlanner::CoordSet.new coord_data
-  end
+  attr_reader :data, :origin, :destination, :name, :type,
+              :coords, :departure_time, :arrival_time, :total_time
 
-  def coords
-    @coords
-  end
+  def initialize(leg_data, global_coords)
+    @data        = leg_data
+    @origin      = data['Origin']
+    @destination = data['Destination']
+    @name        = data['name']
+    @type        = data['type']
+    @coords      = extract_coords(global_coords)
 
-  def origin
-    @origin ||= @data['Origin']
-  end
-
-  def destination
-    @destination ||= @data['Destination']
-  end
-
-  def name
-    @data['name']
-  end
-
-  def type
-    @data['type']
-  end
-
-  def departure_time
-    @departure_time ||= parse_time(origin['date'],origin['time'])
-  end
-
-  def arrival_time
-    @arrival_time ||= parse_time(destination['date'],destination['time'])
-  end
-
-  def total_time
-    @total_time ||= (arrival_time-departure_time)
+    @departure_time = parse_time(origin)
+    @arrival_time   = parse_time(destination)
+    @total_time     = arrival_time - departure_time - 60
   end
 
   def distance
-    @distance ||= calculate_distance @coords.for_polyline
+    @distance ||= calculate_distance coords.for_polyline
   end
 
-  # taken from http://stackoverflow.com/questions/12966638/how-to-calculate-the-distance-between-two-gps-coordinates-without-using-google-m
-  def calculate_distance(loc)
-    loc1 = loc[0]
-    loc2 = loc[1]
-    rad_per_deg = Math::PI/180  # PI / 180
-    rkm = 6371                  # Earth radius in kilometers
-    rm = rkm * 1000             # Radius in meters
-
-    dlat_rad = (loc2[0]-loc1[0]) * rad_per_deg  # Delta, converted to rad
-    dlon_rad = (loc2[1]-loc1[1]) * rad_per_deg
-
-    lat1_rad, lon1_rad = loc1.map {|i| i * rad_per_deg }
-    lat2_rad, lon2_rad = loc2.map {|i| i * rad_per_deg }
-
-    a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
-    c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
-
-    (rm * c).to_i # Delta in meters
+  def route_instructions
+    @route_instructions ||= build_route_instructions
   end
 
   def route_geometry
-    ref = HTTParty.get(@data['JourneyDetailRef']['ref'])['JourneyDetail']['Stop']
-    raise TravelPlanner::ConnectionError unless ref
+    @route_geometry ||= get_route_geometry
+  end
 
-    coords = (origin['routeIdx']..destination['routeIdx']).map do |id|
+  private
+  def parse_time(station)
+    format = '%d.%m.%y%H:%M'
+    offset = ActiveSupport::TimeZone['Copenhagen'].utc_offset
+
+    Time.strptime(station['date'] + station['time'], format).to_i - offset
+  end
+
+  def extract_coords(global_coords)
+    stops = {origin: origin, destination: destination}
+
+    coords = stops.map do |stop_end,stop|
+      if stop['type'] == 'ADR'
+        global_coords.send(stop_end)
+      else
+        Rails.cache.fetch(stop['name']) do
+          location = self.class.get('/location/', query: {'input': stop['name']})['LocationList']['StopLocation']
+          station  = location.detect{|s| s['name'] == stop['name']}
+
+          %w(y x).map{ |coord| station[coord].to_f / 10**6 }
+        end
+      end
+    end
+
+    TravelPlanner::CoordSet.new coords.flatten
+  end
+
+  def get_route_geometry
+    ref = HTTParty.get(self.data['JourneyDetailRef']['ref'])['JourneyDetail']['Stop']
+
+    coords = (self.origin['routeIdx']..self.destination['routeIdx']).map do |id|
       station = ref.detect{ |s| s['routeIdx'] == id }
-      Rails.cache.fetch(station['name'], expires_in: 3.days) do
+
+      Rails.cache.fetch(station['name']) do
         %w(y x).map{|coord| (station[coord].to_f / 10**6)}
       end
     end
@@ -84,7 +78,7 @@ class TravelPlanner::Leg
   # 6 - directionAbbreviation
   # 7 - azimuth
   # 8 - vehicle
-  def route_instructions
+  def build_route_instructions
     start_instructions = [
         '18',
         origin['name'],
@@ -110,11 +104,23 @@ class TravelPlanner::Leg
     [start_instructions,end_instructions]
   end
 
-  private
-  def parse_time(date,time)
-    format = '%d.%m.%y%H:%M'
-    offset = ActiveSupport::TimeZone['Copenhagen'].utc_offset
+  # taken from http://stackoverflow.com/questions/12966638/how-to-calculate-the-distance-between-two-gps-coordinates-without-using-google-m
+  def calculate_distance(loc)
+    loc1 = loc[0]
+    loc2 = loc[1]
+    rad_per_deg = Math::PI/180  # PI / 180
+    rkm = 6371                  # Earth radius in kilometers
+    rm = rkm * 1000             # Radius in meters
 
-    Time.strptime(date + time, format).to_i - offset
+    dlat_rad = (loc2[0]-loc1[0]) * rad_per_deg  # Delta, converted to rad
+    dlon_rad = (loc2[1]-loc1[1]) * rad_per_deg
+
+    lat1_rad, lon1_rad = loc1.map {|i| i * rad_per_deg }
+    lat2_rad, lon2_rad = loc2.map {|i| i * rad_per_deg }
+
+    a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
+    c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+
+    (rm * c).to_i # Delta in meters
   end
 end

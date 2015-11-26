@@ -1,4 +1,7 @@
 class TravelPlanner::CoordSet
+  # This class gathers all the logic needed to format coordinates, so we can use them in different services.
+  # It takes coordinate data in the form of [origin_lat,origin_lng,dest_lat,dest_lng].
+
   def initialize(coord_data)
     raise TravelPlanner::InvalidCoordsError unless coord_data.is_a?(Array) and coord_data.length == 4
     @coords = coord_data
@@ -8,11 +11,11 @@ class TravelPlanner::CoordSet
     @coords
   end
 
-  def origin_coords
+  def origin
     [coords[0],coords[1]]
   end
 
-  def dest_coords
+  def destination
     [coords[2],coords[3]]
   end
 
