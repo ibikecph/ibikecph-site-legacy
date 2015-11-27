@@ -1,10 +1,5 @@
 class TravelPlanner::Journey
-  include HTTParty
-  default_timeout 8
-  disable_rails_query_string_format # for ibike routing server
-  base_uri ENV['REJSEPLANEN_API_URL']
-
-  def initialize(options)
+    def initialize(options)
     @coords = TravelPlanner::CoordSet.new options[:loc]
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
   end
@@ -15,7 +10,7 @@ class TravelPlanner::Journey
 
   private
   def fetch_journey_data(query)
-    response = self.class.get('/trips/', query: query)
+    response = TravelPlanner.get('/trips/', query: query)
     response ? response['TripList']['Trip'] : raise(TravelPlanner::ConnectionError)
   end
 
@@ -81,7 +76,7 @@ class TravelPlanner::Journey
         instructions:true
     }
 
-    response = self.class.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    response = TravelPlanner.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
 
     raise TravelPlanner::ConnectionError unless response['status'] == 0
 

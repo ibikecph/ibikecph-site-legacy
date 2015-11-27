@@ -55,7 +55,7 @@ class TravelPlanner::Leg
   end
 
   def get_route_geometry
-    ref = HTTParty.get(self.data['JourneyDetailRef']['ref'])['JourneyDetail']['Stop']
+    ref = TravelPlanner.get(self.data['JourneyDetailRef']['ref'])['JourneyDetail']['Stop']
 
     coords = (self.origin['routeIdx']..self.destination['routeIdx']).map do |id|
       station = ref.detect{ |s| s['routeIdx'] == id }
