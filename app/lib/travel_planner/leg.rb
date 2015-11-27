@@ -43,7 +43,7 @@ class TravelPlanner::Leg
         global_coords.send(stop_end)
       else
         Rails.cache.fetch(stop['name']) do
-          location = self.class.get('/location/', query: {'input': stop['name']})['LocationList']['StopLocation']
+          location = TravelPlanner.get('/location/', query: {'input': stop['name']})['LocationList']['StopLocation']
           station  = location.detect{|s| s['name'] == stop['name']}
 
           %w(y x).map{ |coord| station[coord].to_f / 10**6 }
