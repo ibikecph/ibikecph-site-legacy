@@ -29,4 +29,5 @@ logfile
 .\#*
 config/database.yml
 config/secrets.yml
-.gitignore
+config/application.yml
+.idea
