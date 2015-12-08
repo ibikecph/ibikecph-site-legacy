@@ -24,7 +24,6 @@ RailsOSRM::Application.routes.draw do
 
       get 'tracks/token' => 'tracks#token'
       get 'journey' => 'journey#show'
-      get 'journey/test' => 'journey#show_test'
 
       post 'users/change_password' => 'users#change_password'
       post 'users/add_password'    => 'users#add_password'

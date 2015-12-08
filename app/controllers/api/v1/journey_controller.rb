@@ -8,10 +8,6 @@ class Api::V1::JourneyController < Api::V1::BaseController
     render json: TravelPlanner.get_journey(params[:loc])
   end
 
-  def show_test
-    render json: TravelPlanner.get_journey(%w(55.677988,12.570595 55.722426,12.494848))
-  end
-
   def travel_planner_message(e)
     render json: {error: e.message}, status: 422
   end
