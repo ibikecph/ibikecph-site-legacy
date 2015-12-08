@@ -8,12 +8,16 @@ class Api::V1::JourneyController < Api::V1::BaseController
     render json: TravelPlanner.get_journey(params[:loc])
   end
 
+  def show_test
+    render json: TravelPlanner.get_journey(%w(55.677988,12.570595 55.722426,12.494848))
+  end
+
   def travel_planner_message(e)
     render json: {error: e.message}, status: 422
   end
 
   def standard_message(e)
-    ExceptionNotifier.notify_exception(e)
+    ExceptionNotifier.notify_exception(e, env: request.env)
     render json: {error: 'An unexpected error occurred.'}, status: 500
   end
 end
