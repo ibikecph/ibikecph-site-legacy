@@ -16,15 +16,15 @@ class TravelPlanner::Leg
   end
 
   def distance
-    @distance ||= calculate_distance coords.for_polyline
+    calculate_distance coords.for_polyline
   end
 
   def route_instructions
-    @route_instructions ||= build_route_instructions
+    build_route_instructions
   end
 
   def route_geometry
-    @route_geometry ||= get_route_geometry
+    get_route_geometry
   end
 
   private
