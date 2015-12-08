@@ -2,7 +2,7 @@ module TravelPlanner
   require 'travel_planner/errors'
 
   include HTTParty
-  default_timeout 8
+  default_timeout 15
   disable_rails_query_string_format # for ibike routing server
   base_uri ENV['REJSEPLANEN_API_URL']
 
