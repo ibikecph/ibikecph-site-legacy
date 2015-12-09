@@ -3,7 +3,7 @@ common: &common
   encoding: unicode
   username: 
   password:
-  pool: 5
+  pool: 2
 
 
 #we're running postgres everywhere, to avoid differences between dev and production

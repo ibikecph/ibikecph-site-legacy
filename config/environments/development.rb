@@ -18,6 +18,8 @@ RailsOSRM::Application.configure do
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
+  config.allow_concurrency = true
+
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true    #set to false to view custom errors pages in dev mode
   config.action_controller.perform_caching = false

@@ -13,7 +13,7 @@ class Api::V1::JourneyController < Api::V1::BaseController
   end
 
   def standard_message(e)
-    ExceptionNotifier.notify_exception(e)
+    ExceptionNotifier.notify_exception(e, env: request.env)
     render json: {error: 'An unexpected error occurred.'}, status: 500
   end
 end

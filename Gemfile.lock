@@ -84,7 +84,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
-    daemons (1.2.3)
     database_cleaner (1.5.0)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
@@ -105,7 +104,6 @@ GEM
       execjs
     eco-source (1.1.0.rc.1)
     erubis (2.7.0)
-    eventmachine (1.0.8)
     exception_notification (4.1.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
@@ -250,6 +248,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.1)
+    kgio (2.10.0)
     koala (2.2.0)
       addressable
       faraday
@@ -327,6 +326,7 @@ GEM
       activesupport (= 4.2.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    raindrops (0.15.0)
     rake (10.4.2)
     recipient_interceptor (0.1.2)
       mail
@@ -380,10 +380,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
     temple (0.7.6)
     terminal-table (1.4.5)
-    thin (1.6.4)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -392,6 +388,13 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicorn (5.0.1)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
+    unicorn-rails (2.2.0)
+      rack
+      unicorn
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
@@ -445,8 +448,9 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   sass-rails
   simple-navigation
-  thin
   uglifier
+  unicorn
+  unicorn-rails
   will_paginate
   workless (~> 1.2.2)
 
