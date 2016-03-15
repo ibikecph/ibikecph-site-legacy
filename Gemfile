@@ -20,9 +20,7 @@ gem 'fog'
 gem 'delayed_job_active_record'
 gem 'simple-navigation'
 gem 'will_paginate'
-#gem 'puma'
-gem 'unicorn'
-gem 'unicorn-rails'
+gem 'puma'
 gem 'auto_html', git: 'git://github.com/ibikecph/auto_html.git', branch: 'master'
 gem 'rails_autolink'
 gem 'acts-as-taggable-on', '~> 3.4'
@@ -37,6 +35,7 @@ gem 'eco'
 gem 'recipient_interceptor'
 gem 'koala'
 gem 'httparty'
+gem "rack-timeout"
 
 gem 'polylines'
 

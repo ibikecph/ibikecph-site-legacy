@@ -22,7 +22,7 @@ RailsOSRM::Application.configure do
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true    #set to false to view custom errors pages in dev mode
-  config.action_controller.perform_caching = false
+  config.action_controller.perform_caching = true
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => MAIN_DOMAIN_WITH_PORT }
@@ -42,7 +42,7 @@ RailsOSRM::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 
   config.eager_load = false
 

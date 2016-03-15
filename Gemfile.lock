@@ -248,7 +248,6 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.1)
-    kgio (2.10.0)
     koala (2.2.0)
       addressable
       faraday
@@ -287,11 +286,13 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.3)
     polylines (0.3.0)
+    puma (3.1.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-timeout (0.3.2)
     rails (4.2.4)
       actionmailer (= 4.2.4)
       actionpack (= 4.2.4)
@@ -326,7 +327,6 @@ GEM
       activesupport (= 4.2.4)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.15.0)
     rake (10.4.2)
     recipient_interceptor (0.1.2)
       mail
@@ -388,13 +388,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    unicorn (5.0.1)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
-    unicorn-rails (2.2.0)
-      rack
-      unicorn
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
@@ -439,7 +432,9 @@ DEPENDENCIES
   omniauth-facebook
   pg
   polylines
+  puma
   quiet_assets
+  rack-timeout
   rails (= 4.2.4)
   rails-timeago
   rails_12factor
@@ -449,8 +444,6 @@ DEPENDENCIES
   sass-rails
   simple-navigation
   uglifier
-  unicorn
-  unicorn-rails
   will_paginate
   workless (~> 1.2.2)
 
