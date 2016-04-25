@@ -2,12 +2,6 @@
 # See https://github.com/svenfuchs/rails_i18n/tree/master/rails%2Flocale for starting points.
 
 da:
-  mobileterms:
-    v1:
-      important_parts_description: |
-        Betingelserne gælder for I Bike CPH og CykelPlanen appene og www.ibikecph.dk sitet, der bliver stillet gratis til rådighed af Københavns Kommune og Region Hovedstaden.
-        Data administeres efter reglerne i den danske Persondatalov. Du kan til enhver tid slette din profil og de tilhørende data.
-        For at forbedre appene og sitet indsamles anonyme data om brug og opståede fejl.
   activerecord:
     models:
       issue: Indlæg

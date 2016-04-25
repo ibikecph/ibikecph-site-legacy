@@ -2,13 +2,6 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  mobileterms:
-    v1:
-      important_parts_description: |
-        The terms covers the I Bike CPH and CykelPlanen apps and the www.ibikecph.dk site, which are provided free of charge by the City of Copenhagen and the Capital Region of Copenhagen.
-        Data is managed in accordance with the danish law on Processing of Personal Data. 
-        You can delete your account and the associated data at any time.
-        To improve the site and the apps, anonymous data on usage and errors is collected.
   activerecord:
     models:
       issue: Entry
