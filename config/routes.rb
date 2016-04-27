@@ -115,10 +115,10 @@ RailsOSRM::Application.routes.draw do
     get '/faq' => 'about#faq'
     get '/api' => 'about#api'
     # get '/about/:action' => 'about#:action'
+    get '/terms' => 'pages#terms'
   end
 
 
-  get '/terms' => 'pages#terms'
   get '/help' => 'pages#help'
 
   get '/ping' => 'pages#ping'
