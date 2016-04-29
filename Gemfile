@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 
 ruby '2.3.0'
 
-gem "rails", github: "rails/rails", ref: "dbfa8fdfc29eb913fec6113a74394167aa13cdd6"
+gem "rails", '5.0.0.beta4'
 gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
-gem 'devise', '~> 4.0.0.rc2'#, '3.5.2'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancancan'#, '~> 1.12.0'
@@ -23,7 +23,7 @@ gem 'will_paginate'
 gem 'puma'
 gem 'auto_html', git: 'git://github.com/ibikecph/auto_html.git', branch: 'master'
 gem 'rails_autolink'
-gem 'acts-as-taggable-on'#, '~> 3.4'
+gem 'acts-as-taggable-on', github: 'mbleigh/acts-as-taggable-on'
 gem 'exception_notification'
 gem 'google-analytics-rails'
 gem 'rails-timeago'
