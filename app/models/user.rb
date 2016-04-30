@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
          :registerable,
          :recoverable,
          :rememberable,
-         # :token_authenticatable,
+         :token_authenticatable,
          :confirmable,
          :omniauthable,
          omniauth_providers: [:facebook]
