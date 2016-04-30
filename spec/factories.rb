@@ -10,7 +10,6 @@ FactoryGirl.define do
   factory :user do
     name
     email
-    track_count 5
     after :build do |u|
       u.email_confirmation = u.email
       u.password = u.password_confirmation = 'password'
@@ -58,20 +57,6 @@ FactoryGirl.define do
     longitude '12.569467'
     source 'favorite'
     sub_source 'favorite'
-  end
-
-  factory :track do
-    timestamp Time.now.to_i
-    from_name 'Vestergade 27-29, 1550 København V'
-    to_name 'Lille Kannikestræde 3, 1170 København K'
-    coordinates {Array.new(5){ attributes_for :coordinate }}
-    coord_count 5
-  end
-
-  factory :coordinate do
-    seconds_passed
-    latitude '55.677276'
-    longitude '12.569467'
   end
 
   factory :privacy_token do

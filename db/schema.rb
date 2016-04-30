@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908131135) do
+ActiveRecord::Schema.define(version: 20160430182030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "blog_entries", force: :cascade do |t|
     t.string   "title"
@@ -35,17 +41,6 @@ ActiveRecord::Schema.define(version: 20150908131135) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "coordinates", force: :cascade do |t|
-    t.decimal  "latitude",       precision: 10, scale: 6
-    t.decimal  "longitude",      precision: 10, scale: 6
-    t.datetime "timestamp"
-    t.integer  "route_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.integer  "track_id"
-    t.integer  "seconds_passed"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -140,8 +135,15 @@ ActiveRecord::Schema.define(version: 20150908131135) do
     t.datetime "created_at"
   end
 
+  add_index "taggings", ["context"], name: "index_taggings_on_context", using: :btree
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+  add_index "taggings", ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+  add_index "taggings", ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
@@ -167,19 +169,6 @@ ActiveRecord::Schema.define(version: 20150908131135) do
     t.datetime "updated_at"
   end
 
-  create_table "tracks", force: :cascade do |t|
-    t.date     "start_date"
-    t.string   "from_name"
-    t.string   "to_name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "timestamp"
-    t.integer  "user_id"
-    t.text     "coordinates"
-    t.string   "salted_signature"
-    t.integer  "privacy_token_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -203,7 +192,6 @@ ActiveRecord::Schema.define(version: 20150908131135) do
     t.datetime "confirmation_sent_at"
     t.string   "account_source",                     default: "ibikecph"
     t.string   "unconfirmed_email"
-    t.integer  "track_count",                        default: 0
   end
 
   create_table "votes", force: :cascade do |t|

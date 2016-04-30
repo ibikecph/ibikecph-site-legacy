@@ -12,14 +12,7 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def destroy
     @user = User.find_by id: params[:id]
-
-    if @user.encrypted_password.present?
-      if @user.destroy_with_tracks params[:user][:password]
-        success t('users.flash.deleted')
-      else
-        failure @user
-      end
-    elsif @user.destroy
+    if @user.destroy
       success t('users.flash.deleted')
     end
   end

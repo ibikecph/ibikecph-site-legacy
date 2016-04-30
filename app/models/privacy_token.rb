@@ -6,7 +6,6 @@ class PrivacyToken < ActiveRecord::Base
   validates_length_of     :password, minimum: 8, maximum: 50
 
   attr_accessor           :email, :password
-  has_many                :tracks
 
   def self.find_by_email_and_password(email, password)
     signature = PrivacyToken.generate_signature email, password

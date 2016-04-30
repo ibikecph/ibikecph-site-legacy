@@ -258,24 +258,12 @@ class User < ActiveRecord::Base
     self.role == 'staff'
   end
 
-  def destroy_with_tracks(password)
-    if self.valid_password? password
-      signature = self.generate_signature password
-      Track.delay.delete_all_by_signature signature, self.track_count
-      self.destroy
-    else
-      self.errors.add(:password, password.blank? ? :blank : :invalid)
-      false
-    end
-  end
-
   def update_and_generate_signature(params)
     ActiveRecord::Base.transaction do
       if params[:password].present?
         old_signature = self.generate_signature params[:current_password]
         new_signature = self.generate_signature params[:password]
 
-        Track.update_all_signatures old_signature, new_signature, self.track_count
         self.signature = new_signature
       end
 

@@ -228,12 +228,10 @@ da:
       image: Billede
       about: Om mig
       email: Email
-      tracks: Indsamling af cykeldata
       password: Adgangskode
       change_email: Ændre Email
       change_password: Ændre adgangskode og email
       change_settings: Rediger indstillinger
-      manage_tracks: Slet data
       notify_by_email: Beskeder via email
       unverified: Uverificeret
       password_hidden: Skjult
@@ -269,12 +267,6 @@ da:
       activate_new_email: "Du har opdateret din konto, men vi er nødt til at bekræfte din nye e-mailadresse. Tjek venligst din e-mail og klik på bekræft link til færdiggøre bekræftelsen din nye e-mailadresse."
     misc:
       cancel: Annuller
-    tracks:
-      title: Slet min indsamlede cykeldata
-      destroy_tracks: Slet min data
-      wrong_password: Forkert adgangskode
-      tracks_deleted: Din cykeldata er blevet slettet
-      info: Du kan slette samtlig data du har indsamlet via din mobile app.  Du skal skrive den adgangskode du opgav da du oprettede indsamling af cykeldata.
 
   blog:
     index:
