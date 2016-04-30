@@ -21,7 +21,6 @@
 .DS_Store
 logfile
 .sass-cache/
-.env
 
 #emacs
 *~
