@@ -837,9 +837,6 @@ body {
 		display: block;
 	}
 }
-.leaflet-control-zoom {
-	padding: 0;
-}
 .leaflet-control-goto-my-location {
 	background-image: image-url('_new/location.png');
 	border-bottom: 1px solid #d5d5d6;
@@ -860,6 +857,21 @@ body {
 		background-color: #fff;
 	}
 }
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font-size: 24px !important;
+	text-indent: 1px;
+	width: 40px !important;
+	height: 30px  !important;
+	background-color: #f4f4f4 !important;
+    &:hover {
+        background-color: white !important;
+    }
+}
+.leaflet-control-layers {
+	display: none;
+}
+
 ::-webkit-input-placeholder {
 	color: #ddd;
 }
