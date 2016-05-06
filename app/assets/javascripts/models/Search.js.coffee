@@ -4,16 +4,16 @@
 
 class IBikeCPH.Models.Search extends Backbone.Model
 
-	initialize: ->
-		@waypoints    	= new IBikeCPH.Collections.Waypoints
-		@instructions 	= new IBikeCPH.Collections.Instructions
-		@summary      	= new IBikeCPH.Models.Summary
-		@profile		= 'standard'
-		
-	reset: ->
-		@waypoints.reset()
-		@instructions.reset()
-		@summary.reset()
-		@set 'route', ''
-		@profile			= 'standard'
-		
+  initialize: ->
+    @waypoints      = new IBikeCPH.Collections.Waypoints
+    @instructions   = new IBikeCPH.Collections.Instructions
+    @summary        = new IBikeCPH.Models.Summary
+    @profile    = 'standard'
+    
+  reset: ->
+    @waypoints.reset()
+    @instructions.reset()
+    @summary.reset()
+    @set 'route', ''
+    @profile      = 'standard'
+    

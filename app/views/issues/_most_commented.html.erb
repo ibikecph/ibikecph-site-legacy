@@ -1,14 +1,14 @@
 <% if @most_commented.any? %>
 <div class="sidebar">
-	<h2><%=t '.title' %></h2>
-	<ul>
-		<% for issue in @most_commented %>
-		<li>
-			<%= link_to "#{issue.title} (#{issue.comments_count})", issue %>
-		</li>
-		<% end %>
-	<ul>
-	<br>
-	<p><%= link_to t('issues.view_all_issues'), issues_path %></p>
+  <h2><%=t '.title' %></h2>
+  <ul>
+    <% for issue in @most_commented %>
+    <li>
+      <%= link_to "#{issue.title} (#{issue.comments_count})", issue %>
+    </li>
+    <% end %>
+  <ul>
+  <br>
+  <p><%= link_to t('issues.view_all_issues'), issues_path %></p>
 </div>
 <% end %>

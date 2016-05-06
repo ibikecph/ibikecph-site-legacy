@@ -1,37 +1,37 @@
 <div id="news_container">
 
-	<div id="news_list">
-		<article class="item single">
-			<div class="inner">
-				<div class="back">
-					<%= link_to 'Back', :back %>
-				</div>
-				<div class="aside">
-					<div class="top">
-						<h1><%= @blog_entry.title %></h1>
-						<p class="posted_at" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@blog_entry.created_at).capitalize %> <%=t 'ago' %></p>
-					</div>
-					<% if @blog_entry.image? %>
-						<div class="image">
-							<%= image_tag @blog_entry.image.url if @blog_entry.image? %>
-						</div>
-					<% end %>
-				</div>
-				<div class="main">
-					<div class="text">
-						<%= auto_html_blog @blog_entry.body, :width => 760, :height => 506 %>
-					</div>
-					<% if can? :manage, @blog_entry %>
-						<ul class="admin_panel">
-							<li class="edit"><%= link_to t('edit'),  [:edit,@blog_entry] %></li>
-							<li class="delete"><%= link_to t('delete'),  @blog_entry, :method => :delete, :confirm => t('sure_q') %></li>
-						</ul>
-					<% end %>
-					<%= comments @blog_entry %>
-				</div>
-			</div>
-			<div class="clear"></div>
-		</article>
-	</div>
+  <div id="news_list">
+    <article class="item single">
+      <div class="inner">
+        <div class="back">
+          <%= link_to 'Back', :back %>
+        </div>
+        <div class="aside">
+          <div class="top">
+            <h1><%= @blog_entry.title %></h1>
+            <p class="posted_at" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@blog_entry.created_at).capitalize %> <%=t 'ago' %></p>
+          </div>
+          <% if @blog_entry.image? %>
+            <div class="image">
+              <%= image_tag @blog_entry.image.url if @blog_entry.image? %>
+            </div>
+          <% end %>
+        </div>
+        <div class="main">
+          <div class="text">
+            <%= auto_html_blog @blog_entry.body, :width => 760, :height => 506 %>
+          </div>
+          <% if can? :manage, @blog_entry %>
+            <ul class="admin_panel">
+              <li class="edit"><%= link_to t('edit'),  [:edit,@blog_entry] %></li>
+              <li class="delete"><%= link_to t('delete'),  @blog_entry, :method => :delete, :confirm => t('sure_q') %></li>
+            </ul>
+          <% end %>
+          <%= comments @blog_entry %>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </article>
+  </div>
 
 </div>

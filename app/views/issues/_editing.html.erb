@@ -1,6 +1,6 @@
 <% if can? :manage, @issue %>
-	<ul class="admin_panel">
-		<li><%= link_to t('edit'), [:edit,@issue] %></li>
-		<li><%= link_to t('delete'), @issue, :method => :delete, :confirm => t('sure_q') %></li>
-	</ul>
+  <ul class="admin_panel">
+    <li><%= link_to t('edit'), [:edit,@issue] %></li>
+    <li><%= link_to t('delete'), @issue, :method => :delete, :confirm => t('sure_q') %></li>
+  </ul>
 <% end %>

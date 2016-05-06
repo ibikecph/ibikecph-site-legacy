@@ -1,11 +1,11 @@
 <% if current_user %>
-	<% following = current_user.following? target %>
-	<% text = following ? "&#10003; #{t('.follow')}".html_safe : t('.follow') %>
-	<% path = following ? [:unfollow,target] : [:follow,target] %>
-	<% url = { :controller => '/follows', :action => :follow, :followable_type => target.class.name, :followable_id => target.id } %>
-	<% method = following ? :delete : :post %>
-	<% title = following ?  t('.stop') : t('.start') %>
-	<% klass = following ? 'on button toggle' : 'button toggle' %>
-	<%= link_to text, url, :remote => true, :method => method, :class => klass, :id => :follow, :title => title %>
+  <% following = current_user.following? target %>
+  <% text = following ? "&#10003; #{t('.follow')}".html_safe : t('.follow') %>
+  <% path = following ? [:unfollow,target] : [:follow,target] %>
+  <% url = { :controller => '/follows', :action => :follow, :followable_type => target.class.name, :followable_id => target.id } %>
+  <% method = following ? :delete : :post %>
+  <% title = following ?  t('.stop') : t('.start') %>
+  <% klass = following ? 'on button toggle' : 'button toggle' %>
+  <%= link_to text, url, :remote => true, :method => method, :class => klass, :id => :follow, :title => title %>
 <% end %>
 

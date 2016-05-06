@@ -1,18 +1,18 @@
 <div id="news_container">
 
-	<div id="news_list">
+  <div id="news_list">
       <!--
-		<div id="news_top">
-			<%= render 'links' %>
-			<%= render 'tag_cloud' %>
-		</div>
+    <div id="news_top">
+      <%= render 'links' %>
+      <%= render 'tag_cloud' %>
+    </div>
       -->
 
-		<h1 class="blog-title"><%=t 'news.title' %></h1>
-		<div class="masonry">
-			<%= render :partial => 'blog_entry', :collection => @blog_entries %>
-		</div>
-		<div class="clear"></div>
-	</div>
+    <h1 class="blog-title"><%=t 'news.title' %></h1>
+    <div class="masonry">
+      <%= render :partial => 'blog_entry', :collection => @blog_entries %>
+    </div>
+    <div class="clear"></div>
+  </div>
 
 </div>

@@ -1,28 +1,28 @@
 <%= form_for @issue, :url => url do |f| %>
-	<%= errors_for( @issue ).html_safe %>
-	<p>
-		<%= f.label :title %>
-		<%= chars_remaining %>
-		<%= f.text_field :title, { :rows => 1, "data-maxlength" => @issue.class::MAXLENGTH[:title], :class => "text_input" } %>
-	</p>
-	<p>
-		<%= f.label :body %>
-		<%= chars_remaining %>
-		<%= f.text_area :body, { :rows => 10, "data-maxlength" => @issue.class::MAXLENGTH[:body], :class => "text_input" } %>
-	</p>
-	<p>
-		<%= f.label :tags %>
-		<%= f.text_field :tag_list, { :rows => 1, :class => "text_input" } %>
-	</p>
-	<p>
-		<%= image_fields f, @issue %>
-	</p>
-	<% if can? :manage, @issue %>
-	<p>
-		<%= f.label :labels %><br>
-		<%= f.text_field :label_list, { :rows => 1, :class => "text_input" } %>
-	</p>
-	<% end %>
-	<p class="submits"><%= f.submit :class => :submit %></p>
+  <%= errors_for( @issue ).html_safe %>
+  <p>
+    <%= f.label :title %>
+    <%= chars_remaining %>
+    <%= f.text_field :title, { :rows => 1, "data-maxlength" => @issue.class::MAXLENGTH[:title], :class => "text_input" } %>
+  </p>
+  <p>
+    <%= f.label :body %>
+    <%= chars_remaining %>
+    <%= f.text_area :body, { :rows => 10, "data-maxlength" => @issue.class::MAXLENGTH[:body], :class => "text_input" } %>
+  </p>
+  <p>
+    <%= f.label :tags %>
+    <%= f.text_field :tag_list, { :rows => 1, :class => "text_input" } %>
+  </p>
+  <p>
+    <%= image_fields f, @issue %>
+  </p>
+  <% if can? :manage, @issue %>
+  <p>
+    <%= f.label :labels %><br>
+    <%= f.text_field :label_list, { :rows => 1, :class => "text_input" } %>
+  </p>
+  <% end %>
+  <p class="submits"><%= f.submit :class => :submit %></p>
 
 <% end %>

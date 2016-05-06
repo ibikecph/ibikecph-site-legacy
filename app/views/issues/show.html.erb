@@ -1,69 +1,69 @@
 <% if params[:ajax] %>
-	<div class="issue <%= @klass %>">
-		<div class="close"></div>
-		<div class="inner">
-			<h1 class="larger"><%= @issue.title %></h1>
-			<div class="text">
-				<div class="user">
-					<% if @issue.user %>
-						<% if profile_image(@issue.user) %>
-							<%= profile_image(@issue.user) %>
-						<% end %>
-					<% end %>
-				</div>
-				<p class="meta">
-					<b><%= @issue.user.name %></b>
-					<span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
-						<%= time_ago_in_words @issue.created_at %>
-					</span>
-				</p>
-				<% if @issue.image? %>
+  <div class="issue <%= @klass %>">
+    <div class="close"></div>
+    <div class="inner">
+      <h1 class="larger"><%= @issue.title %></h1>
+      <div class="text">
+        <div class="user">
+          <% if @issue.user %>
+            <% if profile_image(@issue.user) %>
+              <%= profile_image(@issue.user) %>
+            <% end %>
+          <% end %>
+        </div>
+        <p class="meta">
+          <b><%= @issue.user.name %></b>
+          <span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
+            <%= time_ago_in_words @issue.created_at %>
+          </span>
+        </p>
+        <% if @issue.image? %>
   <p>
        <br />
    <%= image_tag @issue.image.g6.url %>
   </p>
   <% end %>
-				<%= auto_html_blog @issue.body, {} %>
-			</div>
-			<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
-			<%= render 'labels' %>
-			<%= render 'issues/editing' %>
-			<%= comments @issue %>
-		</div>
-	</div>
+        <%= auto_html_blog @issue.body, {} %>
+      </div>
+      <%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
+      <%= render 'labels' %>
+      <%= render 'issues/editing' %>
+      <%= comments @issue %>
+    </div>
+  </div>
 <% else %>
-	<div id="content_responsive">
+  <div id="content_responsive">
 
-		<div class="issue <%= @klass %>">
-			<div class="inner">
-				<h1 class="larger"><%= @issue.title %></h1>
-				<div class="text">
-					<div class="user">
-						<% if @issue.user %>
-							<% if profile_image(@issue.user) %>
-								<%= profile_image(@issue.user) %>
-							<% end %>
-						<% end %>
-					</div>
-					<p class="meta">
-						<b><%= @issue.user.name %></b>
-						<span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
-							<%= time_ago_in_words @issue.created_at %> _password
-						</span>
-					</p>
+    <div class="issue <%= @klass %>">
+      <div class="inner">
+        <h1 class="larger"><%= @issue.title %></h1>
+        <div class="text">
+          <div class="user">
+            <% if @issue.user %>
+              <% if profile_image(@issue.user) %>
+                <%= profile_image(@issue.user) %>
+              <% end %>
+            <% end %>
+          </div>
+          <p class="meta">
+            <b><%= @issue.user.name %></b>
+            <span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
+              <%= time_ago_in_words @issue.created_at %> _password
+            </span>
+          </p>
                 <% if @issue.image? %>
   <p>
       <br />
    <%= image_tag @issue.image.g6.url %>
   </p>
   <% end %>
-					<%= auto_html_blog @issue.body, {} %>
-				</div>
-				<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
-				<%= render 'labels' %>
-				<%= render 'issues/editing' %>
-				<%= comments @issue %>
-			</div>
-		</div>
-	</div>
+          <%= auto_html_blog @issue.body, {} %>
+        </div>
+        <%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
+        <%= render 'labels' %>
+        <%= render 'issues/editing' %>
+        <%= comments @issue %>
+      </div>
+    </div>
+  </div>
 <% end %>

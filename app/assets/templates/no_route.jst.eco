@@ -1,4 +1,4 @@
 <div class="header-title">
-	<%= I18n.t("route_description") %>
+  <%= I18n.t("route_description") %>
 </div>
 <%= I18n.t("no_route") %>.

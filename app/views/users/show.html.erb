@@ -1,16 +1,16 @@
 <div class="centered_dialog small">
-	<%= link_to t('edit'), [:edit,:account], :class => "button righty" if current_user == @user %>
+  <%= link_to t('edit'), [:edit,:account], :class => "button righty" if current_user == @user %>
 
-	<h1><%= @user.name %><%= " (#{t('you')})" if current_user == @user %></h1>
+  <h1><%= @user.name %><%= " (#{t('you')})" if current_user == @user %></h1>
 
-	<p class="note">
-		<%=t '.joined_at_html', :ago => %Q{<span class="timeago" title="blog_entry.created_at.getutc.iso8601">#{ time_ago_in_words(@user.created_at).capitalize } #{t('ago')}</span>}.html_safe %>
-	</p>
+  <p class="note">
+    <%=t '.joined_at_html', :ago => %Q{<span class="timeago" title="blog_entry.created_at.getutc.iso8601">#{ time_ago_in_words(@user.created_at).capitalize } #{t('ago')}</span>}.html_safe %>
+  </p>
 
-	<p><%= image_tag @user.image.g4.url, :class => 'g4 square' %></p>
+  <p><%= image_tag @user.image.g4.url, :class => 'g4 square' %></p>
 
-	<% if @user.about %>
-		<%= simple_format(@user.about) %>
-	<% end %>
-	<%= link_to 'Back', :back %>
+  <% if @user.about %>
+    <%= simple_format(@user.about) %>
+  <% end %>
+  <%= link_to 'Back', :back %>
 </div>

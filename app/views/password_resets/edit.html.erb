@@ -4,16 +4,16 @@
 <%= form_for @user, :url => password_reset_path(params[:token]), :html => {:method => :put} do |f| %>
 <%= errors_for( @user ).html_safe %>
 <p>
-	<%= f.label :password, 'New password' %><br>
-	<%= f.password_field :password %>
+  <%= f.label :password, 'New password' %><br>
+  <%= f.password_field :password %>
 </p>
 <p>
-	<%= f.label :new_password_confirmation %><br>
-	<%= f.password_field :password_confirmation %>
-	<%= hidden_field_tag :token, params[:token] %>
+  <%= f.label :new_password_confirmation %><br>
+  <%= f.password_field :password_confirmation %>
+  <%= hidden_field_tag :token, params[:token] %>
 </p>
 <p>
-	<%= f.submit t('.submit'), :class => :submit %>
+  <%= f.submit t('.submit'), :class => :submit %>
 </p>
 <% end %>
 </div>

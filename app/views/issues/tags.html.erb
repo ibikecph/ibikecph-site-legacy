@@ -1,38 +1,38 @@
 <div id="content_responsive">
 
-	<div class="page_header">
-	
-		<%= render :partial => 'top' %>
-		<div class="back">
-			<%= link_to '← '+t('issues.view_all_issues'), '/feedback' %>
-		</div>
-	</div>
+  <div class="page_header">
+  
+    <%= render :partial => 'top' %>
+    <div class="back">
+      <%= link_to '← '+t('issues.view_all_issues'), '/feedback' %>
+    </div>
+  </div>
 
-	<div class="page_content">
+  <div class="page_content">
 
-	    <h1><%=t '.title' %></h1>
-		<%= render :partial => 'tag_cloud', :locals => { :tags => @tags } %>
-		<br>
-		<%= will_paginate @issues, :class => :pagination %>
-		<ul class="grid">
-			<% for issue in @issues %>
-				<% klass = cycle 'red', 'blue', 'orange' %>
-				<li class="item">
-					<div class="item_thumb <%= klass %>">
-						<%= link_to(issue_path(issue, :color => klass)) do %>
-							<h2><%= issue.title %></h2>
-							<p class="from">af <%= issue.user.name %></p>
-							<div class="soc">
-								<div class="soc_comment">
-									<%= t( 'comment', :count => issue.comments_count ) %>
-								</div>
-							</div>
-						<% end %>
-					</div>
-				</li>
-			<% end %>
-		</ul>
-		<%= will_paginate @issues, :class => :pagination %>
+      <h1><%=t '.title' %></h1>
+    <%= render :partial => 'tag_cloud', :locals => { :tags => @tags } %>
+    <br>
+    <%= will_paginate @issues, :class => :pagination %>
+    <ul class="grid">
+      <% for issue in @issues %>
+        <% klass = cycle 'red', 'blue', 'orange' %>
+        <li class="item">
+          <div class="item_thumb <%= klass %>">
+            <%= link_to(issue_path(issue, :color => klass)) do %>
+              <h2><%= issue.title %></h2>
+              <p class="from">af <%= issue.user.name %></p>
+              <div class="soc">
+                <div class="soc_comment">
+                  <%= t( 'comment', :count => issue.comments_count ) %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <%= will_paginate @issues, :class => :pagination %>
 
-	</div>
+  </div>
 </div>

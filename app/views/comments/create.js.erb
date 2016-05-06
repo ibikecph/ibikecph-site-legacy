@@ -1,6 +1,6 @@
 //add comment
-var comment = $("<%= escape_javascript(render(@comment)) %>");	//render
-comment.find("span.timeago").timeago();	//start timeago updates
+var comment = $("<%= escape_javascript(render(@comment)) %>");  //render
+comment.find("span.timeago").timeago();  //start timeago updates
 
 //insert
 $(".comments table").append(comment).request_route; 

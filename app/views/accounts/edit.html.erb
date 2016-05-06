@@ -1,25 +1,25 @@
 <div class="centered_dialog small">
-	<h1><%=t '.title' %></h1>
-	<%= errors_for( @user ).html_safe %>
-	<%= form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
-		<p>
-			<%= f.label :name %>
-			<%= chars_remaining %><br>
-			<%= f.text_field :name, { "data-maxlength" => User::MAXLENGTH[:name], :class => 'text_input' } %>
-		</p>
-		<%if !@user.facebook_user?%>   
-		<p>		    	    
-			<%= image_fields f, @user %>
-		</p>
-		<%end%>
-		<p>
-			<%= f.label :about %>
-			<%= chars_remaining %>
-			<%= f.text_area :about, { :rows => 6, "data-maxlength" => User::MAXLENGTH[:about], :class => 'text_input' } %>
-		</p>
-		<p class="submits">
-			<%= f.submit t('.submit') %>
-			<%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
-		</p>
-	<% end %>
+  <h1><%=t '.title' %></h1>
+  <%= errors_for( @user ).html_safe %>
+  <%= form_for @user, :url => account_path, :html => {:multipart => true} do |f| %>
+    <p>
+      <%= f.label :name %>
+      <%= chars_remaining %><br>
+      <%= f.text_field :name, { "data-maxlength" => User::MAXLENGTH[:name], :class => 'text_input' } %>
+    </p>
+    <%if !@user.facebook_user?%>   
+    <p>              
+      <%= image_fields f, @user %>
+    </p>
+    <%end%>
+    <p>
+      <%= f.label :about %>
+      <%= chars_remaining %>
+      <%= f.text_area :about, { :rows => 6, "data-maxlength" => User::MAXLENGTH[:about], :class => 'text_input' } %>
+    </p>
+    <p class="submits">
+      <%= f.submit t('.submit') %>
+      <%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
+    </p>
+  <% end %>
 </div>

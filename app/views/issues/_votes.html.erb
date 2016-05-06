@@ -1,9 +1,9 @@
 <% if current_user %>
-	<% path = @vote ? [:unvote,@issue] : [:vote,@issue] %>
-	<% text = "#{@vote ? '&#10003; ':''}#{t( 'vote', :count => @issue.votes.count)}".html_safe %>
-	<% title = @vote ?  t('.unvote') : t('.vote') %>
-	<% klass = @vote ? 'on submit toggle' : 'submit toggle' %>
-	<%= link_to text, path, :remote => true, :id => :votes, :method => :post, :class => klass, :title => title %>
+  <% path = @vote ? [:unvote,@issue] : [:vote,@issue] %>
+  <% text = "#{@vote ? '&#10003; ':''}#{t( 'vote', :count => @issue.votes.count)}".html_safe %>
+  <% title = @vote ?  t('.unvote') : t('.vote') %>
+  <% klass = @vote ? 'on submit toggle' : 'submit toggle' %>
+  <%= link_to text, path, :remote => true, :id => :votes, :method => :post, :class => klass, :title => title %>
 <% end %>
 
 

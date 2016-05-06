@@ -23,233 +23,233 @@
 
 
 jQuery ->
-	elements =
-		content: $('#content')
-		left_col: $('#content .left-col')
-		right_col: $('#content .right-col')
-		terms_a: $('p#terms a')
-		terms_textarea: $('p#terms textarea')
-		menu: $('#header .menu')
-		masonry: $('.masonry')
-		button_validation: $('.button_validation input')
-		comment_form: $('#new_comment_form')
-		facebook_button: $('.submits .facebook')
-		new_button: $('.header_open a')
-		favourites_list: $('#favourites_list')
+  elements =
+    content: $('#content')
+    left_col: $('#content .left-col')
+    right_col: $('#content .right-col')
+    terms_a: $('p#terms a')
+    terms_textarea: $('p#terms textarea')
+    menu: $('#header .menu')
+    masonry: $('.masonry')
+    button_validation: $('.button_validation input')
+    comment_form: $('#new_comment_form')
+    facebook_button: $('.submits .facebook')
+    new_button: $('.header_open a')
+    favourites_list: $('#favourites_list')
 
-	if elements.favourites_list.length > 0
-		class Favourites extends Backbone.Model
-			sync: (method, model, options) ->
-				options or (options = {})
-				switch method
-					when "create"
-						options.url = "/api/favourites"
-					when "read"
-						if model.get("id")
-							options.url = "/api/favourites/" + model.get("id")
-						else
-							options.url = "/api/favourites/"
-					when "delete"
-						options.url = "/api/favourites/" + model.get("id")
-					when "update"
-						options.url = "/api/favourites/" + model.get("id")
+  if elements.favourites_list.length > 0
+    class Favourites extends Backbone.Model
+      sync: (method, model, options) ->
+        options or (options = {})
+        switch method
+          when "create"
+            options.url = "/api/favourites"
+          when "read"
+            if model.get("id")
+              options.url = "/api/favourites/" + model.get("id")
+            else
+              options.url = "/api/favourites/"
+          when "delete"
+            options.url = "/api/favourites/" + model.get("id")
+          when "update"
+            options.url = "/api/favourites/" + model.get("id")
 
-				options.headers = options.headers or {}
-				_.extend options.headers,
-					'accept': 'application/vnd.ibikecph.v1'
-					'contentType': 'application/json'
-
-
-				Backbone.sync.call model, method, model, options  if options.url
-
-		favourites = new Favourites
-		favourites.fetch
-			success: ->
-				_.each favourites.attributes.data, (t, num) ->
-					elements.favourites_list.append('<li>'+t.address+'</li>')
-
-	if elements.new_button.length > 0
-		elements.new_button.click ->
-			if $current_user
-				$('#new_issue').load $(@).attr('href')+'?ajax=1'
-			else
-				$("#flash").remove()
-				flash = $('<div />').html(I18n.t('report_issue.errors.please_login')).attr
-					id: 'flash'
-					class: 'notice'
-				$('body').append(flash)
-				remove_flash()
-			false
-
-	if elements.facebook_button.length > 0
-		elements.facebook_button.parent().find('input').css
-			width: elements.facebook_button.outerWidth()
-
-	if elements.comment_form.length > 0
-		elements.comment_form.submit ->
-			elements.button_validation.parent().parent().find('p').hide()
-			elements.button_validation.remove()
-
-	if elements.button_validation.length > 0
-		$.each elements.button_validation, ->
-			el = $(@)
-			textarea = el.parent().parent().find 'textarea'
-			setInterval ( ->
-				if textarea.val() is ""
-					el.css
-						opacity: 0.8
-					el.prop('disabled', true);
-				else
-					el.css
-						opacity: 1
-					el.prop('disabled', false);
-			), 500
-
-	if elements.masonry.length > 0
-		elements.masonry.simplemasonry()
+        options.headers = options.headers or {}
+        _.extend options.headers,
+          'accept': 'application/vnd.ibikecph.v1'
+          'contentType': 'application/json'
 
 
-	if elements.right_col.length > 0
-		mobile_trigger = $('<div />').addClass('mobile-sidebar-trigger').click ->
-			elements.right_col.toggle()
-		elements.left_col.prepend(mobile_trigger)
+        Backbone.sync.call model, method, model, options  if options.url
 
-	if elements.left_col.outerHeight() < elements.right_col.outerHeight() and $(window).width() > 767
-		elements.left_col.css
-			height: elements.right_col.outerHeight()
+    favourites = new Favourites
+    favourites.fetch
+      success: ->
+        _.each favourites.attributes.data, (t, num) ->
+          elements.favourites_list.append('<li>'+t.address+'</li>')
 
-	elements.terms_a.click (event) ->
-		event.preventDefault()
-		elements.terms_textarea.toggle()
+  if elements.new_button.length > 0
+    elements.new_button.click ->
+      if $current_user
+        $('#new_issue').load $(@).attr('href')+'?ajax=1'
+      else
+        $("#flash").remove()
+        flash = $('<div />').html(I18n.t('report_issue.errors.please_login')).attr
+          id: 'flash'
+          class: 'notice'
+        $('body').append(flash)
+        remove_flash()
+      false
 
-	iBikeGrid =
+  if elements.facebook_button.length > 0
+    elements.facebook_button.parent().find('input').css
+      width: elements.facebook_button.outerWidth()
 
-		elements:
-			container: $('.grid')
-			items: $('.grid .item')
-			thumb: $('.grid .item .item_thumb')
-			win: $(window)
+  if elements.comment_form.length > 0
+    elements.comment_form.submit ->
+      elements.button_validation.parent().parent().find('p').hide()
+      elements.button_validation.remove()
 
-		open_box: null
+  if elements.button_validation.length > 0
+    $.each elements.button_validation, ->
+      el = $(@)
+      textarea = el.parent().parent().find 'textarea'
+      setInterval ( ->
+        if textarea.val() is ""
+          el.css
+            opacity: 0.8
+          el.prop('disabled', true);
+        else
+          el.css
+            opacity: 1
+          el.prop('disabled', false);
+      ), 500
 
-		config:
-			box_styles: [
-				background: '#dc1e19'
-				'box-shadow': '0 1px 2px #e55955 inset, 0 2px 5px #b5b5b5'
-				border: '2px solid #a81813'
-			,
-				background: '#00aeef'
-				'box-shadow': '0 1px 2px #41b0d9 inset, 0 2px 5px #b5b5b5'
-				border: '2px solid #008abd'
-			,
-				background: '#fa9100'
-				'box-shadow': '0 1px 2px #fbae43 inset, 0 2px 5px #b5b5b5'
-				border: '2px solid #c77400'
-			]
-			dimensions:
-				window_width: $(window).width()
-
-		resize_boxes: ->
-			ibg = iBikeGrid
-			width = ibg.elements.container.width()
-			columns = 0
-
-			if width > 1400
-				columns = ibg.layouts.xlarge.columns
-			else if width < 1400 and width > 1100
-				columns = ibg.layouts.large.columns
-			else if width < 1100 and width > 900
-				columns = ibg.layouts.medium.columns
-			else if width < 900 and width > 766
-				columns = ibg.layouts.small.columns
-			else
-				columns = ibg.layouts.xmsall.columns
-			ibg.elements.container.attr 'data-ipr': columns
-			unless columns is 1
-				ibg.elements.items.css width: (width / columns) - 24
-			else
-				ibg.elements.items.css width: (width / columns)
-
-			$('.expand').remove()
-			$('.grid .active').removeClass 'active'
-			$.each ibg.elements.items, (i) ->
-				if (i + 1) % columns is 0
-					expand = $('<li />').addClass 'expand'
-					$(this).after expand
-
-			ibg.elements.container.append '<li class="expand" />'
-
-		layouts:
-			xlarge:
-				columns: 6
-
-			large:
-				columns: 5
-
-			medium:
-				columns: 4
-
-			small:
-				columns: 3
-
-			xmsall:
-				columns: 1
-		init: ->
-			ibg = @
-
-			if window.location.hash.match('feedback')
-				window.location.href = window.location.hash.replace('#', '')
-
-			unless /MSIE (\d+\.\d+);/.test(navigator.userAgent)
-				ibg.elements.win.bind 'resize', ->
-					ibg.resize ibg
-
-				ibg.elements.win.resize _.debounce(->
-					ibg.open_box.trigger 'click'
-				, 250)
-
-			setTimeout (->
-				ibg.resize ibg
-			), 0
-
-			$.each ibg.elements.items.find('h2'), ->
-				el = $(@)
-				letterLength = 0
-				words = el.text().split(' ')
-				$.each words, ->
-					if this.length > letterLength
-						letterLength = this.length
-				if letterLength > 12
-					el.addClass 'smaller'
+  if elements.masonry.length > 0
+    elements.masonry.simplemasonry()
 
 
-			ibg.elements.items.click ->
-				el = $(@)
-				ibg.open_box = el
-				url = el.find('a').attr 'href'
-				target = el.nextAll('.expand').eq 0
-				active = $('.grid').find '.active'
-				unless el.hasClass 'active'
-					window.location.hash = url
-					active.removeClass 'active'
-					el.addClass 'active'
-					$('.expand').html ''
-					target.load url + '&ajax=1', ->
-						$('html, body').animate
-							scrollTop: target.offset().top - 50
-						, 400
-						$('span.timeago').timeago()
-						$('.close').click ->
-							$('html, body').animate
-								scrollTop: el.offset().top - 50
-								window.location.hash = ""
-							, 400
-							el.removeClass 'active'
-							$('.expand').html ''
-				false
+  if elements.right_col.length > 0
+    mobile_trigger = $('<div />').addClass('mobile-sidebar-trigger').click ->
+      elements.right_col.toggle()
+    elements.left_col.prepend(mobile_trigger)
 
-		resize: (ibg) ->
-			ibg.config.dimensions.window_width = ibg.elements.win.width()
-			ibg.resize_boxes()
+  if elements.left_col.outerHeight() < elements.right_col.outerHeight() and $(window).width() > 767
+    elements.left_col.css
+      height: elements.right_col.outerHeight()
 
-	iBikeGrid.init()  if $('.grid').length > 0
+  elements.terms_a.click (event) ->
+    event.preventDefault()
+    elements.terms_textarea.toggle()
+
+  iBikeGrid =
+
+    elements:
+      container: $('.grid')
+      items: $('.grid .item')
+      thumb: $('.grid .item .item_thumb')
+      win: $(window)
+
+    open_box: null
+
+    config:
+      box_styles: [
+        background: '#dc1e19'
+        'box-shadow': '0 1px 2px #e55955 inset, 0 2px 5px #b5b5b5'
+        border: '2px solid #a81813'
+      ,
+        background: '#00aeef'
+        'box-shadow': '0 1px 2px #41b0d9 inset, 0 2px 5px #b5b5b5'
+        border: '2px solid #008abd'
+      ,
+        background: '#fa9100'
+        'box-shadow': '0 1px 2px #fbae43 inset, 0 2px 5px #b5b5b5'
+        border: '2px solid #c77400'
+      ]
+      dimensions:
+        window_width: $(window).width()
+
+    resize_boxes: ->
+      ibg = iBikeGrid
+      width = ibg.elements.container.width()
+      columns = 0
+
+      if width > 1400
+        columns = ibg.layouts.xlarge.columns
+      else if width < 1400 and width > 1100
+        columns = ibg.layouts.large.columns
+      else if width < 1100 and width > 900
+        columns = ibg.layouts.medium.columns
+      else if width < 900 and width > 766
+        columns = ibg.layouts.small.columns
+      else
+        columns = ibg.layouts.xmsall.columns
+      ibg.elements.container.attr 'data-ipr': columns
+      unless columns is 1
+        ibg.elements.items.css width: (width / columns) - 24
+      else
+        ibg.elements.items.css width: (width / columns)
+
+      $('.expand').remove()
+      $('.grid .active').removeClass 'active'
+      $.each ibg.elements.items, (i) ->
+        if (i + 1) % columns is 0
+          expand = $('<li />').addClass 'expand'
+          $(this).after expand
+
+      ibg.elements.container.append '<li class="expand" />'
+
+    layouts:
+      xlarge:
+        columns: 6
+
+      large:
+        columns: 5
+
+      medium:
+        columns: 4
+
+      small:
+        columns: 3
+
+      xmsall:
+        columns: 1
+    init: ->
+      ibg = @
+
+      if window.location.hash.match('feedback')
+        window.location.href = window.location.hash.replace('#', '')
+
+      unless /MSIE (\d+\.\d+);/.test(navigator.userAgent)
+        ibg.elements.win.bind 'resize', ->
+          ibg.resize ibg
+
+        ibg.elements.win.resize _.debounce(->
+          ibg.open_box.trigger 'click'
+        , 250)
+
+      setTimeout (->
+        ibg.resize ibg
+      ), 0
+
+      $.each ibg.elements.items.find('h2'), ->
+        el = $(@)
+        letterLength = 0
+        words = el.text().split(' ')
+        $.each words, ->
+          if this.length > letterLength
+            letterLength = this.length
+        if letterLength > 12
+          el.addClass 'smaller'
+
+
+      ibg.elements.items.click ->
+        el = $(@)
+        ibg.open_box = el
+        url = el.find('a').attr 'href'
+        target = el.nextAll('.expand').eq 0
+        active = $('.grid').find '.active'
+        unless el.hasClass 'active'
+          window.location.hash = url
+          active.removeClass 'active'
+          el.addClass 'active'
+          $('.expand').html ''
+          target.load url + '&ajax=1', ->
+            $('html, body').animate
+              scrollTop: target.offset().top - 50
+            , 400
+            $('span.timeago').timeago()
+            $('.close').click ->
+              $('html, body').animate
+                scrollTop: el.offset().top - 50
+                window.location.hash = ""
+              , 400
+              el.removeClass 'active'
+              $('.expand').html ''
+        false
+
+    resize: (ibg) ->
+      ibg.config.dimensions.window_width = ibg.elements.win.width()
+      ibg.resize_boxes()
+
+  iBikeGrid.init()  if $('.grid').length > 0

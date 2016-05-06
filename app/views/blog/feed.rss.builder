@@ -9,7 +9,7 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title entry.title
         xml.description do 
-        	xml.cdata! entry.body
+          xml.cdata! entry.body
         end
         xml.PublishedDate entry.created_at.strftime("%Y-%m-%dT%H:%M:%SZ%Z")
         xml.link blog_entry_url(entry)

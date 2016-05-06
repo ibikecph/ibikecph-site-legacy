@@ -47,13 +47,13 @@ $columns_3_pad: 3*$column+2*$gutter - 2*$gutter;
 $columns_2_pad: 2*$column+1*$gutter - 2*$gutter;
 
 * {
-	padding: 0px;
-	margin: 0px;
-	font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
     -webkit-font-smoothing: antialiased;
 }
 html {
-	/*min-width: 445px;*/
+  /*min-width: 445px;*/
 }
 body {
     #alpha {
@@ -64,7 +64,7 @@ body {
     }
 }
 img {
-	border: none;	//avoid stupid borders arond logo and alpha flag in IE
+  border: none;  //avoid stupid borders arond logo and alpha flag in IE
     max-width: 100%;
 }
 a {

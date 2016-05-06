@@ -1,10 +1,10 @@
 <div class="centered_dialog small">
-	<h1><%=t '.title' %></h1>
-	<%= will_paginate @users, :class => :pagination %>
-	<% for user in @users %>
-		<p>
-			<%= link_to user.name, user %>
-			<span class="note"><%= time_ago_in_words user.created_at %> <%=t 'ago' %></span>
-		</p>
-	<% end %>
+  <h1><%=t '.title' %></h1>
+  <%= will_paginate @users, :class => :pagination %>
+  <% for user in @users %>
+    <p>
+      <%= link_to user.name, user %>
+      <span class="note"><%= time_ago_in_words user.created_at %> <%=t 'ago' %></span>
+    </p>
+  <% end %>
 </div>

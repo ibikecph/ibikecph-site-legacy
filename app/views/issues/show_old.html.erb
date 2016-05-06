@@ -1,32 +1,32 @@
 <div class="gr">
-	<div class="g4">
-		<%= render 'issues/welcome' %>
-		<%= render 'themes/themes' %>
-		<%= render 'issues/related' %>
-		<%= render 'issues/search' %>
-		<%= render 'issues/tags' %>
-	</div>
-	<div class="g8 ge">
-		<%= render 'issues/editing' %>
-		<h1><%= @issue.title %></h1>
-		<%= auto_html_blog @issue.body, {} %>
-		<br>
-		<%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
-		<%= render 'labels' %>
-		
-		<% if @issue.user %>
-			<%= link_to profile_image(@issue.user), @issue.user, :class => "avatar lefty" %>
-		<% end %>
-		<div class="note">
-			<% if @issue.user %>
-				<%= link_to truncate(@issue.user.name, :length => 80), @issue.user %>,
-			<% end %>
-			<span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
-				<%= time_ago_in_words @issue.created_at %> _password
-			</span>
-		</div>
-		<br class="clear">
+  <div class="g4">
+    <%= render 'issues/welcome' %>
+    <%= render 'themes/themes' %>
+    <%= render 'issues/related' %>
+    <%= render 'issues/search' %>
+    <%= render 'issues/tags' %>
+  </div>
+  <div class="g8 ge">
+    <%= render 'issues/editing' %>
+    <h1><%= @issue.title %></h1>
+    <%= auto_html_blog @issue.body, {} %>
+    <br>
+    <%= render :partial => 'tag_cloud', :locals => { :tags => @issue.tags } %>
+    <%= render 'labels' %>
+    
+    <% if @issue.user %>
+      <%= link_to profile_image(@issue.user), @issue.user, :class => "avatar lefty" %>
+    <% end %>
+    <div class="note">
+      <% if @issue.user %>
+        <%= link_to truncate(@issue.user.name, :length => 80), @issue.user %>,
+      <% end %>
+      <span class="timeago" title="<%= @issue.created_at.getutc.iso8601 %>">
+        <%= time_ago_in_words @issue.created_at %> _password
+      </span>
+    </div>
+    <br class="clear">
 
-		<%= comments @issue %>
-	</div>
+    <%= comments @issue %>
+  </div>
 </div>

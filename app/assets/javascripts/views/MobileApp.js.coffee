@@ -1,9 +1,9 @@
 class IBikeCPH.Views.MobileApp extends Backbone.View
-	template: JST['mobileapp']
+  template: JST['mobileapp']
 
-	initialize: ->
+  initialize: ->
 
-	render: ->
-		@$el.html @template()
-		@toggle
-		this
+  render: ->
+    @$el.html @template()
+    @toggle
+    this

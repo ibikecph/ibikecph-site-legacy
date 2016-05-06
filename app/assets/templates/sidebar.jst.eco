@@ -3,31 +3,31 @@
 <a title="<%= I18n.t 'map.link_for_route' %>" class="helper-icons permalink"><%= I18n.t 'map.link_for_route' %></a>
 
 <div class="mode">
-	<input type="radio" id="standard" name="mode" checked="1"/> <span><%= I18n.t 'map.normal_bike' %></span>
-	<input type="radio" id="cargobike" name="mode" /> <%= I18n.t 'map.cargo_bike' %></span>
+  <input type="radio" id="standard" name="mode" checked="1"/> <span><%= I18n.t 'map.normal_bike' %></span>
+  <input type="radio" id="cargobike" name="mode" /> <%= I18n.t 'map.cargo_bike' %></span>
 </div>
 <div class="clear"></div>
 <div id="addresses">
-	<div class="address">
-		<label class="a"><%= I18n.t 'map.from' %></label>
-		<input type="text" class="from" title="<%= I18n.t 'map.from' %>" placeholder="<%= I18n.t 'map.from_placeholder' %>" tabindex=1 >
-	</div>
-	<div class="address">
-		<label class="b"><%= I18n.t 'map.to' %></label>
-		<input type="text" class="to" title="<%= I18n.t 'map.to' %>" placeholder="<%= I18n.t 'map.to_placeholder' %>" tabindex=2>
-	</div>
-	<span title="<%= I18n.t 'map.reverse_route' %>" class="reverse_route"></span>
+  <div class="address">
+    <label class="a"><%= I18n.t 'map.from' %></label>
+    <input type="text" class="from" title="<%= I18n.t 'map.from' %>" placeholder="<%= I18n.t 'map.from_placeholder' %>" tabindex=1 >
+  </div>
+  <div class="address">
+    <label class="b"><%= I18n.t 'map.to' %></label>
+    <input type="text" class="to" title="<%= I18n.t 'map.to' %>" placeholder="<%= I18n.t 'map.to_placeholder' %>" tabindex=2>
+  </div>
+  <span title="<%= I18n.t 'map.reverse_route' %>" class="reverse_route"></span>
 </div>
 
 <div id="time">
-	<div>
-		<span><%= I18n.t 'map.departure' %></span>
-		<input class="at departure" type="text" placeholder="<%= I18n.t 'map.departure_placeholder' %>" tabindex=3>
-	</div>
-	<div>
-		<span><%= I18n.t 'map.arrival' %></span>
-		<input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
-	</div>
-	<div id="cargobike_trigger" title="<%= I18n.t 'map.cargo_bike' %>"></div>
-	<div class="clear"></div>
+  <div>
+    <span><%= I18n.t 'map.departure' %></span>
+    <input class="at departure" type="text" placeholder="<%= I18n.t 'map.departure_placeholder' %>" tabindex=3>
+  </div>
+  <div>
+    <span><%= I18n.t 'map.arrival' %></span>
+    <input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
+  </div>
+  <div id="cargobike_trigger" title="<%= I18n.t 'map.cargo_bike' %>"></div>
+  <div class="clear"></div>
 </div>

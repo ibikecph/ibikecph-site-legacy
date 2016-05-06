@@ -5,46 +5,46 @@
 <%= form_for @user do |f| %>
 <%= errors_for( @user ).html_safe %>
 <p>
-	<%= f.label :name %><br>
-	<%= f.text_field :name, :tabindex => 1 %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name, :tabindex => 1 %>
 </p>
 <%= fields_for @email do |email| %>
-	<div class="gr">
-		<div class="g4">
-			<p>
-				<%= email.label :uid %><br>
-				<%= email.text_field :uid, :tabindex => 2 %><br>
-			</p>
-		</div>
-		<div class="g4 ge">
-			<p>
-				<%= f.label :password %><br>
-				<%= f.password_field :password, :tabindex => 4 %>
-			</p>
-		</div>
-	</div>
-	<div class="gr">
-		<div class="g4">
-			<p>
-				<%= email.label :uid_confirmation %><br>
-				<%= email.text_field :uid_confirmation, :tabindex => 3 %><br>
-			</p>
-		</div>
-		<div class="g4 ge">
-			<p>
-				<%= f.label :password_confirmation %><br>
-				<%= f.password_field :password_confirmation, :tabindex => 5 %><br>
-			</p>
-		</div>
-	</div>
+  <div class="gr">
+    <div class="g4">
+      <p>
+        <%= email.label :uid %><br>
+        <%= email.text_field :uid, :tabindex => 2 %><br>
+      </p>
+    </div>
+    <div class="g4 ge">
+      <p>
+        <%= f.label :password %><br>
+        <%= f.password_field :password, :tabindex => 4 %>
+      </p>
+    </div>
+  </div>
+  <div class="gr">
+    <div class="g4">
+      <p>
+        <%= email.label :uid_confirmation %><br>
+        <%= email.text_field :uid_confirmation, :tabindex => 3 %><br>
+      </p>
+    </div>
+    <div class="g4 ge">
+      <p>
+        <%= f.label :password_confirmation %><br>
+        <%= f.password_field :password_confirmation, :tabindex => 5 %><br>
+      </p>
+    </div>
+  </div>
 <% end %>
 <p id="terms">
-	<%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
-	<%= text_area_tag :terms_text, t('terms', :locale => :da), :rows => 10, :disabled => 'disabled' %>
+  <%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
+  <%= text_area_tag :terms_text, t('terms', :locale => :da), :rows => 10, :disabled => 'disabled' %>
 </p>
 <p>
-	<%= submit_tag t('.submit'), :class => :submit %>
-	<span class="note"><%=t '.already_have_account_q' %> <%= link_to t('login'), login_path %></span>
+  <%= submit_tag t('.submit'), :class => :submit %>
+  <span class="note"><%=t '.already_have_account_q' %> <%= link_to t('login'), login_path %></span>
 </p>
 <% end %>
 </div>

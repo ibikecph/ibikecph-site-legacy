@@ -356,52 +356,52 @@ td.buttons, th.buttons {
     text-decoration: none;
     padding: 2px 4px 2px 4px;
     line-height: 1.2em;
-	font-size: 0.9em;
+  font-size: 0.9em;
     border-radius: 2px;
     background-color: $medium;
     font-weight: bold;
-	margin-bottom: 0.2em;
+  margin-bottom: 0.2em;
     color: white;
-	&:hover {
-		text-decoration: none;
-	}
+  &:hover {
+    text-decoration: none;
+  }
 }
 .button, .buttons a {
     background-color: $color;
 }
 .tag_cloud a {
-	background-color: $medium;
-	color: white;
-	&:hover {
-		background-color: $darkish;
-		color: white
-	}
-	&.on:hover {
-		background-color: $dark;
-	}
-	&.tag1 { font-size: 0.9em; }
-	&.tag2 { font-size: 1.1em; }
-	&.tag3 { font-size: 1.3em; }
-	&.tag4 { font-size: 1.5em; }
-	&.on {
-		background-color: $dark;
-		color: white;
-	}
+  background-color: $medium;
+  color: white;
+  &:hover {
+    background-color: $darkish;
+    color: white
+  }
+  &.on:hover {
+    background-color: $dark;
+  }
+  &.tag1 { font-size: 0.9em; }
+  &.tag2 { font-size: 1.1em; }
+  &.tag3 { font-size: 1.3em; }
+  &.tag4 { font-size: 1.5em; }
+  &.on {
+    background-color: $dark;
+    color: white;
+  }
 }
 .label_list a {
-	background-color: #4af;
-	color: white;
-	&:hover {
-		background-color: #4af*0.7;
-		color: white
-	}
-	&.on:hover {
-		background-color: $dark;
-	}
-	&.on {
-		background-color: #4af*0.7;
-		color: white;
-	}
+  background-color: #4af;
+  color: white;
+  &:hover {
+    background-color: #4af*0.7;
+    color: white
+  }
+  &.on:hover {
+    background-color: $dark;
+  }
+  &.on {
+    background-color: #4af*0.7;
+    color: white;
+  }
 }
 .label_list, .tag_cloud {
     margin-bottom: 0.5em;
@@ -412,7 +412,7 @@ td.buttons, th.buttons {
     text-decoration: none;
 }
 .buttons.big a {
-	font-size: 1.3em;
+  font-size: 1.3em;
     border-radius: 4px;
     padding: 4px 8px 4px 8px;
 }
@@ -450,47 +450,47 @@ ul.blog_entries {
 }
 .pagination {
   font-size: 0.8em;
-	margin: 0;
-	text-align: left;
-	font-weight: bold;
-	margin-bottom: 10px;
+  margin: 0;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 10px;
   a, span, em {
-  	padding: .2em .5em; 
-  	color: white;
-  	text-decoration: none;
+    padding: .2em .5em; 
+    color: white;
+    text-decoration: none;
   }
   span.disabled {
-  	color: #aaa;
+    color: #aaa;
   }
   span.current {
-  	font-weight: bold;
-  	color: $dark;
+    font-weight: bold;
+    color: $dark;
   }
   a {
-  	color: $color;
+    color: $color;
     &:hover, &:focus {
-    	text-decoration: underline;
+      text-decoration: underline;
     }
   }
   em {
-  	color: $dark;
+    color: $dark;
   }
   .page_info {
-  	color: $medium;
-  	padding-top: .8em;
+    color: $medium;
+    padding-top: .8em;
   }
   .previous_page, .next_page {
-  	border-width: 2px;
-  	color: $color;
-  	&.disabled {
-  	  color: $medium;
-	  }
+    border-width: 2px;
+    color: $color;
+    &.disabled {
+      color: $medium;
+    }
   }
   .previous_page {
-  	margin-right: 1em;
+    margin-right: 1em;
   }
   .next_page {
-  	margin-left: 1em;
+    margin-left: 1em;
   }
 }
 table.issues {
@@ -539,14 +539,14 @@ ul.sort {
     }
 }
 img.dialog {
-	width: 340px;
-	height: 127px;
-	margin-bottom: 1em;
+  width: 340px;
+  height: 127px;
+  margin-bottom: 1em;
 }
 img.tester {
-	width: 530px;
-	height: 200px;
-	margin-bottom: 1em;
+  width: 530px;
+  height: 200px;
+  margin-bottom: 1em;
 }
 .theme {
   margin-bottom: 0.5*$gutter;

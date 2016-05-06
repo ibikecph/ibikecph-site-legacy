@@ -1,34 +1,34 @@
 #
 class IBikeCPH.Views.Icon extends L.Icon
-	options:
-		iconUrl    : "<%= image_path('marker-icon.png') %>"
-		iconSize   : new L.Point(30, 44)
-		iconAnchor : new L.Point(16, 44)
+  options:
+    iconUrl    : "<%= image_path('marker-icon.png') %>"
+    iconSize   : new L.Point(30, 44)
+    iconAnchor : new L.Point(16, 44)
 
 class IBikeCPH.Views.ViaIcon extends L.Icon
-	options:
-		iconUrl    : "<%= image_path('_new/marker_via.png') %>"
-		iconSize   : new L.Point(21, 30)
-		iconAnchor : new L.Point(10, 27)
+  options:
+    iconUrl    : "<%= image_path('_new/marker_via.png') %>"
+    iconSize   : new L.Point(21, 30)
+    iconAnchor : new L.Point(10, 27)
 
 # class IBikeCPH.RouteMarker extends L.Icon
-# 	options:
-# 		iconUrl    : "<%= image_path('_new/marker_drag.png') %>"
-# 		iconSize   : new L.Point(30, 44)
-# 		iconAnchor : new L.Point(16, 44)
+#   options:
+#     iconUrl    : "<%= image_path('_new/marker_drag.png') %>"
+#     iconSize   : new L.Point(30, 44)
+#     iconAnchor : new L.Point(16, 44)
 
 IBikeCPH.icons = {}
 
 IBikeCPH.icons.from = new IBikeCPH.Views.Icon
-	iconUrl : "<%= image_path('_new/marker_a.png') %>"
+  iconUrl : "<%= image_path('_new/marker_a.png') %>"
 
 IBikeCPH.icons.to = new IBikeCPH.Views.Icon
-	iconUrl : "<%= image_path('_new/marker_b.png') %>"
+  iconUrl : "<%= image_path('_new/marker_b.png') %>"
 
 IBikeCPH.icons.via = new IBikeCPH.Views.ViaIcon
 
 IBikeCPH.icons.step = new IBikeCPH.Views.Icon
-	iconUrl : "<%= image_path('_new/marker_step.png') %>"
+  iconUrl : "<%= image_path('_new/marker_step.png') %>"
 
 IBikeCPH.icons.route_marker = new IBikeCPH.Views.ViaIcon
-	iconUrl    : "<%= image_path('_new/marker_drag.png') %>"
+  iconUrl    : "<%= image_path('_new/marker_drag.png') %>"

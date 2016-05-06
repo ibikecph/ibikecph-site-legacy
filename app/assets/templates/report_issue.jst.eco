@@ -1,41 +1,41 @@
 <div class="header">
-	<h1><%= I18n.t 'report_issue.title' %></h1>
-	<span class="back">Back</span>
+  <h1><%= I18n.t 'report_issue.title' %></h1>
+  <span class="back">Back</span>
 </div>
 <div class="inner" id="step_2">
-	<form action="#" class="reportProblemForm">
-		<select name="#" id="" class="selectReplace">
-			<option value=""><%= I18n.t 'report_issue.select' %></option>
-		</select>
+  <form action="#" class="reportProblemForm">
+    <select name="#" id="" class="selectReplace">
+      <option value=""><%= I18n.t 'report_issue.select' %></option>
+    </select>
 
-		<ul class="errors"></ul>
+    <ul class="errors"></ul>
 
-		<p class="problem">
-			<input type="radio" value="Vejnavn er forkert" id="radion_1" name="route">
-			<label for="radion_1"><%= I18n.t 'report_issue.errors.road_name' %></label>
-		</p>
-		<p class="problem">
-			<input type="radio" value="Vejen er ensrettet" id="radio_2" name="route">
-			<label for="radio_2"><%= I18n.t 'report_issue.errors.road_one_way' %></label>
-		</p>
-		<p class="problem">
-			<input type="radio" value="Vejen er lukket" id="radio_3" name="route">
-			<label for="radio_3"><%= I18n.t 'report_issue.errors.road_closed' %></label>
-		</p>
-		<p class="problem">
-			<input type="radio" value="Ruten foreslår ulovlige sving" id="radio_4" name="route">
-			<label for="radio_4"><%= I18n.t 'report_issue.errors.road_illegal_turn' %></label>
-		</p>
-		<p class="problem">
-			<input type="radio" value="Andet" id="radio_5" name="route">
-			<label for="radio_5"><%= I18n.t 'report_issue.errors.road_other' %></label>
-		</p>
-		<p>
-			<textarea name="message" id="" class="explainProblem" placeholder="<%= I18n.t('report_issue.textarea') %>"></textarea>
-		</p>
+    <p class="problem">
+      <input type="radio" value="Vejnavn er forkert" id="radion_1" name="route">
+      <label for="radion_1"><%= I18n.t 'report_issue.errors.road_name' %></label>
+    </p>
+    <p class="problem">
+      <input type="radio" value="Vejen er ensrettet" id="radio_2" name="route">
+      <label for="radio_2"><%= I18n.t 'report_issue.errors.road_one_way' %></label>
+    </p>
+    <p class="problem">
+      <input type="radio" value="Vejen er lukket" id="radio_3" name="route">
+      <label for="radio_3"><%= I18n.t 'report_issue.errors.road_closed' %></label>
+    </p>
+    <p class="problem">
+      <input type="radio" value="Ruten foreslår ulovlige sving" id="radio_4" name="route">
+      <label for="radio_4"><%= I18n.t 'report_issue.errors.road_illegal_turn' %></label>
+    </p>
+    <p class="problem">
+      <input type="radio" value="Andet" id="radio_5" name="route">
+      <label for="radio_5"><%= I18n.t 'report_issue.errors.road_other' %></label>
+    </p>
+    <p>
+      <textarea name="message" id="" class="explainProblem" placeholder="<%= I18n.t('report_issue.textarea') %>"></textarea>
+    </p>
 
-	</form>
+  </form>
 </div>
 <p class="submits">
-	<input type="submit" class="feedbackSubmit" value="<%= I18n.t 'report_issue.submit' %>">
+  <input type="submit" class="feedbackSubmit" value="<%= I18n.t 'report_issue.submit' %>">
 </p>

@@ -1,22 +1,22 @@
 <div class="centered_dialog small">
-	<h1><%=t '.title' %></h1>
+  <h1><%=t '.title' %></h1>
 
-	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-	  <%= devise_error_messages! %>
-	  <%= f.hidden_field :reset_password_token %>
+  <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.hidden_field :reset_password_token %>
 
-	  <p>
-	  	<%= f.label :password, t('.new_password') %>
-	  	<%= f.password_field :password, :autofocus => true, :class => 'text_input' %>
-	  </p>
+    <p>
+      <%= f.label :password, t('.new_password') %>
+      <%= f.password_field :password, :autofocus => true, :class => 'text_input' %>
+    </p>
 
-	  <p>
-	  	<%= f.label :password_confirmation, t('.confirm_password') %>
-	  	<%= f.password_field :password_confirmation, :class => 'text_input' %>
-	  </p>
+    <p>
+      <%= f.label :password_confirmation, t('.confirm_password') %>
+      <%= f.password_field :password_confirmation, :class => 'text_input' %>
+    </p>
 
-	  <p class="submits">
-	  	<%= f.submit t('.submit') %>
-	  </div>
-	<% end %>
+    <p class="submits">
+      <%= f.submit t('.submit') %>
+    </div>
+  <% end %>
 </div>

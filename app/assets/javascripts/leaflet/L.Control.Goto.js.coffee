@@ -11,26 +11,26 @@
 
 L.Control.Goto = L.Control.extend
 
-	options:
-		position: 'topleft'
+  options:
+    position: 'topleft'
 
-	onAdd: (map) ->
-		class_name = 'leaflet-control-goto'
-		container  = L.DomUtil.create 'div', class_name
+  onAdd: (map) ->
+    class_name = 'leaflet-control-goto'
+    container  = L.DomUtil.create 'div', class_name
 
-		@_createButton I18n.t('map.use_my_location'), "#{class_name}-my-location", container, => @go_to_my_location()
-		@_createButton I18n.t('map.zoom_to_route'), "#{class_name}-route"      , container, => @go_to_route()
+    @_createButton I18n.t('map.use_my_location'), "#{class_name}-my-location", container, => @go_to_my_location()
+    @_createButton I18n.t('map.zoom_to_route'), "#{class_name}-route"      , container, => @go_to_route()
 
-		container
+    container
 
-	_createButton: (title, class_name, container, fn) ->
-		link = L.DomUtil.create 'a', class_name, container
-		link.href  = '#'
-		link.title = title
+  _createButton: (title, class_name, container, fn) ->
+    link = L.DomUtil.create 'a', class_name, container
+    link.href  = '#'
+    link.title = title
 
-		L.DomEvent
-			.addListener(link, 'click', L.DomEvent.stopPropagation)
-			.addListener(link, 'click', L.DomEvent.preventDefault)
-			.addListener(link, 'click', fn)
+    L.DomEvent
+      .addListener(link, 'click', L.DomEvent.stopPropagation)
+      .addListener(link, 'click', L.DomEvent.preventDefault)
+      .addListener(link, 'click', fn)
 
-		link
+    link

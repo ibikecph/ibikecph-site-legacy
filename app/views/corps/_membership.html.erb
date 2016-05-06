@@ -1,5 +1,5 @@
 <% if current_user && current_user.tester? %>
-	<%= link_to t('.leave'), leave_corps_path, :class => :submit %>
+  <%= link_to t('.leave'), leave_corps_path, :class => :submit %>
 <% else %>
-	<%= link_to t('.join'), join_corps_path, :class => :submit %>
+  <%= link_to t('.join'), join_corps_path, :class => :submit %>
 <% end %>

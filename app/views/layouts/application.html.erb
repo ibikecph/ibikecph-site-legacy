@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-	<!--[if IE]>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <!--[if IE]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-	<%= stylesheet_link_tag "application", :media => "all" %>
-	<%= javascript_include_tag "application", "misc" %>
-	<%= render 'layouts/locale' %>
-	<%= timeago_script_tag %>
-	<%= csrf_meta_tags %>
-	<!--  favicon -->
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" id="favicon"/>
-	<title><%=t :page_title %></title>
-	<%= analytics_init if Rails.env.production? %>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application", "misc" %>
+  <%= render 'layouts/locale' %>
+  <%= timeago_script_tag %>
+  <%= csrf_meta_tags %>
+  <!--  favicon -->
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" id="favicon"/>
+  <title><%=t :page_title %></title>
+  <%= analytics_init if Rails.env.production? %>
 </head>
 <body>
-	<%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
-	<%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
-	<div id="content">
-		<%= yield %>
-	</div>
-	<!-- <div id="footer">
-	</div> -->
+  <%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
+  <%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
+  <div id="content">
+    <%= yield %>
+  </div>
+  <!-- <div id="footer">
+  </div> -->
 </body>
 </html>
