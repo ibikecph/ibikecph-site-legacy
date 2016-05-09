@@ -6,7 +6,7 @@ gem "rails", '5.0.0.beta4'
 gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
-gem 'devise', '~> 4.0.1'
+gem 'devise', '~> 4.0.2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'devise-token_authenticatable', '~> 0.5.0.beta'
