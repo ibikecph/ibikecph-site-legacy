@@ -75,7 +75,7 @@ RailsOSRM::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.eager_load = true
+  config.eager_load = false
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => WEB_DOMAIN }
