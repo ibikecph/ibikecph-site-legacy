@@ -11,7 +11,7 @@ class EmailsController < ApplicationController
                        :new_verification,
                        :create_verification,
                        :verification_sent
-                     ]
+                     ], raise: false
   before_filter :find_authentication, except: [
                   :new,
                   :create,
