@@ -1,6 +1,6 @@
 class Api::V1::TermsController < Api::V1::BaseController
   
-  skip_before_filter :check_auth_token!
+  skip_before_filter :check_auth_token!, raise: false
   
   def index
     render status: 200,
