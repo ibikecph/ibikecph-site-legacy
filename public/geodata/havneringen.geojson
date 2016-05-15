@@ -1,12 +1,13 @@
 {
   "type": "FeatureCollection",
+  "properties": {
+    "name": "Havneringen",
+    "color": "#001eff"
+  },
   "features": [
     {
       "type": "Feature",
-      "properties": {
-        "name": "Havneringen",
-        "color": "#001eff"
-      },
+      "properties": {},
       "geometry": {
         "type": "LineString",
         "coordinates": [

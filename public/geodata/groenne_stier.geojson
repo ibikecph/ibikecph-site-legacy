@@ -1,12 +1,13 @@
 {
   "type": "FeatureCollection",
+  "properties": {
+    "name": "Grønne stier",
+    "color": "#6fcd00"
+  },
   "features": [
     {
       "type": "Feature",
-      "properties": {
-        "name": "Grønne stier",
-        "color": "#6fcd00"
-      },
+      "properties": {},
       "geometry": {
         "type": "LineString",
         "coordinates": [
