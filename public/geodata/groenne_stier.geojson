@@ -1,7 +1,10 @@
 {
   "type": "FeatureCollection",
   "properties": {
-    "name": "Grønne stier",
+    "name": {
+      "da": "Grønne Stier",
+      "en": "Green Paths"
+    },
     "color": "#6fcd00"
   },
   "features": [

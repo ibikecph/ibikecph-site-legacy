@@ -1,7 +1,10 @@
 {
   "type": "FeatureCollection",
   "properties": {
-    "name": "Havneringen",
+    "name": {
+      "da": "Havneringen",
+      "en": "Harbour Ring"
+    },
     "color": "#001eff"
   },
   "features": [
