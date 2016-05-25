@@ -11,8 +11,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     'change .departure'        : 'change_departure'
     'change .arrival'        : 'change_arrival'
     'click .reverse_route'      : 'reverse_route'
-    'change .mode [type=radio]'      : 'change_mode'
-    'click #cargobike_trigger'    : 'toggle_mode'
+    'change #mode [type=radio]'      : 'change_mode'
+    #'click #cargobike_trigger'    : 'toggle_mode'
 
   map: null
 
@@ -46,10 +46,10 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       favourites = new IBikeCPH.Views.Favourites model: '', el: '#favorites', router: @router
       favourites.render(m.waypoints)
       return false
-    if window.location.hash.match 'mode:cargobike'
-      setTimeout (->
-        $('#cargobike_trigger').trigger 'click'
-      ), 200
+    #if window.location.hash.match 'mode:cargobike'
+    #  setTimeout (->
+    #    $('#cargobike_trigger').trigger 'click'
+    #  ), 200
 
     this
 
@@ -396,6 +396,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     profile = $(event.target).attr('id')
     @model.set 'profile', profile, silent: true
     @model.trigger 'change:profile'
+    console.log @model
 
   toggle_mode: (event) ->
     el = $(event.currentTarget)

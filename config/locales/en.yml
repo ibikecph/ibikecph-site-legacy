@@ -495,9 +495,11 @@ en:
     arrival: Arrival
     departure_placeholder: at
     arrival_placeholder: at
-    normal_bike: Bike
-    cargo_bike: Cargo Bike
-    electric_bike: Electric Bike
+
+    fast_route: Kom hurtigt frem
+    cargo_route: Bedst til ladcykel
+    green_route: Nyd det grønne
+
     reset: Reset
     link_for_route: Link
 

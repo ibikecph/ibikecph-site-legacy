@@ -53,7 +53,7 @@ class IBikeCPH.OSRM
     #return if current_query == @last_query or current_query_with_instructions == @last_query
     #@last_query = current_query
             
-    profile = @model.get('profile') or 'standard'
+    profile = @model.get('profile') or @model.standard_profile()
     url = IBikeCPH.config.routing_service[ profile ]
     url += if /\?/.test(url) then '&' else '?'
     

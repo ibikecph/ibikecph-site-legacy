@@ -500,9 +500,10 @@ da:
     departure_placeholder: kl.
     arrival_placeholder: kl.
 
-    normal_bike: Cykel
-    cargo_bike: Ladcykel
-    electric_bike: Elcykel
+    fast_route: Kom hurtigt frem
+    cargo_route: Bedst til ladcykel
+    green_route: Nyd det grønne
+    
     reset: Nulstil
     link_for_route: Link
   

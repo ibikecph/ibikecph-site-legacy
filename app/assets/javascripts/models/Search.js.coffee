@@ -8,12 +8,15 @@ class IBikeCPH.Models.Search extends Backbone.Model
     @waypoints      = new IBikeCPH.Collections.Waypoints
     @instructions   = new IBikeCPH.Collections.Instructions
     @summary        = new IBikeCPH.Models.Summary
-    @profile    = 'standard'
+    @profile    = @standard_profile()
     
   reset: ->
     @waypoints.reset()
     @instructions.reset()
     @summary.reset()
     @set 'route', ''
-    @profile      = 'standard'
+    @profile      = @standard_profile()
     
+  
+  standard_profile: ->
+    'fast'
