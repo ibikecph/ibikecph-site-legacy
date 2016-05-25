@@ -10,13 +10,13 @@
   <div id="waypoints">
     <div class="waypoint">
       <label class="a"><%= I18n.t 'map.from' %></label>
-      <input class="address from" type="text" title="<%= I18n.t 'map.from' %>" placeholder="<%= I18n.t 'map.from_placeholder' %>" tabindex=1 >
+      <input class="address" id="from_address" type="text" title="<%= I18n.t 'map.from' %>" placeholder="<%= I18n.t 'map.from_placeholder' %>" tabindex=1 >
       <input class="at departure" type="text" placeholder="<%= I18n.t 'map.departure_placeholder' %>" tabindex=3>
       <div class="clear"></div>
     </div>
     <div class="waypoint">
       <label class="b"><%= I18n.t 'map.to' %></label>
-      <input class="address to" type="text" title="<%= I18n.t 'map.to' %>" placeholder="<%= I18n.t 'map.to_placeholder' %>" tabindex=2>
+      <input class="address" id="to_address" type="text" title="<%= I18n.t 'map.to' %>" placeholder="<%= I18n.t 'map.to_placeholder' %>" tabindex=2>
       <input class="at arrival" type="text" placeholder="<%= I18n.t 'map.arrival_placeholder' %>" tabindex=4>
       <div class="clear"></div>
     </div>

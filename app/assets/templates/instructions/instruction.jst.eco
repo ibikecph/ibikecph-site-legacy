@@ -1,3 +1,1 @@
-<span class="instruction_icon" style="background: url(/assets/_new_directions/<%=@instruction.toJSON().turn%>.png?v=new) no-repeat center 10px"></span>
 <span class="instruction_text"><%= IBikeCPH.util.instruction_string(@instruction.toJSON()) %></span>
-<span class="clear"></span>

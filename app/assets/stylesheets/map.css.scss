@@ -44,8 +44,11 @@ body {
       float: left;
       color: $color;
       cursor: pointer;
-      margin-right: 10px;
+      margin-right: 20px;
       text-decoration: underline;
+      &:hover {
+        color: $red;
+      }
     }
   }
   
@@ -204,115 +207,53 @@ body {
       }
     }
   }
-  #summary {
-    display: block;
-    padding: 10px 20px;
-    border: none;
-    background: $dark;
-    color: white;
-    text-align: right;
-    position: relative;
-    text-shadow: 0 -1px 1px #000;
-    .details {
-      font-size: 0.9em;
-      font-weight: bold;
-      color: $white;
-      position: absolute;
-      left: 20px;
-      top: 12px;
-      cursor: pointer;
+  #route_info {
+    background: $light;
+    #summary {
+      display: none;
+      color: $dark;
+      .duration, .distance {
+        font-size: 1.4em;
+        font-weight: bold;
+        margin-right: 20px;
+      }
+      .details {
+        float: right;
+        font-size: 0.9em;
+        font-weight: bold;
+        color: $medium;
+        cursor: pointer;
+      }
     }
-    .duration, .distance {
-      font-size: 1em;
-      font-weight: bold;
-    }
-    .notice {
-      border: 1px solid #cc8;
-      background-color: #fec;
-      color: black;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-  }
-  #instructions_div {
+    #instructions_div {
       display: none;
       overflow-y: auto;
-      margin-left: -20px;
-      width: 390px;
       #instructions {
         display: block;
-      margin-top: 10px;
-      border-bottom: 1px solid #d5d5d6;
-      margin: 0;
-      list-style-type: none;
-      color: $dark;
-      li {
-        cursor: pointer;
-        display: block;
-        padding: 15px 20px;
-        border-bottom: 1px solid #d5d5d6;
-        &:last-child {
-          border: none;
-        };
-        &:hover {
-          background-color: #eee;
-          color: black;
-        };
-        span.instruction_icon {
-          width: 40px;
-          padding-top: 42px;
-          text-align: center;
-          display: block;
-          float: left;
-          margin-right: 10px;
-          font-size: 0.6em;
-        };
-        span.instruction_text {
-          font-size: 17px;
-          font-weight: bold;
-          display: block;
-          float: left;
-          width: 200px;
-        };
-        span.clear {
-          clear: both;
-          font-size: 1px;
-          display: block;
-        }
-      }
-      li.close { display: none; }
-    }
-    &.mobile {
-      z-index: 99;
-      position: absolute;
-      top: -11px;
-      left: 0;
-      background: #fff;
-      #instructions {
-        span.instruction_text {
-          font-size: 14px;
-        }
-        li.close {
-          display: block;
+        margin-top: 5px;
+        margin: 0;
+        list-style-type: none;
+        color: $dark;
+        li {
           cursor: pointer;
-          height: 13px;
-          padding: 14px;
-          position: relative;
-          background: #373737;
-          span {
-            background: image-url('_new/app-close.png') no-repeat center center;
-            display: block;
-            width: 13px;
-            height: 14px;
-            position: absolute;
-            right: 10px;
-            top: 12px;
-          }
+          display: block;
+          padding: 5px 0px;
+          &:last-child {
+            border: none;
+          };
+          &:hover {
+            background-color: #eee;
+            color: black;
+          };
+          span.instruction_text {
+            font-size: 1em;
+          };
         }
       }
     }
   }
 }
+
 #favorites, #report {
   position: absolute;
   z-index: 2;

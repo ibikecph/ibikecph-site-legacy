@@ -2,16 +2,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
   template: JST['sidebar']
   
   events:
-    'change .waypoint .address'      : 'fields_updated'
-    'blur .waypoint input'      : 'hide_suggestions'
-    'keydown .waypoint .address'    : 'find_suggestions'
-    'click .suggestions li'      : 'update_field_from_suggestion'
-    'click #reset'          : 'reset'
-    'click #permalink'        : 'permalink'
-    'click #reverse_route'      : 'reverse_route'
-    'change .waypoint .departure'        : 'change_departure'
-    'change .waypoint .arrival'        : 'change_arrival'
-    'change #mode [type=radio]'      : 'change_mode'
+    'change .waypoint .address'   : 'fields_updated'
+    'blur .waypoint .address'     : 'hide_suggestions'
+    'keydown .waypoint .address'  : 'find_suggestions'
+    'click .suggestions li'       : 'update_field_from_suggestion'
+    'click #reset'                : 'reset'
+    'click #permalink'            : 'permalink'
+    'click #reverse_route'        : 'reverse_route'
+    'change .waypoint .departure' : 'change_departure'
+    'change .waypoint .arrival'   : 'change_arrival'
+    'change #mode [type=radio]'   : 'change_mode'
 
   map: null
 
@@ -22,8 +22,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       #TODO should refactor address fields into backbone views, one for each endpoint (and perhaps for via points too)
       type = model.get 'type'
       value = model.get 'address'
-      @$(".from").val(value) if type=='from'
-      @$(".to").val(value) if type=='to'
+      @$("#from_address").val(value) if type=='from'
+      @$("#to_address").val(value) if type=='to'
     
     @model.waypoints.on 'reset', =>
       @set_field 'from', null
@@ -149,13 +149,102 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
   set_loading: (field_name, loading) ->
     @$(".#{field_name}").toggleClass 'loading', !!loading
 
+  suggestion_interval: (el,parent,items,val,interval) =>
+    if items.length <= 0
+      return
+    $('.suggestions').remove()
+    suggestions = $('<ul />').addClass('suggestions')
+    parent.append(suggestions)
+
+    _.each items, (t,num) ->
+      unless num > 5
+        if t.type is "poi"
+          container = $('<li />').attr
+            'data-name': t.name
+            'data-lat': t.lat
+            'data-lng': t.lng
+            'data-type': el.attr('id')
+            'data-address': t.address
+            'data-class': 'poi'
+            'class': 'poi'
+          name = $('<span />').addClass('n').html(t.name+' ')
+          address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
+          address = $("<span />").addClass("a").html(address)
+          container.append(name).append address
+        else
+          container = $('<li />').attr
+            'data-name': ''
+            'data-lat': t.lat
+            'data-lng': t.lng
+            'data-type': el.attr('id')
+            'data-address': t.address
+            'data-class': 'address'
+            'class': 'address'
+          address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
+          address = $('<span />').addClass('a').html(address.replace('(', '').replace(')', ''))
+          container.append address
+
+        suggestions.append container
+        $('.suggestions li:first').addClass('selected')
+
+    clearInterval interval
+
+  fetch_suggestions: (el,parent) =>
+    val = el.val().toLowerCase()
+
+    if val.length >= 4
+      items = []
+      numberPattern = /\d+/g
+      val_number = val.match(numberPattern);
+      val_address = val.replace(' '+val_number, '')
+      foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token+'&callback=?'
+      #oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
+      kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'&callback=?'
+
+      $.ajax
+        type: 'get'
+        url: kms_url
+        cache: false
+        dataType: 'json'
+        success: (data) ->
+          $.each data.data, ->
+            if @x
+              lat = @y
+              lng = @x
+            else
+              lat = @yMin
+              lng = @xMin
+            items.push
+              name: ''
+              address: @presentationString
+              lat: lat
+              lng: lng
+              type: 'address'
+
+      $.getJSON foursquare_url, (data) ->
+        unless data.response.minivenues.length is 0
+          $.each data.response.minivenues, ->
+            unless @location.postalCode is ""
+              items.push
+                name: @name
+                address: @location.address + ", " + @location.postalCode + " " + @location.city
+                lat: @location.lat
+                lng: @location.lng
+                type: 'poi'
+
+      interval = setInterval(=>
+        @suggestion_interval(el,parent,items,val,interval)
+      , 500)
+
+    else
+      $('.suggestions').html('').hide()
+      return false
+
   find_suggestions: (event) ->
     t = @
-    el = $('.'+$(event.currentTarget).attr('class'))
-
+    el = $(event.currentTarget)
     parent = el.parent()
-    input = parent.find('input').attr('class')
-
+    
     if event.keyCode is 40 or event.keyCode is 38
       if $('.suggestions').html()
         selected_element = $('.suggestions li.selected').index()
@@ -173,147 +262,19 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       $('.suggestions li.selected').trigger('click')
       return false
 
-    setTimeout (->
-      val = el.val().toLowerCase()
-
-      if val.length >= 4
-        items = []
-        numberPattern = /\d+/g
-        val_number = val.match(numberPattern);
-        val_address = val.replace(' '+val_number, '')
-        foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token+'&callback=?'
-        oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
-        kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'&callback=?'
-
-        if $current_user
-          favourites = new IBikeCPH.Models.Favourites
-          favourites.fetch
-            success: ->
-              _.each favourites.attributes.data, (t, num) ->
-                if t.name.toLowerCase().match(val.toLowerCase()) or t.address.toLowerCase().match(val.toLowerCase())
-                  items.push
-                    name: t.name
-                    address: t.address
-                    lat: t.latitude
-                    lng: t.longitude
-                    type: 'favourite'
-                    fav_class: t.source
-
-        $.ajax
-          type: 'get'
-          url: kms_url
-          cache: false
-          dataType: 'json'
-          success: (data) ->
-            $.each data.data, ->
-              if @x
-                lat = @y
-                lng = @x
-              else
-                lat = @yMin
-                lng = @xMin
-              items.push
-                name: ''
-                address: @presentationString
-                lat: lat
-                lng: lng
-                type: 'address'
-        # $.getJSON kms_url, (data) ->
-          # $.each data.data, ->
-          #   if @x
-          #     lat = @y
-          #     lng = @x
-          #   else
-          #     lat = (@yMin+@yMax)/2
-          #     lng = (@xMin+@xMax)/2
-          #   items.push
-          #     name: ''
-          #     address: @presentationString
-          #     lat: lat
-          #     lng: lng
-          #     type: 'address'
-
-        $.getJSON foursquare_url, (data) ->
-          unless data.response.minivenues.length is 0
-            $.each data.response.minivenues, ->
-              unless @location.postalCode is ""
-                items.push
-                  name: @name
-                  address: @location.address + ", " + @location.postalCode + " " + @location.city
-                  lat: @location.lat
-                  lng: @location.lng
-                  type: 'poi'
-
-        interval = setInterval(->
-          if items.length > 0
-            $('.suggestions').remove()
-            suggestions = $('<ul />').addClass('suggestions')
-            parent.append(suggestions)
-            
-            _.each items, (t,num) ->
-              unless num > 5
-                if t.type is 'favourite'
-                  container = $('<li />').attr
-                    'data-name': t.name
-                    'data-lat': t.lat
-                    'data-lng': t.lng
-                    'data-type': input
-                    'data-address': t.address
-                    'data-class': 'favorite'
-                    'class': 'favourite '+t.fav_class
-                  name = $('<span />').addClass('n').html(t.name+' ')
-                  address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
-                  address = $("<span />").addClass("a").html(address)
-                  container.append(name).append address
-                else if t.type is "poi"
-                  container = $('<li />').attr
-                    'data-name': t.name
-                    'data-lat': t.lat
-                    'data-lng': t.lng
-                    'data-type': input
-                    'data-address': t.address
-                    'data-class': 'poi'
-                    'class': 'poi'
-                  name = $('<span />').addClass('n').html(t.name+' ')
-                  address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
-                  address = $("<span />").addClass("a").html(address)
-                  container.append(name).append address
-                else
-                  container = $('<li />').attr
-                    'data-name': ''
-                    'data-lat': t.lat
-                    'data-lng': t.lng
-                    'data-type': input
-                    'data-address': t.address
-                    'data-class': 'address'
-                    'class': 'address'
-                  address = t.address.replace(new RegExp("(" + preg_quote(val) + ")", "gi"), "<b style=\"color: #444;\">$1</b>")
-                  address = $('<span />').addClass('a').html(address.replace('(', '').replace(')', ''))
-                  container.append address
-
-                suggestions.append container
-                $('.suggestions li:first').addClass('selected')
-            
-            clearInterval interval
-        , 500)
-            
-      else
-        $('.suggestions').html('').hide()
-        return false
-
-    ), 500
-  
+    setTimeout (=>@fetch_suggestions(el,parent)), 500
+    
   reverse_route: ->
     @model.waypoints.models.reverse()
     @model.waypoints.reset_from_url @model.waypoints.to_url()
-    @set_field 'from', $("#addresses .to").val()
-    @set_field 'to', $("#addresses .from").val()
+    @set_field 'from', $("#to_address").val()
+    @set_field 'to', $("#from_address").val()
 
   update_field_from_suggestion: (event) ->
     el = $(event.currentTarget)
     type = el.data('type')
     source = el.data 'class'
-
+    
     ll =
       lat: el.data('lat')
       lng: el.data('lng')
@@ -322,38 +283,28 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     if el.data('class') is 'address'
       value = @normalize_address IBikeCPH.util.normalize_whitespace el.data('address')
 
-      if type is 'from'
+      if type is 'from_address'
         @set_field 'from', value
         waypoint = @model.waypoints.first()
         waypoint.set 'address', value
         waypoint.trigger 'input:address'
         $('.from').blur()
-      else if type is 'to'
+      else if type is 'to_address'
         @set_field 'to', value
         waypoint = @model.waypoints.last()
         waypoint.set 'address', value
         waypoint.trigger 'input:address'
         $('.to').blur()
 
-      $('.address .'+type).attr
-        'data-lat': ll.lat
-        'data-lng': ll.lng
-        'data-name': ll.name
-
       $('.suggestions').html('').hide()
     else
-      if type is 'from'
+      if type is 'from_address'
         @model.waypoints.first().set 'location', ll
         @model.waypoints.first().trigger 'input:location'
 
-      else if type is 'to'
+      else if type is 'to_address'
         @model.waypoints.last().set 'location', ll
         @model.waypoints.last().trigger 'input:location'
-
-      $('.address .'+type).attr
-        'data-lat': ll.lat
-        'data-lng': ll.lng
-        'data-name': ll.name
 
       $('.suggestions').html('').hide()
 
@@ -395,14 +346,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     @model.set 'profile', profile, silent: true
     @model.trigger 'change:profile'
     console.log @model
-
-  toggle_mode: (event) ->
-    el = $(event.currentTarget)
-    el.toggleClass('active')
-    if not el.hasClass('active')
-      $('.mode #standard').trigger 'click'
-    else
-      $('.mode #cargobike').trigger 'click'
 
   normalize_address: (value) ->
     value = IBikeCPH.util.normalize_whitespace value
