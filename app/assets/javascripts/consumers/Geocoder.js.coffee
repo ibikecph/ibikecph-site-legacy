@@ -43,7 +43,7 @@ class IBikeCPH.Geocoder
       lat    : location.lat
       lon    : location.lng
     , IBikeCPH.config.geocoding_service.options
-    @lookup_init()
+    @lookup_init()    
     @request = $.getJSON IBikeCPH.config.reverse_geocoding_service.url + '?json_callback=?', options, (result) =>
       address = IBikeCPH.util.displayable_address result
       @model.set 'address', address if address
