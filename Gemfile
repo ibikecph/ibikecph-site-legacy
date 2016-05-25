@@ -49,7 +49,6 @@ end
 group :development, :test do
   gem 'rspec-rails'#, '~> 3.0'
   gem 'figaro'
-  gem 'dotenv-rails'
 end
 
 group :test do
