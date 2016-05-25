@@ -493,8 +493,8 @@ en:
     use_my_location: Use my Location
     departure: Departure
     arrival: Arrival
-    departure_placeholder: at
-    arrival_placeholder: at
+    departure_placeholder: Depart at
+    arrival_placeholder: Arrive at
 
     fast_route: Kom hurtigt frem
     cargo_route: Bedst til ladcykel

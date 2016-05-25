@@ -226,11 +226,11 @@ body {
       }
     }
     #instructions_div {
+      margin-top: -20px !important;
       display: none;
       overflow-y: auto;
       #instructions {
         display: block;
-        margin-top: 5px;
         margin: 0;
         list-style-type: none;
         color: $dark;
@@ -694,13 +694,13 @@ div#help {
 }
 
 ::-webkit-input-placeholder {
-  color: #bbb;
+  color: #aaa;
 }
 :-moz-placeholder {
-  color: #bbb;
+  color: #aaa;
 }
 :-ms-input-placeholder {
-  color: #bbb;
+  color: #aaa;
 }
 
 @media only screen and (max-width: 767px) {
