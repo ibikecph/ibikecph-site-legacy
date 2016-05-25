@@ -506,7 +506,8 @@ da:
     
     reset: Nulstil
     link_for_route: Link
-  
+    permalink: Et link til ruten kan nu kopieres fra adressebaren.
+    
   instructions:
     1: første
     2: anden

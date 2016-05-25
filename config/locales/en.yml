@@ -502,6 +502,7 @@ en:
 
     reset: Reset
     link_for_route: Link
+    permalink: A link to the route can now be copied from the address bar.
 
   instructions:
     1: first
