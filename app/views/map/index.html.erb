@@ -1,34 +1,18 @@
 <div id="viewport">
-    <div id="map"></div>
-    
-    <div id="ui">
-        <div class="fold"></div>
-        <div id="ui_foldable">
-            <div id="search"></div>
-            <div id="summary">
-                <a class="details"><%=t 'map.route_instructions' %></a>
-                <span class='distance'></span>&nbsp;&nbsp;&nbsp;<span class='duration'></span>
-            </div>
-            <div id="instructions_div"></div>
-            <!-- <div class="notice">
-                <%=t 'map.work_in_progress' %><br>
-                <%= link_to( t('map.bugs_and_suggestions'),issues_path) %>
-            </div>-->
-            <ul class="search_bottom">
-                <li class="favorites"><a href="#"><%=t 'map.add_favorite' %></a></li>
-                <li class="report"><a href="#"><%=t 'map.bugs_and_suggestions_short' %></a></li>
-            </ul>
-        </div>
-
+  <div id="map"></div>
+  <div id="ui">
+    <div id="search"></div>
+    <div id="summary">
+        <a class="details"><%=t 'map.route_instructions' %></a>
+        <span class='distance'></span>
+        &nbsp;&nbsp;&nbsp;
+        <span class='duration'></span>
     </div>
-    
-    <div id="help">
-        <a class="help"><%=t 'map.help_dialog.hide_help' %></a>
-        <h2><%=t 'map.help_dialog.title' %></h2>
-        <%= simple_format t('map.help_dialog.body') %>
-    </div>
-
-    <div id="favorites"></div>
-    <div id="report"></div>
-    
+    <div id="instructions_div"></div>
+  </div>
+  <div id="help">
+      <a id="toggle_help"><%=t 'map.help_dialog.hide_help' %></a>
+      <h2><%=t 'map.help_dialog.title' %></h2>
+      <%= simple_format t('map.help_dialog.body') %>
+  </div>
 </div>

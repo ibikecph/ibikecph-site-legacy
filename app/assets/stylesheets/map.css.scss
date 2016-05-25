@@ -24,10 +24,8 @@ body {
 #ui {
   position: absolute;
   z-index: 1;
-  width: 350px;
   top: 40px;
   left: 0;
-  padding: $half_gutter - 2*$border_width;
   border: $border_width solid $lightish;
   background: $white;
   -webkit-transition: left 0.2s ease;
@@ -35,62 +33,20 @@ body {
   -ms-transition: left 0.2s ease;
   -o-transition: left 0.2s ease;
   transition: left 0.2s ease;
-  &.folded {
-    width: 51px;
-    height: 45px;
-    .fold {
-      width: 51px;
-      height: 45px;
-      display: block;
-      background: image-url('_new/logo.png');
+  
+  .pad {
+    padding: $half_gutter - 2*$border_width;
+  }
+  #links {
+    margin-bottom: 10px;
+      a {
+      font-size: 0.9em;
+      float: left;
+      color: $color;
+      cursor: pointer;
+      margin-right: 10px;
+      text-decoration: underline;
     }
-    #ui_foldable {
-      display: none;
-    }
-  }
-  .fold {
-    cursor: pointer;
-    width: 51px;
-    height: 45px;
-    float: left;
-    background: image-url('_new/logo.png');
-  }
-  .reset, .permalink, .help {
-    font-size: 0.8em;
-    float: right;
-    color: $color;
-    cursor: pointer;
-    margin-left: 2px;
-    text-decoration: none;
-    text-indent: -5000px;
-    overflow: hidden;
-    display: block;
-    opacity: 0.5;
-    width: 16px;
-    height: 16px;
-    padding: 10px;
-    background-color: #ddd;
-    border-radius: 3px;
-    margin-left: 3px;
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .helper-icons.help {
-    background-image: image-url('_new/help.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-  .helper-icons.reset {
-    background-image: image-url('_new/reset-search.png');
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-  .helper-icons.permalink {
-    background-image: image-url('_new/link.png');
-    background-repeat: no-repeat;
-    background-position: center center;
   }
   
   h1 {
@@ -101,16 +57,15 @@ body {
   }
   
   #mode {
-    margin: 20px 0;
-    label {
-      margin-right: 10px;
-      &.proposed {
-        color: $medium;
-      }
-    }
     input {
       margin-top: 5px;
       margin-bottom: 5px;
+    }
+    label {
+      margin-right: 20px;
+      &.proposed {
+        color: $medium;
+      }
     }
   }
   .search_bottom {
@@ -158,27 +113,42 @@ body {
       }
     }
   }
-  #addresses {
-    margin: 20px 0;
+  
+  #waypoints {
+    font-size: 1.1em;
+    width: 100%;
     position: relative;
-    .reverse_route {
-      width: 21px;
-      height: 21px;
-      display: block;
-      background: image-url('_new/reverse_route_new.png');
-      opacity: 0.5;
-      right: 0;
-      position: absolute;
-      top: 50%;
-      margin: -9px 0 0;
-      cursor: pointer;
-      &:hover {
-        opacity: 1;
-      };
-    }
-    .address {
+    margin: 20px 0px;
+    .waypoint {
+      margin-bottom: 2px;
+      label, input {
+        display: block;
+        float: left;
+        height: 20px;
+        padding: 5px 10px;
+        margin: 0;
+        border: none;
+      }
+      label {
+        font-weight: bold;
+        width: 12px;
+        background-color: $red;
+        color: white;
+      }
+      input {
+        font-size: 1.1em;
+        background: #eee;
+        position: relative;
+        &.address {
+          width: 300px;
+        }
+        &.at {
+          margin-left: 2px;
+          width: 100px;
+        }
+      }
+      margin-bottom: 2px;
       position: relative;
-      margin-bottom: 10px;
       .suggestions {
         overflow: hidden;
         list-style: none;
@@ -232,104 +202,14 @@ body {
           }
         }
       }
-      label {
-        display: inline-block;
-        font-weight: bold;
-        position: absolute;
-        left: 5px;
-        top: 10px;
-        width: 22px;
-        height: 22px;
-        z-index: 2;
-        text-indent: -5000px;
-        overflow: hidden;
-        &.a {
-          background: image-url('_new/search-a.png');
-        }
-        &.b {
-          background: image-url('_new/search-b.png');
-        }
-      }
-      input {
-        width: 270px;
-        padding: 12px 12px 12px 30px;
-        font-size: 0.80em;
-        background: #f4f4f4;
-        border-radius: 2px;
-        border: 1px solid #e3e3e3;
-        box-shadow: 0 1px 1px #c3c3c3 inset;
-        color: #333;
-        outline: none;
-        font-weight: bold;
-        position: relative;
-        z-index: 1;
-      }
-    }
-  }
-  #time {
-    div {
-      width: 110px;
-      float: left;
-      margin-right: 10px;
-    }
-    .clear {
-      float: none;
-      width: 10px;
-      clear: both;
-      font-size: 1px;
-    }
-    span {
-      display: block;
-      font-size: 0.9em;
-      margin-bottom: 2px;
-      font-weight: bold;
-      color: #666;
-    }
-    input {
-      width: 84px;
-      padding: 12px;
-      font-size: 0.85em;
-      background: #f4f4f4;
-      border-radius: 2px;
-      border: 1px solid #e3e3e3;
-      box-shadow: 0 1px 1px #c3c3c3 inset;
-      color: #333;
-      outline: none;
-      font-weight: bold;
-      position: relative;
-      z-index: 1;
-    }
-    div#cargobike_trigger {
-      width: 70px;
-      height: 41px;
-      margin-top: 15px;
-      background: #f4f4f4 image-url("_new/cargo-normal.png") no-repeat center center;
-      cursor: pointer;
-      border-radius: 2px;
-      border: 1px solid #e3e3e3;
-      box-shadow: 0 1px 2px #c3c3c3;
-      opacity: 0.7;
-      &:hover, &.active {
-        opacity: 1;
-        background: #f4f4f4 image-url("_new/cargo-active.png") no-repeat center center;
-      };
-      &.active {
-        box-shadow: 0 2px 2px #999 inset;
-        background-color: #ccc;
-      }
     }
   }
   #summary {
-    display: none;
-    margin: 10px 0 0 -20px;
+    display: block;
     padding: 10px 20px;
-    width: 350px;
-    border: 1px solid #000;
-    border-right: none;
-    border-left: none;
-    box-shadow: 0 0 5px #5a5a5a inset;
-    background: #444;
-    color: #9d9d9d;
+    border: none;
+    background: $dark;
+    color: white;
     text-align: right;
     position: relative;
     text-shadow: 0 -1px 1px #000;
@@ -343,7 +223,7 @@ body {
       cursor: pointer;
     }
     .duration, .distance {
-      font-size: 0.9em;
+      font-size: 1em;
       font-weight: bold;
     }
     .notice {
@@ -777,7 +657,7 @@ body {
   }
 }
 
-#help {
+div#help {
   display: none;
   opacity:0.9;
   overflow: hidden;
@@ -809,7 +689,7 @@ body {
     color: white;
   }
   font-size: 0.9em;
-  a.help {
+  a#toggle_help {
     font-size: 0.8em;
     float: right;
     color: #ccc;
@@ -873,167 +753,19 @@ body {
 }
 
 ::-webkit-input-placeholder {
-  color: #ddd;
+  color: #bbb;
 }
 :-moz-placeholder {
-  color: #ddd;
+  color: #bbb;
 }
 :-ms-input-placeholder {
-  color: #ddd;
+  color: #bbb;
 }
 
 @media only screen and (max-width: 767px) {
-  #ui {
-    .reset, .permalink, .help {
-      width: 24px !important;
-      height: 24px !important;
-    }
-    width: 250px;
-    top: 50px;
-    padding-bottom: 40px;
-    #addresses {
-      margin: 10px 0;
-      position: relative;
-      .address {
-        margin-bottom: 5px;
-        .suggestions {
-          font-size: 0.7em;
-          top: 26px;
-          left: 2px;
-          width: 214px;
-          padding: 0;
-          z-index: 5;
-          li {
-            padding: 5px 15px 5px 30px;
-          }
-        }
-        label {
-          top: 3px;
-        }
-        input {
-          width: 180px;
-          padding: 5px 5px 5px 30px;
-          font-size: 0.75em;
-          background: #f4f4f4;
-          border-radius: 2px;
-          border: 1px solid #e3e3e3;
-          box-shadow: 0 1px 1px #c3c3c3 inset;
-          color: #333;
-          outline: none;
-          font-weight: bold;
-          position: relative;
-          z-index: 1;
-        }
-      }
-    }
-    #summary {
-      padding: 5px 10px 10px 10px;
-      width: 270px;
-      .details {
-        font-size: 0.75em;
-        left: 10px;
-        top: 9px;
-      }
-      .duration, .distance {
-        font-size: 0.7em;
-      }
-    }
-    #time {
-      div {
-        width: 75px;
-      }
-      input {
-        width: 65px;
-        padding: 5px;
-        font-size: 0.75em;
-      }
-      div#cargobike_trigger {
-        width: 45px;
-        height: 25px;
-        margin-top: 15px;
-        background: #f4f4f4 image-url("_new/cargo_mobile-normal.png") no-repeat center center;
-        &:hover, &.active {
-          background: #f4f4f4 image-url("_new/cargo_mobile-active.png") no-repeat center center;
-        };
-      }
-    }
-    .search_bottom {
-      display: none;
-      margin: 0;
-      width: 290px;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      li {
-        margin: 0;
-        padding: 0;
-        display: block;
-        float: left;
-        width: 144px;
-        &:last-child {
-          width: 143px;
-        }
-        &.report a {
-          background-image: none;
-        }
-        &.favorites a {
-          background-image: none;
-        }
-        a:last-child {
-          border-radius: 0 0 5px 0;
-        }
-        a {
-          display: block;
-          background: #f4f4f4;
-          padding: 12px 0;
-          border-left: 1px solid #fff;
-          border-right: 1px solid #d5d5d6;
-          color: #8b8b8b;
-          text-decoration: none;
-          &:hover {
-            color: #444;
-          }
-        }
-      }
-    }
-  }
-  #favorites, #report {
-    width: 288px;
-    top: 50px;
-    left: -288px;
-  }
-  #report {
-    .selectReplace {
-      height: 18px;
-      width: 179px !important;
-      margin-bottom: 7px;
-      font-size: 11px !important;
-      background: #fff !important;
-      border-radius: 3px;
-      border: 1px solid #e3e3e3;
-      padding: 12px 40px 7px 12px !important;
-      white-space: nowrap !important;
-      overflow: ellipsis !important;
-    }
-    .problem {
-      font-size: 11px !important;
-      textarea {
-        width: 192px !important;
-      }
-    }
-  }
 }
 /* iPad */
 @media only screen 
 and (min-device-width : 768px) 
 and (max-device-width : 1024px){
-  #ui {
-    .reset, .permalink, .help {
-      width: 24px !important;
-      height: 24px !important;
-    }
-    div#cargobike_trigger {
-      margin-top: 18px !important;
-    }
-  }
 }

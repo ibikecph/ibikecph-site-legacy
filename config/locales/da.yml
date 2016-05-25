@@ -497,8 +497,8 @@ da:
     use_my_location: Brug min position
     departure: Afgang
     arrival: Ankomst
-    departure_placeholder: kl.
-    arrival_placeholder: kl.
+    departure_placeholder: Afgang kl.
+    arrival_placeholder: Ankomst kl.
 
     fast_route: Kom hurtigt frem
     cargo_route: Bedst til ladcykel

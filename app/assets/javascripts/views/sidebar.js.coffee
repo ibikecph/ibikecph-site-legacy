@@ -2,17 +2,16 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
   template: JST['sidebar']
   
   events:
-    'change .address input'      : 'fields_updated'
-    'blur .address input'      : 'hide_suggestions'
-    'keydown .address input'    : 'find_suggestions'
+    'change .waypoint .address'      : 'fields_updated'
+    'blur .waypoint input'      : 'hide_suggestions'
+    'keydown .waypoint .address'    : 'find_suggestions'
     'click .suggestions li'      : 'update_field_from_suggestion'
-    'click .reset'          : 'reset'
-    'click .permalink'        : 'permalink'
-    'change .departure'        : 'change_departure'
-    'change .arrival'        : 'change_arrival'
-    'click .reverse_route'      : 'reverse_route'
+    'click #reset'          : 'reset'
+    'click #permalink'        : 'permalink'
+    'click #reverse_route'      : 'reverse_route'
+    'change .waypoint .departure'        : 'change_departure'
+    'change .waypoint .arrival'        : 'change_arrival'
     'change #mode [type=radio]'      : 'change_mode'
-    #'click #cargobike_trigger'    : 'toggle_mode'
 
   map: null
 
@@ -37,8 +36,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     @map = map
     m = @model
     @$el.html @template()
-    $('.help').click (event) => @help()
-    $('.fold').click (event) => @fold()
+    $('a#toggle_help').click (event) => @toggle_help()
     $('.search_bottom .report').click (event) ->
       @report_issue = new IBikeCPH.Views.ReportIssue model: this, el: '#report', router: @router
       @report_issue.render(m.waypoints, m.instructions.models)
@@ -58,7 +56,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     now.setSeconds 0    #avoid minutes that are off by one
     now
 
-  help: ->
+  toggle_help: ->
     $('#help').toggle()
   
   fold: ->
