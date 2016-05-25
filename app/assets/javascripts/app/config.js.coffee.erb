@@ -1,7 +1,12 @@
 window.IBikeCPH or= {}
 
-`kms_username = "<%=ENV['KMS_USERNAME']%>";
-kms_pswd = "<%=ENV['KMS_PSWD']%>"`
+# because this is a .erb file, it will be parsed by ruy first
+# we use this to insert needed ENV variables
+# note that this means the password will be possible to extract from the js
+# that's loaded in the browser
+
+kms_username = "<%= ENV.fetch('KMS_USERNAME') %>"
+kms_pswd = "<%= ENV.fetch('KMS_PSWD') %>"
 
 IBikeCPH.config =
 

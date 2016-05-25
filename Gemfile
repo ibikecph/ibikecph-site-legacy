@@ -41,6 +41,7 @@ gem "rack-timeout"
 gem 'polylines'
 
 group :development do
+  gem 'dotenv-rails', :require => 'dotenv/rails-now'    # make sure this loads early
   gem 'quiet_assets'
   gem 'brakeman', :require => false
 end
