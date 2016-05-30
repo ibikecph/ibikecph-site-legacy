@@ -46,5 +46,7 @@ RailsOSRM::Application.configure do
 
   config.eager_load = false
 
-  Delayed::Worker.delay_jobs = false
+  Delayed::Worker.delay_jobs = true
+  
+  config.debug_exception_response_format = :api
 end

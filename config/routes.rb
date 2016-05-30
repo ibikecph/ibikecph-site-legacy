@@ -22,7 +22,8 @@ RailsOSRM::Application.routes.draw do
       resources :routes
       resources :users, only: [:index, :show, :destroy]
 
-      get 'journey' => 'journey#show'
+      post 'journeys' => 'journey#create'
+      get 'journeys/:token' => 'journey#show'
 
       post 'users/change_password' => 'users#change_password'
       post 'users/add_password'    => 'users#add_password'
