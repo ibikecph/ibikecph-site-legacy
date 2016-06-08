@@ -7,6 +7,7 @@ class IBikeCPH.Models.Waypoint extends Backbone.Model
     located: false
     
   initialize: ->
+    @precision = precision = IBikeCPH.config.routing_service.precision
     @set 'located', @get('location')?, silent: true
     new IBikeCPH.Geocoder this
     
@@ -33,13 +34,13 @@ class IBikeCPH.Models.Waypoint extends Backbone.Model
     #string representation, used in url's
     location = @get 'location'
     return '' unless location
-    lat = Math.floor(1e6 * location.lat)
-    lng = Math.floor(1e6 * location.lng)
+    lat = Math.floor(@precision * location.lat)
+    lng = Math.floor(@precision * location.lng)
     return lat.toString(36) + '.' + lng.toString(36)
 
   from_str: (code) ->
     location = "#{code}".match /^(-?[a-z0-9]{1,6})\.(-?[a-z0-9]{1,6})$/i
     if location
       @set 'location',
-          lat: parseInt(location[1], 36) * 1e-6
-          lng: parseInt(location[2], 36) * 1e-6
+          lat: parseInt(location[1], 36) * @precision
+          lng: parseInt(location[2], 36) * @precision

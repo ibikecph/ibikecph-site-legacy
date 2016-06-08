@@ -345,7 +345,6 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     profile = $(event.target).attr('id')
     @model.set 'profile', profile, silent: true
     @model.trigger 'change:profile'
-    console.log @model
 
   normalize_address: (value) ->
     value = IBikeCPH.util.normalize_whitespace value

@@ -111,8 +111,9 @@ IBikeCPH.util.decode_path = (encoded) ->
       dlng = result >> 1
 
     lng += dlng
-
-    points.push new L.LatLng(lat * 1e-6, lng * 1e-6)
+    
+    precision = IBikeCPH.config.routing_service.precision
+    points.push new L.LatLng(lat * precision, lng * precision)
 
   return points
 
@@ -139,13 +140,10 @@ IBikeCPH.util.translate_turn_instruction = (turn) ->
 
 IBikeCPH.util.displayable_address = (geocoding_response) ->
   address = geocoding_response.address
-  console.log address
   
   if address.country_code == 'dk'
     country_code = "#{address.country_code}".toUpperCase()
     city = address.city or address.town or address.suburb or address.village or address.hamlet or address.administrative
-    console.log country_code
-    console.log city
     if address.postcode
       postcode = "#{address.postcode} "
     else

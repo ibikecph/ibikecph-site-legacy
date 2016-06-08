@@ -4,9 +4,7 @@ class IBikeCPH.OSRM
     @request      = new IBikeCPH.SmartJSONP
     @zoom         = null
     @instructions = true
-    @checksum     = null
     @hints        = {}
-    @last_query   = ''
 
     @model.waypoints.on 'add remove reset change:location', => @waypoints_changed()
     @model.on 'change:profile', => @profile_changed()
@@ -48,28 +46,24 @@ class IBikeCPH.OSRM
     
   request_route: ->
     locations = @locations_array()
-    #current_query = "#{@zoom}/#{!!@instructions}/#{locations.join ';'}"
-    #current_query_with_instructions = "#{@zoom}/true/#{locations.join ';'}"
-    #return if current_query == @last_query or current_query_with_instructions == @last_query
-    #@last_query = current_query
-            
+  
     profile = @model.get('profile') or @model.standard_profile()
-    url = IBikeCPH.config.routing_service[ profile ]
-    url += if /\?/.test(url) then '&' else '?'
+    url = @build_request(profile, locations)     
     
     do (locations) =>
-      @request.exec url + @build_request(locations), (response) =>
+      @request.exec url, (response) =>
         @update_model locations,response
-
+  
   update_model: (locations,response) ->
+    console.log response
     if response.hint_data
       @checksum = response.hint_data.checksum
       @hints = {}
       for hint, index in response.hint_data.locations
         @hints[locations[index]] = hint
   
-    if response.route_geometry
-      @model.set 'route', response.route_geometry
+    if response.routes[0].geometry
+      @model.set 'route', response.routes[0].geometry
     else
       @model.set 'route', ''
         
@@ -83,23 +77,31 @@ class IBikeCPH.OSRM
     else
       @model.instructions.reset()
 
-  build_request: (locations) ->
-    params = []
-    params.push 'jsonp=?'
-    params.push "z=#{@zoom}" if @zoom?
-    params.push 'output=json'
-    params.push "checksum=#{@checksum}" if @checksum?
-    params.push "instructions=#{!!@instructions}"
-    params.push "alt=false"
-    for location, index in locations
-      params.push "loc=#{location}"
-      hint = @hints[location]
-      params.push "hint=#{hint}" if hint and @checksum?
-    params.join('&')
+  build_request: (profile, locations) ->
+    base_url = IBikeCPH.config.routing_service.base_url
+    #url += if /\?/.test(url) then '&' else '?'
+    profile_str = IBikeCPH.config.routing_service.profiles[ profile ]
+    
+    locations_str = locations.join(';')
+    hints_str = (@hints[loc] for loc in locations).join(';')
 
+    params = []
+    params.push "overview=full"   #"z=#{@zoom}" if @zoom?
+    params.push "geometries=polyline"
+    params.push "hints=#{hints_str}"
+    params.push "steps=#{!!@instructions}"
+    params.push "alternatives=false"
+    params_str = params.join('&')
+    
+    path = "#{base_url}/route/v1/#{profile_str}/#{locations_str}"
+    url = [path,params_str].join('?')
+    
+    return url
+    
+    
   locations_array: ->
     locations = []
     for waypoint in @model.waypoints.models
       location = waypoint.get 'location'
-      locations.push "#{location.lat.toFixed 5},#{location.lng.toFixed 5}"
+      locations.push "#{location.lng.toFixed 5},#{location.lat.toFixed 5}"
     locations
