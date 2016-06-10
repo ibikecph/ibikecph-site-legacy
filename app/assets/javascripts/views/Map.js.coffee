@@ -271,15 +271,13 @@ class IBikeCPH.Views.Map extends Backbone.View
       model.set 'location': null, 'address': null
     
   show_step: (model) ->
-    index = model.get 'index'
-    point = @current_route._latlngs[ index ]
-    @step_marker.setLatLng point
+    point = model.get('step').maneuver.location
+    @step_marker.setLatLng [point[1], point[0]]   # osrm and leaflet use inverse lat/lon
     @map.addLayer @step_marker
 
   zoom_to_step: (model) ->
-    index = model.get 'index'
-    point = @current_route._latlngs[ index ]
-    @go_to_point point
+    point = model.get('step').maneuver.location
+    @go_to_point [point[1], point[0]]   # osrm and leaflet use inverse lat/lon
 
   hide_step: (model) ->
     @map.removeLayer @step_marker

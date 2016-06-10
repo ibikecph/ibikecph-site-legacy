@@ -1,74 +1,47 @@
 IBikeCPH.util or= {}
 
 IBikeCPH.util.normalize_whitespace = (text) ->
-  "#{text}".replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ');
+  "#{text}".replace(/^\s+|\s+$/g, '').replace(/\s+/g, ' ')
 
 
-IBikeCPH.util.instruction_string = (instruction) ->
-  string = I18n.translate('instructions.'+instruction.turn);
-
-  if instruction.turn is 'enter_roundabout'
-    string += ' ' +  I18n.t('instructions.take_the_nth_exit').replace('{%nth}', I18n.translate('instructions.'+instruction.roundabout_exit + ''));
+IBikeCPH.util.instruction_string = (instruction) ->  
+  step =  instruction.get('step')
   
-  street = instruction.street.match /\{highway:(.*)\}/
-  if street
-    street = I18n.translate('instructions.highway_'+street[1], {defaultValue: I18n.translate('instructions.highway_default') } )
+  # replace spaces with underscore, so we can use key to lookup i18n string 
+  if step.maneuver.modifier
+    modifier_key = step.maneuver.modifier.replace(/\s/, '_')
+  
+  highway = step.name.match /\{highway:(.*)\}/
+  if highway
+    name = I18n.translate('instructions.highway_'+highway[1], {defaultValue: I18n.translate('instructions.highway_default') } )
   else
-    street = instruction.street
+    name = step.name
   
-  if instruction.street and instruction.turn isnt 'enter_roundabout'
-    string += ' ' + I18n.translate('instructions.follow') + ' ' + street
-
-  if instruction.turn is 'head'
-    string += ' ' + I18n.translate('instructions.'+instruction.direction)
-
-  if instruction.distance and instruction.turn isnt 'continue'
-    string += ' ' + I18n.translate('instructions.and_continue') + ' ' + instruction.distance + 'm';
-
-  if instruction.turn is 'continue'
-    string += ' ' + I18n.translate('instructions.for') + ' ' + instruction.distance + 'm'
-
-  if instruction.mode == 2
-    string +=  " (#{I18n.translate('instructions.mode_push')})"
-  else if instruction.mode == 3
-    string +=  " (#{I18n.translate('instructions.mode_ferry')})"
-  else if instruction.mode == 4
-    string +=  " (#{I18n.translate('instructions.mode_train')})"
-
-  string
-  # string = I18n.translate('instructions.'+instruction.turn);
-
-  # if instruction.turn is 'enter_roundabout'
-  #   string += ' ' +  I18n.t('instructions.take_the_nth_exit').replace('{%nth}', I18n.translate('instructions.'+instruction.roundabout_exit + ''));
+  switch step.maneuver.type
+    when 'depart'
+      heading_code = IBikeCPH.util.angle_to_cardinal step.maneuver.bearing_after
+      heading = I18n.translate("instructions.cardinals.#{heading_code}" )
+      I18n.translate("instructions.depart", {heading:heading, name:name})
+    when 'arrive'
+      I18n.translate("instructions.arrive", {name:step.name})
+    when 'turn', 'new_name', 'fork', 'end of road'
+      I18n.translate("instructions.turn_#{modifier_key}", {name:name} )
+    when 'merge'
+      I18n.translate("instructions.merge_#{modifier_key}", {name:name} )
+    when 'on ramp'
+      I18n.translate("instructions.on_ramp", {name:name} )
+    when 'off ramp'
+      I18n.translate("instructions.off_ramp", {name:name} )
+    when 'continue'
+      I18n.translate("instructions.continue_#{modifier_key}", {name:name} )
+    when 'roundabout' then "traverse roundabout, has additional field exit with NR if the roundabout is left. the modifier specifies the direction of entering the roundabout"
+    when 'rotary' then "a larger version of a roundabout, can offer rotary_name in addition to the exit parameter."
+    when 'roundabout turn' then "Describes a turn at a small roundabout that should be treated as normal turn. The modifier indicates the turn direciton. Example instruction: At the roundabout turn left."
+    when 'notification' then "not an actual turn but a change in the driving conditions. For example the travel mode. If the road takes a turn itself, the modifier describes the direction"
+    else
+      # handle unknown instructions as a normal turn
+      I18n.translate("instructions.turn_#{modifier_key}", {name:name} )
   
-  # street = instruction.street.match /\{highway:(.*)\}/
-  
-  # if street
-  #   street = I18n.translate('instructions.highway_'+street[1], {defaultValue: I18n.translate('instructions.highway_default') } )
-  # else
-  #   street = instruction.street
-  
-
-  # if instruction.street and instruction.turn isnt 'enter_roundabout'
-  #   string += ' ' + I18n.translate('instructions.follow') + ' ' + street
-
-  # if instruction.turn is 'head'
-  #   string += ' ' + I18n.translate('instructions.'+instruction.direction)
-
-  # if instruction.distance and instruction.turn isnt 'continue'
-  #   string += ' ' + I18n.translate('instructions.and_continue') + ' ' + instruction.distance + 'm';
-
-  # if instruction.turn is 'continue'
-  #   string += ' ' + I18n.translate('instructions.for') + ' ' + instruction.distance + 'm'
-  
-  # if instruction.mode == 2
-  #   string +=  " (#{I18n.translate('instructions.mode_push')})"
-  # else if instruction.mode == 3
-  #   string +=  " (#{I18n.translate('instructions.mode_ferry')})"
-  # else if instruction.mode == 4
-  #   string +=  " (#{I18n.translate('instructions.mode_train')})"
-  
-  # string
 
 IBikeCPH.util.decode_path = (encoded) ->
   len    = encoded.length
@@ -117,26 +90,11 @@ IBikeCPH.util.decode_path = (encoded) ->
 
   return points
 
-IBikeCPH.util.translate_turn_instruction = (turn) ->
-  switch turn | 0
-    when 1 then 'continue'
-    when 2 then 'turn_slight_right'
-    when 3 then 'turn_right'
-    when 4 then 'turn_sharp_right'
-    when 5 then 'u-turn'
-    when 6 then 'turn_sharp_left'
-    when 7 then 'turn_left'
-    when 8 then 'turn_slight_left'
-    when 9 then 'reach-via-point'
-    when 10 then 'head'
-    when 11 then 'enter_roundabout'
-    when 12 then 'leave-roundabout'
-    when 13 then 'stay-on-roundabout'
-    when 14 then 'start'
-    when 15 then 'reached_destination'
-    when 16 then 'enter_opposite'
-    when 17 then 'leave_opposite'
-    else 'no-instruction'
+IBikeCPH.util.angle_to_cardinal = (angle) ->
+  directions = 8
+  slice = 360.0 / directions
+  n = Math.round(angle/slice) % directions  # modulo will ensure range 0-7
+  ["N","NE","E","SE","S","SW","W","NW"][n]
 
 IBikeCPH.util.displayable_address = (geocoding_response) ->
   address = geocoding_response.address

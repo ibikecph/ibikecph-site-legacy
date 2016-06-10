@@ -55,31 +55,19 @@ class IBikeCPH.OSRM
         @update_model locations,response
   
   update_model: (locations,response) ->
-    console.log response
-    if response.hint_data
-      @checksum = response.hint_data.checksum
+    #console.log response
+    if response.code == "Ok"
+      route = response.routes[0]    
       @hints = {}
-      for hint, index in response.hint_data.locations
-        @hints[locations[index]] = hint
+      #for hint, index in response.hint_data.locations
+      #  @hints[locations[index]] = hint
   
-    if response.routes[0].geometry
-      @model.set 'route', response.routes[0].geometry
-    else
-      @model.set 'route', ''
-        
-    if response.route_summary
-      @model.summary.set response.route_summary
-    else
-      @model.summary.reset()
-    
-    if response.route_instructions
-      @model.instructions.reset_from_osrm response.route_instructions
-    else
-      @model.instructions.reset()
+      @model.set 'route', route.geometry
+      @model.summary.set { total_distance: route.distance, total_time: route.duration } 
+      @model.instructions.reset_from_osrm route
 
   build_request: (profile, locations) ->
     base_url = IBikeCPH.config.routing_service.base_url
-    #url += if /\?/.test(url) then '&' else '?'
     profile_str = IBikeCPH.config.routing_service.profiles[ profile ]
     
     locations_str = locations.join(';')

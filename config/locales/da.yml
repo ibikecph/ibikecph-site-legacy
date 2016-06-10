@@ -519,37 +519,62 @@ da:
     8: ottende
     9: niende
     10: tiende
+    
     #earth corners
-    N: mod nord
-    NE: mod nordøst
-    E: mod øst
-    SE: mod sydøst
-    S: mod syd
-    SW: mod sydvest
-    W: mod vest
-    NW: mod nordvest
+    cardinals:
+      N: nord
+      NE: nordøst
+      E: øst
+      SE: sydøst
+      S: syd
+      SW: sydvest
+      W: vest
+      NW: nordvest
 
-    #route description
-    head: Start 
-    continue: Fortsæt
-    #left
-    turn_left: Drej til venstre
-    turn_slight_left: Drej let til venstre
-    turn_sharp_left: Drej skarpt til venstre
-    #right
-    turn_right: Drej til højre
-    turn_slight_right: Drej let til højre
-    turn_sharp_right: Drej skarpt til højre
-    #other
-    enter_roundabout: Følg rundkørslen
-    take_the_nth_exit: "og tag {%nth} afkørsel"
-    reached_destination: Ankomst til destinationen
-    enter_opposite: "Træk cyklen"
-    leave_opposite: "Fortsæt på cykel"
-    follow: ad
-    and_continue: og fortsæt
-    for: og kør
-    towards: mod
+    # turns
+    uturn: "vend om"
+    sharp_right: "skarpt til højre"
+    right: "til højre"
+    slight_right: "let til højre"
+    straight: "ligeud"
+    left: "til venstre"
+    slight_left: "let til venstre"
+    sharp_left: "skarpt til venstre"
+
+    #instructions
+    depart: "Start mod {{heading}} ad {{name}}"
+    arrive: "Ankomst"
+ 
+    turn_uturn: "Vend om på {{name}}"    
+    turn_sharp_right: "Drej skarp til højre ad {{name}}"
+    turn_right: "Drej til højre ad {{name}}"
+    turn_slight_right: "Hold til højre ad {{name}}"
+    turn_straight: "Fortsæt ligeud ad {{name}}"
+    turn_sharp_left: "Drej skarpt til venstre ad {{name}}"
+    turn_left: "Drej til venstre ad {{name}}"
+    turn_slight_left: "Hold til venstre ad {{name}}"
+    
+    merge_uturn: "Vend om og flet til {{name}}"    
+    merge_sharp_right: "Flet skarpt mod højre til {{name}}"
+    merge_right: "Flet mod højre til {{name}}"
+    merge_slight_right: "Flet let mod højre til {{name}}"
+    merge_straight: "Flet ligeud til {{name}}"
+    merge_left: "Flet mod venstre til {{name}}"
+    merge_slight_left: "Flet let mod venstre til {{name}}"
+    merge_sharp_left: "Flet skarpt mod venstre til {{name}}"
+    
+    on_ramp: "Tilkørsel {{name}}"
+    off_ramp: "Afkørsel {{name}}"
+        
+    continue_uturn: "Lav u-vending på {{name}}"    
+    continue_sharp_right: "Fortsæt skarp til højre ad {{name}}"
+    continue_right: "Fortsæt mod højre ad {{name}}"
+    continue_slight_right: "Fortsæt let mod højre ad {{name}}"
+    continue_straight: "Fortsæt ligeud ad {{name}}"
+    continue_left: "Fortsæt mod venstre ad {{name}}"
+    continue_slight_left: "Fortsæt let mod venstre ad {{name}}"
+    continue_sharp_left: "Fortsæt skarpt mod venstre ad {{name}}"
+        
     mode_push: "Træk cyklen"
     mode_ferry: "Færge"
     mode_train: "Tog/metro"
