@@ -6,25 +6,37 @@ IBikeCPH.util.normalize_whitespace = (text) ->
 
 IBikeCPH.util.instruction_string = (instruction) ->  
   step =  instruction.get('step')
+  first = instruction.get('first')
+  last = instruction.get('last')
   
   # replace spaces with underscore, so we can use key to lookup i18n string 
   if step.maneuver.modifier
     modifier_key = step.maneuver.modifier.replace(/\s/, '_')
   
-  highway = step.name.match /\{highway:(.*)\}/
-  if highway
-    name = I18n.translate('instructions.highway_'+highway[1], {defaultValue: I18n.translate('instructions.highway_default') } )
+  match = step.name.match /\{highway:(.*)\}/
+  if match
+    highway = match[1]
+    name = I18n.translate('instructions.highway_'+highway, {defaultValue: I18n.translate('instructions.highway_default') } )
   else
     name = step.name
   
-  switch step.maneuver.type
+  base = switch step.maneuver.type
     when 'depart'
       heading_code = IBikeCPH.util.angle_to_cardinal step.maneuver.bearing_after
       heading = I18n.translate("instructions.cardinals.#{heading_code}" )
-      I18n.translate("instructions.depart", {heading:heading, name:name})
+      if first
+        I18n.translate("instructions.depart", {name:name, heading:heading})
+      else
+        I18n.translate("instructions.depart_from_via", {name:name, heading:heading})
     when 'arrive'
-      I18n.translate("instructions.arrive", {name:step.name})
-    when 'turn', 'new_name', 'fork', 'end of road'
+      # TODO should get addresses (including street nr) from searh model
+      key = modifier_key || 'straight'
+      side = I18n.translate("instructions.sides.#{key}" )
+      if last
+        I18n.translate("instructions.arrive", {name:name, side:side})
+      else
+        I18n.translate("instructions.arrive_to_via", {name:name, side:side})
+    when 'turn', 'new_name', 'fork', 'end of road', 'notification'
       I18n.translate("instructions.turn_#{modifier_key}", {name:name} )
     when 'merge'
       I18n.translate("instructions.merge_#{modifier_key}", {name:name} )
@@ -34,14 +46,24 @@ IBikeCPH.util.instruction_string = (instruction) ->
       I18n.translate("instructions.off_ramp", {name:name} )
     when 'continue'
       I18n.translate("instructions.continue_#{modifier_key}", {name:name} )
-    when 'roundabout' then "traverse roundabout, has additional field exit with NR if the roundabout is left. the modifier specifies the direction of entering the roundabout"
-    when 'rotary' then "a larger version of a roundabout, can offer rotary_name in addition to the exit parameter."
-    when 'roundabout turn' then "Describes a turn at a small roundabout that should be treated as normal turn. The modifier indicates the turn direciton. Example instruction: At the roundabout turn left."
-    when 'notification' then "not an actual turn but a change in the driving conditions. For example the travel mode. If the road takes a turn itself, the modifier describes the direction"
+    when 'roundabout', 'rotary'
+      #angle = step.maneuver.bearing_after - step.maneuver.bearing_before
+      #cardinal = IBikeCPH.util.angle_to_cardinal(angle)
+      #direction = I18n.translate("instructions.cardinals.turn_#{cardinal}" )
+      exit = I18n.translate("instructions.#{step.maneuver.exit}" )
+      if step.maneuver.rotary_name
+        I18n.translate("instructions.rotary", {name:name, exit:exit, rotary_name:rotary_name} )
+      else
+        I18n.translate("instructions.roundabout", {name:name, exit:exit} )
     else
       # handle unknown instructions as a normal turn
       I18n.translate("instructions.turn_#{modifier_key}", {name:name} )
   
+  if step.maneuver.type != 'arrive' and step.mode != "cycling"
+    push = I18n.translate("instructions.mode_pushing_bike" )
+    "#{base} (#{push})"
+  else
+    base
 
 IBikeCPH.util.decode_path = (encoded) ->
   len    = encoded.length
