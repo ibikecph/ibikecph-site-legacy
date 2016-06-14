@@ -26,6 +26,9 @@
     <input type="radio" id="fast" name="mode" checked="1" tabindex=5/>
     <label for="fast"><%= I18n.t 'map.fast_route' %></label>
   
+    <input type="radio" id="green" name="mode" tabindex=6/>
+    <label for="green"><%= I18n.t 'map.green_route' %></label>
+
     <input type="radio" id="cargo" name="mode" tabindex=7/>
     <label for="cargo"><%= I18n.t 'map.cargo_route' %></label>  
   </div>
