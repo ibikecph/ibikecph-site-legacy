@@ -61,9 +61,9 @@ class IBikeCPH.OSRM
       @hints = {}
       #for hint, index in response.hint_data.locations
       #  @hints[locations[index]] = hint
-  
+    
       @model.set 'route', route.geometry
-      @model.summary.set { total_distance: route.distance, total_time: route.duration } 
+      @model.summary.set { total_distance: route.distance, total_time: route.duration, summary: route.summary } 
       @model.instructions.reset_from_osrm route
 
   build_request: (profile, locations) ->

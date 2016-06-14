@@ -245,7 +245,11 @@ body {
             background-color: #eee;
             color: black;
           };
-          span.instruction_text {
+          span.instruction {
+            font-size: 1em;
+          };
+          span.duration {
+            float: right;
             font-size: 1em;
           };
         }

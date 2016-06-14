@@ -509,16 +509,16 @@ da:
     permalink: Et link til ruten kan nu kopieres fra adressebaren.
     
   instructions:
-    1: første
-    2: anden
-    3: tredje
-    4: fjerde
-    5: femte
-    6: sjette
-    7: syvende
-    8: ottende
-    9: niende
-    10: tiende
+    1: "1."
+    2: "2."
+    3: "3."
+    4: "4."
+    5: "5."
+    6: "6."
+    7: "7."
+    8: "8."
+    9: "9."
+    10: "10."
     
     #earth corners
     cardinals:
@@ -531,6 +531,15 @@ da:
       W: vest
       NW: nordvest
 
+      turn_N: ligeud
+      turn_NE: let til højre
+      turn_E: til højre
+      turn_SE: skarpt til højre
+      turn_S: vend om
+      turn_SW: skarpt til venstra
+      turn_W: til venstre
+      turn_NW: let til venstre
+
     # turns
     uturn: "vend om"
     sharp_right: "skarpt til højre"
@@ -541,9 +550,17 @@ da:
     slight_left: "let til venstre"
     sharp_left: "skarpt til venstre"
 
+    # sides
+    sides:
+      left: "på venstre side"
+      right: "på højre side"
+      straight: "lige fremme"
+    
     #instructions
     depart: "Start mod {{heading}} ad {{name}}"
-    arrive: "Ankomst"
+    arrive_to_via: "Viapunkt nået, {{name}} ligger {{side}}"
+    depart_from_via: "Fortsæt mod {{heading}} ad {{name}}"
+    arrive: "Mål nået, {{name}} ligger {{side}}"
  
     turn_uturn: "Vend om på {{name}}"    
     turn_sharp_right: "Drej skarp til højre ad {{name}}"
@@ -574,10 +591,16 @@ da:
     continue_left: "Fortsæt mod venstre ad {{name}}"
     continue_slight_left: "Fortsæt let mod venstre ad {{name}}"
     continue_sharp_left: "Fortsæt skarpt mod venstre ad {{name}}"
+
+    roundabout: "Ved rundkørsel tag %{exit} afkørsel ad {{name}}"
+    rotary: "Ved rundkørslen tag %{exit} afkørsel ad {{name}}"
         
-    mode_push: "Træk cyklen"
-    mode_ferry: "Færge"
-    mode_train: "Tog/metro"
+    
+    mode_cycling: "cykel"
+    mode_pushing_bike: "træk cyklen"
+    mode_ferry: "færge"
+    mode_train: "train/metro"
+    
     highway_default: "vej/sti"
     highway_motorway: "motorvej"
     highway_motorway_link: "motorvej"
@@ -601,6 +624,12 @@ da:
     highway_cycleway: "cykelsti"
     highway_bridleway: "ridesti"
     highway_steps: "trappe"
+
+    durations:
+      day: d
+      hour: t
+      minute: min
+      second: sek
 
   user_info:
     edit: Rediger din profil

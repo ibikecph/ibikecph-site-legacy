@@ -505,53 +505,97 @@ en:
     permalink: A link to the route can now be copied from the address bar.
 
   instructions:
-    1: first
-    2: seccond
-    3: third
-    4: fourth
-    5: fifth
-    6: sixth
-    7: seventh
-    8: eigth
-    9: ninth
-    10: tenth
+    1: 1st
+    2: 2nd
+    3: 3rd
+    4: 4th
+    5: 5th
+    6: 6th
+    7: 7th
+    8: 8th
+    9: 9th
+    10: 10th
 
     #earth corners
-    N: north
-    NE: north east
-    E: east
-    SE: south east
-    S: south
-    SW: south west
-    W: west
-    NW: north west
+    cardinals:
+      N: north
+      NE: north east
+      E: east
+      SE: south east
+      S: south
+      SW: south west
+      W: west
+      NW: north west
 
-    #route description
-    head: Head
-    continue: Continue
-    #left
-    turn_left: Turn left
-    turn_slight_left: Turn slightly left
-    turn_sharp_left: Turn sharply left
-    #right
-    turn_right: Turn right
-    turn_slight_right: Turn slighty right
-    turn_sharp_right: Turn sharply right
-    #other
-    enter_roundabout: Enter the roundabout
-    take_the_nth_exit: "and take the {%nth} exit"
-    reached_destination: Arrival at destination
+      turn_N: straight
+      turn_NE: slight right
+      turn_E: right
+      turn_SE: sharp right
+      turn_S: turn around
+      turn_SW: sharp left
+      turn_W: left
+      turn_NW: slight left
 
-    enter_opposite: "Push the bicycle"
-    leave_opposite: "Continue on bicycle"
+    # turns
+    uturn: "turn around"
+    sharp_right: "sharp right"
+    right: "right"
+    slight_right: "slight right"
+    straight: "straight"
+    left: "left"
+    slight_left: "slight left"
+    sharp_left: "sharp left"
 
-    follow: "on"
-    and_continue: and continue for
-    for: for
-    towards: towards
-    mode_push: Push the bike
-    mode_ferry: Ferry
-    mode_train: Train/Metro
+    # sides
+    sides:
+      left: "to the left"
+      right: "to the right"
+      straight: "straight ahead"
+    
+    #instructions
+    depart: "Head {{heading}} on {{name}}"
+    arrive_to_via: "Via point reached, {{name}} is {{side}}"
+    depart_from_via: "Continue heading {{heading}} on {{name}}"
+    arrive: "Destination reached, {{name}} is {{side}}"
+ 
+    turn_uturn: "Make a u-turn onto {{name}}"    
+    turn_sharp_right: "Sharp right onto {{name}}"
+    turn_right: "Right onto {{name}}"
+    turn_slight_right: "Keep right onto {{name}}"
+    turn_straight: "Continue straight onto {{name}}"
+    turn_sharp_left: "Sharp left onto {{name}}"
+    turn_left: "Left onto {{name}}"
+    turn_slight_left: "Keep left onto {{name}}"
+    
+    merge_uturn: "U-turn merging onto {{name}}"    
+    merge_sharp_right: "Merge sharp right onto {{name}}"
+    merge_right: "Merge right onto {{name}}"
+    merge_slight_right: "Merge slight right onto {{name}}"
+    merge_straight: "Merge straight onto {{name}}"
+    merge_left: "Merge left onto {{name}}"
+    merge_slight_left: "Merge slight left onto {{name}}"
+    merge_sharp_left: "Merge sharp right onto {{name}}"
+    
+    on_ramp: "Take on ramp {{name}}"
+    off_ramp: "Off ramp {{name}}"
+        
+    continue_uturn: "U-turn on {{name}}"    
+    continue_sharp_right: "Sharp right continuing on {{name}}"
+    continue_right: "Right continuing on {{name}}"
+    continue_slight_right: "Slight right continuing on {{name}}"
+    continue_straight: "Straight continuing on {{name}}"
+    continue_left: "Left continuing on {{name}}"
+    continue_slight_left: "Slight left continuing on {{name}}"
+    continue_sharp_left: "Sharp left continuing on {{name}}"
+
+    roundabout: "At roundabout take %{exit} exit onto {{name}}"
+    rotary: "At roundabout take %{exit} exit onto {{name}}"
+        
+    mode_cycling: "bicycle"
+    mode_pushing_bike: "pushing bike"
+    mode_ferry: "ferry"
+    mode_train: "train/metro"
+    
     highway_default: "street/path"
     highway_motorway: "motorway"
     highway_motorway_link: "motorway"
@@ -575,7 +619,13 @@ en:
     highway_cycleway: "cycleway"
     highway_bridleway: "bridleway"
     highway_steps: "steps"
-    
+
+    durations:
+      day: d
+      hour: h
+      minute: min
+      second: sec   
+
   user_info:
     edit: Edit your profile
     name: Name

@@ -1,1 +1,2 @@
-<span class="instruction_text"><%= IBikeCPH.util.instruction_string(@instruction) %></span>
+<span class="instruction"><%= @instruction %></span>
+<span class="duration"><%= @duration %></span>

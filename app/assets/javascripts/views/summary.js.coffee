@@ -29,21 +29,8 @@ class IBikeCPH.Views.Summary extends Backbone.View
       @$el.show()
       if $current_user
         $('.search_bottom').show()
-      if meters>=1000
-        $(".distance", @el).text((meters/1000).toFixed(2) + ' km')
-      else
-        $(".distance", @el).text(meters + ' m')
-        
-      if seconds>=3600
-        h = Math.floor(seconds / (60 * 60))
-        divisor_for_minutes = seconds % (60 * 60)
-        m = Math.floor(divisor_for_minutes / 60)
-        
-        $(".duration", @el).text(h+' h '+m+' min')
-      else if seconds>=60
-        $(".duration", @el).text(Math.floor(seconds/60.0) + ' min')
-      else
-        $(".duration", @el).text(seconds + ' sek')
+      $(".distance", @el).text( IBikeCPH.Views.Instruction.humanize_distance(meters) )
+      $(".duration", @el).text( IBikeCPH.Views.Instruction.humanize_duration(seconds) )
     else
       @hide_in 200    
     this
