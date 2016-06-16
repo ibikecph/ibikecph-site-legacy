@@ -10,31 +10,6 @@ class UsersController < ApplicationController
   def show
   end
 
-  def new
-    @user = User.new
-    @email = EmailAuthentication.new
-    @user.authentications << @email
-  end
-
-  def create
-    return unless user_params # && params[:user].is_a?(Hash)
-
-    @user = User.new(user_params)
-    @email = EmailAuthentication.new params[:email_authentication]
-    @user.authentications << @email
-
-    if @user.save
-      copy_return_to
-      @email.send_activation
-      redirect_to activating_account_path
-    # auto_login @user
-    # logged_in account_path, notice: "Account created. Welcome!"
-    else
-      @existing_user = User.find_by_name params[:user][:name]
-      render action: 'new'
-    end
-  end
-
   private
 
   def user_params

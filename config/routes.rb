@@ -34,9 +34,15 @@ RailsOSRM::Application.routes.draw do
 
   resources :token_authentications, only: [:create, :destroy]
 
+
+  # devise does not support scoping OmniAuth callbacks under a dynamic segment
+  # we work around by passing `skip: :omniauth_callbacks` to the `devise_for` call
+  # inside the scope and extracting omniauth options to the following `devise_for` call 
+  # outside the scope:
   devise_for :users,
              skip: [:session, :password, :registration],
              controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
 
   scope '(:locale)', locale: /en/ do
     root to: 'map#index'
@@ -47,30 +53,23 @@ RailsOSRM::Application.routes.draw do
     resources :reported_issues, path: 'issues'
 
     resource :account do
-      # get 'activating'
       get 'welcome'
       get 'settings'
       post 'settings' => :update_settings
     end
     get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
     put 'account/password' => 'accounts#update_password', :as => :update_password
-    # delete 'account/logins/:id' => 'accounts#destroy_oath_login', :as => :destroy_oath_login
-    # get 'account/activate/resend' => 'accounts#new_activation', :as => :new_activation
-    # post 'account/activate/resend' => 'accounts#create_activation', :as => :create_activation
 
     devise_for :users,
                skip: :omniauth_callbacks,
                controllers: {
-                 # omniauth_callbacks: 'omniauth_callbacks',
                  registrations: 'registrations',
                  passwords: 'passwords',
                  sessions: 'sessions'
                } do
       get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
-      get 'users/new' => 'devise/registrations#new'
       get 'infopage', to: 'sessions#infopage', as: 'infopage'
     end
-    resources :users
 
     resources :blogs, controller: :blog, as: :blog_entry, path: :blog do
       collection do
