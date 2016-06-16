@@ -59,7 +59,9 @@ RailsOSRM::Application.routes.draw do
     end
     get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
     put 'account/password' => 'accounts#update_password', :as => :update_password
-
+    
+    resources :users, only: [:show]
+    
     devise_for :users,
                skip: :omniauth_callbacks,
                controllers: {
