@@ -1,4 +1,5 @@
 class Api::V1::RoutesController < Api::V1::BaseController
+  before_filter :scrub_invalid_byte_sequences
   before_filter :manage_duplicate_routes, only: :create
 
   load_and_authorize_resource :user
@@ -9,8 +10,6 @@ class Api::V1::RoutesController < Api::V1::BaseController
   end
 
   def create
-    check_route_encoding!
-
     @route = current_user.routes.new route_params
     if @route.save
       render status: 201,
@@ -53,8 +52,6 @@ class Api::V1::RoutesController < Api::V1::BaseController
                errors: t('routes.flash.route_not_found')
              }
     else
-      check_route_encoding!
-
       if @route.update_attributes(route_params)
         render status: 200,
                json: {
@@ -132,22 +129,10 @@ class Api::V1::RoutesController < Api::V1::BaseController
     @croute.destroy if @croute
   end
 
-  def check_route_encoding!
-    if params[:route] &&
-       params[:route][:from_name] &&
-       !params[:route][:from_name].force_encoding('UTF-8').valid_encoding?
-
-      params[:route][:from_name] = params[:route][:from_name]
-                                   .force_encoding('ISO-8859-1')
-                                   .encode('UTF-8')
-    end
-    if params[:route] &&
-       params[:route][:to_name] &&
-       !params[:route][:to_name].force_encoding('UTF-8').valid_encoding?
-
-      params[:route][:to_name] = params[:route][:to_name]
-                                 .force_encoding('ISO-8859-1')
-                                 .encode('UTF-8')
+  def scrub_invalid_byte_sequences
+    if params[:route]
+      params[:route][:from_name].scrub! if params[:route][:from_name]
+      params[:route][:to_name].scrub! if params[:route][:to_name]
     end
   end
 
