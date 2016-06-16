@@ -18,7 +18,7 @@
 
   <label><%=t '.about' %></label>
   <% if current_user.about.present? %>
-    <%= simple_format(current_user.about) %>
+    <%= simple_format( h(current_user.about) ) %>
   <% else %>
     <p>(<%=t 'empty' %>)</p>
   <% end %>

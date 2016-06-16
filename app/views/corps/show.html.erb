@@ -10,7 +10,7 @@
     <div>
       <%= image_tag @user.image.g3.url, :class => 'g3 square lefty' %>
       <% if @user.about %>
-        <%= simple_format(@user.about) %>
+        <%= simple_format( h(@user.about) ) %>
       <% end %>
     </div>
     <div class="clear"></div>

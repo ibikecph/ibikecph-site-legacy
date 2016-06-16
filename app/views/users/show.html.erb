@@ -10,7 +10,7 @@
   <p><%= image_tag @user.image.g4.url, :class => 'g4 square' %></p>
 
   <% if @user.about %>
-    <%= simple_format(@user.about) %>
+    <%= simple_format( h(@user.about) ) %>
   <% end %>
   <%= link_to 'Back', :back %>
 </div>
