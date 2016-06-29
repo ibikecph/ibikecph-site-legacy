@@ -69,9 +69,9 @@ RailsOSRM::Application.routes.draw do
                  sessions: 'sessions'
                } do
       get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
-      get 'users/:id' => 'users#show'
       get 'infopage', to: 'sessions#infopage', as: 'infopage'
     end
+    resources :users, only: [:show]
 
     resources :blogs, controller: :blog, as: :blog_entry, path: :blog do
       collection do
