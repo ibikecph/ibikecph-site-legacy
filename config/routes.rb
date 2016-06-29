@@ -60,9 +60,7 @@ RailsOSRM::Application.routes.draw do
     end
     get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
     put 'account/password' => 'accounts#update_password', :as => :update_password
-    
-    resources :users, only: [:show]
-    
+
     devise_for :users,
                skip: :omniauth_callbacks,
                controllers: {
@@ -71,6 +69,7 @@ RailsOSRM::Application.routes.draw do
                  sessions: 'sessions'
                } do
       get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
+      get 'users/:id' => 'users#show'
       get 'infopage', to: 'sessions#infopage', as: 'infopage'
     end
 
