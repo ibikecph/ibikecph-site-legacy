@@ -82,7 +82,11 @@ RailsOSRM::Application.configure do
 
   # Setup Workless
   config.after_initialize do
-    Delayed::Job.scaler = :heroku_cedar
+    if ENV['WORKLESS'] == 'on'
+      Delayed::Job.scaler = :heroku_cedar
+    else
+      Delayed::Job.scaler = :null
+    end
   end
   
   # only send email to whitelisted addressed, useful during staging
