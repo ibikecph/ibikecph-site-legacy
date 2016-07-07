@@ -81,7 +81,7 @@ class IBikeCPH.OSRM
     params.push "alternatives=false"
     params_str = params.join('&')
     
-    path = "#{base_url}/route/v1/#{profile_str}/#{locations_str}"
+    path = "#{base_url}/#{profile_str}/#{locations_str}"
     url = [path,params_str].join('?')
     
     return url
