@@ -84,7 +84,7 @@ class TravelPlanner::Journey
     # TODO: Change this to OSRMv5
     response = TravelPlanner.get('https://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
 
-    raise TravelPlanner::ConnectionError unless response['status'] == 0
+    raise TravelPlanner::ConnectionError unless response['status'] == 0 || response['status'] == 200
 
     response['route_summary'].merge!({
         'type': leg.type,
