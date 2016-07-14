@@ -95,7 +95,7 @@ class TravelPlanner::Leg
         '19',
         destination['name'],
         distance,
-        1,
+        1, # FIXME: This should be waypoints.size()-1 instead
         total_time,
         distance.to_s + 'm',
         'N',
