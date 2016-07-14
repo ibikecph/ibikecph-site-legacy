@@ -44,11 +44,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       favourites = new IBikeCPH.Views.Favourites model: '', el: '#favorites', router: @router
       favourites.render(m.waypoints)
       return false
-    #if window.location.hash.match 'mode:cargobike'
-    #  setTimeout (->
-    #    $('#cargobike_trigger').trigger 'click'
-    #  ), 200
-
+    profile = @model.get('profile')
+    $("#mode ##{profile}").prop('checked', true)
     this
 
   getNow: ->
@@ -74,13 +71,8 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     @departure = @getNow()
     
   permalink: ->
-    mode = ""
-    if $('#cargobike_trigger').hasClass('active')
-      mode = '/mode:cargobike'
-
-    url = "#!/#{@model.waypoints.to_url()+mode}"
-    if url
-      @router.navigate url, trigger: false
+    url = "#!/#{@model.waypoints.to_url()}/mode:#{@model.get('profile')}"
+    @router.navigate url, trigger: false
     $('#flash').remove()
     flash = $('<div />').html(I18n.t 'map.permalink').attr
       id: 'flash'

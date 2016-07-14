@@ -45,8 +45,10 @@ class IBikeCPH.Collections.Waypoints extends Backbone.Collection
     if codes.length > 1
       waypoints = []
       for code in codes
-        waypoint = new IBikeCPH.Models.Waypoint type: 'via'
-        waypoint.from_str code
-        waypoints.push waypoint  
+        match = code.match /mode:(\w+)/
+        unless match
+          waypoint = new IBikeCPH.Models.Waypoint type: 'via'
+          waypoint.from_str code
+          waypoints.push waypoint
       @reset waypoints
       

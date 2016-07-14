@@ -2,7 +2,7 @@ class IBikeCPH.Routers.Map extends Backbone.Router
 
   routes:
     '': 'index'
-    '!/*code': 'show'
+    '!/*path': 'handle_legacy_route_link'
 
   initialize: ->
     #TODO
@@ -26,8 +26,10 @@ class IBikeCPH.Routers.Map extends Backbone.Router
   index: ->
     @sidebar.render(@map)
     
-  show: (code) ->
-    #code = code.replace('/mode:cargobike', '')
-    @search.waypoints.reset_from_url code
-    @sidebar.render()
+  handle_legacy_route_link: (path) ->
+    @search.set_profile_from_legacy_url path
+    @search.waypoints.reset_from_url path
+    @sidebar.render(@map)
     @map.go_to_route()
+      
+    

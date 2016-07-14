@@ -30,17 +30,21 @@ class IBikeCPH.Models.Waypoint extends Backbone.Model
   reset: ->
     @set address: null, location: null
 
+  # note: for links, we use the old precison of 6 decimals, even though
+  # osrm v5 now uses 5 decimals. this is to support old links
+  
   to_str: ->
     #string representation, used in url's
     location = @get 'location'
     return '' unless location
-    lat = Math.floor(@precision * location.lat)
-    lng = Math.floor(@precision * location.lng)
-    return lat.toString(36) + '.' + lng.toString(36)
+    lat = Math.floor(location.lat / 1e-6)
+    lng = Math.floor(location.lng / 1e-6)
+    str = lat.toString(36) + '.' + lng.toString(36)
+    return str 
 
   from_str: (code) ->
     location = "#{code}".match /^(-?[a-z0-9]{1,6})\.(-?[a-z0-9]{1,6})$/i
     if location
       @set 'location',
-          lat: parseInt(location[1], 36) * @precision
-          lng: parseInt(location[2], 36) * @precision
+          lat: parseInt(location[1], 36) * 1e-6
+          lng: parseInt(location[2], 36) * 1e-6

@@ -46,7 +46,7 @@ class IBikeCPH.OSRM
     
   request_route: ->
     locations = @locations_array()
-  
+      
     profile = @model.get('profile') or @model.standard_profile()
     url = @build_request(profile, locations)     
     
@@ -55,7 +55,6 @@ class IBikeCPH.OSRM
         @update_model locations,response
   
   update_model: (locations,response) ->
-    #console.log response
     if response.code == "Ok"
       route = response.routes[0]    
       @hints = {}
@@ -71,6 +70,7 @@ class IBikeCPH.OSRM
     profile_str = IBikeCPH.config.routing_service.profiles[ profile ]
     
     locations_str = locations.join(';')
+    
     hints_str = (@hints[loc] for loc in locations).join(';')
 
     params = []
@@ -83,13 +83,13 @@ class IBikeCPH.OSRM
     
     path = "#{base_url}/#{profile_str}/#{locations_str}"
     url = [path,params_str].join('?')
-    
     return url
     
     
   locations_array: ->
     locations = []
+    decimals = 5  # todo should be in configs
     for waypoint in @model.waypoints.models
       location = waypoint.get 'location'
-      locations.push "#{location.lng.toFixed 5},#{location.lat.toFixed 5}"
+      locations.push "#{location.lng.toFixed decimals},#{location.lat.toFixed decimals}"
     locations
