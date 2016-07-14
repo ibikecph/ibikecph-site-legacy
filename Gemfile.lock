@@ -96,8 +96,8 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    devise-token_authenticatable (0.5.0.beta)
-      devise (~> 4.0.0.rc2)
+    devise-token_authenticatable (0.5.1)
+      devise (>= 4.0.0, < 4.2.0)
     diff-lcs (1.2.5)
     dotenv (2.1.1)
     dotenv-rails (2.1.1)
@@ -446,7 +446,7 @@ DEPENDENCIES
   database_cleaner
   delayed_job_active_record
   devise (~> 4.0.2)
-  devise-token_authenticatable (~> 0.5.0.beta)
+  devise-token_authenticatable (~> 0.5.1)
   dotenv-rails
   eco
   exception_notification
@@ -480,5 +480,8 @@ DEPENDENCIES
   will_paginate
   workless
 
+RUBY VERSION
+   ruby 2.3.0p0
+
 BUNDLED WITH
-   1.11.2
+   1.12.5

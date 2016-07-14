@@ -1,5 +1,5 @@
 class TravelPlanner::Journey
-    def initialize(options)
+  def initialize(options)
     @coords = TravelPlanner::CoordSet.new options[:loc]
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
   end
@@ -24,7 +24,12 @@ class TravelPlanner::Journey
     journey = journey_data['Leg'].map do |leg_data|
       leg = TravelPlanner::Leg.new leg_data, @coords
 
-      formatted_leg = leg.type=='BIKE' ? format_bike(leg) : format_public(leg)
+      formatted_leg = case leg.type
+      when 'BIKE', 'WALK'
+        format_bike(leg)
+      else
+        format_public(leg)
+      end
 
       total_time          += formatted_leg['route_summary']['total_time']
       total_distance      += formatted_leg['route_summary']['total_distance']
@@ -76,9 +81,10 @@ class TravelPlanner::Journey
         instructions:true
     }
 
-    response = TravelPlanner.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    # TODO: Change this to OSRMv5
+    response = TravelPlanner.get('https://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
 
-    raise TravelPlanner::ConnectionError unless response['status'] == 0
+    raise TravelPlanner::ConnectionError unless response['status'] == 0 || response['status'] == 200
 
     response['route_summary'].merge!({
         'type': leg.type,
