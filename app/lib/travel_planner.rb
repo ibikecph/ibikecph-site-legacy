@@ -8,7 +8,12 @@ module TravelPlanner
 
   def self.get_journey(loc)
     opt = options(loc)
-    TravelPlanner::Journey.new(opt).trips
+    # Let's tell the journey planner that we want to depart, right now CPH time
+    now = Time.now.in_time_zone('Copenhagen')
+    opt[:date] = now.strftime("%d.%m.%Y")
+    opt[:time] = now.strftime("%H:%M")
+    journey = TravelPlanner::Journey.new(opt)
+    journey.trips
   end
 
   def self.options(loc)
