@@ -29,10 +29,9 @@ class TravelPlanner::Leg
 
   private
   def parse_time(station)
-    format = '%d.%m.%y%H:%M'
-    offset = ActiveSupport::TimeZone['Copenhagen'].utc_offset
-
-    Time.strptime(station['date'] + station['time'], format).to_i - offset
+    format = '%d.%m.%y %H:%M %Z'
+    s = station['date'] + ' ' + station['time'] + ' Copenhagen'
+    Time.strptime(s, format).to_i
   end
 
   def extract_coords(global_coords)
