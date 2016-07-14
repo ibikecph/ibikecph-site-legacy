@@ -6,7 +6,7 @@ class Api::V1::JourneyController < Api::V1::BaseController
   rescue_from StandardError, with: :standard_message
 
   def create
-    remote_outdated_journeys
+    remove_outdated_journeys
     journey = Journey.new
     journey.save!
     journey.delay.fetch params[:loc]      # use delayed_job's delay() to defer to a background job
@@ -41,7 +41,7 @@ class Api::V1::JourneyController < Api::V1::BaseController
 
   private
 
-  def remote_outdated_journeys
+  def remove_outdated_journeys
     # destroy all journey models older than 10 minutes
     Journey.delete_all("created_at < '#{10.minutes.ago}'")
   end
