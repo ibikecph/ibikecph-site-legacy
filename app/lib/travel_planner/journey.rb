@@ -1,5 +1,5 @@
 class TravelPlanner::Journey
-    def initialize(options)
+  def initialize(options)
     @coords = TravelPlanner::CoordSet.new options[:loc]
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
   end
