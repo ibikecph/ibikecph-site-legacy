@@ -24,7 +24,12 @@ class TravelPlanner::Journey
     journey = journey_data['Leg'].map do |leg_data|
       leg = TravelPlanner::Leg.new leg_data, @coords
 
-      formatted_leg = leg.type=='BIKE' ? format_bike(leg) : format_public(leg)
+      formatted_leg = case leg.type
+      when 'BIKE', 'WALK'
+        format_bike(leg)
+      else
+        format_public(leg)
+      end
 
       total_time          += formatted_leg['route_summary']['total_time']
       total_distance      += formatted_leg['route_summary']['total_distance']
