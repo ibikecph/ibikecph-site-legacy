@@ -1,5 +1,6 @@
 class Api::V1::JourneyController < Api::V1::BaseController
   skip_before_filter :check_auth_token!
+  skip_before_filter :verify_authenticity_token
 
   rescue_from TravelPlanner::Error, with: :travel_planner_message
   rescue_from StandardError, with: :standard_message
