@@ -81,7 +81,8 @@ class TravelPlanner::Journey
         instructions:true
     }
 
-    response = TravelPlanner.get('http://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    # TODO: Change this to OSRMv5
+    response = TravelPlanner.get('https://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
 
     raise TravelPlanner::ConnectionError unless response['status'] == 0
 
