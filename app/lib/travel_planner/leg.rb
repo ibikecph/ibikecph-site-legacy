@@ -54,10 +54,12 @@ class TravelPlanner::Leg
   end
 
   def get_route_geometry
-    ref = TravelPlanner.get(self.data['JourneyDetailRef']['ref'])['JourneyDetail']['Stop']
+    journey_details_ref = self.data['JourneyDetailRef']['ref']
+    journey_details = TravelPlanner.get(journey_details_ref)
+    stops = journey_details['JourneyDetail']['Stop']
 
     coords = (self.origin['routeIdx']..self.destination['routeIdx']).map do |id|
-      station = ref.detect{ |s| s['routeIdx'] == id }
+      station = stops.detect{ |s| s['routeIdx'] == id }
 
       Rails.cache.fetch(station['name']) do
         %w(y x).map{|coord| (station[coord].to_f / 10**6)}
