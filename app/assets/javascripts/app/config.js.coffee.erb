@@ -75,9 +75,15 @@ IBikeCPH.config =
     base_url: 'https://routes.ibikecph.dk'
     precision: 1e-5
     profiles:
-      fast: 'v5/fast/route'
-      cargo: 'v5/cargo/route'
-      green: 'v5/green/route'
+      fast:
+        url: 'v5/fast/route'
+        speed: 15
+      cargo:
+        url: 'v5/cargo/route'
+        speed: 10
+      green:
+        url: 'v5/green/route'
+        speed: 15
 
   geocoding_service:
     url: 'https://nominatim.openstreetmap.org/search'

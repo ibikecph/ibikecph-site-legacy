@@ -23,7 +23,7 @@ class IBikeCPH.Views.Summary extends Backbone.View
   
   render: =>
     meters = @model.get 'total_distance'
-    seconds  = @model.get 'total_time'  
+    seconds = @model.get 'total_duration'
     if meters and seconds
       @abort_hide()
       @$el.show()
