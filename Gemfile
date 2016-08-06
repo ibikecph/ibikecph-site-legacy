@@ -10,7 +10,7 @@ gem 'devise', '~> 4.0.2'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'devise-token_authenticatable', '~> 0.5.1'
-gem 'cancancan'#, '~> 1.12.0'
+gem 'cancancan'
 
 gem 'backbone-rails'
 gem 'jquery-rails'
@@ -49,19 +49,19 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'#, '~> 3.0'
+  gem 'rspec-rails'
   gem 'figaro'
 end
 
 group :test do
-  gem 'factory_girl_rails'#, '~> 4.0'
+  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
 end
 
 # place last to allow other stuff to be instrumented
 group :production do
-  gem 'workless'#, '~> 1.2.2'
+  gem 'workless'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
 end
