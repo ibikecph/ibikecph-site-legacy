@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.3.0'
 
-gem "rails", '5.0.0.rc1'
+gem "rails", '5.0.0'
 gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
@@ -45,7 +45,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'quiet_assets'
+  #gem 'quiet_assets'
   gem 'brakeman', :require => false
 end
 
