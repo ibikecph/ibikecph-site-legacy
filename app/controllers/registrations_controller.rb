@@ -9,11 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up).push(
-      :name,
-      :email_confirmation,
-      :terms
-      )
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name,:email_confirmation,:terms] )
   end
 
 end
