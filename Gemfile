@@ -1,20 +1,20 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.1'
 
 gem "rails", '5.0.0'
 gem 'pg'
 
 gem 'bcrypt', require: 'bcrypt'
-gem 'devise', '~> 4.0.2'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'devise-token_authenticatable', '~> 0.5.1'
+gem 'devise-token_authenticatable'
 gem 'cancancan'
 
 gem 'backbone-rails'
 gem 'jquery-rails'
-gem 'i18n-js', '~> 3.0.0.rc12'
+gem 'i18n-js', '~> 3.0.0.rc13'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog'
