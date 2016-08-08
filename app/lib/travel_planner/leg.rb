@@ -29,9 +29,13 @@ class TravelPlanner::Leg
 
   private
   def parse_time(station)
-    format = '%d.%m.%y %H:%M %Z'
-    s = station['date'] + ' ' + station['time'] + ' Copenhagen'
-    Time.strptime(s, format).to_i
+    # No timezone is supplied by Rejseplanen, thus we assume Copenhagen.
+    # This returns either CET or CEST, depending on if it's summer time.
+    zone = TZInfo::Timezone.get('Europe/Copenhagen').current_period.offset.abbreviation.to_s
+
+    format = '%d.%m.%y%H:%M%Z'
+
+    Time.strptime(station['date'] + station['time'] + zone, format).to_i
   end
 
   def extract_coords(global_coords)
