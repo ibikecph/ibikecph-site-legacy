@@ -1,6 +1,6 @@
 class TravelPlanner::Leg
   attr_reader :data, :origin, :destination, :name, :type,
-              :coords, :departure_time, :arrival_time, :total_time
+              :coords, :departure_time, :arrival_time, :duration
 
   def initialize(leg_data, global_coords)
     @data        = leg_data
@@ -12,19 +12,19 @@ class TravelPlanner::Leg
 
     @departure_time = parse_time(origin)
     @arrival_time   = parse_time(destination)
-    @total_time     = arrival_time - departure_time - 60
+    @duration       = arrival_time - departure_time - 60
   end
 
   def distance
     calculate_distance coords.for_polyline
   end
 
-  def route_instructions
-    build_route_instructions
+  def geometry
+    @geometry ||= build_geometry
   end
 
-  def route_geometry
-    get_route_geometry
+  def steps
+    build_steps
   end
 
   private
@@ -56,7 +56,7 @@ class TravelPlanner::Leg
     TravelPlanner::CoordSet.new coords.flatten
   end
 
-  def get_route_geometry
+  def build_geometry
     journey_details_ref = self.data['JourneyDetailRef']['ref']
     journey_details = TravelPlanner.get(journey_details_ref)
     stops = journey_details['JourneyDetail']['Stop']
@@ -72,40 +72,31 @@ class TravelPlanner::Leg
     Polylines::Encoder.encode_points(coords)
   end
 
-  # Route_instructions structure
-  # 0 - ordinalDirection
-  # 1 - name
-  # 2 - prevLengthInMeters
-  # 3 - waypointIndex
-  # 4 - timeInSeconds
-  # 5 - prevLengthInUnit
-  # 6 - directionAbbreviation
-  # 7 - azimuth
-  # 8 - vehicle
-  def build_route_instructions
-    start_instructions = [
-        '18',
-        origin['name'],
-        0,
-        0,
-        0,
-        '0m',
-        'N',
-        '4'
-    ]
+  def destination_coord_geometry
+    poly_coords = coords.for_polyline
+    Polylines::Encoder.encode_points([poly_coords[1]])
+  end
 
-    end_instructions = [
-        '19',
-        destination['name'],
-        distance,
-        1, # FIXME: This should be waypoints.size()-1 instead
-        total_time,
-        distance.to_s + 'm',
-        'N',
-        '4'
-    ]
-
-    [start_instructions,end_instructions]
+  def build_steps
+    [{
+        geometry: geometry,
+        maneuver: {
+            type: :depart
+        },
+        mode:     :train,
+        duration: duration,
+        name:     origin['name'],
+        distance: distance,
+    },{
+        geometry: destination_coord_geometry,
+        maneuver: {
+            type: :arrive
+        },
+        mode:     :train,
+        duration: 0,
+        name:     destination['name'],
+        distance: 0,
+     }]
   end
 
   # taken from http://stackoverflow.com/questions/12966638/how-to-calculate-the-distance-between-two-gps-coordinates-without-using-google-m
