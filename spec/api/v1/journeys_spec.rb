@@ -33,7 +33,7 @@ describe 'Journey API', api: :v1 do
       json = JSON.parse(response.body)
       expect(response.status).to eq(422)
       expect(json.length).to eq 1
-      expect(json["error"]).to eq("not ready")  
+      expect(json["error"]).to eq("not ready")
 
       # poll using invalid token should return 404, "not found"
       get "/api/journeys/99999999999", {}, headers
@@ -48,9 +48,11 @@ describe 'Journey API', api: :v1 do
       get "/api/journeys/#{CGI.escape token}", {}, headers
       json = JSON.parse(response.body)
       expect(response.status).to eq(200)
-      expect(json.length).to eq 3
-      expect(json[0]).to have_key('journey')
-      expect(json[0]).to have_key('journey_summary')
+      expect(json).to have_key('routes')
+      expect(json['routes'].length).to eq 3
+      expect(json['routes'][0]).to have_key('distance')
+      expect(json['routes'][0]['distance']).to be > 0
+      expect(json['routes'][0]).to have_key('legs')
     end
   end
 end

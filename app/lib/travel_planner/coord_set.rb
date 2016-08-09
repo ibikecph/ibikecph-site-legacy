@@ -37,6 +37,10 @@ class TravelPlanner::CoordSet
     [ coords[0].to_s+','+coords[1].to_s, coords[2].to_s+','+coords[3].to_s ]
   end
 
+  def for_osrm
+    coords[1].to_s + ',' + coords[0].to_s + ';' + coords[3].to_s + ',' + coords[2].to_s
+  end
+
   def for_polyline
     poly_coords = coords.map {|coord| coord.to_f}
     [[poly_coords[0],poly_coords[1]], [poly_coords[2],poly_coords[3]]]
