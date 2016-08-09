@@ -83,7 +83,7 @@ class TravelPlanner::Leg
         maneuver: {
             type: :depart
         },
-        mode:     :train,
+        mode:     :idling,
         duration: duration,
         name:     origin['name'],
         distance: distance,
@@ -92,7 +92,7 @@ class TravelPlanner::Leg
         maneuver: {
             type: :arrive
         },
-        mode:     :train,
+        mode:     :idling,
         duration: 0,
         name:     destination['name'],
         distance: 0,
