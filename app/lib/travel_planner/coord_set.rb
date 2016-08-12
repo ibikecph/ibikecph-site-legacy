@@ -19,6 +19,14 @@ class TravelPlanner::CoordSet
     [coords[2],coords[3]]
   end
 
+  def origin_for_maneuver
+    [coords[1], coords[0]]
+  end
+
+  def destination_for_maneuver
+    [coords[3], coords[2]]
+  end
+
   def as_via_points
     [[coords[0],coords[1]], [coords[2],coords[3]]]
   end

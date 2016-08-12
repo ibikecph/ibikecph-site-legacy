@@ -81,7 +81,8 @@ class TravelPlanner::Leg
     [{
         geometry: geometry,
         maneuver: {
-            type: :depart
+            type: :depart,
+            location: coords.origin_for_maneuver
         },
         mode:     :idling,
         duration: duration,
@@ -90,7 +91,8 @@ class TravelPlanner::Leg
     },{
         geometry: destination_coord_geometry,
         maneuver: {
-            type: :arrive
+            type: :arrive,
+            location: coords.destination_for_maneuver
         },
         mode:     :idling,
         duration: 0,
