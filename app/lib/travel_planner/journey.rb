@@ -4,7 +4,7 @@ class TravelPlanner::Journey
     @journey_data = fetch_journey_data options.merge(@coords.for_travel)
   end
 
-  def trips
+  def routes
     format_journeys @journey_data
   end
 
@@ -19,9 +19,9 @@ class TravelPlanner::Journey
   end
 
   def format_legs(journey_data)
-    total_time = total_distance = total_bike_distance = 0
+    total_duration = total_distance = total_distance_bike = 0
 
-    journey = journey_data['Leg'].map do |leg_data|
+    legs = journey_data['Leg'].map do |leg_data|
       leg = TravelPlanner::Leg.new leg_data, @coords
 
       formatted_leg = case leg.type
@@ -31,66 +31,59 @@ class TravelPlanner::Journey
         format_public(leg)
       end
 
-      total_time          += formatted_leg['route_summary']['total_time']
-      total_distance      += formatted_leg['route_summary']['total_distance']
-      total_bike_distance += formatted_leg['route_summary']['total_distance'] if leg.type == 'BIKE'
+      total_duration      += formatted_leg[:duration]
+      total_distance      += formatted_leg[:distance]
+      total_distance_bike += formatted_leg[:distance] if leg.type == 'BIKE'
 
       formatted_leg
     end
 
     {
-      journey_summary:{
-        total_time: total_time,
-        total_distance: total_distance,
-        total_bike_distance: total_bike_distance
-      },
-      journey:journey
+      duration:      total_duration,
+      distance:      total_distance,
+      distance_bike: total_distance_bike,
+      legs: legs
     }
   end
 
   # We're formatting the response so it mirrors our OSRM-routers bike response.
   def format_public(leg)
-    { route_name: [
-          leg.origin['name'],
-          leg.destination['name']
-      ],
-
-      route_summary: {
-          start_point:    leg.origin['name'],
-          end_point:      leg.destination['name'],
-          total_time:     leg.total_time,
-          total_distance: leg.distance,
-          type:           leg.type,
-          name:           leg.name,
-          departure_time: leg.departure_time,
-          arrival_time:   leg.arrival_time
-      },
-
-      route_instructions: leg.route_instructions,
-      route_geometry:     leg.route_geometry,
-
-      via_points: leg.coords.as_via_points
+    {
+      summary:        leg.name,
+      duration:       leg.duration,
+      steps:          leg.steps,
+      distance:       leg.distance,
+      type:           leg.type,
+      departure_time: leg.departure_time,
+      arrival_time:   leg.arrival_time,
+      start_point:    leg.origin['name'],
+      end_point:      leg.destination['name'],
+      geometry:       leg.geometry,
     }.with_indifferent_access
   end
 
   def format_bike(leg)
     options = {
-        loc: leg.coords.for_ibike,
-        z: 18,
-        alt: false,
-        instructions:true
+      overview: 'full',
+      alternatives: 'false',
+      steps: 'true'
     }
 
     # TODO: Change this to OSRMv5
-    response = TravelPlanner.get('https://routes.ibikecph.dk/v1.1/fast/viaroute', query: options)
+    response = TravelPlanner.get("https://routes.ibikecph.dk/v5/fast/route/#{leg.coords.for_osrm}", query: options)
 
-    raise TravelPlanner::ConnectionError unless response['status'] == 0 || response['status'] == 200
+    raise TravelPlanner::ConnectionError unless response['code'] == 'Ok'
 
-    response['route_summary'].merge!({
-        'type': leg.type,
-        'departure_time': leg.departure_time,
-        'arrival_time': leg.arrival_time
-    })
-    response
+    osrm_leg = response['routes'][0]['legs'][0]
+    geometry = response['routes'][0]['geometry']
+    hint     = response['waypoints'][1]['hint'] # destination hint
+
+    osrm_leg.merge!({
+      type:             leg.type,
+      departure_time:   leg.departure_time,
+      arrival_time:     leg.arrival_time,
+      geometry:         geometry,
+      destination_hint: hint
+    }).with_indifferent_access
   end
 end

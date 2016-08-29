@@ -13,7 +13,10 @@ module TravelPlanner
     opt[:date] = now.strftime("%d.%m.%Y")
     opt[:time] = now.strftime("%H:%M")
     journey = TravelPlanner::Journey.new(opt)
-    journey.trips
+    {
+      code:'Ok',
+      routes: journey.routes
+    }
   end
 
   def self.options(loc)

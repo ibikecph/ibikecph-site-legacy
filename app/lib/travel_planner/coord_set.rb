@@ -19,6 +19,14 @@ class TravelPlanner::CoordSet
     [coords[2],coords[3]]
   end
 
+  def origin_for_maneuver
+    [coords[1], coords[0]]
+  end
+
+  def destination_for_maneuver
+    [coords[3], coords[2]]
+  end
+
   def as_via_points
     [[coords[0],coords[1]], [coords[2],coords[3]]]
   end
@@ -35,6 +43,10 @@ class TravelPlanner::CoordSet
 
   def for_ibike
     [ coords[0].to_s+','+coords[1].to_s, coords[2].to_s+','+coords[3].to_s ]
+  end
+
+  def for_osrm
+    coords[1].to_s + ',' + coords[0].to_s + ';' + coords[3].to_s + ',' + coords[2].to_s
   end
 
   def for_polyline
