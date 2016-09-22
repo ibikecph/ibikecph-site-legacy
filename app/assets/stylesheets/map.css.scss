@@ -630,6 +630,16 @@ div#help {
     width: 47%;
     padding-left: 3%;
   }
+
+  a.mail-link {
+    color: #161616;
+    text-decoration: none;
+
+    &:hover {
+      color: #222;
+    }
+  }
+
   h2 {
     color: white;
   }
