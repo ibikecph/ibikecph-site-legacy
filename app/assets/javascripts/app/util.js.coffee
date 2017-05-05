@@ -72,6 +72,10 @@ IBikeCPH.util.displayable_address = (geocoding_response) ->
       display_address = "#{road}, #{postcode}#{city}"
     else if city
       display_address = "#{postcode}#{city}"
+    else if road and house_number
+      display_address = "#{road} #{house_number}, #{postcode}"
+    else if road
+      display_address = "#{road}, #{postcode}"
   else
     display_address = IBikeCPH.util.normalize_whitespace "#{[geocoding_response?.display_name]}"
   return display_address or null

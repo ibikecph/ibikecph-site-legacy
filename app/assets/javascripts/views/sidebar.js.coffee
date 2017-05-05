@@ -134,9 +134,9 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
   get_field: (field_name) ->
     return @$("input.#{field_name}").val() or ''
 
-  set_field: (field_name, text) ->    
+  set_field: (field_name, text) ->
     text = '' unless text
-    @$(".#{field_name}").val "#{text}"
+    @$("##{field_name}").val "#{text}"
 
   set_loading: (field_name, loading) ->
     @$(".#{field_name}").toggleClass 'loading', !!loading
@@ -206,6 +206,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
             else
               lat = @yMin
               lng = @xMin
+
             items.push
               name: ''
               address: @presentationString
@@ -214,7 +215,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
               type: 'address'
 
       $.getJSON foursquare_url, (data) ->
-        unless data.response.minivenues.length is 0
+        if data.response.minivenues and data.response.minivenues.length>0
           $.each data.response.minivenues, ->
             unless @location.postalCode is ""
               items.push
@@ -259,46 +260,31 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
   reverse_route: ->
     @model.waypoints.models.reverse()
     @model.waypoints.reset_from_url @model.waypoints.to_url()
-    @set_field 'from', $("#to_address").val()
-    @set_field 'to', $("#from_address").val()
 
   update_field_from_suggestion: (event) ->
     el = $(event.currentTarget)
     type = el.data('type')
     source = el.data 'class'
+    address = @normalize_address IBikeCPH.util.normalize_whitespace( el.data('address') )
+    location =
+      lat: parseFloat(el.data('lat'))
+      lng: parseFloat(el.data('lng'))
     
-    ll =
-      lat: el.data('lat')
-      lng: el.data('lng')
-      name: el.data('name')
-      
-    if el.data('class') is 'address'
-      value = @normalize_address IBikeCPH.util.normalize_whitespace el.data('address')
+    if source is not 'address'
+      address = "#{el.data('name')}, #{address}"
 
-      if type is 'from_address'
-        @set_field 'from', value
-        waypoint = @model.waypoints.first()
-        waypoint.set 'address', value
-        waypoint.trigger 'input:address'
-        $('.from').blur()
-      else if type is 'to_address'
-        @set_field 'to', value
-        waypoint = @model.waypoints.last()
-        waypoint.set 'address', value
-        waypoint.trigger 'input:address'
-        $('.to').blur()
+    if type is 'from_address'
+      @set_field 'from_address', address
+      waypoint = @model.waypoints.first()
+    else if type is 'to_address'
+      @set_field 'to_address', address
+      waypoint = @model.waypoints.last()
 
-      $('.suggestions').html('').hide()
-    else
-      if type is 'from_address'
-        @model.waypoints.first().set 'location', ll
-        @model.waypoints.first().trigger 'input:location'
-
-      else if type is 'to_address'
-        @model.waypoints.last().set 'location', ll
-        @model.waypoints.last().trigger 'input:location'
-
-      $('.suggestions').html('').hide()
+    waypoint.set 'address', address, silent: true
+    waypoint.set 'location', location, silent: true
+    waypoint.trigger 'change:location'    # will trigger rerouting in OSRM model
+    $('.from').blur()
+    $('.suggestions').html('').hide()
 
   hide_suggestions: ->
     setTimeout (->
@@ -307,31 +293,31 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
 
   fields_updated: (event) ->
     return false
-    input = $(event.currentTarget)
-    if input.is '.from'
-      waypoint = @model.waypoints.first()
-    else if input.is '.to'
-      waypoint = @model.waypoints.last()
-    else
-      return
-    raw_value = input.val()
-    value = IBikeCPH.util.normalize_whitespace raw_value
-    
-    #be a little smarter when parsing adresses, to make nominatim happier
-    value = value.replace /\b[kK][bB][hH]\b/g, "København"    # kbh -> København
-    value = value.replace /\b[nNøØsSvVkK]$/, ""          # remove north/south/east/west postfix
-    value = value.replace /(\d+)\s+(\d+)/, "$1, $2"        # add comma between street nr and zip code
-    
-    input.val(value) if value != raw_value
-    if value
-      waypoint.set 'address', value
-      waypoint.trigger 'input:address'
-    else
-      waypoint.reset()
-      if @model.waypoints.length > 2
-        @model.waypoints.remove waypoint
-      else
-        waypoint.trigger 'input:address'
+    #input = $(event.currentTarget)
+    #if input.is '.from'
+    #  waypoint = @model.waypoints.first()
+    #else if input.is '.to'
+    #  waypoint = @model.waypoints.last()
+    #else
+    #  return
+    #raw_value = input.val()
+    #value = IBikeCPH.util.normalize_whitespace raw_value
+    #
+    ##be a little smarter when parsing adresses, to make nominatim happier
+    #value = value.replace /\b[kK][bB][hH]\b/g, "København"    # kbh -> København
+    #value = value.replace /\b[nNøØsSvVkK]$/, ""          # remove north/south/east/west postfix
+    #value = value.replace /(\d+)\s+(\d+)/, "$1, $2"        # add comma between street nr and zip code
+    #
+    #input.val(value) if value != raw_value
+    #if value
+    #  waypoint.set 'address', value
+    #  waypoint.trigger 'input:address'
+    #else
+    #  waypoint.reset()
+    #  if @model.waypoints.length > 2
+    #    @model.waypoints.remove waypoint
+    #  else
+    #    waypoint.trigger 'input:address'
 
   change_mode: (event) ->
     profile = $(event.target).attr('id')

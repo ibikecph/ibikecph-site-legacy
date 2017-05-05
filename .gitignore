@@ -30,3 +30,4 @@ config/secrets.yml
 config/application.yml
 .idea
 .env
+.env.development
