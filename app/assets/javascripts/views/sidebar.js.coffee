@@ -227,7 +227,7 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       $.getJSON foursquare_url, (data) ->
         if data.response.minivenues and data.response.minivenues.length>0
           $.each data.response.minivenues, ->
-            unless @location.postalCode is ""
+            if @location.lat? and @location.lng? and @location.address? and @location.postalCode?
               items.push
                 name: @name
                 address: @location.address + ", " + @location.postalCode + " " + @location.city
