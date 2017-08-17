@@ -65,5 +65,4 @@ group :production do
   # origin repo in unmaintained, this fork fixes a problem with rails 5
   gem 'workless', git: "https://github.com/vfonic/workless.git", ref: '9c66a42'
   gem 'newrelic_rpm'
-  gem 'rails_12factor'
 end
