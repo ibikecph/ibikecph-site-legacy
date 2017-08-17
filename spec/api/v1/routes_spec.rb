@@ -17,7 +17,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in @user
 
-        get "/api/routes", { auth_token: token }, headers
+        get "/api/routes", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -31,7 +31,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in @user
 
-        get "/api/routes/#{@route.id}", { auth_token: token }, headers
+        get "/api/routes/#{@route.id}", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -57,7 +57,7 @@ describe 'Routes API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/routes/#{@route.id}", { route: newroute, auth_token: token }, headers
+        patch "/api/routes/#{@route.id}", params: { route: newroute, auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -71,7 +71,7 @@ describe 'Routes API', api: :v1 do
 
         attrs = attributes_for :route
 
-        post "/api/routes", { route: attrs, auth_token: token }, headers
+        post "/api/routes", params: { route: attrs, auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -84,7 +84,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in @user
 
-        delete "/api/routes/#{@route.id}", { auth_token: token }, headers
+        delete "/api/routes/#{@route.id}", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -115,7 +115,7 @@ describe 'Routes API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/routes/#{@route.id}", { route: newroute, auth_token: token }, headers
+        patch "/api/routes/#{@route.id}", params: { route: newroute, auth_token: token }, headers: headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -131,7 +131,7 @@ describe 'Routes API', api: :v1 do
 
         sign_in otheruser
 
-        delete "/api/routes/#{@route.id}", { auth_token: token }, headers
+        delete "/api/routes/#{@route.id}", params: { auth_token: token }, headers: headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -141,7 +141,7 @@ describe 'Routes API', api: :v1 do
 
     context 'when not logged in' do
       it 'index routes' do
-        get "/api/routes", {}, headers
+        get "/api/routes", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -149,7 +149,7 @@ describe 'Routes API', api: :v1 do
       end
 
       it 'show route' do
-        get "/api/routes/#{@route.id}", {}, headers
+        get "/api/routes/#{@route.id}", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -159,7 +159,7 @@ describe 'Routes API', api: :v1 do
       it 'create route' do
         attrs = attributes_for :route
 
-        post "/api/routes", { route: attrs }, headers
+        post "/api/routes", params: { route: attrs }, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -179,7 +179,7 @@ describe 'Routes API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/routes/#{@route.id}", { route: newroute }, headers
+        patch "/api/routes/#{@route.id}", params: { route: newroute }, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -189,7 +189,7 @@ describe 'Routes API', api: :v1 do
       it 'destroy route' do
         @user.routes << @route
 
-        delete "/api/routes/#{@route.id}", {}, headers
+        delete "/api/routes/#{@route.id}", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success

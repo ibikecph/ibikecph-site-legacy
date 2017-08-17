@@ -1,6 +1,6 @@
 class AboutController < ApplicationController
 
-  before_filter :find_entries
+  before_action :find_entries
 
   def index
     @entry = BlogEntry.tagged_with(['about/']).first

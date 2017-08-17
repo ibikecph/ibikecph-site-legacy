@@ -1,9 +1,9 @@
 class Api::V1::BaseController < ApplicationController
 
-  #skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
+  #skip_before_action :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
 
-  before_filter :check_format!
-  before_filter :check_auth_token!
+  before_action :check_format!
+  before_action :check_auth_token!
 
   rescue_from CanCan::AccessDenied, :with => :unauthorized
 

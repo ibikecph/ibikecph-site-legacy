@@ -1,12 +1,12 @@
 class IssuesController < ApplicationController
 
-  before_filter :authenticate_user!, except: [
-                  :index,
-                  :show,
-                  :tags,
-                  :labels,
-                  :search,
-                  :searched
+  before_action :authenticate_user!, except: [
+                :index,
+                :show,
+                :tags,
+                :labels,
+                :search,
+                :searched
                 ]
   load_and_authorize_resource except: [
                                 :tags,
@@ -15,18 +15,18 @@ class IssuesController < ApplicationController
                                 :searched
                               ]
   skip_authorize_resource only: [:tags, :labels]
-  # before_filter :find_vote, only: [:show,:vote,:unvote]
-  before_filter :load_sidebar, only: [
-                  :new,
-                  :index,
-                  :tags,
-                  :labels,
-                  :show,
-                  :corps,
-                  :search,
-                  :searched
+  # before_action :find_vote, only: [:show,:vote,:unvote]
+  before_action :load_sidebar, only: [
+                :new,
+                :index,
+                :tags,
+                :labels,
+                :show,
+                :corps,
+                :search,
+                :searched
                 ]
-  before_filter :find_popular_tags, only: [:index, :show, :tags, :labels]
+  before_action :find_popular_tags, only: [:index, :show, :tags, :labels]
 
   def index
     @issues = Issue.lastest

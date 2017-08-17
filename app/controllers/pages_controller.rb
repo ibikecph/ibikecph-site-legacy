@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:index, :ping, :terms, :qr]
+  before_action :authenticate_user!, except: [:index, :ping, :terms, :qr]
 
   def index
   end

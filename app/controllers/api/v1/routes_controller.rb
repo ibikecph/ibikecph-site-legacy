@@ -1,6 +1,6 @@
 class Api::V1::RoutesController < Api::V1::BaseController
-  before_filter :scrub_invalid_byte_sequences
-  before_filter :manage_duplicate_routes, only: :create
+  before_action :scrub_invalid_byte_sequences
+  before_action :manage_duplicate_routes, only: :create
 
   load_and_authorize_resource :user
   load_and_authorize_resource :route

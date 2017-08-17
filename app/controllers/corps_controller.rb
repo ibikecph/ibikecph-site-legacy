@@ -1,8 +1,8 @@
 class CorpsController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :load_sidebar
-  before_filter :find_users, except: [:show]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :load_sidebar
+  before_action :find_users, except: [:show]
 
   def index
   end

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.4.1'
 
 gem "rails"
 gem 'pg'
@@ -17,14 +17,14 @@ gem 'jquery-rails'
 gem 'i18n-js', '~> 3.0.0.rc13'
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'fog'
+gem 'fog-aws'
 gem 'delayed_job_active_record'
 gem 'simple-navigation'
 gem 'will_paginate'
 gem 'puma'
-gem 'auto_html', git: 'git://github.com/ibikecph/auto_html.git', branch: 'master'
+gem 'auto_html', git: 'https://github.com/ibikecph/auto_html.git', branch: 'master'
 gem 'rails_autolink'
-gem 'acts-as-taggable-on', github: 'mbleigh/acts-as-taggable-on'
+gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git', branch: 'master'
 gem 'exception_notification'
 gem 'google-analytics-rails'
 gem 'rails-timeago'
@@ -61,7 +61,9 @@ end
 
 # place last to allow other stuff to be instrumented
 group :production do
-  gem 'workless'
+
+  # origin repo in unmaintained, this fork fixes a problem with rails 5
+  gem 'workless', git: "https://github.com/vfonic/workless.git", ref: '9c66a42'
   gem 'newrelic_rpm'
   gem 'rails_12factor'
 end

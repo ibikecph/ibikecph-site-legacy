@@ -5,23 +5,23 @@ class EmailsController < ApplicationController
 
   include ActionView::Helpers::DateHelper
 
-  skip_before_filter :require_login, only: [
-                       :unverified,
-                       :verify,
-                       :new_verification,
-                       :create_verification,
-                       :verification_sent
+  skip_before_action :require_login, only: [
+                     :unverified,
+                     :verify,
+                     :new_verification,
+                     :create_verification,
+                     :verification_sent
                      ], raise: false
-  before_filter :find_authentication, except: [
-                  :new,
-                  :create,
-                  :unverified,
-                  :verify,
-                  :new_verification,
-                  :create_verification,
-                  :verification_sent
+  before_action :find_authentication, except: [
+                :new,
+                :create,
+                :unverified,
+                :verify,
+                :new_verification,
+                :create_verification,
+                :verification_sent
                 ]
-  before_filter :find_authentication_by_token, only: [:verify]
+  before_action :find_authentication_by_token, only: [:verify]
 
   def unverified
   end

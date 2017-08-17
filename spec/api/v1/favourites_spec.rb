@@ -17,7 +17,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in @user
 
-        get "/api/favourites", { auth_token: token }, headers
+        get "/api/favourites", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -29,7 +29,7 @@ describe 'Favourites API', api: :v1 do
       it 'index own favourites when none' do
         sign_in @user
 
-        get "/api/favourites", { auth_token: token }, headers
+        get "/api/favourites", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -42,7 +42,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in @user
 
-        get "/api/favourites/#{@favourite.id}", { auth_token: token }, headers
+        get "/api/favourites/#{@favourite.id}", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -63,7 +63,7 @@ describe 'Favourites API', api: :v1 do
           longitude: '12.321'
         }
 
-        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite, auth_token: token }, headers
+        patch "/api/favourites/#{@favourite.id}", params: { favourite: newfavourite, auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -77,7 +77,7 @@ describe 'Favourites API', api: :v1 do
 
         attrs = attributes_for :favourite
 
-        post "/api/favourites", { favourite: attrs, auth_token: token }, headers
+        post "/api/favourites", params: { favourite: attrs, auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -97,7 +97,7 @@ describe 'Favourites API', api: :v1 do
             sub_source: "favorite"
         }
 
-        post "/api/favourites", { favourite: attrs, auth_token: token }, headers
+        post "/api/favourites", params: { favourite: attrs, auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -110,7 +110,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in @user
 
-        delete "/api/favourites/#{@favourite.id}", { auth_token: token }, headers
+        delete "/api/favourites/#{@favourite.id}", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -141,7 +141,7 @@ describe 'Favourites API', api: :v1 do
           start_date: Date.new
         }
 
-        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite, auth_token: token }, headers
+        patch "/api/favourites/#{@favourite.id}", params: { favourite: newfavourite, auth_token: token }, headers: headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -157,7 +157,7 @@ describe 'Favourites API', api: :v1 do
 
         sign_in otheruser
 
-        delete "/api/favourites/#{@favourite.id}", { auth_token: token }, headers
+        delete "/api/favourites/#{@favourite.id}", params: { auth_token: token }, headers: headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -167,7 +167,7 @@ describe 'Favourites API', api: :v1 do
 
     context 'when not logged in' do
       it 'index favourites' do
-        get "/api/favourites", {}, headers
+        get "/api/favourites", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -175,7 +175,7 @@ describe 'Favourites API', api: :v1 do
       end
 
       it 'show favourite' do
-        get "/api/favourites/#{@favourite.id}", {}, headers
+        get "/api/favourites/#{@favourite.id}", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -185,7 +185,7 @@ describe 'Favourites API', api: :v1 do
       it 'create favourite' do
         attrs = attributes_for :favourite
 
-        post "/api/favourites", { favourite: attrs }, headers
+        post "/api/favourites", params: { favourite: attrs }, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -200,7 +200,7 @@ describe 'Favourites API', api: :v1 do
           longitude: '321'
         }
 
-        patch "/api/favourites/#{@favourite.id}", { favourite: newfavourite }, headers
+        patch "/api/favourites/#{@favourite.id}", params: { favourite: newfavourite }, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -210,7 +210,7 @@ describe 'Favourites API', api: :v1 do
       it 'destroy favourite' do
         @user.favourites << @favourite
 
-        delete "/api/favourites/#{@favourite.id}", {}, headers
+        delete "/api/favourites/#{@favourite.id}", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success

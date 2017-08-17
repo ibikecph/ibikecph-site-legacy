@@ -4,7 +4,7 @@ describe 'Base API', api: :v1 do
 
   context 'should' do
     it 'be reached with correct headers' do
-      get "/api/users", {}, headers
+      get "/api/users", params: {}, headers: headers
 
       expect(response).not_to be_nil
     end

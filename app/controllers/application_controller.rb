@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :null_session
 
-  before_filter :set_locale
+  before_action :set_locale
   # # require login everywhere by default
-  # before_filter :require_login, except: [
+  # before_action :require_login, except: [
   #                 :error_forbidden,
   #                 :error_route_not_found,
   #                 :error_internal_error

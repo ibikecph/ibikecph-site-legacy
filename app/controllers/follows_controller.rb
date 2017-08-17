@@ -1,7 +1,7 @@
 class FollowsController < ApplicationController
 
-  before_filter :require_user
-  before_filter :find_followable
+  before_action :require_user
+  before_action :find_followable
 
   def follow
     if current_user.follow @followable

@@ -1,6 +1,6 @@
 class Api::V1::JourneyController < Api::V1::BaseController
-  skip_before_filter :check_auth_token!
-  skip_before_filter :verify_authenticity_token
+  skip_before_action :check_auth_token!
+  skip_before_action :verify_authenticity_token
 
   rescue_from TravelPlanner::Error, with: :travel_planner_message
   rescue_from StandardError, with: :standard_message
@@ -43,7 +43,7 @@ class Api::V1::JourneyController < Api::V1::BaseController
 
   def remove_outdated_journeys
     # destroy all journey models older than 10 minutes
-    Journey.delete_all("created_at < '#{10.minutes.ago}'")
+    Journey.where("created_at < '#{10.minutes.ago}'").delete_all
   end
 
 end

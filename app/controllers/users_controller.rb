@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:new, :create, :show]
+  before_action :authenticate_user!, except: [:new, :create, :show]
   load_and_authorize_resource
 
   def index

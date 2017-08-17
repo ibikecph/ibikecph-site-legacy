@@ -17,7 +17,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in @user
 
-        get "/api/issues", { auth_token: token }, headers
+        get "/api/issues", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -31,7 +31,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in @user
 
-        get "/api/issues/#{@issue.id}", { auth_token: token }, headers
+        get "/api/issues/#{@issue.id}", params: { auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(200)
@@ -45,7 +45,7 @@ describe 'Issues API', api: :v1 do
 
         attrs = attributes_for :reported_issue
 
-        post "/api/issues", { issue: attrs, auth_token: token }, headers
+        post "/api/issues", params: { issue: attrs, auth_token: token }, headers: headers
 
         expect(response).to be_success
         expect(response).to have_http_status(201)
@@ -67,7 +67,7 @@ describe 'Issues API', api: :v1 do
           error_type: 'bar'
         }
 
-        patch "/api/issues/#{@issue.id}", { issue: newissue, auth_token: token }, headers
+        patch "/api/issues/#{@issue.id}", params: { issue: newissue, auth_token: token }, headers: headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -79,7 +79,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in @user
 
-        delete "/api/issues/#{@issue.id}", { auth_token: token }, headers
+        delete "/api/issues/#{@issue.id}", params: { auth_token: token }, headers: headers
 
         # unauthorized
         expect(response).not_to be_success
@@ -100,7 +100,7 @@ describe 'Issues API', api: :v1 do
           error_type: 'bar'
         }
 
-        patch "/api/issues/#{@issue.id}", { issue: newissue, auth_token: token }, headers
+        patch "/api/issues/#{@issue.id}", params: { issue: newissue, auth_token: token }, headers: headers
 
         # not found
         expect(response).not_to be_success
@@ -116,7 +116,7 @@ describe 'Issues API', api: :v1 do
 
         sign_in otheruser
 
-        delete "/api/issues/#{@issue.id}", { auth_token: token }, headers
+        delete "/api/issues/#{@issue.id}", params: { auth_token: token }, headers: headers
 
         # not found
         expect(response).not_to be_success
@@ -126,7 +126,7 @@ describe 'Issues API', api: :v1 do
 
     context 'when not logged in' do
       it 'index issues' do
-        get "/api/issues", {}, headers
+        get "/api/issues", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -134,7 +134,7 @@ describe 'Issues API', api: :v1 do
       end
 
       it 'show issue' do
-        get "/api/issues/#{@issue.id}", {}, headers
+        get "/api/issues/#{@issue.id}", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -144,7 +144,7 @@ describe 'Issues API', api: :v1 do
       it 'create issue' do
         attrs = attributes_for :reported_issue
 
-        post "/api/issues", { issue: attrs }, headers
+        post "/api/issues", params: { issue: attrs }, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -157,7 +157,7 @@ describe 'Issues API', api: :v1 do
           error_type: 'bar'
         }
 
-        patch "/api/issues/#{@issue.id}", { issue: newissue }, headers
+        patch "/api/issues/#{@issue.id}", params: { issue: newissue }, headers: headers
 
         # not logged in
         expect(response).not_to be_success
@@ -167,7 +167,7 @@ describe 'Issues API', api: :v1 do
       it 'destroy issue' do
         @issue.user_id = @user.id
 
-        delete "/api/issues/#{@issue.id}", {}, headers
+        delete "/api/issues/#{@issue.id}", params: {}, headers: headers
 
         # not logged in
         expect(response).not_to be_success

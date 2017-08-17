@@ -1,8 +1,8 @@
 class PasswordResetsController < ApplicationController
 
-  skip_before_filter :require_login, raise: false
-  before_filter :find_user_by_token, only: [:edit, :update]
-  before_filter :check_expired, only: [:edit, :update]
+  skip_before_action :require_login, raise: false
+  before_action :find_user_by_token, only: [:edit, :update]
+  before_action :check_expired, only: [:edit, :update]
 
   def new
     if current_user

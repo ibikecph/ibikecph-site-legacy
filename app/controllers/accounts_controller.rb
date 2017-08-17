@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 
-  before_filter :authenticate_user!, except: [
+   before_action :authenticate_user!, except: [
                   :activating,
                   :unverified_email,
                   :new_activation,
@@ -11,8 +11,8 @@ class AccountsController < ApplicationController
                   :existing
                 ]
 
-  # before_filter :check_can_set_password, only: [:new_password, :create_password]
-  # before_filter :find_email_authentication_by_token, only: [:verify_email]
+  #  before_action :check_can_set_password, only: [:new_password, :create_password]
+  #  before_action :find_email_authentication_by_token, only: [:verify_email]
 
   def show
     # @has_password = current_user.has_password?

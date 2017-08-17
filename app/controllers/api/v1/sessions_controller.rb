@@ -1,8 +1,8 @@
 class Api::V1::SessionsController < Devise::SessionsController
 
-  skip_before_filter :check_auth_token!, raise: false
-  prepend_before_filter :check_login_params, only: [:create]
-  prepend_before_filter :require_no_authentication, only: [:create]
+  skip_before_action :check_auth_token!, raise: false
+  prepend_before_action :check_login_params, only: [:create]
+  prepend_before_action :require_no_authentication, only: [:create]
 
   def create
     if params[:user][:fb_token]

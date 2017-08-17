@@ -18,7 +18,7 @@ describe 'Sessions API', api: :v1 do
         password_confirmation: 'foobar'
       }
 
-      post '/api/users', { user: newuser }, headers
+      post '/api/users', params: { user: newuser }, headers: headers
 
       expect(response).to be_success
       expect(response).to have_http_status(201)
@@ -37,12 +37,12 @@ describe 'Sessions API', api: :v1 do
         password_confirmation: 'foobar'
       }
 
-      post '/api/users', { user: newuser }, headers
+      post '/api/users', params: { user: newuser }, headers: headers
 
       expect(response).to be_success
       expect(response).to have_http_status(201)
 
-      post '/api/users/confirmation', { user: newuser }, headers
+      post '/api/users/confirmation', params: { user: newuser }, headers: headers
 
       expect(response).to be_success
       expect(response).to have_http_status(200)

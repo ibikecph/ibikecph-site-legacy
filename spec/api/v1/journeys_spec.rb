@@ -14,7 +14,7 @@ describe 'Journey API', api: :v1 do
       expect(Journey.count).to eq(0)
       
       # initiate journey plan, should get token back
-      post "/api/journeys", { loc: ['55.677516,12.569641','55.671671,12.521519'] }, headers
+      post "/api/journeys", params: { loc: ['55.677516,12.569641','55.671671,12.521519'] }, headers: headers
       json = JSON.parse(response.body)
       expect(response).to be_success
       expect(json.length).to eq 1
@@ -29,14 +29,14 @@ describe 'Journey API', api: :v1 do
       expect( journey.ready).to eq( false )
 
       # poll result using token - should return 422, "not ready"
-      get "/api/journeys/#{CGI.escape token}", {}, headers
+      get "/api/journeys/#{CGI.escape token}", params: {}, headers: headers
       json = JSON.parse(response.body)
       expect(response.status).to eq(422)
       expect(json.length).to eq 1
       expect(json["error"]).to eq("not ready")
 
       # poll using invalid token should return 404, "not found"
-      get "/api/journeys/99999999999", {}, headers
+      get "/api/journeys/99999999999", params: {}, headers: headers
       json = JSON.parse(response.body)
       expect(response.status).to eq(404)
       expect(json["error"]).to eq("not found")  
@@ -45,7 +45,7 @@ describe 'Journey API', api: :v1 do
       expect(Delayed::Worker.new.work_off).to eq( [1,0] )     # returns [successes, failures]
 
       # poll result using token - should now return 200, with the travel plan as content
-      get "/api/journeys/#{CGI.escape token}", {}, headers
+      get "/api/journeys/#{CGI.escape token}", params: {}, headers: headers
       json = JSON.parse(response.body)
       expect(response.status).to eq(200)
       expect(json).to have_key('routes')
