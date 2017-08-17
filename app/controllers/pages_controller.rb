@@ -6,7 +6,7 @@ class PagesController < ApplicationController
   end
 
   def ping
-    render text: 'pong'
+    render plain: 'pong'
   end
 
   def fail
