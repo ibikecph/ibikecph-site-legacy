@@ -5,9 +5,6 @@ window.IBikeCPH or= {}
 # note that this means the password will be possible to extract from the js
 # that's loaded in the browser
 
-kms_username = "<%= ENV.fetch('KMS_USERNAME') %>"
-kms_pswd = "<%= ENV.fetch('KMS_PSWD') %>"
-
 IBikeCPH.config =
 
   initial_location:
@@ -106,5 +103,5 @@ IBikeCPH.config =
       token: '&oauth_token=BM2LGKP3TZURURN3R0NFYGQPQH3PU3L2WDNRF1MUJPSKYV1N&v=20130303' # version number should probably be updated, but this still works
     oiorest:
       url: 'https://geo.oiorest.dk/adresser.json?q='
-    kms:
-      url: 'https://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&login='+kms_username+'&password='+kms_pswd+'&crs=EPSG:4326&search='
+    kortforsyningen:
+      url: 'https://kortforsyningen.kms.dk/Geosearch?service=GEO&resources=Adresser&limit=5&crs=EPSG:4326'

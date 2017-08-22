@@ -32,6 +32,11 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
     @departure = @getNow()
     @model.summary.on 'change', @update_departure_arrival, this
 
+    # TODO: kortforsyningen tickets expire after 24 hours.
+    # in case the user keeps the browser windows open for longer than that
+    # we need to fetch a new ticket via an api call on our backend 
+    @kortforsyningen_ticket = $('#map-src').data('kortforsyningen-ticket')
+
   render: (map) ->
     @map = map
     m = @model
@@ -189,13 +194,18 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       numberPattern = /\d+/g
       val_number = val.match(numberPattern);
       val_address = val.replace(' '+val_number, '')
+      
       foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token+'&callback=?'
-      #oiorest_url = IBikeCPH.config.suggestion_service.oiorest.url+val+'&callback=?'
-      kms_url = IBikeCPH.config.suggestion_service.kms.url+val+'&callback=?'
+
+
+      kortforsyningen_url = IBikeCPH.config.suggestion_service.kortforsyningen.url +
+        '&ticket=' + @kortforsyningen_ticket +
+        '&search=' + val +
+        '&callback=?'
 
       $.ajax
         type: 'get'
-        url: kms_url
+        url: kortforsyningen_url
         cache: false
         dataType: 'json'
         success: (data) ->

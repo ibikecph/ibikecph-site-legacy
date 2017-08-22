@@ -4,6 +4,7 @@ class MapController < ApplicationController
   layout 'map'
 
   def index
+  	@kortforsyningen_ticket = KortforsyningenTicket.last.code
   end
 
 end
