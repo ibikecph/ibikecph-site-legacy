@@ -195,7 +195,10 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
       val_number = val.match(numberPattern);
       val_address = val.replace(' '+val_number, '')
       
-      foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url+val+IBikeCPH.config.suggestion_service.foursquare.token+'&callback=?'
+      foursquare_url = IBikeCPH.config.suggestion_service.foursquare.url +
+        val +
+        IBikeCPH.config.suggestion_service.foursquare.token +
+        '&callback=?'
 
 
       kortforsyningen_url = IBikeCPH.config.suggestion_service.kortforsyningen.url +
@@ -225,12 +228,20 @@ class IBikeCPH.Views.Sidebar extends Backbone.View
               type: 'address'
 
       $.getJSON foursquare_url, (data) ->
+        console.log(data.response)
         if data.response.minivenues and data.response.minivenues.length>0
           $.each data.response.minivenues, ->
-            if @location.lat? and @location.lng? and @location.address? and @location.postalCode?
+            if @location.lat? and @location.lng? and @location.address?
+              address = ''
+              if @location.postalCode and @location.city
+                address = @location.address + ", " + @location.postalCode + " " + @location.city
+              else if @location.city
+                address = @location.address + ", " + @location.city
+              else
+                address = @location.address                
               items.push
                 name: @name
-                address: @location.address + ", " + @location.postalCode + " " + @location.city
+                address: address
                 lat: @location.lat
                 lng: @location.lng
                 type: 'poi'
