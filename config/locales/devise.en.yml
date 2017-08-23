@@ -47,7 +47,6 @@ en:
       new:
         title: Reset Password
         body: "Please enter your email, and we'll send you instructions for resetting your password."
-        warning_html: "<strong>IMPORTANT:</strong> Resetting your password will cause you to lose access to all of your collected bicycle data on our servers. Therefore if you already have your password, please login and change it through your account settings."
         submit: Send Instructions
       edit:
         title: Change your password
