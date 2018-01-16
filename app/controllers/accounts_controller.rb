@@ -62,7 +62,7 @@ class AccountsController < ApplicationController
       flash[:notice] = t('accounts.flash.updated')
       redirect_to account_path
     else
-      render action: edit
+      render action: :edit
     end
   end
 

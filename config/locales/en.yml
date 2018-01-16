@@ -11,11 +11,7 @@ en:
         To improve the site and the apps, anonymous data on usage and errors is collected.
   activerecord:
     models:
-      issue: Entry
       user: User
-      blog_entry: Blog Entry
-      comment: Comment
-      vote: Vote
     attributes:
       favourite:
         name: Name
@@ -29,17 +25,6 @@ en:
       authentications:
         uid: 'Email'      
         uid_confirmation: 'Email confirmation'    
-      blog_entry:
-        title: Title
-        body: Body
-        tags: Tags
-        image: Image
-        sticky: Sticky
-      issue:
-        title: Title
-        body: Description
-        labels: Labels
-        tags: Tags
       user:
         name: Name
         about: About
@@ -62,25 +47,11 @@ en:
     
   menu:
     routes: Map
-    blog: Blog
-    feedback: Feedback
     signup: Sign Up
     login: Login
     logout: Logout
     mobile_app: Download mobile app
     about: About I Bike CPH
-
-  about:
-    about: "About I Bike CPH"
-    faq: "FAQ"
-    api: "API"
-
-  news:
-    title: Blog
-    categories: Tags
-    search: Search news...
-    label_facebook: Follow us on Facebook
-    label_rss: Subscribe to RSS
 
   da: Danish
   en: English
@@ -97,48 +68,26 @@ en:
   you: You
   or_login_with: or login with
   sure_q: Are you sure?
-  be_the_first_to_comment: Be the first to comment
-  comment: comment
   not_a_valid_email: is not a valid email address 
   empty: Empty
 
   #yes and no are reserved words in yaml, so need to quote
   'yes': 'Yes'
   'no': 'No'
-  
-  vote:
-    one: 1 vote
-    other: "%{count} votes"
-  
-  comment:
-    one: 1 comment
-    other: "%{count} comments"
-  
-  issue:
-    one: 1 entry
-    other: "%{count} entries"
-  
+    
   character:
     one: 1 character
     other: "%{count} characters"
     remaining: "%{count} characters remaining"
     too_long: "%{count} characters too long"
 
-  follows:
-    follow:
-        follow: Follow
-        start: Click to Follow
-        stop: Click to Stop Following
-  
   users:
     index:
       title: Users
     new:
       title: Create I Bike CPH account
-      body: | 
-        Join!
-        An I Bike CPH account is free and without obligations, og enables you to uplaod ideas and comments.
-        You choose wether you want emails with news, etc.
+      body: |
+        An I Bike CPH account is free and enables you to save favorite places in the app.
       i_accept: I accept the
       email_confirmation: 'Email confirmation'
       terms: Terms of Service
@@ -265,40 +214,6 @@ en:
     misc:
       cancel: Cancel
       
-  blog:
-    index:
-      new: New Blog Entry
-    show:
-      blog_archive: Blog Archive
-    new:
-      title: New Blog Entry
-    edit:
-      title: Edit Blog Entry
-    form:
-      make_sticky: Keep this entry at top (can be changed latter).
-      submit: Save
-    archive:
-      title: Blog Archive
-    latest:
-      title: Latest Entries
-      archive: Blog Archives
-      new: New Entry
-    tag:
-      title: "Entries tagged with: %{tag}"
-    flash:
-      created: Blog entry created.
-      updated: Blog entry updated.
-      deleted: Blog entry deleted.
-      
-  comments:
-    new:
-      add_comment: Add comment
-      login_to_comment_html: "To comment, please %{link}."
-      login: login
-      submit: Submit
-    comments:
-      title: Comments
-  
   emails:
     new:
       title: Change Email
@@ -362,100 +277,7 @@ en:
     password_reset:
       subject: Resetting your I Bike Cph password
       body: "To reset your I Bike Cph password, please visit:"
-    blog_entry:
-      subject: "Blog: %{title}"
-      body: "A new blog entry titled '%{title}' was posted on I Bike Cph:"
-    comment:
-      subject: "Comment: %{title}"
-      body: "%{user} added a comment '%{title}' on I Bike Cph:"
     unsubscribing: "You cannot reply to this email. If you don't want to receive emails from I Bike CPH, you can change your settings at %{link}."
-  
-  issues:
-    view_all_issues: View all Entrys
-    index:
-      title: Feedback
-      num_issues: "%{count} topics"
-    welcome:
-      body: "Du you have ideas for improving the bike route planner? Did you encounter bugs, or a path missing on the map? Then let us know!"
-      note: |
-        This site is only for discussing the digital bicycle route planner. Please send other ideas for improving biking in Copenhagen to <a href="http://kk.dk/cyklernesby" target="_blank">Copenhagen Municipality</a>. You can report 'analog' problems, like holes in the road, at <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's social forum is located on <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Advertising is not allowed at this site. See the <a href="http://ibikecph.dk/terms" target="_blank">user terms</a> for more info.
-    issues:
-      title: Get involved!
-      sub_title: Give us your suggestions for improvements.
-      no_items: No issues.
-      new: New Entry
-      all_issues: View all issues
-      of: from
-    all:
-      title: All Entrys
-    new:
-      title: New Entry
-    edit:
-      title: Edit Entry
-    show:
-      back_to_list: Back to list
-      labels: Labels
-      tags: Tags
-    related:
-      title: Related Entries
-    most_commented:
-      title: Most Commented
-    votes:
-      vote: Click to Vote
-      unvote: Click to Remove Vote
-    tags:
-      title: "Entrys tagged with..."
-      popular_tags: Popular tags
-      all_tags: View all tags
-    labels:
-      title: "Entrys labelled as.."
-      no_items: No issues found
-    corps:
-      title: Test Corps
-      body: "Become a tester, and help discuss and test new features!"
-      test_corps: Read more
-    search_form:
-      submit: Search
-    search:
-      title: Search for Entry
-      num_found: "Entrys found: %{count}"
-    flash:
-      created: Entry added.
-      updated: Entry updated.
-      destroyed: Entry deleted.
-
-  corps:
-    index:
-      title: Hi Testpilot!
-      body: |
-        Join the Test Corps and help discuss and test new features! As a tester, you will be notified about current themes and activities related to improving the bike route planner.
-        
-        There's no obligations or costs related to joining, and you can leave at any time.
-        is_tester:  You're member of the Test Corps.
-        is_not_tester: You're not a member of the Test Corps
-    testers:
-      title: Testers
-    membership:
-      join: Join
-      leave: Leave
-    show:
-      issues: Indlæg af denne bruger
-    joined:
-      title: Welcome to the Test Corps!
-      body: "You're now part of the Test Corps, and will be notified about current themes and activities related to improving the bike route planner. You can leave at any time if you wish."
-    left:
-      title: You left the Test Corps
-      body: |
-        You're still very welcome to add feedback and comments, but will no longer be notified about current themes and activities related to improving the bike route planner.
-    flash:
-      joined: You joined the test corps
-      already_joined: You're already a member of the test corps
-      left: You left the test corps
-      already_left: You're not a member of the test corps
-
-  pages:
-    terms:
-      title: Terms of use for the I Bike CPH and CykelPlanen app, and the www.ibikecph.dk site
       
   errors:
     forbidden:
@@ -472,10 +294,6 @@ en:
       body: Something went wrong. We'll fix it as soon as possible.
   
   map:
-    payoff: Faster on Bike
-    work_in_progress: "The site is under development, and route suggestion can be inaccurate."
-    bugs_and_suggestions: "Report bugs, or suggest improvements."
-    bugs_and_suggestions_short: "Report bugs"
     add_favorite: "Add to favorites"
     help: Help
     reverse_route: Reverse route
@@ -631,8 +449,8 @@ en:
     name: Name
     email: Email
     waiting_for_confirmation: Currently waiting confirmation for
-    password_leave_blank: Password (leave blank if you don't want to change it)
-    password_current: Current password (we need your current password to confirm your changes)
+    password_leave_blank: New Password
+    password_current: Current password
     submit_update: Update
     token_use: You can use this url to login
     cancel: Cancel my account

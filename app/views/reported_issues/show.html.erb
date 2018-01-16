@@ -1,40 +1,35 @@
-<div class="issues">
-    <div class="inner">
-      <p class="note">Segment</p>
-      <p>
-        <%= @reported_issue.route_segment %>
-      </p>
+<div class="center">
+    <p class="note">Segment</p>
+    <p>
+      <%= @reported_issue.route_segment %>
+    </p>
 
-      <p class="note">Type</p>
-      <p>
-        <%= @reported_issue.error_type %>
-      </p>
+    <p class="note">Type</p>
+    <p>
+      <%= @reported_issue.error_type %>
+    </p>
 
-      <% if @map_url %>
-      <p class="note">Locations</p>
-      <p>
-        <%= link_to @map_link_title, @map_url %>
-      </p>
+    <% if @map_url %>
+    <p class="note">Locations</p>
+    <p>
+      <%= link_to @map_link_title, @map_url %>
+    </p>
+    <% end %>
+
+    <p class="note">Date</p>
+    <p>
+      <span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= @reported_issue.created_at %></span>
+    </p>
+
+    <p class="note">Author</p>
+    <p>
+      <% if @reported_issue.user %>
+        <%= @reported_issue.user.name %>,
       <% end %>
+    </p>
 
-      <p class="note">Date</p>
-      <p>
-        <span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= @reported_issue.created_at %></span>
-      </p>
-
-      <p class="note">Author</p>
-      <p>
-        <% if @reported_issue.user %>
-          <%= @reported_issue.user.name %>,
-        <% end %>
-      </p>
-
-      <p class="note">Comment</p>
-      <p>
-        <%= simple_format @reported_issue.comment %>
-      </p>
-
-
-
-  </div>
+    <p class="note">Comment</p>
+    <p>
+      <%= simple_format @reported_issue.comment %>
+    </p>
 </div>

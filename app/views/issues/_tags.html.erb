@@ -1,7 +1,0 @@
-<% if @popular_tags and @popular_tags.any? %>
-<div class="sidebar">
-  <h2><%=t '.popular_tags' %></h2>
-  <%= render :partial => 'issues/tag_cloud', :locals => { :tags => @popular_tags } %>
-  <%= link_to t('.all_tags'), :controller => :issues, :action => :tags %>
-</div>
-<% end %>

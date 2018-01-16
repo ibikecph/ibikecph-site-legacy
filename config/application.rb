@@ -78,14 +78,8 @@ module RailsOSRM
       end
     end
 
-    #configure acts_as_taggable
-    ActsAsTaggableOn.remove_unused_tags = true  #remove unused tag objects after removing taggings
-    ActsAsTaggableOn.force_lowercase = true     #save all tags as lowercase
-
     #rails-timeago gem settings
     Rails::Timeago.default_options :limit => proc { 1.month.ago }
     #Rails::Timeago.locales = [:en, :da]
   end
 end
-
-APP_VERSION = 'Alpha'

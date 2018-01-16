@@ -9,38 +9,14 @@ class User < ActiveRecord::Base
          :omniauthable,
          omniauth_providers: [:facebook]
 
-  # has_many :authentications, :dependent => :destroy
-  has_many :blog_entries, dependent: :nullify
-  has_many :comments, dependent: :destroy
-  has_many :issues, dependent: :destroy
   has_many :reported_issues, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :routes, dependent: :destroy
 
-  # attr_accessible :name,
-  #                 :about,
-  #                 :email,
-  #                 :email_confirmation,
-  #                 :password,
-  #                 :password_confirmation,
-  #                 :image,
-  #                 :image_path,
-  #                 :remove_image,
-  #                 :image_cache,
-  #                 :notify_by_email,
-  #                 :terms,
-  #                 :tester,
-  #                 :provider,
-  #                 :uid,
-  #                 :account_source,
-  #                 :email_confirmation
-
   attr_accessor :image_path, :signature
-  # attr_accessor :password, :created_from_oath
 
   validates_presence_of :name
   validates_length_of :name, minimum: 2, maximum: 50
-  # validates_uniqueness_of :name, case_sensitive: false
 
   validates_presence_of :email
   validates_presence_of :email_confirmation, on: :create
@@ -64,7 +40,6 @@ class User < ActiveRecord::Base
 
   validates_acceptance_of :terms
   validates_length_of :about, maximum: 2000
-  # accepts_nested_attributes_for :authentications
 
   mount_uploader :image, SquareImageUploader
 
@@ -146,57 +121,8 @@ class User < ActiveRecord::Base
     authentications.emails
   end
 
-  # def email
-  #  authentications.emails.active.first
-  # end
-
   def email_address
     authentications.emails.active.first.uid rescue nil
-  end
-
-  def find_follow target
-    if target
-      Follow.find_by(
-        user_id: self.id,
-        followable_type: target.class.name,
-        followable_id: target.id
-      )
-    end
-  end
-
-  def following? target
-    target && Follow.exists?(
-      user_id: self.id,
-      followable_type: target.class.name,
-      followable_id: target.id,
-      active: true
-    )
-  end
-
-  def follow target, options = {}
-    update_follow target, true, options
-  end
-
-  def unfollow target, options = {}
-    update_follow target, false, options
-  end
-
-  def update_follow target, active, options = {}
-    follow = find_follow target
-
-    if follow
-      follow.update_attribute :active, active unless options[:unless_set]
-    else
-      follow = Follow.new
-      follow.followable = target
-      follow.user = self
-      follow.active = active
-      follow.save
-    end
-  end
-
-  def tester?
-    tester
   end
 
   def facebook_user?

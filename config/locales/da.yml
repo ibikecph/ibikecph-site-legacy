@@ -10,11 +10,7 @@ da:
         For at forbedre appene og sitet indsamles anonyme data om brug og opståede fejl.
   activerecord:
     models:
-      issue: Indlæg
       user: Bruger
-      blog_entry: Blogindlæg
-      comment: Kommentar
-      vote: Stemme
     attributes:
       favourite:
         name: Navn
@@ -28,61 +24,23 @@ da:
       authentications:
         uid: 'Email'
         uid_confirmation: 'Bekræft email'
-      blog_entry:
-        title: Overskrift
-        body: Indhold
-        tags: Tags
-        image: Billede
-        sticky: Sticky
-      issue:
-        title: Overskrift
-        body: Beskrivelse
-        labels: Mærkater
-        tags: Tags/Emneord
       user:
         name: Navn
         about: Om
         image: Billede
-        tags: Tags/Emneord
         terms: Brugerbetingelser
         password: Adgangskode
         password_confirmation: Bekræft adgangskode
         current_password: Nuværende adgangskode
         new_password_confirmation: Bekræft ny adgangskode
-    errors:
-      models:
-        issue:
-          attributes:
-            themes:
-              blank: kan ikke alle være slået fra
-  
-  will_paginate:
-    previous_label: Forrige
-    next_label: Næste
-        
+          
   menu:
     routes: Kort
-    blog: Blog
-    feedback: Feedback
-    signup: Opret
+    signup: Opret konto
     login: Log ind
     logout: Log ud
-    mobile_app: Hent mobil app
-    the_title: Seneste nyheder
     about: Om I Bike CPH
 
-  about:
-    about: "Om I Bike CPH"
-    faq: "FAQ"
-    api: "API"
-
-  news:
-    title: Blog
-    categories: Tags
-    search: Søg nyhed...
-    label_facebook: Følg os på Facebook
-    label_rss: abonnér via rss
-  
   da: Dansk
   en: Engelsk
   
@@ -98,8 +56,6 @@ da:
   you: Dig
   or_login_with: eller log ind med
   sure_q: Er du sikker?
-  be_the_first_to_comment: Vær den første til at kommentere
-  comment: kommentar
   not_a_valid_email: er ikke en gyldig email adresse 
   empty: Ikke udfyldt
  
@@ -107,18 +63,6 @@ da:
   'yes': 'Ja'
   'no': 'Nej'
   
-  vote:
-    one: 1 stemme
-    other: "%{count} stemmer"
-  
-  comment:
-    one: 1 kommentar
-    other: "%{count} kommentarer"
-  
-  issue:
-    one: 1 indlæg
-    other: "%{count} indlæg"
-
   character:
     one: 1 karakter
     other: "%{count} karakterer"
@@ -127,21 +71,13 @@ da:
  
     character:
  
-  follows:
-    follow:
-        follow: Følg
-        start: Klik for at følge
-        stop: Klik for at stoppe med at følge
-
   users:
     index:
       title: Brugere
     new:
       title: Opret I Bike CPH konto
       body: |
-        Vær med!
-        En I Bike CPH konto er gratis og uden forpligtelser, og giver dig mulighed for at komme med input og kommentarer.
-        Du vælger selv om du vil have tilsendt email med nyheder etc.
+        En I Bike CPH konto er gratis og giver dig mulighed for at gemme favoritsted i appen.
       i_accept: Jeg accepterer
       email_confirmation: 'Bekræft email'
       terms: Brugerbetingelser
@@ -221,7 +157,7 @@ da:
   
   accounts:
     show:
-      title: Konto indstillinger
+      title: Konto
       title_login: Log ind
       title_settings: Indstillinger
       name: Navn
@@ -230,7 +166,7 @@ da:
       email: Email
       password: Adgangskode
       change_email: Ændre Email
-      change_password: Ændre adgangskode og email
+      change_password: Skift adgangskode
       change_settings: Rediger indstillinger
       notify_by_email: Beskeder via email
       unverified: Uverificeret
@@ -244,9 +180,9 @@ da:
       body: "For at aktivere din konto, bedes du venligst følge instruktionerne i den email vi har sendt til dig."
       link: Gensend aktiveringsemail
     edit_password:
-      title: Ændre adgangskode og email
+      title: Skift adgangskode
       forgotten_q: Glemt det?
-      new_password: Nyt adgangskode
+      new_password: Ny adgangskode
       submit: Gem
     welcome:
       title: Velkommen!
@@ -255,7 +191,6 @@ da:
     settings:
       title: Rediger Indstillinger
       unverified: "For at modtage emailbeskeder, er det nødvendig at du verificerer din emailadresse."
-      email_notifications: "Send mig en email når der er nye blogindlæg og når folk kommenterer på mine indlæg, etc."
       submit: Gem
     flash:
       email_not_found: Email ikke fundet.
@@ -268,38 +203,6 @@ da:
     misc:
       cancel: Annuller
 
-  blog:
-    index:
-      new: Nyt blogindlæg
-    new:
-      title: Nyt blogindlæg
-    edit:
-      title: Rediger blogindlæg
-    form:
-      make_sticky: Hold dette indlæg øverst (kan ændres senere).
-      submit: Gem
-    archive:
-      title: Alle blogindlæg
-    latest:
-      title: Seneste blogindlæg
-      archive: Se alle blogindlæg
-      new: Nyt indlæg
-    tag:
-      title: "Indlæg tagget med: %{tag}"
-    flash:
-      created: Blogindlæg oprettet.
-      updated: Blogindlæg opdateret.
-      destroyed: Blogindlæg slettet.
-
-  comments:
-    new:
-      add_comment: Kommentar
-      login_to_comment_html: "For at kommentere bedes du %{link}."
-      login: logge ind
-      submit: Tilføj kommentar
-    comments:
-      title: Kommentarer
-  
   emails:
     new:
       title: Ændre Email
@@ -342,13 +245,13 @@ da:
       body: "Instruktioner om hvordan du nulstiller din adgangskode vil blive sendt til %{user}."
       submit: Send Instruktioner
     edit:
-      title: Ændr adgangskode
-      for_user: "Ændre adgangskode for brugeren %{user}."
-      submit: Ændre adgangskode
+      title: Skift adgangskode
+      for_user: "Skift adgangskode for brugeren %{user}."
+      submit: Skift adgangskode
     flash:
       instructions_sent: "Instruktioner om hvordan du nulstiller din adgangskode er sendt til %{email}."
       email_not_found: "Emailen %{email} ikke fundet."
-      password_changed: Kodeord Ændret
+      password_changed: Kodeord ændret
       invalid_link: Ugyldigt link til nulstilling af kodeord.
       expired_link: Link til nulstilling af kodeord er udløbet.
       fb_user_AD: "Adgang nægtet: Facebook-brugere kan ikke nulstille kodeord!"
@@ -363,101 +266,7 @@ da:
     password_reset:
       subject: Nulstilling af din I Bike Cph adgangskode
       body: "For at nulstille din I Bike Cph adgangskode, bedes du gå til:"
-    blog_entry:
-      subject: "Blogindlæg: %{title}"
-      body: "Et nyt blogindlæg med titlen '%{title}' er oprettet på I Bike Cph:"
-    comment:
-      subject: "Kommentar: %{title}"
-      body: "%{user} tilføjede en kommentar '%{title}' på I Bike Cph:"
     unsubscribing: "Denne email kan ikke besvares. Hvis du ikke ønsker at modtage email fra I Bike CPH, kan du ændre dine indstillinger på %{link}."
-    
-  issues:
-    view_all_issues: Se alle indlæg
-    index:
-      title: Feedback
-      num_issues: "%{count} indlæg"
-    welcome:
-      body: |
-        Har du idéer til forbedringer af cykelruteplanlæggeren? Er der noget der ikke virker, eller mangler der en sti på kortet? Så fortæl det her!
-      note: |
-        Websiden omhandler cykelruteplanlæggeren. Andre idéer til forbedring af cykling i København bedes sendt til <a href="http://kk.dk/cyklernesby" target="_blank">Københavns Kommune</a>. Huller i cykelstierne og andre 'analoge' problemer, kan rapporteres på <a href="http://givetpraj.kk.dk" target="_blank">Giv et Praj</a>. I Bike CPH's sociale forum findes på <a href="https://www.facebook.com/IbikeCPH" target="_blank">Facebook</a>. Det er ikke tilladt at reklamere her på siden. Se iøvrigt <a href="http://ibikecph.dk/terms" target="_blank">brugerbetingelserne</a>.
-    issues:
-      title: Vær med!
-      sub_title: Gi’ os dine forslag til forbedringer.
-      no_items: Ingen indlæg
-      new: Nyt indlæg
-      all_issues: Se alle indlæg
-      of: af
-    all:
-      title: Alle indlæg
-    new:
-      title: Nyt indlæg
-    edit:
-      title: Rediger indlæg
-    show:
-      back_to_list: Tilbage til listen
-      labels: Mærkater
-      tags: Tags/Emneord
-    related:
-      title: Relaterede indlæg
-    most_commented:
-      title: Mest kommenterede
-    votes:
-      vote: Klik for at stemme
-      unvote: Klik for at fjerne stemme
-    tags:
-      title: "Indlæg tagget med..."
-      popular_tags: Populære tags
-      all_tags: Se alle tags
-    labels:
-      title: "Indlæg markeret som..."
-      no_items: No issues found
-    corps:
-      title: Testerkorps
-      body: "Meld dig som tester, og vær med til at diskutere og afprøve nye funktioner!"
-      test_corps: Læs mere
-    search_form:
-      submit: Søg
-    search:
-      title: Søg efter indlæg
-      num_found: "Indlæg fundet: %{count}"
-    flash:
-      created: Indlæg oprettet.
-      updated: Indlæg opdateret.
-      destroyed: Indlæg slettet.
-  
-  corps:
-    index:
-      title: Hej testpilot!
-      body: |
-        Tilmeld dig Testerkorpset og vær med til at diskutere og afprøve nye funktioner! Som tester får du besked om aktuelle teamer og aktiviterer relateret til forbedring af cykelruteplanlæggeren.
-        
-        Der er ingen forpligelser eller omkostninger, og du kan til enhver tid framelde dig.
-      is_tester:  Du er med i Testerkorpset
-      is_not_tester: Du er ikke med i Testerkorpset
-    testers:
-      title: Testere
-    membership:
-      join: Meld dig ind
-      leave: Meld dig ud
-    show:
-      issues: Indlæg af denne bruger
-    joined:
-      title: Velkommen til Testerkorpset!
-      body: "Du er nu med i Testerkorpset, og vil få besked om aktuelle temaer og aktiviteter relateret til forbedring af cykelruteplanlæggeren. Du kan til enhver tid framelde dig her på siden."
-    left:
-      title: Du er frameld Testerkorpset
-      body: |
-        Du er stadig meget velkommen til at tilføje feedback og kommentare, men vil ikke længere modtage besked om teamer og aktiviterer relateret til forbedring af cykelruteplanlæggeren.
-    flash:
-      joined: Du er nu med i testerkorpset
-      already_joined: Du er allerede med i testerkorpset
-      left: Du har forladt testerkorpset
-      already_left: Du er ikke med i testerkorpset
-  
-  pages:
-    terms:
-      title: Brugerbetingelser for I Bike CPH og CykelPlanen appen, samt www.ibikecph.dk sitet
      
   errors:
     forbidden:
@@ -477,10 +286,6 @@ da:
     please_login_first: Log venligst ind først
 
   map:
-    payoff: Hurtigere på cykel
-    work_in_progress: "Siden er under udvikling, og ruteforslag kan være unøjagtige."
-    bugs_and_suggestions: "Rapporter fejl, eller foreslå forbedringer."
-    bugs_and_suggestions_short: "Rapporter fejl"
     add_favorite: "Føj til favoritter"
     help: Hjælp
     reverse_route: Vend rute
@@ -636,8 +441,8 @@ da:
     name: Navn
     email: Email
     waiting_for_confirmation: Afventer bekræftelse
-    password_leave_blank: Adgangskode (lad feltet være tomt hvis du ikke ønsker at ændre det)
-    password_current: Nuværende adgangskode (vi skal bruge dit nuværende adgangskode for at bekræfte dine ændringer)
+    password_leave_blank: Ny adgangskode
+    password_current: Nuværende adgangskode
     submit_update: Opdater
     token_use: Du kan bruge denne webadresse til at logge
     cancel: Annuller min konto

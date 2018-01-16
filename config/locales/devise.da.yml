@@ -25,7 +25,7 @@ da:
       reset_password_instructions:
         subject: "Instruktioner til nulstilling af adgangskode"
         addressuser: "Hej"
-        rplink: "Ændre min adgangskode"
+        rplink: "Skift adgangskode"
         contentblock_1: "Nogen har anmodet om et link til at ændre din adgangskode. Du kan gøre dette via nedenstående link."
         contentblock_2: "Hvis du ikke har anmodet dette, bedes du se bort fra denne e-mail."
         contentblock_3: "Din adgangskode vil ikke ændre sig, indtil du får adgang til linket ovenfor og opretter en ny."
@@ -49,7 +49,7 @@ da:
         body: "Indtast din email adresse i feltet og tryk send. Du vil modtage instruktioner til hvordan du nulstiller din adgangskode."
         submit: SEND
       edit:
-        title: Ændre din adgangskode
+        title: Skift adgangskode
         new_password: Ny adgangskode
         confirm_password: Bekræft ny adgangskode
         submit: Gem
@@ -64,10 +64,10 @@ da:
       new:
         title: Opret konto
         body: |
-          En I Bike CPH konto er gratis og uforpligtende. Med en konto har du mulighed for at komme med input og kommentarer samt at modtage vores nyheder. Som noget nyt kan du også gemme favoritter og søgninger på tværs af ibikecph.dk og appen.
+          En I Bike CPH konto er gratis og giver mulighed for at gemme favoritter i appen.
         i_accept: Jeg accepterer
-        terms: Brugerbetingelser
-        submit: OPRET KONTO
+        terms: Brugerbetingelserne
+        submit: Opret konto
         already_have_account_q: Har du allerede en konto?
     sessions:
       signed_in: "Du er nu logget ind."

@@ -64,11 +64,9 @@ en:
       new:
         title: Create I Bike CPH account
         body: |
-          Join!
-          An I Bike CPH account is free and without obligations, og enables you to uplaod ideas and comments.
-          You choose wether you want emails with news, etc.
+          An I Bike CPH account is free and enables you to save favorite locations in the app.
         i_accept: I accept the
-        terms: Terms of Service
+        terms: User Terms
         submit: Create Account
         already_have_account_q: Already have an account?
     sessions:

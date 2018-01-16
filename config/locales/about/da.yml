@@ -1,0 +1,102 @@
+da:
+  about:
+    intro: |
+      # Om I Bike CPH appen og siden
+
+      Find vej på cykel i København. Appen og siden kender alle de gode cykelsmutveje og ved hvilke parker du må cykle i og hvor du lovligt må cykle mod ensretningen for biler.
+
+      I Bike CPH er Københavns Kommunes service for alle der cykler. Services er tilpasset livet på cykel i København, men virker i hele Danmark.
+
+      Kortet er tilpasset cykling og viser bl.a. brosten og cykelbomme, så du kan slippe for rysteture og omveje på ladcykel.
+      
+      * Find den hurtigst vej på cykel - appen kender de gode cykelgenveje.
+      * Ruter for ladcykler - undgå trapper, cykelbomme og brosten.
+      * Bliv guidet undervejs med GPS turn-by-turn navigation (kræver en mobilholder).
+      * Undgå rysteture – appen undgår så vidt muligt brosten.
+      * Foreslår træk af cykel når det kan betale sig, fx ved ensrettede gader.
+      * Grønne stier og Supercykelstier bliver prioriteret.
+      * Log ind og gem favorit-steder, så du hurtigt kan finde vej til dem senere.
+      * Cykelkort der viser brosten, cykelbomme, grønne ruter, Supercykelstier, etc.
+      * Søg efter adresser, caféer, steder, etc.
+      * Anvender kortdata fra det brugerdrevne OpenStreetMap (OSM), der opdateres løbende.
+
+      Kontinuerlig brug af GSP i baggrunden kan reducere batterilevetiden, men appen er optimeret til kun at bruge GPS når det er nødvendigt.
+
+    help: |
+      # Sådan bruger du I Bike CPH app og siden
+      help body
+
+    api: |
+      # Om det offentlige I Bike CPH API
+      api body
+
+    terms: |
+      # Brugerbetingelser for I Bike CPH
+
+      ### Om brugerbetingelserne
+      Den danske udgave af brugerbetingelserne er den jurisk bindende. Den engelske version er kun gjort tilgængelig som en service.
+
+      I Bike CPH appen, CykelPlanen appen og www.ibikecph.dk sitet er for dig, der cykler i København eller i Region Hovedstaden. Appene og sitet bliver stillet gratis til rådighed af Københavns Kommune og Region Hovedstaden.
+
+      Brugerbetingelserne administreres af Københavns Kommune.
+
+      Når du benytter appene eller sitet accepterer og forpligter du dig til at overholde de gældende brugerbetingelser. Brugerbetingelserne kan ændres uden varsel, og det er alene dit ansvar, at du holder dig orienteret om de gældende brugerbetingelser. Københavns Kommune vil dog så vidt muligt gøre opmærksom på ændringer i brugerbetingelserne på sitet og i appene.
+
+      Nedenfor kan du læse mere detaljeret om brugerbetingelserne. Københavns Kommune er klar over, at formuleringerne herunder kan være kompliceret læsning. Så hvis du er i tvivl om, hvordan brugerbetingelserne skal forstås, kan du til enhver tid kontakte Københavns Kommune og få afklaring på dine spørgsmål.
+
+      ### Din profil
+      Når du opretter en profil skal du vælge et kodeord (med mindre du logger ind via Facebook). Kodeordet er personligt og sikrer dig, at kun du kan få adgang til din konto og dine data og at kun du kan offentliggøre indhold med dig som afsender. Dit kodeord opbevares kun i krypteret form af Københavns Kommune og kan ikke genskabes.
+
+      Du kan til enhver tid slette din profil. Hvis du gør det slettes alt data knyttet til din profil.
+
+      Københavns Kommune forbeholder sig retten til at spærre eller slette din profil, hvis vi vurderer, at anstødeligt, irrelevant eller ulovligt indhold lægges på siden med brug af din profil. I så fald vil du modtage en email fra Københavns Kommune med en begrundelse.
+
+      ### Indhold på sitet og i appene
+      Det er udelukkende dit ansvar, at det materiale du lægger ud på sitet og via appene er i overensstemmelse med gældende dansk lovgivning - herunder lovgivningen om ophavsret/patent og varemærkelovgivningen samt straffelovens regler om personkrænkelser, dokumentfalsk, injurie- og racisme, etc. Der må ikke reklameres på siden.
+
+      Det betyder at:
+      du skal overholde gældende lovgivning.
+      du skal efterleve alle ordensregler eller andre meddelelser, herunder ændringer af disse brugerbetingelser, Københavns Kommune måtte udstede.
+      du skal hemmeligholde din kode.
+      du straks skal underrette os, hvis du opdager et brud på sikkerheden af sitet eller appene.
+
+      Opdager du indhold på sitet, som du vurderer ikke er i overensstemmelse med brugerbetingelserne, vil vi sætte stor pris på, at du kontakter Københavns Kommune.
+
+      Hvis indhold på sitet fremstår anstødeligt, skadeligt eller er direkte ulovligt, vil det blive fjernet uden yderligere varsel, så snart Københavns Kommune er blevet opmærksom på det. I den forbindelse forbeholder Københavns Kommune sig også retten til uden yderligere varsel at fjerne indhold fra sitet, hvis Københavns Kommune efter henvendelse fra tredjemand erfarer, at tredjemands rettigheder er krænket som følge af indhold lagt på sitet.
+
+      ### Registrering af personlige data
+      Hvis du opretter en profil, indsamler Københavns Kommune udelukkende de nødvendige data som gør, at sitet og appene kan fungere efter intentionen om at Københavns Kommune kan relevante services til cyklister. Københavns Kommune gemmer således dit navn og din email for at kunne forbinde dig med din profil. Såfremt du logger ind via Facebook anmoder vi kun om lov til at anvende dit navn, email og profilbillede.
+
+      Når du angiver din email, accepterer du samtidig, at Københavns Kommune har mulighed for at sende et nyhedsbrev til din email. Ønsker du ikke at modtage nyhedsbreve, kan du fravælge denne mulighed i dine profilindstillinger.
+
+      De indsamlede og registrerede oplysninger administreres efter de danske regler i Persondataloven. Den fastlægger retningslinierne for, hvordan myndigheder skal behandle personoplysninger. Loven sikrer også din retsstilling på dataområdet. Det giver dig nogle rettigheder, når oplysninger om dig er registreret elektronisk.
+
+      Der må kun indhentes og benyttes relevante oplysninger og kun de personlige oplysninger, der er nødvendige for at drive og forbedre sitet og appene, ligesom vi bruger dine oplysninger til at kommunikere med dig, herunder til at fremsende nyhedsbreve, profiloplysninger, oplysning om forbedringer af sitet og appene og oplysninger om tekniske problemer.
+
+      Der sker ingen overdragelse eller videregivelse af profiloplysninger fra sitet og appene til Københavns Kommunes forvaltning.
+
+      Dine rettigheder er at:
+      du kan få at vide, hvilke oplysninger Københavns Kommune har om dig.
+      du kan gøre else mod Københavns Kommunes behandling af dine oplysninger.Hvis din indsigelse er berettiget, skal behandlingen ophøre.
+      du kan få urigtige eller vildledende oplysninger rettet eller slettet.
+      du kan klage over Københavns Kommunes behandling af dine personoplysninger til datatilsynet.
+
+      ### Indsigt i oplysninger
+      Du kan få indsigt i oplysninger om dig selv vedrørende sitet og appene. Kontakt Byens Anvendelse, Teknik- og Miljøforvaltningen, Københavns Kommune, Njalsgade 13, 2300 København S, som er dataansvarlig.
+
+      ### Analysedata
+      Sitet og appen samler data om brug og opståede fejl. Data er anonyme og anvendes til at forbedre sitet og appene.
+
+      ### Cookies
+      Sitet benytter sig af cookies for at skabe en optimal brugeroplevelse på sitet. En cookie er en lille fil, der gemmes på din computer, når du opretter en profil på sitet. Denne cookie bevirker, at siden vil kunne huske eksempelvis dit brugernavn.
+
+      ### Ansvar for data
+      Københavns Kommune er ansvarlig for de data du oplyser, når du indtaster dit navn og din emailadresse, ligesom Københavns Kommune er dataansvarlig for registreringen af din IP-adresse. Du er derimod alene selv ansvarlig for alle øvrige data, du måtte vælge at lægge op på sitet og appene.
+
+      Den tekniske drift af sitet og appene varetages af en ekstern virksomhed. Virksomheden forvalter de data som Københavns Kommune er ansvarlig for. Når du benytter sitet eller appene accepterer du samtidig, at de data du selv er ansvarlig for ligeledes forvaltes af den eksterne virksomhed. Vær her opmærksom på, at virksomheden, der forestår den tekniske drift, udelukkende handler efter anvisning fra Københavns Kommune. Denne virksomhed har etableret sikkerhedsforanstaltninger mod, at oplysninger hændeligt eller ulovligt tilintetgøres, fortabes eller forringes samt mod, at de kommer til uvedkommendes kendskab, misbruges eller i øvrigt behandles i strid med lov om behandling af personoplysninger.
+
+      Københavns Kommune bestræber sig på at tilsikre en stabil drift, men garanterer ikke for det. Hvis du er ude for tab af data i forbindelse med driftsproblemer eller andre forhold, er Københavns Kommune ikke erstatningsansvarlig over for dig. Københavns Kommune er alene erstatningsansvarlig efter dansk rets almindelige erstatningsregler.
+
+      ### Rettigheder
+      Københavns Kommune har alle rettigheder til sitet og appene. Når du benytter disse, opnår du som bruger udelukkende en non-eksklusiv brugsret til Københavns Kommune tekniske platform. Omvendt giver du udelukkende Københavns Kommune en non-eksklusiv brugsret til dit materiale, når du lægger indhold, oplysninger eller data på sitet eller appene. Denne brugsret giver du udelukkende Københavns Kommune med henblik på driften af sitet og appene. Således har du alle rettigheder til det materiale du lægger op på sitet og appene – med undtagelse af føromtalte brugsret.
+      

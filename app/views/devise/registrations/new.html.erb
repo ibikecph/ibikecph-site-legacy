@@ -25,9 +25,9 @@
             <%= f.password_field :password_confirmation, :tabindex => 5, :class => 'text_input' %><br>
         </p>
         <p id="terms">
-            <%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), nil, :target => '_blank' %>
-            <%= text_area_tag :terms_text, t('terms', :locale => :da), :rows => 10, :disabled => 'disabled' %>
+            <%= f.check_box :terms %> <%= f.label t('.i_accept') %> <%= link_to t('.terms'), { controller: :about, action: :terms }, :target => '_blank' %>
         </p>
+
         <p class="submits">
             <%= submit_tag t('menu.signup'), :class => :submit %>
         </p>

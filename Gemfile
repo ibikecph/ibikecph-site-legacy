@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.4.1'
 
 gem "rails"
-gem 'pg'
+gem 'pg', '~> 0.20'
 
 gem 'bcrypt', require: 'bcrypt'
 gem 'devise'
@@ -20,11 +20,7 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'delayed_job_active_record'
 gem 'simple-navigation'
-gem 'will_paginate'
 gem 'puma'
-gem 'auto_html', git: 'https://github.com/ibikecph/auto_html.git', branch: 'master'
-gem 'rails_autolink'
-gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git', branch: 'master'
 gem 'exception_notification'
 gem 'google-analytics-rails'
 gem 'rails-timeago'
@@ -37,7 +33,7 @@ gem 'recipient_interceptor'
 gem 'koala'
 gem 'httparty'
 gem "rack-timeout"
-
+gem 'redcarpet'
 gem 'polylines'
 
 group :development, :test do

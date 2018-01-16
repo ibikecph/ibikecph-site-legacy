@@ -8,7 +8,8 @@
     <%= f.email_field :email, :autofocus => true, :class => 'text_input' %></div>
 
     <p class="submits">
-    <%= f.submit t('resend_confirmation.submit') %>
+    	<%= link_to t('accounts.misc.cancel'), :back, :class => 'cancel' %>
+		<%= f.submit t('resend_confirmation.submit') %>
     </p>
   <% end %>
 </div>

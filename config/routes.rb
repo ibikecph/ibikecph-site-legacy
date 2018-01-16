@@ -48,14 +48,12 @@ RailsOSRM::Application.routes.draw do
   scope '(:locale)', locale: /en/ do
     root to: 'map#index'
 
-    get 'embed/cykelsupersti' => 'embed#cykelsupersti'
-
-    resources :reported_issues, path: 'issues'
+    resources :reported_issues
 
     resource :account do
       get 'welcome'
-      get 'settings'
-      post 'settings' => :update_settings
+      #get 'settings'
+      #post 'settings' => :update_settings
     end
     get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
     put 'account/password' => 'accounts#update_password', :as => :update_password
@@ -72,67 +70,15 @@ RailsOSRM::Application.routes.draw do
     end
     resources :users, only: [:show]
 
-    resources :blogs, controller: :blog, as: :blog_entry, path: :blog do
-      collection do
-        get 'archive' => :archive
-        get 'tag/:tag' => :tag
-        get 'transition' => :transition
-        get 'feed' => :feed, :defaults => { format: 'rss' }
-      end
-    end
-    resources :comments, only: [:destroy]
-    post 'comments/:commentable_type/:commentable_id' => 'comments#create'
-
-    post 'follows/:followable_type/:followable_id' => 'follows#follow'
-    delete 'follows/:followable_type/:followable_id' => 'follows#unfollow'
-
-    resources :corps, only: [:index, :show] do
-      collection do
-        get 'join' => :join
-        get 'leave' => :leave
-      end
-    end
-
-    resources :issues, path: 'feedback' do
-      collection do
-        get 'search'
-        post 'search' => :searched, :as => :post_search
-        get 'cards'
-        get 'tags(/:tag)' => :tags
-        get 'labels(/:label)' => :labels
-      end
-      member do
-        post 'vote'
-        post 'unvote'
-      end
-    end
-
-    get '/about' => 'about#index'
-    get '/signal' => 'about#signal'
-    get '/faq' => 'about#faq'
-    get '/api' => 'about#api'
-    # get '/about/:action' => 'about#:action'
-    get '/terms' => 'pages#terms'
+    get '/about' => 'about#intro'
+    get '/about/help' => 'about#help'
+    get '/about/api' => 'about#api'
+    get '/about/terms' => 'about#terms'
   end
 
-
-  get '/help' => 'pages#help'
-
-  get '/ping' => 'pages#ping'
-  get '/fail' => 'pages#fail'
-
-  get 'qr/:code' => 'pages#qr'
+  get '/ping' => 'application#ping'
 
   # rail 3.2 exception handling
   get '/404', to: 'application#error_route_not_found'
   get '/500', to: 'application#error_internal_error'
-
-
-  get 'medlemmer/*path' => 'blog#transition'
-  get 'groupper/*path' => 'blog#transition'
-  get 'cykler/*path' => 'blog#transition'
-  get 'steder/*path' => 'blog#transition'
-  get 'tips/*path' => 'blog#transition'
-  get 'indlaeg/*path' => 'blog#transition'
-  get 'cykelguide' => 'blog#transition'
 end

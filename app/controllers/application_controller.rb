@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
     render 'errors/internal_error' rescue last_chance
   end
 
+  def ping
+    render plain: 'pong'
+  end
+
   private
 
   def set_locale

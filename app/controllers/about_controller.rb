@@ -1,30 +1,22 @@
 class AboutController < ApplicationController
 
-  before_action :find_entries
-
-  def index
-    @entry = BlogEntry.tagged_with(['about/']).first
-    render :show
+  def intro
+    @lookup = 'about.intro'
+    render action: :show
   end
 
-  def signal
-    @entry = BlogEntry.tagged_with(['about/signal']).first
-    render :show
+  def help
+    @lookup = 'about.help'
+    render action: :show
   end
 
   def api
-    @entry = BlogEntry.tagged_with(['about/']).first
-    render :show
+    @lookup = 'about.api'
+    render action: :show
   end
 
-  def faq
-    @entry = BlogEntry.tagged_with(['about/']).first
-    render :show
+  def terms
+    @lookup = 'about.terms'
+    render action: :show
   end
-
-  private
-  def find_entries
-    @entries = BlogEntry.about.includes(:title)
-  end
-
 end

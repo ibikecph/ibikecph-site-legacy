@@ -27,8 +27,6 @@ jQuery ->
     content: $('#content')
     left_col: $('#content .left-col')
     right_col: $('#content .right-col')
-    terms_a: $('p#terms a')
-    terms_textarea: $('p#terms textarea')
     menu: $('#header .menu')
     masonry: $('.masonry')
     button_validation: $('.button_validation input')
@@ -117,10 +115,6 @@ jQuery ->
   if elements.left_col.outerHeight() < elements.right_col.outerHeight() and $(window).width() > 767
     elements.left_col.css
       height: elements.right_col.outerHeight()
-
-  elements.terms_a.click (event) ->
-    event.preventDefault()
-    elements.terms_textarea.toggle()
 
   iBikeGrid =
 
