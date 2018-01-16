@@ -1,21 +1,40 @@
-<div class="gr">
-  <div class="g8 ge">
-    <% if can? :manage, @reported_issue %>
-    <div class="buttons righty">
-      <%= link_to t('edit'),  [:edit,@reported_issue] %>
-      <%= link_to t('delete'),  @reported_issue, :method => :delete, :confirm => t('sure_q') %>
-    </div>
-    <% end %>
-    <h1><%= @reported_issue.route_segment %></h1>
-    <%= @reported_issue.error_type %>
-    <br><br>
-    <%= @reported_issue.comment %>
-    <p class="note">
-      <% if @reported_issue.user %>
-        <%= @reported_issue.user.name %>,
+<div class="issues">
+    <div class="inner">
+      <p class="note">Segment</p>
+      <p>
+        <%= @reported_issue.route_segment %>
+      </p>
+
+      <p class="note">Type</p>
+      <p>
+        <%= @reported_issue.error_type %>
+      </p>
+
+      <% if @map_url %>
+      <p class="note">Locations</p>
+      <p>
+        <%= link_to @map_link_title, @map_url %>
+      </p>
       <% end %>
-      <span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= time_ago_in_words(@reported_issue.created_at).capitalize %> <%=t 'ago' %></span>
-    </p>
+
+      <p class="note">Date</p>
+      <p>
+        <span class="timeago" title="blog_entry.created_at.getutc.iso8601"><%= @reported_issue.created_at %></span>
+      </p>
+
+      <p class="note">Author</p>
+      <p>
+        <% if @reported_issue.user %>
+          <%= @reported_issue.user.name %>,
+        <% end %>
+      </p>
+
+      <p class="note">Comment</p>
+      <p>
+        <%= simple_format @reported_issue.comment %>
+      </p>
+
+
 
   </div>
 </div>

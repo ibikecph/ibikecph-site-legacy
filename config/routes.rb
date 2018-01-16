@@ -50,7 +50,6 @@ RailsOSRM::Application.routes.draw do
 
     get 'embed/cykelsupersti' => 'embed#cykelsupersti'
 
-    get 'issues/:filter', to: 'reported_issues#index'
     resources :reported_issues, path: 'issues'
 
     resource :account do

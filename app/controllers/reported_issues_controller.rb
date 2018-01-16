@@ -7,7 +7,7 @@ class ReportedIssuesController < ApplicationController
     when 'closed'
       @reported_issues = ReportedIssue.closed_issues
     else
-      @reported_issues = ReportedIssue.all_issues
+      @reported_issues = ReportedIssue.order(created_at: :asc)
     end
   end
 
@@ -29,6 +29,15 @@ class ReportedIssuesController < ApplicationController
 
   def show
     @reported_issue = ReportedIssue.find_by_id(params[:id])
+
+    regex = /(55[\.,]\d+).+(12[\.,]\d+).+(55[\.,]\d+).+(12[\.,]\d+)/m
+    m =  @reported_issue.comment.match(regex)
+    if m
+      @from = [m[1].sub(',', '.').to_f,m[2].sub(',', '.').to_f]
+      @to   = [m[3].sub(',', '.').to_f,m[4].sub(',', '.').to_f]
+      @map_link_title = "#{@from.join(',')} to #{@to.join('.')}"
+      @map_url = "/#!/#{@from.join(',')}/#{@to.join(',')}"
+    end
   end
 
   def edit

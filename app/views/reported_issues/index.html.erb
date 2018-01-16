@@ -1,5 +1,9 @@
 <div class="issues">
     <div class="inner">
-        <%= render :partial => 'reported_issue', :collection => @reported_issues %>
+	  <% for reported_issue in @reported_issues %>
+	    <p>
+	      <%= link_to reported_issue.id, reported_issue %>
+	    </p>
+	  <% end %>
     </div>
 </div>

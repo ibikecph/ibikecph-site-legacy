@@ -42,9 +42,18 @@ class IBikeCPH.Models.Waypoint extends Backbone.Model
     str = lat.toString(36) + '.' + lng.toString(36)
     return str 
 
-  from_str: (code) ->
-    location = "#{code}".match /^(-?[a-z0-9]{1,6})\.(-?[a-z0-9]{1,6})$/i
+  from_str: (str) ->
+    location = "#{str}".match /^(-?[a-z0-9]{1,6})\.(-?[a-z0-9]{1,6})$/i
     if location
       @set 'location',
           lat: parseInt(location[1], 36) * 1e-6
           lng: parseInt(location[2], 36) * 1e-6
+      return
+
+    console.log(str)
+    location = "#{str}".match /^([0-9\.]+),([0-9\.]+)$/i
+    if location
+      @set 'location',
+          lat: parseFloat(location[1])
+          lng: parseFloat(location[2])
+      return
