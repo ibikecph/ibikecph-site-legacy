@@ -83,20 +83,6 @@ describe 'Users API', api: :v1 do
         post '/api/users/has_password', params: {auth_token: fb_user.authentication_token}, headers: headers
         expect(json_newest['has_password']).to eq(true)
       end
-
-      it 'change password and token' do
-        user = {email:'person100@example.com',
-                current_password: @user.password,
-                password: 'password123',
-                password_confirmation:'password123'}
-
-        sign_in @user
-
-
-        put update_password_path, params: {user: user, auth_token: token}, headers: headers
-
-        expect(response).to redirect_to(account_path)
-      end
     end
     context 'when not logged in' do
       it 'sign in' do

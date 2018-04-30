@@ -17,7 +17,7 @@
   <%= analytics_init if Rails.env.production? %>
 </head>
 <body>
-  <%= render :partial => 'layouts/header', :locals => { :current_user => current_user } %>
+  <%= render :partial => 'layouts/header'%>
   <%= render :partial => 'layouts/flash', :locals => { :alert => alert, :notice => notice } %>
   <%= yield %>
 </body>

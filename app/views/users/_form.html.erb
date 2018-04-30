@@ -1,9 +1,0 @@
-<%= form_for @user, :url => url do |f| %>
-<%= errors_for( @user ).html_safe %>
-  <p>
-    <%= f.label :name %>
-    <%= chars_remaining %>
-    <%= f.text_area :name, { :rows => 1, "data-maxlength" => @user.class::MAXLENGTH[:name] } %>
-  </p>
-  <p><%= f.submit :class => :submit %></p>
-<% end %>

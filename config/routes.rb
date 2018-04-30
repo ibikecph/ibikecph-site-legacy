@@ -38,7 +38,7 @@ RailsOSRM::Application.routes.draw do
 
   # devise does not support scoping OmniAuth callbacks under a dynamic segment
   # we work around by passing `skip: :omniauth_callbacks` to the `devise_for` call
-  # inside the scope and extracting omniauth options to the following `devise_for` call 
+  # inside the scope and extracting omniauth options to the following `devise_for` call
   # outside the scope:
   devise_for :users,
              skip: [:session, :password, :registration],
@@ -52,26 +52,6 @@ RailsOSRM::Application.routes.draw do
 
     get 'issues/:filter', to: 'reported_issues#index'
     resources :reported_issues, path: 'issues'
-
-    resource :account do
-      get 'welcome'
-      get 'settings'
-      post 'settings' => :update_settings
-    end
-    get 'account/password/change' => 'accounts#edit_password', :as => :edit_password
-    put 'account/password' => 'accounts#update_password', :as => :update_password
-
-    devise_for :users,
-               skip: :omniauth_callbacks,
-               controllers: {
-                 registrations: 'registrations',
-                 passwords: 'passwords',
-                 sessions: 'sessions'
-               } do
-      get 'users/edit/:id' => 'devise/registrations#edit', :as => :edit_user_registration
-      get 'infopage', to: 'sessions#infopage', as: 'infopage'
-    end
-    resources :users, only: [:show]
 
     resources :blogs, controller: :blog, as: :blog_entry, path: :blog do
       collection do
