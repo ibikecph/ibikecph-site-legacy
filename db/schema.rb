@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170822083247) do
+ActiveRecord::Schema.define(version: 20180425104229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20170822083247) do
 
   create_table "comments", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "commentable_id"
     t.string "commentable_type"
+    t.integer "commentable_id"
     t.string "title"
     t.text "body"
     t.datetime "created_at"
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20170822083247) do
 
   create_table "follows", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "followable_id"
     t.string "followable_type"
+    t.integer "followable_id"
     t.boolean "active", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -133,10 +133,10 @@ ActiveRecord::Schema.define(version: 20170822083247) do
 
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
-    t.integer "taggable_id"
     t.string "taggable_type"
-    t.integer "tagger_id"
+    t.integer "taggable_id"
     t.string "tagger_type"
+    t.integer "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context"

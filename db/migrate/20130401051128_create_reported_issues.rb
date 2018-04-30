@@ -1,4 +1,4 @@
-class CreateReportedIssues < ActiveRecord::Migration
+class CreateReportedIssues < ActiveRecord::Migration[4.2]
   def change
     create_table :reported_issues do |t|
       t.string :route_segment

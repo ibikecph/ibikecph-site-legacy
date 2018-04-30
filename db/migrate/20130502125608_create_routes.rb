@@ -1,4 +1,4 @@
-class CreateRoutes < ActiveRecord::Migration
+class CreateRoutes < ActiveRecord::Migration[4.2]
   def change
     create_table :routes do |t|
       t.references :user           

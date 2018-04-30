@@ -1,4 +1,4 @@
-class CreateThemings < ActiveRecord::Migration
+class CreateThemings < ActiveRecord::Migration[4.2]
   def change
     create_table :themings do |t|
       t.references :issue

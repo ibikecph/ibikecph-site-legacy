@@ -1,4 +1,4 @@
-class FixLatColumnName < ActiveRecord::Migration
+class FixLatColumnName < ActiveRecord::Migration[4.2]
   def up
     rename_column :favourites, :lattitude, :latitude
     rename_column :routes, :from_lattitude, :from_latitude

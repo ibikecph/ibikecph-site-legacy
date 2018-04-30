@@ -1,4 +1,4 @@
-class CreateCoordinates < ActiveRecord::Migration
+class CreateCoordinates < ActiveRecord::Migration[4.2]
   def change
     create_table :coordinates do |t|
       t.time :time

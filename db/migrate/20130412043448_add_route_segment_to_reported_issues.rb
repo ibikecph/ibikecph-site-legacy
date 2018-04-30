@@ -1,4 +1,4 @@
-class AddRouteSegmentToReportedIssues < ActiveRecord::Migration
+class AddRouteSegmentToReportedIssues < ActiveRecord::Migration[4.2]
   def up
      add_column :reported_issues, :route_segment, :string  
   end

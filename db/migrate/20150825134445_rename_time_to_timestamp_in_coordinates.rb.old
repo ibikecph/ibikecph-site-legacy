@@ -1,4 +1,4 @@
-class RenameTimeToTimestampInCoordinates < ActiveRecord::Migration
+class RenameTimeToTimestampInCoordinates < ActiveRecord::Migration[4.2]
   def change
     rename_column :coordinates, :time, :timestamp
   end

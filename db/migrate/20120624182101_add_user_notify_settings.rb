@@ -1,4 +1,4 @@
-class AddUserNotifySettings < ActiveRecord::Migration
+class AddUserNotifySettings < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :notify_by_email, :boolean, :default => true
   end

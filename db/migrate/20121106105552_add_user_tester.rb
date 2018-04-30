@@ -1,4 +1,4 @@
-class AddUserTester < ActiveRecord::Migration
+class AddUserTester < ActiveRecord::Migration[4.2]
   def change
     add_column :users, :tester, :boolean, :default => false
   end

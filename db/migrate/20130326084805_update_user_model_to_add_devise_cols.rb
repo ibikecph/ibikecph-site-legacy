@@ -1,4 +1,4 @@
-class UpdateUserModelToAddDeviseCols < ActiveRecord::Migration
+class UpdateUserModelToAddDeviseCols < ActiveRecord::Migration[4.2]
   def up
     # Database authenticatable
     rename_column :users, "password_hash", "encrypted_password"
