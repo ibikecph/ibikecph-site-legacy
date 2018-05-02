@@ -26,7 +26,6 @@ gem 'auto_html', git: 'https://github.com/ibikecph/auto_html.git', branch: 'mast
 gem 'rails_autolink'
 gem 'acts-as-taggable-on', git: 'https://github.com/mbleigh/acts-as-taggable-on.git', branch: 'master'
 gem 'exception_notification'
-gem 'google-analytics-rails'
 gem 'rails-timeago'
 gem 'jbuilder'
 gem 'sass-rails'
