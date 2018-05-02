@@ -7,9 +7,6 @@ RailsOSRM::Application.configure do
   MAIN_DOMAIN = ENV['DOMAIN']
   WEB_DOMAIN = ENV['WEB_DOMAIN']
 
-  # google analytics
-  GA.tracker = ENV['GOOGLE_ANALYTICS_KEY']
-
   # Code is not reloaded between requests
   config.cache_classes = true
 
