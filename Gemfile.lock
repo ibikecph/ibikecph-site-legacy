@@ -137,7 +137,6 @@ GEM
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    google-analytics-rails (1.1.1)
     hashie (3.5.7)
     heroics (0.0.24)
       erubis (~> 2.0)
@@ -323,7 +322,6 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   fog-aws
-  google-analytics-rails
   httparty
   i18n-js (~> 3.0.0.rc13)
   jbuilder
