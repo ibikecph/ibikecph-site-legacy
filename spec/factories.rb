@@ -1,5 +1,5 @@
 # coding: utf-8
-FactoryGirl.define do
+FactoryBot.define do
 
   sequence(:title) { |n| "Title#{n}" }
   sequence(:name)  { |n| "Person#{n}" }

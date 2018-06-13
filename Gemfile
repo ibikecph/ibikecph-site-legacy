@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.5.1'
 
 gem "rails"
 gem 'pg', '~> 0.20'
@@ -31,7 +31,7 @@ gem 'eco'
 gem 'recipient_interceptor'
 gem 'koala'
 gem 'httparty'
-gem "rack-timeout"
+gem "rack-timeout", require:"rack/timeout/base"
 gem 'redcarpet'
 gem 'polylines'
 
@@ -49,7 +49,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'capybara'
   gem 'database_cleaner'
 end
