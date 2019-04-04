@@ -69,12 +69,12 @@ class TravelPlanner::Leg
       end
     end
 
-    Polylines::Encoder.encode_points(coords)
+    FastPolylines::Encoder.encode(coords)
   end
 
   def destination_coord_geometry
     poly_coords = coords.for_polyline
-    Polylines::Encoder.encode_points([poly_coords[1]])
+    FastPolylines::Encoder.encode([poly_coords[1]])
   end
 
   def build_steps

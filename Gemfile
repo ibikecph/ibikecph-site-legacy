@@ -33,7 +33,7 @@ gem 'koala'
 gem 'httparty'
 gem "rack-timeout", require:"rack/timeout/base"
 gem 'redcarpet'
-gem 'polylines'
+gem 'fast-polylines'
 
 group :development, :test do
   gem 'dotenv-rails', :require => 'dotenv/rails-now'    # make sure this loads early
