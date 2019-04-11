@@ -2,6 +2,9 @@
 # See https://github.com/svenfuchs/rails_i18n/tree/master/rails%2Flocale for starting points.
 
 da:
+  closing_down_title: I Bike CPH servicen lukker
+  closing_down_text: Denne hjemmeside og den tilhørende "I Bike CPH" app lukker den 1. maj 2019. Det sker som led i generelle besparelser i Teknik- og Miljøforvaltningen i Københavns Kommune. Hvis du har appen installeret bliver den liggende på din mobil, men vil holde op med af fungere.
+
   mobileterms:
     v1:
       important_parts_description: |

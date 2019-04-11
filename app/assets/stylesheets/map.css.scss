@@ -17,7 +17,7 @@ body {
 #map {
   position: fixed;
   left: 0;
-  top: 40px;
+  top: 140px;
   width: 100%;
   z-index: 0;
 }
@@ -655,6 +655,9 @@ div#help {
       color: #fff;
     }
   }
+}
+.leaflet-top {
+  top: 40px;
 }
 .leaflet-control {
   background-color: #f4f4f4;

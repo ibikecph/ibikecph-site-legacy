@@ -84,14 +84,31 @@ a {
     text-transform: uppercase;
     overflow: hidden;
     position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 100;
     white-space: nowrap;
-    height: 40px;
     width: 100%;
     z-index: 6;
 }
+#closing {
+    color: black;
+    padding: 15px;
+    height: 100px;
+    margin: 0;
+    background-color: yellow;
+    #left {
+        height: 90px;
+        padding: 10px;
+        float: left;
+        padding-right: 20px;
+    }
+    h1 {
+        color: black;
+        font-size: 1.2em;
+        padding: 0;
+        margin-top: 0.4em;
+        margin-bottom: 0.4em;
+    }
+}
+
 .right_menu {
     position: absolute;
     top: 0;
