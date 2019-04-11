@@ -117,7 +117,7 @@
     var key, value;
     for (key in obj) if (obj.hasOwnProperty(key)) {
       value = obj[key];
-      if (isString(value) || isNumber(value) || isBoolean(value)) {
+      if (isString(value) || isNumber(value) || isBoolean(value) || isArray(value)) {
         dest[key] = value;
       } else {
         if (dest[key] == null) dest[key] = {};
@@ -309,11 +309,11 @@
       var firstFallback = null;
       var secondFallback = null;
       if (localeParts.length === 3) {
-        firstFallback = localeParts[0];
-        secondFallback = [
+        firstFallback = [
           localeParts[0],
           localeParts[1]
         ].join("-");
+        secondFallback = localeParts[0];
       }
       else if (localeParts.length === 2) {
         firstFallback = localeParts[0];
@@ -598,6 +598,10 @@
 
     if (typeof(translation) === "string") {
       translation = this.interpolate(translation, options);
+    } else if (isArray(translation)) {
+      translation = translation.map(function(t) {
+        return this.interpolate(t, options);
+      }, this);
     } else if (isObject(translation) && isSet(options.count)) {
       translation = this.pluralize(options.count, scope, options);
     }

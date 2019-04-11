@@ -11,6 +11,10 @@ da:
         Betingelserne gælder for I Bike CPH og CykelPlanen appene og www.ibikecph.dk sitet, der bliver stillet gratis til rådighed af Københavns Kommune og Region Hovedstaden.
         Data administeres efter reglerne i den danske Persondatalov. Du kan til enhver tid slette din profil og de tilhørende data.
         For at forbedre appene og sitet indsamles anonyme data om brug og opståede fejl.
+    v2:
+      important_parts_description: |
+        I Bike CPH servicen lukker.
+        Denne hjemmeside og den tilhørende "I Bike CPH" app lukker den 1. maj 2019. Det sker som led i generelle besparelser i Teknik- og Miljøforvaltningen i Københavns Kommune. Hvis du har appen installeret bliver den liggende på din mobil, men vil holde op med af fungere.
   activerecord:
     models:
       user: Bruger

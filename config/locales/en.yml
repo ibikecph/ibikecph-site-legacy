@@ -11,6 +11,10 @@ en:
         Data is managed in accordance with the danish law on Processing of Personal Data. 
         You can delete your account and the associated data at any time.
         To improve the site and the apps, anonymous data on usage and errors is collected.
+    v2:
+      important_parts_description: |
+        The I Bike CPH service is closing down.
+        This website and the related "I Bike CPH" will close down May 1st 2019. This happens as part of general cuts in the Technical and Environment Department of the City of Copenhagen. If you have installed the app, it will remain on your phone, but will stop working.
   activerecord:
     models:
       user: User
